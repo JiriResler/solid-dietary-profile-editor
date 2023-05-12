@@ -3,14 +3,10 @@ import { IntlProvider } from "react-intl";
 
 const messages = {
   "en-US": {
-    logo: "logo",
-    demo: "This demo app was internationalized by react-intl",
-    now: "Current date and time are {currentDateTime, date, ::EEE, MMM d, yyyy h:mm a}",
+    app_name: "Dietary profile editor",
   },
-  "ar-EG": {
-    logo: "رمز التطبيق",
-    demo: "تم تدويل هذا التطبيق التجريبي بواسطة رياكت إنتل",
-    now: "التاريخ والوقت الحاليان هما {currentDateTime, date, ::EEE, MMM d, yyyy h:mm a}",
+  "sk": {
+    app_name: "Dietárny editor profilu",
   },
 };
 

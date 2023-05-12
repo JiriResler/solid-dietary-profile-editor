@@ -11,17 +11,13 @@ const Login: React.FC = ({ onLocaleChanged }) => {
       <button onClick={() => onLocaleChanged("en-US")}>
           English
         </button>
-        <button onClick={() => onLocaleChanged("ar-EG")}>
-          Arabic
+        <button onClick={() => onLocaleChanged("sk")}>
+          Slovensky
         </button>
-
-        <p>
-          <FormattedMessage id="demo" />
-        </p>
 
       <Row>
         <Col className="text-center mt-5 h1">
-          <b>Dietary profile editor</b>
+          <b><FormattedMessage id="app_name" /></b>
         </Col>
       </Row>
 
