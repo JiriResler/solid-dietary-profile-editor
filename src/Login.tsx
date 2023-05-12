@@ -1,10 +1,24 @@
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import { FormattedMessage, useIntl } from "react-intl";
 
-const Login: React.FC = () => {
+const Login: React.FC = ({ onLocaleChanged }) => {
+  const intl = useIntl();
+
   return (
     <Container>
+      <button onClick={() => onLocaleChanged("en-US")}>
+          English
+        </button>
+        <button onClick={() => onLocaleChanged("ar-EG")}>
+          Arabic
+        </button>
+
+        <p>
+          <FormattedMessage id="demo" />
+        </p>
+
       <Row>
         <Col className="text-center mt-5 h1">
           <b>Dietary profile editor</b>
