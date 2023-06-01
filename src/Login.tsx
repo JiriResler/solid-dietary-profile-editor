@@ -1,23 +1,26 @@
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import { FormattedMessage, useIntl } from "react-intl";
 
-const Login: React.FC = ({ onLocaleChanged }) => {
-  const intl = useIntl();
+import {
+  LoginButton,
+} from "@inrupt/solid-ui-react";
+
+const Login: React.FC = () => {
+  // const intl = useIntl();
 
   return (
     <Container>
-      <button onClick={() => onLocaleChanged("en-US")}>
-          English
-        </button>
-        <button onClick={() => onLocaleChanged("sk")}>
-          Slovensky
-        </button>
+      {/* <button onClick={() => onLocaleChanged("en-US")}>
+        English
+      </button>
+      <button onClick={() => onLocaleChanged("sk")}>
+        Slovensky
+      </button> */}
 
       <Row>
         <Col className="text-center mt-5 h1">
-          <b><FormattedMessage id="app_name" /></b>
+          <b>Solid dietary profile editor</b>
         </Col>
       </Row>
 
@@ -41,24 +44,27 @@ const Login: React.FC = ({ onLocaleChanged }) => {
           </select>
         </Col>
         <Col xs={12} md={{ span: 2, offset: 0 }} className="text-center mt-2">
-          <button>Log in</button>
+        <LoginButton
+          oidcIssuer={'https://solidcommunity.net/'}
+          redirectUrl={window.location.href}
+        />
         </Col>
       </Row>
 
-      <Row>
+      {/* <Row>
         <Col className="text-center mt-3">
           What is Solid and how do I log in?
         </Col>
-      </Row>
+      </Row> */}
 
-      <Row className="position-absolute bottom-0 start-0">
+      {/* <Row className="position-absolute bottom-0 start-0">
         <Col className="ms-3 mb-3">
-        <select>
-          <option value="selectLanguage">Select language</option>
-          <option value="option">Option</option>
-        </select>
+          <select>
+            <option value="selectLanguage">Select language</option>
+            <option value="option">Option</option>
+          </select>
         </Col>
-      </Row>
+      </Row> */}
     </Container>
   );
 };
