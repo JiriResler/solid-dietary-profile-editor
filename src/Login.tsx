@@ -33,13 +33,13 @@ const Login: React.FC = () => {
       </Row>
 
       <Row>
-        <Col className="text-center mt-4 h4">
-          <img src={logo} alt="Sammy Image" width="150"/>
+        <Col className="text-center mt-4">
+          <img src={logo} alt="Solid logo" width="175"/>
         </Col>
       </Row>
 
       <Row>
-        <Col className="text-center mt-5 h6">
+        <Col className="text-center mt-4 h5">
           Please log in via your Solid identity provider
         </Col>
       </Row>
