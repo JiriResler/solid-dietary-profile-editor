@@ -6,6 +6,8 @@ import {
   LoginButton,
 } from "@inrupt/solid-ui-react";
 
+import logo from './logo.svg'
+
 const Login: React.FC = () => {
   // const intl = useIntl();
 
@@ -31,6 +33,12 @@ const Login: React.FC = () => {
       </Row>
 
       <Row>
+        <Col className="text-center mt-4 h4">
+          <img src={logo} alt="Sammy Image" width="150"/>
+        </Col>
+      </Row>
+
+      <Row>
         <Col className="text-center mt-5 h6">
           Please log in via your Solid identity provider
         </Col>
@@ -39,13 +47,13 @@ const Login: React.FC = () => {
       <Row>
         <Col xs={12} md={{ span: 3, offset: 4 }} className="text-center mt-2">
           <select>
-            <option value="someOption">solidcommunity.net</option>
+            <option value="someOption">https://login.inrupt.com/</option>
             <option value="otherOption">Other option</option>
           </select>
         </Col>
         <Col xs={12} md={{ span: 2, offset: 0 }} className="text-center mt-2">
         <LoginButton
-          oidcIssuer={'https://solidcommunity.net/'}
+          oidcIssuer={'https://login.inrupt.com/'}
           redirectUrl={window.location.href}
         />
         </Col>
