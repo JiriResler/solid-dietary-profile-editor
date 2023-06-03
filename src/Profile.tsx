@@ -5,22 +5,19 @@ import {
 } from "@inrupt/solid-ui-react";
 
 import {
-  addUrl,
   addStringNoLocale,
   createSolidDataset,
   createThing,
   getPodUrlAll,
   getSolidDataset,
   getThingAll,
-  getStringNoLocale,
   removeThing,
   saveSolidDatasetAt,
   setThing,
   SolidDataset,
-  getThing
 } from "@inrupt/solid-client";
 
-import { SCHEMA_INRUPT, RDF, AS } from "@inrupt/vocab-common-rdf";
+import { SCHEMA_INRUPT } from "@inrupt/vocab-common-rdf";
 
 
 const Profile: React.FC = () => {
