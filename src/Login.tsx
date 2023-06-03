@@ -1,6 +1,8 @@
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
 
 import {
   LoginButton,
@@ -34,7 +36,7 @@ const Login: React.FC = () => {
 
       <Row>
         <Col className="text-center mt-4">
-          <img src={logo} alt="Solid logo" width="175"/>
+          <img src={logo} alt="Solid logo" width="175" />
         </Col>
       </Row>
 
@@ -44,18 +46,22 @@ const Login: React.FC = () => {
         </Col>
       </Row>
 
-      <Row>
-        <Col xs={12} md={{ span: 3, offset: 4 }} className="text-center mt-2">
-          <select>
-            <option value="someOption">https://solidweb.org/</option>
-            <option value="otherOption">Other option</option>
-          </select>
+      <Row className="align-items-center">
+        <Col xs={12} md={{ span: 5, offset: 2 }} className="text-center mt-3">
+          <Form.Select size="lg">
+            <option value="solid-web">solidcommunity.net</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+          </Form.Select>
         </Col>
-        <Col xs={12} md={{ span: 2, offset: 0 }} className="text-center mt-2">
-        <LoginButton
-          oidcIssuer={'https://solidweb.org/'}
-          redirectUrl={window.location.href}
-        />
+
+        <Col xs={12} md={{ span: 2, offset: 0 }} className="text-center mt-3">
+          <LoginButton
+            oidcIssuer={'https://solidcommunity.net/'}
+            redirectUrl={window.location.href}
+          >
+            <Button variant="primary" size="lg">Log in</Button>
+          </LoginButton>
         </Col>
       </Row>
 
