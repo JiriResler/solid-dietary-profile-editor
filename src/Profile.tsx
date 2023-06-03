@@ -27,9 +27,10 @@ const Profile: React.FC = () => {
   const { session } = useSession();
 
   async function handleWrite() {
-    const podsUrls: String[] = await getPodUrlAll(session.info.webId, { fetch: session.fetch });
+    let userWebId: string = session.info.webId === undefined? "" : session.info.webId;
+    const podsUrls: String[] = await getPodUrlAll(userWebId, { fetch: session.fetch });
     const readingListUrl = `${podsUrls[0]}dietary-profile/my-profile`;
-    let myReadingList: SolidDataset;
+    let myReadingList: SolidDataset = setThing(createSolidDataset(), createThing());
 
     try {
       // Attempt to retrieve the reading list in case it already exists.
@@ -39,7 +40,7 @@ const Profile: React.FC = () => {
       items.forEach((item) => {
         myReadingList = removeThing(myReadingList, item);
       });
-    } catch (error) {
+    } catch (error: any) {
       if (typeof error.statusCode === "number" && error.statusCode === 404) {
         // if not found, create a new SolidDataset (i.e., the reading list)
         myReadingList = createSolidDataset();
