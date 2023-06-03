@@ -27,7 +27,7 @@ const Login: React.FC = () => {
       </Row>
 
       <Row>
-        <Col className="text-center mt-4 h4">
+        <Col className="text-center mt-3 h4">
           Specify your allergies, diets and what foods and drinks you like or dislike.
         </Col>
       </Row>
@@ -47,13 +47,13 @@ const Login: React.FC = () => {
       <Row>
         <Col xs={12} md={{ span: 3, offset: 4 }} className="text-center mt-2">
           <select>
-            <option value="someOption">https://login.inrupt.com/</option>
+            <option value="someOption">https://solidweb.org/</option>
             <option value="otherOption">Other option</option>
           </select>
         </Col>
         <Col xs={12} md={{ span: 2, offset: 0 }} className="text-center mt-2">
         <LoginButton
-          oidcIssuer={'https://login.inrupt.com/'}
+          oidcIssuer={'https://solidweb.org/'}
           redirectUrl={window.location.href}
         />
         </Col>

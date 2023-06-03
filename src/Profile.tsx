@@ -48,8 +48,7 @@ const Profile: React.FC = () => {
       }
     }
 
-    let item = createThing({ name: "title" });
-    item = addUrl(item, RDF.type, AS.Article);
+    let item = createThing({ name: "user" });
     item = addStringNoLocale(item, SCHEMA_INRUPT.name, "allergen1");
     myReadingList = setThing(myReadingList, item);
 
@@ -63,6 +62,7 @@ const Profile: React.FC = () => {
   return (
     <>
       <h1>Welcome to the Solid dietary profile editor</h1>
+      <p>Logged in: {session.info.webId}</p>
       <button onClick={() => handleWrite()}>Write allergen to pod</button>
     </>
   );
