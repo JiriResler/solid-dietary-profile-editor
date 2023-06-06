@@ -60,7 +60,7 @@ const Login: React.FC = () => {
             oidcIssuer={'https://solidcommunity.net/'}
             redirectUrl={window.location.href}
           >
-            <Button variant="primary" size="lg">Log in</Button>
+            <Button variant="primary" size="lg" onClick={() => alert(window.location.href)}>Log in</Button>
           </LoginButton>
         </Col>
       </Row>
