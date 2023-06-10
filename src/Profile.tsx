@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import {
   useSession,
@@ -22,6 +22,7 @@ import { SCHEMA_INRUPT } from "@inrupt/vocab-common-rdf";
 
 const Profile: React.FC = () => {
   const { session } = useSession();
+  const [selectedAllergen, setSelectedAllergen] = useState("allergen1");
 
   async function handleWrite() {
     let userWebId: string = session.info.webId === undefined? "" : session.info.webId;
@@ -47,7 +48,7 @@ const Profile: React.FC = () => {
     }
 
     let item = createThing({ name: "user" });
-    item = addStringNoLocale(item, SCHEMA_INRUPT.name, "allergen1");
+    item = addStringNoLocale(item, SCHEMA_INRUPT.name, selectedAllergen);
     myReadingList = setThing(myReadingList, item);
 
     await saveSolidDatasetAt(
@@ -55,12 +56,22 @@ const Profile: React.FC = () => {
       myReadingList,
       { fetch: session.fetch }
     );
+    
+    alert('Done.');
   }
 
   return (
     <>
       <h1>Welcome to the Solid dietary profile editor</h1>
-      <p>Logged in: {session.info.webId}</p>
+      <p>Select what you are allergic to</p>
+      <select 
+        value={selectedAllergen}
+        onChange={e => setSelectedAllergen(e.target.value)}>
+        <option key="a1" value="allergen1">Allergen1</option>
+        <option key="a2" value="allergen2">Allergen2</option>
+      </select>
+      <br/>
+      <br/>
       <button onClick={() => handleWrite()}>Write allergen to pod</button>
     </>
   );
