@@ -56,7 +56,7 @@ const Login: React.FC = () => {
       </Row>
 
       <Row className="align-items-center">
-        <Col xs={12} md={{ span: 5, offset: 2 }} className="text-center mt-2">
+        <Col xs={12} md={{ span: 3, offset: 4 }} className="text-center mt-3">
           <Form.Select
             size="lg"
             value={selectedOption}
@@ -86,7 +86,7 @@ const Login: React.FC = () => {
       </Row>
 
       <Row>
-        <Col className="text-center mt-3">
+        <Col className="text-center mt-4">
           <a href='https://solidproject.org' target="_blank" style={{ textDecoration: 'none' }}>What is Solid?</a>
         </Col>
       </Row>
