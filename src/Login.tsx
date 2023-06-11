@@ -75,7 +75,7 @@ const Login: React.FC = () => {
           </Form.Select>
         </Col>
 
-        <Col xs={12} md={{ span: 3, offset: 0 }} className="text-center mt-3">
+        <Col xs={12} md={{ span: 2, offset: 0 }} className="text-center mt-3">
           <LoginButton
             oidcIssuer={selectedOption}
             redirectUrl={window.location.href}
@@ -85,11 +85,11 @@ const Login: React.FC = () => {
         </Col>
       </Row>
 
-      {/* <Row>
-        <Col className="text-center mt-3">
-          What is Solid and how do I log in?
+      <Row>
+        <Col className="text-center mt-4">
+          <a href='https://solidproject.org' target="_blank" style={{ textDecoration: 'none' }}>What is Solid?</a>
         </Col>
-      </Row> */}
+      </Row>
 
       {/* <Row className="position-absolute bottom-0 start-0">
         <Col className="ms-3 mb-3">
