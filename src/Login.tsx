@@ -31,8 +31,14 @@ const Login: React.FC = () => {
         Slovensky
       </button> */}
 
+            <Row>
+        <Col className="text-center mt-4">
+          <img src={logo} alt="Solid logo" width="175" />
+        </Col>
+      </Row>
+
       <Row>
-        <Col className="text-center mt-5 h1">
+        <Col className="text-center mt-3 h1">
           <b>Solid dietary profile editor</b>
         </Col>
       </Row>
@@ -44,19 +50,13 @@ const Login: React.FC = () => {
       </Row>
 
       <Row>
-        <Col className="text-center mt-4">
-          <img src={logo} alt="Solid logo" width="175" />
-        </Col>
-      </Row>
-
-      <Row>
         <Col className="text-center mt-4 h5">
           Please log in via your Solid identity provider
         </Col>
       </Row>
 
       <Row className="align-items-center">
-        <Col xs={12} md={{ span: 5, offset: 2 }} className="text-center mt-3">
+        <Col xs={12} md={{ span: 5, offset: 2 }} className="text-center mt-2">
           <Form.Select
             size="lg"
             value={selectedOption}
@@ -75,7 +75,7 @@ const Login: React.FC = () => {
           </Form.Select>
         </Col>
 
-        <Col xs={12} md={{ span: 2, offset: 0 }} className="text-center mt-3">
+        <Col xs={12} md={{ span: 2, offset: 0 }} className="text-center mt-2">
           <LoginButton
             oidcIssuer={selectedOption}
             redirectUrl={window.location.href}
@@ -86,7 +86,7 @@ const Login: React.FC = () => {
       </Row>
 
       <Row>
-        <Col className="text-center mt-4">
+        <Col className="text-center mt-3">
           <a href='https://solidproject.org' target="_blank" style={{ textDecoration: 'none' }}>What is Solid?</a>
         </Col>
       </Row>
