@@ -5,13 +5,22 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
 import {
-  LoginButton,
+  LoginButton, useSession,
 } from "@inrupt/solid-ui-react";
 
 import logo from './logo.svg'
+import { useState } from 'react';
+
+const solidIdProviders: string[] = ['https://solidcommunity.net/', 'https://login.inrupt.com/',
+'https://inrupt.net/', 'https://solidweb.org/'];
 
 const Login: React.FC = () => {
   // const intl = useIntl();
+
+  const identityProviders: string[] = solidIdProviders;
+
+  const { session } = useSession();
+  const [selectedOption, setSelectedOption] = useState('Select an identity provider');
 
   return (
     <Container>
@@ -48,19 +57,30 @@ const Login: React.FC = () => {
 
       <Row className="align-items-center">
         <Col xs={12} md={{ span: 5, offset: 2 }} className="text-center mt-3">
-          <Form.Select size="lg">
-            <option value="solid-web">solidcommunity.net</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
+          <Form.Select
+            size="lg"
+            value={selectedOption}
+            onChange={e => setSelectedOption(e.target.value)}
+          >
+            <option key="initialOption">
+              Select an identity provider
+            </option>
+            {identityProviders.map((opt) => {
+              return (
+                <option key={opt}>
+                  {opt}
+                </option>
+              );
+            })}
           </Form.Select>
         </Col>
 
-        <Col xs={12} md={{ span: 2, offset: 0 }} className="text-center mt-3">
+        <Col xs={12} md={{ span: 3, offset: 0 }} className="text-center mt-3">
           <LoginButton
-            oidcIssuer={'https://solidcommunity.net/'}
+            oidcIssuer={selectedOption}
             redirectUrl={window.location.href}
           >
-            <Button variant="primary" size="lg">Log in</Button>
+            <Button variant="primary" size="lg" disabled={selectedOption === 'Select an identity provider'}>Log in</Button>
           </LoginButton>
         </Col>
       </Row>
