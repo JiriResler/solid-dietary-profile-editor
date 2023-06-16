@@ -18,14 +18,18 @@ import {
 } from "@inrupt/solid-client";
 
 import { SCHEMA_INRUPT } from "@inrupt/vocab-common-rdf";
-
+import Form from 'react-bootstrap/Form';
+import Button from 'react-bootstrap/Button';
 
 const Profile: React.FC = () => {
   const { session } = useSession();
-  const [selectedAllergen, setSelectedAllergen] = useState("allergen1");
+
+  const [checkedAllergens, setCheckedAllergens] = useState(new Set<string>());
+
+  const allergens = ["milk", "gluten", "soybeans"];
 
   async function handleWrite() {
-    let userWebId: string = session.info.webId === undefined? "" : session.info.webId;
+    let userWebId: string = session.info.webId === undefined ? "" : session.info.webId;
     const podsUrls: String[] = await getPodUrlAll(userWebId, { fetch: session.fetch });
     const readingListUrl = `${podsUrls[0]}dietary-profile/my-profile`;
     let myReadingList: SolidDataset = setThing(createSolidDataset(), createThing());
@@ -48,7 +52,11 @@ const Profile: React.FC = () => {
     }
 
     let item = createThing({ name: "user" });
-    item = addStringNoLocale(item, SCHEMA_INRUPT.name, selectedAllergen);
+
+    for (const allergen of checkedAllergens) {
+      item = addStringNoLocale(item, SCHEMA_INRUPT.name, allergen);
+    }
+
     myReadingList = setThing(myReadingList, item);
 
     await saveSolidDatasetAt(
@@ -56,23 +64,33 @@ const Profile: React.FC = () => {
       myReadingList,
       { fetch: session.fetch }
     );
-    
-    alert('Done.');
+  }
+
+  function handleAllergenClick(allergen) {
+    let newAllergenSet = new Set(checkedAllergens);
+
+    if (newAllergenSet.has(allergen)) {
+      newAllergenSet.delete(allergen);
+    } else {
+      newAllergenSet.add(allergen);
+    }
+
+    setCheckedAllergens(newAllergenSet);
   }
 
   return (
     <>
-      <h1>Welcome to the Solid dietary profile editor</h1>
+      <h1>My profile</h1>
       <p>Select what you are allergic to</p>
-      <select 
-        value={selectedAllergen}
-        onChange={e => setSelectedAllergen(e.target.value)}>
-        <option key="a1" value="allergen1">Allergen1</option>
-        <option key="a2" value="allergen2">Allergen2</option>
-      </select>
-      <br/>
-      <br/>
-      <button onClick={() => handleWrite()}>Write allergen to pod</button>
+      {allergens.map(allergen =>
+        <Form.Check
+          type="checkbox"
+          label={allergen}
+          checked={checkedAllergens.has(allergen)}
+          onChange={() => handleAllergenClick(allergen)}
+        />
+      )}
+      <Button onClick={() => handleWrite()}>Save profile</Button>
     </>
   );
 };
