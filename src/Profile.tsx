@@ -28,6 +28,8 @@ const Profile: React.FC = () => {
 
   const allergens = ["milk", "gluten", "soybeans"];
 
+  const diets = ["vegan", "vegetarian", "low-carb", "keto", "raw"];
+
   async function handleWrite() {
     let userWebId: string = session.info.webId === undefined ? "" : session.info.webId;
     const podsUrls: String[] = await getPodUrlAll(userWebId, { fetch: session.fetch });
@@ -81,13 +83,23 @@ const Profile: React.FC = () => {
   return (
     <>
       <h1>My profile</h1>
-      <p>Select what you are allergic to</p>
+      <h3>Select what you are allergic to</h3>
       {allergens.map(allergen =>
         <Form.Check
           type="checkbox"
           label={allergen}
           checked={checkedAllergens.has(allergen)}
           onChange={() => handleAllergenClick(allergen)}
+        />
+      )}
+
+      <h3>Select your diets</h3>
+      {diets.map(diet =>
+        <Form.Check
+          type="checkbox"
+          label={diet}
+          checked={false}
+          // onChange={() => handleAllergenClick(allergen)}
         />
       )}
       <Button onClick={() => handleWrite()}>Save profile</Button>
