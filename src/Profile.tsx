@@ -56,7 +56,7 @@ const Profile: React.FC = () => {
     let item = createThing({ name: "user" });
 
     for (const allergen of checkedAllergens) {
-      item = addStringNoLocale(item, SCHEMA_INRUPT.name, allergen);
+      item = addStringNoLocale(item, SCHEMA_INRUPT.name, allergen.toLowerCase());
     }
 
     myReadingList = setThing(myReadingList, item);
@@ -66,6 +66,8 @@ const Profile: React.FC = () => {
       myReadingList,
       { fetch: session.fetch }
     );
+
+    alert("Profile saved")
   }
 
   function handleAllergenClick(allergen) {
@@ -108,9 +110,6 @@ const Profile: React.FC = () => {
 
       <Button className="mt-3" onClick={() => handleWrite()}>Save profile</Button>
     </Container>
-
-
-
     </>
   );
 };
