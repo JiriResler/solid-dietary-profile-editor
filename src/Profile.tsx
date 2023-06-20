@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
-
 import {
   useSession,
 } from "@inrupt/solid-ui-react";
-
 import {
   addStringNoLocale,
   createSolidDataset,
@@ -16,19 +14,21 @@ import {
   setThing,
   SolidDataset,
 } from "@inrupt/solid-client";
-
 import { SCHEMA_INRUPT } from "@inrupt/vocab-common-rdf";
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 const Profile: React.FC = () => {
   const { session } = useSession();
 
   const [checkedAllergens, setCheckedAllergens] = useState(new Set<string>());
 
-  const allergens = ["milk", "gluten", "soybeans"];
+  const allergens = ["Celery", "Gluten", "Crustaceans", "Eggs", "Fish", "Lupin", "Milk", "Molluscs", "Mustard", "Tree nuts", "Peanuts", "Sesame", "Soya", "Sulphites"];
 
-  const diets = ["vegan", "vegetarian", "low-carb", "keto", "raw"];
+  // const diets = ["vegan", "vegetarian", "low-carb", "keto", "raw"];
 
   async function handleWrite() {
     let userWebId: string = session.info.webId === undefined ? "" : session.info.webId;
@@ -81,19 +81,22 @@ const Profile: React.FC = () => {
   }
 
   return (
-    <>
-      <h1>My profile</h1>
-      <h3>Select what you are allergic to</h3>
-      {allergens.map(allergen =>
-        <Form.Check
-          type="checkbox"
-          label={allergen}
-          checked={checkedAllergens.has(allergen)}
-          onChange={() => handleAllergenClick(allergen)}
-        />
-      )}
+    <><Container fluid >
+      <h3 className="mt-3">Select what you are allergic to</h3>
+      <Row className="w-25 mt-2">
+        {allergens.map(allergen =>
+          <Col md={6}>
+            <Form.Check
+              type="checkbox"
+              label={allergen}
+              checked={checkedAllergens.has(allergen)}
+              onChange={() => handleAllergenClick(allergen)}
+            />
+          </Col>
+        )}
+      </Row>
 
-      <h3>Select your diets</h3>
+      {/* <h3>Select your diets</h3>
       {diets.map(diet =>
         <Form.Check
           type="checkbox"
@@ -101,8 +104,13 @@ const Profile: React.FC = () => {
           checked={false}
           // onChange={() => handleAllergenClick(allergen)}
         />
-      )}
-      <Button onClick={() => handleWrite()}>Save profile</Button>
+      )} */}
+
+      <Button className="mt-3" onClick={() => handleWrite()}>Save profile</Button>
+    </Container>
+
+
+
     </>
   );
 };
