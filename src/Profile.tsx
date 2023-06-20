@@ -53,10 +53,10 @@ const Profile: React.FC = () => {
       }
     }
 
-    let item = createThing({ name: "user" });
+    let item = createThing({ name: userWebId });
 
     for (const allergen of checkedAllergens) {
-      item = addStringNoLocale(item, SCHEMA_INRUPT.name, allergen.toLowerCase());
+      item = addStringNoLocale(item, "https://github.com/JiriResler/solid-choose-well-ontology/blob/main/choosewell#isAllergicTo", allergen.toLowerCase());
     }
 
     myReadingList = setThing(myReadingList, item);
@@ -87,7 +87,7 @@ const Profile: React.FC = () => {
       <h3 className="mt-3">Select what you are allergic to</h3>
       <Row className="w-25 mt-2">
         {allergens.map(allergen =>
-          <Col md={6}>
+          <Col lg={6}>
             <Form.Check
               type="checkbox"
               label={allergen}
