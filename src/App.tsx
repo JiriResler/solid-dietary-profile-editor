@@ -20,7 +20,7 @@ function App() {
 
   return (
     <BrowserRouter
-      basename={import.meta.env.DEV ? '/' : '/solid-gh-pages-deployment/'}
+      basename={import.meta.env.DEV ? '/' : '/solid-dietary-profile-editor/'}
     >
       <Routes>
         <Route
