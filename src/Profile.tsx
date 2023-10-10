@@ -51,7 +51,7 @@ const Profile: React.FC = () => {
     const userWebId: string =
       session.info.webId === undefined ? '' : session.info.webId
     const podsUrls: string[] = await getPodUrlAll(userWebId, {
-      fetch: session.fetch,
+      fetch: session.fetch as undefined,
     })
     const readingListUrl = `${podsUrls[0]}dietary-profile/my-profile`
     let myReadingList: SolidDataset = setThing(
@@ -62,7 +62,7 @@ const Profile: React.FC = () => {
     try {
       // Attempt to retrieve the reading list in case it already exists.
       let myReadingList = await getSolidDataset(readingListUrl, {
-        fetch: session.fetch,
+        fetch: session.fetch as undefined,
       })
       // Clear the list to override the whole list
       const items = getThingAll(myReadingList)
@@ -94,7 +94,7 @@ const Profile: React.FC = () => {
     myReadingList = setThing(myReadingList, item)
 
     await saveSolidDatasetAt(readingListUrl, myReadingList, {
-      fetch: session.fetch,
+      fetch: session.fetch as undefined,
     })
 
     alert('Profile saved')
