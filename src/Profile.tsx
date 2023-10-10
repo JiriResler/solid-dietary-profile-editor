@@ -139,7 +139,7 @@ const Profile: React.FC = () => {
         />
       )} */}
 
-        <Button className="mt-3" onClick={() => handleWrite()}>
+        <Button className="mt-3" onClick={() => void handleWrite()}>
           Save profile
         </Button>
       </Container>
