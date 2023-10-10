@@ -19,6 +19,10 @@ import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 
+interface ResponseError extends Error {
+  statusCode?: number
+}
+
 const Profile: React.FC = () => {
   const { session } = useSession()
 
@@ -66,11 +70,14 @@ const Profile: React.FC = () => {
         myReadingList = removeThing(myReadingList, item)
       })
     } catch (error) {
-      if (typeof error.statusCode === 'number' && error.statusCode === 404) {
+      if (
+        typeof (error as ResponseError).statusCode === 'number' &&
+        (error as ResponseError).statusCode === 404
+      ) {
         // if not found, create a new SolidDataset (i.e., the reading list)
         myReadingList = createSolidDataset()
       } else {
-        console.error(error.message)
+        console.error((error as Error).message)
       }
     }
 
