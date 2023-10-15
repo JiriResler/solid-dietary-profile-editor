@@ -1,6 +1,8 @@
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Navbar from 'react-bootstrap/Navbar'
+import Stack from 'react-bootstrap/Stack'
+import Button from 'react-bootstrap/Button'
 
 const App: React.FC = () => {
   return (
@@ -14,7 +16,17 @@ const App: React.FC = () => {
       </Row>
 
       <Row className="position-absolute top-50 start-50 translate-middle">
-        Body
+        <Stack gap={3}>
+          <h2>Dietary profile editor</h2>
+          <Button className="">Use Solid</Button>
+          <Button variant="outline-secondary">Use Google Cloud</Button>
+          <a
+            href="/home"
+            className="text-center link-underline link-underline-opacity-0"
+          >
+            What is the difference?
+          </a>
+        </Stack>
       </Row>
 
       <Row className="position-absolute bottom-0 end-0 me-auto">
