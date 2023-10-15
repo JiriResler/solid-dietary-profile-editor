@@ -3,6 +3,7 @@ import Row from 'react-bootstrap/Row'
 import Navbar from 'react-bootstrap/Navbar'
 import Stack from 'react-bootstrap/Stack'
 import Button from 'react-bootstrap/Button'
+import './styles/Test.css'
 
 const App: React.FC = () => {
   return (
@@ -18,8 +19,9 @@ const App: React.FC = () => {
       <Row className="position-absolute top-50 start-50 translate-middle">
         <Stack gap={3}>
           <h2>Dietary profile editor</h2>
-          <Button className="">Use Solid</Button>
-          <Button variant="outline-secondary">Use Google Cloud</Button>
+          <h6>Select who you want to trust with your personal data</h6>
+          <Button className="box">Trust Solid</Button>
+          <Button variant="outline-secondary">Trust Google</Button>
           <a
             href="/home"
             className="text-center link-underline link-underline-opacity-0"

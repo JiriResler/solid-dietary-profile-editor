@@ -1,0 +1,13 @@
+.box {
+    width: 120px;
+    height: 60px;
+    background-color: yellow;
+    color: black;
+    padding: 12px;
+  }
+  
+  .box:hover {
+    background-color: black;
+    color: white;
+  }
+  
