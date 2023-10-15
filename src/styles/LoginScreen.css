@@ -8,3 +8,7 @@
 .solid-button:hover {
   background-color: #6A35FF;
 }
+
+.solid-logo {
+  width: 150%;
+}

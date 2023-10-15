@@ -3,7 +3,7 @@ import Row from 'react-bootstrap/Row'
 import Navbar from 'react-bootstrap/Navbar'
 import Stack from 'react-bootstrap/Stack'
 import Button from 'react-bootstrap/Button'
-import './styles/SolidButton.css'
+import './styles/LoginScreen.css'
 import Col from 'react-bootstrap/Col'
 
 const App: React.FC = () => {
@@ -26,7 +26,7 @@ const App: React.FC = () => {
                   <img
                     src="../resources/logo_solid.svg"
                     alt="Solid project logo"
-                    style={{ width: '150%' }}
+                    className="solid-logo"
                   />
                 </Col>
                 <Col>
