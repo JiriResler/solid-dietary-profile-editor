@@ -5,14 +5,14 @@ import react from '@vitejs/plugin-react'
 export default defineConfig(({ command }) => {
   const config = {
     plugins: [react()],
-    base: '/',
+    base: '/solid-dietary-profile-editor/',
     test: {
-      environment: 'jsdom'
-    }
+      environment: 'jsdom',
+    },
   }
 
-  if (command !== 'serve') {
-    config.base = '/solid-dietary-profile-editor/'
+  if (command === 'serve') {
+    config.base = '/'
   }
 
   return config
