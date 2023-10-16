@@ -1,6 +1,6 @@
 .solid-button {
-  display: block;
-  width: 100%;
+  /* display: block; */
+  /* width: 100%; */
   background-color: #7C4DFF;
   border-color: #7C4DFF;
 }
@@ -10,5 +10,5 @@
 }
 
 .solid-logo {
-  width: 150%;
+  height:35px;
 }

@@ -16,13 +16,13 @@ const App: React.FC = () => {
       </Navbar>
 
       <Container>
-        <Row className="position-absolute top-50 start-50 translate-middle">
+        <Row className="position-absolute top-50 start-50 translate-middle ">
           <Col>
             <Stack gap={3}>
               <h2>Dietary profile editor</h2>
               <h6>Select who you want to trust with your personal data</h6>
               <Row className="align-items-center">
-                <Col xs={2}>
+                <Col className="text-center">
                   <img
                     src="images/logo_solid.svg"
                     alt="Solid project logo"
