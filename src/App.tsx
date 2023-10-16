@@ -24,7 +24,7 @@ const App: React.FC = () => {
               <Row className="align-items-center">
                 <Col xs={2}>
                   <img
-                    src="./resources/logo_solid.svg"
+                    src="/images/logo_solid.svg"
                     alt="Solid project logo"
                     className="solid-logo"
                   />
