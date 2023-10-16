@@ -18,18 +18,18 @@ const App: React.FC = () => {
       <Container>
         <Row className="position-absolute top-50 start-50 translate-middle ">
           <Col>
-            <Stack gap={3}>
+            <Stack gap={3} className="text-center">
               <h2>Dietary profile editor</h2>
               <h6>Select who you want to trust with your personal data</h6>
               <Row className="align-items-center">
-                <Col className="text-center">
+                <Col className="text-end">
                   <img
                     src="images/logo_solid.svg"
                     alt="Solid project logo"
                     className="solid-logo"
                   />
                 </Col>
-                <Col>
+                <Col xs={8} className="text-start">
                   <Button className="solid-button">Trust Solid</Button>
                 </Col>
               </Row>
