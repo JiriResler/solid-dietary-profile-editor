@@ -20,7 +20,7 @@ const App: React.FC = () => {
           <Col>
             <Stack gap={3} className="text-center">
               <h2>Dietary profile editor</h2>
-              <h6>Select who you want to trust with your personal data</h6>
+              <h6>Choose a method for signing in</h6>
               <Row className="align-items-center">
                 <Col className="text-end">
                   <img
@@ -30,10 +30,10 @@ const App: React.FC = () => {
                   />
                 </Col>
                 <Col xs={8} className="text-start">
-                  <Button className="solid-button">Trust Solid</Button>
+                  <Button className="solid-button">Solid WebID</Button>
                 </Col>
               </Row>
-              <Button variant="outline-secondary">Trust Google</Button>
+              <Button variant="outline-secondary">Google account</Button>
               <a
                 href="/home"
                 className="text-center link-underline link-underline-opacity-0"
