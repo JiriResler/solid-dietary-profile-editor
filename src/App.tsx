@@ -22,18 +22,33 @@ const App: React.FC = () => {
               <h2>Dietary profile editor</h2>
               <h6>Choose a method for signing in</h6>
               <Row className="align-items-center">
-                <Col className="text-end">
+                <Col xs={3}>
                   <img
                     src="images/logo_solid.svg"
                     alt="Solid project logo"
                     className="solid-logo"
                   />
                 </Col>
-                <Col xs={8} className="text-start">
-                  <Button className="solid-button">Solid WebID</Button>
+                <Col className="text-start">
+                  <Button className="solid-button text-start">
+                    Solid WebID
+                  </Button>
                 </Col>
               </Row>
-              <Button variant="outline-secondary">Google account</Button>
+              <Row className="align-items-center">
+                <Col xs={3}>
+                  <img
+                    src="images/logo_google.svg"
+                    alt="Google logo"
+                    className="google-logo"
+                  />
+                </Col>
+                <Col className="text-start">
+                  <Button className="google-button text-start">
+                    Google account
+                  </Button>
+                </Col>
+              </Row>
               <a
                 href="/home"
                 className="text-center link-underline link-underline-opacity-0"

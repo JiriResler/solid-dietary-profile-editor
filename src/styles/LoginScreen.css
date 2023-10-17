@@ -1,5 +1,5 @@
 .solid-button {
-  width: 75%;
+  width: 100%;
   background-color: #7C4DFF;
   border-color: #7C4DFF;
 }
@@ -8,6 +8,15 @@
   background-color: #6A35FF;
 }
 
+.google-button {
+  width: 100%;
+}
+
 .solid-logo {
   height:35px;
+}
+
+.google-logo {
+  
+  height:45px;
 }
