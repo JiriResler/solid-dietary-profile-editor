@@ -20,14 +20,10 @@ const App: React.FC = () => {
           <Col>
             <Stack gap={3} className="text-center">
               <h2>Dietary profile editor</h2>
-              <h6>Choose a method for signing in</h6>
+              <h6>You can choose how to sign in</h6>
               <Row className="align-items-center">
                 <Col xs={3}>
-                  <img
-                    src="images/logo_solid.svg"
-                    alt="Solid project logo"
-                    className="solid-logo"
-                  />
+                  <img src="images/logo_solid.svg" alt="Solid project logo" />
                 </Col>
                 <Col className="text-start">
                   <Button className="solid-button text-start">
@@ -35,17 +31,14 @@ const App: React.FC = () => {
                   </Button>
                 </Col>
               </Row>
+              <div>or</div>
               <Row className="align-items-center">
                 <Col xs={3}>
-                  <img
-                    src="images/logo_google.svg"
-                    alt="Google logo"
-                    className="google-logo"
-                  />
+                  <img src="images/logo_google.svg" alt="Google logo" />
                 </Col>
                 <Col className="text-start">
                   <Button className="google-button text-start">
-                    Google account
+                    Sign in with Google
                   </Button>
                 </Col>
               </Row>
