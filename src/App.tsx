@@ -5,8 +5,12 @@ import Stack from 'react-bootstrap/Stack'
 import Button from 'react-bootstrap/Button'
 import './styles/LoginScreen.css'
 import Col from 'react-bootstrap/Col'
+import { useState } from 'react'
+import SolidLogin from './components/SolidLogin.tsx'
 
 const App: React.FC = () => {
+  const [loginPageState, setLoginPageState] = useState('choosingMethod')
+
   return (
     <>
       <Navbar bg="primary" data-bs-theme="dark">
@@ -20,34 +24,54 @@ const App: React.FC = () => {
           <Col>
             <Stack gap={3} className="text-center">
               <h2>Dietary profile editor</h2>
-              <h6>You can choose how to sign in</h6>
-              <Row className="align-items-center">
-                <Col xs={3}>
-                  <img src="images/logo_solid.svg" alt="Solid project logo" />
-                </Col>
-                <Col className="text-start">
-                  <Button className="solid-button text-start">
-                    Solid WebID
+
+              {loginPageState === 'choosingMethod' && (
+                <div className="border">
+                  <h6>You can choose how to sign in</h6>
+                  <Row className="align-items-center">
+                    <Col xs={3}>
+                      <img
+                        src="images/logo_solid.svg"
+                        alt="Solid project logo"
+                      />
+                    </Col>
+                    <Col className="text-start">
+                      <Button
+                        onClick={() => setLoginPageState('userChoseSolid')}
+                        className="solid-button text-start"
+                      >
+                        Solid WebID
+                      </Button>
+                    </Col>
+                  </Row>
+                  <div>or</div>
+                  <Row className="align-items-center">
+                    <Col xs={3}>
+                      <img src="images/logo_google.svg" alt="Google logo" />
+                    </Col>
+                    <Col className="text-start">
+                      <Button className="google-button text-start">
+                        Sign in with Google
+                      </Button>
+                    </Col>
+                  </Row>
+                  <a
+                    href="/home"
+                    className="text-center link-underline link-underline-opacity-0"
+                  >
+                    What is the difference?
+                  </a>
+                </div>
+              )}
+
+              {loginPageState === 'userChoseSolid' && (
+                <div>
+                  <SolidLogin />
+                  <Button onClick={() => setLoginPageState('choosingMethod')}>
+                    Back
                   </Button>
-                </Col>
-              </Row>
-              <div>or</div>
-              <Row className="align-items-center">
-                <Col xs={3}>
-                  <img src="images/logo_google.svg" alt="Google logo" />
-                </Col>
-                <Col className="text-start">
-                  <Button className="google-button text-start">
-                    Sign in with Google
-                  </Button>
-                </Col>
-              </Row>
-              <a
-                href="/home"
-                className="text-center link-underline link-underline-opacity-0"
-              >
-                What is the difference?
-              </a>
+                </div>
+              )}
             </Stack>
           </Col>
         </Row>

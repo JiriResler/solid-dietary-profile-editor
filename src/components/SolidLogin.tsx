@@ -6,7 +6,7 @@ import Form from 'react-bootstrap/Form'
 
 import { LoginButton } from '@inrupt/solid-ui-react'
 
-import logo from './logo.svg'
+import logo from '../../public/images/logo_solid.svg'
 import { useState } from 'react'
 
 const solidIdProviders: string[] = [
@@ -16,7 +16,7 @@ const solidIdProviders: string[] = [
   'https://solidweb.org/',
 ]
 
-const Login: React.FC = () => {
+const SolidLogin: React.FC = () => {
   // const intl = useIntl();
 
   const identityProviders: string[] = solidIdProviders
@@ -114,4 +114,4 @@ const Login: React.FC = () => {
   )
 }
 
-export default Login
+export default SolidLogin
