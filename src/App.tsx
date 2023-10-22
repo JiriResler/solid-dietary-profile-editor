@@ -9,15 +9,9 @@ function App() {
     <BrowserRouter>
       <div className="App">
         <Routes>
-          <Route path="/solid-dietary-profile-editor/" element={<Home />} />
-          <Route
-            path="/solid-dietary-profile-editor/about"
-            element={<About />}
-          />
-          <Route
-            path="/solid-dietary-profile-editor/contact"
-            element={<Contact />}
-          />
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
         </Routes>
       </div>
     </BrowserRouter>

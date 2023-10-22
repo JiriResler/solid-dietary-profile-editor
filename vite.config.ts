@@ -1,12 +1,19 @@
+import { defineConfig } from 'vitest/config'
 import react from '@vitejs/plugin-react'
 
 // https://vitejs.dev/config/
-const config = {
-  plugins: [react()],
-  base: '/solid-dietary-profile-editor/',
-  test: {
-    environment: 'jsdom',
-  },
-}
+export default defineConfig(({ command }) => {
+  const config = {
+    plugins: [react()],
+    base: '/solid-dietary-profile-editor/',
+    test: {
+      environment: 'jsdom',
+    },
+  }
 
-export default config
+  if (command === 'serve') {
+    config.base = '/'
+  }
+
+  return config
+})
