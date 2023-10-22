@@ -35,7 +35,7 @@ function Home() {
     e.preventDefault()
 
     try {
-      await signInWithEmailAndPassword(auth, signUpEmail, signUpPassword)
+      await signInWithEmailAndPassword(auth, loginEmail, loginPassword)
       console.log('Login succesfull')
     } catch {
       console.log('You entered a wrong username or password.')
