@@ -6,7 +6,9 @@ import Contact from './Contact'
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter
+      basename={import.meta.env.DEV ? '/' : '/solid-dietary-profile-editor/'}
+    >
       <div className="App">
         <Routes>
           <Route path="/" element={<Home />} />
