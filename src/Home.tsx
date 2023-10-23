@@ -3,6 +3,8 @@ import { useState } from 'react'
 import { auth } from './firebase'
 import { signInWithEmailAndPassword } from 'firebase/auth'
 import { createUserWithEmailAndPassword } from 'firebase/auth'
+import { doc, setDoc } from 'firebase/firestore'
+import { db } from './firebase'
 
 function Home() {
   const [loginEmail, setLoginEmail] = useState('')
@@ -19,7 +21,24 @@ function Home() {
 
     if (signUpPassword === signUpConfirmPassword) {
       try {
-        await createUserWithEmailAndPassword(auth, signUpEmail, signUpPassword)
+        await createUserWithEmailAndPassword(
+          auth,
+          signUpEmail,
+          signUpPassword,
+        ).then(async (response) => {
+          const userid = response.user.uid
+          try {
+            await setDoc(doc(db, 'users', userid), {
+              fullName: 'Full Name',
+              username: 'user name',
+              email: signUpEmail,
+              dateOfBirth: 'date of birth',
+            })
+          } catch (e) {
+            console.error('Error adding document: ', e)
+          }
+        })
+
         console.log('Sign up succesfull')
       } catch {
         console.log('Email must be valid and password at lesat 6 chars long')
@@ -95,6 +114,13 @@ function Home() {
           Log in
         </button>
       </form>
+
+      <br />
+      <br />
+      <br />
+
+      <h1>write allergen to profile</h1>
+      <h1>Read profile</h1>
     </div>
   )
 }
