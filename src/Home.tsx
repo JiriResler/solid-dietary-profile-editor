@@ -21,24 +21,7 @@ function Home() {
 
     if (signUpPassword === signUpConfirmPassword) {
       try {
-        await createUserWithEmailAndPassword(
-          auth,
-          signUpEmail,
-          signUpPassword,
-        ).then(async (response) => {
-          const userid = response.user.uid
-          try {
-            await setDoc(doc(db, 'users', userid), {
-              fullName: 'Full Name',
-              username: 'user name',
-              email: signUpEmail,
-              dateOfBirth: 'date of birth',
-            })
-          } catch (e) {
-            console.error('Error adding document: ', e)
-          }
-        })
-
+        await createUserWithEmailAndPassword(auth, signUpEmail, signUpPassword)
         console.log('Sign up succesfull')
       } catch {
         console.log('Email must be valid and password at lesat 6 chars long')
@@ -61,10 +44,20 @@ function Home() {
     }
   }
 
+  const writeAllergenToProfile = async () => {
+    const userid = 'Z5heWuWp7AOygiwpKU4MfXyf3xH3'
+
+    try {
+      await setDoc(doc(db, 'users', userid), {
+        allergicTo: 'allergen 1',
+      })
+    } catch (e) {
+      console.error('Error adding document: ', e)
+    }
+  }
+
   return (
     <div>
-      {/* <h1>This is the home page</h1>
-      <Link to="about">Click to view our about page</Link> */}
       <h1>Create a new profile</h1>
       <form>
         <input
@@ -119,8 +112,10 @@ function Home() {
       <br />
       <br />
 
-      <h1>write allergen to profile</h1>
-      <h1>Read profile</h1>
+      <button onClick={() => void writeAllergenToProfile()}>
+        Write allergen to profile
+      </button>
+      <button>Read allergen from profile</button>
     </div>
   )
 }
