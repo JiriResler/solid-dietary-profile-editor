@@ -26,3 +26,12 @@
   left: 50%;
   width: 100%;
 }
+
+.navbar-link {
+  color: white;
+  text-decoration: none;
+}
+
+.sign-in-method-difference-link {
+  text-decoration: none;
+}
