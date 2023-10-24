@@ -8,10 +8,21 @@
   background-color: #6A35FF;
 }
 
-.google-button {
+.sign-in-with-email-button {
   width: 100%;
 }
 
-.login-provider-icon{
+.login-provider-icon {
   width: 35px;
+}
+
+.sign-in-row {
+  width: 300px;
+}
+
+.app-name-row {
+  position: absolute;
+  top: 25%;
+  left: 50%;
+  width: 100%;
 }
