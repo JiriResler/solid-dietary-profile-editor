@@ -2,12 +2,12 @@ import { Routes, Route } from 'react-router-dom'
 import { BrowserRouter } from 'react-router-dom'
 import Home from './Home'
 import About from './About'
-import { ImageSizeContext } from './Context.js'
-import { useContext } from 'react'
+import { LoginMethodContext } from './LoginMethodContext'
+// import { useContext } from 'react'
 
 function App() {
   return (
-    <ImageSizeContext.Provider value={1000}>
+    <LoginMethodContext.Provider value={'default-context'}>
       <BrowserRouter
         basename={import.meta.env.DEV ? '/' : '/solid-dietary-profile-editor/'}
       >
@@ -16,16 +16,10 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
           </Routes>
-          <PlaceImage />
         </div>
       </BrowserRouter>
-    </ImageSizeContext.Provider>
+    </LoginMethodContext.Provider>
   )
-}
-
-function PlaceImage() {
-  const imageSize = useContext(ImageSizeContext)
-  return <p>{imageSize}</p>
 }
 
 export default App
