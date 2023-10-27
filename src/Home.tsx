@@ -109,7 +109,7 @@ const Home: React.FC<HomeProps> = ({
         >
           <option key="en">en</option>
           <option key="sk">sk</option>
-          <option key="cz">cz</option>
+          <option key="cs">cs</option>
         </Form.Select>
       </div>
     </>

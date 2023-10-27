@@ -15,7 +15,7 @@ const sk_messages = {
   what_is_the_difference: 'Aký je v tom rozdiel?',
 }
 
-const cz_messages = {
+const cs_messages = {
   app_name: 'Editor dietního profilu',
   about_application: 'O aplikaci',
   sign_in_with: 'Přihlásit se přes',
@@ -29,8 +29,8 @@ function getCurrentLocaleMessages(locale: string) {
     return sk_messages
   }
 
-  if (locale === 'cz') {
-    return cz_messages
+  if (locale === 'cs') {
+    return cs_messages
   }
 
   return {}
