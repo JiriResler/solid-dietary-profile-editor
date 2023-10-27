@@ -5,6 +5,7 @@ import Col from 'react-bootstrap/Col'
 import Navbar from 'react-bootstrap/Navbar'
 import Stack from 'react-bootstrap/Stack'
 import Button from 'react-bootstrap/Button'
+import { FormattedMessage } from 'react-intl'
 
 function Home() {
   return (
@@ -18,7 +19,9 @@ function Home() {
       </Navbar>
 
       <h1 className="text-center app-name-row translate-middle">
-        Dietary profile editor
+      <FormattedMessage
+            id="app_name"
+          />
       </h1>
 
       <Container>
