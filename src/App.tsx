@@ -3,16 +3,22 @@ import Home from './Home'
 import About from './About'
 import SignInMethodComparison from './SignInMethodComparison'
 import './styles/LoginScreen.css'
-import { IntlProvider, FormattedMessage, FormattedNumber } from 'react-intl'
+import { IntlProvider } from 'react-intl'
 
-const en_messages = { app_name: 'Dietary profile editor' }
-const sk_messages = { app_name: 'Editor diétneho profilu' }
+const sk_messages = { 
+  app_name: 'Editor diétneho profilu',
+  about_application: 'O aplikácii',
+  sign_in_with: 'Prihlásiť sa cez',
+  or: 'alebo',
+  email_and_password: 'Email a heslo',
+  what_is_the_difference: 'Aký je v tom rozdiel?'
+ }
 
 const App: React.FC = () => {
   const selectedLanguage = 'en'
   return (
     <IntlProvider
-      messages={en_messages}
+      messages={sk_messages}
       locale={selectedLanguage}
       defaultLocale="en"
     >

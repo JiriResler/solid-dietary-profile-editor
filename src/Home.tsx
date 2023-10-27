@@ -13,7 +13,10 @@ function Home() {
       <Navbar bg="primary" data-bs-theme="dark">
         <Navbar.Brand className="ms-3 fs-6">
           <Link className="navbar-link" to="about">
-            About
+          <FormattedMessage
+            id="about_application"
+            defaultMessage={'About'}
+          />
           </Link>
         </Navbar.Brand>
       </Navbar>
@@ -21,6 +24,7 @@ function Home() {
       <h1 className="text-center app-name-row translate-middle">
       <FormattedMessage
             id="app_name"
+            defaultMessage={'Dietary profile editor'}
           />
       </h1>
 
@@ -30,7 +34,12 @@ function Home() {
             <Stack gap={2} className="text-center">
               <Row className="pb-2">
                 <Col>
-                  <h5>Sign in with</h5>
+                  <h5>
+                    <FormattedMessage 
+                      id="sign_in_with"
+                      defaultMessage={'Sign in with'}
+                    />
+                    </h5>
                 </Col>
               </Row>
               <Row className="align-items-center">
@@ -48,7 +57,11 @@ function Home() {
                 </Col>
               </Row>
               <Row>
-                <Col>or</Col>
+                <Col>
+                <FormattedMessage 
+                      id="or"
+                      defaultMessage={'or'}
+                    /></Col>
               </Row>
               <Row className="align-items-center">
                 <Col xs={3}>
@@ -60,7 +73,10 @@ function Home() {
                 </Col>
                 <Col className="text-start">
                   <Button className="text-start sign-in-with-email-button">
-                    Email and password
+                  <FormattedMessage 
+                      id="email_and_password"
+                      defaultMessage={'Email and password'}
+                    />
                   </Button>
                 </Col>
               </Row>
@@ -70,7 +86,10 @@ function Home() {
                     className="sign-in-method-difference-link"
                     to="sign-in-methods-comparison"
                   >
-                    What is the difference?
+                    <FormattedMessage 
+                      id="what_is_the_difference"
+                      defaultMessage={'What is the difference?'}
+                    />
                   </Link>
                 </Col>
               </Row>
