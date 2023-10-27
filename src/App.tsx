@@ -4,7 +4,7 @@ import About from './About'
 import SignInMethodComparison from './SignInMethodComparison'
 import './styles/LoginScreen.css'
 import { IntlProvider } from 'react-intl'
-// import { useState } from 'react'
+import { useState } from 'react'
 
 const sk_messages = {
   app_name: 'Editor diétneho profilu',
@@ -25,13 +25,23 @@ const sk_messages = {
 // }
 
 const App: React.FC = () => {
+  const [selectedLanguage, setSelectedLanguage] = useState<string>('English')
+
   return (
     <IntlProvider messages={sk_messages} locale={''} defaultLocale="en">
       <BrowserRouter
         basename={import.meta.env.DEV ? '/' : '/solid-dietary-profile-editor/'}
       >
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route
+            path="/"
+            element={
+              <Home
+                selectedLanguage={selectedLanguage}
+                setSelectedLanguage={setSelectedLanguage}
+              />
+            }
+          />
           <Route path="/about" element={<About />} />
           <Route
             path="sign-in-methods-comparison"

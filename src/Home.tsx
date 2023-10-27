@@ -8,7 +8,15 @@ import Button from 'react-bootstrap/Button'
 import { FormattedMessage } from 'react-intl'
 import Form from 'react-bootstrap/Form'
 
-function Home() {
+type HomeProps = {
+  selectedLanguage: string
+  setSelectedLanguage: React.Dispatch<React.SetStateAction<string>>
+}
+
+const Home: React.FC<HomeProps> = ({
+  selectedLanguage,
+  setSelectedLanguage,
+}) => {
   return (
     <>
       <Navbar bg="primary" data-bs-theme="dark">
@@ -96,10 +104,10 @@ function Home() {
 
       <div className="position-absolute bottom-0 end-0 me-3 mb-3">
         <Form.Select
-
-        // value={}
-        // onChange={(e) => f(e.target.value)}
+          value={selectedLanguage}
+          onChange={(e) => setSelectedLanguage(e.target.value)}
         >
+          <option key="english">English</option>
           <option key="slovak">Slovensky</option>
           <option key="czech">Česky</option>
         </Form.Select>
