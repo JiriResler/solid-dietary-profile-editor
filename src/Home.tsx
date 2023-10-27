@@ -107,9 +107,9 @@ const Home: React.FC<HomeProps> = ({
           value={selectedLanguage}
           onChange={(e) => setSelectedLanguage(e.target.value)}
         >
-          <option key="english">English</option>
-          <option key="slovak">Slovensky</option>
-          <option key="czech">Česky</option>
+          <option key="en">en</option>
+          <option key="sk">sk</option>
+          <option key="cz">cz</option>
         </Form.Select>
       </div>
     </>
