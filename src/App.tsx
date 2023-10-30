@@ -5,6 +5,7 @@ import SignInMethodComparison from './SignInMethodComparison'
 import './styles/LoginScreen.css'
 import { IntlProvider } from 'react-intl'
 import { useState } from 'react'
+import LogInSolid from './LogInSolid'
 
 const sk_messages = {
   app_name: 'Editor diétneho profilu',
@@ -60,9 +61,10 @@ const App: React.FC = () => {
           />
           <Route path="/about" element={<About />} />
           <Route
-            path="sign-in-methods-comparison"
+            path="/sign-in-methods-comparison"
             element={<SignInMethodComparison />}
           />
+          <Route path="/log-in-solid" element={<LogInSolid />} />
         </Routes>
       </BrowserRouter>
     </IntlProvider>

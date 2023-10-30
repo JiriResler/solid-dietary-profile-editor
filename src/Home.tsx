@@ -58,7 +58,9 @@ const Home: React.FC<HomeProps> = ({
                 </Col>
                 <Col className="text-start">
                   <Button className="solid-button text-start">
-                    Solid WebID
+                    <Link className="navbar-link" to="log-in-solid">
+                      Solid WebID
+                    </Link>
                   </Button>
                 </Col>
               </Row>
