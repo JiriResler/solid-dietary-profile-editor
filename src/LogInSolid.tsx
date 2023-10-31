@@ -9,7 +9,6 @@ import { LoginButton } from '@inrupt/solid-ui-react'
 
 import logo from '/images/logo_solid.svg'
 import { useState } from 'react'
-import { useSession } from '@inrupt/solid-ui-react'
 
 const solidIdProviders: string[] = [
   'https://solidcommunity.net/',
@@ -21,17 +20,12 @@ const solidIdProviders: string[] = [
 const LogInSolid: React.FC = () => {
   const identityProviders: string[] = solidIdProviders
 
-  const { session } = useSession()
   const [selectedOption, setSelectedOption] = useState(
     'Select an identity provider',
   )
 
   return (
     <Container>
-      <p>
-        Solid is logged in:{' '}
-        {session.info.isLoggedIn === true ? 'true' : 'false'}
-      </p>
       <Row>
         <Col className="text-center mt-4">
           <img src={logo} alt="Solid logo" width="175" />
@@ -74,7 +68,7 @@ const LogInSolid: React.FC = () => {
         <Col xs={12} md={{ span: 2, offset: 0 }} className="text-center mt-2">
           <LoginButton
             oidcIssuer={selectedOption}
-            redirectUrl={window.location.href}
+            redirectUrl={'http://localhost:5173/'}
           >
             <Button
               variant="primary"

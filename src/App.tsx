@@ -6,7 +6,8 @@ import './styles/LoginScreen.css'
 import { IntlProvider } from 'react-intl'
 import { useState } from 'react'
 import LogInSolid from './LogInSolid'
-import { SessionProvider } from '@inrupt/solid-ui-react'
+import { useSession } from '@inrupt/solid-ui-react'
+import Profile from './components/Profile'
 
 const sk_messages = {
   app_name: 'Editor diétneho profilu',
@@ -40,19 +41,18 @@ function getCurrentLocaleMessages(locale: string) {
 
 const App: React.FC = () => {
   const [selectedLanguage, setSelectedLanguage] = useState<string>('en')
+  const { session } = useSession()
 
   return (
-    <SessionProvider sessionId="session-id">
-      <IntlProvider
-        messages={getCurrentLocaleMessages(selectedLanguage)}
-        locale={selectedLanguage}
-        defaultLocale="en"
+    <IntlProvider
+      messages={getCurrentLocaleMessages(selectedLanguage)}
+      locale={selectedLanguage}
+      defaultLocale="en"
+    >
+      <BrowserRouter
+        basename={import.meta.env.DEV ? '/' : '/solid-dietary-profile-editor/'}
       >
-        <BrowserRouter
-          basename={
-            import.meta.env.DEV ? '/' : '/solid-dietary-profile-editor/'
-          }
-        >
+        {!session.info.isLoggedIn && (
           <Routes>
             <Route
               path="/"
@@ -70,9 +70,15 @@ const App: React.FC = () => {
             />
             <Route path="/log-in-solid" element={<LogInSolid />} />
           </Routes>
-        </BrowserRouter>
-      </IntlProvider>
-    </SessionProvider>
+        )}
+
+        {session.info.isLoggedIn && (
+          <Routes>
+            <Route path="/" element={<Profile />} />
+          </Routes>
+        )}
+      </BrowserRouter>
+    </IntlProvider>
   )
 }
 
