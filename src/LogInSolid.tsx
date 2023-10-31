@@ -68,7 +68,7 @@ const LogInSolid: React.FC = () => {
         <Col xs={12} md={{ span: 2, offset: 0 }} className="text-center mt-2">
           <LoginButton
             oidcIssuer={selectedOption}
-            redirectUrl={'http://localhost:5173/'}
+            redirectUrl={window.location.origin}
           >
             <Button
               variant="primary"
