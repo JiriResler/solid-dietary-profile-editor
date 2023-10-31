@@ -6,6 +6,7 @@ import './styles/LoginScreen.css'
 import { IntlProvider } from 'react-intl'
 import { useState } from 'react'
 import LogInSolid from './LogInSolid'
+import { SessionProvider } from '@inrupt/solid-ui-react'
 
 const sk_messages = {
   app_name: 'Editor diétneho profilu',
@@ -41,33 +42,37 @@ const App: React.FC = () => {
   const [selectedLanguage, setSelectedLanguage] = useState<string>('en')
 
   return (
-    <IntlProvider
-      messages={getCurrentLocaleMessages(selectedLanguage)}
-      locale={selectedLanguage}
-      defaultLocale="en"
-    >
-      <BrowserRouter
-        basename={import.meta.env.DEV ? '/' : '/solid-dietary-profile-editor/'}
+    <SessionProvider sessionId="session-id">
+      <IntlProvider
+        messages={getCurrentLocaleMessages(selectedLanguage)}
+        locale={selectedLanguage}
+        defaultLocale="en"
       >
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <Home
-                selectedLanguage={selectedLanguage}
-                setSelectedLanguage={setSelectedLanguage}
-              />
-            }
-          />
-          <Route path="/about" element={<About />} />
-          <Route
-            path="/sign-in-methods-comparison"
-            element={<SignInMethodComparison />}
-          />
-          <Route path="/log-in-solid" element={<LogInSolid />} />
-        </Routes>
-      </BrowserRouter>
-    </IntlProvider>
+        <BrowserRouter
+          basename={
+            import.meta.env.DEV ? '/' : '/solid-dietary-profile-editor/'
+          }
+        >
+          <Routes>
+            <Route
+              path="/"
+              element={
+                <Home
+                  selectedLanguage={selectedLanguage}
+                  setSelectedLanguage={setSelectedLanguage}
+                />
+              }
+            />
+            <Route path="/about" element={<About />} />
+            <Route
+              path="/sign-in-methods-comparison"
+              element={<SignInMethodComparison />}
+            />
+            <Route path="/log-in-solid" element={<LogInSolid />} />
+          </Routes>
+        </BrowserRouter>
+      </IntlProvider>
+    </SessionProvider>
   )
 }
 

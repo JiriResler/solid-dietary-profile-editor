@@ -1,13 +1,15 @@
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-// import Button from 'react-bootstrap/Button'
+import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
+import { Link } from 'react-router-dom'
 
-// import { LoginButton } from '@inrupt/solid-ui-react'
+import { LoginButton } from '@inrupt/solid-ui-react'
 
-import logo from '../public/images/logo_solid.svg'
+import logo from '/images/logo_solid.svg'
 import { useState } from 'react'
+import { useSession } from '@inrupt/solid-ui-react'
 
 const solidIdProviders: string[] = [
   'https://solidcommunity.net/',
@@ -19,13 +21,17 @@ const solidIdProviders: string[] = [
 const LogInSolid: React.FC = () => {
   const identityProviders: string[] = solidIdProviders
 
-  // const { session } = useSession()
+  const { session } = useSession()
   const [selectedOption, setSelectedOption] = useState(
     'Select an identity provider',
   )
 
   return (
     <Container>
+      <p>
+        Solid is logged in:{' '}
+        {session.info.isLoggedIn === true ? 'true' : 'false'}
+      </p>
       <Row>
         <Col className="text-center mt-4">
           <img src={logo} alt="Solid logo" width="175" />
@@ -66,8 +72,7 @@ const LogInSolid: React.FC = () => {
         </Col>
 
         <Col xs={12} md={{ span: 2, offset: 0 }} className="text-center mt-2">
-          <button>Log in</button>
-          {/* <LoginButton
+          <LoginButton
             oidcIssuer={selectedOption}
             redirectUrl={window.location.href}
           >
@@ -78,7 +83,7 @@ const LogInSolid: React.FC = () => {
             >
               Log in
             </Button>
-          </LoginButton> */}
+          </LoginButton>
         </Col>
       </Row>
 
@@ -93,6 +98,7 @@ const LogInSolid: React.FC = () => {
           </a>
         </Col>
       </Row>
+      <Link to="/">Go back</Link>
     </Container>
   )
 }
