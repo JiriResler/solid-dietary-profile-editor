@@ -6,6 +6,7 @@ import './styles/LoginScreen.css'
 import { IntlProvider } from 'react-intl'
 import { useState } from 'react'
 import LogInSolid from './LogInSolid'
+import LogInEmail from './LogInEmail'
 import { useSession } from '@inrupt/solid-ui-react'
 import Profile from './components/Profile'
 
@@ -69,6 +70,7 @@ const App: React.FC = () => {
               element={<SignInMethodComparison />}
             />
             <Route path="/log-in-solid" element={<LogInSolid />} />
+            <Route path="/log-in-email" element={<LogInEmail />} />
           </Routes>
         )}
 

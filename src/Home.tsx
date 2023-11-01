@@ -79,10 +79,12 @@ const Home: React.FC<HomeProps> = ({
                 </Col>
                 <Col className="text-start">
                   <Button className="text-start sign-in-with-email-button">
-                    <FormattedMessage
-                      id="email_and_password"
-                      defaultMessage={'Email and password'}
-                    />
+                    <Link className="navbar-link" to="log-in-email">
+                      <FormattedMessage
+                        id="email_and_password"
+                        defaultMessage={'Email and password'}
+                      />
+                    </Link>
                   </Button>
                 </Col>
               </Row>
