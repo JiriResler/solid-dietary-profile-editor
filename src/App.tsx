@@ -49,6 +49,7 @@ const App: React.FC = () => {
       locale={selectedLanguage}
       defaultLocale="en"
     >
+      {window.location.origin}
       <BrowserRouter
         basename={import.meta.env.DEV ? '/' : '/solid-dietary-profile-editor/'}
       >
