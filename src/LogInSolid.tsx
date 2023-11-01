@@ -4,7 +4,7 @@ import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 import { Link } from 'react-router-dom'
-import { LoginButton } from '@inrupt/solid-ui-react'
+import { LoginButton} from '@inrupt/solid-ui-react'
 import logo from '/images/logo_solid.svg'
 import { useState } from 'react'
 
@@ -24,28 +24,31 @@ const LogInSolid: React.FC = () => {
 
   return (
     <Container>
-      {import.meta.env.PROD ? '/solid-dietary-profile-editor/' : '/'}
       <Row>
         <Col className="text-center mt-4">
           <img src={logo} alt="Solid logo" width="175" />
         </Col>
       </Row>
+
       <Row>
         <Col className="text-center mt-3 h1">
           <b>Solid dietary profile editor</b>
         </Col>
       </Row>
+
       <Row>
         <Col className="text-center mt-3 h4">
           Specify your allergies, diets and what foods and drinks you like or
           dislike.
         </Col>
       </Row>
+
       <Row>
         <Col className="text-center mt-4 h5">
           Please log in via your Solid identity provider
         </Col>
       </Row>
+
       <Row className="align-items-center">
         <Col xs={12} md={{ span: 3, offset: 4 }} className="text-center mt-3">
           <Form.Select
@@ -78,6 +81,7 @@ const LogInSolid: React.FC = () => {
           </LoginButton>
         </Col>
       </Row>
+
       <Row>
         <Col className="text-center mt-4">
           <a
@@ -89,6 +93,8 @@ const LogInSolid: React.FC = () => {
           </a>
         </Col>
       </Row>
+
+    
       <Link to="/">Go back</Link>
     </Container>
   )

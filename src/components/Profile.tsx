@@ -18,6 +18,7 @@ import Button from 'react-bootstrap/Button'
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
+import { LogoutButton } from '@inrupt/solid-ui-react'
 
 interface ResponseError extends Error {
   statusCode?: number
@@ -142,6 +143,9 @@ const Profile: React.FC = () => {
         <Button className="mt-3" onClick={() => void handleWrite()}>
           Save profile
         </Button>
+        <LogoutButton>
+        <button>Log out</button>
+      </LogoutButton>
       </Container>
     </>
   )
