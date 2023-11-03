@@ -5,8 +5,8 @@ import { signOut } from 'firebase/auth'
 import { useState } from 'react'
 
 function LogInEmail() {
-  const [loginEmail, setLoginEmail] = useState('')
-  const [loginPassword, setLoginPassword] = useState('')
+  const [loginEmail, setLoginEmail] = useState('new.profile@gmail.com')
+  const [loginPassword, setLoginPassword] = useState('123456')
 
   //   const auth = getAuth()
 

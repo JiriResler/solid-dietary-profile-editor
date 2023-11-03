@@ -20,7 +20,8 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import { LogoutButton } from '@inrupt/solid-ui-react'
 import { signOut } from 'firebase/auth'
-import { auth } from '../firebase'
+import { auth, db } from '../firebase'
+import { doc, setDoc } from 'firebase/firestore'
 
 interface ResponseError extends Error {
   statusCode?: number
@@ -59,7 +60,7 @@ const Profile: React.FC = () => {
     }
   }
 
-  async function handleWrite() {
+  async function handleWriteSolid() {
     const userWebId: string =
       session.info.webId === undefined ? '' : session.info.webId
     const podsUrls: string[] = await getPodUrlAll(userWebId, {
@@ -112,6 +113,18 @@ const Profile: React.FC = () => {
     alert('Profile saved')
   }
 
+  async function handleWriteFirebase() {
+    const userid = 'Z5heWuWp7AOygiwpKU4MfXyf3xH3'
+
+    try {
+      await setDoc(doc(db, 'users', userid), {
+        allergicTo: 'allergen 3',
+      })
+    } catch (e) {
+      console.error('Error adding document: ', e)
+    }
+  }
+
   function handleAllergenClick(allergen: string) {
     const newAllergenSet = new Set(checkedAllergens)
 
@@ -151,8 +164,12 @@ const Profile: React.FC = () => {
         />
       )} */}
 
-        <Button className="mt-3" onClick={() => void handleWrite()}>
-          Save profile
+        <Button className="mt-3" onClick={() => void handleWriteSolid()}>
+          Save profile to Solid Pod
+        </Button>
+
+        <Button onClick={() => void handleWriteFirebase()}>
+          Save profile to Firestore
         </Button>
         <br />
         <br />
