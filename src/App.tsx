@@ -8,6 +8,8 @@ import { useState } from 'react'
 import LogInSolid from './LogInSolid'
 import LogInEmail from './LogInEmail'
 import { useSession } from '@inrupt/solid-ui-react'
+import { useAuthState } from 'react-firebase-hooks/auth'
+import { auth } from './firebase'
 import Profile from './components/Profile'
 
 const sk_messages = {
@@ -44,6 +46,8 @@ const App: React.FC = () => {
   const [selectedLanguage, setSelectedLanguage] = useState<string>('en')
   const { session } = useSession()
 
+  const [user] = useAuthState(auth)
+
   return (
     <IntlProvider
       messages={getCurrentLocaleMessages(selectedLanguage)}
@@ -53,7 +57,7 @@ const App: React.FC = () => {
       <BrowserRouter
         basename={import.meta.env.DEV ? '/' : '/solid-dietary-profile-editor/'}
       >
-        {!session.info.isLoggedIn && (
+        {!session.info.isLoggedIn && user === null && (
           <Routes>
             <Route
               path="/"
@@ -74,7 +78,7 @@ const App: React.FC = () => {
           </Routes>
         )}
 
-        {session.info.isLoggedIn && (
+        {(session.info.isLoggedIn || auth.currentUser !== null) && (
           <Routes>
             <Route path="/" element={<Profile />} />
           </Routes>

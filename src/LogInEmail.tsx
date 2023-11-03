@@ -3,13 +3,10 @@ import { auth } from './firebase'
 import { signInWithEmailAndPassword } from 'firebase/auth'
 import { signOut } from 'firebase/auth'
 import { useState } from 'react'
-import { useAuthState } from 'react-firebase-hooks/auth'
 
 function LogInEmail() {
   const [loginEmail, setLoginEmail] = useState('')
   const [loginPassword, setLoginPassword] = useState('')
-
-  const [user] = useAuthState(auth)
 
   //   const auth = getAuth()
 
@@ -36,14 +33,6 @@ function LogInEmail() {
 
   return (
     <div>
-      {user && (
-        <div>
-          <p>logged in </p>
-        </div>
-      )}
-      {user === null && <div>logged out</div>}
-      <p>is logged in: {auth.currentUser !== null ? 'true' : 'false'}</p>
-
       <h1>Log in with email and password</h1>
       <form>
         <input

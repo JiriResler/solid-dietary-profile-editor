@@ -19,6 +19,8 @@ import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import { LogoutButton } from '@inrupt/solid-ui-react'
+import { signOut } from 'firebase/auth'
+import { auth } from '../firebase'
 
 interface ResponseError extends Error {
   statusCode?: number
@@ -47,6 +49,15 @@ const Profile: React.FC = () => {
   ]
 
   // const diets = ["vegan", "vegetarian", "low-carb", "keto", "raw"];
+
+  async function logOut() {
+    try {
+      await signOut(auth)
+      alert('Log out successful')
+    } catch {
+      alert('Log out failed.')
+    }
+  }
 
   async function handleWrite() {
     const userWebId: string =
@@ -143,9 +154,19 @@ const Profile: React.FC = () => {
         <Button className="mt-3" onClick={() => void handleWrite()}>
           Save profile
         </Button>
+        <br />
+        <br />
         <LogoutButton>
-        <button>Log out</button>
-      </LogoutButton>
+          <button>Log out Solid</button>
+        </LogoutButton>
+        <br />
+        <button
+          onClick={() => {
+            void logOut()
+          }}
+        >
+          Log out Firebase
+        </button>
       </Container>
     </>
   )
