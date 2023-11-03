@@ -4,9 +4,11 @@ import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 import { Link } from 'react-router-dom'
-import { LoginButton} from '@inrupt/solid-ui-react'
+import { LoginButton } from '@inrupt/solid-ui-react'
 import logo from '/images/logo_solid.svg'
 import { useState } from 'react'
+import { handleIncomingRedirect } from '@inrupt/solid-client-authn-browser'
+import { useEffect } from 'react'
 
 const solidIdProviders: string[] = [
   'https://solidcommunity.net/',
@@ -16,6 +18,20 @@ const solidIdProviders: string[] = [
 ]
 
 const LogInSolid: React.FC = () => {
+  useEffect(() => {
+    async function fetchData() {
+      await handleIncomingRedirect({
+        restorePreviousSession: true,
+      })
+    }
+
+    fetchData()
+      .then(() => {
+        console.log('this will succeed')
+      })
+      .catch(() => 'obligatory catch')
+  }, [])
+
   const identityProviders: string[] = solidIdProviders
 
   const [selectedOption, setSelectedOption] = useState(
@@ -94,7 +110,6 @@ const LogInSolid: React.FC = () => {
         </Col>
       </Row>
 
-    
       <Link to="/">Go back</Link>
     </Container>
   )
