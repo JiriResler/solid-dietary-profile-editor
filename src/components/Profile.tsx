@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Button from 'react-bootstrap/Button'
 import Container from 'react-bootstrap/Container'
 import { LogoutButton } from '@inrupt/solid-ui-react'
@@ -10,6 +10,8 @@ type Props = {
 }
 
 const Profile: React.FC<Props> = ({ selectedSignInMethod }) => {
+  const [currentStep, setCurrentStep] = useState<number>(1)
+
   async function logOut() {
     if (selectedSignInMethod === 'firebase') {
       try {
@@ -25,11 +27,53 @@ const Profile: React.FC<Props> = ({ selectedSignInMethod }) => {
     <>
       <Container fluid>
         <p>Logged in with {selectedSignInMethod}</p>
-        <Button
-          className="mt-3"
-          onClick={() => alert('create profile clicked')}
-        >
-          Create profile
+        {currentStep === 1 && (
+          <div>
+            <h1>Step 1: Specify your allergies</h1>
+            <button
+              onClick={() => {
+                setCurrentStep(currentStep + 1)
+              }}
+            >
+              Next step
+            </button>
+          </div>
+        )}
+
+        {currentStep === 2 && (
+          <div>
+            <h1>Step 2: Specify your diets</h1>
+            <button
+              onClick={() => {
+                setCurrentStep(currentStep - 1)
+              }}
+            >
+              Previous step
+            </button>
+            <button
+              onClick={() => {
+                setCurrentStep(currentStep + 1)
+              }}
+            >
+              Next step
+            </button>
+          </div>
+        )}
+
+        {currentStep === 3 && (
+          <div>
+            <h1>Step 3: Specify what food you like and dislike</h1>
+            <button
+              onClick={() => {
+                setCurrentStep(currentStep - 1)
+              }}
+            >
+              Previous step
+            </button>
+          </div>
+        )}
+        <Button className="mt-3" onClick={() => alert('Save profile clicked')}>
+          Save profile
         </Button>
         <br />
         <br />
