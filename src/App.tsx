@@ -44,8 +44,9 @@ function getCurrentLocaleMessages(locale: string) {
 
 const App: React.FC = () => {
   const [selectedLanguage, setSelectedLanguage] = useState<string>('en')
-  const { session } = useSession()
+  // const [selectedSignInMethod, setSelectedSignInMethod] = useState<string>('')
 
+  const { session } = useSession()
   const [user] = useAuthState(auth)
 
   return (
@@ -78,9 +79,21 @@ const App: React.FC = () => {
           </Routes>
         )}
 
-        {(session.info.isLoggedIn || auth.currentUser !== null) && (
+        {session.info.isLoggedIn && (
           <Routes>
-            <Route path="/" element={<Profile />} />
+            <Route
+              path="/"
+              element={<Profile selectedSignInMethod="solid" />}
+            />
+          </Routes>
+        )}
+
+        {auth.currentUser !== null && (
+          <Routes>
+            <Route
+              path="/"
+              element={<Profile selectedSignInMethod="firebase" />}
+            />
           </Routes>
         )}
       </BrowserRouter>

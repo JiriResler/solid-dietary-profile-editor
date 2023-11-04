@@ -27,7 +27,11 @@ interface ResponseError extends Error {
   statusCode?: number
 }
 
-const Profile: React.FC = () => {
+type Props = {
+  selectedSignInMethod: string
+}
+
+const Profile: React.FC<Props> = ({ selectedSignInMethod }) => {
   const { session } = useSession()
 
   const [checkedAllergens, setCheckedAllergens] = useState(new Set<string>())
@@ -52,11 +56,23 @@ const Profile: React.FC = () => {
   // const diets = ["vegan", "vegetarian", "low-carb", "keto", "raw"];
 
   async function logOut() {
-    try {
-      await signOut(auth)
-      alert('Log out successful')
-    } catch {
-      alert('Log out failed.')
+    if (selectedSignInMethod === 'firebase') {
+      try {
+        await signOut(auth)
+        alert('Log out successful')
+      } catch {
+        alert('Log out failed.')
+      }
+    }
+  }
+
+  async function saveProfile() {
+    if (selectedSignInMethod === 'solid') {
+      await handleWriteSolid()
+    }
+
+    if (selectedSignInMethod === 'firebase') {
+      await handleWriteFirebase()
     }
   }
 
@@ -140,6 +156,7 @@ const Profile: React.FC = () => {
   return (
     <>
       <Container fluid>
+        <p>Logged in with {selectedSignInMethod}</p>
         <h3 className="mt-3">Select what you are allergic to</h3>
         <Row className="w-25 mt-2">
           {allergens.map((allergen) => (
@@ -164,26 +181,20 @@ const Profile: React.FC = () => {
         />
       )} */}
 
-        <Button className="mt-3" onClick={() => void handleWriteSolid()}>
-          Save profile to Solid Pod
-        </Button>
-
-        <Button onClick={() => void handleWriteFirebase()}>
-          Save profile to Firestore
+        <Button className="mt-3" onClick={() => void saveProfile()}>
+          Save profile
         </Button>
         <br />
         <br />
         <LogoutButton>
-          <button>Log out Solid</button>
+          <button
+            onClick={() => {
+              void logOut()
+            }}
+          >
+            Log out
+          </button>
         </LogoutButton>
-        <br />
-        <button
-          onClick={() => {
-            void logOut()
-          }}
-        >
-          Log out Firebase
-        </button>
       </Container>
     </>
   )
