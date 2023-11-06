@@ -27,8 +27,8 @@ const Home: React.FC<HomeProps> = ({
         </Navbar.Brand>
       </Navbar>
 
-      <Container className="bg-secondary container">
-        <Row className="bg-success h-75 align-items-center text-center">
+      <Container className="log-in-container">
+        <Row className="h-100 align-items-center text-center">
           <Col>
             <h1>
               <FormattedMessage
@@ -38,7 +38,7 @@ const Home: React.FC<HomeProps> = ({
             </h1>
           </Col>
         </Row>
-        <Row className="bg-warning sign-in-row position-absolute top-50 start-50 translate-middle">
+        <Row className="sign-in-row mx-auto">
           <Col>
             <Stack gap={2} className="text-center">
               <Row className="pb-2">
@@ -94,7 +94,7 @@ const Home: React.FC<HomeProps> = ({
               <Row className="mt-3">
                 <Col>
                   <Link
-                    className="sign-in-method-difference-link"
+                    className="link-no-decoration"
                     to="sign-in-methods-comparison"
                   >
                     <FormattedMessage

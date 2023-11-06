@@ -16,19 +16,12 @@
   width: 35px;
 }
 
-.container {
-  height: 50vh;
-}
-
-.app-name-row {
-  /* position: absolute;
-  top: 25%;
-  left: 50%;
-  width: 100%; */
+.log-in-container {
+  height: 25vh;
 }
 
 .sign-in-row {
-  /* width: 300px; */
+  width: 300px;
 }
 
 .navbar-link {
@@ -36,6 +29,6 @@
   text-decoration: none;
 }
 
-.sign-in-method-difference-link {
+.link-no-decoration {
   text-decoration: none;
 }
