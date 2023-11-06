@@ -27,8 +27,8 @@ const Home: React.FC<HomeProps> = ({
         </Navbar.Brand>
       </Navbar>
 
-      <Container>
-        <Row className="bg-success app-name-row">
+      <Container className="bg-secondary container">
+        <Row className="bg-success h-75 align-items-center text-center">
           <Col>
             <h1>
               <FormattedMessage
