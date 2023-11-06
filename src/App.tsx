@@ -5,8 +5,6 @@ import SignInMethodComparison from './SignInMethodComparison'
 import './styles/LoginScreen.css'
 import { IntlProvider } from 'react-intl'
 import { useState } from 'react'
-import LogInSolid from './LogInSolid'
-import LogInEmail from './LogInEmail'
 import { useSession } from '@inrupt/solid-ui-react'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { auth } from './firebase'
@@ -74,8 +72,6 @@ const App: React.FC = () => {
               path="/sign-in-methods-comparison"
               element={<SignInMethodComparison />}
             />
-            <Route path="/log-in-solid" element={<LogInSolid />} />
-            <Route path="/log-in-email" element={<LogInEmail />} />
           </Routes>
         )}
 

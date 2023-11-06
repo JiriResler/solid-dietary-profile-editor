@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom'
 import { auth } from './firebase'
 import { signInWithEmailAndPassword } from 'firebase/auth'
 import { signOut } from 'firebase/auth'
@@ -62,8 +61,6 @@ function LogInEmail() {
       >
         Log out
       </button>
-      <br />
-      <Link to="/">Go back</Link>
     </div>
   )
 }

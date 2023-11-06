@@ -7,16 +7,18 @@ import Stack from 'react-bootstrap/Stack'
 import Button from 'react-bootstrap/Button'
 import { FormattedMessage } from 'react-intl'
 import Form from 'react-bootstrap/Form'
+import { useState } from 'react'
+import LogInSolid from './LogInSolid'
+import LogInEmail from './LogInEmail'
 
-type HomeProps = {
+type Props = {
   selectedLanguage: string
   setSelectedLanguage: React.Dispatch<React.SetStateAction<string>>
 }
 
-const Home: React.FC<HomeProps> = ({
-  selectedLanguage,
-  setSelectedLanguage,
-}) => {
+const Home: React.FC<Props> = ({ selectedLanguage, setSelectedLanguage }) => {
+  const [selectedLoginMethod, setSelectedLoginMethod] = useState<string>('none')
+
   return (
     <>
       <Navbar bg="primary" data-bs-theme="dark">
@@ -38,73 +40,112 @@ const Home: React.FC<HomeProps> = ({
             </h1>
           </Col>
         </Row>
+
         <Row className="sign-in-row mx-auto">
           <Col>
-            <Stack gap={2} className="text-center">
-              <Row className="pb-2">
-                <Col>
-                  <h5>
-                    <FormattedMessage
-                      id="sign_in_with"
-                      defaultMessage={'Sign in with'}
+            {selectedLoginMethod === 'none' && (
+              <Stack gap={2} className="text-center">
+                <Row className="pb-2">
+                  <Col>
+                    <h5>
+                      <FormattedMessage
+                        id="sign_in_with"
+                        defaultMessage={'Sign in with'}
+                      />
+                    </h5>
+                  </Col>
+                </Row>
+
+                <Row className="align-items-center">
+                  <Col xs={3}>
+                    <img
+                      src="images/logo_solid.svg"
+                      alt="Solid project logo"
+                      className="login-provider-icon"
                     />
-                  </h5>
-                </Col>
-              </Row>
-              <Row className="align-items-center">
-                <Col xs={3}>
-                  <img
-                    src="images/logo_solid.svg"
-                    alt="Solid project logo"
-                    className="login-provider-icon"
-                  />
-                </Col>
-                <Col className="text-start">
-                  <Button className="solid-button text-start">
-                    <Link className="navbar-link" to="log-in-solid">
+                  </Col>
+                  <Col className="text-start">
+                    <Button
+                      onClick={() => {
+                        setSelectedLoginMethod('solid')
+                      }}
+                      className="solid-button text-start"
+                    >
                       Solid WebID
-                    </Link>
-                  </Button>
-                </Col>
-              </Row>
-              <Row>
-                <Col>
-                  <FormattedMessage id="or" defaultMessage={'or'} />
-                </Col>
-              </Row>
-              <Row className="align-items-center">
-                <Col xs={3}>
-                  <img
-                    src="images/envelope-at.svg"
-                    alt="Envelope icon"
-                    className="login-provider-icon me-"
-                  />
-                </Col>
-                <Col className="text-start">
-                  <Button className="text-start sign-in-with-email-button">
-                    <Link className="navbar-link" to="log-in-email">
+                    </Button>
+                  </Col>
+                </Row>
+
+                <Row>
+                  <Col>
+                    <FormattedMessage id="or" defaultMessage={'or'} />
+                  </Col>
+                </Row>
+
+                <Row className="align-items-center">
+                  <Col xs={3}>
+                    <img
+                      src="images/envelope-at.svg"
+                      alt="Envelope icon"
+                      className="login-provider-icon me-"
+                    />
+                  </Col>
+                  <Col className="text-start">
+                    <Button
+                      onClick={() => {
+                        setSelectedLoginMethod('email')
+                      }}
+                      className="bg-secondary text-start sign-in-with-email-button"
+                    >
                       <FormattedMessage
                         id="email_and_password"
                         defaultMessage={'Email and password'}
                       />
+                    </Button>
+                  </Col>
+                </Row>
+
+                <Row className="mt-3">
+                  <Col>
+                    <Link
+                      className="link-no-decoration"
+                      to="sign-in-methods-comparison"
+                    >
+                      <FormattedMessage
+                        id="what_is_the_difference"
+                        defaultMessage={'What is the difference?'}
+                      />
                     </Link>
-                  </Button>
-                </Col>
-              </Row>
-              <Row className="mt-3">
-                <Col>
-                  <Link
-                    className="link-no-decoration"
-                    to="sign-in-methods-comparison"
-                  >
-                    <FormattedMessage
-                      id="what_is_the_difference"
-                      defaultMessage={'What is the difference?'}
-                    />
-                  </Link>
-                </Col>
-              </Row>
-            </Stack>
+                  </Col>
+                </Row>
+              </Stack>
+            )}
+
+            {selectedLoginMethod === 'solid' && (
+              <div>
+                <LogInSolid />
+                <button
+                  onClick={() => {
+                    setSelectedLoginMethod('none')
+                  }}
+                >
+                  Go back
+                </button>
+              </div>
+            )}
+
+            {selectedLoginMethod === 'email' && (
+              <div>
+                <LogInEmail />
+                <button
+                  onClick={() => {
+                    setSelectedLoginMethod('none')
+                  }}
+                >
+                  Go back
+                </button>
+              </div>
+            )}
           </Col>
         </Row>
       </Container>
