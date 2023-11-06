@@ -4,7 +4,6 @@ import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 import { LoginButton } from '@inrupt/solid-ui-react'
-import logo from '/images/logo_solid.svg'
 import { useState } from 'react'
 import { handleIncomingRedirect } from '@inrupt/solid-client-authn-browser'
 import { useEffect } from 'react'
@@ -40,27 +39,8 @@ const LogInSolid: React.FC = () => {
   return (
     <Container>
       <Row>
-        <Col className="text-center mt-4">
-          <img src={logo} alt="Solid logo" width="175" />
-        </Col>
-      </Row>
-
-      <Row>
-        <Col className="text-center mt-3 h1">
-          <b>Solid dietary profile editor</b>
-        </Col>
-      </Row>
-
-      <Row>
-        <Col className="text-center mt-3 h4">
-          Specify your allergies, diets and what foods and drinks you like or
-          dislike.
-        </Col>
-      </Row>
-
-      <Row>
         <Col className="text-center mt-4 h5">
-          Please log in via your Solid identity provider
+          Select your Solid identity provider
         </Col>
       </Row>
 
