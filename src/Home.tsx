@@ -27,15 +27,18 @@ const Home: React.FC<HomeProps> = ({
         </Navbar.Brand>
       </Navbar>
 
-      <h1 className="text-center app-name-row translate-middle">
-        <FormattedMessage
-          id="app_name"
-          defaultMessage={'Dietary profile editor'}
-        />
-      </h1>
-
       <Container>
-        <Row className="border sign-in-row position-absolute top-50 start-50 translate-middle ">
+        <Row className="bg-success app-name-row">
+          <Col>
+            <h1>
+              <FormattedMessage
+                id="app_name"
+                defaultMessage={'Dietary profile editor'}
+              />
+            </h1>
+          </Col>
+        </Row>
+        <Row className="bg-warning sign-in-row position-absolute top-50 start-50 translate-middle">
           <Col>
             <Stack gap={2} className="text-center">
               <Row className="pb-2">

@@ -21,10 +21,10 @@
 }
 
 .app-name-row {
-  position: absolute;
+  /* position: absolute;
   top: 25%;
   left: 50%;
-  width: 100%;
+  width: 100%; */
 }
 
 .navbar-link {
