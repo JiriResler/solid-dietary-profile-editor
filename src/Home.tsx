@@ -41,7 +41,7 @@ const Home: React.FC<Props> = ({ selectedLanguage, setSelectedLanguage }) => {
           </Col>
         </Row>
 
-        <Row className="sign-in-row mx-auto">
+        <Row className="border sign-in-row mx-auto">
           <Col>
             {selectedLoginMethod === 'none' && (
               <Stack gap={2} className="text-center">
@@ -129,7 +129,7 @@ const Home: React.FC<Props> = ({ selectedLanguage, setSelectedLanguage }) => {
                     setSelectedLoginMethod('none')
                   }}
                 >
-                  Go back
+                  <FormattedMessage id="go_back" defaultMessage={'Go back'} />
                 </button>
               </div>
             )}
@@ -142,7 +142,7 @@ const Home: React.FC<Props> = ({ selectedLanguage, setSelectedLanguage }) => {
                     setSelectedLoginMethod('none')
                   }}
                 >
-                  Go back
+                  <FormattedMessage id="go_back" defaultMessage={'Go back'} />
                 </button>
               </div>
             )}

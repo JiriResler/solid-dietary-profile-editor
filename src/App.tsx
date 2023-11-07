@@ -17,6 +17,9 @@ const sk_messages = {
   or: 'alebo',
   email_and_password: 'Email a heslo',
   what_is_the_difference: 'Aký je v tom rozdiel?',
+  select_id_provider: 'Vyberte svojho poskytovateľa identity',
+  log_in: 'Prihlásiť sa',
+  go_back: 'Naspäť',
 }
 
 const cs_messages = {
@@ -26,6 +29,9 @@ const cs_messages = {
   or: 'nebo',
   email_and_password: 'Email a heslo',
   what_is_the_difference: 'Jaký je v tom rozdíl?',
+  select_id_provider: 'Zvolte svého poskytovatela identity',
+  log_in: 'Přihlásit',
+  go_back: 'Zpátky',
 }
 
 function getCurrentLocaleMessages(locale: string) {

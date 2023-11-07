@@ -1,4 +1,3 @@
-import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button'
@@ -7,12 +6,21 @@ import { LoginButton } from '@inrupt/solid-ui-react'
 import { useState } from 'react'
 import { handleIncomingRedirect } from '@inrupt/solid-client-authn-browser'
 import { useEffect } from 'react'
+import Stack from 'react-bootstrap/Stack'
+import { FormattedMessage } from 'react-intl'
+
+// const solidIdProviders: string[] = [
+//   'https://solidcommunity.net/',
+//   'https://login.inrupt.com/',
+//   'https://inrupt.net/',
+//   'https://solidweb.org/',
+// ]
 
 const solidIdProviders: string[] = [
-  'https://solidcommunity.net/',
-  'https://login.inrupt.com/',
-  'https://inrupt.net/',
-  'https://solidweb.org/',
+  'solidcommunity.net',
+  'inrupt.com (PodSpaces)',
+  'inrupt.net',
+  'solidweb.org',
 ]
 
 const LogInSolid: React.FC = () => {
@@ -25,7 +33,7 @@ const LogInSolid: React.FC = () => {
 
     fetchData()
       .then(() => {
-        console.log('this will succeed')
+        console.log('handleIncomingRedirect()')
       })
       .catch(() => 'obligatory catch')
   }, [])
@@ -37,28 +45,34 @@ const LogInSolid: React.FC = () => {
   )
 
   return (
-    <Container>
+    <Stack gap={2} className="text-center">
       <Row>
-        <Col className="text-center mt-4 h5">
-          Select your Solid identity provider
+        <Col>
+          <h4>
+            <FormattedMessage
+              id="select_id_provider"
+              defaultMessage={'Select your identity provider'}
+            />
+          </h4>
         </Col>
       </Row>
 
-      <Row className="align-items-center">
-        <Col xs={12} md={{ span: 3, offset: 4 }} className="text-center mt-3">
+      <Row>
+        <Col>
           <Form.Select
             size="lg"
             value={selectedOption}
             onChange={(e) => setSelectedOption(e.target.value)}
           >
-            <option key="initialOption">Select an identity provider</option>
             {identityProviders.map((opt) => {
               return <option key={opt}>{opt}</option>
             })}
           </Form.Select>
         </Col>
+      </Row>
 
-        <Col xs={12} md={{ span: 2, offset: 0 }} className="text-center mt-2">
+      <Row>
+        <Col>
           <LoginButton
             oidcIssuer={selectedOption}
             redirectUrl={
@@ -66,29 +80,13 @@ const LogInSolid: React.FC = () => {
               (import.meta.env.PROD ? '/solid-dietary-profile-editor/' : '')
             }
           >
-            <Button
-              variant="primary"
-              size="lg"
-              disabled={selectedOption === 'Select an identity provider'}
-            >
-              Log in
+            <Button size="lg">
+              <FormattedMessage id="log_in" defaultMessage={'Log in'} />
             </Button>
           </LoginButton>
         </Col>
       </Row>
-
-      <Row>
-        <Col className="text-center mt-4">
-          <a
-            href="https://solidproject.org"
-            target="_blank"
-            style={{ textDecoration: 'none' }}
-          >
-            What is Solid?
-          </a>
-        </Col>
-      </Row>
-    </Container>
+    </Stack>
   )
 }
 
