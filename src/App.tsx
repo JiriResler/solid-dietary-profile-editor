@@ -29,7 +29,7 @@ const cs_messages = {
   or: 'nebo',
   email_and_password: 'Email a heslo',
   what_is_the_difference: 'Jaký je v tom rozdíl?',
-  select_id_provider: 'Zvolte svého poskytovatela identity',
+  select_id_provider: 'Zvolte svého poskytovatele identity',
   log_in: 'Přihlásit',
   go_back: 'Zpátky',
 }
