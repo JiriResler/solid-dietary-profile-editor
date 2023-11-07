@@ -45,15 +45,15 @@ const LogInSolid: React.FC = () => {
   )
 
   return (
-    <Stack gap={2} className="text-center">
+    <Stack gap={3} className="text-center">
       <Row>
         <Col>
-          <h4>
+          <h5>
             <FormattedMessage
               id="select_id_provider"
               defaultMessage={'Select your identity provider'}
             />
-          </h4>
+          </h5>
         </Col>
       </Row>
 
