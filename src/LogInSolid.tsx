@@ -80,7 +80,7 @@ const LogInSolid: React.FC = () => {
               (import.meta.env.PROD ? '/solid-dietary-profile-editor/' : '')
             }
           >
-            <Button size="lg">
+            <Button size="lg" className="login-solid-button">
               <FormattedMessage id="log_in" defaultMessage={'Log in'} />
             </Button>
           </LoginButton>

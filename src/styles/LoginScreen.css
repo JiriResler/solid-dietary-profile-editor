@@ -4,7 +4,17 @@
   border-color: #7C4DFF;
 }
 
+.login-solid-button {
+  background-color: #7C4DFF;
+  border-color: #7C4DFF;
+}
+
 .solid-button:hover {
+  background-color: #6933ff;
+  border-color: #6933ff;
+}
+
+.login-solid-button:hover {
   background-color: #6933ff;
   border-color: #6933ff;
 }
