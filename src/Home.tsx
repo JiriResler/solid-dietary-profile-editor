@@ -95,7 +95,7 @@ const Home: React.FC<Props> = ({ selectedLanguage, setSelectedLanguage }) => {
                       onClick={() => {
                         setSelectedLoginMethod('email')
                       }}
-                      className="bg-secondary text-start sign-in-with-email-button"
+                      className="text-start sign-in-with-email-button"
                     >
                       <FormattedMessage
                         id="email_and_password"

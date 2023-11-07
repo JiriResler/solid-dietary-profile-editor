@@ -5,11 +5,19 @@
 }
 
 .solid-button:hover {
-  background-color: #6A35FF;
+  background-color: #6933ff;
+  border-color: #6933ff;
 }
 
 .sign-in-with-email-button {
   width: 100%;
+  background-color: #6c757d;
+  border-color: #6c757d;
+}
+
+.sign-in-with-email-button:hover {
+  background-color: #5f666d;
+  border-color: #5f666d;
 }
 
 .login-provider-icon {
