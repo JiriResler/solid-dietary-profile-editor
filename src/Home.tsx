@@ -29,6 +29,8 @@ const Home: React.FC<Props> = ({ selectedLanguage, setSelectedLanguage }) => {
         </Navbar.Brand>
       </Navbar>
 
+      <div className="media-style">Hello world</div>
+
       <Container className="log-in-container">
         <Row className="h-100 align-items-center text-center">
           <Col>
