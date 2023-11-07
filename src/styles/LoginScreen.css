@@ -57,7 +57,7 @@
 }
 
 .media-style {
-  font-size: 10pt;
+  font-size: 40pt;
 }
 
 @keyframes fade-in {
@@ -69,8 +69,8 @@
   }
 }
 
-@media (max-width: 576px) {
+@media (min-width: 577px) {
   .media-style {
-    font-size: 40pt;
+    font-size: 10pt;
   }
 }
