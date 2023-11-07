@@ -122,7 +122,7 @@ const Home: React.FC<Props> = ({ selectedLanguage, setSelectedLanguage }) => {
             )}
 
             {selectedLoginMethod === 'solid' && (
-              <div>
+              <div className="example-style">
                 <LogInSolid />
                 <button
                   onClick={() => {
