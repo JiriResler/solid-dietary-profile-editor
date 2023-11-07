@@ -69,7 +69,7 @@
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 576px) {
   .media-style {
     font-size: 40pt;
   }
