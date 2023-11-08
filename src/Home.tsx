@@ -56,23 +56,23 @@ const Home: React.FC<Props> = ({ selectedLanguage, setSelectedLanguage }) => {
                   </Col>
                 </Row>
 
-                <Row className="align-items-center">
-                  <Col xs={3}>
-                    <img
-                      src="images/logo_solid.svg"
-                      alt="Solid project logo"
-                      className="login-provider-icon"
-                    />
-                  </Col>
-                  <Col className="text-start">
-                    <Button
-                      onClick={() => {
-                        setSelectedLoginMethod('solid')
-                      }}
-                      className="solid-button text-start"
-                    >
-                      Solid WebID
-                    </Button>
+                <Row className="mx-auto">
+                  <Col>
+                    <Stack direction="horizontal" gap={4} className="pe-5">
+                      <img
+                        src="images/logo_solid.svg"
+                        alt="Solid project logo"
+                        className="login-provider-icon "
+                      />
+                      <Button
+                        onClick={() => {
+                          setSelectedLoginMethod('solid')
+                        }}
+                        className="solid-button text-start"
+                      >
+                        Solid WebID
+                      </Button>
+                    </Stack>
                   </Col>
                 </Row>
 
@@ -82,26 +82,26 @@ const Home: React.FC<Props> = ({ selectedLanguage, setSelectedLanguage }) => {
                   </Col>
                 </Row>
 
-                <Row className="align-items-center">
-                  <Col xs={3}>
-                    <img
-                      src="images/envelope-at.svg"
-                      alt="Envelope icon"
-                      className="login-provider-icon me-"
-                    />
-                  </Col>
-                  <Col className="text-start">
-                    <Button
-                      onClick={() => {
-                        setSelectedLoginMethod('email')
-                      }}
-                      className="text-start sign-in-with-email-button"
-                    >
-                      <FormattedMessage
-                        id="email_and_password"
-                        defaultMessage={'Email and password'}
+                <Row className="mx-auto">
+                  <Col>
+                    <Stack direction="horizontal" gap={4} className="pe-5">
+                      <img
+                        src="images/envelope-at.svg"
+                        alt="Envelope icon"
+                        className="login-provider-icon"
                       />
-                    </Button>
+                      <Button
+                        onClick={() => {
+                          setSelectedLoginMethod('email')
+                        }}
+                        className="text-start sign-in-with-email-button"
+                      >
+                        <FormattedMessage
+                          id="email_and_password"
+                          defaultMessage={'Email and password'}
+                        />
+                      </Button>
+                    </Stack>
                   </Col>
                 </Row>
 
