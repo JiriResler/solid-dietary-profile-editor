@@ -57,10 +57,10 @@ const LogInSolid: React.FC = () => {
         </Col>
       </Row>
 
-      <Row className="select-provider-row mx-auto">
-        <Col xs={12} md={9} className="bg-warning">
+      <Row className="mx-auto">
+        <Col xs={12} md={9}>
           <Form.Select
-            className="select-provider"
+            className="select-provider mx-auto"
             value={selectedOption}
             onChange={(e) => setSelectedOption(e.target.value)}
           >
@@ -70,7 +70,7 @@ const LogInSolid: React.FC = () => {
           </Form.Select>
         </Col>
 
-        <Col md={3} className="bg-success">
+        <Col md={3}>
           <LoginButton
             oidcIssuer={selectedOption}
             redirectUrl={
