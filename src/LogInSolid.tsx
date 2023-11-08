@@ -58,7 +58,7 @@ const LogInSolid: React.FC = () => {
       </Row>
 
       <Row>
-        <Col>
+        <Col xs={12} md={6}>
           <Form.Select
             size="lg"
             value={selectedOption}
@@ -69,9 +69,6 @@ const LogInSolid: React.FC = () => {
             })}
           </Form.Select>
         </Col>
-      </Row>
-
-      <Row>
         <Col>
           <LoginButton
             oidcIssuer={selectedOption}
