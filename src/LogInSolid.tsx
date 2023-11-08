@@ -57,10 +57,10 @@ const LogInSolid: React.FC = () => {
         </Col>
       </Row>
 
-      <Row>
-        <Col xs={12} md={6}>
+      <Row className="select-provider-row mx-auto">
+        <Col xs={12} md={9} className="bg-warning">
           <Form.Select
-            size="lg"
+            className="select-provider"
             value={selectedOption}
             onChange={(e) => setSelectedOption(e.target.value)}
           >
@@ -69,7 +69,8 @@ const LogInSolid: React.FC = () => {
             })}
           </Form.Select>
         </Col>
-        <Col>
+
+        <Col md={3} className="bg-success">
           <LoginButton
             oidcIssuer={selectedOption}
             redirectUrl={
@@ -77,7 +78,7 @@ const LogInSolid: React.FC = () => {
               (import.meta.env.PROD ? '/solid-dietary-profile-editor/' : '')
             }
           >
-            <Button size="lg" className="login-solid-button">
+            <Button className="login-solid-button">
               <FormattedMessage id="log_in" defaultMessage={'Log in'} />
             </Button>
           </LoginButton>

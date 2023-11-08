@@ -1,3 +1,13 @@
+.select-provider-row {
+  width:350px;
+  /* margin-left: auto; */
+}
+
+.select-provider {
+  width:auto;
+  /* margin-left: auto; */
+}
+
 .solid-button {
   width: 175px;
   height: 50px;
@@ -6,6 +16,7 @@
 }
 
 .login-solid-button {
+  width:100px;
   background-color: #7C4DFF;
   border-color: #7C4DFF;
 }
