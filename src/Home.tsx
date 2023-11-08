@@ -41,7 +41,7 @@ const Home: React.FC<Props> = ({ selectedLanguage, setSelectedLanguage }) => {
           </Col>
         </Row>
 
-        <Row className="border sign-in-row mx-auto">
+        <Row>
           <Col>
             {selectedLoginMethod === 'none' && (
               <Stack gap={2} className="text-center">
@@ -150,7 +150,7 @@ const Home: React.FC<Props> = ({ selectedLanguage, setSelectedLanguage }) => {
         </Row>
       </Container>
 
-      <div className="position-absolute bottom-0 end-0 me-3 mb-3">
+      <div className="position-absolute bottom-0 start-0 ms-3 mb-3">
         <Form.Select
           value={selectedLanguage}
           onChange={(e) => setSelectedLanguage(e.target.value)}
