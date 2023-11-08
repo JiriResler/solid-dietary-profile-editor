@@ -23,13 +23,11 @@ const Home: React.FC<Props> = ({ selectedLanguage, setSelectedLanguage }) => {
     <>
       <Navbar bg="primary" data-bs-theme="dark">
         <Navbar.Brand className="ms-3 fs-6">
-          <Link className="navbar-link" to="about">
+          <Link className="navbar-link about-link " to="about">
             <FormattedMessage id="about_application" defaultMessage={'About'} />
           </Link>
         </Navbar.Brand>
       </Navbar>
-
-      <div className="media-style">Hello world</div>
 
       <Container className="log-in-container">
         <Row className="h-100 align-items-center text-center">

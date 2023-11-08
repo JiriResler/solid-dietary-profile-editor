@@ -60,6 +60,10 @@
   font-size: 40pt;
 }
 
+.about-link {
+  font-size: 14pt;
+}
+
 @keyframes fade-in {
   from {
     opacity: 0;
@@ -72,5 +76,9 @@
 @media (min-width: 577px) {
   .media-style {
     font-size: 10pt;
+  }
+
+  .about-link {
+    font-size: 12pt;
   }
 }
