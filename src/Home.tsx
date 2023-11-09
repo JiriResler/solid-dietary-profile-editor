@@ -41,7 +41,7 @@ const Home: React.FC<Props> = ({ selectedLanguage, setSelectedLanguage }) => {
           </Col>
         </Row>
 
-        <Row className="border login-row mx-auto">
+        <Row className="login-row mx-auto">
           <Col>
             {selectedLoginMethod === 'none' && (
               <Stack gap={2} className="text-center fade-in">
@@ -126,6 +126,8 @@ const Home: React.FC<Props> = ({ selectedLanguage, setSelectedLanguage }) => {
                 <LogInSolid />
                 <Button
                   variant="secondary"
+                  className="mt-5"
+                  size="sm"
                   onClick={() => {
                     setSelectedLoginMethod('none')
                   }}
