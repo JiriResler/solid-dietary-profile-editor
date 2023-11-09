@@ -154,6 +154,7 @@ const Home: React.FC<Props> = ({ selectedLanguage, setSelectedLanguage }) => {
         <Form.Select
           value={selectedLanguage}
           onChange={(e) => setSelectedLanguage(e.target.value)}
+          size="lg"
         >
           <option key="en">en</option>
           <option key="sk">sk</option>
