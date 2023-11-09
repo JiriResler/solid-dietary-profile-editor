@@ -1,3 +1,7 @@
+.login-row {
+  width: 200pt;
+}
+
 .solid-button-login-redirect {
   margin-top: 20pt;
 }
@@ -102,5 +106,9 @@
 
   .solid-button-login-redirect {
     margin-top: 0pt;
+  }
+
+  .login-row {
+    width: 300pt;
   }
 }

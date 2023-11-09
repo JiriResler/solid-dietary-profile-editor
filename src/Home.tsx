@@ -41,7 +41,7 @@ const Home: React.FC<Props> = ({ selectedLanguage, setSelectedLanguage }) => {
           </Col>
         </Row>
 
-        <Row>
+        <Row className="border login-row mx-auto">
           <Col>
             {selectedLoginMethod === 'none' && (
               <Stack gap={2} className="text-center fade-in">
@@ -62,7 +62,7 @@ const Home: React.FC<Props> = ({ selectedLanguage, setSelectedLanguage }) => {
                       <img
                         src="images/logo_solid.svg"
                         alt="Solid project logo"
-                        className="login-provider-icon "
+                        className="login-provider-icon"
                       />
                       <Button
                         onClick={() => {
@@ -124,26 +124,28 @@ const Home: React.FC<Props> = ({ selectedLanguage, setSelectedLanguage }) => {
             {selectedLoginMethod === 'solid' && (
               <div className="fade-in">
                 <LogInSolid />
-                <button
+                <Button
+                  variant="secondary"
                   onClick={() => {
                     setSelectedLoginMethod('none')
                   }}
                 >
                   <FormattedMessage id="go_back" defaultMessage={'Go back'} />
-                </button>
+                </Button>
               </div>
             )}
 
             {selectedLoginMethod === 'email' && (
               <div className="fade-in">
                 <LogInEmail />
-                <button
+                <Button
+                  variant="secondary"
                   onClick={() => {
                     setSelectedLoginMethod('none')
                   }}
                 >
                   <FormattedMessage id="go_back" defaultMessage={'Go back'} />
-                </button>
+                </Button>
               </div>
             )}
           </Col>
