@@ -142,6 +142,8 @@ const Home: React.FC<Props> = ({ selectedLanguage, setSelectedLanguage }) => {
                 <LogInEmail />
                 <Button
                   variant="secondary"
+                  className="mt-5"
+                  size="sm"
                   onClick={() => {
                     setSelectedLoginMethod('none')
                   }}
