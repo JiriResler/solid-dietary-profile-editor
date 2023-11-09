@@ -70,7 +70,7 @@ const LogInSolid: React.FC = () => {
           </Form.Select>
         </Col>
 
-        <Col md={3}>
+        <Col md={3} className="solid-button-login-redirect">
           <LoginButton
             oidcIssuer={selectedOption}
             redirectUrl={

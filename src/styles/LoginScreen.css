@@ -1,3 +1,7 @@
+.solid-button-login-redirect {
+  margin-top: 20pt;
+}
+
 .select-provider {
   width:auto;
 }
@@ -94,5 +98,9 @@
     height: 38px;
     background-color: #6c757d;
     border-color: #6c757d;
+  }
+
+  .solid-button-login-redirect {
+    margin-top: 0pt;
   }
 }
