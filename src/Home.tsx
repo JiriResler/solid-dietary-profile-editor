@@ -44,7 +44,7 @@ const Home: React.FC<Props> = ({ selectedLanguage, setSelectedLanguage }) => {
         <Row>
           <Col>
             {selectedLoginMethod === 'none' && (
-              <Stack gap={2} className="text-center">
+              <Stack gap={2} className="text-center fade-in">
                 <Row className="pb-2">
                   <Col>
                     <h5>
@@ -122,7 +122,7 @@ const Home: React.FC<Props> = ({ selectedLanguage, setSelectedLanguage }) => {
             )}
 
             {selectedLoginMethod === 'solid' && (
-              <div className="example-style">
+              <div className="fade-in">
                 <LogInSolid />
                 <button
                   onClick={() => {
@@ -135,7 +135,7 @@ const Home: React.FC<Props> = ({ selectedLanguage, setSelectedLanguage }) => {
             )}
 
             {selectedLoginMethod === 'email' && (
-              <div>
+              <div className="fade-in">
                 <LogInEmail />
                 <button
                   onClick={() => {
