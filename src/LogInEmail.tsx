@@ -32,35 +32,12 @@ function LogInEmail() {
 
   return (
     <div>
-      <h1>Log in with email and password</h1>
-      <form>
-        <input
-          type="email"
-          placeholder="Your email"
-          value={loginEmail}
-          onChange={(e) => setLoginEmail(e.target.value)}
-        ></input>
-        <input
-          type="password"
-          placeholder="Password"
-          value={loginPassword}
-          onChange={(e) => setLoginPassword(e.target.value)}
-        ></input>
-        <button
-          type="submit"
-          onClick={(e) => void loginWithUsernameAndPassword(e)}
-        >
-          Log in
-        </button>
-      </form>
-      <br />
-      <button
-        onClick={() => {
-          void logOut()
-        }}
-      >
-        Log out
-      </button>
+      <h1>Sign In or Sign Up</h1>
+      <input placeholder="Email Address"></input>
+      <button>CONTINUE</button>
+      <p>or</p>
+      <hr></hr>G <button>Sign in with Google</button> <br />F{' '}
+      <button>Sign in with Facebook</button>
     </div>
   )
 }
