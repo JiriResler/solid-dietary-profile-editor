@@ -61,20 +61,29 @@ function LogInEmail() {
       )}
 
       {signInState === 'password' && (
-        <div>
+        <Stack gap={2} className="text-center">
           <h4>Sign in</h4>
-          <input placeholder="Email address"></input>
-          <input placeholder="Password"></input>
-          <p>Forgot Your Password</p>
-          <button>SIGN IN</button> <br />
-          <button
+          <Form>
+            <Stack gap={2}>
+              <Form.Group className="" controlId="exampleForm.ControlInput1">
+                <Form.Control type="email" placeholder="Email Address" />
+              </Form.Group>
+              <Form.Group className="" controlId="exampleForm.ControlInput2">
+                <Form.Control type="password" placeholder="Password" />
+              </Form.Group>
+            </Stack>
+          </Form>
+          <a href="/">Forgot Your Password</a>
+          <Button>SIGN IN</Button>
+          <Button
+            variant="secondary"
             onClick={() => {
               setSignInState('email')
             }}
           >
             Back to email
-          </button>
-        </div>
+          </Button>
+        </Stack>
       )}
     </>
   )
