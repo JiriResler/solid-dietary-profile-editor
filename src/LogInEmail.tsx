@@ -2,9 +2,11 @@
 // import { signInWithEmailAndPassword } from 'firebase/auth'
 // import { signOut } from 'firebase/auth'
 // import { useState } from 'react'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
+// import Row from 'react-bootstrap/Row'
+// import Col from 'react-bootstrap/Col'
 import Stack from 'react-bootstrap/Stack'
+import Form from 'react-bootstrap/Form'
+import Button from 'react-bootstrap/Button'
 
 function LogInEmail() {
   // const [loginEmail, setLoginEmail] = useState('new.profile@gmail.com')
@@ -36,8 +38,13 @@ function LogInEmail() {
   return (
     <Stack gap={3} className="text-center">
       <h4>Sign In or Sign Up</h4>
-      <input placeholder="Email Address"></input>
-      <button>CONTINUE</button>
+      <Form>
+        <Form.Group className="" controlId="exampleForm.ControlInput1">
+          <Form.Control type="email" placeholder="Email Address" />
+        </Form.Group>
+      </Form>
+
+      <Button >CONTINUE</Button>
       <span>or</span>
       <div>
         G <button>Sign in with Google</button>
