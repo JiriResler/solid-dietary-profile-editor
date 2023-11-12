@@ -34,7 +34,7 @@ const Home: React.FC<Props> = ({ selectedLanguage, setSelectedLanguage }) => {
         </Navbar.Brand>
       </Navbar>
 
-      <Modal show={show} onHide={handleClose}>
+      <Modal size="lg" centered show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Modal heading</Modal.Title>
         </Modal.Header>
