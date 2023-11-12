@@ -91,11 +91,12 @@ const LogInSolid: React.FC<Props> = ({ setSelectedLoginMethod }) => {
 
       <Button
         variant="secondary"
+        className="mt-4 back-button"
         onClick={() => {
           setSelectedLoginMethod('none')
         }}
       >
-        <FormattedMessage id="go_back" defaultMessage={'Go back'} />
+        <FormattedMessage id="go_back" defaultMessage={'Back'} />
       </Button>
     </Stack>
   )

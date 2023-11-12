@@ -64,11 +64,12 @@ function LogInEmail({ setSelectedLoginMethod }: Props) {
           </div>
           <Button
             variant="secondary"
+            className="mt-4 back-button"
             onClick={() => {
               setSelectedLoginMethod('none')
             }}
           >
-            <FormattedMessage id="go_back" defaultMessage={'Go back'} />
+            <FormattedMessage id="go_back" defaultMessage={'Back'} />
           </Button>
         </Stack>
       )}
@@ -90,11 +91,12 @@ function LogInEmail({ setSelectedLoginMethod }: Props) {
           <Button>SIGN IN</Button>
           <Button
             variant="secondary"
+            className="mt-4 back-button"
             onClick={() => {
               setSignInState('email')
             }}
           >
-            Back to email
+            Back
           </Button>
         </Stack>
       )}

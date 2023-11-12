@@ -1,3 +1,7 @@
+.back-button {
+  width: min-content;
+}
+
 .sign-in-comparison-question {
   cursor: pointer;
   color: rgb(41, 41, 255);
@@ -76,7 +80,7 @@
 }
 
 .fade-in {
-  animation: fade-in 1s;
+  animation: fade-in .5s;
 }
 
 .media-style {
