@@ -23,7 +23,11 @@ const solidIdProviders: string[] = [
   'solidweb.org',
 ]
 
-const LogInSolid: React.FC = () => {
+type Props = {
+  setSelectedLoginMethod: React.Dispatch<React.SetStateAction<string>>
+}
+
+const LogInSolid: React.FC<Props> = ({ setSelectedLoginMethod }) => {
   useEffect(() => {
     async function fetchData() {
       await handleIncomingRedirect({
@@ -84,6 +88,15 @@ const LogInSolid: React.FC = () => {
           </LoginButton>
         </Col>
       </Row>
+
+      <Button
+        variant="secondary"
+        onClick={() => {
+          setSelectedLoginMethod('none')
+        }}
+      >
+        <FormattedMessage id="go_back" defaultMessage={'Go back'} />
+      </Button>
     </Stack>
   )
 }

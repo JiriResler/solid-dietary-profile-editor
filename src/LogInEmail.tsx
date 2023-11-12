@@ -7,8 +7,13 @@ import { useState } from 'react'
 import Stack from 'react-bootstrap/Stack'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
+import { FormattedMessage } from 'react-intl'
 
-function LogInEmail() {
+type Props = {
+  setSelectedLoginMethod: React.Dispatch<React.SetStateAction<string>>
+}
+
+function LogInEmail({ setSelectedLoginMethod }: Props) {
   const [signInState, setSignInState] = useState('email')
 
   // const loginWithUsernameAndPassword = async (
@@ -57,6 +62,14 @@ function LogInEmail() {
           <div>
             F <button>Sign in with Facebook</button>
           </div>
+          <Button
+            variant="secondary"
+            onClick={() => {
+              setSelectedLoginMethod('none')
+            }}
+          >
+            <FormattedMessage id="go_back" defaultMessage={'Go back'} />
+          </Button>
         </Stack>
       )}
 

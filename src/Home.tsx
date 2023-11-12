@@ -140,33 +140,13 @@ const Home: React.FC<Props> = ({ selectedLanguage, setSelectedLanguage }) => {
 
             {selectedLoginMethod === 'solid' && (
               <div className="fade-in">
-                <LogInSolid />
-                <Button
-                  variant="secondary"
-                  className="mt-5"
-                  size="sm"
-                  onClick={() => {
-                    setSelectedLoginMethod('none')
-                  }}
-                >
-                  <FormattedMessage id="go_back" defaultMessage={'Go back'} />
-                </Button>
+                <LogInSolid setSelectedLoginMethod={setSelectedLoginMethod} />
               </div>
             )}
 
             {selectedLoginMethod === 'email' && (
               <div className="fade-in">
-                <LogInEmail />
-                <Button
-                  variant="secondary"
-                  className="mt-5"
-                  size="sm"
-                  onClick={() => {
-                    setSelectedLoginMethod('none')
-                  }}
-                >
-                  <FormattedMessage id="go_back" defaultMessage={'Go back'} />
-                </Button>
+                <LogInEmail setSelectedLoginMethod={setSelectedLoginMethod} />
               </div>
             )}
           </Col>
