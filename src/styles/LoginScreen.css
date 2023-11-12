@@ -1,3 +1,13 @@
+.sign-in-comparison-question {
+  cursor: pointer;
+  color: rgb(41, 41, 255);
+}
+
+.sign-in-comparison-question:hover {
+  color: rgb(3, 8, 177);
+  text-decoration: underline;
+}
+
 .login-row {
   width: 250pt;
 }
@@ -7,7 +17,7 @@
 }
 
 .select-provider {
-  width:auto;
+  width: auto;
 }
 
 .solid-button {
@@ -17,14 +27,14 @@
   border-color: #7C4DFF;
 }
 
-.solid-button:hover, 
+.solid-button:hover,
 .solid-button:active:focus {
   background-color: #6933ff;
   border-color: #6933ff;
 }
 
 .login-solid-button {
-  width:100px;
+  width: 100px;
   background-color: #7C4DFF;
   border-color: #7C4DFF;
 }
@@ -81,6 +91,7 @@
   from {
     opacity: 0;
   }
+
   to {
     opacity: 100;
   }

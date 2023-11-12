@@ -127,9 +127,12 @@ const Home: React.FC<Props> = ({ selectedLanguage, setSelectedLanguage }) => {
 
                 <Row className="mt-3">
                   <Col>
-                    <Button variant="primary" onClick={handleShow}>
-                      Launch demo modal
-                    </Button>
+                    <span
+                      onClick={handleShow}
+                      className="sign-in-comparison-question"
+                    >
+                      What is the difference?
+                    </span>
                   </Col>
                 </Row>
               </Stack>
