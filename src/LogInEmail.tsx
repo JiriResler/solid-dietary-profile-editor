@@ -14,7 +14,9 @@ type Props = {
 }
 
 function LogInEmail({ setSelectedLoginMethod }: Props) {
-  const [signInState, setSignInState] = useState('email')
+  const [signInState, setSignInState] = useState('enterEmail')
+
+  const [emailLinkedToAccount, setEmailLinkedToAccount] = useState(false)
 
   // const loginWithUsernameAndPassword = async (
   //   e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
@@ -39,7 +41,7 @@ function LogInEmail({ setSelectedLoginMethod }: Props) {
 
   return (
     <>
-      {signInState === 'email' && (
+      {signInState === 'enterEmail' && (
         <Stack gap={3} className="text-center">
           <h4>Sign In or Sign Up</h4>
           <Form>
@@ -47,10 +49,15 @@ function LogInEmail({ setSelectedLoginMethod }: Props) {
               <Form.Control type="email" placeholder="Email Address" />
             </Form.Group>
           </Form>
-
+          <Form.Check
+            type="checkbox"
+            label={'Email is linked to an existing account (Log in)'}
+            checked={emailLinkedToAccount}
+            onChange={() => setEmailLinkedToAccount(!emailLinkedToAccount)}
+          />
           <Button
             onClick={() => {
-              setSignInState('password')
+              setSignInState('emailEntered')
             }}
           >
             CONTINUE
@@ -74,7 +81,7 @@ function LogInEmail({ setSelectedLoginMethod }: Props) {
         </Stack>
       )}
 
-      {signInState === 'password' && (
+      {signInState === 'emailEntered' && emailLinkedToAccount && (
         <Stack gap={2} className="text-center">
           <h4>Sign in</h4>
           <Form>
@@ -93,7 +100,28 @@ function LogInEmail({ setSelectedLoginMethod }: Props) {
             variant="secondary"
             className="mt-4 back-button"
             onClick={() => {
-              setSignInState('email')
+              setSignInState('enterEmail')
+            }}
+          >
+            Back
+          </Button>
+        </Stack>
+      )}
+
+      {signInState === 'emailEntered' && !emailLinkedToAccount && (
+        <Stack gap={2} className="text-center">
+          <h4>Create a password</h4>
+          <Form>
+            <Form.Group className="" controlId="exampleForm.ControlInput2">
+              <Form.Control type="password" placeholder="Password" />
+            </Form.Group>
+          </Form>
+          <Button>Next</Button>
+          <Button
+            variant="secondary"
+            className="mt-4 back-button"
+            onClick={() => {
+              setSignInState('enterEmail')
             }}
           >
             Back
