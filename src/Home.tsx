@@ -10,6 +10,7 @@ import Form from 'react-bootstrap/Form'
 import { useState } from 'react'
 import LogInSolid from './LogInSolid'
 import LogInEmail from './LogInEmail'
+import Modal from 'react-bootstrap/Modal'
 
 type Props = {
   selectedLanguage: string
@@ -18,6 +19,10 @@ type Props = {
 
 const Home: React.FC<Props> = ({ selectedLanguage, setSelectedLanguage }) => {
   const [selectedLoginMethod, setSelectedLoginMethod] = useState<string>('none')
+  const [show, setShow] = useState(false)
+
+  const handleClose = () => setShow(false)
+  const handleShow = () => setShow(true)
 
   return (
     <>
@@ -28,6 +33,21 @@ const Home: React.FC<Props> = ({ selectedLanguage, setSelectedLanguage }) => {
           </Link>
         </Navbar.Brand>
       </Navbar>
+
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Modal heading</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Woohoo, you are reading this text in a modal!</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={handleClose}>
+            Save Changes
+          </Button>
+        </Modal.Footer>
+      </Modal>
 
       <Container className="log-in-container">
         <Row className="h-100 align-items-center text-center">
@@ -107,15 +127,9 @@ const Home: React.FC<Props> = ({ selectedLanguage, setSelectedLanguage }) => {
 
                 <Row className="mt-3">
                   <Col>
-                    <Link
-                      className="link-no-decoration"
-                      to="sign-in-methods-comparison"
-                    >
-                      <FormattedMessage
-                        id="what_is_the_difference"
-                        defaultMessage={'What is the difference?'}
-                      />
-                    </Link>
+                    <Button variant="primary" onClick={handleShow}>
+                      Launch demo modal
+                    </Button>
                   </Col>
                 </Row>
               </Stack>
