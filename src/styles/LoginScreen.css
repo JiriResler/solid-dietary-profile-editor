@@ -17,18 +17,20 @@
   border-color: #7C4DFF;
 }
 
+.solid-button:hover, 
+.solid-button:active:focus {
+  background-color: #6933ff;
+  border-color: #6933ff;
+}
+
 .login-solid-button {
   width:100px;
   background-color: #7C4DFF;
   border-color: #7C4DFF;
 }
 
-.solid-button:hover {
-  background-color: #6933ff;
-  border-color: #6933ff;
-}
-
-.login-solid-button:hover {
+.login-solid-button:hover,
+.login-solid-button:active:focus {
   background-color: #6933ff;
   border-color: #6933ff;
 }
@@ -40,7 +42,8 @@
   border-color: #6c757d;
 }
 
-.sign-in-with-email-button:hover {
+.sign-in-with-email-button:hover,
+.sign-in-with-email-button:active:focus {
   background-color: #5f666d;
   border-color: #5f666d;
 }
