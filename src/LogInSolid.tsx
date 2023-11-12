@@ -52,6 +52,16 @@ const LogInSolid: React.FC<Props> = ({ setSelectedLoginMethod }) => {
     <Stack gap={3} className="text-center">
       <Row>
         <Col>
+          <img
+            src="images/logo_solid.svg"
+            alt="Solid project logo"
+            className="solid-logo-login-screen"
+          />
+        </Col>
+      </Row>
+
+      <Row>
+        <Col>
           <h5>
             <FormattedMessage
               id="select_id_provider"
