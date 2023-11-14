@@ -141,7 +141,7 @@ const Login: React.FC<Props> = ({ selectedLanguage, setSelectedLanguage }) => {
 
             {selectedLoginMethod === 'email' && (
               <div className="fade-in">
-                <LogInEmail setSelectedLoginMethod={setSelectedLoginMethod} />
+                {/* <LogInEmail setSelectedLoginMethod={setSelectedLoginMethod} /> */}
               </div>
             )}
           </Col>
