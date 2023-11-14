@@ -1,8 +1,7 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import Home from './Home'
-import About from './About'
-import SignInMethodComparison from './SignInMethodComparison'
-import './styles/LoginScreen.css'
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+// import Login from './components/Login'
+import About from './components/About'
+// import './styles/LoginScreen.css'
 import { IntlProvider } from 'react-intl'
 import { useState } from 'react'
 import { useSession } from '@inrupt/solid-ui-react'
@@ -34,24 +33,37 @@ const cs_messages = {
   go_back: 'Zpátky',
 }
 
-function getCurrentLocaleMessages(locale: string) {
-  if (locale === 'sk') {
-    return sk_messages
-  }
-
-  if (locale === 'cs') {
-    return cs_messages
-  }
-
-  return {}
-}
-
 const App: React.FC = () => {
-  const [selectedLanguage, setSelectedLanguage] = useState<string>('en')
-  // const [selectedSignInMethod, setSelectedSignInMethod] = useState<string>('')
+  const [selectedLanguage] = useState('en')
 
   const { session } = useSession()
   const [user] = useAuthState(auth)
+
+  function getCurrentLocaleMessages(locale: string) {
+    if (locale === 'sk') {
+      return sk_messages
+    }
+
+    if (locale === 'cs') {
+      return cs_messages
+    }
+
+    return {}
+  }
+
+  function loginIfNotAuthenticated() {
+    const userIsLoggedOut = !session.info.isLoggedIn && user === null
+
+    if (userIsLoggedOut) {
+      return <Navigate to="/login" />
+    } else {
+      if (session.info.isLoggedIn) {
+        return <Profile selectedSignInMethod="solid" />
+      } else {
+        return <Profile selectedSignInMethod="firebase" />
+      }
+    }
+  }
 
   return (
     <IntlProvider
@@ -62,42 +74,11 @@ const App: React.FC = () => {
       <BrowserRouter
         basename={import.meta.env.DEV ? '/' : '/solid-dietary-profile-editor/'}
       >
-        {!session.info.isLoggedIn && user === null && (
-          <Routes>
-            <Route
-              path="/"
-              element={
-                <Home
-                  selectedLanguage={selectedLanguage}
-                  setSelectedLanguage={setSelectedLanguage}
-                />
-              }
-            />
-            <Route path="/about" element={<About />} />
-            <Route
-              path="/sign-in-methods-comparison"
-              element={<SignInMethodComparison />}
-            />
-          </Routes>
-        )}
-
-        {session.info.isLoggedIn && (
-          <Routes>
-            <Route
-              path="/"
-              element={<Profile selectedSignInMethod="solid" />}
-            />
-          </Routes>
-        )}
-
-        {auth.currentUser !== null && (
-          <Routes>
-            <Route
-              path="/"
-              element={<Profile selectedSignInMethod="firebase" />}
-            />
-          </Routes>
-        )}
+        <Routes>
+          <Route path="/" element={loginIfNotAuthenticated()} />
+          <Route path="/login" element={<h1>Hello /login</h1>} />
+          <Route path="/about" element={<About />} />
+        </Routes>
       </BrowserRouter>
     </IntlProvider>
   )

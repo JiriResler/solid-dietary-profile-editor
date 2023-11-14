@@ -9,7 +9,6 @@ import { FormattedMessage } from 'react-intl'
 import Form from 'react-bootstrap/Form'
 import { useState } from 'react'
 import LogInSolid from './LogInSolid'
-import LogInEmail from './LogInEmail'
 import Modal from 'react-bootstrap/Modal'
 
 type Props = {
@@ -17,7 +16,7 @@ type Props = {
   setSelectedLanguage: React.Dispatch<React.SetStateAction<string>>
 }
 
-const Home: React.FC<Props> = ({ selectedLanguage, setSelectedLanguage }) => {
+const Login: React.FC<Props> = ({ selectedLanguage, setSelectedLanguage }) => {
   const [selectedLoginMethod, setSelectedLoginMethod] = useState<string>('none')
   const [show, setShow] = useState(false)
 
@@ -164,4 +163,4 @@ const Home: React.FC<Props> = ({ selectedLanguage, setSelectedLanguage }) => {
   )
 }
 
-export default Home
+export default Login
