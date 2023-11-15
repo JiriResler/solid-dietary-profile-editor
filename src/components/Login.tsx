@@ -8,17 +8,15 @@ import Button from 'react-bootstrap/Button'
 import { FormattedMessage } from 'react-intl'
 import Form from 'react-bootstrap/Form'
 import { useState } from 'react'
+import { useContext } from 'react'
 import LogInSolid from './LogInSolid'
 import Modal from 'react-bootstrap/Modal'
+import LanguageContext from '../LanguageContext'
 
-type Props = {
-  selectedLanguage: string
-  setSelectedLanguage: React.Dispatch<React.SetStateAction<string>>
-}
-
-const Login: React.FC<Props> = ({ selectedLanguage, setSelectedLanguage }) => {
+const Login: React.FC = () => {
   const [selectedLoginMethod, setSelectedLoginMethod] = useState<string>('none')
   const [show, setShow] = useState(false)
+  const { language, setLanguage } = useContext(LanguageContext)
 
   const handleClose = () => setShow(false)
   const handleShow = () => setShow(true)
@@ -150,8 +148,8 @@ const Login: React.FC<Props> = ({ selectedLanguage, setSelectedLanguage }) => {
 
       <div className="position-absolute bottom-0 start-0 ms-3 mb-3">
         <Form.Select
-          value={selectedLanguage}
-          onChange={(e) => setSelectedLanguage(e.target.value)}
+          value={language}
+          onChange={(e) => setLanguage(e.target.value)}
           size="lg"
         >
           <option key="en">en</option>

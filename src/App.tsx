@@ -1,13 +1,13 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
-// import Login from './components/Login'
 import About from './components/About'
-// import './styles/LoginScreen.css'
 import { IntlProvider } from 'react-intl'
 import { useState } from 'react'
 import { useSession } from '@inrupt/solid-ui-react'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { auth } from './firebase'
 import Profile from './components/Profile'
+import LanguageContext from './LanguageContext'
+import Login from './components/Login'
 
 const sk_messages = {
   app_name: 'Editor diétneho profilu',
@@ -34,7 +34,8 @@ const cs_messages = {
 }
 
 const App: React.FC = () => {
-  const [selectedLanguage] = useState('en')
+  const [language, setLanguage] = useState('en')
+  const languageContextInitialValue = { language, setLanguage }
 
   const { session } = useSession()
   const [user] = useAuthState(auth)
@@ -66,21 +67,24 @@ const App: React.FC = () => {
   }
 
   return (
-    <IntlProvider
-      messages={getCurrentLocaleMessages(selectedLanguage)}
-      locale={selectedLanguage}
-      defaultLocale="en"
-    >
-      <BrowserRouter
-        basename={import.meta.env.DEV ? '/' : '/solid-dietary-profile-editor/'}
+    <LanguageContext.Provider value={languageContextInitialValue}>
+      <IntlProvider
+        messages={getCurrentLocaleMessages(language)}
+        locale={language}
       >
-        <Routes>
-          <Route path="/" element={loginIfNotAuthenticated()} />
-          <Route path="/login" element={<h1>Hello /login</h1>} />
-          <Route path="/about" element={<About />} />
-        </Routes>
-      </BrowserRouter>
-    </IntlProvider>
+        <BrowserRouter
+          basename={
+            import.meta.env.DEV ? '/' : '/solid-dietary-profile-editor/'
+          }
+        >
+          <Routes>
+            <Route path="/" element={loginIfNotAuthenticated()} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/about" element={<About />} />
+          </Routes>
+        </BrowserRouter>
+      </IntlProvider>
+    </LanguageContext.Provider>
   )
 }
 
