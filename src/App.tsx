@@ -1,13 +1,8 @@
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
-import About from './components/About'
 import { IntlProvider } from 'react-intl'
 import { useState } from 'react'
-import { useSession } from '@inrupt/solid-ui-react'
-import { useAuthState } from 'react-firebase-hooks/auth'
-import { auth } from './firebase'
-import Profile from './components/Profile'
 import LanguageContext from './LanguageContext'
-import Login from './components/Login'
+import RouterWrapper from './components/RouterWrapper'
+import { SessionProvider } from '@inrupt/solid-ui-react'
 
 const sk_messages = {
   app_name: 'Editor diétneho profilu',
@@ -37,9 +32,6 @@ const App: React.FC = () => {
   const [language, setLanguage] = useState('en')
   const languageContextInitialValue = { language, setLanguage }
 
-  const { session } = useSession()
-  const [user] = useAuthState(auth)
-
   function getCurrentLocaleMessages(locale: string) {
     if (locale === 'sk') {
       return sk_messages
@@ -52,39 +44,17 @@ const App: React.FC = () => {
     return {}
   }
 
-  function loginIfNotAuthenticated() {
-    const userIsLoggedOut = !session.info.isLoggedIn && user === null
-
-    if (userIsLoggedOut) {
-      return <Navigate to="/login" />
-    } else {
-      if (session.info.isLoggedIn) {
-        return <Profile selectedSignInMethod="solid" />
-      } else {
-        return <Profile selectedSignInMethod="firebase" />
-      }
-    }
-  }
-
   return (
-    <LanguageContext.Provider value={languageContextInitialValue}>
-      <IntlProvider
-        messages={getCurrentLocaleMessages(language)}
-        locale={language}
-      >
-        <BrowserRouter
-          basename={
-            import.meta.env.DEV ? '/' : '/solid-dietary-profile-editor/'
-          }
+    <SessionProvider>
+      <LanguageContext.Provider value={languageContextInitialValue}>
+        <IntlProvider
+          messages={getCurrentLocaleMessages(language)}
+          locale={language}
         >
-          <Routes>
-            <Route path="/" element={loginIfNotAuthenticated()} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/about" element={<About />} />
-          </Routes>
-        </BrowserRouter>
-      </IntlProvider>
-    </LanguageContext.Provider>
+          <RouterWrapper />
+        </IntlProvider>
+      </LanguageContext.Provider>
+    </SessionProvider>
   )
 }
 
