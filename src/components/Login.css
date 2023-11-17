@@ -55,7 +55,7 @@
 .google-button {
   width: auto;
   height: auto;
-  background-color: #ffffff;
+  background-color: white;
   border-color: #0000008a;
   color: #0000008a;
 }
@@ -64,4 +64,17 @@
 .google-button:active:focus {
   background-color: #e7e7e7;
   border-color: #e7e7e7;
+}
+
+.apple-button {
+  width: auto;
+  height: auto;
+  background-color: black;
+  border-color: black;
+}
+
+.apple-button:hover,
+.apple-button:active:focus {
+  background-color: #222222;
+  border-color: #222222;
 }

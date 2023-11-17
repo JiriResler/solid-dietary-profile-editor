@@ -80,7 +80,14 @@ const Login: React.FC = () => {
           />
           <span className="ms-3">Google</span>
         </Button>
-        <button>Apple</button>
+        <Button className="apple-button text-start mx-auto">
+          <img
+            src="images/logo_apple.svg"
+            alt="Apple logo"
+            className="login-provider-icon"
+          />
+          <span className="ms-3">Apple</span>
+        </Button>
         <div onClick={handleShow} className="choose-provider-question">
           <FormattedMessage
             id="which_provider_to_choose"
