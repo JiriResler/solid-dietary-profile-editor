@@ -56,7 +56,14 @@ const Login: React.FC = () => {
             defaultMessage={'Please sign in via an identity provider'}
           />
         </h5>
-        <button>Solid</button>
+        <Button className="solid-button text-start mx-auto">
+          <img
+            src="images/logo_solid.svg"
+            alt="Solid project logo"
+            className="login-provider-icon"
+          />
+          <span className="ms-3">Solid</span>
+        </Button>
         <button>Facebook</button>
         <button>Google</button>
         <button>Apple</button>

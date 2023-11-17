@@ -21,3 +21,20 @@
   color: rgb(3, 8, 177);
   text-decoration: underline;
 }
+
+.login-provider-icon {
+  width: 30px;
+}
+
+.solid-button {
+  width: auto;
+  height: auto;
+  background-color: #7c4dff;
+  border-color: #7c4dff;
+}
+
+.solid-button:hover,
+.solid-button:active:focus {
+  background-color: #6933ff;
+  border-color: #6933ff;
+}
