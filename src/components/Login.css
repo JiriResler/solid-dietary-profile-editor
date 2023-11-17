@@ -23,7 +23,7 @@
 }
 
 .login-provider-icon {
-  width: 30px;
+  width: 35px;
 }
 
 .solid-button {
@@ -37,4 +37,17 @@
 .solid-button:active:focus {
   background-color: #6933ff;
   border-color: #6933ff;
+}
+
+.facebook-button {
+  width: auto;
+  height: auto;
+  background-color: #1877f2;
+  border-color: #1877f2;
+}
+
+.facebook-button:hover,
+.facebook-button:active:focus {
+  background-color: #0467e9;
+  border-color: #0467e9;
 }

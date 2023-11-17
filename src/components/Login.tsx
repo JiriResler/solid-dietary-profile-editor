@@ -64,7 +64,14 @@ const Login: React.FC = () => {
           />
           <span className="ms-3">Solid</span>
         </Button>
-        <button>Facebook</button>
+        <Button className="facebook-button text-start mx-auto">
+          <img
+            src="images/logo_facebook.svg"
+            alt="Facebook logo"
+            className="login-provider-icon"
+          />
+          <span className="ms-3">Facebook</span>
+        </Button>
         <button>Google</button>
         <button>Apple</button>
         <div onClick={handleShow} className="choose-provider-question">
