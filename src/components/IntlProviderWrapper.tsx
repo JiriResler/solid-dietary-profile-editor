@@ -1,7 +1,7 @@
 import { IntlProvider } from 'react-intl'
 import { useState } from 'react'
 import LanguageContext from '../LanguageContext'
-import RouterWrapper from './RouterWrapper'
+import { PropsWithChildren } from 'react'
 
 const sk_messages = {
   app_name: 'Editor diétneho profilu',
@@ -27,7 +27,7 @@ const cs_messages = {
   go_back: 'Zpátky',
 }
 
-function IntlProviderWrapper() {
+export const IntlProviderWrapper = (props: PropsWithChildren) => {
   const [language, setLanguage] = useState('en')
   const languageContextInitialValue = { language, setLanguage }
 
@@ -42,13 +42,14 @@ function IntlProviderWrapper() {
 
     return {}
   }
+
   return (
     <LanguageContext.Provider value={languageContextInitialValue}>
       <IntlProvider
         messages={getCurrentLocaleMessages(language)}
         locale={language}
       >
-        <RouterWrapper />
+        {props.children}
       </IntlProvider>
     </LanguageContext.Provider>
   )
