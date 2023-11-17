@@ -1,3 +1,9 @@
+.about-link {
+  font-size: 13pt;
+  color: white;
+  text-decoration: none;
+}
+
 .app-name {
   width: 100vw;
 }

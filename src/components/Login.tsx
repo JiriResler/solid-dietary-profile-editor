@@ -23,7 +23,7 @@ const Login: React.FC = () => {
     <>
       <Navbar bg="primary" data-bs-theme="dark">
         <Navbar.Brand className="ms-3 fs-6">
-          <Link className="navbar-link about-link " to="../about">
+          <Link className="about-link" to="../about">
             <FormattedMessage id="about_application" defaultMessage={'About'} />
           </Link>
         </Navbar.Brand>
