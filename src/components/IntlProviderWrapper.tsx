@@ -6,7 +6,7 @@ import { PropsWithChildren } from 'react'
 const sk_messages = {
   app_name: 'Editor diétneho profilu',
   about_application: 'O aplikácii',
-  sign_in_with: 'Prihlásiť sa cez',
+  sign_in_via_provider: 'Zvoľte poskytovateľa identity',
   or: 'alebo',
   email_and_password: 'Email a heslo',
   what_is_the_difference: 'Aký je v tom rozdiel?',
@@ -18,7 +18,7 @@ const sk_messages = {
 const cs_messages = {
   app_name: 'Editor dietního profilu',
   about_application: 'O aplikaci',
-  sign_in_with: 'Přihlásit se přes',
+  sign_in_via_provider: 'Zvolte poskytovatele identity',
   or: 'nebo',
   email_and_password: 'Email a heslo',
   what_is_the_difference: 'Jaký je v tom rozdíl?',

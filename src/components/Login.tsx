@@ -1,7 +1,4 @@
 import { Link } from 'react-router-dom'
-import Container from 'react-bootstrap/Container'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
 import Navbar from 'react-bootstrap/Navbar'
 import Stack from 'react-bootstrap/Stack'
 import Button from 'react-bootstrap/Button'
@@ -9,17 +6,17 @@ import { FormattedMessage } from 'react-intl'
 import Form from 'react-bootstrap/Form'
 import { useState } from 'react'
 import { useContext } from 'react'
-import LogInSolid from './LogInSolid'
+// import LogInSolid from './LogInSolid'
 import Modal from 'react-bootstrap/Modal'
 import LanguageContext from '../LanguageContext'
 
 const Login: React.FC = () => {
-  const [selectedLoginMethod, setSelectedLoginMethod] = useState<string>('none')
+  // const [selectedLoginMethod, setSelectedLoginMethod] = useState('none')
   const [show, setShow] = useState(false)
   const { language, setLanguage } = useContext(LanguageContext)
 
   const handleClose = () => setShow(false)
-  const handleShow = () => setShow(true)
+  // const handleShow = () => setShow(true)
 
   return (
     <>
@@ -42,109 +39,30 @@ const Login: React.FC = () => {
         </Modal.Body>
       </Modal>
 
-      <Container className="log-in-container">
-        <Row className="h-100 align-items-center text-center">
-          <Col>
-            <h1>
-              <FormattedMessage
-                id="app_name"
-                defaultMessage={'Dietary profile editor'}
-              />
-            </h1>
-          </Col>
-        </Row>
+      <div className="h-100 align-items-center text-center">
+        <h1>
+          <FormattedMessage
+            id="app_name"
+            defaultMessage={'Dietary profile editor'}
+          />
+        </h1>
+      </div>
 
-        <Row className="login-row mx-auto">
-          <Col>
-            {selectedLoginMethod === 'none' && (
-              <Stack gap={2} className="text-center fade-in">
-                <Row className="pb-2">
-                  <Col>
-                    <h5>
-                      <FormattedMessage
-                        id="sign_in_with"
-                        defaultMessage={'Sign in with'}
-                      />
-                    </h5>
-                  </Col>
-                </Row>
-
-                <Row className="mx-auto">
-                  <Col>
-                    <Stack direction="horizontal" gap={4} className="pe-5">
-                      <img
-                        src="images/logo_solid.svg"
-                        alt="Solid project logo"
-                        className="login-provider-icon"
-                      />
-                      <Button
-                        onClick={() => {
-                          setSelectedLoginMethod('solid')
-                        }}
-                        className="solid-button text-start"
-                      >
-                        Solid WebID
-                      </Button>
-                    </Stack>
-                  </Col>
-                </Row>
-
-                <Row>
-                  <Col>
-                    <FormattedMessage id="or" defaultMessage={'or'} />
-                  </Col>
-                </Row>
-
-                <Row className="mx-auto">
-                  <Col>
-                    <Stack direction="horizontal" gap={4} className="pe-5">
-                      <img
-                        src="images/envelope-at.svg"
-                        alt="Envelope icon"
-                        className="login-provider-icon"
-                      />
-                      <Button
-                        onClick={() => {
-                          setSelectedLoginMethod('email')
-                        }}
-                        className="text-start sign-in-with-email-button"
-                      >
-                        <FormattedMessage
-                          id="email_and_password"
-                          defaultMessage={'Email and password'}
-                        />
-                      </Button>
-                    </Stack>
-                  </Col>
-                </Row>
-
-                <Row className="mt-3">
-                  <Col>
-                    <span
-                      onClick={handleShow}
-                      className="sign-in-comparison-question"
-                    >
-                      What is the difference?
-                    </span>
-                  </Col>
-                </Row>
-              </Stack>
-            )}
-
-            {selectedLoginMethod === 'solid' && (
-              <div className="fade-in">
-                <LogInSolid setSelectedLoginMethod={setSelectedLoginMethod} />
-              </div>
-            )}
-
-            {selectedLoginMethod === 'email' && (
-              <div className="fade-in">
-                {/* <LogInEmail setSelectedLoginMethod={setSelectedLoginMethod} /> */}
-              </div>
-            )}
-          </Col>
-        </Row>
-      </Container>
+      <Stack gap={2}>
+        <div className="">
+          <h5>
+            <FormattedMessage
+              id="sign_in_via_provider"
+              defaultMessage={'Please sign in via an identity provider'}
+            />
+          </h5>
+        </div>
+        <div>Which provider should I use?</div>
+        <button>Solid</button>
+        <button>Facebook</button>
+        <button>Google</button>
+        <button>Apple</button>
+      </Stack>
 
       <div className="position-absolute bottom-0 start-0 ms-3 mb-3">
         <Form.Select
