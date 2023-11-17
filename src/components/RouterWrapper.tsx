@@ -34,6 +34,16 @@ function RouterWrapper() {
     }
   }
 
+  function aboutIfNotAuthenticated() {
+    const userIsLoggedOut = !session.info.isLoggedIn && user === null
+
+    if (userIsLoggedOut) {
+      return <About />
+    } else {
+      return <Navigate to="/" />
+    }
+  }
+
   return (
     <BrowserRouter
       basename={import.meta.env.DEV ? '/' : '/solid-dietary-profile-editor/'}
@@ -41,7 +51,7 @@ function RouterWrapper() {
       <Routes>
         <Route path="/" element={profileIfAuthenticated()} />
         <Route path="/login" element={loginIfNotAuthenticated()} />
-        <Route path="/about" element={<About />} />
+        <Route path="/about" element={aboutIfNotAuthenticated()} />
       </Routes>
     </BrowserRouter>
   )
