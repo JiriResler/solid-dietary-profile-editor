@@ -40,31 +40,32 @@ const Login: React.FC = () => {
         </Modal.Body>
       </Modal>
 
-      <Stack gap={3} className="mt-5 sign-in-stack  text-center mx-auto">
-        <div className="mt-5 align-items-center text-center">
-          <h1>
-            <FormattedMessage
-              id="app_name"
-              defaultMessage={'Dietary profile editor'}
-            />
-          </h1>
-        </div>
+      <div className="app-name mt-5 text-center">
+        <h1>
+          <FormattedMessage
+            id="app_name"
+            defaultMessage={'Dietary profile editor'}
+          />
+        </h1>
+      </div>
+
+      <Stack gap={3} className="mt-5 sign-in-stack text-center mx-auto">
         <h5>
           <FormattedMessage
             id="sign_in_via_provider"
             defaultMessage={'Please sign in via an identity provider'}
           />
         </h5>
-        <div onClick={handleShow} className="choose-provider-question">
-          <FormattedMessage
-            id="which_provider_to_choose"
-            defaultMessage={'Which provider should I use?'}
-          />
-        </div>
         <button>Solid</button>
         <button>Facebook</button>
         <button>Google</button>
         <button>Apple</button>
+        <div onClick={handleShow} className="choose-provider-question">
+          <FormattedMessage
+            id="which_provider_to_choose"
+            defaultMessage={'Which provider should I choose?'}
+          />
+        </div>
       </Stack>
 
       <div className="position-absolute bottom-0 start-0 ms-3 mb-3">
