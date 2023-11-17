@@ -9,6 +9,7 @@ import { useContext } from 'react'
 // import LogInSolid from './LogInSolid'
 import Modal from 'react-bootstrap/Modal'
 import LanguageContext from '../LanguageContext'
+import './Login.css'
 
 const Login: React.FC = () => {
   // const [selectedLoginMethod, setSelectedLoginMethod] = useState('none')
