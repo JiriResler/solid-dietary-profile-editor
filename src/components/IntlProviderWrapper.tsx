@@ -13,6 +13,7 @@ const sk_messages = {
   select_id_provider: 'Vyberte svojho poskytovateľa identity',
   log_in: 'Prihlásiť sa',
   go_back: 'Naspäť',
+  which_provider_to_choose: 'Podľa čoho zvoliť poskytovateľa?',
 }
 
 const cs_messages = {
@@ -25,6 +26,7 @@ const cs_messages = {
   select_id_provider: 'Zvolte svého poskytovatele identity',
   log_in: 'Přihlásit',
   go_back: 'Zpátky',
+  which_provider_to_choose: 'Jak vybrat správného poskytovatele?',
 }
 
 export const IntlProviderWrapper = (props: PropsWithChildren) => {

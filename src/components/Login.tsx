@@ -17,7 +17,7 @@ const Login: React.FC = () => {
   const { language, setLanguage } = useContext(LanguageContext)
 
   const handleClose = () => setShow(false)
-  // const handleShow = () => setShow(true)
+  const handleShow = () => setShow(true)
 
   return (
     <>
@@ -40,25 +40,27 @@ const Login: React.FC = () => {
         </Modal.Body>
       </Modal>
 
-      <div className="h-100 align-items-center text-center">
-        <h1>
-          <FormattedMessage
-            id="app_name"
-            defaultMessage={'Dietary profile editor'}
-          />
-        </h1>
-      </div>
-
-      <Stack gap={2}>
-        <div className="">
-          <h5>
+      <Stack gap={3} className="mt-5 sign-in-stack  text-center mx-auto">
+        <div className="mt-5 align-items-center text-center">
+          <h1>
             <FormattedMessage
-              id="sign_in_via_provider"
-              defaultMessage={'Please sign in via an identity provider'}
+              id="app_name"
+              defaultMessage={'Dietary profile editor'}
             />
-          </h5>
+          </h1>
         </div>
-        <div>Which provider should I use?</div>
+        <h5>
+          <FormattedMessage
+            id="sign_in_via_provider"
+            defaultMessage={'Please sign in via an identity provider'}
+          />
+        </h5>
+        <div onClick={handleShow} className="choose-provider-question">
+          <FormattedMessage
+            id="which_provider_to_choose"
+            defaultMessage={'Which provider should I use?'}
+          />
+        </div>
         <button>Solid</button>
         <button>Facebook</button>
         <button>Google</button>

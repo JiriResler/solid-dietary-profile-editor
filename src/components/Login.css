@@ -1,3 +1,13 @@
-.non-empty {
-  color: blue;
+.sign-in-stack {
+  width: 60vw;
+}
+
+.choose-provider-question {
+  cursor: pointer;
+  color: rgb(41, 41, 255);
+}
+
+.choose-provider-question:hover {
+  color: rgb(3, 8, 177);
+  text-decoration: underline;
 }
