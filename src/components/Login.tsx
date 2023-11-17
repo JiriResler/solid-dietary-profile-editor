@@ -56,35 +56,35 @@ const Login: React.FC = () => {
             defaultMessage={'Please sign in via an identity provider'}
           />
         </h5>
-        <Button className="solid-button text-start mx-auto">
+        <Button className="provider-button solid-button text-start mx-auto">
           <img
             src="images/logo_solid.svg"
             alt="Solid project logo"
-            className="login-provider-icon"
+            className="provider-icon"
           />
           <span className="ms-3">Solid</span>
         </Button>
-        <Button className="facebook-button text-start mx-auto">
+        <Button className="provider-button facebook-button text-start mx-auto">
           <img
             src="images/logo_facebook.svg"
             alt="Facebook logo"
-            className="login-provider-icon"
+            className="provider-icon"
           />
           <span className="ms-3">Facebook</span>
         </Button>
-        <Button className="google-button text-start mx-auto">
+        <Button className="provider-button google-button text-start mx-auto">
           <img
             src="images/logo_google.svg"
             alt="Google logo"
-            className="login-provider-icon"
+            className="provider-icon"
           />
           <span className="ms-3">Google</span>
         </Button>
-        <Button className="apple-button text-start mx-auto">
+        <Button className="provider-button apple-button text-start mx-auto">
           <img
             src="images/logo_apple.svg"
             alt="Apple logo"
-            className="login-provider-icon"
+            className="provider-icon"
           />
           <span className="ms-3">Apple</span>
         </Button>

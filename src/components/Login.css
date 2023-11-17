@@ -14,21 +14,23 @@
 
 .choose-provider-question {
   cursor: pointer;
-  color: rgb(41, 41, 255);
+  color: #2929ff;
 }
 
 .choose-provider-question:hover {
-  color: rgb(3, 8, 177);
+  color: #0308b1;
   text-decoration: underline;
 }
 
-.login-provider-icon {
+.provider-icon {
   width: 35px;
 }
 
+.provider-button {
+  width: 150px;
+}
+
 .solid-button {
-  width: auto;
-  height: auto;
   background-color: #7c4dff;
   border-color: #7c4dff;
 }
@@ -40,8 +42,6 @@
 }
 
 .facebook-button {
-  width: auto;
-  height: auto;
   background-color: #1877f2;
   border-color: #1877f2;
 }
@@ -53,8 +53,6 @@
 }
 
 .google-button {
-  width: auto;
-  height: auto;
   background-color: white;
   border-color: #0000008a;
   color: #0000008a;
@@ -67,8 +65,6 @@
 }
 
 .apple-button {
-  width: auto;
-  height: auto;
   background-color: black;
   border-color: black;
 }
