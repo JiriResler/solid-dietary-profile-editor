@@ -59,14 +59,14 @@ const Login: React.FC = () => {
         <Button className="provider-button solid-button text-start mx-auto">
           <img
             src="images/logo_solid.svg"
-            alt="Solid project logo"
+            alt="Solid logo"
             className="provider-icon"
           />
           <span className="ms-3">Solid</span>
         </Button>
         <Button className="provider-button facebook-button text-start mx-auto">
           <img
-            src="images/logo_facebook.svg"
+            src="images/facebook_round_white_icon.svg"
             alt="Facebook logo"
             className="provider-icon"
           />
@@ -74,7 +74,7 @@ const Login: React.FC = () => {
         </Button>
         <Button className="provider-button google-button text-start mx-auto">
           <img
-            src="images/logo_google.svg"
+            src="images/google_g_logo.svg"
             alt="Google logo"
             className="provider-icon"
           />
@@ -82,7 +82,7 @@ const Login: React.FC = () => {
         </Button>
         <Button className="provider-button apple-button text-start mx-auto">
           <img
-            src="images/logo_apple.svg"
+            src="images/apple_logo_white.svg"
             alt="Apple logo"
             className="provider-icon"
           />
