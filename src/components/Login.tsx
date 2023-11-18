@@ -19,6 +19,38 @@ const Login: React.FC = () => {
   const handleClose = () => setShow(false)
   const handleShow = () => setShow(true)
 
+  function setLanguageShorthand(languageLong: string) {
+    if (languageLong === 'English') {
+      setLanguage('en')
+    }
+
+    if (languageLong === 'Slovensky') {
+      setLanguage('sk')
+    }
+
+    if (languageLong === 'Česky') {
+      setLanguage('cs')
+    }
+
+    return
+  }
+
+  function languageFullName(languageShorthand: string) {
+    if (languageShorthand === 'en') {
+      return 'English'
+    }
+
+    if (languageShorthand === 'sk') {
+      return 'Slovensky'
+    }
+
+    if (languageShorthand === 'cs') {
+      return 'Česky'
+    }
+
+    return
+  }
+
   return (
     <>
       <Navbar bg="primary" data-bs-theme="dark">
@@ -98,13 +130,13 @@ const Login: React.FC = () => {
 
       <div className="position-absolute bottom-0 start-0 ms-3 mb-3">
         <Form.Select
-          value={language}
-          onChange={(e) => setLanguage(e.target.value)}
+          value={languageFullName(language)}
+          onChange={(e) => setLanguageShorthand(e.target.value)}
           size="lg"
         >
-          <option key="en">en</option>
-          <option key="sk">sk</option>
-          <option key="cs">cs</option>
+          <option key="en">English</option>
+          <option key="sk">Slovensky</option>
+          <option key="cs">Česky</option>
         </Form.Select>
       </div>
     </>
