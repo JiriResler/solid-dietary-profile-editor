@@ -14,6 +14,7 @@ import './Login.css'
 const Login: React.FC = () => {
   // const [selectedLoginMethod, setSelectedLoginMethod] = useState('none')
   const [show, setShow] = useState(false)
+  const [showMoreProviders, setShowMoreProviders] = useState(false)
   const { language, setLanguage } = useContext(LanguageContext)
 
   const handleClose = () => setShow(false)
@@ -88,6 +89,7 @@ const Login: React.FC = () => {
             defaultMessage={'Please sign in via an identity provider'}
           />
         </h5>
+
         <Button className="provider-button solid-button text-start mx-auto">
           <img
             src="images/logo_solid.svg"
@@ -96,36 +98,45 @@ const Login: React.FC = () => {
           />
           <span className="ms-3">Solid</span>
         </Button>
-        <Button className="provider-button facebook-button text-start mx-auto">
-          <img
-            src="images/facebook_round_white_icon.svg"
-            alt="Facebook logo"
-            className="provider-icon"
-          />
-          <span className="ms-3">Facebook</span>
-        </Button>
-        <Button className="provider-button google-button text-start mx-auto">
-          <img
-            src="images/google_g_logo.svg"
-            alt="Google logo"
-            className="provider-icon"
-          />
-          <span className="ms-3">Google</span>
-        </Button>
-        <Button className="provider-button apple-button text-start mx-auto">
-          <img
-            src="images/apple_logo_white.svg"
-            alt="Apple logo"
-            className="provider-icon"
-          />
-          <span className="ms-3">Apple</span>
-        </Button>
-        <div onClick={handleShow} className="choose-provider-question">
-          <FormattedMessage
-            id="which_provider_to_choose"
-            defaultMessage={'Which provider should I choose?'}
-          />
-        </div>
+
+        <span>What is Solid?</span>
+        <br />
+        <span>Other providers v</span>
+
+        {showMoreProviders && (
+          <>
+            <Button className="provider-button facebook-button text-start mx-auto">
+              <img
+                src="images/facebook_round_white_icon.svg"
+                alt="Facebook logo"
+                className="provider-icon"
+              />
+              <span className="ms-3">Facebook</span>
+            </Button>
+            <Button className="provider-button google-button text-start mx-auto">
+              <img
+                src="images/google_g_logo.svg"
+                alt="Google logo"
+                className="provider-icon"
+              />
+              <span className="ms-3">Google</span>
+            </Button>
+            <Button className="provider-button apple-button text-start mx-auto">
+              <img
+                src="images/apple_logo_white.svg"
+                alt="Apple logo"
+                className="provider-icon"
+              />
+              <span className="ms-3">Apple</span>
+            </Button>
+            <div onClick={handleShow} className="choose-provider-question">
+              <FormattedMessage
+                id="which_provider_to_choose"
+                defaultMessage={'Which provider is the best option?'}
+              />
+            </div>
+          </>
+        )}
       </Stack>
 
       <div className="position-absolute bottom-0 start-0 ms-3 mb-3">
