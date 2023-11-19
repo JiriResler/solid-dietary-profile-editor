@@ -7,18 +7,13 @@ import Form from 'react-bootstrap/Form'
 import { useState } from 'react'
 import { useContext } from 'react'
 // import LogInSolid from './LogInSolid'
-import Modal from 'react-bootstrap/Modal'
 import LanguageContext from '../LanguageContext'
 import './Login.css'
 
 const Login: React.FC = () => {
   // const [selectedLoginMethod, setSelectedLoginMethod] = useState('none')
-  const [show, setShow] = useState(false)
   const [showMoreProviders, setShowMoreProviders] = useState(false)
   const { language, setLanguage } = useContext(LanguageContext)
-
-  const handleClose = () => setShow(false)
-  const handleShow = () => setShow(true)
 
   function setLanguageShorthand(languageLong: string) {
     if (languageLong === 'English') {
@@ -62,17 +57,6 @@ const Login: React.FC = () => {
         </Navbar.Brand>
       </Navbar>
 
-      <Modal size="lg" centered show={show} onHide={handleClose}>
-        <Modal.Body>
-          Woohoo, you are reading this text in a modal! <br />
-          <div className="mt-3 text-end">
-            <Button variant="secondary" onClick={handleClose}>
-              Close
-            </Button>
-          </div>
-        </Modal.Body>
-      </Modal>
-
       <div className="app-name mt-5 text-center">
         <h1>
           <FormattedMessage
@@ -101,8 +85,13 @@ const Login: React.FC = () => {
 
         <span>What is Solid?</span>
         <br />
-        <span>
-          Other providers {/* Chevron icon */}
+
+        <span
+          onClick={() => {
+            setShowMoreProviders(!showMoreProviders)
+          }}
+        >
+          More providers {/* Chevron icon */}
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="16"
@@ -144,12 +133,6 @@ const Login: React.FC = () => {
               />
               <span className="ms-3">Apple</span>
             </Button>
-            <div onClick={handleShow} className="choose-provider-question">
-              <FormattedMessage
-                id="which_provider_to_choose"
-                defaultMessage={'Which provider is the best option?'}
-              />
-            </div>
           </>
         )}
       </Stack>
