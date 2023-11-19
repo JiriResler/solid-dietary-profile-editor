@@ -61,7 +61,7 @@ const Login: React.FC = () => {
         <h1>
           <FormattedMessage
             id="app_name"
-            defaultMessage={'Dietary profile editor'}
+            defaultMessage={'Eating Preferences Profile Editor'}
           />
         </h1>
       </div>
@@ -84,7 +84,6 @@ const Login: React.FC = () => {
         </Button>
 
         <span>What is Solid?</span>
-        <br />
 
         <span
           onClick={() => {
