@@ -61,7 +61,7 @@ const Login: React.FC = () => {
         <h1>
           <FormattedMessage
             id="app_name"
-            defaultMessage={'Eating Preferences Profile Editor'}
+            defaultMessage={'Personal Eating Preferences Profile Editor'}
           />
         </h1>
       </div>
