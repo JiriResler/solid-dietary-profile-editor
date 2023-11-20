@@ -32,6 +32,8 @@
 }
 
 .solid-button {
+  height: 40pt;
+  width: 100pt;
   background-color: #7c4dff;
   border-color: #7c4dff;
 }

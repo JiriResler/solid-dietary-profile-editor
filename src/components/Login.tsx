@@ -79,7 +79,7 @@ const Login: React.FC = () => {
           />
         </h5>
 
-        <Button className="provider-button solid-button text-start mx-auto">
+        <Button className="solid-button text-start mx-auto">
           <img
             src="images/logo_solid.svg"
             alt="Solid logo"
