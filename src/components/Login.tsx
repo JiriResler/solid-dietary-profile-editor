@@ -9,12 +9,15 @@ import { useContext } from 'react'
 // import LogInSolid from './LogInSolid'
 import LanguageContext from '../LanguageContext'
 import './Login.css'
-import { Col, Row } from 'react-bootstrap'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
+import Modal from 'react-bootstrap/Modal'
 
 const Login: React.FC = () => {
   // const [selectedLoginMethod, setSelectedLoginMethod] = useState('none')
   const [showMoreProviders, setShowMoreProviders] = useState(false)
   const { language, setLanguage } = useContext(LanguageContext)
+  const [showProvidersModal, setShowProvidersModal] = useState(false)
 
   function setLanguageShorthand(languageLong: string) {
     if (languageLong === 'English') {
@@ -58,6 +61,29 @@ const Login: React.FC = () => {
         </Navbar.Brand>
       </Navbar>
 
+      <Modal
+        size="lg"
+        centered
+        show={showProvidersModal}
+        onHide={() => {
+          setShowProvidersModal(false)
+        }}
+      >
+        <Modal.Body>
+          Woohoo, you are reading this text in a modal! <br />
+          <div className="mt-3 text-end">
+            <Button
+              variant="secondary"
+              onClick={() => {
+                setShowProvidersModal(false)
+              }}
+            >
+              Close
+            </Button>
+          </div>
+        </Modal.Body>
+      </Modal>
+
       <div className="app-name mt-4 mx-auto">
         <h1>
           <FormattedMessage
@@ -92,7 +118,7 @@ const Login: React.FC = () => {
           onClick={() => {
             setShowMoreProviders(!showMoreProviders)
           }}
-          className="mx-auto"
+          className="show-more-providers mx-auto"
         >
           More providers {/* Chevron icon */}
           {!showMoreProviders && (
@@ -162,8 +188,14 @@ const Login: React.FC = () => {
             </Col>
           </Row>
 
-          <div className="text-center mt-3">
-            <span>Which provider to choose?</span>
+          <div className="how-to-choose-provider text-center mt-3">
+            <span
+              onClick={() => {
+                setShowProvidersModal(true)
+              }}
+            >
+              Which provider to choose?
+            </span>
           </div>
         </div>
       )}

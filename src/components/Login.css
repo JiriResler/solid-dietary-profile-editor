@@ -92,6 +92,18 @@
   animation: fade-in 1s;
 }
 
+.how-to-choose-provider {
+  cursor: pointer;
+}
+
+.how-to-choose-provider:hover {
+  text-decoration: underline;
+}
+
+.show-more-providers {
+  cursor: pointer;
+}
+
 @keyframes fade-in {
   from {
     opacity: 0;
