@@ -87,6 +87,16 @@
   text-align: justify;
 }
 
-.more-providers-row {
-  width:75vw;
+.more-providers {
+  width:175pt;
+  animation: fade-in 1s;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 100;
+  }
 }

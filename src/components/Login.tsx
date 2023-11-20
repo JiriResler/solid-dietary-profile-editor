@@ -128,8 +128,8 @@ const Login: React.FC = () => {
       </Stack>
 
       {showMoreProviders && (
-        <>
-          <Row className="more-providers-row mt-3 mx-auto">
+        <div className="more-providers mt-3 mx-auto">
+          <Row className="">
             <Col>
               <Button className="provider-button facebook-button">
                 <img
@@ -164,7 +164,7 @@ const Login: React.FC = () => {
           <div className="text-center mt-3">
             <span>Which provider to choose?</span>
           </div>
-        </>
+        </div>
       )}
 
       <div className="position-absolute bottom-0 start-0 ms-3 mb-3">
