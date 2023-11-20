@@ -133,7 +133,6 @@ const Login: React.FC = () => {
                 alt="Facebook logo"
                 className="provider-icon"
               />
-              <span className="ms-3">Facebook</span>
             </Button>
             <Button className="provider-button google-button text-start mx-auto">
               <img
@@ -141,7 +140,6 @@ const Login: React.FC = () => {
                 alt="Google logo"
                 className="provider-icon"
               />
-              <span className="ms-3">Google</span>
             </Button>
             <Button className="provider-button apple-button text-start mx-auto">
               <img
@@ -149,7 +147,6 @@ const Login: React.FC = () => {
                 alt="Apple logo"
                 className="provider-icon"
               />
-              <span className="ms-3">Apple</span>
             </Button>
             <span>Which provider to choose?</span>
           </>
