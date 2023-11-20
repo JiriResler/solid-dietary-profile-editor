@@ -23,11 +23,12 @@
 }
 
 .provider-icon {
-  width: 35px;
+  height: 25pt;
 }
 
 .provider-button {
-  width: auto;
+  height: 45pt;
+  width: 45pt;
 }
 
 .solid-button {
@@ -76,7 +77,7 @@
 }
 
 .application-logo {
-  width: 100pt;
+  width: 85pt;
 }
 
 .app-name {

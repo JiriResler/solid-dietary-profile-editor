@@ -129,7 +129,7 @@ const Login: React.FC = () => {
 
       {showMoreProviders && (
         <>
-          <Row className="more-providers-row border mt-2 mx-auto">
+          <Row className="more-providers-row mt-3 mx-auto">
             <Col>
               <Button className="provider-button facebook-button">
                 <img
@@ -161,7 +161,7 @@ const Login: React.FC = () => {
             </Col>
           </Row>
 
-          <div className="text-center mt-2">
+          <div className="text-center mt-3">
             <span>Which provider to choose?</span>
           </div>
         </>
