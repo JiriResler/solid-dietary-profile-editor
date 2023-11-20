@@ -14,7 +14,7 @@ import Col from 'react-bootstrap/Col'
 import Modal from 'react-bootstrap/Modal'
 
 const Login: React.FC = () => {
-  // const [selectedLoginMethod, setSelectedLoginMethod] = useState('none')
+  const [loginWithSolid, setLoginWithSolid] = useState(false)
   const [showMoreProviders, setShowMoreProviders] = useState(false)
   const { language, setLanguage } = useContext(LanguageContext)
   const [showProvidersModal, setShowProvidersModal] = useState(false)
@@ -53,14 +53,6 @@ const Login: React.FC = () => {
 
   return (
     <>
-      <Navbar bg="primary" data-bs-theme="dark">
-        <Navbar.Brand className="ms-3 fs-6">
-          <Link className="about-link" to="../about">
-            <FormattedMessage id="about_application" defaultMessage={'About'} />
-          </Link>
-        </Navbar.Brand>
-      </Navbar>
-
       <Modal
         size="lg"
         centered
@@ -84,6 +76,14 @@ const Login: React.FC = () => {
         </Modal.Body>
       </Modal>
 
+      <Navbar bg="primary" data-bs-theme="dark">
+        <Navbar.Brand className="ms-3 fs-6">
+          <Link className="about-link" to="../about">
+            <FormattedMessage id="about_application" defaultMessage={'About'} />
+          </Link>
+        </Navbar.Brand>
+      </Navbar>
+
       <div className="app-name mt-4 mx-auto">
         <h1>
           <FormattedMessage
@@ -105,53 +105,68 @@ const Login: React.FC = () => {
           />
         </h5>
 
-        <Button className="solid-button text-start mx-auto">
-          <img
-            src="images/logo_solid.svg"
-            alt="Solid logo"
-            className="provider-icon"
-          />
-          <span className="ms-3">Solid</span>
-        </Button>
+        {!loginWithSolid && (
+          <>
+            <Button
+              onClick={() => {
+                setLoginWithSolid(true)
+              }}
+              className="solid-button text-start mx-auto"
+            >
+              <img
+                src="images/logo_solid.svg"
+                alt="Solid logo"
+                className="provider-icon"
+              />
+              <span className="ms-3">Solid</span>
+            </Button>
 
-        <span
-          onClick={() => {
-            setShowMoreProviders(!showMoreProviders)
-          }}
-          className="show-more-providers mx-auto"
-        >
-          More providers {/* Chevron icon */}
-          {!showMoreProviders && (
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              fill="currentColor"
-              className="bi bi-chevron-down"
-              viewBox="0 0 16 16"
+            <span
+              onClick={() => {
+                setShowMoreProviders(!showMoreProviders)
+              }}
+              className="show-more-providers mx-auto"
             >
-              <path
-                fill-rule="evenodd"
-                d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"
-              />
-            </svg>
-          )}
-          {showMoreProviders && (
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="16"
-              height="16"
-              fill="currentColor"
-              className="bi bi-chevron-up"
-              viewBox="0 0 16 16"
-            >
-              <path
-                fill-rule="evenodd"
-                d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z"
-              />
-            </svg>
-          )}
-        </span>
+              More providers {/* Chevron icon */}
+              {!showMoreProviders && (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  className="bi bi-chevron-down"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"
+                  />
+                </svg>
+              )}
+              {showMoreProviders && (
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  className="bi bi-chevron-up"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M7.646 4.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1-.708.708L8 5.707l-5.646 5.647a.5.5 0 0 1-.708-.708l6-6z"
+                  />
+                </svg>
+              )}
+            </span>
+          </>
+        )}
+
+        {loginWithSolid && (
+          <>
+            <p>log in with solid</p>
+          </>
+        )}
       </Stack>
 
       {showMoreProviders && (
