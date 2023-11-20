@@ -92,6 +92,7 @@ const Login: React.FC = () => {
           onClick={() => {
             setShowMoreProviders(!showMoreProviders)
           }}
+          className="mx-auto"
         >
           More providers {/* Chevron icon */}
           {!showMoreProviders && (
