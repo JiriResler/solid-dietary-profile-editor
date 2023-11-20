@@ -66,6 +66,10 @@ const Login: React.FC = () => {
         </h1>
       </div>
 
+      <div className="mt-5 mx-auto application-logo">
+        <img src="images/apple.svg" alt="application logo" />
+      </div>
+
       <Stack gap={3} className="mt-5 sign-in-stack text-center mx-auto">
         <h5>
           <FormattedMessage
