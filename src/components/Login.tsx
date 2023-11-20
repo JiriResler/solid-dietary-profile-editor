@@ -9,6 +9,7 @@ import { useContext } from 'react'
 // import LogInSolid from './LogInSolid'
 import LanguageContext from '../LanguageContext'
 import './Login.css'
+import { Col, Row } from 'react-bootstrap'
 
 const Login: React.FC = () => {
   // const [selectedLoginMethod, setSelectedLoginMethod] = useState('none')
@@ -124,34 +125,47 @@ const Login: React.FC = () => {
             </svg>
           )}
         </span>
-
-        {showMoreProviders && (
-          <>
-            <Button className="provider-button facebook-button text-start mx-auto">
-              <img
-                src="images/facebook_round_white_icon.svg"
-                alt="Facebook logo"
-                className="provider-icon"
-              />
-            </Button>
-            <Button className="provider-button google-button text-start mx-auto">
-              <img
-                src="images/google_g_logo.svg"
-                alt="Google logo"
-                className="provider-icon"
-              />
-            </Button>
-            <Button className="provider-button apple-button text-start mx-auto">
-              <img
-                src="images/apple_logo_white.svg"
-                alt="Apple logo"
-                className="provider-icon"
-              />
-            </Button>
-            <span>Which provider to choose?</span>
-          </>
-        )}
       </Stack>
+
+      {showMoreProviders && (
+        <>
+          <Row className="more-providers-row border mt-2 mx-auto">
+            <Col>
+              <Button className="provider-button facebook-button">
+                <img
+                  src="images/facebook_round_white_icon.svg"
+                  alt="Facebook logo"
+                  className="provider-icon"
+                />
+              </Button>
+            </Col>
+
+            <Col>
+              <Button className="provider-button google-button">
+                <img
+                  src="images/google_g_logo.svg"
+                  alt="Google logo"
+                  className="provider-icon"
+                />
+              </Button>
+            </Col>
+
+            <Col>
+              <Button className="provider-button apple-button">
+                <img
+                  src="images/apple_logo_white.svg"
+                  alt="Apple logo"
+                  className="provider-icon"
+                />
+              </Button>
+            </Col>
+          </Row>
+
+          <div className="text-center mt-2">
+            <span>Which provider to choose?</span>
+          </div>
+        </>
+      )}
 
       <div className="position-absolute bottom-0 start-0 ms-3 mb-3">
         <Form.Select
