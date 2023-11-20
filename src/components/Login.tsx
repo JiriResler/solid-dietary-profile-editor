@@ -57,7 +57,7 @@ const Login: React.FC = () => {
         </Navbar.Brand>
       </Navbar>
 
-      <div className="app-name mt-5 text-center">
+      <div className="app-name mt-4 mx-auto">
         <h1>
           <FormattedMessage
             id="app_name"
@@ -66,11 +66,11 @@ const Login: React.FC = () => {
         </h1>
       </div>
 
-      <div className="mt-5 mx-auto application-logo">
-        <img src="images/apple.svg" alt="application logo" />
+      <div className="application-logo mt-4 mx-auto">
+        <img src="images/apple.svg" alt="application_logo" />
       </div>
 
-      <Stack gap={3} className="mt-5 sign-in-stack text-center mx-auto">
+      <Stack gap={3} className="sign-in-stack mt-4 text-center mx-auto">
         <h5>
           <FormattedMessage
             id="sign_in_via_provider"
@@ -86,8 +86,6 @@ const Login: React.FC = () => {
           />
           <span className="ms-3">Solid</span>
         </Button>
-
-        <span>What is Solid?</span>
 
         <span
           onClick={() => {
@@ -153,6 +151,7 @@ const Login: React.FC = () => {
               />
               <span className="ms-3">Apple</span>
             </Button>
+            <span>Which provider to choose?</span>
           </>
         )}
       </Stack>
