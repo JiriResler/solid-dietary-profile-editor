@@ -8,6 +8,7 @@ import { handleIncomingRedirect } from '@inrupt/solid-client-authn-browser'
 import { useEffect } from 'react'
 import Stack from 'react-bootstrap/Stack'
 import { FormattedMessage } from 'react-intl'
+import './LoginSolid.css'
 
 // const solidIdProviders: string[] = [
 //   'https://solidcommunity.net/',
@@ -51,7 +52,7 @@ const LogInSolid: React.FC<Props> = ({
   )
 
   return (
-    <Stack gap={3} className="text-center">
+    <Stack gap={3} className="text-center fade-in">
       <Row className="mx-auto">
         <Col xs={12} md={9}>
           <Form.Select
