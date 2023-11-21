@@ -24,10 +24,12 @@ const solidIdProviders: string[] = [
 ]
 
 type Props = {
-  setSelectedLoginMethod: React.Dispatch<React.SetStateAction<string>>
+  setSolidLogin: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const LogInSolid: React.FC<Props> = ({ setSelectedLoginMethod }) => {
+const LogInSolid: React.FC<Props> = ({
+  setSolidLogin: setSelectedLoginMethod,
+}) => {
   useEffect(() => {
     async function fetchData() {
       await handleIncomingRedirect({
@@ -50,27 +52,6 @@ const LogInSolid: React.FC<Props> = ({ setSelectedLoginMethod }) => {
 
   return (
     <Stack gap={3} className="text-center">
-      <Row>
-        <Col>
-          <img
-            src="images/logo_solid.svg"
-            alt="Solid project logo"
-            className="solid-logo-login-screen"
-          />
-        </Col>
-      </Row>
-
-      <Row>
-        <Col>
-          <h5>
-            <FormattedMessage
-              id="select_id_provider"
-              defaultMessage={'Select your identity provider'}
-            />
-          </h5>
-        </Col>
-      </Row>
-
       <Row className="mx-auto">
         <Col xs={12} md={9}>
           <Form.Select
@@ -103,7 +84,7 @@ const LogInSolid: React.FC<Props> = ({ setSelectedLoginMethod }) => {
         variant="secondary"
         className="mt-4 back-button"
         onClick={() => {
-          setSelectedLoginMethod('none')
+          setSelectedLoginMethod(false)
         }}
       >
         <FormattedMessage id="go_back" defaultMessage={'Back'} />

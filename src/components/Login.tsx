@@ -6,12 +6,12 @@ import { FormattedMessage } from 'react-intl'
 import Form from 'react-bootstrap/Form'
 import { useState } from 'react'
 import { useContext } from 'react'
-// import LogInSolid from './LogInSolid'
 import LanguageContext from '../LanguageContext'
 import './Login.css'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Modal from 'react-bootstrap/Modal'
+import LogInSolid from './LogInSolid'
 
 const Login: React.FC = () => {
   const [loginWithSolid, setLoginWithSolid] = useState(false)
@@ -164,7 +164,7 @@ const Login: React.FC = () => {
 
         {loginWithSolid && (
           <>
-            <p>log in with solid</p>
+            <LogInSolid setSolidLogin={setLoginWithSolid} />
           </>
         )}
       </Stack>
