@@ -32,6 +32,7 @@ const SignInViaProvider: React.FC = () => {
           <>
             <Button
               onClick={() => {
+                setShowMoreProviders(false)
                 setLoginWithSolid(true)
               }}
               className="solid-button text-start mx-auto"
