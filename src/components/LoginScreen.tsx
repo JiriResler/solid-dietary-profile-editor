@@ -4,10 +4,10 @@ import { FormattedMessage } from 'react-intl'
 import Navbar from 'react-bootstrap/Navbar'
 import Form from 'react-bootstrap/Form'
 import LanguageContext from '../LanguageContext'
-import './Login.css'
+import './LoginScreen.css'
 import SignInViaProvider from './SignInViaProvider'
 
-const Login: React.FC = () => {
+const LoginScreen: React.FC = () => {
   const { language, setLanguage } = useContext(LanguageContext)
 
   function setLanguageShorthand(languageLong: string) {
@@ -82,4 +82,4 @@ const Login: React.FC = () => {
   )
 }
 
-export default Login
+export default LoginScreen

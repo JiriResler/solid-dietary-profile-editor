@@ -6,6 +6,7 @@ import Stack from 'react-bootstrap/Stack'
 import ProviderComparisonModalWrapper from './ProviderComparisonModalWrapper'
 import { useState } from 'react'
 import { FormattedMessage } from 'react-intl'
+import './SignInViaProvider.css'
 
 const SignInViaProvider: React.FC = () => {
   const [loginWithSolid, setLoginWithSolid] = useState(false)

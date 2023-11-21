@@ -4,7 +4,7 @@ import { useAuthState } from 'react-firebase-hooks/auth'
 import { auth } from '../firebase'
 import Profile from './Profile'
 import About from './About'
-import Login from './Login'
+import LoginScreen from './LoginScreen'
 
 function RouterWrapper() {
   const { session } = useSession()
@@ -28,7 +28,7 @@ function RouterWrapper() {
     const userIsLoggedOut = !session.info.isLoggedIn && user === null
 
     if (userIsLoggedOut) {
-      return <Login />
+      return <LoginScreen />
     } else {
       return <Navigate to="/" />
     }
