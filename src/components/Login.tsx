@@ -54,8 +54,8 @@ const Login: React.FC = () => {
   return (
     <>
       <ProviderComparisonModalWrapper
-        showModal={showProvidersModal}
-        setShowModal={setShowProvidersModal}
+        showProvidersModal={showProvidersModal}
+        setShowProvidersModal={setShowProvidersModal}
       />
 
       <Navbar bg="primary" data-bs-theme="dark">

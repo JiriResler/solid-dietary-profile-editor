@@ -2,21 +2,21 @@ import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 
 type Props = {
-  showModal: boolean
-  setShowModal: React.Dispatch<React.SetStateAction<boolean>>
+  showProvidersModal: boolean
+  setShowProvidersModal: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 const ProviderComparisonModalWrapper: React.FC<Props> = ({
-  showModal: showProvidersModal,
-  setShowModal: setShowProvidersModal,
+  showProvidersModal: showModal,
+  setShowProvidersModal: setShowModal,
 }) => {
   return (
     <Modal
       size="lg"
       centered
-      show={showProvidersModal}
+      show={showModal}
       onHide={() => {
-        setShowProvidersModal(false)
+        setShowModal(false)
       }}
     >
       <Modal.Body>
@@ -25,7 +25,7 @@ const ProviderComparisonModalWrapper: React.FC<Props> = ({
           <Button
             variant="secondary"
             onClick={() => {
-              setShowProvidersModal(false)
+              setShowModal(false)
             }}
           >
             Close
