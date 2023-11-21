@@ -1,17 +1,17 @@
+import { useState } from 'react'
+import { useContext } from 'react'
 import { Link } from 'react-router-dom'
+import { FormattedMessage } from 'react-intl'
 import Navbar from 'react-bootstrap/Navbar'
 import Stack from 'react-bootstrap/Stack'
 import Button from 'react-bootstrap/Button'
-import { FormattedMessage } from 'react-intl'
 import Form from 'react-bootstrap/Form'
-import { useState } from 'react'
-import { useContext } from 'react'
 import LanguageContext from '../LanguageContext'
 import './Login.css'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-import Modal from 'react-bootstrap/Modal'
 import LogInSolid from './LogInSolid'
+import ProviderComparisonModalWrapper from './ProviderComparisonModalWrapper'
 
 const Login: React.FC = () => {
   const [loginWithSolid, setLoginWithSolid] = useState(false)
@@ -53,28 +53,10 @@ const Login: React.FC = () => {
 
   return (
     <>
-      <Modal
-        size="lg"
-        centered
-        show={showProvidersModal}
-        onHide={() => {
-          setShowProvidersModal(false)
-        }}
-      >
-        <Modal.Body>
-          Woohoo, you are reading this text in a modal! <br />
-          <div className="mt-3 text-end">
-            <Button
-              variant="secondary"
-              onClick={() => {
-                setShowProvidersModal(false)
-              }}
-            >
-              Close
-            </Button>
-          </div>
-        </Modal.Body>
-      </Modal>
+      <ProviderComparisonModalWrapper
+        showModal={showProvidersModal}
+        setShowModal={setShowProvidersModal}
+      />
 
       <Navbar bg="primary" data-bs-theme="dark">
         <Navbar.Brand className="ms-3 fs-6">
