@@ -71,7 +71,6 @@ const LoginScreen: React.FC = () => {
         <Form.Select
           value={languageFullName(language)}
           onChange={(e) => setLanguageShorthand(e.target.value)}
-          size="lg"
         >
           <option key="en">English</option>
           <option key="sk">Slovensky</option>
