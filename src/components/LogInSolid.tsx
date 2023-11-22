@@ -56,7 +56,7 @@ const LogInSolid: React.FC<Props> = ({
       <Row className="mx-auto">
         <Col xs={12} md={9}>
           <Form.Select
-            className="select-provider mx-auto"
+            className="mx-auto"
             value={selectedOption}
             onChange={(e) => setSelectedOption(e.target.value)}
           >
@@ -66,7 +66,7 @@ const LogInSolid: React.FC<Props> = ({
           </Form.Select>
         </Col>
 
-        <Col md={3} className="solid-button-login-redirect">
+        <Col md={3} className="mt-4">
           <LoginButton
             oidcIssuer={selectedOption}
             redirectUrl={
@@ -74,7 +74,7 @@ const LogInSolid: React.FC<Props> = ({
               (import.meta.env.PROD ? '/solid-dietary-profile-editor/' : '')
             }
           >
-            <Button className="login-solid-button">
+            <Button className="solid-login-button">
               <FormattedMessage id="log_in" defaultMessage={'Log in'} />
             </Button>
           </LoginButton>
@@ -83,7 +83,7 @@ const LogInSolid: React.FC<Props> = ({
 
       <Button
         variant="secondary"
-        className="mt-4 back-button"
+        className="back-button mt-4"
         onClick={() => {
           setSelectedLoginMethod(false)
         }}
