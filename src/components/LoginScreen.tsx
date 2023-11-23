@@ -5,7 +5,7 @@ import Navbar from 'react-bootstrap/Navbar'
 import Form from 'react-bootstrap/Form'
 import LanguageContext from '../LanguageContext'
 import './LoginScreen.css'
-import SignInViaProvider from './SignInViaProvider'
+import SelectProvider from './SelectProvider'
 
 const LoginScreen: React.FC = () => {
   const { language, setLanguage } = useContext(LanguageContext)
@@ -65,7 +65,7 @@ const LoginScreen: React.FC = () => {
         <img src="images/apple.svg" alt="application_logo" />
       </div>
 
-      <SignInViaProvider />
+      <SelectProvider />
 
       <div className="position-absolute bottom-0 start-0 ms-3 mb-3">
         <Form.Select

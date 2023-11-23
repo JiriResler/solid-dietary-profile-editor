@@ -6,9 +6,9 @@ import Stack from 'react-bootstrap/Stack'
 import ProviderComparisonModalWrapper from './ProviderComparisonModalWrapper'
 import { useState } from 'react'
 import { FormattedMessage } from 'react-intl'
-import './SignInViaProvider.css'
+import './SelectProvider.css'
 
-const SignInViaProvider: React.FC = () => {
+const SelectProvider: React.FC = () => {
   const [loginWithSolid, setLoginWithSolid] = useState(false)
   const [showMoreProviders, setShowMoreProviders] = useState(false)
   const [showProvidersModal, setShowProvidersModal] = useState(false)
@@ -142,4 +142,4 @@ const SignInViaProvider: React.FC = () => {
   )
 }
 
-export default SignInViaProvider
+export default SelectProvider
