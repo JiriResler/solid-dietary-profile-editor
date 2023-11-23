@@ -36,7 +36,7 @@ const SelectProvider: React.FC = () => {
               onClick={() => {
                 setSelectedProvider(IdentityProvider.SOLID)
               }}
-              className="solid-button text-start mx-auto"
+              className="select-provider-button solid-button text-start mx-auto"
             >
               <img
                 src="images/logo_solid.svg"
@@ -46,22 +46,22 @@ const SelectProvider: React.FC = () => {
               <span className="ms-3">Solid</span>
             </Button>
 
-            <span
+            <Button
               onClick={() => {
                 setSelectedProvider(IdentityProvider.TRADITIONAL)
               }}
-              className="other-providers mx-auto"
+              className="select-provider-button mt-2 mx-auto"
             >
               Other providers
-            </span>
+            </Button>
 
-            <div className="how-to-choose-provider text-center mt-3">
+            <div className="how-to-choose-provider text-center mt-2">
               <span
                 onClick={() => {
                   setShowProvidersModal(true)
                 }}
               >
-                How to choose a provider?
+                Why use Solid?
               </span>
             </div>
           </>

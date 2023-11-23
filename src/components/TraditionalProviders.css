@@ -12,13 +12,6 @@
   width: 45pt;
 }
 
-.solid-button {
-  height: 40pt;
-  width: 100pt;
-  background-color: #7c4dff;
-  border-color: #7c4dff;
-}
-
 .solid-button:hover,
 .solid-button:active:focus {
   background-color: #6933ff;

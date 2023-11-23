@@ -2,6 +2,16 @@
   width: 60vw;
 }
 
+.select-provider-button {
+  height: 40pt;
+  width: 105pt;
+}
+
+.solid-button {
+  background-color: #7c4dff;
+  border-color: #7c4dff;
+}
+
 .choose-provider-question {
   cursor: pointer;
   color: #2929ff;
@@ -18,10 +28,6 @@
 
 .how-to-choose-provider:hover {
   text-decoration: underline;
-}
-
-.other-providers {
-  cursor: pointer;
 }
 
 .solid-icon {
