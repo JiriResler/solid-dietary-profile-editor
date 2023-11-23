@@ -52,13 +52,13 @@ const LoginScreen: React.FC = () => {
         </Navbar.Brand>
       </Navbar>
 
-      <div className="app-name mt-4 mx-auto">
-        <h1>
+      <div className="app-name text-center mt-4 mx-auto">
+        <h3>
           <FormattedMessage
             id="app_name"
             defaultMessage={'Personal Eating Preferences Profile Editor'}
           />
-        </h1>
+        </h3>
       </div>
 
       <div className="application-logo mt-4 mx-auto">
