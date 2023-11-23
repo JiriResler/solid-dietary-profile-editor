@@ -1,4 +1,5 @@
 import Button from 'react-bootstrap/Button'
+import ProviderComparisonModalWrapper from './ProviderComparisonModalWrapper'
 import LogInSolid from './LogInSolid'
 import Stack from 'react-bootstrap/Stack'
 import { useState } from 'react'
@@ -12,8 +13,15 @@ const SelectProvider: React.FC = () => {
     IdentityProvider.NONE,
   )
 
+  const [showProvidersModal, setShowProvidersModal] = useState(false)
+
   return (
     <>
+      <ProviderComparisonModalWrapper
+        showProvidersModal={showProvidersModal}
+        setShowProvidersModal={setShowProvidersModal}
+      />
+
       <Stack gap={3} className="sign-in-stack mt-4 text-center mx-auto">
         <h5>
           <FormattedMessage
@@ -46,17 +54,27 @@ const SelectProvider: React.FC = () => {
             >
               Other providers
             </span>
+
+            <div className="how-to-choose-provider text-center mt-3">
+              <span
+                onClick={() => {
+                  setShowProvidersModal(true)
+                }}
+              >
+                How to choose a provider?
+              </span>
+            </div>
           </>
         )}
 
         {selectedProvider === IdentityProvider.SOLID && (
           <LogInSolid setSelectedProvider={setSelectedProvider} />
         )}
-      </Stack>
 
-      {selectedProvider === IdentityProvider.TRADITIONAL && (
-        <TraditionalProviders />
-      )}
+        {selectedProvider === IdentityProvider.TRADITIONAL && (
+          <TraditionalProviders setSelectedProvider={setSelectedProvider} />
+        )}
+      </Stack>
     </>
   )
 }

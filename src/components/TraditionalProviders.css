@@ -1,0 +1,60 @@
+.more-providers {
+  width: 175pt;
+  animation: fade-in 1s;
+}
+
+.provider-icon {
+  height: 25pt;
+}
+
+.provider-button {
+  height: 45pt;
+  width: 45pt;
+}
+
+.solid-button {
+  height: 40pt;
+  width: 100pt;
+  background-color: #7c4dff;
+  border-color: #7c4dff;
+}
+
+.solid-button:hover,
+.solid-button:active:focus {
+  background-color: #6933ff;
+  border-color: #6933ff;
+}
+
+.facebook-button {
+  background-color: #1877f2;
+  border-color: #1877f2;
+}
+
+.facebook-button:hover,
+.facebook-button:active:focus {
+  background-color: #0467e9;
+  border-color: #0467e9;
+}
+
+.google-button {
+  background-color: white;
+  border-color: #0000008a;
+  color: #0000008a;
+}
+
+.google-button:hover,
+.google-button:active:focus {
+  background-color: #e7e7e7;
+  border-color: #e7e7e7;
+}
+
+.apple-button {
+  background-color: black;
+  border-color: black;
+}
+
+.apple-button:hover,
+.apple-button:active:focus {
+  background-color: #222222;
+  border-color: #222222;
+}
