@@ -9,6 +9,7 @@ import { useEffect } from 'react'
 import Stack from 'react-bootstrap/Stack'
 import { FormattedMessage } from 'react-intl'
 import './LoginSolid.css'
+import IdentityProvider from './IdentityProviderEnum'
 
 // const solidIdProviders: string[] = [
 //   'https://solidcommunity.net/',
@@ -25,12 +26,10 @@ const solidIdProviders: string[] = [
 ]
 
 type Props = {
-  setSolidLogin: React.Dispatch<React.SetStateAction<boolean>>
+  setSelectedProvider: React.Dispatch<React.SetStateAction<IdentityProvider>>
 }
 
-const LogInSolid: React.FC<Props> = ({
-  setSolidLogin: setSelectedLoginMethod,
-}) => {
+const LogInSolid: React.FC<Props> = ({ setSelectedProvider }) => {
   useEffect(() => {
     async function fetchData() {
       await handleIncomingRedirect({
@@ -85,7 +84,7 @@ const LogInSolid: React.FC<Props> = ({
         variant="secondary"
         className="back-button mt-4"
         onClick={() => {
-          setSelectedLoginMethod(false)
+          setSelectedProvider(IdentityProvider.NONE)
         }}
       >
         <FormattedMessage id="go_back" defaultMessage={'Back'} />

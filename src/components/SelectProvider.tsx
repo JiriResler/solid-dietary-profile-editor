@@ -5,10 +5,12 @@ import { useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 import './SelectProvider.css'
 import TraditionalProviders from './TraditionalProviders'
+import IdentityProvider from './IdentityProviderEnum'
 
 const SelectProvider: React.FC = () => {
-  const [loginWithSolid, setLoginWithSolid] = useState(false)
-  const [showMoreProviders, setShowMoreProviders] = useState(false)
+  const [selectedProvider, setSelectedProvider] = useState<IdentityProvider>(
+    IdentityProvider.NONE,
+  )
 
   return (
     <>
@@ -20,12 +22,11 @@ const SelectProvider: React.FC = () => {
           />
         </h5>
 
-        {!loginWithSolid && (
+        {selectedProvider === IdentityProvider.NONE && (
           <>
             <Button
               onClick={() => {
-                setShowMoreProviders(false)
-                setLoginWithSolid(true)
+                setSelectedProvider(IdentityProvider.SOLID)
               }}
               className="solid-button text-start mx-auto"
             >
@@ -39,19 +40,23 @@ const SelectProvider: React.FC = () => {
 
             <span
               onClick={() => {
-                setShowMoreProviders(!showMoreProviders)
+                setSelectedProvider(IdentityProvider.TRADITIONAL)
               }}
               className="show-more-providers mx-auto"
             >
-              More providers
+              Other providers
             </span>
           </>
         )}
 
-        {loginWithSolid && <LogInSolid setSolidLogin={setLoginWithSolid} />}
+        {selectedProvider === IdentityProvider.SOLID && (
+          <LogInSolid setSelectedProvider={setSelectedProvider} />
+        )}
       </Stack>
 
-      {showMoreProviders && <TraditionalProviders />}
+      {selectedProvider === IdentityProvider.TRADITIONAL && (
+        <TraditionalProviders />
+      )}
     </>
   )
 }
