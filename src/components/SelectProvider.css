@@ -1,4 +1,4 @@
-.sign-in-stack {
+.select-provider-stack {
   width: 60vw;
 }
 
@@ -20,8 +20,12 @@
   text-decoration: underline;
 }
 
-.show-more-providers {
+.other-providers {
   cursor: pointer;
+}
+
+.solid-icon {
+  height: 25pt;
 }
 
 @keyframes fade-in {

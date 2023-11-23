@@ -6,7 +6,6 @@ import { LoginButton } from '@inrupt/solid-ui-react'
 import { useState } from 'react'
 import { handleIncomingRedirect } from '@inrupt/solid-client-authn-browser'
 import { useEffect } from 'react'
-import Stack from 'react-bootstrap/Stack'
 import { FormattedMessage } from 'react-intl'
 import './LoginSolid.css'
 import IdentityProvider from './IdentityProviderEnum'
@@ -51,7 +50,7 @@ const LogInSolid: React.FC<Props> = ({ setSelectedProvider }) => {
   )
 
   return (
-    <Stack gap={3} className="text-center fade-in">
+    <div className="fade-in">
       <Row className="mx-auto">
         <Col xs={12} md={9}>
           <Form.Select
@@ -89,7 +88,7 @@ const LogInSolid: React.FC<Props> = ({ setSelectedProvider }) => {
       >
         <FormattedMessage id="go_back" defaultMessage={'Back'} />
       </Button>
-    </Stack>
+    </div>
   )
 }
 

@@ -22,7 +22,7 @@ const SelectProvider: React.FC = () => {
         setShowProvidersModal={setShowProvidersModal}
       />
 
-      <Stack gap={3} className="sign-in-stack mt-4 text-center mx-auto">
+      <Stack gap={3} className="select-provider-stack mt-4 text-center mx-auto">
         <h5>
           <FormattedMessage
             id="sign_in_via_provider"
@@ -41,7 +41,7 @@ const SelectProvider: React.FC = () => {
               <img
                 src="images/logo_solid.svg"
                 alt="Solid logo"
-                className="provider-icon"
+                className="solid-icon"
               />
               <span className="ms-3">Solid</span>
             </Button>
@@ -50,7 +50,7 @@ const SelectProvider: React.FC = () => {
               onClick={() => {
                 setSelectedProvider(IdentityProvider.TRADITIONAL)
               }}
-              className="show-more-providers mx-auto"
+              className="other-providers mx-auto"
             >
               Other providers
             </span>
