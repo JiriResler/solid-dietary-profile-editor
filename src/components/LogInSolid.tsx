@@ -51,10 +51,9 @@ const LogInSolid: React.FC<Props> = ({ setSelectedProvider }) => {
 
   return (
     <div className="fade-in">
-      <Row className="mx-auto">
+      <Row>
         <Col xs={12} md={9}>
           <Form.Select
-            className="mx-auto"
             value={selectedOption}
             onChange={(e) => setSelectedOption(e.target.value)}
           >
@@ -79,15 +78,17 @@ const LogInSolid: React.FC<Props> = ({ setSelectedProvider }) => {
         </Col>
       </Row>
 
-      <Button
-        variant="secondary"
-        className="back-button mt-4"
-        onClick={() => {
-          setSelectedProvider(IdentityProvider.NONE)
-        }}
-      >
-        <FormattedMessage id="go_back" defaultMessage={'Back'} />
-      </Button>
+      <div className="text-start mt-3">
+        <Button
+          variant="secondary"
+          className="back-button mt-4"
+          onClick={() => {
+            setSelectedProvider(IdentityProvider.NONE)
+          }}
+        >
+          <FormattedMessage id="go_back" defaultMessage={'Back'} />
+        </Button>
+      </div>
     </div>
   )
 }
