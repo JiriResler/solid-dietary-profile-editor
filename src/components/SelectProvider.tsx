@@ -49,7 +49,7 @@ const SelectProvider: React.FC = () => {
 
             <TraditionalProviders />
 
-            <div className="why-solid text-center mt-2">
+            <div className="why-solid text-center mt-4">
               <span
                 onClick={() => {
                   setShowProvidersModal(true)
