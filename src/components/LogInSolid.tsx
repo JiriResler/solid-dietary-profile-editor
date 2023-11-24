@@ -4,52 +4,54 @@ import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 import { LoginButton } from '@inrupt/solid-ui-react'
 import { useState } from 'react'
-import { handleIncomingRedirect } from '@inrupt/solid-client-authn-browser'
-import { useEffect } from 'react'
+// import { handleIncomingRedirect } from '@inrupt/solid-client-authn-browser'
+// import { useEffect } from 'react'
 import { FormattedMessage } from 'react-intl'
 import './LoginSolid.css'
-
-// const solidIdProviders: string[] = [
-//   'https://solidcommunity.net/',
-//   'https://login.inrupt.com/',
-//   'https://inrupt.net/',
-//   'https://solidweb.org/',
-// ]
+import { useSession } from '@inrupt/solid-ui-react'
 
 const solidIdProviders: string[] = [
-  'solidcommunity.net',
-  'inrupt.com (PodSpaces)',
-  'inrupt.net',
-  'solidweb.org',
+  'https://solidcommunity.net/',
+  'https://login.inrupt.com/',
+  'https://inrupt.net/',
+  'https://solidweb.org/',
 ]
+
+// const solidIdProviders: string[] = [
+//   'solidcommunity.net',
+//   'inrupt.com (PodSpaces)',
+//   'inrupt.net',
+//   'solidweb.org',
+// ]
 
 type Props = {
   setLoginWithSolid: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 const LogInSolid: React.FC<Props> = ({ setLoginWithSolid }) => {
-  useEffect(() => {
-    async function fetchData() {
-      await handleIncomingRedirect({
-        restorePreviousSession: true,
-      })
-    }
+  const { session } = useSession()
 
-    fetchData()
-      .then(() => {
-        console.log('handleIncomingRedirect()')
-      })
-      .catch(() => 'obligatory catch')
-  }, [])
+  // useEffect(() => {
+  //   async function fetchData() {
+  //     await handleIncomingRedirect({
+  //       restorePreviousSession: true,
+  //     })
+  //   }
+
+  //   fetchData()
+  //     .then(() => {
+  //       console.log('handleIncomingRedirect()')
+  //     })
+  //     .catch(() => 'obligatory catch')
+  // }, [])
 
   const identityProviders: string[] = solidIdProviders
 
-  const [selectedOption, setSelectedOption] = useState(
-    'Select an identity provider',
-  )
+  const [selectedOption, setSelectedOption] = useState(solidIdProviders[0])
 
   return (
     <div className="fade-in">
+      <p>{session.info.isLoggedIn ? 'logged in' : 'logged out'}</p>
       <Row>
         <Col xs={12} md={9}>
           <Form.Select
