@@ -8,7 +8,6 @@ import { handleIncomingRedirect } from '@inrupt/solid-client-authn-browser'
 import { useEffect } from 'react'
 import { FormattedMessage } from 'react-intl'
 import './LoginSolid.css'
-import IdentityProvider from './IdentityProviderEnum'
 
 // const solidIdProviders: string[] = [
 //   'https://solidcommunity.net/',
@@ -25,10 +24,10 @@ const solidIdProviders: string[] = [
 ]
 
 type Props = {
-  setSelectedProvider: React.Dispatch<React.SetStateAction<IdentityProvider>>
+  setLoginWithSolid: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const LogInSolid: React.FC<Props> = ({ setSelectedProvider }) => {
+const LogInSolid: React.FC<Props> = ({ setLoginWithSolid }) => {
   useEffect(() => {
     async function fetchData() {
       await handleIncomingRedirect({
@@ -83,7 +82,7 @@ const LogInSolid: React.FC<Props> = ({ setSelectedProvider }) => {
           variant="secondary"
           className="back-button mt-4"
           onClick={() => {
-            setSelectedProvider(IdentityProvider.NONE)
+            setLoginWithSolid(false)
           }}
         >
           <FormattedMessage id="go_back" defaultMessage={'Back'} />

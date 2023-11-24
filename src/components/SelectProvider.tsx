@@ -6,12 +6,9 @@ import { useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 import './SelectProvider.css'
 import TraditionalProviders from './TraditionalProviders'
-import IdentityProvider from './IdentityProviderEnum'
 
 const SelectProvider: React.FC = () => {
-  const [selectedProvider, setSelectedProvider] = useState<IdentityProvider>(
-    IdentityProvider.NONE,
-  )
+  const [loginWithSolid, setLoginWithSolid] = useState(false)
 
   const [showProvidersModal, setShowProvidersModal] = useState(false)
 
@@ -30,11 +27,13 @@ const SelectProvider: React.FC = () => {
           />
         </h5>
 
-        {selectedProvider === IdentityProvider.NONE && (
+        {loginWithSolid && <LogInSolid setLoginWithSolid={setLoginWithSolid} />}
+
+        {!loginWithSolid && (
           <>
             <Button
               onClick={() => {
-                setSelectedProvider(IdentityProvider.SOLID)
+                setLoginWithSolid(true)
               }}
               className="select-provider-button solid-button text-start mx-auto"
             >
@@ -45,17 +44,11 @@ const SelectProvider: React.FC = () => {
               />
               <span className="ms-3">Solid</span>
             </Button>
+            <hr />
 
-            <Button
-              onClick={() => {
-                setSelectedProvider(IdentityProvider.TRADITIONAL)
-              }}
-              className="select-provider-button mt-2 mx-auto"
-            >
-              Other providers
-            </Button>
+            <TraditionalProviders />
 
-            <div className="how-to-choose-provider text-center mt-2">
+            <div className="why-solid text-center mt-2">
               <span
                 onClick={() => {
                   setShowProvidersModal(true)
@@ -65,14 +58,6 @@ const SelectProvider: React.FC = () => {
               </span>
             </div>
           </>
-        )}
-
-        {selectedProvider === IdentityProvider.SOLID && (
-          <LogInSolid setSelectedProvider={setSelectedProvider} />
-        )}
-
-        {selectedProvider === IdentityProvider.TRADITIONAL && (
-          <TraditionalProviders setSelectedProvider={setSelectedProvider} />
         )}
       </Stack>
     </>

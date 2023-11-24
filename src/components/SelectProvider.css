@@ -12,33 +12,14 @@
   border-color: #7c4dff;
 }
 
-.choose-provider-question {
-  cursor: pointer;
-  color: #2929ff;
-}
-
-.choose-provider-question:hover {
-  color: #0308b1;
-  text-decoration: underline;
-}
-
-.how-to-choose-provider {
-  cursor: pointer;
-}
-
-.how-to-choose-provider:hover {
-  text-decoration: underline;
-}
-
 .solid-icon {
   height: 25pt;
 }
 
-@keyframes fade-in {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 100;
-  }
+.why-solid {
+  cursor: pointer;
+}
+
+.why-solid:hover {
+  text-decoration: underline;
 }
