@@ -19,7 +19,7 @@ const SelectProvider: React.FC = () => {
         setShowProvidersModal={setShowProvidersModal}
       />
 
-      <Stack gap={3} className="select-provider-stack text-center mt-4 mx-auto">
+      <Stack gap={2} className="select-provider-stack text-center mt-3 mx-auto">
         <h5>
           <FormattedMessage
             id="sign_in_via_provider"

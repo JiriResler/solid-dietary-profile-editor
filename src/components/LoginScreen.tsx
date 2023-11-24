@@ -52,7 +52,7 @@ const LoginScreen: React.FC = () => {
         </Navbar.Brand>
       </Navbar>
 
-      <div className="app-name text-center mt-4 mx-auto">
+      <div className="app-name text-center mt-3 mx-auto">
         <h3>
           <FormattedMessage
             id="app_name"
@@ -61,7 +61,7 @@ const LoginScreen: React.FC = () => {
         </h3>
       </div>
 
-      <div className="application-logo mt-4 mx-auto">
+      <div className="application-logo mt-3 mx-auto">
         <img src="images/apple.svg" alt="application_logo" />
       </div>
 
