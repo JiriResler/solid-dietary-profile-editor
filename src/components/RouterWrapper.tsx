@@ -5,10 +5,13 @@ import { auth } from '../firebase'
 import Profile from './Profile'
 import About from './About'
 import LoginScreen from './LoginScreen'
+import LogInSolid from './LogInSolid'
 
 function RouterWrapper() {
-  const { session } = useSession()
+  const { session, sessionRequestInProgress } = useSession()
   const [user] = useAuthState(auth)
+
+  const userIsLoggedIn = session.info.isLoggedIn || user !== null
 
   function profileIfAuthenticated() {
     const userIsLoggedIn = session.info.isLoggedIn || user !== null
@@ -44,15 +47,36 @@ function RouterWrapper() {
     }
   }
 
+  if (sessionRequestInProgress) {
+    return <h1>Loading...</h1>
+  }
+
   return (
     <BrowserRouter
       basename={import.meta.env.DEV ? '/' : '/solid-dietary-profile-editor/'}
     >
-      <Routes>
-        <Route path="/" element={profileIfAuthenticated()} />
-        <Route path="/login" element={loginIfNotAuthenticated()} />
-        <Route path="/about" element={aboutIfNotAuthenticated()} />
-      </Routes>
+      {userIsLoggedIn && (
+        <Routes>
+          <Route path="/" element={<Profile selectedSignInMethod="solid" />} />
+          <Route
+            path="/login"
+            element={<Profile selectedSignInMethod="solid" />}
+          />
+        </Routes>
+      )}
+
+      {!userIsLoggedIn && (
+        <Routes>
+          <Route
+            path="/"
+            element={<LogInSolid setLoginWithSolid={() => {}} />}
+          />
+          <Route
+            path="/login"
+            element={<LogInSolid setLoginWithSolid={() => {}} />}
+          />
+        </Routes>
+      )}
     </BrowserRouter>
   )
 }
