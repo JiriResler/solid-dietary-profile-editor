@@ -14,6 +14,7 @@ function RouterWrapper() {
   const userIsLoggedIn = session.info.isLoggedIn || user !== null
 
   function profileIfAuthenticated() {
+    console.log('profileIfAuthenticated')
     if (userIsLoggedIn) {
       if (session.info.isLoggedIn) {
         return <Profile selectedSignInMethod="solid" />
@@ -26,6 +27,7 @@ function RouterWrapper() {
   }
 
   function loginIfNotAuthenticated() {
+    console.log('loginIfNotAuthenticated')
     if (!userIsLoggedIn) {
       return <LoginScreen />
     } else {
@@ -40,8 +42,6 @@ function RouterWrapper() {
   //     return <Navigate to="/" />
   //   }
   // }
-
-  // while (sessionRequestInProgress){}
 
   if (sessionRequestInProgress) {
     return <h1>Loading...</h1>
