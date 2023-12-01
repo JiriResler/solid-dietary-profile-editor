@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { useSession } from '@inrupt/solid-ui-react'
-import { useAuthState } from 'react-firebase-hooks/auth'
-import { auth } from '../firebase'
+// import { useAuthState } from 'react-firebase-hooks/auth'
+// import { auth } from '../firebase'
 import Profile from './Profile'
 // import About from './About'
 import LoginScreen from './LoginScreen'
@@ -9,13 +9,12 @@ import LoginScreen from './LoginScreen'
 
 function RouterWrapper() {
   const { session, sessionRequestInProgress } = useSession()
-  const [user] = useAuthState(auth)
+  // const [user] = useAuthState(auth)
 
-  const userIsLoggedIn = session.info.isLoggedIn || user !== null
+  // const userIsLoggedIn =  || user !== null
 
   function profileIfAuthenticated() {
-    console.log('profileIfAuthenticated')
-    if (userIsLoggedIn) {
+    if (session.info.isLoggedIn) {
       if (session.info.isLoggedIn) {
         return <Profile selectedSignInMethod="solid" />
       } else {
@@ -27,8 +26,7 @@ function RouterWrapper() {
   }
 
   function loginIfNotAuthenticated() {
-    console.log('loginIfNotAuthenticated')
-    if (!userIsLoggedIn) {
+    if (!session.info.isLoggedIn) {
       return <LoginScreen />
     } else {
       return <Navigate to="/" />
@@ -44,7 +42,7 @@ function RouterWrapper() {
   // }
 
   if (sessionRequestInProgress) {
-    return <h1>Loading...</h1>
+    return <h1>Redirecting to provider...</h1>
   }
 
   return (
