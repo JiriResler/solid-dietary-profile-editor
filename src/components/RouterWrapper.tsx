@@ -5,6 +5,7 @@ import { auth } from '../firebase'
 import Profile from './Profile'
 // import About from './About'
 import LoginScreen from './LoginScreen'
+import { handleIncomingRedirect } from '@inrupt/solid-client-authn-browser'
 
 function RouterWrapper() {
   const { session, sessionRequestInProgress } = useSession()
@@ -12,7 +13,19 @@ function RouterWrapper() {
 
   const userIsLoggedIn = session.info.isLoggedIn || user !== null
 
+  async function fetchData() {
+    await handleIncomingRedirect({
+      restorePreviousSession: true,
+    })
+  }
+
   function profileIfAuthenticated() {
+    fetchData()
+      .then(() => {
+        console.log('handleIncomingRedirect()')
+      })
+      .catch(() => 'obligatory catch')
+
     if (userIsLoggedIn) {
       if (session.info.isLoggedIn) {
         return <Profile selectedSignInMethod="solid" />
@@ -25,6 +38,12 @@ function RouterWrapper() {
   }
 
   function loginIfNotAuthenticated() {
+    fetchData()
+      .then(() => {
+        console.log('handleIncomingRedirect()')
+      })
+      .catch(() => 'obligatory catch')
+
     if (!userIsLoggedIn) {
       return <LoginScreen />
     } else {
