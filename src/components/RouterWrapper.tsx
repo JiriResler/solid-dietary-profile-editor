@@ -5,13 +5,10 @@ import { useSession } from '@inrupt/solid-ui-react'
 import Profile from './Profile'
 // import About from './About'
 import LoginScreen from './LoginScreen'
-// import LogInSolid from './LogInSolid'
 
 function RouterWrapper() {
   const { session, sessionRequestInProgress } = useSession()
   // const [user] = useAuthState(auth)
-
-  // const userIsLoggedIn =  || user !== null
 
   function profileIfAuthenticated() {
     if (session.info.isLoggedIn) {
@@ -42,7 +39,7 @@ function RouterWrapper() {
   // }
 
   if (sessionRequestInProgress) {
-    return <h1>Redirecting to provider...</h1>
+    return <h1>Loading...</h1>
   }
 
   return (
