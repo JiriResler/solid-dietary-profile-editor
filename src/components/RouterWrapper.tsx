@@ -1,17 +1,19 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { useSession } from '@inrupt/solid-ui-react'
-// import { useAuthState } from 'react-firebase-hooks/auth'
-// import { auth } from '../firebase'
+import { useAuthState } from 'react-firebase-hooks/auth'
+import { auth } from '../firebase'
 import Profile from './Profile'
 // import About from './About'
 import LoginScreen from './LoginScreen'
 
 function RouterWrapper() {
   const { session, sessionRequestInProgress } = useSession()
-  // const [user] = useAuthState(auth)
+  const [user] = useAuthState(auth)
+
+  const userIsLoggedIn = session.info.isLoggedIn || user !== null
 
   function profileIfAuthenticated() {
-    if (session.info.isLoggedIn) {
+    if (userIsLoggedIn) {
       if (session.info.isLoggedIn) {
         return <Profile selectedSignInMethod="solid" />
       } else {
@@ -23,7 +25,7 @@ function RouterWrapper() {
   }
 
   function loginIfNotAuthenticated() {
-    if (!session.info.isLoggedIn) {
+    if (!userIsLoggedIn) {
       return <LoginScreen />
     } else {
       return <Navigate to="/" />

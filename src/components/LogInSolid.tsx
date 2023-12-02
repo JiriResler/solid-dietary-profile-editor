@@ -4,11 +4,8 @@ import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 import { LoginButton } from '@inrupt/solid-ui-react'
 import { useState } from 'react'
-// import { handleIncomingRedirect } from '@inrupt/solid-client-authn-browser'
-// import { useEffect } from 'react'
 import { FormattedMessage } from 'react-intl'
 import './LoginSolid.css'
-import { useSession } from '@inrupt/solid-ui-react'
 
 const solidIdProviders: string[] = [
   'https://solidcommunity.net/',
@@ -29,29 +26,12 @@ type Props = {
 }
 
 const LogInSolid: React.FC<Props> = ({ setLoginWithSolid }) => {
-  const { session } = useSession()
-
-  // useEffect(() => {
-  //   async function fetchData() {
-  //     await handleIncomingRedirect({
-  //       restorePreviousSession: true,
-  //     })
-  //   }
-
-  //   fetchData()
-  //     .then(() => {
-  //       console.log('handleIncomingRedirect()')
-  //     })
-  //     .catch(() => 'obligatory catch')
-  // }, [])
-
   const identityProviders: string[] = solidIdProviders
 
   const [selectedOption, setSelectedOption] = useState(solidIdProviders[0])
 
   return (
     <div className="fade-in">
-      <p>{session.info.isLoggedIn ? 'logged in' : 'logged out'}</p>
       <Row>
         <Col xs={12} md={9}>
           <Form.Select
