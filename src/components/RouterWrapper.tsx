@@ -16,11 +16,11 @@ function RouterWrapper() {
   async function handleSolidRedirect() {
     await handleIncomingRedirect({
       restorePreviousSession: true,
-    })
+    }).catch((error: Error) => console.log(error.message))
   }
 
   function profileIfAuthenticated() {
-    handleSolidRedirect().catch((error: Error) => error.message)
+    void handleSolidRedirect()
 
     if (userIsLoggedIn) {
       if (session.info.isLoggedIn) {
@@ -34,7 +34,7 @@ function RouterWrapper() {
   }
 
   function loginIfNotAuthenticated() {
-    handleSolidRedirect().catch((error: Error) => error.message)
+    void handleSolidRedirect()
 
     if (!userIsLoggedIn) {
       return <LoginScreen />
