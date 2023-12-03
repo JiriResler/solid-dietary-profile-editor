@@ -62,7 +62,7 @@ const LoginScreen: React.FC = () => {
       </div>
 
       <div className="application-logo mt-3 mx-auto">
-        <img src="images/apple.svg" alt="application_logo" />
+        <img src="images/app_logo.svg" alt="application_logo" />
       </div>
 
       <SelectProvider />
