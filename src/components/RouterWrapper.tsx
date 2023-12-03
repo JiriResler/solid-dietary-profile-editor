@@ -13,18 +13,14 @@ function RouterWrapper() {
 
   const userIsLoggedIn = session.info.isLoggedIn || user !== null
 
-  async function fetchData() {
+  async function handleSolidRedirect() {
     await handleIncomingRedirect({
       restorePreviousSession: true,
     })
   }
 
   function profileIfAuthenticated() {
-    fetchData()
-      .then(() => {
-        console.log('handleIncomingRedirect()')
-      })
-      .catch(() => 'obligatory catch')
+    handleSolidRedirect().catch((error: Error) => error.message)
 
     if (userIsLoggedIn) {
       if (session.info.isLoggedIn) {
@@ -38,11 +34,7 @@ function RouterWrapper() {
   }
 
   function loginIfNotAuthenticated() {
-    fetchData()
-      .then(() => {
-        console.log('handleIncomingRedirect()')
-      })
-      .catch(() => 'obligatory catch')
+    handleSolidRedirect().catch((error: Error) => error.message)
 
     if (!userIsLoggedIn) {
       return <LoginScreen />

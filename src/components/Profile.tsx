@@ -58,7 +58,6 @@ const Profile: React.FC<Props> = ({ selectedSignInMethod }) => {
     if (selectedSignInMethod === 'firebase') {
       try {
         await signOut(auth)
-        alert('Log out successful')
       } catch {
         alert('Log out failed.')
       }
