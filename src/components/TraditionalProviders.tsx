@@ -31,13 +31,6 @@ const TraditionalProviders: React.FC = () => {
           className="provider-icon"
         />
       </Button>
-      <Button className="provider-button apple-button">
-        <img
-          src="images/apple_logo_white.svg"
-          alt="Apple logo"
-          className="provider-icon"
-        />
-      </Button>
     </Stack>
   )
 }
