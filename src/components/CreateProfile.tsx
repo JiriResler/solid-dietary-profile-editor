@@ -2,6 +2,7 @@ import { useState } from 'react'
 import Button from 'react-bootstrap/Button'
 import Stack from 'react-bootstrap/Stack'
 import './CreateProfile.css'
+import SelectAllergens from './SelectAllergens'
 
 const CreateProfile: React.FC = () => {
   const [currentStep, setCurrentStep] = useState<number>(0)
@@ -17,7 +18,12 @@ const CreateProfile: React.FC = () => {
           <div>
             You can create a new profile or import an already existing one.
           </div>
-          <Button className="welcome-screen-button mx-auto">
+          <Button
+            onClick={() => {
+              setCurrentStep(currentStep + 1)
+            }}
+            className="welcome-screen-button mx-auto"
+          >
             Create a new profile
           </Button>
           <Button className="welcome-screen-button mx-auto">
@@ -25,6 +31,8 @@ const CreateProfile: React.FC = () => {
           </Button>
         </Stack>
       )}
+
+      {currentStep === 1 && <SelectAllergens />}
     </>
   )
 }
