@@ -25,6 +25,12 @@ const SelectAllergens: React.FC = () => {
           <div>Mustard (x)</div>
           <img src="images/Mustard.svg" alt="" className="allergen-icon" />
         </Stack>
+
+        <Stack direction="horizontal" gap={2}>
+          <Form.Check type={'checkbox'} id={'id'} />
+          <div>Peanuts (x)</div>
+          <img src="images/peanut-icon.svg" alt="" className="allergen-icon" />
+        </Stack>
       </Stack>
       <div className="mt-5">1/3</div>
       <Button>Next step</Button>
