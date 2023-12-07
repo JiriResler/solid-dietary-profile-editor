@@ -14,15 +14,11 @@ const SelectAllergens: React.FC = () => {
         <p>
           A number in brackets is the number of the allergen given by the law.
         </p>
-        <div>
-          <input type="checkbox"></input>{' '}
-          <img
-            className="allergen-icon"
-            src="images/app_logo.svg"
-            alt="application_logo"
-          />{' '}
-          allergen (x) i
-        </div>
+        <Stack direction="horizontal" gap={2}>
+          <input type="checkbox"></input>
+          <div>Allergen (x)</div>
+          <div>i</div>
+        </Stack>
       </Stack>
       <div className="mt-5">1/3</div>
       <Button>Next step</Button>
