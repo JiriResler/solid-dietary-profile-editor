@@ -3,13 +3,14 @@ import Button from 'react-bootstrap/Button'
 import Stack from 'react-bootstrap/Stack'
 import './CreateProfile.css'
 import SelectAllergens from './SelectAllergens'
+import CreateProfileNavigation from './CreateProfileNavigation'
 
 const CreateProfile: React.FC = () => {
   const [currentStep, setCurrentStep] = useState<number>(0)
 
   return (
     <>
-      <div className="border mt-3 mx-auto">
+      <div className="border mainContainer mt-3 mx-auto">
         {currentStep === 0 && (
           <Stack
             gap={3}
@@ -36,10 +37,10 @@ const CreateProfile: React.FC = () => {
         {currentStep === 1 && <SelectAllergens />}
       </div>
 
-      <div className="mt-3">
-        <Button>Previous step</Button> {currentStep} / 3{' '}
-        <Button>Next step</Button>
-      </div>
+      <CreateProfileNavigation
+        currentStep={currentStep}
+        setCurrentStep={setCurrentStep}
+      />
     </>
   )
 }

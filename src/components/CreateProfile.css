@@ -6,3 +6,7 @@ width: 75vw;
 width: 175pt;
 height: 40pt;
 }
+
+.mainContainer {
+    height: 60vh;
+}
