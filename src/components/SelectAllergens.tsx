@@ -10,26 +10,72 @@ const allergenList = [
   {
     name: 'Celery',
     assignedLawNumber: 1,
-    imageName: 'celery',
     IRI: 'http://dbpedia.org/resource/Celery',
   },
   {
-    name: 'Gluten',
-    assignedLawNumber: 2,
-    imageName: 'gluten',
-    IRI: 'http://dbpedia.org/resource/Gluten',
+    name: 'Molluscs',
+    assignedLawNumber: 8,
+    IRI: 'http://dbpedia.org/resource/Mollusc_shell',
   },
   {
     name: 'Gluten',
     assignedLawNumber: 2,
-    imageName: 'gluten',
     IRI: 'http://dbpedia.org/resource/Gluten',
   },
   {
-    name: 'Gluten',
-    assignedLawNumber: 2,
-    imageName: 'gluten',
-    IRI: 'http://dbpedia.org/resource/Gluten',
+    name: 'Mustard',
+    assignedLawNumber: 9,
+    IRI: 'http://dbpedia.org/resource/Mustard_(condiment)',
+  },
+  {
+    name: 'Crustaceans',
+    assignedLawNumber: 3,
+    IRI: 'http://dbpedia.org/resource/Crustacean',
+  },
+  {
+    name: 'Nuts',
+    assignedLawNumber: 10,
+    IRI: 'http://dbpedia.org/resource/Nut_(fruit)',
+  },
+  {
+    name: 'Eggs',
+    assignedLawNumber: 4,
+    IRI: 'http://dbpedia.org/resource/Egg',
+  },
+  {
+    name: 'Peanuts',
+    assignedLawNumber: 11,
+    IRI: 'http://dbpedia.org/resource/Peanut',
+  },
+  {
+    name: 'Fish',
+    assignedLawNumber: 5,
+    IRI: 'http://dbpedia.org/resource/Fish',
+  },
+  {
+    name: 'Sesame',
+    assignedLawNumber: 12,
+    IRI: 'http://dbpedia.org/resource/Sesame',
+  },
+  {
+    name: 'Lupin',
+    assignedLawNumber: 6,
+    IRI: 'http://dbpedia.org/resource/Lupinus_polyphyllus',
+  },
+  {
+    name: 'Soya',
+    assignedLawNumber: 13,
+    IRI: 'http://dbpedia.org/resource/Soybean',
+  },
+  {
+    name: 'Milk',
+    assignedLawNumber: 7,
+    IRI: 'http://dbpedia.org/resource/Milk',
+  },
+  {
+    name: 'Sulphites',
+    assignedLawNumber: 14,
+    IRI: 'http://dbpedia.org/resource/Sulfur_dioxide',
   },
 ]
 
@@ -46,14 +92,16 @@ const SelectAllergens: React.FC = () => {
         <Row>
           {allergenList.map((allergen) => {
             return (
-              <Col xs={6}>
+              <Col key={allergen.IRI} xs={6}>
                 <Stack direction="horizontal" gap={2}>
                   <Form.Check type={'checkbox'} id={'id'} />
                   <div>
                     {allergen.name} ({allergen.assignedLawNumber})
                   </div>
                   <img
-                    src={'images/allergens/' + allergen.imageName + '.svg'}
+                    src={
+                      'images/allergens/' + allergen.name.toLowerCase() + '.svg'
+                    }
                     alt=""
                     className="allergen-icon"
                   />
