@@ -1,5 +1,4 @@
 // import { useState } from 'react'
-import Button from 'react-bootstrap/Button'
 import Stack from 'react-bootstrap/Stack'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
@@ -96,7 +95,7 @@ const SelectAllergens: React.FC = () => {
                 <Stack direction="horizontal" gap={2}>
                   <Form.Check type={'checkbox'} id={'id'} />
                   <div>
-                    {allergen.name} ({allergen.assignedLawNumber})
+                    {allergen.assignedLawNumber} {allergen.name}
                   </div>
                   <img
                     src={
@@ -111,8 +110,6 @@ const SelectAllergens: React.FC = () => {
           })}
         </Row>
       </Stack>
-      <div className="mt-5">1/3</div>
-      <Button>Next step</Button>
     </>
   )
 }
