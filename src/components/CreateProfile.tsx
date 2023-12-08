@@ -10,7 +10,7 @@ const CreateProfile: React.FC = () => {
 
   return (
     <>
-      <div className="border mainContainer mt-3 mx-auto">
+      <div className="mainContainer mt-3 mx-auto">
         {currentStep === 0 && (
           <Stack
             gap={3}

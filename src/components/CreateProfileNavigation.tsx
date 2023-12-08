@@ -1,4 +1,7 @@
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
 import Button from 'react-bootstrap/Button'
+import './CreateProfileNavigation.css'
 
 type Props = {
   currentStep: number
@@ -10,31 +13,43 @@ const CreateProfileNavigation: React.FC<Props> = ({
   setCurrentStep,
 }) => {
   return (
-    <div className="border text-center">
-      {currentStep > 1 && (
-        <Button
-          onClick={() => {
-            setCurrentStep(currentStep - 1)
-          }}
-        >
-          Previous step
-        </Button>
-      )}
+    <Row>
+      <Col className="text-end">
+        {currentStep > 1 && (
+          <Button
+            onClick={() => {
+              setCurrentStep(currentStep - 1)
+            }}
+            className="navigationButton"
+          >
+            Previous
+          </Button>
+        )}
+      </Col>
 
-      {currentStep > 0 && <span>{currentStep} / 3</span>}
+      <Col xs={3} className="d-flex align-items-center ">
+        {currentStep > 0 && <span className="mx-auto">{currentStep} / 3</span>}
+      </Col>
 
-      {currentStep > 0 && currentStep < 3 && (
-        <Button
-          onClick={() => {
-            setCurrentStep(currentStep + 1)
-          }}
-        >
-          Next step
-        </Button>
-      )}
+      <Col>
+        {currentStep > 0 && currentStep < 3 && (
+          <Button
+            onClick={() => {
+              setCurrentStep(currentStep + 1)
+            }}
+            className="navigationButton"
+          >
+            Next
+          </Button>
+        )}
 
-      {currentStep === 3 && <Button variant="success">Create profile</Button>}
-    </div>
+        {currentStep === 3 && (
+          <Button className="navigationButton" variant="success">
+            Finish
+          </Button>
+        )}
+      </Col>
+    </Row>
   )
 }
 
