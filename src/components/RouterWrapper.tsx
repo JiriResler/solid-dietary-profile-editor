@@ -24,9 +24,9 @@ function RouterWrapper() {
 
     if (userIsLoggedIn) {
       if (session.info.isLoggedIn) {
-        return <Profile selectedSignInMethod="solid" />
+        return <Profile />
       } else {
-        return <Profile selectedSignInMethod="firebase" />
+        return <Profile />
       }
     } else {
       return <Navigate to="/login" />
