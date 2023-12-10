@@ -1,6 +1,5 @@
 import Form from 'react-bootstrap/Form'
-
-const diets = ['diet1, a_diet2, b_diet3']
+import Select from 'react-select'
 
 const SelectDiets: React.FC = () => {
   return (
@@ -9,12 +8,19 @@ const SelectDiets: React.FC = () => {
       <Form.Check type={'checkbox'} id={'id'} label="Vegan" />
       <Form.Check type={'checkbox'} id={'id'} label="Vegetarian" />
       <h3>Other diets</h3>
-      <ul>
-        <li>no data</li>
-      </ul>
-      <Form>
-        <Form.Control type="text" placeholder="Search for a diet" />
-      </Form>
+      <Select
+        components={{
+          DropdownIndicator: () => null,
+          IndicatorSeparator: () => null,
+          ClearIndicator: () => null,
+        }}
+        isMulti
+        openMenuOnClick={false}
+        options={[
+          { value: 1, label: 'foo' },
+          { value: 2, label: 'bar' },
+        ]}
+      />
     </>
   )
 }
