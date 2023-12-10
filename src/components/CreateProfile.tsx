@@ -4,6 +4,7 @@ import Stack from 'react-bootstrap/Stack'
 import './CreateProfile.css'
 import SelectAllergens from './SelectAllergens'
 import CreateProfileNavigation from './CreateProfileNavigation'
+import SelectDiets from './SelectDiets'
 
 const CreateProfile: React.FC = () => {
   const [currentStep, setCurrentStep] = useState<number>(0)
@@ -35,6 +36,8 @@ const CreateProfile: React.FC = () => {
         )}
 
         {currentStep === 1 && <SelectAllergens />}
+
+        {currentStep === 2 && <SelectDiets />}
       </div>
 
       <CreateProfileNavigation
