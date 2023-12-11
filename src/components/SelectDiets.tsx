@@ -2,13 +2,21 @@ import Form from 'react-bootstrap/Form'
 import Select from 'react-select'
 import { useState } from 'react'
 
-type MyOption = { label: string; value: number }
+type DietOption = { label: string; value: number }
+
+const SelectComponents = {
+  DropdownIndicator: () => null,
+  IndicatorSeparator: () => null,
+  ClearIndicator: () => null,
+}
 
 const SelectDiets: React.FC = () => {
-  const [options, setOptions] = useState<ReadonlyArray<MyOption>>([])
+  const [selectedDiets, setSelectedDiets] = useState<ReadonlyArray<DietOption>>(
+    [],
+  )
 
-  function handleChange(value: ReadonlyArray<MyOption>) {
-    setOptions(value)
+  function handleSelectChange(dietArray: ReadonlyArray<DietOption>) {
+    setSelectedDiets(dietArray)
   }
 
   return (
@@ -24,17 +32,13 @@ const SelectDiets: React.FC = () => {
           { value: 3, label: 'abc' },
           { value: 4, label: 'aba' },
         ]}
-        value={options}
-        onChange={(data) => {
-          handleChange(data)
+        value={selectedDiets}
+        onChange={(value) => {
+          handleSelectChange(value)
         }}
         isMulti
         openMenuOnClick={false}
-        components={{
-          DropdownIndicator: () => null,
-          IndicatorSeparator: () => null,
-          ClearIndicator: () => null,
-        }}
+        components={SelectComponents}
         placeholder="Search for a diet"
       />
     </>
