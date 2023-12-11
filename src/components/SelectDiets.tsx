@@ -2,7 +2,15 @@ import Form from 'react-bootstrap/Form'
 import Select from 'react-select'
 import { useState } from 'react'
 
+type MyOption = { label: string; value: number }
+
 const SelectDiets: React.FC = () => {
+  const [options, setOptions] = useState<ReadonlyArray<MyOption>>([])
+
+  function handleChange(value: ReadonlyArray<MyOption>) {
+    setOptions(value)
+  }
+
   return (
     <>
       <h1>2. Which diets are you on?</h1>
@@ -16,6 +24,10 @@ const SelectDiets: React.FC = () => {
           { value: 3, label: 'abc' },
           { value: 4, label: 'aba' },
         ]}
+        value={options}
+        onChange={(data) => {
+          handleChange(data)
+        }}
         isMulti
         openMenuOnClick={false}
         components={{
