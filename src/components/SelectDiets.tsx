@@ -17,20 +17,22 @@ const SelectDiets: React.FC = () => {
 
   const [dietOptions, setDietOptions] = useState<DietOption[]>([])
 
+  const [loadingDiets, setLoadingDiets] = useState(false)
+
+  // Load list of diets upon initial render
   useEffect(() => {
-    fetchDiets()
+    void fetchDiets()
   }, [])
 
-  function handleSelectChange(dietArray: ReadonlyArray<DietOption>) {
-    setSelectedDiets(dietArray)
-  }
-
   async function fetchDiets() {
+    setLoadingDiets(true)
     const response = await fetch(
       'https://raw.githubusercontent.com/JiriResler/solid-choose-well-ontology/main/diets_data.json',
     )
     const movies = await response.json()
     console.log(movies)
+
+    setLoadingDiets(false)
 
     setDietOptions([
       { value: 1, label: 'aaa' },
@@ -38,6 +40,10 @@ const SelectDiets: React.FC = () => {
       { value: 3, label: 'abc' },
       { value: 4, label: 'aba' },
     ])
+  }
+
+  function handleSelectChange(dietArray: ReadonlyArray<DietOption>) {
+    setSelectedDiets(dietArray)
   }
 
   return (
@@ -55,13 +61,14 @@ const SelectDiets: React.FC = () => {
         options={dietOptions}
         value={selectedDiets}
         isMulti
-        // value={selectedDiets}
         onChange={(value) => {
           handleSelectChange(value)
         }}
         openMenuOnClick={false}
         components={SelectComponents}
-        placeholder="Search for a diet"
+        isDisabled={loadingDiets ? true : false}
+        isLoading={loadingDiets ? true : false}
+        placeholder={loadingDiets ? 'Loading data...' : 'Search for a diet'}
       />
     </>
   )
