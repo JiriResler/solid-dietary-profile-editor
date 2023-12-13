@@ -1,6 +1,6 @@
 import Form from 'react-bootstrap/Form'
 import Select from 'react-select'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 type DietOption = { label: string; value: number }
 
@@ -16,6 +16,10 @@ const SelectDiets: React.FC = () => {
   )
 
   const [dietOptions, setDietOptions] = useState<DietOption[]>([])
+
+  useEffect(() => {
+    fetchDiets()
+  }, [])
 
   function handleSelectChange(dietArray: ReadonlyArray<DietOption>) {
     setSelectedDiets(dietArray)
@@ -38,13 +42,6 @@ const SelectDiets: React.FC = () => {
 
   return (
     <>
-      <button
-        onClick={() => {
-          void fetchDiets()
-        }}
-      >
-        Fetch diets
-      </button>
       <ul>
         {selectedDiets.map((diet) => {
           return <li key={diet.value}>{diet.label}</li>
