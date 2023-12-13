@@ -29,7 +29,7 @@ const SelectDiets: React.FC = () => {
     const response = await fetch(
       'https://raw.githubusercontent.com/JiriResler/solid-choose-well-ontology/main/diets_data.json',
     )
-    const movies = await response.json()
+    const movies = (await response.json()) as Promise<DietOption[]>
     console.log(movies)
 
     setLoadingDiets(false)
