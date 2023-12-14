@@ -38,12 +38,12 @@ const SelectDiets: React.FC = () => {
   useEffect(() => {
     setLoadingDiets(true)
 
-    void getDiets()
+    void fetchAndSetDiets()
 
     setLoadingDiets(false)
   }, [])
 
-  async function getDiets() {
+  async function fetchAndSetDiets() {
     const dietsResponse = await fetchDiets()
 
     const dietsList = transformDietsResponse(dietsResponse)
@@ -76,8 +76,12 @@ const SelectDiets: React.FC = () => {
     return resultDietsArr
   }
 
-  function handleSelectChange(dietArray: ReadonlyArray<DietOption>) {
-    setSelectedDiets(dietArray)
+  const customFilter = (option: DietOption, searchText: string) => {
+    if (option.label.toLowerCase().includes(searchText.toLowerCase())) {
+      return true
+    }
+
+    return false
   }
 
   return (
@@ -87,17 +91,18 @@ const SelectDiets: React.FC = () => {
           return <li key={diet.value}>{diet.label}</li>
         })}
       </ul>
+
       <h1>2. Which diets are you on?</h1>
       <Form.Check type={'checkbox'} id={'id'} label="Vegan" />
       <Form.Check type={'checkbox'} id={'id'} label="Vegetarian" />
+
       <h3>Other diets</h3>
       <Select
         options={dietOptions}
         value={selectedDiets}
+        filterOption={customFilter}
         isMulti
-        onChange={(value) => {
-          handleSelectChange(value)
-        }}
+        onChange={setSelectedDiets}
         openMenuOnClick={false}
         components={SelectComponents}
         isDisabled={loadingDiets ? true : false}
