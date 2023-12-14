@@ -77,8 +77,8 @@ const SelectDiets: React.FC = () => {
     return resultDietsArr
   }
 
-  const customFilter = (option: DietOption, searchText: string) => {
-    if (option.label.toLowerCase().includes(searchText.toLowerCase())) {
+  const selectMenuOptionFilter = (option: DietOption, searchText: string) => {
+    if (option.label.toLowerCase().startsWith(searchText.toLowerCase())) {
       return true
     }
 
@@ -101,7 +101,7 @@ const SelectDiets: React.FC = () => {
       <Select
         options={dietOptions}
         value={selectedDiets}
-        filterOption={customFilter}
+        filterOption={selectMenuOptionFilter}
         isMulti
         onChange={setSelectedDiets}
         openMenuOnClick={false}
