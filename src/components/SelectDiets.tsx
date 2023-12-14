@@ -41,6 +41,7 @@ const SelectDiets: React.FC = () => {
     void fetchAndSetDiets()
 
     setLoadingDiets(false)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   async function fetchAndSetDiets() {
