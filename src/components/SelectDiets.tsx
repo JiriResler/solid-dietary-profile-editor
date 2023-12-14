@@ -2,7 +2,22 @@ import Form from 'react-bootstrap/Form'
 import Select from 'react-select'
 import { useEffect, useState } from 'react'
 
-type DietOption = { label: string; value: number }
+type DietOption = { label: string; value: string }
+
+interface DBPediaResponse {
+  results: {
+    bindings: ResponseBinding[]
+  }
+}
+
+interface ResponseBinding {
+  dietIRI: {
+    value: string
+  }
+  dietLabel: {
+    value: string
+  }
+}
 
 const SelectComponents = {
   DropdownIndicator: () => null,
@@ -21,25 +36,44 @@ const SelectDiets: React.FC = () => {
 
   // Load list of diets upon initial render
   useEffect(() => {
-    void fetchDiets()
-  }, [])
-
-  async function fetchDiets() {
     setLoadingDiets(true)
-    const response = await fetch(
-      'https://raw.githubusercontent.com/JiriResler/solid-choose-well-ontology/main/diets_data.json',
-    )
-    const movies = (await response.json()) as Promise<DietOption[]>
-    console.log(movies)
+
+    void getDiets()
 
     setLoadingDiets(false)
+  }, [])
 
-    setDietOptions([
-      { value: 1, label: 'aaa' },
-      { value: 2, label: 'abb' },
-      { value: 3, label: 'abc' },
-      { value: 4, label: 'aba' },
-    ])
+  async function getDiets() {
+    const dietsResponse = await fetchDiets()
+
+    const dietsList = transformDietsResponse(dietsResponse)
+
+    setDietOptions(dietsList)
+  }
+
+  async function fetchDiets() {
+    const dietsResponse = await fetch(
+      'https://raw.githubusercontent.com/JiriResler/solid-choose-well-ontology/main/diets_data.json',
+    )
+
+    const dietsResponseObj = (await dietsResponse.json()) as DBPediaResponse
+
+    return dietsResponseObj.results.bindings
+  }
+
+  function transformDietsResponse(dietsResponseArr: ResponseBinding[]) {
+    const resultDietsArr: DietOption[] = []
+
+    for (const responseDiet of dietsResponseArr) {
+      const resultDiet: DietOption = {
+        value: responseDiet.dietIRI.value,
+        label: responseDiet.dietLabel.value,
+      }
+
+      resultDietsArr.push(resultDiet)
+    }
+
+    return resultDietsArr
   }
 
   function handleSelectChange(dietArray: ReadonlyArray<DietOption>) {
