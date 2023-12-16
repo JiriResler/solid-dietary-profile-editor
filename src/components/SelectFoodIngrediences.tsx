@@ -59,11 +59,11 @@ const SelectFoodIngrediences: React.FC = () => {
   }
 
   function transformIngredientsResponse(
-    dietsResponseArr: IngredientResponseObj[],
+    ingredientsResponseArr: IngredientResponseObj[],
   ) {
     const resultIngredientsArr: IngredientOption[] = []
 
-    for (const responseIngredient of dietsResponseArr) {
+    for (const responseIngredient of ingredientsResponseArr) {
       const resultIngredient: IngredientOption = {
         value: responseIngredient.food,
         label: responseIngredient.foodLabel,
