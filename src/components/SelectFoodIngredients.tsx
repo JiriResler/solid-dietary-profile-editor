@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
-import Select, { components, MenuProps, Props } from 'react-select'
+import Select, { components, MenuProps } from 'react-select'
 
-const Menu = ({ children, ...props }: MenuProps<IngredientOption, false>) => {
+const Menu = ({ children, ...props }: MenuProps<IngredientOption, true>) => {
   if (props.selectProps.inputValue.length === 0) {
     return null
   }
@@ -20,9 +20,10 @@ const SelectComponents = {
   DropdownIndicator: () => null,
   IndicatorSeparator: () => null,
   ClearIndicator: () => null,
+  Menu: Menu,
 }
 
-const SelectFoodIngredients: React.FC = (props: Props<IngredientOption>) => {
+const SelectFoodIngredients: React.FC = () => {
   // eslint-disable-next-line prettier/prettier
   const [selectedFavoredIngredients, setSelectedFavoredIngredients] = 
     useState<ReadonlyArray<IngredientOption>>([])
@@ -103,7 +104,6 @@ const SelectFoodIngredients: React.FC = (props: Props<IngredientOption>) => {
         filterOption={selectMenuIngredientFilter}
         isMulti
         onChange={setSelectedFavoredIngredients}
-        openMenuOnClick={false}
         components={SelectComponents}
         isDisabled={loadingIngredients ? true : false}
         isLoading={loadingIngredients ? true : false}
@@ -119,21 +119,12 @@ const SelectFoodIngredients: React.FC = (props: Props<IngredientOption>) => {
         filterOption={selectMenuIngredientFilter}
         isMulti
         onChange={setSelectedDislikedIngredients}
-        openMenuOnClick={false}
         components={SelectComponents}
         isDisabled={loadingIngredients ? true : false}
         isLoading={loadingIngredients ? true : false}
         placeholder={
           loadingIngredients ? 'Loading data...' : 'Search for an ingredient'
         }
-      />
-
-      <Select
-        {...props}
-        components={{ Menu: Menu }}
-        isSearchable
-        name="emoji"
-        options={ingredientOptions}
       />
     </>
   )
