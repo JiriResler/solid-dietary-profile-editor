@@ -22,17 +22,17 @@ const SelectComponents = {
   ClearIndicator: () => null,
 }
 
-const SelectFoodIngrediences: React.FC = (props: Props<IngredientOption>) => {
-  const [selectedFavoredIngredients, setSelectedFavoredIngredients] = useState<
-    ReadonlyArray<IngredientOption>
-  >([])
+const SelectFoodIngredients: React.FC = (props: Props<IngredientOption>) => {
+  // eslint-disable-next-line prettier/prettier
+  const [selectedFavoredIngredients, setSelectedFavoredIngredients] = 
+    useState<ReadonlyArray<IngredientOption>>([])
 
   const [selectedDislikedIngredients, setSelectedDislikedIngredients] =
     useState<ReadonlyArray<IngredientOption>>([])
 
-  const [ingredientOptions, setIngredientOptions] = useState<
-    IngredientOption[]
-  >([])
+  // eslint-disable-next-line prettier/prettier
+  const [ingredientOptions, setIngredientOptions] = 
+    useState<IngredientOption[]>([])
 
   const [loadingIngredients, setLoadingIngredients] = useState(false)
 
@@ -139,4 +139,4 @@ const SelectFoodIngrediences: React.FC = (props: Props<IngredientOption>) => {
   )
 }
 
-export default SelectFoodIngrediences
+export default SelectFoodIngredients

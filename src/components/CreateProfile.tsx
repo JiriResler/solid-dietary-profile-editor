@@ -5,7 +5,7 @@ import './CreateProfile.css'
 import SelectAllergens from './SelectAllergens'
 import CreateProfileNavigation from './CreateProfileNavigation'
 import SelectDiets from './SelectDiets'
-import SelectFoodIngrediences from './SelectFoodIngrediences'
+import SelectFoodIngredients from './SelectFoodIngredients'
 
 const CreateProfile: React.FC = () => {
   const [currentStep, setCurrentStep] = useState<number>(0)
@@ -40,7 +40,7 @@ const CreateProfile: React.FC = () => {
 
         {currentStep === 2 && <SelectDiets />}
 
-        {currentStep === 3 && <SelectFoodIngrediences />}
+        {currentStep === 3 && <SelectFoodIngredients />}
       </div>
 
       <CreateProfileNavigation
