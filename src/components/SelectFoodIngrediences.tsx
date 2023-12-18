@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-
 import Select from 'react-select'
 
 type IngredientOption = { label: string; value: string }
@@ -88,7 +87,7 @@ const SelectFoodIngrediences: React.FC = () => {
 
   return (
     <>
-      <h1>2. What are your food ingredients preferences?</h1>
+      <h1>2. What are your food ingredient preferences?</h1>
       <h3>Select what you like</h3>
       <Select
         options={ingredientOptions}
