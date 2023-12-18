@@ -1,5 +1,13 @@
 import { useEffect, useState } from 'react'
-import Select from 'react-select'
+import Select, { components, MenuProps, Props } from 'react-select'
+
+const Menu = ({ children, ...props }: MenuProps<IngredientOption, false>) => {
+  if (props.selectProps.inputValue.length === 0) {
+    return null
+  }
+
+  return <components.Menu {...props}>{children}</components.Menu>
+}
 
 type IngredientOption = { label: string; value: string }
 
@@ -14,7 +22,7 @@ const SelectComponents = {
   ClearIndicator: () => null,
 }
 
-const SelectFoodIngrediences: React.FC = () => {
+const SelectFoodIngrediences: React.FC = (props: Props<IngredientOption>) => {
   const [selectedFavoredIngredients, setSelectedFavoredIngredients] = useState<
     ReadonlyArray<IngredientOption>
   >([])
@@ -118,6 +126,14 @@ const SelectFoodIngrediences: React.FC = () => {
         placeholder={
           loadingIngredients ? 'Loading data...' : 'Search for an ingredient'
         }
+      />
+
+      <Select
+        {...props}
+        components={{ Menu: Menu }}
+        isSearchable
+        name="emoji"
+        options={ingredientOptions}
       />
     </>
   )
