@@ -1,15 +1,7 @@
 import { useEffect, useState } from 'react'
-import Select, { components, MenuProps } from 'react-select'
-
-const Menu = ({ children, ...props }: MenuProps<IngredientOption, true>) => {
-  if (props.selectProps.inputValue.length === 0) {
-    return null
-  }
-
-  return <components.Menu {...props}>{children}</components.Menu>
-}
-
-type IngredientOption = { label: string; value: string }
+import Select from 'react-select'
+import CustomSelectMenu from './CustomSelectMenu'
+import Option from './OptionType'
 
 interface IngredientResponseObj {
   food: string
@@ -20,20 +12,20 @@ const SelectComponents = {
   DropdownIndicator: () => null,
   IndicatorSeparator: () => null,
   ClearIndicator: () => null,
-  Menu: Menu,
+  Menu: CustomSelectMenu,
 }
 
 const SelectFoodIngredients: React.FC = () => {
   // eslint-disable-next-line prettier/prettier
-  const [selectedFavoredIngredients, setSelectedFavoredIngredients] = 
-    useState<ReadonlyArray<IngredientOption>>([])
+  const [selectedFavoredIngredients, setSelectedFavoredIngredients] = useState<
+    ReadonlyArray<Option>
+  >([])
 
   const [selectedDislikedIngredients, setSelectedDislikedIngredients] =
-    useState<ReadonlyArray<IngredientOption>>([])
+    useState<ReadonlyArray<Option>>([])
 
   // eslint-disable-next-line prettier/prettier
-  const [ingredientOptions, setIngredientOptions] = 
-    useState<IngredientOption[]>([])
+  const [ingredientOptions, setIngredientOptions] = useState<Option[]>([])
 
   const [loadingIngredients, setLoadingIngredients] = useState(false)
 
@@ -69,10 +61,10 @@ const SelectFoodIngredients: React.FC = () => {
   function transformIngredientsResponse(
     ingredientsResponseArr: IngredientResponseObj[],
   ) {
-    const resultIngredientsArr: IngredientOption[] = []
+    const resultIngredientsArr: Option[] = []
 
     for (const responseIngredient of ingredientsResponseArr) {
-      const resultIngredient: IngredientOption = {
+      const resultIngredient: Option = {
         value: responseIngredient.food,
         label: responseIngredient.foodLabel,
       }
@@ -83,10 +75,7 @@ const SelectFoodIngredients: React.FC = () => {
     return resultIngredientsArr
   }
 
-  const selectMenuIngredientFilter = (
-    option: IngredientOption,
-    searchText: string,
-  ) => {
+  const selectMenuIngredientFilter = (option: Option, searchText: string) => {
     if (option.label.toLowerCase().startsWith(searchText.toLowerCase())) {
       return true
     }

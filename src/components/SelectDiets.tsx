@@ -1,8 +1,7 @@
 import Form from 'react-bootstrap/Form'
 import Select from 'react-select'
 import { useEffect, useState } from 'react'
-
-type DietOption = { label: string; value: string }
+import Option from './OptionType'
 
 interface DBPediaResponse {
   results: {
@@ -26,11 +25,9 @@ const SelectComponents = {
 }
 
 const SelectDiets: React.FC = () => {
-  const [selectedDiets, setSelectedDiets] = useState<ReadonlyArray<DietOption>>(
-    [],
-  )
+  const [selectedDiets, setSelectedDiets] = useState<ReadonlyArray<Option>>([])
 
-  const [dietOptions, setDietOptions] = useState<DietOption[]>([])
+  const [dietOptions, setDietOptions] = useState<Option[]>([])
 
   const [loadingDiets, setLoadingDiets] = useState(false)
 
@@ -63,10 +60,10 @@ const SelectDiets: React.FC = () => {
   }
 
   function transformDietsResponse(dietsResponseArr: ResponseBinding[]) {
-    const resultDietsArr: DietOption[] = []
+    const resultDietsArr: Option[] = []
 
     for (const responseDiet of dietsResponseArr) {
-      const resultDiet: DietOption = {
+      const resultDiet: Option = {
         value: responseDiet.dietIRI.value,
         label: responseDiet.dietLabel.value,
       }
@@ -77,7 +74,7 @@ const SelectDiets: React.FC = () => {
     return resultDietsArr
   }
 
-  const selectMenuOptionFilter = (option: DietOption, searchText: string) => {
+  const selectMenuOptionFilter = (option: Option, searchText: string) => {
     if (option.label.toLowerCase().startsWith(searchText.toLowerCase())) {
       return true
     }
