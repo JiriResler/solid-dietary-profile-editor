@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react'
 import Select from 'react-select'
 import CustomSelectMenu from './CustomSelectMenu'
-import Option from './OptionType'
+import Option from './optionType'
+import selectMenuOptionFilter from './selectMenuOptionFilter'
 
-interface IngredientResponseObj {
+interface IngredientResponse {
   food: string
   foodLabel: string
 }
@@ -16,7 +17,6 @@ const SelectComponents = {
 }
 
 const SelectFoodIngredients: React.FC = () => {
-  // eslint-disable-next-line prettier/prettier
   const [selectedFavoredIngredients, setSelectedFavoredIngredients] = useState<
     ReadonlyArray<Option>
   >([])
@@ -24,7 +24,6 @@ const SelectFoodIngredients: React.FC = () => {
   const [selectedDislikedIngredients, setSelectedDislikedIngredients] =
     useState<ReadonlyArray<Option>>([])
 
-  // eslint-disable-next-line prettier/prettier
   const [ingredientOptions, setIngredientOptions] = useState<Option[]>([])
 
   const [loadingIngredients, setLoadingIngredients] = useState(false)
@@ -53,13 +52,13 @@ const SelectFoodIngredients: React.FC = () => {
     )
 
     const ingredientsResponseArr =
-      (await ingredientsResponse.json()) as Array<IngredientResponseObj>
+      (await ingredientsResponse.json()) as Array<IngredientResponse>
 
     return ingredientsResponseArr
   }
 
   function transformIngredientsResponse(
-    ingredientsResponseArr: IngredientResponseObj[],
+    ingredientsResponseArr: IngredientResponse[],
   ) {
     const resultIngredientsArr: Option[] = []
 
@@ -75,14 +74,6 @@ const SelectFoodIngredients: React.FC = () => {
     return resultIngredientsArr
   }
 
-  const selectMenuIngredientFilter = (option: Option, searchText: string) => {
-    if (option.label.toLowerCase().startsWith(searchText.toLowerCase())) {
-      return true
-    }
-
-    return false
-  }
-
   return (
     <>
       <h1>2. What are your food ingredient preferences?</h1>
@@ -90,7 +81,7 @@ const SelectFoodIngredients: React.FC = () => {
       <Select
         options={ingredientOptions}
         value={selectedFavoredIngredients}
-        filterOption={selectMenuIngredientFilter}
+        filterOption={selectMenuOptionFilter}
         isMulti
         onChange={setSelectedFavoredIngredients}
         components={SelectComponents}
@@ -105,7 +96,7 @@ const SelectFoodIngredients: React.FC = () => {
       <Select
         options={ingredientOptions}
         value={selectedDislikedIngredients}
-        filterOption={selectMenuIngredientFilter}
+        filterOption={selectMenuOptionFilter}
         isMulti
         onChange={setSelectedDislikedIngredients}
         components={SelectComponents}

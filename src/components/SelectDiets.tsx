@@ -1,8 +1,9 @@
 import Form from 'react-bootstrap/Form'
 import Select from 'react-select'
 import { useEffect, useState } from 'react'
-import Option from './OptionType'
+import Option from './optionType'
 import CustomSelectMenu from './CustomSelectMenu'
+import selectMenuOptionFilter from './selectMenuOptionFilter'
 
 interface DBPediaResponse {
   results: {
@@ -74,14 +75,6 @@ const SelectDiets: React.FC = () => {
     }
 
     return resultDietsArr
-  }
-
-  const selectMenuOptionFilter = (option: Option, searchText: string) => {
-    if (option.label.toLowerCase().startsWith(searchText.toLowerCase())) {
-      return true
-    }
-
-    return false
   }
 
   return (
