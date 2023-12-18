@@ -2,6 +2,7 @@ import Form from 'react-bootstrap/Form'
 import Select from 'react-select'
 import { useEffect, useState } from 'react'
 import Option from './OptionType'
+import CustomSelectMenu from './CustomSelectMenu'
 
 interface DBPediaResponse {
   results: {
@@ -22,6 +23,7 @@ const SelectComponents = {
   DropdownIndicator: () => null,
   IndicatorSeparator: () => null,
   ClearIndicator: () => null,
+  Menu: CustomSelectMenu,
 }
 
 const SelectDiets: React.FC = () => {
@@ -101,7 +103,6 @@ const SelectDiets: React.FC = () => {
         filterOption={selectMenuOptionFilter}
         isMulti
         onChange={setSelectedDiets}
-        openMenuOnClick={false}
         components={SelectComponents}
         isDisabled={loadingDiets ? true : false}
         isLoading={loadingDiets ? true : false}
