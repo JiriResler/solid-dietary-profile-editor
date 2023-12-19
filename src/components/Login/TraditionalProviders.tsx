@@ -1,7 +1,7 @@
 import './TraditionalProviders.css'
 import Button from 'react-bootstrap/Button'
 import Stack from 'react-bootstrap/Stack'
-import { auth, facebook, google } from '../firebase'
+import { auth, facebook, google } from '../../firebase'
 import { signInWithPopup } from 'firebase/auth'
 
 const TraditionalProviders: React.FC = () => {

@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import CreateProfile from './CreateProfile'
+import CreateProfile from './CreateProfile/CreateProfile'
 
 const Profile: React.FC = () => {
   const [userProfileExists] = useState(false)

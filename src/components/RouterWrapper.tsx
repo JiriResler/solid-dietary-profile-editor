@@ -4,7 +4,7 @@ import { useAuthState } from 'react-firebase-hooks/auth'
 import { auth } from '../firebase'
 import Profile from './Profile'
 // import About from './About'
-import LoginScreen from './LoginScreen'
+import LoginScreen from './Login/LoginScreen'
 import { handleIncomingRedirect } from '@inrupt/solid-client-authn-browser'
 
 function RouterWrapper() {

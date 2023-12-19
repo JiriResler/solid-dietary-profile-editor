@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { FormattedMessage } from 'react-intl'
 import Navbar from 'react-bootstrap/Navbar'
 import Form from 'react-bootstrap/Form'
-import LanguageContext from '../LanguageContext'
+import LanguageContext from '../../LanguageContext'
 import './LoginScreen.css'
 import SelectProvider from './SelectProvider'
 
