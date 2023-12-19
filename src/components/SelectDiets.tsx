@@ -4,21 +4,7 @@ import { useEffect, useState } from 'react'
 import Option from './optionType'
 import CustomSelectMenu from './CustomSelectMenu'
 import selectMenuOptionFilter from './selectMenuOptionFilter'
-
-interface DBPediaResponse {
-  results: {
-    bindings: ResponseBinding[]
-  }
-}
-
-interface ResponseBinding {
-  dietIRI: {
-    value: string
-  }
-  dietLabel: {
-    value: string
-  }
-}
+import { fetchDiets, transformDietsResponse } from './fetchData'
 
 const SelectComponents = {
   DropdownIndicator: () => null,
@@ -50,31 +36,6 @@ const SelectDiets: React.FC = () => {
     const dietsList = transformDietsResponse(dietsResponse)
 
     setDietOptions(dietsList)
-  }
-
-  async function fetchDiets() {
-    const dietsResponse = await fetch(
-      'https://raw.githubusercontent.com/JiriResler/solid-choose-well-ontology/main/diets_data.json',
-    )
-
-    const dietsResponseObj = (await dietsResponse.json()) as DBPediaResponse
-
-    return dietsResponseObj.results.bindings
-  }
-
-  function transformDietsResponse(dietsResponseArr: ResponseBinding[]) {
-    const resultDietsArr: Option[] = []
-
-    for (const responseDiet of dietsResponseArr) {
-      const resultDiet: Option = {
-        value: responseDiet.dietIRI.value,
-        label: responseDiet.dietLabel.value,
-      }
-
-      resultDietsArr.push(resultDiet)
-    }
-
-    return resultDietsArr
   }
 
   return (

@@ -3,11 +3,7 @@ import Select from 'react-select'
 import CustomSelectMenu from './CustomSelectMenu'
 import Option from './optionType'
 import selectMenuOptionFilter from './selectMenuOptionFilter'
-
-interface IngredientResponse {
-  food: string
-  foodLabel: string
-}
+import { fetchIngredients, transformIngredientsResponse } from './fetchData'
 
 const SelectComponents = {
   DropdownIndicator: () => null,
@@ -44,34 +40,6 @@ const SelectFoodIngredients: React.FC = () => {
     const ingredientsList = transformIngredientsResponse(ingredientsResponse)
 
     setIngredientOptions(ingredientsList)
-  }
-
-  async function fetchIngredients() {
-    const ingredientsResponse = await fetch(
-      'https://raw.githubusercontent.com/JiriResler/solid-choose-well-ontology/main/food_ingredients_data.json',
-    )
-
-    const ingredientsResponseArr =
-      (await ingredientsResponse.json()) as Array<IngredientResponse>
-
-    return ingredientsResponseArr
-  }
-
-  function transformIngredientsResponse(
-    ingredientsResponseArr: IngredientResponse[],
-  ) {
-    const resultIngredientsArr: Option[] = []
-
-    for (const responseIngredient of ingredientsResponseArr) {
-      const resultIngredient: Option = {
-        value: responseIngredient.food,
-        label: responseIngredient.foodLabel,
-      }
-
-      resultIngredientsArr.push(resultIngredient)
-    }
-
-    return resultIngredientsArr
   }
 
   return (

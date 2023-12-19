@@ -52,6 +52,7 @@ const LogInSolid: React.FC<Props> = ({ setLoginWithSolid }) => {
               (import.meta.env.PROD ? '/solid-dietary-profile-editor/' : '')
             }
           >
+            {/* TODO: on click Log out from all providers first */}
             <Button className="solid-login-button">
               <FormattedMessage id="log_in" defaultMessage={'Log in'} />
             </Button>
