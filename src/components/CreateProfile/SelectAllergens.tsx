@@ -3,14 +3,9 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Form from 'react-bootstrap/Form'
 import './SelectAllergens.css'
+import { Allergen } from './allergenType'
 
-type AllergenResource = {
-  IRI: string
-  label: string
-  menuLegendNumber: number
-}
-
-const allergenList: AllergenResource[] = [
+const allergenList: Allergen[] = [
   {
     label: 'Celery',
     menuLegendNumber: 1,
@@ -84,17 +79,15 @@ const allergenList: AllergenResource[] = [
 ]
 
 type Props = {
-  selectedAllergens: Set<AllergenResource>
-  setSelectedAllergens: React.Dispatch<
-    React.SetStateAction<Set<AllergenResource>>
-  >
+  selectedAllergens: Set<Allergen>
+  setSelectedAllergens: React.Dispatch<React.SetStateAction<Set<Allergen>>>
 }
 
 const SelectAllergens: React.FC<Props> = ({
   selectedAllergens,
   setSelectedAllergens,
 }) => {
-  function handleAllergenClick(allergen: AllergenResource) {
+  function handleAllergenClick(allergen: Allergen) {
     const newAllergenSet = new Set(selectedAllergens)
 
     if (newAllergenSet.has(allergen)) {
@@ -116,7 +109,7 @@ const SelectAllergens: React.FC<Props> = ({
         </p>
 
         <Row>
-          {allergenList.map((allergen: AllergenResource) => {
+          {allergenList.map((allergen: Allergen) => {
             return (
               <Col key={allergen.IRI} xs={6}>
                 <Stack direction="horizontal" gap={2}>

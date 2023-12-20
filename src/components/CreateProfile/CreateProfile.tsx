@@ -6,17 +6,7 @@ import SelectAllergens from './SelectAllergens'
 import CreateProfileNavigation from './CreateProfileNavigation'
 import SelectDiets from './SelectDiets'
 import SelectFoodIngredients from './SelectFoodIngredients'
-
-// type Resource = {
-//   IRI: string
-//   label: string
-// }
-
-type AllergenResource = {
-  IRI: string
-  label: string
-  menuLegendNumber: number
-}
+import { Allergen } from './allergenType'
 
 // type ProfileData = {
 //   allergens: Set<Resource>
@@ -31,7 +21,7 @@ const CreateProfile: React.FC = () => {
   const [currentStep, setCurrentStep] = useState(0)
 
   const [selectedAllergens, setSelectedAllergens] = useState(
-    new Set<AllergenResource>(),
+    new Set<Allergen>(),
   )
 
   function saveProfile() {}
