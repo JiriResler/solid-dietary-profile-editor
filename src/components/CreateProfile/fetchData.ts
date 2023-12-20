@@ -3,7 +3,7 @@ import {
   DietResponseBinding,
   IngredientResponse,
 } from './fetchResponseInterfaces'
-import Option from './optionType'
+import SelectMenuOption from './selectMenuOptionType'
 
 export async function fetchDiets() {
   const dietsResponse = await fetch(
@@ -18,10 +18,10 @@ export async function fetchDiets() {
 export function transformDietsResponse(
   dietsResponseArr: DietResponseBinding[],
 ) {
-  const resultDietsArr: Option[] = []
+  const resultDietsArr: SelectMenuOption[] = []
 
   for (const responseDiet of dietsResponseArr) {
-    const resultDiet: Option = {
+    const resultDiet: SelectMenuOption = {
       value: responseDiet.dietIRI.value,
       label: responseDiet.dietLabel.value,
     }
@@ -47,10 +47,10 @@ export async function fetchIngredients() {
 export function transformIngredientsResponse(
   ingredientsResponseArr: IngredientResponse[],
 ) {
-  const resultIngredientsArr: Option[] = []
+  const resultIngredientsArr: SelectMenuOption[] = []
 
   for (const responseIngredient of ingredientsResponseArr) {
-    const resultIngredient: Option = {
+    const resultIngredient: SelectMenuOption = {
       value: responseIngredient.food,
       label: responseIngredient.foodLabel,
     }

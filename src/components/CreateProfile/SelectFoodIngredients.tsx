@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import Select from 'react-select'
 import CustomSelectMenu from './CustomSelectMenu'
-import Option from './optionType'
+import SelectMenuOption from './selectMenuOptionType'
 import selectMenuOptionFilter from './selectMenuOptionFilter'
 import { fetchIngredients, transformIngredientsResponse } from './fetchData'
 
@@ -14,13 +14,13 @@ const SelectComponents = {
 
 const SelectFoodIngredients: React.FC = () => {
   const [selectedFavoredIngredients, setSelectedFavoredIngredients] = useState<
-    ReadonlyArray<Option>
+    ReadonlyArray<SelectMenuOption>
   >([])
 
   const [selectedDislikedIngredients, setSelectedDislikedIngredients] =
-    useState<ReadonlyArray<Option>>([])
+    useState<ReadonlyArray<SelectMenuOption>>([])
 
-  const [ingredientOptions, setIngredientOptions] = useState<Option[]>([])
+  const [ingredientOptions, setIngredientOptions] = useState<SelectMenuOption[]>([])
 
   const [loadingIngredients, setLoadingIngredients] = useState(false)
 

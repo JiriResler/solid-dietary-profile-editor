@@ -1,11 +1,10 @@
 import Form from 'react-bootstrap/Form'
 import Select from 'react-select'
 import { useEffect, useState } from 'react'
-import Option from './optionType'
+import SelectMenuOption from './selectMenuOptionType'
 import CustomSelectMenu from './CustomSelectMenu'
 import selectMenuOptionFilter from './selectMenuOptionFilter'
 import { fetchDiets, transformDietsResponse } from './fetchData'
-import { Diet } from './profileDataTypes'
 
 const SelectComponents = {
   DropdownIndicator: () => null,
@@ -15,14 +14,16 @@ const SelectComponents = {
 }
 
 type Props = {
-  selectedDiets: Set<Diet>
-  setSelectedDiets: React.Dispatch<React.SetStateAction<Set<Diet>>>
+  selectedDiets: SelectMenuOption[]
+  setSelectedDiets: React.Dispatch<
+    React.SetStateAction<ReadonlyArray<SelectMenuOption>>
+  >
 }
 
 const SelectDiets: React.FC<Props> = ({ selectedDiets, setSelectedDiets }) => {
-  const [selectedDiets, setSelectedDiets] = useState<ReadonlyArray<Option>>([])
-
-  const [dietOptions, setDietOptions] = useState<Option[]>([])
+  const [selectMenuDietOptions, setSelectMenuDietOptions] = useState<
+    SelectMenuOption[]
+  >([])
 
   const [loadingDiets, setLoadingDiets] = useState(false)
 
@@ -41,28 +42,24 @@ const SelectDiets: React.FC<Props> = ({ selectedDiets, setSelectedDiets }) => {
 
     const dietsList = transformDietsResponse(dietsResponse)
 
-    setDietOptions(dietsList)
+    setSelectMenuDietOptions(dietsList)
   }
 
   return (
     <>
-      <ul>
-        {selectedDiets.map((diet) => {
-          return <li key={diet.value}>{diet.label}</li>
-        })}
-      </ul>
-
       <h1>2. Which diets are you on?</h1>
       <Form.Check type={'checkbox'} id={'id'} label="Vegan" />
       <Form.Check type={'checkbox'} id={'id'} label="Vegetarian" />
 
       <h3>Other diets</h3>
       <Select
-        options={dietOptions}
+        options={selectMenuDietOptions}
         value={selectedDiets}
         filterOption={selectMenuOptionFilter}
         isMulti
-        onChange={setSelectedDiets}
+        onChange={(newArray) => {
+          setSelectedDiets(newArray)
+        }}
         components={SelectComponents}
         isDisabled={loadingDiets ? true : false}
         isLoading={loadingDiets ? true : false}

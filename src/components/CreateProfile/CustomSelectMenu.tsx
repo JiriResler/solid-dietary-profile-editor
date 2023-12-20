@@ -1,7 +1,7 @@
 import { components, MenuProps } from 'react-select'
-import Option from './optionType'
+import SelectMenuOption from './selectMenuOptionType'
 
-const CustomSelectMenu = ({ children, ...props }: MenuProps<Option, true>) => {
+const CustomSelectMenu = ({ children, ...props }: MenuProps<SelectMenuOption, true>) => {
   if (props.selectProps.inputValue.length === 0) {
     return null
   }

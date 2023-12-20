@@ -6,7 +6,8 @@ import SelectAllergens from './SelectAllergens'
 import CreateProfileNavigation from './CreateProfileNavigation'
 import SelectDiets from './SelectDiets'
 import SelectFoodIngredients from './SelectFoodIngredients'
-import { Allergen, Diet } from './profileDataTypes'
+import { Allergen } from './profileDataTypes'
+import SelectMenuOption from './selectMenuOptionType'
 
 // type ProfileData = {
 //   allergens: Set<Resource>
@@ -24,7 +25,7 @@ const CreateProfile: React.FC = () => {
     new Set<Allergen>(),
   )
 
-  const [selectedDiets, setSelectedDiets] = useState(new Set<Diet>())
+  const [selectedDiets, setSelectedDiets] = useState<SelectMenuOption[]>([])
 
   function saveProfile() {}
 
