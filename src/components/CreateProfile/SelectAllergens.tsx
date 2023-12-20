@@ -1,84 +1,111 @@
-// import { useState } from 'react'
 import Stack from 'react-bootstrap/Stack'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Form from 'react-bootstrap/Form'
 import './SelectAllergens.css'
 
-const allergenList = [
+type AllergenResource = {
+  IRI: string
+  label: string
+  menuLegendNumber: number
+}
+
+const allergenList: AllergenResource[] = [
   {
-    name: 'Celery',
-    assignedLawNumber: 1,
+    label: 'Celery',
+    menuLegendNumber: 1,
     IRI: 'http://dbpedia.org/resource/Celery',
   },
   {
-    name: 'Molluscs',
-    assignedLawNumber: 8,
+    label: 'Molluscs',
+    menuLegendNumber: 8,
     IRI: 'http://dbpedia.org/resource/Mollusc_shell',
   },
   {
-    name: 'Gluten',
-    assignedLawNumber: 2,
+    label: 'Gluten',
+    menuLegendNumber: 2,
     IRI: 'http://dbpedia.org/resource/Gluten',
   },
   {
-    name: 'Mustard',
-    assignedLawNumber: 9,
+    label: 'Mustard',
+    menuLegendNumber: 9,
     IRI: 'http://dbpedia.org/resource/Mustard_(condiment)',
   },
   {
-    name: 'Crustaceans',
-    assignedLawNumber: 3,
+    label: 'Crustaceans',
+    menuLegendNumber: 3,
     IRI: 'http://dbpedia.org/resource/Crustacean',
   },
   {
-    name: 'Nuts',
-    assignedLawNumber: 10,
+    label: 'Nuts',
+    menuLegendNumber: 10,
     IRI: 'http://dbpedia.org/resource/Nut_(fruit)',
   },
   {
-    name: 'Eggs',
-    assignedLawNumber: 4,
+    label: 'Eggs',
+    menuLegendNumber: 4,
     IRI: 'http://dbpedia.org/resource/Egg',
   },
   {
-    name: 'Peanuts',
-    assignedLawNumber: 11,
+    label: 'Peanuts',
+    menuLegendNumber: 11,
     IRI: 'http://dbpedia.org/resource/Peanut',
   },
   {
-    name: 'Fish',
-    assignedLawNumber: 5,
+    label: 'Fish',
+    menuLegendNumber: 5,
     IRI: 'http://dbpedia.org/resource/Fish',
   },
   {
-    name: 'Sesame',
-    assignedLawNumber: 12,
+    label: 'Sesame',
+    menuLegendNumber: 12,
     IRI: 'http://dbpedia.org/resource/Sesame',
   },
   {
-    name: 'Lupin',
-    assignedLawNumber: 6,
+    label: 'Lupin',
+    menuLegendNumber: 6,
     IRI: 'http://dbpedia.org/resource/Lupinus_polyphyllus',
   },
   {
-    name: 'Soya',
-    assignedLawNumber: 13,
+    label: 'Soya',
+    menuLegendNumber: 13,
     IRI: 'http://dbpedia.org/resource/Soybean',
   },
   {
-    name: 'Milk',
-    assignedLawNumber: 7,
+    label: 'Milk',
+    menuLegendNumber: 7,
     IRI: 'http://dbpedia.org/resource/Milk',
   },
   {
-    name: 'Sulphites',
-    assignedLawNumber: 14,
+    label: 'Sulphites',
+    menuLegendNumber: 14,
     IRI: 'http://dbpedia.org/resource/Sulfur_dioxide',
   },
 ]
 
-const SelectAllergens: React.FC = () => {
+type Props = {
+  selectedAllergens: Set<AllergenResource>
+  setSelectedAllergens: React.Dispatch<
+    React.SetStateAction<Set<AllergenResource>>
+  >
+}
+
+const SelectAllergens: React.FC<Props> = ({
+  selectedAllergens,
+  setSelectedAllergens,
+}) => {
+  function handleAllergenClick(allergen: AllergenResource) {
+    const newAllergenSet = new Set(selectedAllergens)
+
+    if (newAllergenSet.has(allergen)) {
+      newAllergenSet.delete(allergen)
+    } else {
+      newAllergenSet.add(allergen)
+    }
+
+    setSelectedAllergens(newAllergenSet)
+  }
+
   return (
     <>
       <Stack>
@@ -89,19 +116,26 @@ const SelectAllergens: React.FC = () => {
         </p>
 
         <Row>
-          {allergenList.map((allergen) => {
+          {allergenList.map((allergen: AllergenResource) => {
             return (
               <Col key={allergen.IRI} xs={6}>
                 <Stack direction="horizontal" gap={2}>
-                  <Form.Check type={'checkbox'} id={'id'} />
+                  <Form.Check
+                    checked={selectedAllergens.has(allergen)}
+                    onChange={() => {
+                      handleAllergenClick(allergen)
+                    }}
+                    type={'checkbox'}
+                  />
                   <div>
-                    {allergen.assignedLawNumber} {allergen.name}
+                    {allergen.menuLegendNumber} {allergen.label}
                   </div>
                   <img
                     src={
-                      'images/allergens/' + allergen.name.toLowerCase() + '.svg'
+                      'images/allergens/' +
+                      allergen.label.toLowerCase() +
+                      '.svg'
                     }
-                    alt=""
                     className="allergen-icon"
                   />
                 </Stack>

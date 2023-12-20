@@ -44,7 +44,13 @@ const CreateProfileNavigation: React.FC<Props> = ({
         )}
 
         {currentStep === 3 && (
-          <Button className="navigationButton" variant="success">
+          <Button
+            onClick={() => {
+              saveProfile()
+            }}
+            className="navigationButton"
+            variant="success"
+          >
             Finish
           </Button>
         )}

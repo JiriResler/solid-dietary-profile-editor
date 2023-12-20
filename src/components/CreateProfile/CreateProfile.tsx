@@ -7,8 +7,34 @@ import CreateProfileNavigation from './CreateProfileNavigation'
 import SelectDiets from './SelectDiets'
 import SelectFoodIngredients from './SelectFoodIngredients'
 
+// type Resource = {
+//   IRI: string
+//   label: string
+// }
+
+type AllergenResource = {
+  IRI: string
+  label: string
+  menuLegendNumber: number
+}
+
+// type ProfileData = {
+//   allergens: Set<Resource>
+//   diets: Set<Resource>
+//   preferences: {
+//     favored: Set<Resource>
+//     disliked: Set<Resource>
+//   }
+// }
+
 const CreateProfile: React.FC = () => {
-  const [currentStep, setCurrentStep] = useState<number>(0)
+  const [currentStep, setCurrentStep] = useState(0)
+
+  const [selectedAllergens, setSelectedAllergens] = useState(
+    new Set<AllergenResource>(),
+  )
+
+  function saveProfile() {}
 
   return (
     <>
@@ -36,11 +62,26 @@ const CreateProfile: React.FC = () => {
           </Stack>
         )}
 
-        {currentStep === 1 && <SelectAllergens />}
+        {currentStep === 1 && (
+          <SelectAllergens
+            selectedAllergens={selectedAllergens}
+            setSelectedAllergens={setSelectedAllergens}
+          />
+        )}
 
-        {currentStep === 2 && <SelectDiets />}
+        {currentStep === 2 && (
+          <SelectDiets
+            newProfileData={newProfileData}
+            setNewProfileData={setNewProfileData}
+          />
+        )}
 
-        {currentStep === 3 && <SelectFoodIngredients />}
+        {currentStep === 3 && (
+          <SelectFoodIngredients
+            newProfileData={newProfileData}
+            setNewProfileData={setNewProfileData}
+          />
+        )}
       </div>
 
       <CreateProfileNavigation
