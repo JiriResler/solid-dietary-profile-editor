@@ -6,11 +6,13 @@ import './CreateProfileNavigation.css'
 type Props = {
   currentStep: number
   setCurrentStep: React.Dispatch<React.SetStateAction<number>>
+  saveProfile: () => void
 }
 
 const CreateProfileNavigation: React.FC<Props> = ({
   currentStep,
   setCurrentStep,
+  saveProfile,
 }) => {
   return (
     <Row>

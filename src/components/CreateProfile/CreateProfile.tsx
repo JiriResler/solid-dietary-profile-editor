@@ -25,9 +25,15 @@ const CreateProfile: React.FC = () => {
     new Set<Allergen>(),
   )
 
-  const [selectedDiets, setSelectedDiets] = useState<SelectMenuOption[]>([])
+  const [selectedDiets, setSelectedDiets] = useState<
+    ReadonlyArray<SelectMenuOption>
+  >([])
 
-  function saveProfile() {}
+  function saveProfile() {
+    // for (const member of selectedAllergens) {
+    //   console.log(JSON.stringify(member))
+    // }
+  }
 
   return (
     <>
@@ -69,17 +75,18 @@ const CreateProfile: React.FC = () => {
           />
         )}
 
-        {currentStep === 3 && (
+        {/* {currentStep === 3 && (
           <SelectFoodIngredients
             newProfileData={newProfileData}
             setNewProfileData={setNewProfileData}
           />
-        )}
+        )} */}
       </div>
 
       <CreateProfileNavigation
         currentStep={currentStep}
         setCurrentStep={setCurrentStep}
+        saveProfile={saveProfile}
       />
     </>
   )

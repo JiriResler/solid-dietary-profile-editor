@@ -14,15 +14,15 @@ const SelectComponents = {
 }
 
 type Props = {
-  selectedDiets: SelectMenuOption[]
+  selectedDiets: ReadonlyArray<SelectMenuOption>
   setSelectedDiets: React.Dispatch<
     React.SetStateAction<ReadonlyArray<SelectMenuOption>>
   >
 }
 
 const SelectDiets: React.FC<Props> = ({ selectedDiets, setSelectedDiets }) => {
-  const [selectMenuDietOptions, setSelectMenuDietOptions] = useState<
-    SelectMenuOption[]
+  const [menuOptions, setMenuOptions] = useState<
+    ReadonlyArray<SelectMenuOption>
   >([])
 
   const [loadingDiets, setLoadingDiets] = useState(false)
@@ -42,7 +42,7 @@ const SelectDiets: React.FC<Props> = ({ selectedDiets, setSelectedDiets }) => {
 
     const dietsList = transformDietsResponse(dietsResponse)
 
-    setSelectMenuDietOptions(dietsList)
+    setMenuOptions(dietsList)
   }
 
   return (
@@ -53,7 +53,7 @@ const SelectDiets: React.FC<Props> = ({ selectedDiets, setSelectedDiets }) => {
 
       <h3>Other diets</h3>
       <Select
-        options={selectMenuDietOptions}
+        options={menuOptions}
         value={selectedDiets}
         filterOption={selectMenuOptionFilter}
         isMulti
