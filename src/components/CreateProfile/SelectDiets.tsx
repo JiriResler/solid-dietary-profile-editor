@@ -5,6 +5,7 @@ import Option from './optionType'
 import CustomSelectMenu from './CustomSelectMenu'
 import selectMenuOptionFilter from './selectMenuOptionFilter'
 import { fetchDiets, transformDietsResponse } from './fetchData'
+import { Diet } from './profileDataTypes'
 
 const SelectComponents = {
   DropdownIndicator: () => null,
@@ -13,7 +14,12 @@ const SelectComponents = {
   Menu: CustomSelectMenu,
 }
 
-const SelectDiets: React.FC = () => {
+type Props = {
+  selectedDiets: Set<Diet>
+  setSelectedDiets: React.Dispatch<React.SetStateAction<Set<Diet>>>
+}
+
+const SelectDiets: React.FC<Props> = ({ selectedDiets, setSelectedDiets }) => {
   const [selectedDiets, setSelectedDiets] = useState<ReadonlyArray<Option>>([])
 
   const [dietOptions, setDietOptions] = useState<Option[]>([])
