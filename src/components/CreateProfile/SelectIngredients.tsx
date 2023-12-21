@@ -12,15 +12,26 @@ const SelectComponents = {
   Menu: CustomSelectMenu,
 }
 
-const SelectFoodIngredients: React.FC = () => {
-  const [selectedFavoredIngredients, setSelectedFavoredIngredients] = useState<
-    ReadonlyArray<SelectMenuOption>
+type Props = {
+  selectedFavoredIngredients: ReadonlyArray<SelectMenuOption>
+  setSelectedFavoredIngredients: React.Dispatch<
+    React.SetStateAction<ReadonlyArray<SelectMenuOption>>
+  >
+  selectedDislikedIngredients: ReadonlyArray<SelectMenuOption>
+  setSelectedDislikedIngredients: React.Dispatch<
+    React.SetStateAction<ReadonlyArray<SelectMenuOption>>
+  >
+}
+
+const SelectIngredients: React.FC<Props> = ({
+  selectedFavoredIngredients,
+  setSelectedFavoredIngredients,
+  selectedDislikedIngredients,
+  setSelectedDislikedIngredients,
+}) => {
+  const [ingredientOptions, setIngredientOptions] = useState<
+    SelectMenuOption[]
   >([])
-
-  const [selectedDislikedIngredients, setSelectedDislikedIngredients] =
-    useState<ReadonlyArray<SelectMenuOption>>([])
-
-  const [ingredientOptions, setIngredientOptions] = useState<SelectMenuOption[]>([])
 
   const [loadingIngredients, setLoadingIngredients] = useState(false)
 
@@ -51,7 +62,9 @@ const SelectFoodIngredients: React.FC = () => {
         value={selectedFavoredIngredients}
         filterOption={selectMenuOptionFilter}
         isMulti
-        onChange={setSelectedFavoredIngredients}
+        onChange={(newArray) => {
+          setSelectedFavoredIngredients(newArray)
+        }}
         components={SelectComponents}
         isDisabled={loadingIngredients ? true : false}
         isLoading={loadingIngredients ? true : false}
@@ -66,7 +79,9 @@ const SelectFoodIngredients: React.FC = () => {
         value={selectedDislikedIngredients}
         filterOption={selectMenuOptionFilter}
         isMulti
-        onChange={setSelectedDislikedIngredients}
+        onChange={(newArray) => {
+          setSelectedDislikedIngredients(newArray)
+        }}
         components={SelectComponents}
         isDisabled={loadingIngredients ? true : false}
         isLoading={loadingIngredients ? true : false}
@@ -78,4 +93,4 @@ const SelectFoodIngredients: React.FC = () => {
   )
 }
 
-export default SelectFoodIngredients
+export default SelectIngredients

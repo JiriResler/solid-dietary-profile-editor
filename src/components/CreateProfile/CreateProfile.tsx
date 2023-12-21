@@ -5,18 +5,9 @@ import './CreateProfile.css'
 import SelectAllergens from './SelectAllergens'
 import CreateProfileNavigation from './CreateProfileNavigation'
 import SelectDiets from './SelectDiets'
-import SelectFoodIngredients from './SelectFoodIngredients'
+import SelectIngredients from './SelectIngredients'
 import { Allergen } from './profileDataTypes'
 import SelectMenuOption from './selectMenuOptionType'
-
-// type ProfileData = {
-//   allergens: Set<Resource>
-//   diets: Set<Resource>
-//   preferences: {
-//     favored: Set<Resource>
-//     disliked: Set<Resource>
-//   }
-// }
 
 const CreateProfile: React.FC = () => {
   const [currentStep, setCurrentStep] = useState(0)
@@ -28,6 +19,13 @@ const CreateProfile: React.FC = () => {
   const [selectedDiets, setSelectedDiets] = useState<
     ReadonlyArray<SelectMenuOption>
   >([])
+
+  const [selectedFavoredIngredients, setSelectedFavoredIngredients] = useState<
+    ReadonlyArray<SelectMenuOption>
+  >([])
+
+  const [selectedDislikedIngredients, setSelectedDislikedIngredients] =
+    useState<ReadonlyArray<SelectMenuOption>>([])
 
   function saveProfile() {
     // for (const member of selectedAllergens) {
@@ -75,12 +73,14 @@ const CreateProfile: React.FC = () => {
           />
         )}
 
-        {/* {currentStep === 3 && (
-          <SelectFoodIngredients
-            newProfileData={newProfileData}
-            setNewProfileData={setNewProfileData}
+        {currentStep === 3 && (
+          <SelectIngredients
+            selectedFavoredIngredients={selectedFavoredIngredients}
+            setSelectedFavoredIngredients={setSelectedFavoredIngredients}
+            selectedDislikedIngredients={selectedDislikedIngredients}
+            setSelectedDislikedIngredients={setSelectedDislikedIngredients}
           />
-        )} */}
+        )}
       </div>
 
       <CreateProfileNavigation
