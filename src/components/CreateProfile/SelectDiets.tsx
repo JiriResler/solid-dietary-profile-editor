@@ -99,8 +99,19 @@ const SelectDiets: React.FC<Props> = ({ selectedDiets, setSelectedDiets }) => {
     }
   }
 
+  // Filters out the vegan and vegetarian diets from selectedDiets
   function selectedDietsWithoutVeg() {
-    
+    const filteredDiets: SelectMenuOption[] = []
+
+    for (const diet of selectedDiets) {
+      if (diet.value === veganIRI || diet.value === vegetarianIRI) {
+        continue
+      }
+
+      filteredDiets.push(diet)
+    }
+
+    return filteredDiets
   }
 
   return (
