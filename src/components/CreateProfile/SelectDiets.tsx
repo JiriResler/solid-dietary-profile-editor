@@ -25,6 +25,18 @@ const SelectDiets: React.FC<Props> = ({ selectedDiets, setSelectedDiets }) => {
     ReadonlyArray<SelectMenuOption>
   >([])
 
+  const veganIRI = 'http://dbpedia.org/resource/Veganism'
+
+  const [veganChecked, setVeganChecked] = useState(
+    selectedDietsInclude(veganIRI),
+  )
+
+  const vegetarianIRI = 'http://dbpedia.org/resource/Vegetarianism'
+
+  const [vegetarianChecked, setVegetarianChecked] = useState(
+    selectedDietsInclude(vegetarianIRI),
+  )
+
   const [loadingDiets, setLoadingDiets] = useState(false)
 
   // Load list of diets upon initial render
@@ -45,16 +57,82 @@ const SelectDiets: React.FC<Props> = ({ selectedDiets, setSelectedDiets }) => {
     setMenuOptions(dietsList)
   }
 
+  function selectedDietsInclude(dietIRI: string) {
+    let result = false
+
+    for (const diet of selectedDiets) {
+      if (diet.value === dietIRI) {
+        result = true
+      }
+    }
+
+    return result
+  }
+
+  function handleCheckboxOnChange(dietIRI: string, dietLabel: string) {
+    const newDietsArray: SelectMenuOption[] = []
+
+    if (selectedDietsInclude(dietIRI)) {
+      for (const existingDiet of selectedDiets) {
+        if (existingDiet.value === dietIRI) {
+          continue
+        }
+
+        newDietsArray.push(existingDiet)
+      }
+    } else {
+      for (const existingDiet of selectedDiets) {
+        newDietsArray.push(existingDiet)
+      }
+
+      const newDiet: SelectMenuOption = { label: dietLabel, value: dietIRI }
+
+      newDietsArray.push(newDiet)
+    }
+
+    setSelectedDiets(newDietsArray)
+
+    if (dietLabel === 'Vegan') {
+      setVeganChecked(!veganChecked)
+    } else {
+      setVegetarianChecked(!vegetarianChecked)
+    }
+  }
+
+  function selectedDietsWithoutVeg() {
+    
+  }
+
   return (
     <>
       <h1>2. Which diets are you on?</h1>
-      <Form.Check type={'checkbox'} id={'id'} label="Vegan" />
-      <Form.Check type={'checkbox'} id={'id'} label="Vegetarian" />
+      <Form.Check
+        checked={veganChecked}
+        onChange={() => {
+          handleCheckboxOnChange(
+            'http://dbpedia.org/resource/Veganism',
+            'Vegan',
+          )
+        }}
+        type="checkbox"
+        label="Vegan"
+      />
+      <Form.Check
+        checked={vegetarianChecked}
+        onChange={() => {
+          handleCheckboxOnChange(
+            'http://dbpedia.org/resource/Vegetarianism',
+            'Vegetarian',
+          )
+        }}
+        type="checkbox"
+        label="Vegetarian"
+      />
 
       <h3>Other diets</h3>
       <Select
         options={menuOptions}
-        value={selectedDiets}
+        value={selectedDietsWithoutVeg()}
         filterOption={selectMenuOptionFilter}
         isMulti
         onChange={(newArray) => {
