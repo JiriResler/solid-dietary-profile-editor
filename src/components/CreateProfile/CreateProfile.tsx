@@ -11,7 +11,19 @@ import SelectMenuOption from './selectMenuOptionType'
 import { LoginMethod } from '../loginMethodEnum'
 import { useSession } from '@inrupt/solid-ui-react'
 import { fetch } from '@inrupt/solid-client-authn-browser'
-import { getPodUrlAll } from '@inrupt/solid-client'
+import {
+  addUrl,
+  addStringNoLocale,
+  createSolidDataset,
+  createThing,
+  getPodUrlAll,
+  getSolidDataset,
+  getThingAll,
+  removeThing,
+  saveSolidDatasetAt,
+  setThing,
+} from '@inrupt/solid-client'
+import { SCHEMA_INRUPT, RDF, AS } from '@inrupt/vocab-common-rdf'
 
 type Props = {
   loginMethod: LoginMethod
@@ -50,7 +62,34 @@ const CreateProfile: React.FC<Props> = ({ loginMethod }) => {
   async function saveProfileSolid() {
     const podUrl = await getPodUrl()
 
-    
+    const datasetUrl = podUrl + 'readingList/myList'
+
+    let myReadingList
+
+    try {
+      // Attempt to retrieve the reading list in case it already exists.
+      myReadingList = await getSolidDataset(datasetUrl, { fetch: fetch })
+      // Clear the list to override the whole list
+      let items = getThingAll(myReadingList)
+      items.forEach((item) => {
+        myReadingList = removeThing(myReadingList, item)
+      })
+    } catch (error) {
+      if (typeof error.statusCode === 'number' && error.statusCode === 404) {
+        // if not found, create a new SolidDataset (i.e., the reading list)
+        myReadingList = createSolidDataset()
+      } else {
+        console.error(error.message)
+      }
+    }
+
+    let item = createThing({ name: 'title' })
+    item = addUrl(item, RDF.type, AS.Article)
+    item = addStringNoLocale(item, SCHEMA_INRUPT.name, 'title2')
+    myReadingList = setThing(myReadingList, item)
+
+    // save
+    await saveSolidDatasetAt(datasetUrl, myReadingList, { fetch: fetch })
 
     // const allergens = createAllergenThings()
 
