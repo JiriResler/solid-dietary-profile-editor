@@ -8,8 +8,18 @@ import SelectDiets from './SelectDiets'
 import SelectIngredients from './SelectIngredients'
 import { Allergen } from './profileDataTypes'
 import SelectMenuOption from './selectMenuOptionType'
+import { LoginMethod } from '../loginMethodEnum'
+import { useSession } from '@inrupt/solid-ui-react'
+import { fetch } from '@inrupt/solid-client-authn-browser'
+import { getPodUrlAll } from '@inrupt/solid-client'
 
-const CreateProfile: React.FC = () => {
+type Props = {
+  loginMethod: LoginMethod
+}
+
+const CreateProfile: React.FC<Props> = ({ loginMethod }) => {
+  const { session } = useSession()
+
   const [currentStep, setCurrentStep] = useState(0)
 
   const [selectedAllergens, setSelectedAllergens] = useState(
@@ -28,10 +38,47 @@ const CreateProfile: React.FC = () => {
     useState<ReadonlyArray<SelectMenuOption>>([])
 
   function saveProfile() {
-    // for (const member of selectedAllergens) {
-    //   console.log(JSON.stringify(member))
-    // }
+    if (loginMethod === LoginMethod.SOLID) {
+      void saveProfileSolid()
+    }
+
+    if (loginMethod === LoginMethod.FIREBASE) {
+      saveProfileFirebase()
+    }
   }
+
+  async function saveProfileSolid() {
+    const podUrl = await getPodUrl()
+
+    
+
+    // const allergens = createAllergenThings()
+
+    // const diets = createDietThings()
+
+    // const favoredIngredients = createFavoredIngredientThings()
+
+    // const dislikedIngredients = createDislikedIngredientsThings()
+
+    // const profile = [allergens, diets, favoredIngredients, dislikedIngredients]
+
+    // saveToPod(podUrl, profile)
+  }
+
+  async function getPodUrl() {
+    const userWebID: string =
+      session.info.webId !== undefined ? session.info.webId : ''
+
+    const podUrls: string[] = await getPodUrlAll(userWebID, {
+      fetch: fetch,
+    }).catch((error: Error) => console.log(error.message))
+
+    const firstPodUrl = podUrls[0]
+
+    return firstPodUrl
+  }
+
+  function saveProfileFirebase() {}
 
   return (
     <>

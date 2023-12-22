@@ -1,11 +1,16 @@
 import { useState } from 'react'
 import CreateProfile from './CreateProfile/CreateProfile'
+import { LoginMethod } from './loginMethodEnum'
 
-const Profile: React.FC = () => {
+type Props = {
+  loginMethod: LoginMethod
+}
+
+const Profile: React.FC<Props> = ({ loginMethod }) => {
   const [userProfileExists] = useState(false)
 
   if (!userProfileExists) {
-    return <CreateProfile />
+    return <CreateProfile loginMethod={loginMethod} />
   }
 
   return (

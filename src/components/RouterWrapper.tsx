@@ -6,6 +6,7 @@ import Profile from './Profile'
 // import About from './About'
 import LoginScreen from './Login/LoginScreen'
 import { handleIncomingRedirect } from '@inrupt/solid-client-authn-browser'
+import { LoginMethod } from './loginMethodEnum'
 
 function RouterWrapper() {
   const { session, sessionRequestInProgress } = useSession()
@@ -24,9 +25,9 @@ function RouterWrapper() {
 
     if (userIsLoggedIn) {
       if (session.info.isLoggedIn) {
-        return <Profile />
+        return <Profile loginMethod={LoginMethod.SOLID} />
       } else {
-        return <Profile />
+        return <Profile loginMethod={LoginMethod.FIREBASE} />
       }
     } else {
       return <Navigate to="/login" />
