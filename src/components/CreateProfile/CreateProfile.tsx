@@ -90,7 +90,11 @@ const CreateProfile: React.FC<Props> = ({ loginMethod }) => {
     let user = createThing({ name: 'me' })
 
     for (const allergen of selectedAllergens) {
-      user = addUrl(user, RDF.type, allergen.IRI)
+      user = addUrl(
+        user,
+        'https://github.com/JiriResler/solid-choose-well-ontology/blob/main/choosewell#allergicTo',
+        allergen.IRI,
+      )
     }
 
     eatingPreferencesProfile = setThing(eatingPreferencesProfile, user)
