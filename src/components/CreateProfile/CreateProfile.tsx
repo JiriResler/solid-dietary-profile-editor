@@ -62,46 +62,42 @@ const CreateProfile: React.FC<Props> = ({ loginMethod }) => {
   async function saveProfileSolid() {
     const podUrl = await getPodUrl()
 
-    const datasetUrl = podUrl + 'readingList/myList'
+    const profileLocation = 'eatingPreferencesProfile/profile'
 
-    let myReadingList
+    const profileUrl = podUrl + profileLocation
+
+    let eatingPreferencesProfile
 
     try {
-      // Attempt to retrieve the reading list in case it already exists.
-      myReadingList = await getSolidDataset(datasetUrl, { fetch: fetch })
-      // Clear the list to override the whole list
-      let items = getThingAll(myReadingList)
+      // Attempt to retrieve the profile in case it already exists.
+      eatingPreferencesProfile = await getSolidDataset(profileUrl, {
+        fetch: fetch,
+      })
+      // Clear the profile
+      let items = getThingAll(eatingPreferencesProfile)
       items.forEach((item) => {
-        myReadingList = removeThing(myReadingList, item)
+        eatingPreferencesProfile = removeThing(eatingPreferencesProfile, item)
       })
     } catch (error) {
       if (typeof error.statusCode === 'number' && error.statusCode === 404) {
-        // if not found, create a new SolidDataset (i.e., the reading list)
-        myReadingList = createSolidDataset()
+        // if not found, create a new SolidDataset
+        eatingPreferencesProfile = createSolidDataset()
       } else {
         console.error(error.message)
       }
     }
 
-    let item = createThing({ name: 'title' })
-    item = addUrl(item, RDF.type, AS.Article)
-    item = addStringNoLocale(item, SCHEMA_INRUPT.name, 'title2')
-    myReadingList = setThing(myReadingList, item)
+    let user = createThing({ name: 'me' })
 
-    // save
-    await saveSolidDatasetAt(datasetUrl, myReadingList, { fetch: fetch })
+    user = addAllergens(user)
 
-    // const allergens = createAllergenThings()
+    eatingPreferencesProfile = setThing(eatingPreferencesProfile, user)
 
-    // const diets = createDietThings()
+    await saveSolidDatasetAt(profileUrl, eatingPreferencesProfile, {
+      fetch: fetch,
+    })
 
-    // const favoredIngredients = createFavoredIngredientThings()
-
-    // const dislikedIngredients = createDislikedIngredientsThings()
-
-    // const profile = [allergens, diets, favoredIngredients, dislikedIngredients]
-
-    // saveToPod(podUrl, profile)
+    alert('Profile saved')
   }
 
   async function getPodUrl() {
@@ -115,6 +111,16 @@ const CreateProfile: React.FC<Props> = ({ loginMethod }) => {
     const firstPodUrl = podUrls[0]
 
     return firstPodUrl
+  }
+
+  function addAllergens(user) {
+    let newUser = user
+
+    for (const allergen of selectedAllergens) {
+      newUser = addUrl(newUser, RDF.type, allergen.IRI)
+    }
+
+    return newUser
   }
 
   function saveProfileFirebase() {}
