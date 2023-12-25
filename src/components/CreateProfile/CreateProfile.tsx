@@ -97,6 +97,30 @@ const CreateProfile: React.FC<Props> = ({ loginMethod }) => {
       )
     }
 
+    for (const diet of selectedDiets) {
+      user = addUrl(
+        user,
+        'https://github.com/JiriResler/solid-choose-well-ontology/blob/main/choosewell#isOnDiet',
+        diet.value,
+      )
+    }
+
+    for (const ingredient of selectedFavoredIngredients) {
+      user = addUrl(
+        user,
+        'https://github.com/JiriResler/solid-choose-well-ontology/blob/main/choosewell#favoredIngredient',
+        ingredient.value,
+      )
+    }
+
+    for (const ingredient of selectedDislikedIngredients) {
+      user = addUrl(
+        user,
+        'https://github.com/JiriResler/solid-choose-well-ontology/blob/main/choosewell#dislikedIngredient',
+        ingredient.value,
+      )
+    }
+
     eatingPreferencesProfile = setThing(eatingPreferencesProfile, user)
 
     await saveSolidDatasetAt(profileUrl, eatingPreferencesProfile, {
