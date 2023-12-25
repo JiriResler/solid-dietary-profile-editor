@@ -89,7 +89,9 @@ const CreateProfile: React.FC<Props> = ({ loginMethod }) => {
 
     let user = createThing({ name: 'me' })
 
-    user = addAllergens(user)
+    for (const allergen of selectedAllergens) {
+      user = addUrl(user, RDF.type, allergen.IRI)
+    }
 
     eatingPreferencesProfile = setThing(eatingPreferencesProfile, user)
 
@@ -111,16 +113,6 @@ const CreateProfile: React.FC<Props> = ({ loginMethod }) => {
     const firstPodUrl = podUrls[0]
 
     return firstPodUrl
-  }
-
-  function addAllergens(user) {
-    let newUser = user
-
-    for (const allergen of selectedAllergens) {
-      newUser = addUrl(newUser, RDF.type, allergen.IRI)
-    }
-
-    return newUser
   }
 
   function saveProfileFirebase() {}
