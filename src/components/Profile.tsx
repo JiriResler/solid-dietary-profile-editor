@@ -3,6 +3,7 @@ import CreateProfile from './CreateProfile/CreateProfile'
 import { LoginMethod } from './loginMethodEnum'
 import Offcanvas from 'react-bootstrap/Offcanvas'
 import Button from 'react-bootstrap/Button'
+import './Profile.css'
 
 type Props = {
   loginMethod: LoginMethod
@@ -23,9 +24,9 @@ const Profile: React.FC<Props> = ({ loginMethod }) => {
       <Button
         variant="primary"
         onClick={() => setShowSidebar(true)}
-        className="position-absolute top-0 end-0 mt-3 me-3"
+        className="position-absolute top-0 end-0 mt-4 me-4 hamburger-icon"
       >
-        Menu
+        <img src="images/hamburger_menu_icon.svg" />
       </Button>
 
       <Offcanvas
