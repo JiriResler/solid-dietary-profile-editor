@@ -24,9 +24,9 @@ const Profile: React.FC<Props> = ({ loginMethod }) => {
       <Button
         variant="primary"
         onClick={() => setShowSidebar(true)}
-        className="position-absolute top-0 end-0 mt-4 me-4 hamburger-icon"
+        className="position-absolute top-0 end-0 mt-4 me-4"
       >
-        <img src="images/hamburger_menu_icon.svg" />
+        <img src="images/hamburger_menu_icon.svg" className="hamburger-icon" />
       </Button>
 
       <Offcanvas
@@ -35,7 +35,7 @@ const Profile: React.FC<Props> = ({ loginMethod }) => {
         placement="end"
         className="sidebar-menu"
       >
-        <Offcanvas.Header closeButton>
+        <Offcanvas.Header className="border">
           <Offcanvas.Title>
             <img
               className="w-25 mb-2"
@@ -46,15 +46,11 @@ const Profile: React.FC<Props> = ({ loginMethod }) => {
           </Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
-          <div>Edit profile</div>
-          <hr />
-          <div>Select Pod</div>
-          <hr />
-          <div>Import profile</div>
-          <hr />
-          <div>Export profile</div>
-          <hr />
-          <div>Log out</div>
+          <div className="mt-2">Edit profile</div>
+          <div className="mt-4">Select Pod</div>
+          <div className="mt-4">Import profile</div>
+          <div className="mt-4">Export profile</div>
+          <div className="mt-4">Log out</div>
         </Offcanvas.Body>
       </Offcanvas>
     </>
