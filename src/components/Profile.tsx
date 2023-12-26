@@ -33,14 +33,28 @@ const Profile: React.FC<Props> = ({ loginMethod }) => {
         show={showSidebar}
         onHide={() => setShowSidebar(false)}
         placement="end"
-        className="w-50"
+        className="sidebar-menu"
       >
         <Offcanvas.Header closeButton>
-          <Offcanvas.Title>Menu</Offcanvas.Title>
+          <Offcanvas.Title>
+            <img
+              className="w-25 mb-2"
+              src="images/app_logo.svg"
+              alt="application_logo"
+            />
+            <span className="ms-4">Menu</span>
+          </Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
-          Some text as placeholder. In real life you can have the elements you
-          have chosen. Like, text, images, lists, etc.
+          <div>Edit profile</div>
+          <hr />
+          <div>Select Pod</div>
+          <hr />
+          <div>Import profile</div>
+          <hr />
+          <div>Export profile</div>
+          <hr />
+          <div>Log out</div>
         </Offcanvas.Body>
       </Offcanvas>
     </>

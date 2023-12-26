@@ -1,3 +1,7 @@
 .hamburger-icon {
   height: 40pt;  
 }
+
+.sidebar-menu {
+  width: 150pt !important;
+}
