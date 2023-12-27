@@ -47,7 +47,7 @@ const Profile: React.FC<Props> = ({ loginMethod }) => {
         </Offcanvas.Header>
         <Offcanvas.Body>
           <div className="mt-2">Edit profile</div>
-          <div className="mt-4">Select Pod</div>
+          <div className="mt-4">Select Solid Pod</div>
           <div className="mt-4">Import profile</div>
           <div className="mt-4">Export profile</div>
           <div className="mt-4">Log out</div>
