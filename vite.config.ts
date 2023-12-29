@@ -7,7 +7,9 @@ export default defineConfig(({ command }) => {
     plugins: [react()],
     base: '/solid-dietary-profile-editor/',
     test: {
+      globals: true,
       environment: 'jsdom',
+      setupFiles: ['src/test-setup.ts'],
     },
   }
 

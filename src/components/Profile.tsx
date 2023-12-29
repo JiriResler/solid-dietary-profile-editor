@@ -4,12 +4,17 @@ import { LoginMethod } from './loginMethodEnum'
 import Offcanvas from 'react-bootstrap/Offcanvas'
 import Button from 'react-bootstrap/Button'
 import './Profile.css'
+import { signOut } from 'firebase/auth'
+import { auth } from '../firebase'
+import { useSession } from '@inrupt/solid-ui-react'
 
 type Props = {
   loginMethod: LoginMethod
 }
 
 const Profile: React.FC<Props> = ({ loginMethod }) => {
+  const { session } = useSession()
+
   const [userProfileExists] = useState(true)
   const [showSidebar, setShowSidebar] = useState(false)
 
@@ -50,7 +55,20 @@ const Profile: React.FC<Props> = ({ loginMethod }) => {
           <div className="mt-4">Select Solid Pod</div>
           <div className="mt-4">Import profile</div>
           <div className="mt-4">Export profile</div>
-          <div className="mt-4">Log out</div>
+          <div
+            onClick={() => {
+              signOut(auth).catch((error) => {
+                console.log(error.message)
+              })
+
+              session.logout().catch((error) => {
+                console.log(error.message)
+              })
+            }}
+            className="mt-4"
+          >
+            Log out
+          </div>
         </Offcanvas.Body>
       </Offcanvas>
     </>
