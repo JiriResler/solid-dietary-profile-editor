@@ -57,11 +57,11 @@ const Profile: React.FC<Props> = ({ loginMethod }) => {
           <div className="mt-4">Export profile</div>
           <div
             onClick={() => {
-              signOut(auth).catch((error) => {
+              signOut(auth).catch((error: Error) => {
                 console.log(error.message)
               })
 
-              session.logout().catch((error) => {
+              session.logout().catch((error: Error) => {
                 console.log(error.message)
               })
             }}

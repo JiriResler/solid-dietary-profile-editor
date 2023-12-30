@@ -10,9 +10,7 @@ describe('SelectProvider', () => {
         <SelectProvider />
       </IntlProviderWrapper>,
     )
-    expect(screen.getByRole('heading')).toBeInTheDocument()
-    // const heading =
 
-    // expect(heading).toBeNull()
+    expect(screen.getByRole('heading')).toBeInTheDocument()
   })
 })

@@ -12,8 +12,8 @@ import { LoginMethod } from '../loginMethodEnum'
 import { useSession } from '@inrupt/solid-ui-react'
 import { fetch } from '@inrupt/solid-client-authn-browser'
 import {
+  SolidDataset,
   addUrl,
-  addStringNoLocale,
   createSolidDataset,
   createThing,
   getPodUrlAll,
@@ -23,7 +23,6 @@ import {
   saveSolidDatasetAt,
   setThing,
 } from '@inrupt/solid-client'
-import { SCHEMA_INRUPT, RDF, AS } from '@inrupt/vocab-common-rdf'
 
 type Props = {
   loginMethod: LoginMethod
@@ -66,15 +65,16 @@ const CreateProfile: React.FC<Props> = ({ loginMethod }) => {
 
     const profileUrl = podUrl + profileLocation
 
-    let eatingPreferencesProfile
+    let eatingPreferencesProfile: SolidDataset
 
     try {
       // Attempt to retrieve the profile in case it already exists.
       eatingPreferencesProfile = await getSolidDataset(profileUrl, {
-        fetch: fetch,
+        fetch: fetch as undefined,
       })
+
       // Clear the profile
-      let items = getThingAll(eatingPreferencesProfile)
+      const items = getThingAll(eatingPreferencesProfile)
       items.forEach((item) => {
         eatingPreferencesProfile = removeThing(eatingPreferencesProfile, item)
       })
@@ -124,7 +124,7 @@ const CreateProfile: React.FC<Props> = ({ loginMethod }) => {
     eatingPreferencesProfile = setThing(eatingPreferencesProfile, user)
 
     await saveSolidDatasetAt(profileUrl, eatingPreferencesProfile, {
-      fetch: fetch,
+      fetch: fetch as undefined,
     })
 
     alert('Profile saved')
@@ -134,8 +134,8 @@ const CreateProfile: React.FC<Props> = ({ loginMethod }) => {
     const userWebID: string =
       session.info.webId !== undefined ? session.info.webId : ''
 
-    const podUrls: string[] = await getPodUrlAll(userWebID, {
-      fetch: fetch,
+    const podUrls = await getPodUrlAll(userWebID, {
+      fetch: fetch as undefined,
     }).catch((error: Error) => console.log(error.message))
 
     const firstPodUrl = podUrls[0]
