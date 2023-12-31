@@ -15,7 +15,7 @@ type Props = {
 const Profile: React.FC<Props> = ({ loginMethod }) => {
   const { session } = useSession()
 
-  const [userProfileExists] = useState(true)
+  const [userProfileExists] = useState(false)
   const [showSidebar, setShowSidebar] = useState(false)
 
   if (!userProfileExists) {
