@@ -5,7 +5,6 @@ import './CreateProfile.css'
 import SelectAllergens from './SelectAllergens'
 import CreateProfileNavigation from './CreateProfileNavigation'
 import SelectDiets from './SelectDiets'
-import SelectIngredients from './SelectIngredients'
 import { Allergen } from './profileDataTypes'
 import SelectMenuOption from './selectMenuOptionType'
 import { LoginMethod } from '../loginMethodEnum'
@@ -23,6 +22,7 @@ import {
   saveSolidDatasetAt,
   setThing,
 } from '@inrupt/solid-client'
+import SelectTastePreferences from './SelectTastePreferences'
 
 type Props = {
   loginMethod: LoginMethod
@@ -40,13 +40,6 @@ const CreateProfile: React.FC<Props> = ({ loginMethod }) => {
   const [selectedDiets, setSelectedDiets] = useState<
     ReadonlyArray<SelectMenuOption>
   >([])
-
-  const [selectedFavoredIngredients, setSelectedFavoredIngredients] = useState<
-    ReadonlyArray<SelectMenuOption>
-  >([])
-
-  const [selectedDislikedIngredients, setSelectedDislikedIngredients] =
-    useState<ReadonlyArray<SelectMenuOption>>([])
 
   function saveProfile() {
     if (loginMethod === LoginMethod.SOLID) {
@@ -102,22 +95,6 @@ const CreateProfile: React.FC<Props> = ({ loginMethod }) => {
         user,
         'https://github.com/JiriResler/solid-choose-well-ontology/blob/main/choosewell#isOnDiet',
         diet.value,
-      )
-    }
-
-    for (const ingredient of selectedFavoredIngredients) {
-      user = addUrl(
-        user,
-        'https://github.com/JiriResler/solid-choose-well-ontology/blob/main/choosewell#favoredIngredient',
-        ingredient.value,
-      )
-    }
-
-    for (const ingredient of selectedDislikedIngredients) {
-      user = addUrl(
-        user,
-        'https://github.com/JiriResler/solid-choose-well-ontology/blob/main/choosewell#dislikedIngredient',
-        ingredient.value,
       )
     }
 
@@ -185,14 +162,7 @@ const CreateProfile: React.FC<Props> = ({ loginMethod }) => {
           />
         )}
 
-        {currentStep === 3 && (
-          <SelectIngredients
-            selectedFavoredIngredients={selectedFavoredIngredients}
-            setSelectedFavoredIngredients={setSelectedFavoredIngredients}
-            selectedDislikedIngredients={selectedDislikedIngredients}
-            setSelectedDislikedIngredients={setSelectedDislikedIngredients}
-          />
-        )}
+        {currentStep === 3 && <SelectTastePreferences />}
       </div>
 
       <CreateProfileNavigation
