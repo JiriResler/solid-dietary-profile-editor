@@ -33,6 +33,8 @@ const CreateProfile: React.FC<Props> = ({ loginMethod }) => {
 
   const [currentStep, setCurrentStep] = useState(0)
 
+  const numberOfSteps = 3
+
   const [selectedAllergens, setSelectedAllergens] = useState(
     new Set<Allergen>(),
   )
@@ -150,6 +152,7 @@ const CreateProfile: React.FC<Props> = ({ loginMethod }) => {
 
         {currentStep === 1 && (
           <SelectAllergens
+            currentStep={currentStep}
             selectedAllergens={selectedAllergens}
             setSelectedAllergens={setSelectedAllergens}
           />
@@ -157,16 +160,20 @@ const CreateProfile: React.FC<Props> = ({ loginMethod }) => {
 
         {currentStep === 2 && (
           <SelectDiets
+            currentStep={currentStep}
             selectedDiets={selectedDiets}
             setSelectedDiets={setSelectedDiets}
           />
         )}
 
-        {currentStep === 3 && <SelectTastePreferences />}
+        {currentStep === 3 && (
+          <SelectTastePreferences currentStep={currentStep} />
+        )}
       </div>
 
       <CreateProfileNavigation
         currentStep={currentStep}
+        numberOfSteps={numberOfSteps}
         setCurrentStep={setCurrentStep}
         saveProfile={saveProfile}
       />

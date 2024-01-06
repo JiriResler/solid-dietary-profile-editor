@@ -14,13 +14,18 @@ const SelectComponents = {
 }
 
 type Props = {
+  currentStep: number
   selectedDiets: ReadonlyArray<SelectMenuOption>
   setSelectedDiets: React.Dispatch<
     React.SetStateAction<ReadonlyArray<SelectMenuOption>>
   >
 }
 
-const SelectDiets: React.FC<Props> = ({ selectedDiets, setSelectedDiets }) => {
+const SelectDiets: React.FC<Props> = ({
+  currentStep,
+  selectedDiets,
+  setSelectedDiets,
+}) => {
   const [menuOptions, setMenuOptions] = useState<
     ReadonlyArray<SelectMenuOption>
   >([])
@@ -116,7 +121,7 @@ const SelectDiets: React.FC<Props> = ({ selectedDiets, setSelectedDiets }) => {
 
   return (
     <>
-      <h1>2. Which diets are you on?</h1>
+      <h1>{currentStep}. Which diets are you on?</h1>
       <Form.Check
         checked={veganChecked}
         onChange={() => {

@@ -6,12 +6,14 @@ import './CreateProfileNavigation.css'
 type Props = {
   currentStep: number
   setCurrentStep: React.Dispatch<React.SetStateAction<number>>
+  numberOfSteps: number
   saveProfile: () => void
 }
 
 const CreateProfileNavigation: React.FC<Props> = ({
   currentStep,
   setCurrentStep,
+  numberOfSteps,
   saveProfile,
 }) => {
   return (
@@ -30,11 +32,15 @@ const CreateProfileNavigation: React.FC<Props> = ({
       </Col>
 
       <Col xs={3} className="d-flex align-items-center ">
-        {currentStep > 0 && <span className="mx-auto">{currentStep} / 3</span>}
+        {currentStep > 0 && (
+          <span className="mx-auto">
+            {currentStep} / {numberOfSteps}
+          </span>
+        )}
       </Col>
 
       <Col>
-        {currentStep > 0 && currentStep < 3 && (
+        {currentStep > 0 && currentStep < numberOfSteps && (
           <Button
             onClick={() => {
               setCurrentStep(currentStep + 1)
@@ -45,7 +51,7 @@ const CreateProfileNavigation: React.FC<Props> = ({
           </Button>
         )}
 
-        {currentStep === 3 && (
+        {currentStep === numberOfSteps && (
           <Button
             onClick={() => {
               saveProfile()

@@ -79,11 +79,13 @@ const allergenList: Allergen[] = [
 ]
 
 type Props = {
+  currentStep: number
   selectedAllergens: Set<Allergen>
   setSelectedAllergens: React.Dispatch<React.SetStateAction<Set<Allergen>>>
 }
 
 const SelectAllergens: React.FC<Props> = ({
+  currentStep,
   selectedAllergens,
   setSelectedAllergens,
 }) => {
@@ -102,7 +104,7 @@ const SelectAllergens: React.FC<Props> = ({
   return (
     <>
       <Stack>
-        <h1>1. What are you allergic to?</h1>
+        <h1>{currentStep}. What are you allergic to?</h1>
 
         <p>
           A number in brackets is the number of the allergen given by the law.
