@@ -5,7 +5,7 @@ import './CreateProfile.css'
 import SelectAllergens from './SelectAllergens'
 import CreateProfileNavigation from './CreateProfileNavigation'
 import SelectDiets from './SelectDiets'
-import { Allergen } from './profileDataTypes'
+import { Allergen, TastePreferences } from './profileDataTypes'
 import SelectMenuOption from './selectMenuOptionType'
 import { LoginMethod } from '../loginMethodEnum'
 import { useSession } from '@inrupt/solid-ui-react'
@@ -42,6 +42,13 @@ const CreateProfile: React.FC<Props> = ({ loginMethod }) => {
   const [selectedDiets, setSelectedDiets] = useState<
     ReadonlyArray<SelectMenuOption>
   >([])
+
+  const [selectedTastePreferences, setSelectedTastePreferences] =
+    useState<TastePreferences>({
+      cuisines: new Set<string>(),
+      desserts: '',
+      spiciness: 0,
+    })
 
   function saveProfile() {
     if (loginMethod === LoginMethod.SOLID) {
@@ -167,7 +174,11 @@ const CreateProfile: React.FC<Props> = ({ loginMethod }) => {
         )}
 
         {currentStep === 3 && (
-          <SelectTastePreferences currentStep={currentStep} />
+          <SelectTastePreferences
+            currentStep={currentStep}
+            selectedTastePreferences={selectedTastePreferences}
+            setSelectedTastePreferences={setSelectedTastePreferences}
+          />
         )}
       </div>
 

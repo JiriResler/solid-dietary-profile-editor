@@ -8,3 +8,9 @@ export type Diet = {
   IRI: string
   label: string
 }
+
+export type TastePreferences = {
+  cuisines: Set<string>
+  desserts: string
+  spiciness: number
+}

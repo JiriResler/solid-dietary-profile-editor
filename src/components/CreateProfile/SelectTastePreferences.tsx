@@ -1,8 +1,18 @@
+import { TastePreferences } from './profileDataTypes'
+
 type Props = {
   currentStep: number
+  selectedTastePreferences: TastePreferences
+  setSelectedTastePreferences: React.Dispatch<
+    React.SetStateAction<TastePreferences>
+  >
 }
 
-const SelectTastePreferences: React.FC<Props> = ({ currentStep }) => {
+const SelectTastePreferences: React.FC<Props> = ({
+  currentStep,
+  selectedTastePreferences,
+  setSelectedTastePreferences,
+}) => {
   return (
     <>
       <h1>{currentStep}. Taste preferences</h1>
