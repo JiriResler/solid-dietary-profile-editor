@@ -45,7 +45,7 @@ const CreateProfile: React.FC<Props> = ({ loginMethod }) => {
 
   const [selectedTastePreferences, setSelectedTastePreferences] =
     useState<TastePreferences>({
-      cuisines: new Set<string>(),
+      cuisines: [],
       desserts: '',
       spiciness: 0,
     })

@@ -157,7 +157,7 @@ const SelectDiets: React.FC<Props> = ({
         components={SelectComponents}
         isDisabled={loadingDiets ? true : false}
         isLoading={loadingDiets ? true : false}
-        placeholder={loadingDiets ? 'Loading data...' : 'Search for a diet'}
+        placeholder={loadingDiets ? 'Loading data...' : 'Search for a diet...'}
       />
     </>
   )

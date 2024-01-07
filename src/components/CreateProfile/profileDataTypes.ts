@@ -1,16 +1,13 @@
+import SelectMenuOption from './selectMenuOptionType'
+
 export type Allergen = {
   IRI: string
   label: string
   menuLegendNumber: number
 }
 
-export type Diet = {
-  IRI: string
-  label: string
-}
-
 export type TastePreferences = {
-  cuisines: Set<string>
+  cuisines: ReadonlyArray<SelectMenuOption>
   desserts: string
   spiciness: number
 }
