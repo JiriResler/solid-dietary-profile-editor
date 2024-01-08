@@ -4,6 +4,7 @@ import Select, { MultiValue } from 'react-select'
 import selectMenuOptionFilter from './selectMenuOptionFilter'
 import SelectMenuOption from './selectMenuOptionType'
 import { fetchCuisines, transformCuisinesResponse } from './loadFromWikidata'
+import CustomSelectMenu from './CustomSelectMenu'
 
 type Props = {
   currentStep: number
@@ -14,8 +15,10 @@ type Props = {
 }
 
 const SelectComponents = {
+  DropdownIndicator: () => null,
   IndicatorSeparator: () => null,
   ClearIndicator: () => null,
+  Menu: CustomSelectMenu,
 }
 
 const SelectTastePreferences: React.FC<Props> = ({
