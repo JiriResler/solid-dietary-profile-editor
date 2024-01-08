@@ -12,8 +12,3 @@ export interface DietResponseBinding {
     value: string
   }
 }
-
-export interface IngredientResponse {
-  food: string
-  foodLabel: string
-}

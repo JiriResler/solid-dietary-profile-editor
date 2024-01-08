@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import SelectMenuOption from './selectMenuOptionType'
 import CustomSelectMenu from './CustomSelectMenu'
 import selectMenuOptionFilter from './selectMenuOptionFilter'
-import { fetchDiets, transformDietsResponse } from './fetchData'
+import { fetchDiets, transformDietsResponse } from './loadFromWikidata'
 
 const SelectComponents = {
   DropdownIndicator: () => null,
@@ -51,7 +51,6 @@ const SelectDiets: React.FC<Props> = ({
     void fetchAndSetDiets()
 
     setLoadingDiets(false)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   async function fetchAndSetDiets() {
