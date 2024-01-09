@@ -28,6 +28,25 @@ export function transformDietsResponse(
   return resultDietsArr
 }
 
-export async function fetchCuisines() {}
+export async function fetchCuisines() {
+  const endpointUrl = 'https://query.wikidata.org/sparql'
 
-export function transformCuisinesResponse(cuisinesResponseArr) {}
+  const sparqlQuery = `SELECT ?cuisineIRI ?cuisineLabel WHERE {
+    ?cuisineIRI wdt:P31 wd:Q1968435;
+      rdfs:label ?cuisineLabel.
+    FILTER((LANG(?cuisineLabel)) = "en")
+  }`
+
+  const fullUrl = endpointUrl + '?query=' + encodeURIComponent(sparqlQuery)
+  const headers = { Accept: 'application/sparql-results+json' }
+
+  const cuisinesResponse = await fetch(fullUrl, { headers })
+
+  const cuisinesResponseJson = await cuisinesResponse.json()
+
+  return cuisinesResponseJson.results.bindings
+}
+
+export function transformCuisinesResponse(cuisinesResponseArr) {
+
+}
