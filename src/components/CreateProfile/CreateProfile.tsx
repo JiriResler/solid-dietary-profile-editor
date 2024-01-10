@@ -86,6 +86,12 @@ const CreateProfile: React.FC<Props> = ({ loginMethod }) => {
         eatingPreferencesProfile = createSolidDataset()
       } else {
         console.error(error.message)
+        alert(
+          'There was an error while saving the profile with code ' +
+            error.statusCode,
+        )
+
+        return
       }
     }
 
