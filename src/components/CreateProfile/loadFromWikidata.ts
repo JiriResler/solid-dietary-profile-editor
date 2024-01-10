@@ -1,4 +1,9 @@
-import { DietResponse, DietResponseBinding } from './fetchResponseInterfaces'
+import {
+  WikidataDietResponse,
+  DietResponseBinding,
+  WikidataCuisineResponse,
+  CuisineResponseBinding,
+} from './fetchResponseInterfaces'
 import SelectMenuOption from './selectMenuOptionType'
 
 export async function fetchDiets() {
@@ -6,7 +11,7 @@ export async function fetchDiets() {
     'https://raw.githubusercontent.com/JiriResler/solid-choose-well-ontology/main/diets_data.json',
   )
 
-  const dietsResponseObj = (await dietsResponse.json()) as DietResponse
+  const dietsResponseObj = (await dietsResponse.json()) as WikidataDietResponse
 
   return dietsResponseObj.results.bindings
 }
@@ -42,11 +47,32 @@ export async function fetchCuisines() {
 
   const cuisinesResponse = await fetch(fullUrl, { headers })
 
-  const cuisinesResponseJson = await cuisinesResponse.json()
+  const cuisinesResponseJSON =
+    (await cuisinesResponse.json()) as WikidataCuisineResponse
 
-  return cuisinesResponseJson.results.bindings
+  return cuisinesResponseJSON.results.bindings
 }
 
-export function transformCuisinesResponse(cuisinesResponseArr) {
+export function transformCuisinesResponse(
+  cuisinesResponseArr: CuisineResponseBinding[],
+) {
+  const resultCuisinesArr: SelectMenuOption[] = []
 
+  for (const responseCuisine of cuisinesResponseArr) {
+    // Make result labels have capital first letter
+    let resultLabel = ''
+
+    resultLabel += responseCuisine.cuisineLabel.value.charAt(0).toUpperCase()
+
+    resultLabel += responseCuisine.cuisineLabel.value.slice(1)
+
+    const resultCuisine: SelectMenuOption = {
+      value: responseCuisine.cuisineIRI.value,
+      label: resultLabel,
+    }
+
+    resultCuisinesArr.push(resultCuisine)
+  }
+
+  return resultCuisinesArr
 }
