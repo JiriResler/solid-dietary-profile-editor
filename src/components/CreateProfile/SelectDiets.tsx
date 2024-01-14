@@ -1,17 +1,62 @@
 import Form from 'react-bootstrap/Form'
-import Select from 'react-select'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import SelectMenuOption from './selectMenuOptionType'
-import CustomSelectMenu from './CustomSelectMenu'
-import selectMenuOptionFilter from './selectMenuOptionFilter'
-import { fetchDiets, transformDietsResponse } from './loadFromWikidata'
 
-const SelectComponents = {
-  DropdownIndicator: () => null,
-  IndicatorSeparator: () => null,
-  ClearIndicator: () => null,
-  Menu: CustomSelectMenu,
+type Diet = {
+  label: string
+  IRI: string
 }
+
+const dietList: Diet[] = [
+  {
+    label: 'Vegetarian',
+    IRI: 'http://dbpedia.org/resource/Vegetarianism',
+  },
+  {
+    label: 'Vegan',
+    IRI: 'http://dbpedia.org/resource/Veganism',
+  },
+  {
+    label: 'Mediterranean',
+    IRI: 'http://dbpedia.org/resource/Mediterranean_diet',
+  },
+  {
+    label: 'Ketogenic',
+    IRI: 'http://dbpedia.org/resource/Ketogenic_diet',
+  },
+  {
+    label: 'Atkins',
+    IRI: 'http://dbpedia.org/resource/Atkins_diet',
+  },
+  {
+    label: 'Paleolithic',
+    IRI: 'http://dbpedia.org/resource/Paleolithic_diet',
+  },
+  {
+    label: 'Pescetarian',
+    IRI: 'http://dbpedia.org/resource/Pescetarianism',
+  },
+  {
+    label: 'Raw foodism',
+    IRI: 'http://dbpedia.org/resource/Raw_foodism',
+  },
+  {
+    label: 'Fruitarian',
+    IRI: 'http://dbpedia.org/resource/Fruitarianism',
+  },
+  {
+    label: 'Diabetic',
+    IRI: 'http://dbpedia.org/resource/Diet_in_diabetes',
+  },
+  {
+    label: 'DASH',
+    IRI: 'http://dbpedia.org/resource/DASH_diet',
+  },
+  {
+    label: 'MIND',
+    IRI: 'http://dbpedia.org/resource/MIND_diet',
+  },
+]
 
 type Props = {
   currentStep: number
@@ -26,10 +71,6 @@ const SelectDiets: React.FC<Props> = ({
   selectedDiets,
   setSelectedDiets,
 }) => {
-  const [menuOptions, setMenuOptions] = useState<
-    ReadonlyArray<SelectMenuOption>
-  >([])
-
   const veganIRI = 'http://dbpedia.org/resource/Veganism'
 
   const [veganChecked, setVeganChecked] = useState(
@@ -41,37 +82,6 @@ const SelectDiets: React.FC<Props> = ({
   const [vegetarianChecked, setVegetarianChecked] = useState(
     selectedDietsInclude(vegetarianIRI),
   )
-
-  const [loadingDiets, setLoadingDiets] = useState(false)
-
-  // Load list of diets upon initial render
-  useEffect(() => {
-    setLoadingDiets(true)
-
-    void fetchAndSetDiets()
-
-    setLoadingDiets(false)
-  }, [])
-
-  async function fetchAndSetDiets() {
-    const dietsResponse = await fetchDiets()
-
-    const dietsList = transformDietsResponse(dietsResponse)
-
-    setMenuOptions(dietsList)
-  }
-
-  function selectedDietsInclude(dietIRI: string) {
-    let result = false
-
-    for (const diet of selectedDiets) {
-      if (diet.value === dietIRI) {
-        result = true
-      }
-    }
-
-    return result
-  }
 
   function handleCheckboxOnChange(dietIRI: string, dietLabel: string) {
     const newDietsArray: SelectMenuOption[] = []
@@ -103,21 +113,6 @@ const SelectDiets: React.FC<Props> = ({
     }
   }
 
-  // Filters out the vegan and vegetarian diets from selectedDiets
-  function selectedDietsWithoutVeg() {
-    const filteredDiets: SelectMenuOption[] = []
-
-    for (const diet of selectedDiets) {
-      if (diet.value === veganIRI || diet.value === vegetarianIRI) {
-        continue
-      }
-
-      filteredDiets.push(diet)
-    }
-
-    return filteredDiets
-  }
-
   return (
     <>
       <h1>{currentStep}. Which diets are you on?</h1>
@@ -142,21 +137,6 @@ const SelectDiets: React.FC<Props> = ({
         }}
         type="checkbox"
         label="Vegetarian"
-      />
-
-      <h3>Other diets</h3>
-      <Select
-        options={menuOptions}
-        value={selectedDietsWithoutVeg()}
-        filterOption={selectMenuOptionFilter}
-        isMulti
-        onChange={(newArray) => {
-          setSelectedDiets(newArray)
-        }}
-        components={SelectComponents}
-        isDisabled={loadingDiets ? true : false}
-        isLoading={loadingDiets ? true : false}
-        placeholder={loadingDiets ? 'Loading data...' : 'Search for a diet...'}
       />
     </>
   )
