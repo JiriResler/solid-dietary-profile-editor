@@ -6,7 +6,6 @@ import SelectAllergens from './SelectAllergens'
 import CreateProfileNavigation from './CreateProfileNavigation'
 import SelectDiets from './SelectDiets'
 import { Allergen, TastePreferences } from './profileDataTypes'
-import SelectMenuOption from './selectMenuOptionType'
 import { LoginMethod } from '../loginMethodEnum'
 import { useSession } from '@inrupt/solid-ui-react'
 import { fetch } from '@inrupt/solid-client-authn-browser'
@@ -23,6 +22,7 @@ import {
   setThing,
 } from '@inrupt/solid-client'
 import SelectTastePreferences from './SelectTastePreferences'
+import { Diet } from './profileDataTypes'
 
 interface SolidPodResponseError extends Error {
   statusCode?: number
@@ -43,9 +43,7 @@ const CreateProfile: React.FC<Props> = ({ loginMethod }) => {
     new Set<Allergen>(),
   )
 
-  const [selectedDiets, setSelectedDiets] = useState<
-    ReadonlyArray<SelectMenuOption>
-  >([])
+  const [selectedDiets, setSelectedDiets] = useState(new Set<Diet>())
 
   const [selectedTastePreferences, setSelectedTastePreferences] =
     useState<TastePreferences>({
@@ -116,7 +114,15 @@ const CreateProfile: React.FC<Props> = ({ loginMethod }) => {
       user = addUrl(
         user,
         'https://github.com/JiriResler/solid-choose-well-ontology/blob/main/choosewell#isOnDiet',
-        diet.value,
+        diet.IRI,
+      )
+    }
+
+    for (const cuisine of selectedTastePreferences.cuisines) {
+      user = addUrl(
+        user,
+        'https://github.com/JiriResler/solid-choose-well-ontology/blob/main/choosewell#likesCuisine',
+        cuisine.value,
       )
     }
 

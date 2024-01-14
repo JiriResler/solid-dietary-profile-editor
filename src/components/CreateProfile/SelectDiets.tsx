@@ -1,11 +1,8 @@
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
 import Form from 'react-bootstrap/Form'
-import { useState } from 'react'
-import SelectMenuOption from './selectMenuOptionType'
-
-type Diet = {
-  label: string
-  IRI: string
-}
+import Stack from 'react-bootstrap/Stack'
+import { Diet } from './profileDataTypes'
 
 const dietList: Diet[] = [
   {
@@ -60,10 +57,8 @@ const dietList: Diet[] = [
 
 type Props = {
   currentStep: number
-  selectedDiets: ReadonlyArray<SelectMenuOption>
-  setSelectedDiets: React.Dispatch<
-    React.SetStateAction<ReadonlyArray<SelectMenuOption>>
-  >
+  selectedDiets: Set<Diet>
+  setSelectedDiets: React.Dispatch<React.SetStateAction<Set<Diet>>>
 }
 
 const SelectDiets: React.FC<Props> = ({
@@ -71,73 +66,38 @@ const SelectDiets: React.FC<Props> = ({
   selectedDiets,
   setSelectedDiets,
 }) => {
-  const veganIRI = 'http://dbpedia.org/resource/Veganism'
+  function handleCheckboxOnChange(diet: Diet) {
+    const newDietSet = new Set(selectedDiets)
 
-  const [veganChecked, setVeganChecked] = useState(
-    selectedDietsInclude(veganIRI),
-  )
-
-  const vegetarianIRI = 'http://dbpedia.org/resource/Vegetarianism'
-
-  const [vegetarianChecked, setVegetarianChecked] = useState(
-    selectedDietsInclude(vegetarianIRI),
-  )
-
-  function handleCheckboxOnChange(dietIRI: string, dietLabel: string) {
-    const newDietsArray: SelectMenuOption[] = []
-
-    if (selectedDietsInclude(dietIRI)) {
-      for (const existingDiet of selectedDiets) {
-        if (existingDiet.value === dietIRI) {
-          continue
-        }
-
-        newDietsArray.push(existingDiet)
-      }
+    if (newDietSet.has(diet)) {
+      newDietSet.delete(diet)
     } else {
-      for (const existingDiet of selectedDiets) {
-        newDietsArray.push(existingDiet)
-      }
-
-      const newDiet: SelectMenuOption = { label: dietLabel, value: dietIRI }
-
-      newDietsArray.push(newDiet)
+      newDietSet.add(diet)
     }
 
-    setSelectedDiets(newDietsArray)
-
-    if (dietLabel === 'Vegan') {
-      setVeganChecked(!veganChecked)
-    } else {
-      setVegetarianChecked(!vegetarianChecked)
-    }
+    setSelectedDiets(newDietSet)
   }
-
   return (
     <>
       <h1>{currentStep}. Which diets are you on?</h1>
-      <Form.Check
-        checked={veganChecked}
-        onChange={() => {
-          handleCheckboxOnChange(
-            'http://dbpedia.org/resource/Veganism',
-            'Vegan',
+      <Row>
+        {dietList.map((diet: Diet) => {
+          return (
+            <Col key={diet.IRI} xs={6}>
+              <Stack direction="horizontal" gap={2}>
+                <Form.Check
+                  checked={selectedDiets.has(diet)}
+                  onChange={() => {
+                    handleCheckboxOnChange(diet)
+                  }}
+                  type={'checkbox'}
+                />
+                <div>{diet.label}</div>
+              </Stack>
+            </Col>
           )
-        }}
-        type="checkbox"
-        label="Vegan"
-      />
-      <Form.Check
-        checked={vegetarianChecked}
-        onChange={() => {
-          handleCheckboxOnChange(
-            'http://dbpedia.org/resource/Vegetarianism',
-            'Vegetarian',
-          )
-        }}
-        type="checkbox"
-        label="Vegetarian"
-      />
+        })}
+      </Row>
     </>
   )
 }
