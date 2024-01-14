@@ -8,6 +8,7 @@ describe('SelectAllergens', () => {
       <SelectAllergens
         selectedAllergens={new Set()}
         setSelectedAllergens={() => {}}
+        currentStep={0}
       />,
     )
 
