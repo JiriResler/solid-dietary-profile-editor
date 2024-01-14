@@ -24,6 +24,10 @@ import {
 } from '@inrupt/solid-client'
 import SelectTastePreferences from './SelectTastePreferences'
 
+interface SolidPodResponseError extends Error {
+  statusCode?: number
+}
+
 type Props = {
   loginMethod: LoginMethod
 }
@@ -81,14 +85,17 @@ const CreateProfile: React.FC<Props> = ({ loginMethod }) => {
         eatingPreferencesProfile = removeThing(eatingPreferencesProfile, item)
       })
     } catch (error) {
-      if (typeof error.statusCode === 'number' && error.statusCode === 404) {
+      if (
+        typeof (error as SolidPodResponseError).statusCode === 'number' &&
+        (error as SolidPodResponseError).statusCode === 404
+      ) {
         // if not found, create a new SolidDataset
         eatingPreferencesProfile = createSolidDataset()
       } else {
-        console.error(error.message)
+        console.error((error as Error).message)
         alert(
-          'There was an error while saving the profile with code ' +
-            error.statusCode,
+          'There was an error while saving the profile with the code ' +
+            (error as SolidPodResponseError).statusCode,
         )
 
         return
