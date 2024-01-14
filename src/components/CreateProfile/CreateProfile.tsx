@@ -137,6 +137,10 @@ const CreateProfile: React.FC<Props> = ({ loginMethod }) => {
       fetch: fetch as undefined,
     }).catch((error: Error) => console.log(error.message))
 
+    if (podUrls === undefined) {
+      throw new Error('Array with pod URLs is undefined')
+    }
+
     const firstPodUrl = podUrls[0]
 
     return firstPodUrl
