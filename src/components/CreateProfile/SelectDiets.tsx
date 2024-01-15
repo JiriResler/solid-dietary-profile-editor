@@ -90,7 +90,7 @@ const SelectDiets: React.FC<Props> = ({
                   onChange={() => {
                     handleCheckboxOnChange(diet)
                   }}
-                  type={'checkbox'}
+                  type="checkbox"
                 />
                 <div>{diet.label}</div>
               </Stack>

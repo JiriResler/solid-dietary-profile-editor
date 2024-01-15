@@ -119,7 +119,7 @@ const SelectAllergens: React.FC<Props> = ({
                   onChange={() => {
                     handleCheckboxOnChange(allergen)
                   }}
-                  type={'checkbox'}
+                  type="checkbox"
                 />
                 <div>
                   {allergen.menuLegendNumber} {allergen.label}
