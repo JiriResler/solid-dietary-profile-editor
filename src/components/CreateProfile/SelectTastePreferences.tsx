@@ -60,7 +60,7 @@ const SelectTastePreferences: React.FC<Props> = ({
     setSelectedTastePreferences(newTastePreferences)
   }
 
-  function handleDessertCheckboxOnChange(dessertValue: string) {
+  function handleDessertCheckboxOnChange(dessertValueIRI: string) {
     const newTastePreferences: TastePreferences = {
       cuisines: [],
       desserts: [],
@@ -76,21 +76,21 @@ const SelectTastePreferences: React.FC<Props> = ({
 
     newTastePreferences.cuisines = cuisinesCopy
 
-    if (selectedTastePreferences.desserts.includes(dessertValue)) {
+    if (selectedTastePreferences.desserts.includes(dessertValueIRI)) {
       newTastePreferences.desserts = selectedTastePreferences.desserts.filter(
         (value) => {
-          return value !== dessertValue
+          return value !== dessertValueIRI
         },
       )
     } else {
       newTastePreferences.desserts = [...selectedTastePreferences.desserts]
-      newTastePreferences.desserts.push(dessertValue)
+      newTastePreferences.desserts.push(dessertValueIRI)
     }
 
     setSelectedTastePreferences(newTastePreferences)
   }
 
-  function handleSpicinessCheckboxOnChange(spicinessValue: string) {
+  function handleSpicinessCheckboxOnChange(spicinessValueIRI: string) {
     const newTastePreferences: TastePreferences = {
       cuisines: [],
       desserts: [...selectedTastePreferences.desserts],
@@ -106,15 +106,15 @@ const SelectTastePreferences: React.FC<Props> = ({
 
     newTastePreferences.cuisines = cuisinesCopy
 
-    if (selectedTastePreferences.spiciness.includes(spicinessValue)) {
+    if (selectedTastePreferences.spiciness.includes(spicinessValueIRI)) {
       newTastePreferences.spiciness = selectedTastePreferences.spiciness.filter(
         (value) => {
-          return value !== spicinessValue
+          return value !== spicinessValueIRI
         },
       )
     } else {
       newTastePreferences.spiciness = [...selectedTastePreferences.spiciness]
-      newTastePreferences.spiciness.push(spicinessValue)
+      newTastePreferences.spiciness.push(spicinessValueIRI)
     }
 
     setSelectedTastePreferences(newTastePreferences)
@@ -143,9 +143,13 @@ const SelectTastePreferences: React.FC<Props> = ({
       <Stack direction="horizontal" gap={2}>
         <Form.Check
           type="checkbox"
-          checked={selectedTastePreferences.desserts.includes('sweet')}
+          checked={selectedTastePreferences.desserts.includes(
+            'http://dbpedia.org/resource/Sweetness',
+          )}
           onChange={() => {
-            handleDessertCheckboxOnChange('sweet')
+            handleDessertCheckboxOnChange(
+              'http://dbpedia.org/resource/Sweetness',
+            )
           }}
         />
         Sweet
@@ -153,9 +157,13 @@ const SelectTastePreferences: React.FC<Props> = ({
       <Stack direction="horizontal" gap={2}>
         <Form.Check
           type="checkbox"
-          checked={selectedTastePreferences.desserts.includes('savory')}
+          checked={selectedTastePreferences.desserts.includes(
+            'http://www.wikidata.org/entity/Q3324978',
+          )}
           onChange={() => {
-            handleDessertCheckboxOnChange('savory')
+            handleDessertCheckboxOnChange(
+              'http://www.wikidata.org/entity/Q3324978',
+            )
           }}
         />
         Savory
@@ -165,9 +173,13 @@ const SelectTastePreferences: React.FC<Props> = ({
       <Stack direction="horizontal" gap={2}>
         <Form.Check
           type="checkbox"
-          checked={selectedTastePreferences.spiciness.includes('mild')}
+          checked={selectedTastePreferences.spiciness.includes(
+            'http://www.wikidata.org/entity/Q96278776',
+          )}
           onChange={() => {
-            handleSpicinessCheckboxOnChange('mild')
+            handleSpicinessCheckboxOnChange(
+              'http://www.wikidata.org/entity/Q96278776',
+            )
           }}
         />
         Mild
@@ -175,9 +187,13 @@ const SelectTastePreferences: React.FC<Props> = ({
       <Stack direction="horizontal" gap={2}>
         <Form.Check
           type="checkbox"
-          checked={selectedTastePreferences.spiciness.includes('medium')}
+          checked={selectedTastePreferences.spiciness.includes(
+            'http://www.wikidata.org/entity/Q17525443',
+          )}
           onChange={() => {
-            handleSpicinessCheckboxOnChange('medium')
+            handleSpicinessCheckboxOnChange(
+              'http://www.wikidata.org/entity/Q17525443',
+            )
           }}
         />
         Medium
@@ -185,9 +201,13 @@ const SelectTastePreferences: React.FC<Props> = ({
       <Stack direction="horizontal" gap={2}>
         <Form.Check
           type={'checkbox'}
-          checked={selectedTastePreferences.spiciness.includes('hot')}
+          checked={selectedTastePreferences.spiciness.includes(
+            'http://www.wikidata.org/entity/Q28128222',
+          )}
           onChange={() => {
-            handleSpicinessCheckboxOnChange('hot')
+            handleSpicinessCheckboxOnChange(
+              'http://www.wikidata.org/entity/Q28128222',
+            )
           }}
         />
         Hot
