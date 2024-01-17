@@ -48,8 +48,8 @@ const CreateProfile: React.FC<Props> = ({ loginMethod }) => {
   const [selectedTastePreferences, setSelectedTastePreferences] =
     useState<TastePreferences>({
       cuisines: [],
-      desserts: '',
-      spiciness: 0,
+      desserts: [],
+      spiciness: [],
     })
 
   function saveProfile() {

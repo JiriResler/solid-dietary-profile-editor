@@ -51,9 +51,40 @@ const SelectTastePreferences: React.FC<Props> = ({
   }
 
   function handleSelectOnChange(cuisinesArray: MultiValue<SelectMenuOption>) {
-    const newTastePreferences = {
-      ...selectedTastePreferences,
+    const newTastePreferences: TastePreferences = {
       cuisines: cuisinesArray,
+      desserts: [...selectedTastePreferences.desserts],
+      spiciness: [...selectedTastePreferences.spiciness],
+    }
+
+    setSelectedTastePreferences(newTastePreferences)
+  }
+
+  function handleDessertCheckboxOnChange(dessertValue: string) {
+    const newTastePreferences: TastePreferences = {
+      cuisines: [],
+      desserts: [],
+      spiciness: [...selectedTastePreferences.spiciness],
+    }
+
+    const cuisinesCopy: SelectMenuOption[] = []
+
+    // Create a deep copy of the cuisines array
+    selectedTastePreferences.cuisines.forEach((cuisine) =>
+      cuisinesCopy.push(Object.assign({}, cuisine)),
+    )
+
+    newTastePreferences.cuisines = cuisinesCopy
+
+    if (selectedTastePreferences.desserts.includes(dessertValue)) {
+      newTastePreferences.desserts = selectedTastePreferences.desserts.filter(
+        (value) => {
+          return value !== dessertValue
+        },
+      )
+    } else {
+      newTastePreferences.desserts = [...selectedTastePreferences.desserts]
+      newTastePreferences.desserts.push(dessertValue)
     }
 
     setSelectedTastePreferences(newTastePreferences)
@@ -80,15 +111,24 @@ const SelectTastePreferences: React.FC<Props> = ({
       />
       <h3>What kind of desserts do you like?</h3>
       <Stack direction="horizontal" gap={2}>
-        <Form.Check type="checkbox" />
+        <Form.Check
+          type="checkbox"
+          checked={selectedTastePreferences.desserts.includes('sweet')}
+          onChange={() => {
+            handleDessertCheckboxOnChange('sweet')
+          }}
+        />
         Sweet
       </Stack>
       <Stack direction="horizontal" gap={2}>
-        <Form.Check type="checkbox" />
+        <Form.Check
+          type="checkbox"
+          checked={selectedTastePreferences.desserts.includes('savory')}
+          onChange={() => {
+            handleDessertCheckboxOnChange('savory')
+          }}
+        />
         Savory
-      </Stack>
-      <Stack direction="horizontal" gap={2}>
-        <Form.Check type="checkbox" />I like every kind of dessert
       </Stack>
 
       <h3>How spicy do you like your food to be?</h3>

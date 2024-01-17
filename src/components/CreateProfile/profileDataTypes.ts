@@ -13,6 +13,6 @@ export type Diet = {
 
 export type TastePreferences = {
   cuisines: ReadonlyArray<SelectMenuOption>
-  desserts: string
-  spiciness: number
+  desserts: string[]
+  spiciness: string[]
 }
