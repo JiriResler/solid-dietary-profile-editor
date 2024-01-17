@@ -90,6 +90,36 @@ const SelectTastePreferences: React.FC<Props> = ({
     setSelectedTastePreferences(newTastePreferences)
   }
 
+  function handleSpicinessCheckboxOnChange(spicinessValue: string) {
+    const newTastePreferences: TastePreferences = {
+      cuisines: [],
+      desserts: [...selectedTastePreferences.desserts],
+      spiciness: [],
+    }
+
+    const cuisinesCopy: SelectMenuOption[] = []
+
+    // Create a deep copy of the cuisines array
+    selectedTastePreferences.cuisines.forEach((cuisine) =>
+      cuisinesCopy.push(Object.assign({}, cuisine)),
+    )
+
+    newTastePreferences.cuisines = cuisinesCopy
+
+    if (selectedTastePreferences.spiciness.includes(spicinessValue)) {
+      newTastePreferences.spiciness = selectedTastePreferences.spiciness.filter(
+        (value) => {
+          return value !== spicinessValue
+        },
+      )
+    } else {
+      newTastePreferences.spiciness = [...selectedTastePreferences.spiciness]
+      newTastePreferences.spiciness.push(spicinessValue)
+    }
+
+    setSelectedTastePreferences(newTastePreferences)
+  }
+
   return (
     <>
       <h1>{currentStep}. Specify your taste preferences</h1>
@@ -133,15 +163,33 @@ const SelectTastePreferences: React.FC<Props> = ({
 
       <h3>How spicy do you like your food to be?</h3>
       <Stack direction="horizontal" gap={2}>
-        <Form.Check type="checkbox" />
+        <Form.Check
+          type="checkbox"
+          checked={selectedTastePreferences.spiciness.includes('mild')}
+          onChange={() => {
+            handleSpicinessCheckboxOnChange('mild')
+          }}
+        />
         Mild
       </Stack>
       <Stack direction="horizontal" gap={2}>
-        <Form.Check type="checkbox" />
+        <Form.Check
+          type="checkbox"
+          checked={selectedTastePreferences.spiciness.includes('medium')}
+          onChange={() => {
+            handleSpicinessCheckboxOnChange('medium')
+          }}
+        />
         Medium
       </Stack>
       <Stack direction="horizontal" gap={2}>
-        <Form.Check type={'checkbox'} />
+        <Form.Check
+          type={'checkbox'}
+          checked={selectedTastePreferences.spiciness.includes('hot')}
+          onChange={() => {
+            handleSpicinessCheckboxOnChange('hot')
+          }}
+        />
         Hot
       </Stack>
     </>
