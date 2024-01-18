@@ -23,6 +23,8 @@ import {
 } from '@inrupt/solid-client'
 import SelectTastePreferences from './SelectTastePreferences'
 import { Diet } from './profileDataTypes'
+import { db, auth } from '../../firebase'
+import { doc, setDoc } from 'firebase/firestore'
 
 interface SolidPodResponseError extends Error {
   statusCode?: number
@@ -58,7 +60,7 @@ const CreateProfile: React.FC<Props> = ({ loginMethod }) => {
     }
 
     if (loginMethod === LoginMethod.FIREBASE) {
-      saveProfileFirebase()
+      void saveProfileFirebase()
     }
   }
 
@@ -168,7 +170,22 @@ const CreateProfile: React.FC<Props> = ({ loginMethod }) => {
     return firstPodUrl
   }
 
-  function saveProfileFirebase() {}
+  async function saveProfileFirebase() {
+    const loggedInUser = auth.currentUser
+
+    //  Get rid of TypeScript error
+    if (loggedInUser === null) {
+      return
+    }
+
+    await setDoc(doc(db, 'users', loggedInUser.uid), {
+      name: 'Los Angeles',
+      state: 'CA',
+      country: 'USA',
+    })
+
+    alert('Profile saved')
+  }
 
   return (
     <>
