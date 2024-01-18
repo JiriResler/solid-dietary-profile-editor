@@ -113,7 +113,7 @@ const CreateProfile: React.FC<Props> = ({ loginMethod }) => {
     for (const diet of selectedDiets) {
       user = addUrl(
         user,
-        'https://github.com/JiriResler/solid-choose-well-ontology/blob/main/choosewell#OnDiet',
+        'https://github.com/JiriResler/solid-choose-well-ontology/blob/main/choosewell#onDiet',
         diet.IRI,
       )
     }
