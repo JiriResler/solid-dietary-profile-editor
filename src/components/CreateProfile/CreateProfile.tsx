@@ -26,6 +26,14 @@ import { Diet } from './profileDataTypes'
 import { db, auth } from '../../firebase'
 import { doc, setDoc } from 'firebase/firestore'
 
+type FirestoreUserProfile = {
+  allergicTo: string[]
+  onDiets: string[]
+  likesCuisines: string[]
+  likesDessertTaste: string[]
+  likesSpiciness: string[]
+}
+
 interface SolidPodResponseError extends Error {
   statusCode?: number
 }
@@ -173,16 +181,24 @@ const CreateProfile: React.FC<Props> = ({ loginMethod }) => {
   async function saveProfileFirebase() {
     const loggedInUser = auth.currentUser
 
-    //  Get rid of TypeScript error
+    //  Get rid of a TypeScript error
     if (loggedInUser === null) {
       return
     }
 
-    await setDoc(doc(db, 'users', loggedInUser.uid), {
-      name: 'Los Angeles',
-      state: 'CA',
-      country: 'USA',
-    })
+    const profileData: FirestoreUserProfile = {
+      allergicTo: Array.from(selectedAllergens.values()).map(
+        (allergen) => allergen.IRI,
+      ),
+      onDiets: Array.from(selectedDiets.values()).map((diet) => diet.IRI),
+      likesCuisines: selectedTastePreferences.cuisines.map(
+        (cuisine) => cuisine.value,
+      ),
+      likesDessertTaste: selectedTastePreferences.desserts,
+      likesSpiciness: selectedTastePreferences.spiciness,
+    }
+
+    await setDoc(doc(db, 'users', loggedInUser.uid), profileData)
 
     alert('Profile saved')
   }
