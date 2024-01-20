@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import CreateProfile from './CreateProfile/CreateProfile'
 import { LoginMethod } from './loginMethodEnum'
 import Offcanvas from 'react-bootstrap/Offcanvas'
@@ -7,6 +7,13 @@ import './Profile.css'
 import { signOut } from 'firebase/auth'
 import { auth } from '../firebase'
 import { useSession } from '@inrupt/solid-ui-react'
+import { getPodUrlAll, getSolidDataset } from '@inrupt/solid-client'
+import { fetch } from '@inrupt/solid-client-authn-browser'
+
+//  todo: move type to separate file
+interface SolidPodResponseError extends Error {
+  statusCode?: number
+}
 
 type Props = {
   loginMethod: LoginMethod
@@ -15,8 +22,68 @@ type Props = {
 const Profile: React.FC<Props> = ({ loginMethod }) => {
   const { session } = useSession()
 
-  const [userProfileExists] = useState(false)
+  const [userProfileExists, setUserProfileExists] = useState(false)
   const [showSidebar, setShowSidebar] = useState(false)
+  const [loadingProfile, setLoadingProfile] = useState(true)
+
+  useEffect(() => {
+    // todo: add a loading state
+    void checkIfProfileExists()
+  }, [])
+
+  async function checkIfProfileExists() {
+    if (loginMethod === LoginMethod.SOLID) {
+      const podUrl = await getPodUrl()
+
+      const profileLocation = 'eatingPreferencesProfile/profile'
+
+      const profileUrl = podUrl + profileLocation
+
+      try {
+        // Attempt to retrieve a profile
+        await getSolidDataset(profileUrl, {
+          fetch: fetch as undefined,
+        })
+
+        setUserProfileExists(true)
+      } catch (error) {
+        if (
+          typeof (error as SolidPodResponseError).statusCode === 'number' &&
+          (error as SolidPodResponseError).statusCode === 404
+        ) {
+          setUserProfileExists(false)
+        }
+      }
+    }
+
+    if (loginMethod === LoginMethod.FIREBASE) {
+    }
+
+    setLoadingProfile(false)
+  }
+
+  async function getPodUrl() {
+    const userWebID: string =
+      session.info.webId !== undefined ? session.info.webId : ''
+
+    const podUrls = await getPodUrlAll(userWebID, {
+      fetch: fetch as undefined,
+    }).catch((error: Error) => console.log(error.message))
+
+    // todo: add better error handling
+    // Get rid of a TypeScript error
+    if (podUrls === undefined) {
+      throw new Error('Array with pod URLs is undefined')
+    }
+
+    const firstPodUrl = podUrls[0]
+
+    return firstPodUrl
+  }
+
+  if (loadingProfile) {
+    return <h1>Loading profile data</h1>
+  }
 
   if (!userProfileExists) {
     return <CreateProfile loginMethod={loginMethod} />

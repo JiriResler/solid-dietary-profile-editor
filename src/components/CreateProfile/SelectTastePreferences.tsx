@@ -36,16 +36,15 @@ const SelectTastePreferences: React.FC<Props> = ({
 
   useEffect(() => {
     setLoadingCuisines(true)
-
     void fetchAndSetCuisines()
-
-    setLoadingCuisines(false)
   }, [])
 
   async function fetchAndSetCuisines() {
     const cuisinesResponse = await fetchCuisines()
 
     const cuisinesList = transformCuisinesResponse(cuisinesResponse)
+
+    setLoadingCuisines(false)
 
     setMenuOptions(cuisinesList)
   }

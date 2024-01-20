@@ -161,6 +161,7 @@ const CreateProfile: React.FC<Props> = ({ loginMethod }) => {
     alert('Profile saved')
   }
 
+  // todo: move function to a separate file as it is used in other components
   async function getPodUrl() {
     const userWebID: string =
       session.info.webId !== undefined ? session.info.webId : ''
@@ -186,6 +187,7 @@ const CreateProfile: React.FC<Props> = ({ loginMethod }) => {
       return
     }
 
+    // todo: make this code easier to read by splitting it to more lines
     const profileData: FirestoreUserProfile = {
       allergicTo: Array.from(selectedAllergens.values()).map(
         (allergen) => allergen.IRI,
