@@ -5,10 +5,11 @@ import Offcanvas from 'react-bootstrap/Offcanvas'
 import Button from 'react-bootstrap/Button'
 import './Profile.css'
 import { signOut } from 'firebase/auth'
-import { auth } from '../firebase'
 import { useSession } from '@inrupt/solid-ui-react'
 import { getPodUrlAll, getSolidDataset } from '@inrupt/solid-client'
 import { fetch } from '@inrupt/solid-client-authn-browser'
+import { doc, getDoc } from 'firebase/firestore'
+import { db, auth } from '../firebase'
 
 //  todo: move type to separate file
 interface SolidPodResponseError extends Error {
@@ -57,6 +58,25 @@ const Profile: React.FC<Props> = ({ loginMethod }) => {
     }
 
     if (loginMethod === LoginMethod.FIREBASE) {
+      const loggedInUser = auth.currentUser
+
+      //  Get rid of a TypeScript error
+      if (loggedInUser === null) {
+        return
+      }
+
+      const profileRef = doc(db, 'users', loggedInUser?.uid)
+      const userProfile = await getDoc(profileRef)
+
+      if (userProfile.exists()) {
+        console.log('Document data:', userProfile.data())
+
+        // todo: add profile data to a state variable for displaying it to the user
+        setUserProfileExists(true)
+      } else {
+        console.log('No such document!')
+        setUserProfileExists(false)
+      }
     }
 
     setLoadingProfile(false)
