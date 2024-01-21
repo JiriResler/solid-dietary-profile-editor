@@ -106,7 +106,12 @@ const Profile: React.FC<Props> = ({ loginMethod }) => {
   }
 
   if (!userProfileExists) {
-    return <CreateProfile loginMethod={loginMethod} />
+    return (
+      <CreateProfile
+        loginMethod={loginMethod}
+        setUserProfileExists={setUserProfileExists}
+      />
+    )
   }
 
   return (

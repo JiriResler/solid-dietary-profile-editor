@@ -40,9 +40,13 @@ interface SolidPodResponseError extends Error {
 
 type Props = {
   loginMethod: LoginMethod
+  setUserProfileExists: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const CreateProfile: React.FC<Props> = ({ loginMethod }) => {
+const CreateProfile: React.FC<Props> = ({
+  loginMethod,
+  setUserProfileExists,
+}) => {
   const { session } = useSession()
 
   const [currentStep, setCurrentStep] = useState(0)
@@ -159,6 +163,8 @@ const CreateProfile: React.FC<Props> = ({ loginMethod }) => {
     })
 
     alert('Profile saved')
+
+    setUserProfileExists(true)
   }
 
   // todo: move function to a separate file as it is used in other components
@@ -203,6 +209,8 @@ const CreateProfile: React.FC<Props> = ({ loginMethod }) => {
     await setDoc(doc(db, 'users', loggedInUser.uid), profileData)
 
     alert('Profile saved')
+
+    setUserProfileExists(true)
   }
 
   return (
