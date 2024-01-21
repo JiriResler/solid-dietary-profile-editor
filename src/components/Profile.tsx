@@ -11,6 +11,14 @@ import { fetch } from '@inrupt/solid-client-authn-browser'
 import { doc, getDoc } from 'firebase/firestore'
 import { db, auth } from '../firebase'
 
+type UserProfile = {
+  allergicTo: string[]
+  onDiets: string[]
+  likesCuisines: string[]
+  likesDessertTaste: string[]
+  likesSpiciness: string[]
+}
+
 //  todo: move type to separate file
 interface SolidPodResponseError extends Error {
   statusCode?: number
@@ -24,8 +32,18 @@ const Profile: React.FC<Props> = ({ loginMethod }) => {
   const { session } = useSession()
 
   const [userProfileExists, setUserProfileExists] = useState(false)
+
   const [showSidebar, setShowSidebar] = useState(false)
+
   const [loadingProfile, setLoadingProfile] = useState(true)
+
+  const [userProfile, setUserProfile] = useState<UserProfile>({
+    allergicTo: [],
+    onDiets: [],
+    likesCuisines: [],
+    likesDessertTaste: [],
+    likesSpiciness: [],
+  })
 
   useEffect(() => {
     // todo: add a loading state
@@ -71,7 +89,6 @@ const Profile: React.FC<Props> = ({ loginMethod }) => {
       if (userProfile.exists()) {
         console.log('Document data:', userProfile.data())
 
-        // todo: add profile data to a state variable for displaying it to the user
         setUserProfileExists(true)
       } else {
         console.log('No such document!')
@@ -117,6 +134,46 @@ const Profile: React.FC<Props> = ({ loginMethod }) => {
   return (
     <>
       <h1 className="mt-3">Profile overview</h1>
+      <p>
+        Signed in with{' '}
+        {loginMethod === LoginMethod.SOLID ? 'solid' : 'firebase'}
+      </p>
+      <button>Load profile</button>
+
+      <h2>You are allergic to</h2>
+      <ul>
+        {userProfile.allergicTo.map((allergen) => {
+          return <li>{allergen}</li>
+        })}
+      </ul>
+
+      <h2>You are on diets</h2>
+      <ul>
+        {userProfile.onDiets.map((diet) => {
+          return <li>{diet}</li>
+        })}
+      </ul>
+
+      <h2>You like cuisines</h2>
+      <ul>
+        {userProfile.likesCuisines.map((cuisine) => {
+          return <li>{cuisine}</li>
+        })}
+      </ul>
+
+      <h2>You like desserts</h2>
+      <ul>
+        {userProfile.likesDessertTaste.map((dessertTaste) => {
+          return <li>{dessertTaste}</li>
+        })}
+      </ul>
+
+      <h2>You like spiciness</h2>
+      <ul>
+        {userProfile.likesSpiciness.map((spiciness) => {
+          return <li>{spiciness}</li>
+        })}
+      </ul>
 
       <Button
         variant="primary"
