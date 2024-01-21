@@ -131,6 +131,32 @@ const Profile: React.FC<Props> = ({ loginMethod }) => {
     )
   }
 
+  async function loadUserProfile() {
+    // if (loginMethod === LoginMethod.SOLID) {
+
+    // }
+
+    if (loginMethod === LoginMethod.FIREBASE) {
+      const loggedInUser = auth.currentUser
+
+      //  Get rid of a TypeScript error
+      if (loggedInUser === null) {
+        return
+      }
+
+      const profileRef = doc(db, 'users', loggedInUser?.uid)
+
+      const userProfile = await getDoc(profileRef)
+
+      //  Get rid of a TypeScript error
+      if (!userProfile.exists()) {
+        return
+      }
+
+      setUserProfile(userProfile.data() as UserProfile)
+    }
+  }
+
   return (
     <>
       <h1 className="mt-3">Profile overview</h1>
@@ -138,7 +164,7 @@ const Profile: React.FC<Props> = ({ loginMethod }) => {
         Signed in with{' '}
         {loginMethod === LoginMethod.SOLID ? 'solid' : 'firebase'}
       </p>
-      <button>Load profile</button>
+      <button onClick={() => void loadUserProfile()}>Load profile</button>
 
       <h2>You are allergic to</h2>
       <ul>
