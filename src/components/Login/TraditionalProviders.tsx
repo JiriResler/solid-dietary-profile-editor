@@ -4,6 +4,7 @@ import Stack from 'react-bootstrap/Stack'
 import { auth, facebook, google } from '../../firebase'
 import { signInWithPopup } from 'firebase/auth'
 
+// todo: sign out from all providers before signing in
 const TraditionalProviders: React.FC = () => {
   return (
     <Stack direction="horizontal" gap={3} className=" mx-auto">

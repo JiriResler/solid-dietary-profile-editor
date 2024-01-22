@@ -14,6 +14,8 @@ const solidIdProviders: string[] = [
   'https://solidweb.org/',
 ]
 
+// todo Make provider urls prettier - names instead of full urls
+
 // const solidIdProviders: string[] = [
 //   'solidcommunity.net',
 //   'inrupt.com (PodSpaces)',
