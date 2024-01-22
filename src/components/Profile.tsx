@@ -6,7 +6,12 @@ import Button from 'react-bootstrap/Button'
 import './Profile.css'
 import { signOut } from 'firebase/auth'
 import { useSession } from '@inrupt/solid-ui-react'
-import { getPodUrlAll, getSolidDataset } from '@inrupt/solid-client'
+import {
+  getPodUrlAll,
+  getSolidDataset,
+  getThing,
+  getUrlAll,
+} from '@inrupt/solid-client'
 import { fetch } from '@inrupt/solid-client-authn-browser'
 import { doc, getDoc } from 'firebase/firestore'
 import { db, auth } from '../firebase'
@@ -132,9 +137,59 @@ const Profile: React.FC<Props> = ({ loginMethod }) => {
   }
 
   async function loadUserProfile() {
-    // if (loginMethod === LoginMethod.SOLID) {
+    if (loginMethod === LoginMethod.SOLID) {
+      const podUrl = await getPodUrl()
 
-    // }
+      const profileLocation = 'eatingPreferencesProfile/profile'
+
+      const profileUrl = podUrl + profileLocation
+
+      const profileDataset = await getSolidDataset(profileUrl, {
+        fetch: fetch as undefined,
+      })
+
+      const userThing = getThing(profileDataset, profileUrl + '#me')
+
+      // Get rid of a TypeScript error
+      if (userThing === null) {
+        return
+      }
+
+      const profile: UserProfile = {
+        allergicTo: [],
+        onDiets: [],
+        likesCuisines: [],
+        likesDessertTaste: [],
+        likesSpiciness: [],
+      }
+
+      profile.allergicTo = getUrlAll(
+        userThing,
+        'https://github.com/JiriResler/solid-choose-well-ontology/blob/main/choosewell#allergicTo',
+      )
+
+      profile.onDiets = getUrlAll(
+        userThing,
+        'https://github.com/JiriResler/solid-choose-well-ontology/blob/main/choosewell#onDiet',
+      )
+
+      profile.likesCuisines = getUrlAll(
+        userThing,
+        'https://github.com/JiriResler/solid-choose-well-ontology/blob/main/choosewell#likesCuisine',
+      )
+
+      profile.likesDessertTaste = getUrlAll(
+        userThing,
+        'https://github.com/JiriResler/solid-choose-well-ontology/blob/main/choosewell#likesDessert',
+      )
+
+      profile.likesSpiciness = getUrlAll(
+        userThing,
+        'https://github.com/JiriResler/solid-choose-well-ontology/blob/main/choosewell#likesSpicyFood',
+      )
+
+      setUserProfile(profile)
+    }
 
     if (loginMethod === LoginMethod.FIREBASE) {
       const loggedInUser = auth.currentUser
