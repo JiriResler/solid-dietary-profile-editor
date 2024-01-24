@@ -228,7 +228,14 @@ const Profile: React.FC<Props> = ({ loginMethod }) => {
     <>
       <Stack gap={3} className="mt-4">
         <div>
-          <h3>Name</h3>
+          <Stack direction="horizontal">
+            <img
+              src="images/profile_picture_default.svg"
+              alt="Profile icon"
+              style={{ width: '75px' }}
+            />
+            <h3 className="ms-2">Name</h3>
+          </Stack>
           <h5>email</h5>
         </div>
         <Card>
@@ -238,7 +245,7 @@ const Profile: React.FC<Props> = ({ loginMethod }) => {
               You are allergic to
             </Card.Subtitle>
             <Card.Text>
-              <ul style={{'list-style-type': 'none'}}>
+              <ul style={{ 'list-style-type': 'none' }}>
                 {userProfile.allergicTo.map((allergen) => {
                   return <li>- {allergen}</li>
                 })}
