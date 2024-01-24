@@ -15,6 +15,16 @@ import {
 import { fetch } from '@inrupt/solid-client-authn-browser'
 import { doc, getDoc } from 'firebase/firestore'
 import { db, auth } from '../firebase'
+import Card from 'react-bootstrap/Card'
+import Stack from 'react-bootstrap/Stack'
+
+const dummyProfile = {
+  allergicTo: ['Gluten', 'Milk'],
+  onDiets: ['Vegetarian'],
+  likesCuisines: ['Chinese', 'Italian', 'Greek'],
+  likesDessertTaste: ['Sweet'],
+  likesSpiciness: ['Medium'],
+}
 
 type UserProfile = {
   allergicTo: string[]
@@ -42,13 +52,15 @@ const Profile: React.FC<Props> = ({ loginMethod }) => {
 
   const [loadingProfile, setLoadingProfile] = useState(true)
 
-  const [userProfile, setUserProfile] = useState<UserProfile>({
-    allergicTo: [],
-    onDiets: [],
-    likesCuisines: [],
-    likesDessertTaste: [],
-    likesSpiciness: [],
-  })
+  // const [userProfile, setUserProfile] = useState<UserProfile>({
+  //   allergicTo: [],
+  //   onDiets: [],
+  //   likesCuisines: [],
+  //   likesDessertTaste: [],
+  //   likesSpiciness: [],
+  // })
+
+  const [userProfile, setUserProfile] = useState<UserProfile>(dummyProfile)
 
   useEffect(() => {
     // todo: add a loading state
@@ -214,48 +226,27 @@ const Profile: React.FC<Props> = ({ loginMethod }) => {
 
   return (
     <>
-      <h1 className="mt-3">Profile overview</h1>
-      <p>
-        Signed in with{' '}
-        {loginMethod === LoginMethod.SOLID ? 'solid' : 'firebase'}
-      </p>
-      <button onClick={() => void loadUserProfile()}>Load profile</button>
-
-      <h2>You are allergic to</h2>
-      <ul>
-        {userProfile.allergicTo.map((allergen) => {
-          return <li>{allergen}</li>
-        })}
-      </ul>
-
-      <h2>You are on diets</h2>
-      <ul>
-        {userProfile.onDiets.map((diet) => {
-          return <li>{diet}</li>
-        })}
-      </ul>
-
-      <h2>You like cuisines</h2>
-      <ul>
-        {userProfile.likesCuisines.map((cuisine) => {
-          return <li>{cuisine}</li>
-        })}
-      </ul>
-
-      <h2>You like desserts</h2>
-      <ul>
-        {userProfile.likesDessertTaste.map((dessertTaste) => {
-          return <li>{dessertTaste}</li>
-        })}
-      </ul>
-
-      <h2>You like spiciness</h2>
-      <ul>
-        {userProfile.likesSpiciness.map((spiciness) => {
-          return <li>{spiciness}</li>
-        })}
-      </ul>
-
+      <Stack gap={3} className="mt-4">
+        <div>
+          <h3>Name</h3>
+          <h5>email</h5>
+        </div>
+        <Card>
+          <Card.Body>
+            <Card.Title>Allergens</Card.Title>
+            <Card.Subtitle className="mb-2 text-muted">
+              You are allergic to
+            </Card.Subtitle>
+            <Card.Text>
+              <ul style={{'list-style-type': 'circle'}}>
+                {userProfile.allergicTo.map((allergen) => {
+                  return <li>{allergen}</li>
+                })}
+              </ul>
+            </Card.Text>
+          </Card.Body>
+        </Card>
+      </Stack>
       <Button
         variant="primary"
         onClick={() => setShowSidebar(true)}
