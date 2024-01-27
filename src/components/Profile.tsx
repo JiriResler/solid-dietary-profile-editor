@@ -17,6 +17,8 @@ import { doc, getDoc } from 'firebase/firestore'
 import { db, auth } from '../firebase'
 import Card from 'react-bootstrap/Card'
 import Stack from 'react-bootstrap/Stack'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
 
 const dummyProfile = {
   allergicTo: ['Gluten', 'Milk'],
@@ -135,19 +137,6 @@ const Profile: React.FC<Props> = ({ loginMethod }) => {
     return firstPodUrl
   }
 
-  if (loadingProfile) {
-    return <h1>Loading profile data</h1>
-  }
-
-  if (!userProfileExists) {
-    return (
-      <CreateProfile
-        loginMethod={loginMethod}
-        setUserProfileExists={setUserProfileExists}
-      />
-    )
-  }
-
   async function loadUserProfile() {
     if (loginMethod === LoginMethod.SOLID) {
       const podUrl = await getPodUrl()
@@ -224,20 +213,38 @@ const Profile: React.FC<Props> = ({ loginMethod }) => {
     }
   }
 
+  if (loadingProfile) {
+    return <h1>Loading profile data</h1>
+  }
+
+  if (!userProfileExists) {
+    return (
+      <CreateProfile
+        loginMethod={loginMethod}
+        setUserProfileExists={setUserProfileExists}
+      />
+    )
+  }
+
   return (
     <>
       <Stack gap={3} className="mt-4">
-        <div>
-          <Stack direction="horizontal">
+        <Row className='w-75'>
+          <Col xs={4}>
             <img
               src="images/profile_picture_default.svg"
               alt="Profile icon"
               style={{ width: '75px' }}
             />
-            <h3 className="ms-2">Name</h3>
-          </Stack>
-          <h5>email</h5>
-        </div>
+          </Col>
+          <Col className='my-auto'>
+            <Row>
+              <Col xs={12}>Name</Col>
+              <Col>Email</Col>
+            </Row>
+          </Col>
+        </Row>
+
         <Card>
           <Card.Header>Allergens</Card.Header>
           <Card.Body>
@@ -252,6 +259,7 @@ const Profile: React.FC<Props> = ({ loginMethod }) => {
           </Card.Body>
         </Card>
       </Stack>
+
       <Button
         variant="primary"
         onClick={() => setShowSidebar(true)}
