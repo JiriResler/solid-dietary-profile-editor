@@ -229,7 +229,7 @@ const Profile: React.FC<Props> = ({ loginMethod }) => {
   return (
     <>
       <Stack gap={3} className="mt-4">
-        <Row className='w-75'>
+        <Row className="w-75">
           <Col xs={4}>
             <img
               src="images/profile_picture_default.svg"
@@ -237,16 +237,20 @@ const Profile: React.FC<Props> = ({ loginMethod }) => {
               style={{ width: '75px' }}
             />
           </Col>
-          <Col className='my-auto'>
+          <Col className="my-auto">
             <Row>
-              <Col xs={12}>Name</Col>
+              <Col xs={12}>
+                <span style={{ 'font-weight': 'bold' }}>Name</span>
+              </Col>
               <Col>Email</Col>
             </Row>
           </Col>
         </Row>
 
         <Card>
-          <Card.Header>Allergens</Card.Header>
+          <Card.Header>
+            <span style={{ 'font-weight': 'bold' }}>Allergens</span>
+          </Card.Header>
           <Card.Body>
             <Card.Subtitle className="mb-2 text-muted">
               You are allergic to
