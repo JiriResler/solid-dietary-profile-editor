@@ -245,11 +245,9 @@ const Profile: React.FC<Props> = ({ loginMethod }) => {
               You are allergic to
             </Card.Subtitle>
             <Card.Text>
-              <ul style={{ 'list-style-type': 'none' }}>
-                {userProfile.allergicTo.map((allergen) => {
-                  return <li>- {allergen}</li>
-                })}
-              </ul>
+              {userProfile.allergicTo.map((allergen) => {
+                return <div>- {allergen}</div>
+              })}
             </Card.Text>
           </Card.Body>
         </Card>
