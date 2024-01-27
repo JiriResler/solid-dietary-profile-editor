@@ -239,8 +239,8 @@ const Profile: React.FC<Props> = ({ loginMethod }) => {
           <h5>email</h5>
         </div>
         <Card>
+          <Card.Header>Allergens</Card.Header>
           <Card.Body>
-            <Card.Title>Allergens</Card.Title>
             <Card.Subtitle className="mb-2 text-muted">
               You are allergic to
             </Card.Subtitle>
