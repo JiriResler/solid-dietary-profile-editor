@@ -25,6 +25,7 @@ import SelectTastePreferences from './SelectTastePreferences'
 import { Diet } from './profileDataTypes'
 import { db, auth } from '../../firebase'
 import { doc, setDoc } from 'firebase/firestore'
+import { SolidPodResponseError } from '../Profile/SolidPodResponseError'
 
 type FirestoreUserProfile = {
   allergicTo: string[]
@@ -32,10 +33,6 @@ type FirestoreUserProfile = {
   likesCuisines: string[]
   likesDessertTaste: string[]
   likesSpiciness: string[]
-}
-
-interface SolidPodResponseError extends Error {
-  statusCode?: number
 }
 
 type Props = {

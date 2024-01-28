@@ -1,10 +1,7 @@
 import { useEffect, useState } from 'react'
-import CreateProfile from './CreateProfile/CreateProfile'
-import { LoginMethod } from './loginMethodEnum'
-import Offcanvas from 'react-bootstrap/Offcanvas'
-import Button from 'react-bootstrap/Button'
+import CreateProfile from '../CreateProfile/CreateProfile'
+import { LoginMethod } from '../loginMethodEnum'
 import './Profile.css'
-import { signOut } from 'firebase/auth'
 import { useSession } from '@inrupt/solid-ui-react'
 import {
   getPodUrlAll,
@@ -14,11 +11,13 @@ import {
 } from '@inrupt/solid-client'
 import { fetch } from '@inrupt/solid-client-authn-browser'
 import { doc, getDoc } from 'firebase/firestore'
-import { db, auth } from '../firebase'
+import { db, auth } from '../../firebase'
 import Card from 'react-bootstrap/Card'
 import Stack from 'react-bootstrap/Stack'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
+import { SolidPodResponseError } from './SolidPodResponseError'
+import OffCanvasMenu from './OffCanvasMenu'
 
 const dummyProfile = {
   allergicTo: ['Gluten', 'Milk'],
@@ -36,11 +35,6 @@ type UserProfile = {
   likesSpiciness: string[]
 }
 
-//  todo: move type to separate file
-interface SolidPodResponseError extends Error {
-  statusCode?: number
-}
-
 type Props = {
   loginMethod: LoginMethod
 }
@@ -49,8 +43,6 @@ const Profile: React.FC<Props> = ({ loginMethod }) => {
   const { session } = useSession()
 
   const [userProfileExists, setUserProfileExists] = useState(false)
-
-  const [showSidebar, setShowSidebar] = useState(false)
 
   const [loadingProfile, setLoadingProfile] = useState(true)
 
@@ -228,6 +220,8 @@ const Profile: React.FC<Props> = ({ loginMethod }) => {
 
   return (
     <>
+      <OffCanvasMenu />
+
       <Stack gap={3} className="mt-4">
         <Row className="w-75">
           <Col xs={4}>
@@ -240,7 +234,7 @@ const Profile: React.FC<Props> = ({ loginMethod }) => {
           <Col className="my-auto">
             <Row>
               <Col xs={12}>
-                <span style={{ 'font-weight': 'bold' }}>Name</span>
+                <span className="text-bold">Name</span>
               </Col>
               <Col>Email</Col>
             </Row>
@@ -249,7 +243,7 @@ const Profile: React.FC<Props> = ({ loginMethod }) => {
 
         <Card>
           <Card.Header>
-            <span style={{ 'font-weight': 'bold' }}>Allergens</span>
+            <span className="text-bold">Allergens</span>
           </Card.Header>
           <Card.Body>
             <Card.Subtitle className="mb-2 text-muted">
@@ -263,52 +257,6 @@ const Profile: React.FC<Props> = ({ loginMethod }) => {
           </Card.Body>
         </Card>
       </Stack>
-
-      <Button
-        variant="primary"
-        onClick={() => setShowSidebar(true)}
-        className="position-absolute top-0 end-0 mt-4 me-4"
-      >
-        <img src="images/hamburger_menu_icon.svg" className="hamburger-icon" />
-      </Button>
-
-      <Offcanvas
-        show={showSidebar}
-        onHide={() => setShowSidebar(false)}
-        placement="end"
-        className="sidebar-menu"
-      >
-        <Offcanvas.Header className="border">
-          <Offcanvas.Title>
-            <img
-              className="w-25 mb-2"
-              src="images/app_logo.svg"
-              alt="application_logo"
-            />
-            <span className="ms-4">Menu</span>
-          </Offcanvas.Title>
-        </Offcanvas.Header>
-        <Offcanvas.Body>
-          <div className="mt-2">Edit profile</div>
-          <div className="mt-4">Select Solid Pod</div>
-          <div className="mt-4">Import profile</div>
-          <div className="mt-4">Export profile</div>
-          <div
-            onClick={() => {
-              signOut(auth).catch((error: Error) => {
-                console.log(error.message)
-              })
-
-              session.logout().catch((error: Error) => {
-                console.log(error.message)
-              })
-            }}
-            className="mt-4"
-          >
-            Log out
-          </div>
-        </Offcanvas.Body>
-      </Offcanvas>
     </>
   )
 }

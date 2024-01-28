@@ -1,11 +1,11 @@
 import React, { Dispatch } from 'react'
 
-interface ILanguageContext {
+interface LanguageContext {
   language: string
   setLanguage: Dispatch<React.SetStateAction<string>>
 }
 
-const LanguageContext = React.createContext<ILanguageContext>({
+const LanguageContext = React.createContext<LanguageContext>({
   language: '',
   setLanguage: () => {},
 })

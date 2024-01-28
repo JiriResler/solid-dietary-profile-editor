@@ -1,3 +1,7 @@
 .sidebar-menu {
   width: 150pt !important;
 }
+
+.text-bold {
+  font-weight: bold;
+}
