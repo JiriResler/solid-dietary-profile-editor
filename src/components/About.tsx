@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import { FormattedMessage } from 'react-intl'
 
-function About() {
+const About: React.FC = () => {
   return (
     <div>
       <h1>This is the about page</h1>

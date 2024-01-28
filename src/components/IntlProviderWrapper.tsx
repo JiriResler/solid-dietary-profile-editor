@@ -3,6 +3,7 @@ import { useState } from 'react'
 import LanguageContext from '../LanguageContext'
 import { PropsWithChildren } from 'react'
 
+// todo Move messages to GitHub and load only those which are necessary based on selected language
 const sk_messages = {
   app_name: 'Editor diétneho profilu',
   about_application: 'O aplikácii',
@@ -29,7 +30,7 @@ const cs_messages = {
   which_provider_to_choose: 'Jak vybrat správného poskytovatele?',
 }
 
-export const IntlProviderWrapper = (props: PropsWithChildren) => {
+const IntlProviderWrapper: React.FC = (props: PropsWithChildren) => {
   const [language, setLanguage] = useState('en')
   const languageContextInitialValue = { language, setLanguage }
 

@@ -3,12 +3,11 @@ import { useSession } from '@inrupt/solid-ui-react'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { auth } from '../firebase'
 import Profile from './Profile/Profile'
-// import About from './About'
 import LoginScreen from './Login/LoginScreen'
 import { handleIncomingRedirect } from '@inrupt/solid-client-authn-browser'
 import { LoginMethod } from './loginMethodEnum'
 
-function RouterWrapper() {
+const RouterWrapper: React.FC = () => {
   const { session, sessionRequestInProgress } = useSession()
   const [user] = useAuthState(auth)
 
