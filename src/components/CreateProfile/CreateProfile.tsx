@@ -27,6 +27,7 @@ import { db, auth } from '../../firebase'
 import { doc, setDoc } from 'firebase/firestore'
 import { SolidPodResponseError } from '../Profile/SolidPodResponseError'
 
+// todo change to general user profile used in application
 type FirestoreUserProfile = {
   allergicTo: string[]
   onDiets: string[]
@@ -37,13 +38,9 @@ type FirestoreUserProfile = {
 
 type Props = {
   loginMethod: LoginMethod
-  setUserProfileExists: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const CreateProfile: React.FC<Props> = ({
-  loginMethod,
-  setUserProfileExists,
-}) => {
+const CreateProfile: React.FC<Props> = ({ loginMethod }) => {
   const { session } = useSession()
 
   const [currentStep, setCurrentStep] = useState(0)
@@ -161,7 +158,7 @@ const CreateProfile: React.FC<Props> = ({
 
     alert('Profile saved')
 
-    setUserProfileExists(true)
+    // todo loadProfile()
   }
 
   // todo: move function to a separate file as it is used in other components
@@ -207,7 +204,7 @@ const CreateProfile: React.FC<Props> = ({
 
     alert('Profile saved')
 
-    setUserProfileExists(true)
+    // todo loadProfile()
   }
 
   return (

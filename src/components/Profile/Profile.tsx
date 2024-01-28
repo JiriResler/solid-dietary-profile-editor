@@ -19,14 +19,6 @@ import Col from 'react-bootstrap/Col'
 import { SolidPodResponseError } from './SolidPodResponseError'
 import OffCanvasMenu from './OffCanvasMenu'
 
-const dummyProfile = {
-  allergicTo: ['Gluten', 'Milk'],
-  onDiets: ['Vegetarian'],
-  likesCuisines: ['Chinese', 'Italian', 'Greek'],
-  likesDessertTaste: ['Sweet'],
-  likesSpiciness: ['Medium'],
-}
-
 type UserProfile = {
   allergicTo: string[]
   onDiets: string[]
@@ -42,73 +34,13 @@ type Props = {
 const Profile: React.FC<Props> = ({ loginMethod }) => {
   const { session } = useSession()
 
-  const [userProfileExists, setUserProfileExists] = useState(false)
-
   const [loadingProfile, setLoadingProfile] = useState(true)
 
-  // const [userProfile, setUserProfile] = useState<UserProfile>({
-  //   allergicTo: [],
-  //   onDiets: [],
-  //   likesCuisines: [],
-  //   likesDessertTaste: [],
-  //   likesSpiciness: [],
-  // })
-
-  const [userProfile, setUserProfile] = useState<UserProfile>(dummyProfile)
+  const [userProfile, setUserProfile] = useState<UserProfile | null>(null)
 
   useEffect(() => {
-    // todo: add a loading state
-    void checkIfProfileExists()
+    void loadUserProfile()
   }, [])
-
-  async function checkIfProfileExists() {
-    if (loginMethod === LoginMethod.SOLID) {
-      const podUrl = await getPodUrl()
-
-      const profileLocation = 'eatingPreferencesProfile/profile'
-
-      const profileUrl = podUrl + profileLocation
-
-      try {
-        // Attempt to retrieve a profile
-        await getSolidDataset(profileUrl, {
-          fetch: fetch as undefined,
-        })
-
-        setUserProfileExists(true)
-      } catch (error) {
-        if (
-          typeof (error as SolidPodResponseError).statusCode === 'number' &&
-          (error as SolidPodResponseError).statusCode === 404
-        ) {
-          setUserProfileExists(false)
-        }
-      }
-    }
-
-    if (loginMethod === LoginMethod.FIREBASE) {
-      const loggedInUser = auth.currentUser
-
-      //  Get rid of a TypeScript error
-      if (loggedInUser === null) {
-        return
-      }
-
-      const profileRef = doc(db, 'users', loggedInUser?.uid)
-      const userProfile = await getDoc(profileRef)
-
-      if (userProfile.exists()) {
-        console.log('Document data:', userProfile.data())
-
-        setUserProfileExists(true)
-      } else {
-        console.log('No such document!')
-        setUserProfileExists(false)
-      }
-    }
-
-    setLoadingProfile(false)
-  }
 
   async function getPodUrl() {
     const userWebID: string =
@@ -129,93 +61,102 @@ const Profile: React.FC<Props> = ({ loginMethod }) => {
     return firstPodUrl
   }
 
-  async function loadUserProfile() {
-    if (loginMethod === LoginMethod.SOLID) {
-      const podUrl = await getPodUrl()
+  function loadUserProfile() {
+    // if (loginMethod === LoginMethod.SOLID) {
+    //   const podUrl = await getPodUrl()
 
-      const profileLocation = 'eatingPreferencesProfile/profile'
+    //   const profileLocation = 'eatingPreferencesProfile/profile'
 
-      const profileUrl = podUrl + profileLocation
+    //   const profileUrl = podUrl + profileLocation
 
-      const profileDataset = await getSolidDataset(profileUrl, {
-        fetch: fetch as undefined,
-      })
+    //   const profileDataset = await getSolidDataset(profileUrl, {
+    //     fetch: fetch as undefined,
+    //   })
 
-      const userThing = getThing(profileDataset, profileUrl + '#me')
+    //   const userThing = getThing(profileDataset, profileUrl + '#me')
 
-      // Get rid of a TypeScript error
-      if (userThing === null) {
-        return
-      }
+    //   // Get rid of a TypeScript error
+    //   if (userThing === null) {
+    //     return
+    //   }
 
-      const profile: UserProfile = {
-        allergicTo: [],
-        onDiets: [],
-        likesCuisines: [],
-        likesDessertTaste: [],
-        likesSpiciness: [],
-      }
+    //   const profile: UserProfile = {
+    //     allergicTo: [],
+    //     onDiets: [],
+    //     likesCuisines: [],
+    //     likesDessertTaste: [],
+    //     likesSpiciness: [],
+    //   }
 
-      profile.allergicTo = getUrlAll(
-        userThing,
-        'https://github.com/JiriResler/solid-choose-well-ontology/blob/main/choosewell#allergicTo',
-      )
+    //   profile.allergicTo = getUrlAll(
+    //     userThing,
+    //     'https://github.com/JiriResler/solid-choose-well-ontology/blob/main/choosewell#allergicTo',
+    //   )
 
-      profile.onDiets = getUrlAll(
-        userThing,
-        'https://github.com/JiriResler/solid-choose-well-ontology/blob/main/choosewell#onDiet',
-      )
+    //   profile.onDiets = getUrlAll(
+    //     userThing,
+    //     'https://github.com/JiriResler/solid-choose-well-ontology/blob/main/choosewell#onDiet',
+    //   )
 
-      profile.likesCuisines = getUrlAll(
-        userThing,
-        'https://github.com/JiriResler/solid-choose-well-ontology/blob/main/choosewell#likesCuisine',
-      )
+    //   profile.likesCuisines = getUrlAll(
+    //     userThing,
+    //     'https://github.com/JiriResler/solid-choose-well-ontology/blob/main/choosewell#likesCuisine',
+    //   )
 
-      profile.likesDessertTaste = getUrlAll(
-        userThing,
-        'https://github.com/JiriResler/solid-choose-well-ontology/blob/main/choosewell#likesDessert',
-      )
+    //   profile.likesDessertTaste = getUrlAll(
+    //     userThing,
+    //     'https://github.com/JiriResler/solid-choose-well-ontology/blob/main/choosewell#likesDessert',
+    //   )
 
-      profile.likesSpiciness = getUrlAll(
-        userThing,
-        'https://github.com/JiriResler/solid-choose-well-ontology/blob/main/choosewell#likesSpicyFood',
-      )
+    //   profile.likesSpiciness = getUrlAll(
+    //     userThing,
+    //     'https://github.com/JiriResler/solid-choose-well-ontology/blob/main/choosewell#likesSpicyFood',
+    //   )
 
-      setUserProfile(profile)
+    //   setUserProfile(profile)
+    // }
+
+    // if (loginMethod === LoginMethod.FIREBASE) {
+    //   const loggedInUser = auth.currentUser
+
+    //   //  Get rid of a TypeScript error
+    //   if (loggedInUser === null) {
+    //     return
+    //   }
+
+    //   const profileRef = doc(db, 'users', loggedInUser?.uid)
+
+    //   const userProfile = await getDoc(profileRef)
+
+    //   //  Get rid of a TypeScript error
+    //   if (!userProfile.exists()) {
+    //     return
+    //   }
+
+    //   setUserProfile(userProfile.data() as UserProfile)
+    // }
+
+    setLoadingProfile(true)
+
+    const dummyProfile = {
+      allergicTo: ['Gluten', 'Milk'],
+      onDiets: ['Vegetarian'],
+      likesCuisines: ['Chinese', 'Italian', 'Greek'],
+      likesDessertTaste: ['Sweet'],
+      likesSpiciness: ['Medium'],
     }
 
-    if (loginMethod === LoginMethod.FIREBASE) {
-      const loggedInUser = auth.currentUser
+    setUserProfile(dummyProfile)
 
-      //  Get rid of a TypeScript error
-      if (loggedInUser === null) {
-        return
-      }
-
-      const profileRef = doc(db, 'users', loggedInUser?.uid)
-
-      const userProfile = await getDoc(profileRef)
-
-      //  Get rid of a TypeScript error
-      if (!userProfile.exists()) {
-        return
-      }
-
-      setUserProfile(userProfile.data() as UserProfile)
-    }
+    setLoadingProfile(false)
   }
 
   if (loadingProfile) {
     return <h1>Loading profile data</h1>
   }
 
-  if (!userProfileExists) {
-    return (
-      <CreateProfile
-        loginMethod={loginMethod}
-        setUserProfileExists={setUserProfileExists}
-      />
-    )
+  if (userProfile === null) {
+    return <CreateProfile loginMethod={loginMethod} />
   }
 
   return (
