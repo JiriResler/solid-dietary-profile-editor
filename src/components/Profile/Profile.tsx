@@ -16,7 +16,6 @@ import Card from 'react-bootstrap/Card'
 import Stack from 'react-bootstrap/Stack'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-import { SolidPodResponseError } from './SolidPodResponseError'
 import OffCanvasMenu from './OffCanvasMenu'
 
 type UserProfile = {
@@ -142,9 +141,9 @@ const Profile: React.FC<Props> = ({ loginMethod }) => {
     setLoadingProfile(false)
   }
 
-  // if (loadingProfile) {
-  //   return <h1>Loading profile data</h1>
-  // }
+  if (loadingProfile) {
+    return <h1>Loading profile data</h1>
+  }
 
   if (userProfile === null) {
     return <CreateProfile loginMethod={loginMethod} />
