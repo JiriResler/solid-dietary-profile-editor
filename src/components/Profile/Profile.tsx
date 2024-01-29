@@ -61,99 +61,90 @@ const Profile: React.FC<Props> = ({ loginMethod }) => {
     return firstPodUrl
   }
 
-  function loadUserProfile() {
-    // if (loginMethod === LoginMethod.SOLID) {
-    //   const podUrl = await getPodUrl()
-
-    //   const profileLocation = 'eatingPreferencesProfile/profile'
-
-    //   const profileUrl = podUrl + profileLocation
-
-    //   const profileDataset = await getSolidDataset(profileUrl, {
-    //     fetch: fetch as undefined,
-    //   })
-
-    //   const userThing = getThing(profileDataset, profileUrl + '#me')
-
-    //   // Get rid of a TypeScript error
-    //   if (userThing === null) {
-    //     return
-    //   }
-
-    //   const profile: UserProfile = {
-    //     allergicTo: [],
-    //     onDiets: [],
-    //     likesCuisines: [],
-    //     likesDessertTaste: [],
-    //     likesSpiciness: [],
-    //   }
-
-    //   profile.allergicTo = getUrlAll(
-    //     userThing,
-    //     'https://github.com/JiriResler/solid-choose-well-ontology/blob/main/choosewell#allergicTo',
-    //   )
-
-    //   profile.onDiets = getUrlAll(
-    //     userThing,
-    //     'https://github.com/JiriResler/solid-choose-well-ontology/blob/main/choosewell#onDiet',
-    //   )
-
-    //   profile.likesCuisines = getUrlAll(
-    //     userThing,
-    //     'https://github.com/JiriResler/solid-choose-well-ontology/blob/main/choosewell#likesCuisine',
-    //   )
-
-    //   profile.likesDessertTaste = getUrlAll(
-    //     userThing,
-    //     'https://github.com/JiriResler/solid-choose-well-ontology/blob/main/choosewell#likesDessert',
-    //   )
-
-    //   profile.likesSpiciness = getUrlAll(
-    //     userThing,
-    //     'https://github.com/JiriResler/solid-choose-well-ontology/blob/main/choosewell#likesSpicyFood',
-    //   )
-
-    //   setUserProfile(profile)
-    // }
-
-    // if (loginMethod === LoginMethod.FIREBASE) {
-    //   const loggedInUser = auth.currentUser
-
-    //   //  Get rid of a TypeScript error
-    //   if (loggedInUser === null) {
-    //     return
-    //   }
-
-    //   const profileRef = doc(db, 'users', loggedInUser?.uid)
-
-    //   const userProfile = await getDoc(profileRef)
-
-    //   //  Get rid of a TypeScript error
-    //   if (!userProfile.exists()) {
-    //     return
-    //   }
-
-    //   setUserProfile(userProfile.data() as UserProfile)
-    // }
-
+  async function loadUserProfile() {
     setLoadingProfile(true)
 
-    const dummyProfile = {
-      allergicTo: ['Gluten', 'Milk'],
-      onDiets: ['Vegetarian'],
-      likesCuisines: ['Chinese', 'Italian', 'Greek'],
-      likesDessertTaste: ['Sweet'],
-      likesSpiciness: ['Medium'],
+    if (loginMethod === LoginMethod.SOLID) {
+      const podUrl = await getPodUrl()
+
+      const profileLocation = 'eatingPreferencesProfile/profile'
+
+      const profileUrl = podUrl + profileLocation
+
+      // todo If profile not found, ...
+      const profileDataset = await getSolidDataset(profileUrl, {
+        fetch: fetch as undefined,
+      })
+
+      const userThing = getThing(profileDataset, profileUrl + '#me')
+
+      // Get rid of a TypeScript error
+      if (userThing === null) {
+        return
+      }
+
+      const profile: UserProfile = {
+        allergicTo: [],
+        onDiets: [],
+        likesCuisines: [],
+        likesDessertTaste: [],
+        likesSpiciness: [],
+      }
+
+      profile.allergicTo = getUrlAll(
+        userThing,
+        'https://github.com/JiriResler/solid-choose-well-ontology/blob/main/choosewell#allergicTo',
+      )
+
+      profile.onDiets = getUrlAll(
+        userThing,
+        'https://github.com/JiriResler/solid-choose-well-ontology/blob/main/choosewell#onDiet',
+      )
+
+      profile.likesCuisines = getUrlAll(
+        userThing,
+        'https://github.com/JiriResler/solid-choose-well-ontology/blob/main/choosewell#likesCuisine',
+      )
+
+      profile.likesDessertTaste = getUrlAll(
+        userThing,
+        'https://github.com/JiriResler/solid-choose-well-ontology/blob/main/choosewell#likesDessert',
+      )
+
+      profile.likesSpiciness = getUrlAll(
+        userThing,
+        'https://github.com/JiriResler/solid-choose-well-ontology/blob/main/choosewell#likesSpicyFood',
+      )
+
+      setUserProfile(profile)
     }
 
-    setUserProfile(dummyProfile)
+    if (loginMethod === LoginMethod.FIREBASE) {
+      const loggedInUser = auth.currentUser
+
+      //  Get rid of a TypeScript error
+      if (loggedInUser === null) {
+        return
+      }
+
+      const profileRef = doc(db, 'users', loggedInUser?.uid)
+
+      const userProfile = await getDoc(profileRef)
+
+      //  Get rid of a TypeScript error
+      if (!userProfile.exists()) {
+        return
+      }
+
+      setUserProfile(userProfile.data() as UserProfile)
+    }
 
     setLoadingProfile(false)
   }
 
-  if (loadingProfile) {
-    return <h1>Loading profile data</h1>
-  }
+  // if (loadingProfile) {
+  //   return <h1>Loading profile data</h1>
+  // }
 
   if (userProfile === null) {
     return <CreateProfile loginMethod={loginMethod} />
@@ -192,7 +183,18 @@ const Profile: React.FC<Props> = ({ loginMethod }) => {
             </Card.Subtitle>
             <Card.Text>
               {userProfile.allergicTo.map((allergen) => {
-                return <div>- {allergen}</div>
+                return (
+                  <span key={allergen}>
+                    - {allergen}{' '}
+                    <img
+                      src="images/info_icon.svg"
+                      alt="information icon"
+                      onClick={() => {
+                        alert('click')
+                      }}
+                    />
+                  </span>
+                )
               })}
             </Card.Text>
           </Card.Body>
