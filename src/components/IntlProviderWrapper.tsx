@@ -30,7 +30,7 @@ const cs_messages = {
   which_provider_to_choose: 'Jak vybrat správného poskytovatele?',
 }
 
-const IntlProviderWrapper: React.FC = (props: PropsWithChildren) => {
+const IntlProviderWrapper: React.FC<PropsWithChildren> = (props) => {
   const [language, setLanguage] = useState('en')
   const languageContextInitialValue = { language, setLanguage }
 
