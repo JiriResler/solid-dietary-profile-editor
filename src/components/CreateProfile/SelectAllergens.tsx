@@ -5,78 +5,7 @@ import Form from 'react-bootstrap/Form'
 import './SelectAllergens.css'
 import { Allergen } from './profileDataTypes'
 
-const allergenList: Allergen[] = [
-  {
-    label: 'Celery',
-    menuLegendNumber: 1,
-    IRI: 'http://dbpedia.org/resource/Celery',
-  },
-  {
-    label: 'Molluscs',
-    menuLegendNumber: 8,
-    IRI: 'http://dbpedia.org/resource/Mollusc_shell',
-  },
-  {
-    label: 'Gluten',
-    menuLegendNumber: 2,
-    IRI: 'http://dbpedia.org/resource/Gluten',
-  },
-  {
-    label: 'Mustard',
-    menuLegendNumber: 9,
-    IRI: 'http://dbpedia.org/resource/Mustard_(condiment)',
-  },
-  {
-    label: 'Crustaceans',
-    menuLegendNumber: 3,
-    IRI: 'http://dbpedia.org/resource/Crustacean',
-  },
-  {
-    label: 'Nuts',
-    menuLegendNumber: 10,
-    IRI: 'http://dbpedia.org/resource/Nut_(fruit)',
-  },
-  {
-    label: 'Eggs',
-    menuLegendNumber: 4,
-    IRI: 'http://dbpedia.org/resource/Egg',
-  },
-  {
-    label: 'Peanuts',
-    menuLegendNumber: 11,
-    IRI: 'http://dbpedia.org/resource/Peanut',
-  },
-  {
-    label: 'Fish',
-    menuLegendNumber: 5,
-    IRI: 'http://dbpedia.org/resource/Fish',
-  },
-  {
-    label: 'Sesame',
-    menuLegendNumber: 12,
-    IRI: 'http://dbpedia.org/resource/Sesame',
-  },
-  {
-    label: 'Lupin',
-    menuLegendNumber: 6,
-    IRI: 'http://dbpedia.org/resource/Lupinus_polyphyllus',
-  },
-  {
-    label: 'Soya',
-    menuLegendNumber: 13,
-    IRI: 'http://dbpedia.org/resource/Soybean',
-  },
-  {
-    label: 'Milk',
-    menuLegendNumber: 7,
-    IRI: 'http://dbpedia.org/resource/Milk',
-  },
-  {
-    label: 'Sulphites',
-    menuLegendNumber: 14,
-    IRI: 'http://dbpedia.org/resource/Sulfur_dioxide',
-  },
-]
+const allergenList: Allergen[] = []
 
 type Props = {
   currentStep: number

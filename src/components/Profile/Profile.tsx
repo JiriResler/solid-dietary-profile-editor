@@ -39,6 +39,7 @@ const Profile: React.FC<Props> = ({ loginMethod }) => {
 
   useEffect(() => {
     void loadUserProfile()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   async function getPodUrl() {
@@ -183,7 +184,7 @@ const Profile: React.FC<Props> = ({ loginMethod }) => {
             <Card.Text>
               {userProfile.allergicTo.map((allergen) => {
                 return (
-                  <span key={allergen}>
+                  <div key={allergen}>
                     - {allergen}{' '}
                     <img
                       src="images/info_icon.svg"
@@ -192,7 +193,7 @@ const Profile: React.FC<Props> = ({ loginMethod }) => {
                         alert('click')
                       }}
                     />
-                  </span>
+                  </div>
                 )
               })}
             </Card.Text>
