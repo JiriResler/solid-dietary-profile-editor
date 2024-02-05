@@ -142,9 +142,9 @@ const Profile: React.FC<Props> = ({ loginMethod }) => {
     setLoadingProfile(false)
   }
 
-  if (loadingProfile) {
-    return <h1>Loading profile data</h1>
-  }
+  // if (loadingProfile) {
+  //   return <h1>Loading profile data</h1>
+  // }
 
   if (userProfile === null) {
     return <CreateProfile loginMethod={loginMethod} />
