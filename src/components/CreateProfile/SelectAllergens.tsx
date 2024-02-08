@@ -6,7 +6,7 @@ import Form from 'react-bootstrap/Form'
 import './SelectAllergens.css'
 import { Allergen } from './profileDataTypes'
 import { fetch } from '@inrupt/solid-client-authn-browser'
-import { getSolidDataset, getThing, getUrl } from '@inrupt/solid-client'
+import { getSolidDataset, getThing, getUrl, getStringEnglish, getInteger } from '@inrupt/solid-client'
 
 type Props = {
   currentStep: number
@@ -19,7 +19,7 @@ const SelectAllergens: React.FC<Props> = ({
   selectedAllergens,
   setSelectedAllergens,
 }) => {
-  const [allergenList, setAllergenList] = useState<Allergen[]>([])
+  const [allergenArray, setAllergenArray] = useState<Allergen[]>([])
 
   useEffect(() => {
     void fetchList()
@@ -66,7 +66,40 @@ const SelectAllergens: React.FC<Props> = ({
       counter = counter + 1
     }
 
-    console.log(allergenUrlArray)
+    // Load allergens
+    const allergenArray: Allergen[] = []
+
+    for (const allergenUrl of allergenUrlArray) {
+      const allergenDataset = await getSolidDataset(
+        allergenUrl + '.ttl',
+        {
+          fetch: fetch as undefined,
+        },
+      )
+
+      const allergenThing = getThing(
+        allergenDataset,
+        allergenUrl,
+      )
+
+      if (allergenThing === null) {
+        return
+      }
+
+      const allergenNumber = getInteger(allergenThing, 'https://personal-restaurant-menu-viewer-app.solidcommunity.net/public/ontology#allergenNumber')
+
+      const allergenLabel = getStringEnglish(allergenThing, 'http://www.w3.org/2000/01/rdf-schema#label')
+
+      if (allergenNumber === null || allergenLabel === null) {
+        return
+      }
+
+      const allergen: Allergen = { IRI: allergenUrl, label: allergenLabel, menuLegendNumber: allergenNumber }
+
+      allergenArray.push(allergen)
+    }
+
+    setAllergenArray(allergenArray)
   }
 
   function handleCheckboxOnChange(allergen: Allergen) {
@@ -90,7 +123,7 @@ const SelectAllergens: React.FC<Props> = ({
       </p>
 
       <Row>
-        {allergenList.map((allergen: Allergen) => {
+        {allergenArray.map((allergen: Allergen) => {
           return (
             <Col key={allergen.IRI} xs={6}>
               <Stack direction="horizontal" gap={2}>
