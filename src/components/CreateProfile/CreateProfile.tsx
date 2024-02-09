@@ -1,40 +1,17 @@
 import { useState } from 'react'
+import { auth } from '../../firebase'
 import Button from 'react-bootstrap/Button'
 import Stack from 'react-bootstrap/Stack'
 import './CreateProfile.css'
 import SelectAllergens from './SelectAllergens'
 import CreateProfileNavigation from './CreateProfileNavigation'
 import SelectDiets from './SelectDiets'
-import { Allergen, TastePreferences } from './profileDataTypes'
+import { Allergen, Diet, TastePreferences } from './profileDataTypes'
 import { LoginMethod } from '../loginMethodEnum'
 import { useSession } from '@inrupt/solid-ui-react'
-import { fetch } from '@inrupt/solid-client-authn-browser'
-import {
-  SolidDataset,
-  addUrl,
-  createSolidDataset,
-  createThing,
-  getSolidDataset,
-  getThingAll,
-  removeThing,
-  saveSolidDatasetAt,
-  setThing,
-} from '@inrupt/solid-client'
 import SelectTastePreferences from './SelectTastePreferences'
-import { Diet } from './profileDataTypes'
-import { db, auth } from '../../firebase'
-import { doc, setDoc } from 'firebase/firestore'
-import { SolidPodResponseError } from '../Profile/SolidPodResponseError'
-import getPodUrl from '../getPodUrl'
+import { saveProfileFirebase, saveProfileSolid } from './saveProfile'
 
-// todo change to general user profile used in application
-type FirestoreUserProfile = {
-  allergicTo: string[]
-  onDiets: string[]
-  likesCuisines: string[]
-  likesDessertTaste: string[]
-  likesSpiciness: string[]
-}
 
 type Props = {
   loginMethod: LoginMethod
@@ -45,6 +22,7 @@ const CreateProfile: React.FC<Props> = ({ loginMethod }) => {
 
   const [currentStep, setCurrentStep] = useState(0)
 
+  // Number of steps in profile creation
   const numberOfSteps = 3
 
   const [selectedAllergens, setSelectedAllergens] = useState(
@@ -62,131 +40,12 @@ const CreateProfile: React.FC<Props> = ({ loginMethod }) => {
 
   function saveProfile() {
     if (loginMethod === LoginMethod.SOLID) {
-      void saveProfileSolid()
+      void saveProfileSolid(session, selectedAllergens, selectedDiets, selectedTastePreferences)
     }
 
     if (loginMethod === LoginMethod.FIREBASE) {
-      void saveProfileFirebase()
+      void saveProfileFirebase(auth, selectedAllergens, selectedDiets, selectedTastePreferences)
     }
-  }
-
-  async function saveProfileSolid() {
-    const podUrl = await getPodUrl(session)
-
-    const profileLocation = 'eatingPreferencesProfile/profile'
-
-    const profileUrl = podUrl + profileLocation
-
-    let eatingPreferencesProfile: SolidDataset
-
-    try {
-      // Attempt to retrieve the profile in case it already exists.
-      eatingPreferencesProfile = await getSolidDataset(profileUrl, {
-        fetch: fetch as undefined,
-      })
-
-      // Clear the profile
-      const items = getThingAll(eatingPreferencesProfile)
-      items.forEach((item) => {
-        eatingPreferencesProfile = removeThing(eatingPreferencesProfile, item)
-      })
-    } catch (error) {
-      if (
-        typeof (error as SolidPodResponseError).statusCode === 'number' &&
-        (error as SolidPodResponseError).statusCode === 404
-      ) {
-        // if not found, create a new SolidDataset
-        eatingPreferencesProfile = createSolidDataset()
-      } else {
-        console.error((error as Error).message)
-        alert(
-          'There was an error while saving the profile with the code ' +
-            (error as SolidPodResponseError).statusCode,
-        )
-
-        return
-      }
-    }
-
-    let user = createThing({ name: 'me' })
-
-    for (const allergen of selectedAllergens) {
-      user = addUrl(
-        user,
-        'https://github.com/JiriResler/solid-choose-well-ontology/blob/main/choosewell#allergicTo',
-        allergen.IRI,
-      )
-    }
-
-    for (const diet of selectedDiets) {
-      user = addUrl(
-        user,
-        'https://github.com/JiriResler/solid-choose-well-ontology/blob/main/choosewell#onDiet',
-        diet.IRI,
-      )
-    }
-
-    for (const cuisine of selectedTastePreferences.cuisines) {
-      user = addUrl(
-        user,
-        'https://github.com/JiriResler/solid-choose-well-ontology/blob/main/choosewell#likesCuisine',
-        cuisine.value,
-      )
-    }
-
-    for (const dessertValueIRI of selectedTastePreferences.desserts) {
-      user = addUrl(
-        user,
-        'https://github.com/JiriResler/solid-choose-well-ontology/blob/main/choosewell#likesDessert',
-        dessertValueIRI,
-      )
-    }
-
-    for (const spicinessValueIRI of selectedTastePreferences.spiciness) {
-      user = addUrl(
-        user,
-        'https://github.com/JiriResler/solid-choose-well-ontology/blob/main/choosewell#likesSpicyFood',
-        spicinessValueIRI,
-      )
-    }
-
-    eatingPreferencesProfile = setThing(eatingPreferencesProfile, user)
-
-    await saveSolidDatasetAt(profileUrl, eatingPreferencesProfile, {
-      fetch: fetch as undefined,
-    })
-
-    alert('Profile saved')
-
-    // todo loadProfile()
-  }
-
-  async function saveProfileFirebase() {
-    const loggedInUser = auth.currentUser
-
-    //  Get rid of a TypeScript error
-    if (loggedInUser === null) {
-      return
-    }
-
-    // todo: make this code easier to read by splitting it to more lines
-    const profileData: FirestoreUserProfile = {
-      allergicTo: Array.from(selectedAllergens.values()).map(
-        (allergen) => allergen.IRI,
-      ),
-      onDiets: Array.from(selectedDiets.values()).map((diet) => diet.IRI),
-      likesCuisines: selectedTastePreferences.cuisines.map(
-        (cuisine) => cuisine.value,
-      ),
-      likesDessertTaste: selectedTastePreferences.desserts,
-      likesSpiciness: selectedTastePreferences.spiciness,
-    }
-
-    await setDoc(doc(db, 'users', loggedInUser.uid), profileData)
-
-    alert('Profile saved')
-
-    // todo loadProfile()
   }
 
   return (
