@@ -4,7 +4,6 @@ import { LoginMethod } from '../loginMethodEnum'
 import './Profile.css'
 import { useSession } from '@inrupt/solid-ui-react'
 import {
-  getPodUrlAll,
   getSolidDataset,
   getThing,
   getUrlAll,
@@ -34,8 +33,6 @@ type Props = {
 const Profile: React.FC<Props> = ({ loginMethod }) => {
   const { session } = useSession()
 
-  const [loadingProfile, setLoadingProfile] = useState(true)
-
   const [userProfile, setUserProfile] = useState<UserProfile | null>(null)
 
   useEffect(() => {
@@ -44,8 +41,6 @@ const Profile: React.FC<Props> = ({ loginMethod }) => {
   }, [])
 
   async function loadUserProfile() {
-    setLoadingProfile(true)
-
     if (loginMethod === LoginMethod.SOLID) {
       const podUrl = await getPodUrl(session)
 
@@ -120,8 +115,6 @@ const Profile: React.FC<Props> = ({ loginMethod }) => {
 
       setUserProfile(userProfile.data() as UserProfile)
     }
-
-    setLoadingProfile(false)
   }
 
   // if (loadingProfile) {
