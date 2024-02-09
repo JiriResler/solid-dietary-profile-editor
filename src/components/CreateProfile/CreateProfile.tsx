@@ -14,7 +14,6 @@ import {
   addUrl,
   createSolidDataset,
   createThing,
-  getPodUrlAll,
   getSolidDataset,
   getThingAll,
   removeThing,
@@ -26,6 +25,7 @@ import { Diet } from './profileDataTypes'
 import { db, auth } from '../../firebase'
 import { doc, setDoc } from 'firebase/firestore'
 import { SolidPodResponseError } from '../Profile/SolidPodResponseError'
+import getPodUrl from '../getPodUrl'
 
 // todo change to general user profile used in application
 type FirestoreUserProfile = {
@@ -71,7 +71,7 @@ const CreateProfile: React.FC<Props> = ({ loginMethod }) => {
   }
 
   async function saveProfileSolid() {
-    const podUrl = await getPodUrl()
+    const podUrl = await getPodUrl(session)
 
     const profileLocation = 'eatingPreferencesProfile/profile'
 
@@ -159,24 +159,6 @@ const CreateProfile: React.FC<Props> = ({ loginMethod }) => {
     alert('Profile saved')
 
     // todo loadProfile()
-  }
-
-  // todo: move function to a separate file as it is used in other components
-  async function getPodUrl() {
-    const userWebID: string =
-      session.info.webId !== undefined ? session.info.webId : ''
-
-    const podUrls = await getPodUrlAll(userWebID, {
-      fetch: fetch as undefined,
-    }).catch((error: Error) => console.log(error.message))
-
-    if (podUrls === undefined) {
-      throw new Error('Array with pod URLs is undefined')
-    }
-
-    const firstPodUrl = podUrls[0]
-
-    return firstPodUrl
   }
 
   async function saveProfileFirebase() {

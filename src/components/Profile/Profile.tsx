@@ -17,6 +17,7 @@ import Stack from 'react-bootstrap/Stack'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import OffCanvasMenu from './OffCanvasMenu'
+import getPodUrl from '../getPodUrl'
 
 type UserProfile = {
   allergicTo: string[]
@@ -42,30 +43,11 @@ const Profile: React.FC<Props> = ({ loginMethod }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  async function getPodUrl() {
-    const userWebID: string =
-      session.info.webId !== undefined ? session.info.webId : ''
-
-    const podUrls = await getPodUrlAll(userWebID, {
-      fetch: fetch as undefined,
-    }).catch((error: Error) => console.log(error.message))
-
-    // todo: add better error handling
-    // Get rid of a TypeScript error
-    if (podUrls === undefined) {
-      throw new Error('Array with pod URLs is undefined')
-    }
-
-    const firstPodUrl = podUrls[0]
-
-    return firstPodUrl
-  }
-
   async function loadUserProfile() {
     setLoadingProfile(true)
 
     if (loginMethod === LoginMethod.SOLID) {
-      const podUrl = await getPodUrl()
+      const podUrl = await getPodUrl(session)
 
       const profileLocation = 'eatingPreferencesProfile/profile'
 
