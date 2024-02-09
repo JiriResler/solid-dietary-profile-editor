@@ -34,11 +34,7 @@ const SelectAllergens: React.FC<Props> = ({
   return (
     <>
       <h1>{currentStep}. What are you allergic to?</h1>
-
-      <p>
-        A number in brackets is the number of the allergen given by the law.
-      </p>
-
+ 
       <Row>
         {allergenArray.map((allergen: Allergen) => {
           return (
@@ -51,15 +47,22 @@ const SelectAllergens: React.FC<Props> = ({
                   }}
                   type="checkbox"
                 />
-                <div>
-                  {allergen.menuLegendNumber} {allergen.label}
-                </div>
                 <img
                   src={
                     allergen.iconUrl
                   }
                   className="allergen-icon"
                 />
+                <div>
+                  {allergen.label}
+                </div>
+                <img
+                      src="images/info_icon.svg"
+                      alt="information icon"
+                      onClick={() => {
+                        alert(allergen.label + ' has number ' + allergen.menuLegendNumber)
+                      }}
+                    />
               </Stack>
             </Col>
           )
