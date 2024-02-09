@@ -4,6 +4,7 @@ export type Allergen = {
   IRI: string
   label: string
   menuLegendNumber: number
+  iconUrl: string
 }
 
 export type Diet = {

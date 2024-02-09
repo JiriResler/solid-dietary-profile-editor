@@ -27,7 +27,7 @@ const SelectAllergens: React.FC<Props> = ({
 
   async function fetchList() {
     const dataset = await getSolidDataset(
-      'https://personal-restaurant-menu-viewer-app.solidcommunity.net/public/List_of_allergens.ttl',
+      'https://personal-restaurant-menu-viewer-app.solidcommunity.net/public/resource/List_of_allergens.ttl',
       {
         fetch: fetch as undefined,
       },
@@ -35,7 +35,7 @@ const SelectAllergens: React.FC<Props> = ({
 
     const thing = getThing(
       dataset,
-      'https://personal-restaurant-menu-viewer-app.solidcommunity.net/public/List_of_allergens',
+      'https://personal-restaurant-menu-viewer-app.solidcommunity.net/public/resource/List_of_allergens',
     )
 
     if (thing === null) {
@@ -90,11 +90,13 @@ const SelectAllergens: React.FC<Props> = ({
 
       const allergenLabel = getStringEnglish(allergenThing, 'http://www.w3.org/2000/01/rdf-schema#label')
 
-      if (allergenNumber === null || allergenLabel === null) {
+      const allergenIconUrl = getUrl(allergenThing, 'https://personal-restaurant-menu-viewer-app.solidcommunity.net/public/ontology#hasIcon')
+
+      if (allergenNumber === null || allergenLabel === null || allergenIconUrl === null) {
         return
       }
 
-      const allergen: Allergen = { IRI: allergenUrl, label: allergenLabel, menuLegendNumber: allergenNumber }
+      const allergen: Allergen = { IRI: allergenUrl, label: allergenLabel, menuLegendNumber: allergenNumber, iconUrl: allergenIconUrl }
 
       allergenArray.push(allergen)
     }
@@ -139,7 +141,7 @@ const SelectAllergens: React.FC<Props> = ({
                 </div>
                 <img
                   src={
-                    'images/allergens/' + allergen.label.toLowerCase() + '.svg'
+                    allergen.iconUrl
                   }
                   className="allergen-icon"
                 />
