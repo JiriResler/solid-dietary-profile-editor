@@ -4,6 +4,9 @@ import Col from 'react-bootstrap/Col'
 import Form from 'react-bootstrap/Form'
 import './SelectAllergens.css'
 import { Allergen } from './profileDataTypes'
+import { useState } from 'react'
+import Modal from 'react-bootstrap/Modal'
+import Button from 'react-bootstrap/Button'
 
 type Props = {
   allergenArray: Allergen[]
@@ -18,6 +21,9 @@ const SelectAllergens: React.FC<Props> = ({
   selectedAllergens,
   setSelectedAllergens,
 }) => {
+  const [showAllergenDetail, setShowAllergenDetail] = useState(false)
+
+  const [allergenInfo, setAllergenInfo] = useState<Allergen | null>(null)
 
   function handleCheckboxOnChange(allergen: Allergen) {
     const newAllergenSet = new Set(selectedAllergens)
@@ -34,7 +40,7 @@ const SelectAllergens: React.FC<Props> = ({
   return (
     <>
       <h1>{currentStep}. What are you allergic to?</h1>
- 
+
       <Row>
         {allergenArray.map((allergen: Allergen) => {
           return (
@@ -57,17 +63,43 @@ const SelectAllergens: React.FC<Props> = ({
                   {allergen.label}
                 </div>
                 <img
-                      src="images/info_icon.svg"
-                      alt="information icon"
-                      onClick={() => {
-                        alert(allergen.label + ' has number ' + allergen.menuLegendNumber)
-                      }}
-                    />
+                  src="images/info_icon.svg"
+                  alt="information icon"
+                  onClick={() => {
+                    setAllergenInfo(allergen)
+                    setShowAllergenDetail(true)
+                  }}
+                />
               </Stack>
             </Col>
           )
         })}
       </Row>
+
+      {(allergenInfo !== null) && (
+        <Modal
+          size="lg"
+          centered
+          show={showAllergenDetail}
+          onHide={() => {
+            setShowAllergenDetail(false)
+          }}
+        >
+          <Modal.Body>
+            {allergenInfo.label + ' has number ' + allergenInfo.menuLegendNumber}
+
+            <div className="mt-3 text-end">
+              <Button
+                variant="secondary"
+                onClick={() => {
+                  setShowAllergenDetail(false)
+                }}
+              >
+                Close
+              </Button>
+            </div>
+          </Modal.Body>
+        </Modal>)}
     </>
   )
 }
