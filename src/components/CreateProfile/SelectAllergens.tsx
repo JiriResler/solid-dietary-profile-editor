@@ -53,15 +53,8 @@ const SelectAllergens: React.FC<Props> = ({
                   }}
                   type="checkbox"
                 />
-                <img
-                  src={
-                    allergen.iconUrl
-                  }
-                  className="allergen-icon"
-                />
-                <div>
-                  {allergen.label}
-                </div>
+                <img src={allergen.iconUrl} className="allergen-icon" />
+                <div>{allergen.label}</div>
                 <img
                   src="images/info_icon.svg"
                   alt="information icon"
@@ -76,7 +69,7 @@ const SelectAllergens: React.FC<Props> = ({
         })}
       </Row>
 
-      {(allergenInfo !== null) && (
+      {allergenInfo !== null && (
         <Modal
           size="lg"
           centered
@@ -86,7 +79,9 @@ const SelectAllergens: React.FC<Props> = ({
           }}
         >
           <Modal.Body>
-            {allergenInfo.label + ' has number ' + allergenInfo.menuLegendNumber}
+            {allergenInfo.label +
+              ' has number ' +
+              allergenInfo.menuLegendNumber}
 
             <div className="mt-3 text-end">
               <Button
@@ -99,7 +94,8 @@ const SelectAllergens: React.FC<Props> = ({
               </Button>
             </div>
           </Modal.Body>
-        </Modal>)}
+        </Modal>
+      )}
     </>
   )
 }

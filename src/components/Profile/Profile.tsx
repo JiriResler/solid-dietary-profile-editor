@@ -3,11 +3,7 @@ import CreateProfile from '../CreateProfile/CreateProfile'
 import { LoginMethod } from '../loginMethodEnum'
 import './Profile.css'
 import { useSession } from '@inrupt/solid-ui-react'
-import {
-  getSolidDataset,
-  getThing,
-  getUrlAll,
-} from '@inrupt/solid-client'
+import { getSolidDataset, getThing, getUrlAll } from '@inrupt/solid-client'
 import { fetch } from '@inrupt/solid-client-authn-browser'
 import { doc, getDoc } from 'firebase/firestore'
 import { db, auth } from '../../firebase'
