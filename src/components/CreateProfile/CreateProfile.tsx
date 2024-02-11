@@ -13,7 +13,6 @@ import SelectTastePreferences from './SelectTastePreferences'
 import { saveProfileFirebase, saveProfileSolid } from './saveProfile'
 import { loadProfileCreationData } from './loadProfileCreationData'
 
-
 type Props = {
   loginMethod: LoginMethod
 }
@@ -47,11 +46,21 @@ const CreateProfile: React.FC<Props> = ({ loginMethod }) => {
 
   function saveProfile() {
     if (loginMethod === LoginMethod.SOLID) {
-      void saveProfileSolid(session, selectedAllergens, selectedDiets, selectedTastePreferences)
+      void saveProfileSolid(
+        session,
+        selectedAllergens,
+        selectedDiets,
+        selectedTastePreferences,
+      )
     }
 
     if (loginMethod === LoginMethod.FIREBASE) {
-      void saveProfileFirebase(auth, selectedAllergens, selectedDiets, selectedTastePreferences)
+      void saveProfileFirebase(
+        auth,
+        selectedAllergens,
+        selectedDiets,
+        selectedTastePreferences,
+      )
     }
   }
 

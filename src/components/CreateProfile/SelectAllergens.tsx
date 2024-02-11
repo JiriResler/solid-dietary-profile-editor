@@ -9,7 +9,7 @@ import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 
 interface AllergenDescription extends Allergen {
-  description: string
+  descriptionText: string
   imageUrl: string
 }
 
@@ -45,9 +45,12 @@ const SelectAllergens: React.FC<Props> = ({
   }
 
   function displayAllergenDescription(allergen: Allergen) {
+    // load allergen description
+    // load picture
+
     const allergenDescription: AllergenDescription = {
       ...allergen,
-      description:
+      descriptionText:
         'Celery (Apium graveolens) is a marshland plant in the family Apiaceae that has been cultivated as a vegetable since antiquity. Celery has a long fibrous stalk tapering into leaves. Depending on location and cultivar, either its stalks, leaves or hypocotyl are eaten and used in cooking. Celery seed powder is used as a spice.',
       imageUrl:
         'https://upload.wikimedia.org/wikipedia/commons/a/a2/Celery_2.jpg',
@@ -66,7 +69,7 @@ const SelectAllergens: React.FC<Props> = ({
       <Row>
         {allergenArray.map((allergen: Allergen) => {
           return (
-            <Col key={allergen.IRI} xs={6}>
+            <Col key={allergen.iri} xs={6}>
               <Stack direction="horizontal" gap={2}>
                 <Form.Check
                   checked={selectedAllergens.has(allergen)}
@@ -109,7 +112,7 @@ const SelectAllergens: React.FC<Props> = ({
           </Modal.Header>
 
           <Modal.Body>
-            {allergenDescription.description}
+            {allergenDescription.descriptionText}
             <img className="w-50" src={allergenDescription.imageUrl} />
           </Modal.Body>
 

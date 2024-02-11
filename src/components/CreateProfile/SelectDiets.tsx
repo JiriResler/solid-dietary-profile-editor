@@ -7,51 +7,51 @@ import { Diet } from './profileDataTypes'
 const dietList: Diet[] = [
   {
     label: 'Vegetarian',
-    IRI: 'http://dbpedia.org/resource/Vegetarianism',
+    iri: 'http://dbpedia.org/resource/Vegetarianism',
   },
   {
     label: 'Vegan',
-    IRI: 'http://dbpedia.org/resource/Veganism',
+    iri: 'http://dbpedia.org/resource/Veganism',
   },
   {
     label: 'Mediterranean',
-    IRI: 'http://dbpedia.org/resource/Mediterranean_diet',
+    iri: 'http://dbpedia.org/resource/Mediterranean_diet',
   },
   {
     label: 'Ketogenic',
-    IRI: 'http://dbpedia.org/resource/Ketogenic_diet',
+    iri: 'http://dbpedia.org/resource/Ketogenic_diet',
   },
   {
     label: 'Atkins',
-    IRI: 'http://dbpedia.org/resource/Atkins_diet',
+    iri: 'http://dbpedia.org/resource/Atkins_diet',
   },
   {
     label: 'Paleolithic',
-    IRI: 'http://dbpedia.org/resource/Paleolithic_diet',
+    iri: 'http://dbpedia.org/resource/Paleolithic_diet',
   },
   {
     label: 'Pescetarian',
-    IRI: 'http://dbpedia.org/resource/Pescetarianism',
+    iri: 'http://dbpedia.org/resource/Pescetarianism',
   },
   {
     label: 'Raw foodism',
-    IRI: 'http://dbpedia.org/resource/Raw_foodism',
+    iri: 'http://dbpedia.org/resource/Raw_foodism',
   },
   {
     label: 'Fruitarian',
-    IRI: 'http://dbpedia.org/resource/Fruitarianism',
+    iri: 'http://dbpedia.org/resource/Fruitarianism',
   },
   {
     label: 'Diabetic',
-    IRI: 'http://dbpedia.org/resource/Diet_in_diabetes',
+    iri: 'http://dbpedia.org/resource/Diet_in_diabetes',
   },
   {
     label: 'DASH',
-    IRI: 'http://dbpedia.org/resource/DASH_diet',
+    iri: 'http://dbpedia.org/resource/DASH_diet',
   },
   {
     label: 'MIND',
-    IRI: 'http://dbpedia.org/resource/MIND_diet',
+    iri: 'http://dbpedia.org/resource/MIND_diet',
   },
 ]
 
@@ -83,7 +83,7 @@ const SelectDiets: React.FC<Props> = ({
       <Row>
         {dietList.map((diet: Diet) => {
           return (
-            <Col key={diet.IRI} xs={6}>
+            <Col key={diet.iri} xs={6}>
               <Stack direction="horizontal" gap={2}>
                 <Form.Check
                   checked={selectedDiets.has(diet)}

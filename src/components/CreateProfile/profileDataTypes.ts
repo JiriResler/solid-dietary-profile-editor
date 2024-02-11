@@ -1,15 +1,16 @@
 import SelectMenuOption from './selectMenuOptionType'
 
 export type Allergen = {
-  IRI: string
+  iri: string
   label: string
   menuLegendNumber: number
   iconUrl: string
+  sameAsIri: string
 }
 
 export type Diet = {
   label: string
-  IRI: string
+  iri: string
 }
 
 export type TastePreferences = {
