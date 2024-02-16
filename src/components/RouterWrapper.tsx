@@ -43,14 +43,6 @@ const RouterWrapper: React.FC = () => {
     }
   }
 
-  // function aboutIfNotAuthenticated() {
-  //   if (!userIsLoggedIn) {
-  //     return <About />
-  //   } else {
-  //     return <Navigate to="/" />
-  //   }
-  // }
-
   if (sessionRequestInProgress) {
     return <h1>Loading...</h1>
   }
