@@ -29,6 +29,7 @@ const SelectAllergens: React.FC<Props> = ({
   const [showAllergenDescriptionModal, setShowAllergenDescriptionModal] =
     useState(false)
 
+  // Allergen with its description to show in a modal
   const [allergenDescription, setAllergenDescription] =
     useState<AllergenDescription | null>(null)
 
@@ -44,14 +45,32 @@ const SelectAllergens: React.FC<Props> = ({
     setSelectedAllergens(newAllergenSet)
   }
 
-  function displayAllergenDescription(allergen: Allergen) {
-    // load allergen description
-    // load picture
+  // Allergen IRIs are all from DBPedia
+  // todo: add loading state when fetching data
+  async function displayAllergenDescription(allergen: Allergen) {
+    // Allergen IRI in DBPedia
+    const allergenKnowledgeGraphIri = allergen.sameAsIri
+
+    const endpointUrl = 'https://dbpedia.org/sparql'
+
+    const sparqlQuery = `SELECT ?desc WHERE {
+      <${allergenKnowledgeGraphIri}> rdfs:comment ?desc .
+      FILTER (lang(?desc) = 'en') .
+      }`
+
+    const fullUrl = endpointUrl + '?query=' + encodeURIComponent(sparqlQuery)
+
+    const headers = { Accept: 'application/sparql-results+json' }
+
+    const response = await fetch(fullUrl, { headers })
+
+    const responseJSON = await response.json()
+
+    const descriptionText = responseJSON.results.bindings[0].desc.value
 
     const allergenDescription: AllergenDescription = {
       ...allergen,
-      descriptionText:
-        'Celery (Apium graveolens) is a marshland plant in the family Apiaceae that has been cultivated as a vegetable since antiquity. Celery has a long fibrous stalk tapering into leaves. Depending on location and cultivar, either its stalks, leaves or hypocotyl are eaten and used in cooking. Celery seed powder is used as a spice.',
+      descriptionText: descriptionText,
       imageUrl:
         'https://upload.wikimedia.org/wikipedia/commons/a/a2/Celery_2.jpg',
     }
@@ -84,7 +103,7 @@ const SelectAllergens: React.FC<Props> = ({
                   src="images/info_icon.svg"
                   alt="information icon"
                   onClick={() => {
-                    displayAllergenDescription(allergen)
+                    void displayAllergenDescription(allergen)
                   }}
                 />
               </Stack>
