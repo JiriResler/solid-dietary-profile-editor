@@ -20,6 +20,12 @@ type Props = {
   setSelectedAllergens: React.Dispatch<React.SetStateAction<Set<Allergen>>>
 }
 
+// responseJSON.results.bindings[0].desc.value
+
+type AllergenResponse = {
+  results: { bindings: Array<{ desc: { value: string } }> }
+}
+
 const SelectAllergens: React.FC<Props> = ({
   allergenArray,
   currentStep,
@@ -64,7 +70,7 @@ const SelectAllergens: React.FC<Props> = ({
 
     const response = await fetch(fullUrl, { headers })
 
-    const responseJSON = await response.json()
+    const responseJSON = (await response.json()) as AllergenResponse
 
     const descriptionText = responseJSON.results.bindings[0].desc.value
 
