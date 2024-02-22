@@ -5,7 +5,11 @@ import { signOut } from 'firebase/auth'
 import { auth } from '../../firebase'
 import { useSession } from '@inrupt/solid-ui-react'
 
-const OffCanvasMenu: React.FC = () => {
+type Props = {
+  setShowExportProfileModal: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+const OffCanvasMenu: React.FC<Props> = ({setShowExportProfileModal}) => {
   const [showSidebar, setShowSidebar] = useState(false)
 
   const { session } = useSession()
@@ -40,7 +44,10 @@ const OffCanvasMenu: React.FC = () => {
           <div className="mt-2">Edit profile</div>
           <div className="mt-4">Select Solid Pod</div>
           <div className="mt-4">Import profile</div>
-          <div className="mt-4">Export profile</div>
+          <div className="mt-4" onClick={()=>{
+            setShowSidebar(false)
+            setShowExportProfileModal(true)
+            }}>Export profile</div>
           <div
             onClick={() => {
               signOut(auth).catch((error: Error) => {

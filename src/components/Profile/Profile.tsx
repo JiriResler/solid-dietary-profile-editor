@@ -13,6 +13,8 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import OffCanvasMenu from './OffCanvasMenu'
 import getPodUrl from '../getPodUrl'
+import Modal from 'react-bootstrap/Modal'
+import Button from 'react-bootstrap/Button';
 
 type UserProfile = {
   allergicTo: string[]
@@ -30,6 +32,8 @@ const Profile: React.FC<Props> = ({ loginMethod }) => {
   const { session } = useSession()
 
   const [userProfile, setUserProfile] = useState<UserProfile | null>(null)
+
+  const [showExportProfileModal, setShowExportProfileModal] = useState(false)
 
   useEffect(() => {
     void loadUserProfile()
@@ -123,7 +127,19 @@ const Profile: React.FC<Props> = ({ loginMethod }) => {
 
   return (
     <>
-      <OffCanvasMenu />
+      <OffCanvasMenu setShowExportProfileModal={setShowExportProfileModal}/>
+
+      <Modal show={showExportProfileModal} onHide={()=>{setShowExportProfileModal(false)}}>
+        <Modal.Header closeButton>
+          <Modal.Title>Modal heading</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Woohoo, you are reading this text in a modal!</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={()=>{setShowExportProfileModal(false)}}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
 
       <Stack gap={3} className="mt-4">
         <Row className="w-75">
