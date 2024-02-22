@@ -117,6 +117,16 @@ const Profile: React.FC<Props> = ({ loginMethod }) => {
     }
   }
 
+  function downloadProfileFile() {
+    const linkElement = document.createElement("a");
+    const profileFile = new Blob([JSON.stringify(userProfile)], {type: 'text/plain'})
+    linkElement.href = URL.createObjectURL(profileFile);
+    const profileFileName = 'eating_preferences_profile.txt'
+    linkElement.download = profileFileName;
+    document.body.appendChild(linkElement); // Required for this to work in FireFox
+    linkElement.click();
+  }
+
   // if (loadingProfile) {
   //   return <h1>Loading profile data</h1>
   // }
@@ -131,12 +141,17 @@ const Profile: React.FC<Props> = ({ loginMethod }) => {
 
       <Modal show={showExportProfileModal} onHide={()=>{setShowExportProfileModal(false)}}>
         <Modal.Header closeButton>
-          <Modal.Title>Modal heading</Modal.Title>
+          <Modal.Title>Export profile</Modal.Title>
         </Modal.Header>
-        <Modal.Body>Woohoo, you are reading this text in a modal!</Modal.Body>
+        <Modal.Body>
+          Choose format
+        </Modal.Body>
         <Modal.Footer>
+        <Button variant="success" onClick={()=>{downloadProfileFile()}}>
+            Download
+          </Button>
           <Button variant="secondary" onClick={()=>{setShowExportProfileModal(false)}}>
-            Close
+            Cancel
           </Button>
         </Modal.Footer>
       </Modal>
