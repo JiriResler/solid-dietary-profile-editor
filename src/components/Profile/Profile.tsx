@@ -125,6 +125,7 @@ const Profile: React.FC<Props> = ({ loginMethod }) => {
     linkElement.download = profileFileName;
     document.body.appendChild(linkElement); // Required for this to work in FireFox
     linkElement.click();
+    document.body.removeChild(linkElement)
   }
 
   // if (loadingProfile) {
