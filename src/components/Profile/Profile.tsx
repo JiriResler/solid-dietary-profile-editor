@@ -35,6 +35,8 @@ const Profile: React.FC<Props> = ({ loginMethod }) => {
 
   const [showExportProfileModal, setShowExportProfileModal] = useState(false)
 
+  const [showImportProfileModal, setShowImportProfileModal] = useState(false)
+
   useEffect(() => {
     void loadUserProfile()
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -128,6 +130,29 @@ const Profile: React.FC<Props> = ({ loginMethod }) => {
     document.body.removeChild(linkElement)
   }
 
+  const readJsonFile = (file: Blob) =>
+  new Promise((resolve, reject) => {
+    const fileReader = new FileReader()
+
+    fileReader.onload = event => {
+      if (event.target) {
+        resolve(JSON.parse(event.target.result as string))
+      }
+    }
+
+    fileReader.onerror = error => reject(error)
+    fileReader.readAsText(file)
+  })
+
+  const onChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files) {
+      const parsedData = await readJsonFile(event.target.files[0])
+  
+      console.log(parsedData)
+    }
+  }
+  
+
   // if (loadingProfile) {
   //   return <h1>Loading profile data</h1>
   // }
@@ -138,7 +163,7 @@ const Profile: React.FC<Props> = ({ loginMethod }) => {
 
   return (
     <>
-      <OffCanvasMenu setShowExportProfileModal={setShowExportProfileModal}/>
+      <OffCanvasMenu setShowExportProfileModal={setShowExportProfileModal} setShowImportProfileModal={setShowImportProfileModal}/>
 
       <Modal show={showExportProfileModal} onHide={()=>{setShowExportProfileModal(false)}}>
         <Modal.Header closeButton>
@@ -152,6 +177,23 @@ const Profile: React.FC<Props> = ({ loginMethod }) => {
             Download
           </Button>
           <Button variant="secondary" onClick={()=>{setShowExportProfileModal(false)}}>
+            Cancel
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
+      <Modal show={showImportProfileModal} onHide={()=>{setShowImportProfileModal(false)}}>
+        <Modal.Header closeButton>
+          <Modal.Title>Import profile</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <input type="file" accept=".json,application/json" onChange={onChange} />
+        </Modal.Body>
+        <Modal.Footer>
+        <Button variant="success" onClick={()=>{}}>
+            Import
+          </Button>
+          <Button variant="secondary" onClick={()=>{setShowImportProfileModal(false)}}>
             Cancel
           </Button>
         </Modal.Footer>
