@@ -1,7 +1,7 @@
-import { db } from '../../firebase'
+import { db } from '../../../firebase'
 import { doc, setDoc } from 'firebase/firestore'
-import { SolidPodResponseError } from '../Profile/SolidPodResponseError'
-import getPodUrl from '../getPodUrl'
+import { SolidPodResponseError } from '../SolidPodResponseError'
+import getPodUrl from '../../getPodUrl'
 import { fetch } from '@inrupt/solid-client-authn-browser'
 import {
   SolidDataset,

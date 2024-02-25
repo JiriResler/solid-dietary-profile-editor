@@ -10,7 +10,10 @@ type Props = {
   setShowImportProfileModal: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const OffCanvasMenu: React.FC<Props> = ({setShowExportProfileModal, setShowImportProfileModal}) => {
+const OffCanvasMenu: React.FC<Props> = ({
+  setShowExportProfileModal,
+  setShowImportProfileModal,
+}) => {
   const [showSidebar, setShowSidebar] = useState(false)
 
   const { session } = useSession()
@@ -44,14 +47,24 @@ const OffCanvasMenu: React.FC<Props> = ({setShowExportProfileModal, setShowImpor
         <Offcanvas.Body>
           <div className="mt-2">Edit profile</div>
           <div className="mt-4">Select Solid Pod</div>
-          <div className="mt-4" onClick={()=>{
-            setShowSidebar(false)
-            setShowImportProfileModal(true)
-          }}>Import profile</div>
-          <div className="mt-4" onClick={()=>{
-            setShowSidebar(false)
-            setShowExportProfileModal(true)
-            }}>Export profile</div>
+          <div
+            className="mt-4"
+            onClick={() => {
+              setShowSidebar(false)
+              setShowImportProfileModal(true)
+            }}
+          >
+            Import profile
+          </div>
+          <div
+            className="mt-4"
+            onClick={() => {
+              setShowSidebar(false)
+              setShowExportProfileModal(true)
+            }}
+          >
+            Export profile
+          </div>
           <div
             onClick={() => {
               signOut(auth).catch((error: Error) => {

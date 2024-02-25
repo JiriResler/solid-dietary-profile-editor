@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import CreateProfile from '../CreateProfile/CreateProfile'
+import CreateProfile from './CreateProfile/CreateProfile'
 import { LoginMethod } from '../loginMethodEnum'
 import './Profile.css'
 import { useSession } from '@inrupt/solid-ui-react'
@@ -14,7 +14,7 @@ import Col from 'react-bootstrap/Col'
 import OffCanvasMenu from './OffCanvasMenu'
 import getPodUrl from '../getPodUrl'
 import Modal from 'react-bootstrap/Modal'
-import Button from 'react-bootstrap/Button';
+import Button from 'react-bootstrap/Button'
 
 type UserProfile = {
   allergicTo: string[]
@@ -120,13 +120,15 @@ const Profile: React.FC<Props> = ({ loginMethod }) => {
   }
 
   function downloadProfileFile() {
-    const linkElement = document.createElement("a");
-    const profileFile = new Blob([JSON.stringify(userProfile)], { type: 'application/json' })
-    linkElement.href = URL.createObjectURL(profileFile);
+    const linkElement = document.createElement('a')
+    const profileFile = new Blob([JSON.stringify(userProfile)], {
+      type: 'application/json',
+    })
+    linkElement.href = URL.createObjectURL(profileFile)
     const profileFileName = 'eating_preferences_profile.json'
-    linkElement.download = profileFileName;
-    document.body.appendChild(linkElement); // Required for this to work in FireFox
-    linkElement.click();
+    linkElement.download = profileFileName
+    document.body.appendChild(linkElement) // Required for this to work in FireFox
+    linkElement.click()
     document.body.removeChild(linkElement)
   }
 
@@ -134,17 +136,17 @@ const Profile: React.FC<Props> = ({ loginMethod }) => {
     new Promise((resolve, reject) => {
       const fileReader = new FileReader()
 
-      fileReader.onload = event => {
+      fileReader.onload = (event) => {
         if (event.target) {
           resolve(JSON.parse(event.target.result as string))
         }
       }
 
-      fileReader.onerror = error => reject(error)
+      fileReader.onerror = (error) => reject(error)
       fileReader.readAsText(file)
     })
 
-  const onChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleOnChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files) {
       const parsedData = await readJsonFile(event.target.files[0])
 
@@ -162,37 +164,69 @@ const Profile: React.FC<Props> = ({ loginMethod }) => {
 
   return (
     <>
-      <OffCanvasMenu setShowExportProfileModal={setShowExportProfileModal} setShowImportProfileModal={setShowImportProfileModal} />
+      <OffCanvasMenu
+        setShowExportProfileModal={setShowExportProfileModal}
+        setShowImportProfileModal={setShowImportProfileModal}
+      />
 
-      <Modal show={showExportProfileModal} onHide={() => { setShowExportProfileModal(false) }}>
+      <Modal
+        show={showExportProfileModal}
+        onHide={() => {
+          setShowExportProfileModal(false)
+        }}
+      >
         <Modal.Header closeButton>
           <Modal.Title>Export profile</Modal.Title>
         </Modal.Header>
-        <Modal.Body>
-          Choose format
-        </Modal.Body>
+        <Modal.Body>Choose format</Modal.Body>
         <Modal.Footer>
-          <Button variant="success" onClick={() => { downloadProfileFile() }}>
+          <Button
+            variant="success"
+            onClick={() => {
+              downloadProfileFile()
+            }}
+          >
             Download
           </Button>
-          <Button variant="secondary" onClick={() => { setShowExportProfileModal(false) }}>
+          <Button
+            variant="secondary"
+            onClick={() => {
+              setShowExportProfileModal(false)
+            }}
+          >
             Cancel
           </Button>
         </Modal.Footer>
       </Modal>
 
-      <Modal show={showImportProfileModal} onHide={() => { setShowImportProfileModal(false) }}>
+      <Modal
+        show={showImportProfileModal}
+        onHide={() => {
+          setShowImportProfileModal(false)
+        }}
+      >
         <Modal.Header closeButton>
           <Modal.Title>Import profile</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <input type="file" accept=".json,application/json" onChange={onChange} />
+          <input
+            type="file"
+            accept=".json,application/json"
+            onChange={(e) => {
+              void handleOnChange(e)
+            }}
+          />
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="success" onClick={() => { }}>
+          <Button variant="success" onClick={() => {}}>
             Import
           </Button>
-          <Button variant="secondary" onClick={() => { setShowImportProfileModal(false) }}>
+          <Button
+            variant="secondary"
+            onClick={() => {
+              setShowImportProfileModal(false)
+            }}
+          >
             Cancel
           </Button>
         </Modal.Footer>
