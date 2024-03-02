@@ -37,8 +37,11 @@ const Profile: React.FC<Props> = ({ loginMethod }) => {
 
   const [showImportProfileModal, setShowImportProfileModal] = useState(false)
 
+  const [podUrl, setPodUrl] = useState('jj')
+
   useEffect(() => {
     void loadUserProfile()
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
@@ -117,6 +120,15 @@ const Profile: React.FC<Props> = ({ loginMethod }) => {
 
       setUserProfile(userProfile.data() as UserProfile)
     }
+
+    const profilePodUrl = await getPodUrl(session)
+
+    // todo: throw error
+    if (profilePodUrl === undefined) {
+      return
+    }
+
+    setPodUrl(profilePodUrl)
   }
 
   function downloadProfileFile() {
@@ -231,6 +243,9 @@ const Profile: React.FC<Props> = ({ loginMethod }) => {
           </Button>
         </Modal.Footer>
       </Modal>
+
+      <div>WebID: {session.info.webId}</div>
+      <div>Solid pod URL: {podUrl}</div>
 
       <Stack gap={3} className="mt-4">
         <Row className="w-75">
