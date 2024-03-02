@@ -37,7 +37,9 @@ const Profile: React.FC<Props> = ({ loginMethod }) => {
 
   const [showImportProfileModal, setShowImportProfileModal] = useState(false)
 
-  const [podUrl, setPodUrl] = useState('jj')
+  const [editProfile, setEditProfile] = useState(false)
+
+  const [podUrl, setPodUrl] = useState('')
 
   useEffect(() => {
     void loadUserProfile()
@@ -171,7 +173,23 @@ const Profile: React.FC<Props> = ({ loginMethod }) => {
   // }
 
   if (userProfile === null) {
-    return <CreateProfile loginMethod={loginMethod} />
+    return (
+      <CreateProfile
+        loginMethod={loginMethod}
+        startStep={0}
+        setEditProfile={setEditProfile}
+      />
+    )
+  }
+
+  if (editProfile) {
+    return (
+      <CreateProfile
+        loginMethod={loginMethod}
+        startStep={1}
+        setEditProfile={setEditProfile}
+      />
+    )
   }
 
   return (
@@ -179,6 +197,7 @@ const Profile: React.FC<Props> = ({ loginMethod }) => {
       <OffCanvasMenu
         setShowExportProfileModal={setShowExportProfileModal}
         setShowImportProfileModal={setShowImportProfileModal}
+        setEditProfile={setEditProfile}
       />
 
       <Modal

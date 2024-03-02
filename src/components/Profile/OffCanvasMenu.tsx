@@ -8,11 +8,13 @@ import { useSession } from '@inrupt/solid-ui-react'
 type Props = {
   setShowExportProfileModal: React.Dispatch<React.SetStateAction<boolean>>
   setShowImportProfileModal: React.Dispatch<React.SetStateAction<boolean>>
+  setEditProfile: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 const OffCanvasMenu: React.FC<Props> = ({
   setShowExportProfileModal,
   setShowImportProfileModal,
+  setEditProfile,
 }) => {
   const [showSidebar, setShowSidebar] = useState(false)
 
@@ -45,7 +47,14 @@ const OffCanvasMenu: React.FC<Props> = ({
           </Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
-          <div className="mt-2">Edit profile</div>
+          <div
+            className="mt-2"
+            onClick={() => {
+              setEditProfile(true)
+            }}
+          >
+            Edit profile
+          </div>
           <div className="mt-4">Select Solid Pod</div>
           <div
             className="mt-4"

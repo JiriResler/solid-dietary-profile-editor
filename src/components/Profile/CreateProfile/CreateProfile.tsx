@@ -15,15 +15,21 @@ import { loadProfileCreationData } from './loadProfileCreationData'
 
 type Props = {
   loginMethod: LoginMethod
+  setEditProfile: React.Dispatch<React.SetStateAction<boolean>>
+  startStep: number
 }
 
-const CreateProfile: React.FC<Props> = ({ loginMethod }) => {
+const CreateProfile: React.FC<Props> = ({
+  loginMethod,
+  startStep,
+  setEditProfile,
+}) => {
   const { session } = useSession()
-
-  const [currentStep, setCurrentStep] = useState(0)
 
   // Number of steps in profile creation
   const numberOfSteps = 3
+
+  const [currentStep, setCurrentStep] = useState(startStep)
 
   const [allergenArray, setAllergenArray] = useState<Allergen[]>([])
 
@@ -62,6 +68,8 @@ const CreateProfile: React.FC<Props> = ({ loginMethod }) => {
         selectedTastePreferences,
       )
     }
+
+    setEditProfile(false)
   }
 
   return (
