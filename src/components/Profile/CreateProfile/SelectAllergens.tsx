@@ -143,7 +143,8 @@ const SelectAllergens: React.FC<Props> = ({
               fade
               indicators={false}
               interval={null}
-              className="border bg-secondary"
+              className="border"
+              data-bs-theme="dark"
             >
               <Carousel.Item>
                 <div className="carouselImgContainer">
