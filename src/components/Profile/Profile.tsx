@@ -39,8 +39,6 @@ const Profile: React.FC<Props> = ({ loginMethod }) => {
 
   const [editProfile, setEditProfile] = useState(false)
 
-  const [podUrl, setPodUrl] = useState('')
-
   useEffect(() => {
     void loadUserProfile()
 
@@ -129,8 +127,6 @@ const Profile: React.FC<Props> = ({ loginMethod }) => {
     if (profilePodUrl === undefined) {
       return
     }
-
-    setPodUrl(profilePodUrl)
   }
 
   function downloadProfileFile() {
@@ -262,9 +258,6 @@ const Profile: React.FC<Props> = ({ loginMethod }) => {
           </Button>
         </Modal.Footer>
       </Modal>
-
-      <div>WebID: {session.info.webId}</div>
-      <div>Solid pod URL: {podUrl}</div>
 
       <Stack gap={3} className="mt-4">
         <Row className="w-75">

@@ -55,7 +55,6 @@ const OffCanvasMenu: React.FC<Props> = ({
           >
             Edit profile
           </div>
-          <div className="mt-4">Select Solid Pod</div>
           <div
             className="mt-4"
             onClick={() => {
