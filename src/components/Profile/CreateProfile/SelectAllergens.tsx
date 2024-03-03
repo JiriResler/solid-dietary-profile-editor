@@ -7,6 +7,7 @@ import { Allergen } from './profileDataTypes'
 import { useState } from 'react'
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
+import Carousel from 'react-bootstrap/Carousel'
 
 interface AllergenDescription extends Allergen {
   descriptionText: string
@@ -138,7 +139,18 @@ const SelectAllergens: React.FC<Props> = ({
 
           <Modal.Body>
             {allergenDescription.descriptionText}
-            <img className="w-50" src={allergenDescription.imageUrl} />
+            <Carousel fade indicators={false} interval={null}>
+              <Carousel.Item className="bg-success">
+                {
+                  '1 Use Bootstrap’s JavaScript modal plugin to add dialogs to your site for lightboxes, user notifications, or completely custom content.Use Bootstrap’s JavaScript modal plugin to add dialogs to your site for lightboxes, user notifications, or completely custom content.'
+                }
+              </Carousel.Item>
+              <Carousel.Item className="bg-success">
+                {
+                  '2 Use Bootstrap’s JavaScript modal plugin to add dialogs to your site for lightboxes, user notifications, or completely custom content.Use Bootstrap’s JavaScript modal plugin to add dialogs to your site for lightboxes, user notifications, or completely custom content.'
+                }
+              </Carousel.Item>
+            </Carousel>
           </Modal.Body>
 
           <Modal.Footer>
