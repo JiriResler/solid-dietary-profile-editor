@@ -59,19 +59,19 @@ const OffCanvasMenu: React.FC<Props> = ({
             className="mt-4"
             onClick={() => {
               setShowSidebar(false)
-              setShowImportProfileModal(true)
+              setShowExportProfileModal(true)
             }}
           >
-            Import profile
+            Export profile
           </div>
           <div
             className="mt-4"
             onClick={() => {
               setShowSidebar(false)
-              setShowExportProfileModal(true)
+              setShowImportProfileModal(true)
             }}
           >
-            Export profile
+            Import profile
           </div>
           <div
             onClick={() => {
