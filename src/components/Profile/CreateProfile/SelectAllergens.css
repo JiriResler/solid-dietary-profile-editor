@@ -1,3 +1,11 @@
 .allergen-icon {
-    width: 20pt;
+  width: 20pt;
+}
+
+.carouselImgContainer {
+  height: 300px;
+}
+
+.carouselDepictionImg {
+  height: 100%;
 }

@@ -139,16 +139,27 @@ const SelectAllergens: React.FC<Props> = ({
 
           <Modal.Body>
             {allergenDescription.descriptionText}
-            <Carousel fade indicators={false} interval={null}>
-              <Carousel.Item className="bg-success">
-                {
-                  '1 Use Bootstrap’s JavaScript modal plugin to add dialogs to your site for lightboxes, user notifications, or completely custom content.Use Bootstrap’s JavaScript modal plugin to add dialogs to your site for lightboxes, user notifications, or completely custom content.'
-                }
+            <Carousel
+              fade
+              indicators={false}
+              interval={null}
+              className="border"
+            >
+              <Carousel.Item>
+                <div className="carouselImgContainer">
+                  <img
+                    className="carouselDepictionImg"
+                    src="http://commons.wikimedia.org/wiki/Special:FilePath/Celery_2.jpg"
+                  />
+                </div>
               </Carousel.Item>
-              <Carousel.Item className="bg-success">
-                {
-                  '2 Use Bootstrap’s JavaScript modal plugin to add dialogs to your site for lightboxes, user notifications, or completely custom content.Use Bootstrap’s JavaScript modal plugin to add dialogs to your site for lightboxes, user notifications, or completely custom content.'
-                }
+              <Carousel.Item>
+                <div className="carouselImgContainer">
+                  <img
+                    className="carouselDepictionImg"
+                    src="http://commons.wikimedia.org/wiki/Special:FilePath/Celery_(apium).jpg"
+                  />
+                </div>
               </Carousel.Item>
             </Carousel>
           </Modal.Body>
