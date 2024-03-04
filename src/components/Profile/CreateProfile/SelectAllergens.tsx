@@ -144,6 +144,7 @@ const SelectAllergens: React.FC<Props> = ({
               indicators={false}
               interval={null}
               data-bs-theme="dark"
+              className="mt-3 pb-2"
             >
               <Carousel.Item>
                 <div className="carouselImgContainer mx-auto">
