@@ -131,7 +131,7 @@ const SelectAllergens: React.FC<Props> = ({
           <Modal.Header closeButton>
             <Modal.Title>
               <div>{allergenDescription.label}</div>
-              <div>
+              <div className="legendNumberText">
                 Menu legend number: {allergenDescription.menuLegendNumber}
               </div>
             </Modal.Title>
