@@ -3,10 +3,15 @@
 }
 
 .carouselImgContainer {
-  height: 300px;
-  text-align: center;
+    width: 340px;
+    height: 250px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
 }
 
-.carouselDepictionImg {
-  height: 100%;
+.allergenDepiction {
+    max-width: 100%;
+    max-height: 100%;
 }

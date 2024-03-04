@@ -143,21 +143,20 @@ const SelectAllergens: React.FC<Props> = ({
               fade
               indicators={false}
               interval={null}
-              className="border"
               data-bs-theme="dark"
             >
               <Carousel.Item>
-                <div className="carouselImgContainer">
+                <div className="carouselImgContainer mx-auto">
                   <img
-                    className="carouselDepictionImg"
+                    className="allergenDepiction"
                     src="http://commons.wikimedia.org/wiki/Special:FilePath/Celery_2.jpg"
                   />
                 </div>
               </Carousel.Item>
               <Carousel.Item>
-                <div className="carouselImgContainer">
+                <div className="carouselImgContainer mx-auto">
                   <img
-                    className="carouselDepictionImg"
+                    className="allergenDepiction"
                     src="http://commons.wikimedia.org/wiki/Special:FilePath/Celery_(apium).jpg"
                   />
                 </div>
