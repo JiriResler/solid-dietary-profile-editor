@@ -147,9 +147,14 @@ const SelectAllergens: React.FC<Props> = ({
             >
               <Carousel.Item>
                 <div className="carouselImgContainer mx-auto">
+                  <img className="allergenDepiction" src="images/square.svg" />
+                </div>
+              </Carousel.Item>
+              <Carousel.Item>
+                <div className="carouselImgContainer mx-auto">
                   <img
                     className="allergenDepiction"
-                    src="http://commons.wikimedia.org/wiki/Special:FilePath/Celery_2.jpg"
+                    src="images/rect_wide.svg"
                   />
                 </div>
               </Carousel.Item>
@@ -157,7 +162,7 @@ const SelectAllergens: React.FC<Props> = ({
                 <div className="carouselImgContainer mx-auto">
                   <img
                     className="allergenDepiction"
-                    src="http://commons.wikimedia.org/wiki/Special:FilePath/Celery_(apium).jpg"
+                    src="images/rect_tall.svg"
                   />
                 </div>
               </Carousel.Item>
