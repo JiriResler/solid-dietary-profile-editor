@@ -1,7 +1,6 @@
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Form from 'react-bootstrap/Form'
-import Stack from 'react-bootstrap/Stack'
 import { Diet } from './profileDataTypes'
 
 const dietList: Diet[] = [
@@ -85,29 +84,25 @@ const SelectDiets: React.FC<Props> = ({
           return (
             <Col key={diet.iri} xs={6}>
               <Row>
-                <Stack direction="horizontal" gap={2}>
-                  <Col xs={10}>
-                    <Stack direction="horizontal" gap={2}>
-                      <Form.Check
-                        checked={selectedDiets.has(diet)}
-                        onChange={() => {
-                          handleCheckboxOnChange(diet)
-                        }}
-                        type="checkbox"
-                      />
-                      <div>{diet.label}</div>
-                    </Stack>
-                  </Col>
-                  <Col>
-                    <img
-                      src="images/info_icon.svg"
-                      alt="information icon"
-                      onClick={() => {
-                        alert('click')
-                      }}
-                    />
-                  </Col>
-                </Stack>
+                <Col xs={9}>
+                  <Form.Check
+                    checked={selectedDiets.has(diet)}
+                    onChange={() => {
+                      handleCheckboxOnChange(diet)
+                    }}
+                    type="checkbox"
+                    label={diet.label}
+                  />
+                </Col>
+                <Col>
+                  <img
+                    src="images/info_icon.svg"
+                    alt="information icon"
+                    onClick={() => {
+                      alert('click')
+                    }}
+                  />
+                </Col>
               </Row>
             </Col>
           )
