@@ -17,3 +17,7 @@
   color: #6c757d;
   font-size: smaller;
 }
+
+.onHoverPointer {
+  cursor: pointer;
+}

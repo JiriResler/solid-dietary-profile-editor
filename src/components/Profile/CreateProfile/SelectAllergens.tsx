@@ -109,6 +109,7 @@ const SelectAllergens: React.FC<Props> = ({
                 <img
                   src="images/info_icon.svg"
                   alt="information icon"
+                  className="onHoverPointer"
                   onClick={() => {
                     void displayAllergenDescription(allergen)
                   }}
