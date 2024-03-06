@@ -84,23 +84,31 @@ const SelectDiets: React.FC<Props> = ({
         {dietList.map((diet: Diet) => {
           return (
             <Col key={diet.iri} xs={6}>
-              <Stack direction="horizontal" gap={2}>
-                <Form.Check
-                  checked={selectedDiets.has(diet)}
-                  onChange={() => {
-                    handleCheckboxOnChange(diet)
-                  }}
-                  type="checkbox"
-                />
-                <div>{diet.label}</div>
-                <img
-                  src="images/info_icon.svg"
-                  alt="information icon"
-                  onClick={() => {
-                    alert('click')
-                  }}
-                />
-              </Stack>
+              <Row>
+                <Stack direction="horizontal" gap={2}>
+                  <Col xs={10}>
+                    <Stack direction="horizontal" gap={2}>
+                      <Form.Check
+                        checked={selectedDiets.has(diet)}
+                        onChange={() => {
+                          handleCheckboxOnChange(diet)
+                        }}
+                        type="checkbox"
+                      />
+                      <div>{diet.label}</div>
+                    </Stack>
+                  </Col>
+                  <Col>
+                    <img
+                      src="images/info_icon.svg"
+                      alt="information icon"
+                      onClick={() => {
+                        alert('click')
+                      }}
+                    />
+                  </Col>
+                </Stack>
+              </Row>
             </Col>
           )
         })}
