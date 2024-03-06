@@ -93,6 +93,13 @@ const SelectDiets: React.FC<Props> = ({
                   type="checkbox"
                 />
                 <div>{diet.label}</div>
+                <img
+                  src="images/info_icon.svg"
+                  alt="information icon"
+                  onClick={() => {
+                    alert('click')
+                  }}
+                />
               </Stack>
             </Col>
           )
