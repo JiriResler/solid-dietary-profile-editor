@@ -34,7 +34,7 @@ const dietList: Diet[] = [
     iri: 'http://dbpedia.org/resource/Pescetarianism',
   },
   {
-    label: 'Raw foodism',
+    label: 'Raw',
     iri: 'http://dbpedia.org/resource/Raw_foodism',
   },
   {
