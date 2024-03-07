@@ -6,6 +6,7 @@ import { useState } from 'react'
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 import Carousel from 'react-bootstrap/Carousel'
+import Select from 'react-select'
 
 const dietList: Diet[] = [
   {
@@ -116,6 +117,14 @@ const SelectDiets: React.FC<Props> = ({
           )
         })}
       </Row>
+
+      <h3 className="mt-3">Are you looking for something else?</h3>
+      <Select
+        options={[
+          { value: 'val1', label: 'label1' },
+          { value: 'val2', label: 'label2' },
+        ]}
+      />
 
       <Modal
         size="lg"
