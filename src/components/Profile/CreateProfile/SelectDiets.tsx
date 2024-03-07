@@ -2,6 +2,10 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Form from 'react-bootstrap/Form'
 import { Diet } from './profileDataTypes'
+import { useState } from 'react'
+import Modal from 'react-bootstrap/Modal'
+import Button from 'react-bootstrap/Button'
+import Carousel from 'react-bootstrap/Carousel'
 
 const dietList: Diet[] = [
   {
@@ -65,6 +69,8 @@ const SelectDiets: React.FC<Props> = ({
   selectedDiets,
   setSelectedDiets,
 }) => {
+  const [showModal, setShowModal] = useState(false)
+
   function handleCheckboxOnChange(diet: Diet) {
     const newDietSet = new Set(selectedDiets)
 
@@ -76,6 +82,7 @@ const SelectDiets: React.FC<Props> = ({
 
     setSelectedDiets(newDietSet)
   }
+
   return (
     <>
       <h1>{currentStep}. Which diets are you on?</h1>
@@ -96,10 +103,11 @@ const SelectDiets: React.FC<Props> = ({
                 </Col>
                 <Col>
                   <img
+                    style={{ cursor: 'pointer' }}
                     src="images/info_icon.svg"
                     alt="information icon"
                     onClick={() => {
-                      alert('click')
+                      setShowModal(true)
                     }}
                   />
                 </Col>
@@ -108,6 +116,57 @@ const SelectDiets: React.FC<Props> = ({
           )
         })}
       </Row>
+
+      <Modal
+        size="lg"
+        centered
+        show={showModal}
+        onHide={() => {
+          setShowModal(false)
+        }}
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>Title</Modal.Title>
+        </Modal.Header>
+
+        <Modal.Body>
+          <div>Body text</div>
+          <Carousel
+            fade
+            indicators={false}
+            interval={null}
+            data-bs-theme="dark"
+            className="mt-3 pb-2"
+          >
+            <Carousel.Item>
+              <div className="carouselImgContainer mx-auto">
+                <img className="allergenDepiction" src="images/square.svg" />
+              </div>
+            </Carousel.Item>
+            <Carousel.Item>
+              <div className="carouselImgContainer mx-auto">
+                <img className="allergenDepiction" src="images/rect_wide.svg" />
+              </div>
+            </Carousel.Item>
+            <Carousel.Item>
+              <div className="carouselImgContainer mx-auto">
+                <img className="allergenDepiction" src="images/rect_tall.svg" />
+              </div>
+            </Carousel.Item>
+          </Carousel>
+        </Modal.Body>
+
+        <Modal.Footer>
+          <Button
+            variant="secondary"
+            onClick={() => {
+              setShowModal(false)
+            }}
+          >
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </>
   )
 }
