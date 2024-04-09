@@ -1,13 +1,12 @@
 import './TraditionalProviders.css'
 import Button from 'react-bootstrap/Button'
-import Stack from 'react-bootstrap/Stack'
 import { auth, facebook, google } from '../../firebase'
 import { signInWithPopup } from 'firebase/auth'
 
 // todo: sign out from all providers before signing in
 const TraditionalProviders: React.FC = () => {
   return (
-    <Stack direction="horizontal" gap={3} className=" mx-auto">
+    <>
       <Button
         onClick={() => {
           void signInWithPopup(auth, facebook)
@@ -19,6 +18,8 @@ const TraditionalProviders: React.FC = () => {
           alt="Facebook logo"
           className="provider-icon"
         />
+
+      <span className="ms-3">Sign in with Facebook</span>
       </Button>
       <Button
         onClick={() => {
@@ -31,8 +32,9 @@ const TraditionalProviders: React.FC = () => {
           alt="Google logo"
           className="provider-icon"
         />
+        <span className="ms-3">Sign in with Google</span>
       </Button>
-    </Stack>
+      </>
   )
 }
 
