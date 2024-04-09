@@ -1,7 +1,5 @@
 import { useContext } from 'react'
-import { Link } from 'react-router-dom'
 import { FormattedMessage } from 'react-intl'
-import Navbar from 'react-bootstrap/Navbar'
 import Form from 'react-bootstrap/Form'
 import LanguageContext from '../../LanguageContext'
 import './LoginScreen.css'
@@ -44,14 +42,6 @@ const LoginScreen: React.FC = () => {
 
   return (
     <>
-      <Navbar bg="primary" data-bs-theme="dark">
-        <Navbar.Brand className="ms-3 fs-6">
-          <Link className="about-link" to="../about">
-            <FormattedMessage id="about_application" defaultMessage={'About'} />
-          </Link>
-        </Navbar.Brand>
-      </Navbar>
-
       <div className="app-name text-center mt-3 mx-auto">
         <h3>
           <FormattedMessage
