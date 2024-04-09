@@ -44,6 +44,8 @@ const LoginScreen: React.FC = () => {
      
       <img className="application-logo" src="images/app_logo.svg" alt="application_logo" />
 
+      <h4 className='manage-your-profile-heading'>Manage your personal eating preferences profile</h4>
+
       <SelectProvider />
 
       <div className="position-absolute bottom-0 start-0 ms-3 mb-3">
