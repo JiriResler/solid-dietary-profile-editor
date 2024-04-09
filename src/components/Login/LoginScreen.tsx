@@ -1,5 +1,4 @@
 import { useContext } from 'react'
-import { FormattedMessage } from 'react-intl'
 import Form from 'react-bootstrap/Form'
 import LanguageContext from '../../LanguageContext'
 import './LoginScreen.css'
@@ -42,18 +41,8 @@ const LoginScreen: React.FC = () => {
 
   return (
     <>
-      <div className="app-name text-center mt-3 mx-auto">
-        <h3>
-          <FormattedMessage
-            id="app_name"
-            defaultMessage={'Personal Eating Preferences Profile Editor'}
-          />
-        </h3>
-      </div>
-
-      <div className="application-logo mt-3 mx-auto">
-        <img src="images/app_logo.svg" alt="application_logo" />
-      </div>
+     
+      <img className="application-logo" src="images/app_logo.svg" alt="application_logo" />
 
       <SelectProvider />
 

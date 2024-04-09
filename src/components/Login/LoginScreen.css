@@ -1,13 +1,6 @@
-.app-name {
-  width: 80vw;
-}
-
 .application-logo {
-  width: 85pt;
-}
-
-.about-link {
-  font-size: 13pt;
-  color: white;
-  text-decoration: none;
+  width: 150pt;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
