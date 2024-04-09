@@ -3,7 +3,6 @@ import ProviderComparisonModalWrapper from './ProviderComparisonModalWrapper'
 import LogInSolid from './LogInSolid'
 import Stack from 'react-bootstrap/Stack'
 import { useState } from 'react'
-import { FormattedMessage } from 'react-intl'
 import './SelectProvider.css'
 import TraditionalProviders from './TraditionalProviders'
 
@@ -19,13 +18,8 @@ const SelectProvider: React.FC = () => {
         setShowProvidersModal={setShowProvidersModal}
       />
 
-      <Stack gap={2} className="select-provider-stack text-center mt-3 mx-auto">
-        <h5>
-          <FormattedMessage
-            id="sign_in_via_provider"
-            defaultMessage={'Please sign in via an identity provider'}
-          />
-        </h5>
+      <Stack gap={2} className="select-provider-stack text-center mx-auto">
+        <div className='select-provider-heading'>Select an identity provider</div>
 
         {loginWithSolid && <LogInSolid setLoginWithSolid={setLoginWithSolid} />}
 
@@ -35,29 +29,29 @@ const SelectProvider: React.FC = () => {
               onClick={() => {
                 setLoginWithSolid(true)
               }}
-              className="select-provider-button solid-button text-start mx-auto"
+              className="sign-with-solid-button text-start mx-auto"
             >
               <img
                 src="images/logo_solid.svg"
                 alt="Solid logo"
                 className="solid-icon"
               />
-              <span className="ms-3">Solid</span>
+              <span className="ms-3">Sign in with Solid</span>
             </Button>
 
-            <hr />
-
-            <TraditionalProviders />
-
-            <div className="why-solid text-center mt-4">
+            <div className="why-solid text-center">
               <span
                 onClick={() => {
                   setShowProvidersModal(true)
                 }}
               >
-                Why use Solid?
+                What is Solid?
               </span>
             </div>
+
+            <h2><span>or</span></h2>
+
+            <TraditionalProviders />
           </>
         )}
       </Stack>

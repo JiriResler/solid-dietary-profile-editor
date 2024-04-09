@@ -1,13 +1,15 @@
 .select-provider-stack {
-  width: 60vw;
+  width: 70vw;
 }
 
-.select-provider-button {
+.select-provider-heading {
+  font-size: large;
+  font-weight: 500;
+}
+
+.sign-with-solid-button{
   height: 40pt;
-  width: 105pt;
-}
-
-.solid-button {
+  width: 175pt;
   background-color: #7c4dff;
   border-color: #7c4dff;
 }
@@ -22,4 +24,17 @@
 
 .why-solid:hover {
   text-decoration: underline;
+}
+
+h2 {
+  width: 100%;
+  text-align: center;
+  border-bottom: 1px solid #000;
+  line-height: 0.1em;
+  margin: 10px 0 20px;
+}
+
+h2 span {
+  background: #fff;
+  padding: 0 10px;
 }
