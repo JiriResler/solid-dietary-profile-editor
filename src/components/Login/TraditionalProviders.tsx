@@ -19,7 +19,7 @@ const TraditionalProviders: React.FC = () => {
           className="provider-icon"
         />
 
-      <span className="ms-3">Sign in with Facebook</span>
+        <span className="ms-3">Sign in with Facebook</span>
       </Button>
       <Button
         onClick={() => {
@@ -34,7 +34,7 @@ const TraditionalProviders: React.FC = () => {
         />
         <span className="ms-3">Sign in with Google</span>
       </Button>
-      </>
+    </>
   )
 }
 

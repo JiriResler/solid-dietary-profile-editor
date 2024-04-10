@@ -41,10 +41,15 @@ const LoginScreen: React.FC = () => {
 
   return (
     <>
-     
-      <img className="application-logo" src="images/app_logo.svg" alt="application_logo" />
+      <img
+        className="application-logo"
+        src="images/app_logo.svg"
+        alt="application_logo"
+      />
 
-      <h4 className='manage-your-profile-heading'>Manage your personal eating preferences profile</h4>
+      <h4 className="manage-your-profile-heading">
+        Manage your personal eating preferences profile
+      </h4>
 
       <SelectProvider />
 
