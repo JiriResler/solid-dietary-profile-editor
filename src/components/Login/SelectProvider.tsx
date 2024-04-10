@@ -31,7 +31,7 @@ const SelectProvider: React.FC = () => {
               onClick={() => {
                 setLoginWithSolid(true)
               }}
-              className="sign-with-solid-button text-start mx-auto"
+              className="provider-button solid-button text-start mx-auto"
             >
               <img
                 src="images/logo_solid.svg"
@@ -41,7 +41,7 @@ const SelectProvider: React.FC = () => {
               <span className="ms-3">Sign in with Solid</span>
             </Button>
 
-            <div className="why-solid text-center">
+            <div className="why-solid ">
               <span
                 onClick={() => {
                   setShowProvidersModal(true)

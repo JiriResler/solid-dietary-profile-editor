@@ -1,5 +1,5 @@
 .select-provider-stack {
-  width: 70vw;
+  width: 190pt;
 }
 
 .select-provider-heading {
@@ -7,11 +7,20 @@
   font-weight: 500;
 }
 
-.sign-with-solid-button{
+.provider-button {
   height: 45pt;
-  width: 180pt;
+  width: 100%;
+}
+
+.solid-button2 {
   background-color: #7c4dff;
   border-color: #7c4dff;
+}
+
+.solid-button2:hover,
+.solid-button2:active:focus {
+  background-color: #000;
+  border-color: #000;
 }
 
 .solid-icon {

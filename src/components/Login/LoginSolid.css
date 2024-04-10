@@ -1,17 +1,17 @@
 .solid-login-button {
-    background-color: #7c4dff;
-    border-color: #7c4dff;
-  }
-  
-  .solid-login-button:hover,
-  .solid-login-button:active:focus {
-    background-color: #6933ff;
-    border-color: #6933ff;
-  }
+  background-color: #7c4dff;
+  border-color: #7c4dff;
+}
 
-  .back-button {
-    width: 50pt;
-  }
+.solid-login-button:hover,
+.solid-login-button:active:focus {
+  background-color: #6933ff;
+  border-color: #6933ff;
+}
+
+.back-button {
+  width: 50pt;
+}
 
 .fade-in {
   animation: fade-in 1s;

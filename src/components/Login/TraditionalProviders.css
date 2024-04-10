@@ -7,11 +7,6 @@
   height: 25pt;
 }
 
-.provider-button {
-  height: 45pt;
-  width: 180pt;
-}
-
 .solid-button:hover,
 .solid-button:active:focus {
   background-color: #6933ff;
