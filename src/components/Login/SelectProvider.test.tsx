@@ -21,7 +21,7 @@ describe('SelectProvider', () => {
       </IntlProviderWrapper>,
     )
 
-    const signInViaSolidButton = screen.getByText('Solid')
+    const signInViaSolidButton = screen.getByText('Sign in with Solid')
 
     fireEvent.click(signInViaSolidButton)
 
