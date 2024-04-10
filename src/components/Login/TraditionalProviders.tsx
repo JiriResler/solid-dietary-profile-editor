@@ -11,12 +11,12 @@ const TraditionalProviders: React.FC = () => {
         onClick={() => {
           void signInWithPopup(auth, facebook)
         }}
-        className="provider-button facebook-button"
+        className="provider-button facebook-button text-start"
       >
         <img
           src="images/facebook_round_white_icon.svg"
           alt="Facebook logo"
-          className="provider-icon border"
+          className="provider-icon"
         />
 
         <span className="ms-3">Sign in with Facebook</span>
@@ -25,12 +25,12 @@ const TraditionalProviders: React.FC = () => {
         onClick={() => {
           void signInWithPopup(auth, google)
         }}
-        className="provider-button google-button"
+        className="provider-button google-button text-start"
       >
         <img
           src="images/google_g_logo.svg"
           alt="Google logo"
-          className="provider-icon border"
+          className="provider-icon"
         />
         <span className="ms-3">Sign in with Google</span>
       </Button>
