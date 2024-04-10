@@ -12,6 +12,10 @@
   width: 100%;
 }
 
+.provider-icon {
+  height: 25pt;
+}
+
 .solid-button {
   background-color: #7c4dff;
   border-color: #7c4dff;
