@@ -36,7 +36,7 @@ const SelectProvider: React.FC = () => {
               <img
                 src="images/logo_solid.svg"
                 alt="Solid logo"
-                className="provider-icon border"
+                className="solid-icon"
               />
               <span className="ms-3">Sign in with Solid</span>
             </Button>
