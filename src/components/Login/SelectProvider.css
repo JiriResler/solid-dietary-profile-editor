@@ -12,15 +12,15 @@
   width: 100%;
 }
 
-.solid-button2 {
+.solid-button {
   background-color: #7c4dff;
   border-color: #7c4dff;
 }
 
-.solid-button2:hover,
-.solid-button2:active:focus {
-  background-color: #000;
-  border-color: #000;
+.solid-button:hover,
+.solid-button:active:focus {
+  background-color: #6933ff;
+  border-color: #6933ff;
 }
 
 .solid-icon {
