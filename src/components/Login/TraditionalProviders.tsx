@@ -11,7 +11,7 @@ const TraditionalProviders: React.FC = () => {
         onClick={() => {
           void signInWithPopup(auth, facebook)
         }}
-        className="provider-button facebook-button mx-auto"
+        className="provider-button facebook-button"
       >
         <img
           src="images/facebook_round_white_icon.svg"
@@ -25,7 +25,7 @@ const TraditionalProviders: React.FC = () => {
         onClick={() => {
           void signInWithPopup(auth, google)
         }}
-        className="provider-button google-button mx-auto"
+        className="provider-button google-button"
       >
         <img
           src="images/google_g_logo.svg"
