@@ -41,7 +41,7 @@ const LoginScreen: React.FC = () => {
   }
 
   return (
-    <Stack gap={2} className="select-provider-stack text-center mx-auto">
+    <Stack gap={3} className="select-provider-stack text-center mx-auto">
       <img
         className="application-logo"
         src="images/app_logo.svg"
