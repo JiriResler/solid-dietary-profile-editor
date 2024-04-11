@@ -5,7 +5,7 @@
 
 .provider-button {
   height: 45pt;
-  width: 100%;
+  border-radius: 12px;
 }
 
 .provider-icon {
