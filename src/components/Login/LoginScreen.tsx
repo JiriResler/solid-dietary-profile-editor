@@ -3,6 +3,7 @@ import Form from 'react-bootstrap/Form'
 import LanguageContext from '../../LanguageContext'
 import './LoginScreen.css'
 import SelectProvider from './SelectProvider'
+import Stack from 'react-bootstrap/Stack'
 
 const LoginScreen: React.FC = () => {
   const { language, setLanguage } = useContext(LanguageContext)
@@ -40,16 +41,16 @@ const LoginScreen: React.FC = () => {
   }
 
   return (
-    <>
+    <Stack gap={2} className="select-provider-stack text-center mx-auto">
       <img
         className="application-logo"
         src="images/app_logo.svg"
         alt="application_logo"
       />
 
-      <h4 className="manage-your-profile-heading">
+      <h5 className="manage-your-profile-heading">
         Manage your personal eating preferences profile
-      </h4>
+      </h5>
 
       <SelectProvider />
 
@@ -63,7 +64,7 @@ const LoginScreen: React.FC = () => {
           <option key="cs">Česky</option>
         </Form.Select>
       </div>
-    </>
+    </Stack>
   )
 }
 

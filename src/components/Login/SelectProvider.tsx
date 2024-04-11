@@ -1,7 +1,6 @@
 import Button from 'react-bootstrap/Button'
 import ProviderComparisonModalWrapper from './ProviderComparisonModalWrapper'
 import LogInSolid from './LogInSolid'
-import Stack from 'react-bootstrap/Stack'
 import { useState } from 'react'
 import './SelectProvider.css'
 import TraditionalProviders from './TraditionalProviders'
@@ -18,47 +17,43 @@ const SelectProvider: React.FC = () => {
         setShowProvidersModal={setShowProvidersModal}
       />
 
-      <Stack gap={2} className="select-provider-stack text-center mx-auto">
-        <div className="select-provider-heading">
-          Select an identity provider
-        </div>
+      <div className="select-provider-heading">Select an identity provider</div>
 
-        {loginWithSolid && <LogInSolid setLoginWithSolid={setLoginWithSolid} />}
+      {loginWithSolid && <LogInSolid setLoginWithSolid={setLoginWithSolid} />}
 
-        {!loginWithSolid && (
-          <>
-            <Button
+      {!loginWithSolid && (
+        <>
+          <Button
+            onClick={() => {
+              setLoginWithSolid(true)
+            }}
+            className="provider-button solid-button text-start"
+          >
+            <img
+              src="images/logo_solid.svg"
+              alt="Solid logo"
+              className="solid-icon"
+            />
+            <span className="ms-3">Sign in with Solid</span>
+          </Button>
+
+          <div className="why-solid ">
+            <span
               onClick={() => {
-                setLoginWithSolid(true)
+                setShowProvidersModal(true)
               }}
-              className="provider-button solid-button text-start"
             >
-              <img
-                src="images/logo_solid.svg"
-                alt="Solid logo"
-                className="solid-icon"
-              />
-              <span className="ms-3">Sign in with Solid</span>
-            </Button>
+              What is Solid?
+            </span>
+          </div>
 
-            <div className="why-solid ">
-              <span
-                onClick={() => {
-                  setShowProvidersModal(true)
-                }}
-              >
-                What is Solid?
-              </span>
-            </div>
+          <h2>
+            <span>or</span>
+          </h2>
 
-            <h2>
-              <span>or</span>
-            </h2>
-
-            <TraditionalProviders />
-          </>
-        )}
-      </Stack>
+          <TraditionalProviders />
+        </>
+      )}
     </>
   )
 }
