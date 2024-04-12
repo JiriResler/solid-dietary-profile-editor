@@ -48,9 +48,7 @@ const LoginScreen: React.FC = () => {
         alt="application_logo"
       />
 
-      <h5 className="manage-your-profile-heading">
-        Manage your personal eating preferences profile
-      </h5>
+      <h5>Manage your personal eating preferences profile</h5>
 
       <SelectProvider />
 
