@@ -17,11 +17,12 @@
 .google-button {
   background-color: white;
   border-color: #5a58588a;
-  color: #000;
+  color: black;
 }
 
 .google-button:hover,
 .google-button:active:focus {
-  background-color: #e7e7e7;
-  border-color: #e7e7e7;
+  background-color: white;
+  border-color: #5a58588a;
+  color: black;
 }
