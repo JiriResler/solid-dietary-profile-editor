@@ -6,6 +6,7 @@ import SelectProvider from './SelectProvider'
 import Stack from 'react-bootstrap/Stack'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
+import Card from 'react-bootstrap/Card'
 
 const LoginScreen: React.FC = () => {
   const { language, setLanguage } = useContext(LanguageContext)
@@ -45,7 +46,7 @@ const LoginScreen: React.FC = () => {
   return (
     <>
       <Row className="large-screen-login-row d-none d-md-flex">
-        <Col md={8}>
+        <Col md={7}>
           <Stack className="w-75 mx-auto text-center mt-5">
             <h2 className="mt-5">
               Welcome to the personal eating preferences profile editor!
@@ -56,13 +57,24 @@ const LoginScreen: React.FC = () => {
               alt="application_logo"
             />
 
-            <h4 className='mt-2'>Manage your eating preferences profile</h4>
+            <h4 className="mt-2">Manage your eating preferences profile</h4>
             <div className="position-absolute bottom-0 w-50 mb-3">
               About | Source code | Created by Jiří Resler
             </div>
           </Stack>
         </Col>
-        <Col className="select-provider-login-col">2 of 2</Col>
+        <Col className="select-provider-login-col">
+          <Card className="select-provider-card mx-auto mt-5">
+            <Card.Body>
+              <Stack
+                gap={3}
+                className="select-provider-stack text-center mx-auto"
+              >
+                <SelectProvider />
+              </Stack>
+            </Card.Body>
+          </Card>
+        </Col>
       </Row>
 
       <Stack

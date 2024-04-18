@@ -5,6 +5,15 @@
   margin-right: auto;
 }
 
+.select-provider-stack {
+  width: 250px;
+}
+
+.select-provider-card {
+  width: 320px;
+  
+}
+
 .large-screen-login-row {
   height: 100vh;
 }
