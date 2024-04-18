@@ -45,7 +45,23 @@ const LoginScreen: React.FC = () => {
   return (
     <>
       <Row className="large-screen-login-row d-none d-md-flex">
-        <Col md={8}>1 of 2</Col>
+        <Col md={8}>
+          <Stack className="w-75 mx-auto text-center mt-5">
+            <h2 className="mt-5">
+              Welcome to the personal eating preferences profile editor!
+            </h2>
+            <img
+              className="application-logo"
+              src="images/app_logo.svg"
+              alt="application_logo"
+            />
+
+            <h4 className='mt-2'>Manage your eating preferences profile</h4>
+            <div className="position-absolute bottom-0 w-50 mb-3">
+              About | Source code | Created by Jiří Resler
+            </div>
+          </Stack>
+        </Col>
         <Col className="select-provider-login-col">2 of 2</Col>
       </Row>
 
