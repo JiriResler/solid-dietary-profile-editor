@@ -45,12 +45,10 @@ const LoginScreen: React.FC = () => {
 
   return (
     <>
-      <Row className="large-screen-login-row d-none d-md-flex">
+      <Row className="large-screen-login-row d-none d-md-flex align-items-center">
         <Col md={7}>
-          <Stack className="w-75 mx-auto text-center mt-5">
-            <h2 className="mt-5">
-              Welcome to the personal eating preferences profile editor!
-            </h2>
+          <Stack className="w-75 mx-auto text-center">
+            <h2>Welcome to the personal eating preferences profile editor!</h2>
             <img
               className="application-logo"
               src="images/app_logo.svg"
@@ -63,8 +61,9 @@ const LoginScreen: React.FC = () => {
             </div>
           </Stack>
         </Col>
+
         <Col className="select-provider-login-col">
-          <Card className="select-provider-card mx-auto mt-5">
+          <Card className="select-provider-card mx-auto">
             <Card.Body>
               <Stack
                 gap={3}
