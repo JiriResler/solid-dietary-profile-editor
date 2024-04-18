@@ -46,8 +46,8 @@ const LoginScreen: React.FC = () => {
   return (
     <>
       <Row className="d-none d-md-flex align-items-center">
-        <Col md={7}>
-          <Stack className="w-75 mx-auto text-center">
+        <Col md={7} className="position-relative welcome-col">
+          <Stack className="w-75 mx-auto text-center welcome-stack position-absolute top-50 start-50 translate-middle">
             <h2>Welcome to the personal eating preferences profile editor!</h2>
             <img
               className="application-logo"
@@ -56,10 +56,10 @@ const LoginScreen: React.FC = () => {
             />
 
             <h4 className="mt-2">Manage your eating preferences profile</h4>
-            <div className="mb-3">
-              About | Source code | Created by Jiří Resler
-            </div>
           </Stack>
+          <div className="position-absolute bottom-0 start-50 translate-middle-x mb-3">
+            About | Source code | Created by Jiří Resler
+          </div>
         </Col>
 
         <Col className="select-provider-login-col">
