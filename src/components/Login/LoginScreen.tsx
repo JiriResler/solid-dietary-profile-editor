@@ -41,17 +41,22 @@ const LoginScreen: React.FC = () => {
   }
 
   return (
-    <Stack gap={3} className="select-provider-stack text-center mx-auto">
-      <img
-        className="application-logo"
-        src="images/app_logo.svg"
-        alt="application_logo"
-      />
+    <>
+      <div className="d-none d-md-block">hello world</div>
+      <Stack
+        gap={3}
+        className="select-provider-stack d-md-none text-center mx-auto"
+      >
+        <img
+          className="application-logo"
+          src="images/app_logo.svg"
+          alt="application_logo"
+        />
 
-      <h5>Manage your personal eating preferences profile</h5>
+        <h5>Manage your personal eating preferences profile</h5>
 
-      <SelectProvider />
-
+        <SelectProvider />
+      </Stack>
       <div className="position-absolute bottom-0 start-0 ms-3 mb-3">
         <Form.Select
           value={languageFullName(language)}
@@ -62,7 +67,7 @@ const LoginScreen: React.FC = () => {
           <option key="cs">Česky</option>
         </Form.Select>
       </div>
-    </Stack>
+    </>
   )
 }
 
