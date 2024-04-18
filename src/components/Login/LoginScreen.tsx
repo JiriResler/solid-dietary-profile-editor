@@ -56,14 +56,14 @@ const LoginScreen: React.FC = () => {
             />
 
             <h4 className="mt-2">Manage your eating preferences profile</h4>
-            <div className="position-absolute bottom-0 w-50 mb-3">
+            <div className="mb-3">
               About | Source code | Created by Jiří Resler
             </div>
           </Stack>
         </Col>
 
         <Col className="select-provider-login-col">
-          <Card className="select-provider-card mx-auto">
+          <Card className="select-provider-card mx-auto pb-1">
             <Card.Body>
               <Stack
                 gap={3}

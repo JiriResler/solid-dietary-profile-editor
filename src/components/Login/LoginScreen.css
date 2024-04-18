@@ -19,7 +19,11 @@
 }
 
 .select-provider-login-col {
+  height: 100vh;
   background-color: #2541B2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .bottom-information-text {
