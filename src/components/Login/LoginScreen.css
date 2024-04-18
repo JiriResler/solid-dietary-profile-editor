@@ -4,3 +4,11 @@
   margin-left: auto;
   margin-right: auto;
 }
+
+.large-screen-login-row {
+  height: 100vh;
+}
+
+.select-provider-login-col {
+  background-color: #2541B2;
+}

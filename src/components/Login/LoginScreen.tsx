@@ -4,6 +4,8 @@ import LanguageContext from '../../LanguageContext'
 import './LoginScreen.css'
 import SelectProvider from './SelectProvider'
 import Stack from 'react-bootstrap/Stack'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
 
 const LoginScreen: React.FC = () => {
   const { language, setLanguage } = useContext(LanguageContext)
@@ -42,7 +44,11 @@ const LoginScreen: React.FC = () => {
 
   return (
     <>
-      <div className="d-none d-md-block">hello world</div>
+      <Row className="large-screen-login-row d-none d-md-flex">
+        <Col md={8}>1 of 2</Col>
+        <Col className="select-provider-login-col">2 of 2</Col>
+      </Row>
+
       <Stack
         gap={3}
         className="select-provider-stack d-md-none text-center mx-auto"
@@ -57,6 +63,7 @@ const LoginScreen: React.FC = () => {
 
         <SelectProvider />
       </Stack>
+
       <div className="position-absolute bottom-0 start-0 ms-3 mb-3">
         <Form.Select
           value={languageFullName(language)}
