@@ -45,7 +45,7 @@ const LoginScreen: React.FC = () => {
 
   return (
     <>
-      <Row className="large-screen-login-row d-none d-md-flex align-items-center">
+      <Row className="d-none d-md-flex align-items-center">
         <Col md={7}>
           <Stack className="w-75 mx-auto text-center">
             <h2>Welcome to the personal eating preferences profile editor!</h2>
