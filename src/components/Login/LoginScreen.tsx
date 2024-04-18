@@ -45,9 +45,9 @@ const LoginScreen: React.FC = () => {
 
   return (
     <>
-      <Row className="d-none d-md-flex align-items-center">
-        <Col md={7} className="position-relative welcome-col">
-          <Stack className="w-75 mx-auto text-center welcome-stack position-absolute top-50 start-50 translate-middle">
+      <Row className="d-none d-md-flex">
+        <Col md={7} className="position-relative">
+          <Stack className="w-75 text-center position-absolute top-50 start-50 translate-middle">
             <h2>Welcome to the personal eating preferences profile editor!</h2>
             <img
               className="application-logo"
