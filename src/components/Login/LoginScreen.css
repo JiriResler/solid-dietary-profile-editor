@@ -11,11 +11,6 @@
 
 .select-provider-card {
   width: 320px;
-  
-}
-
-.large-screen-login-row {
-  height: 100vh;
 }
 
 .select-provider-login-col {
@@ -24,11 +19,4 @@
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.bottom-information-text {
-  margin: auto;
-  width: 50%;
-  border: 3px solid green;
-  padding: 10px;
 }
