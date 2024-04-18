@@ -7,7 +7,7 @@ const App: React.FC = () => {
   return (
     <SessionProvider>
       <IntlProviderWrapper>
-        <BootstrapContainer>
+        <BootstrapContainer fluid>
           <RouterWrapper />
         </BootstrapContainer>
       </IntlProviderWrapper>
