@@ -45,7 +45,7 @@ const LoginScreen: React.FC = () => {
 
   return (
     <>
-      <Row className="d-none d-md-flex">
+      <Row className="d-none d-lg-flex">
         <Col md={7} className="position-relative">
           <Stack className="w-75 text-center position-absolute top-50 start-50 translate-middle">
             <h2>Welcome to the personal eating preferences profile editor!</h2>
@@ -55,7 +55,7 @@ const LoginScreen: React.FC = () => {
               alt="application_logo"
             />
 
-            <h4 className="mt-2">Manage your eating preferences profile</h4>
+            <h5 className="mt-2">Manage your eating preferences profile</h5>
           </Stack>
           <div className="position-absolute bottom-0 start-50 translate-middle-x mb-3">
             About | Source code | Created by Jiří Resler
@@ -78,7 +78,7 @@ const LoginScreen: React.FC = () => {
 
       <Stack
         gap={3}
-        className="select-provider-stack position-absolute top-50 start-50 translate-middle pb-5 d-md-none text-center mx-auto"
+        className="select-provider-stack position-absolute top-50 start-50 translate-middle pb-5 d-lg-none text-center mx-auto"
       >
         <img
           className="application-logo"
