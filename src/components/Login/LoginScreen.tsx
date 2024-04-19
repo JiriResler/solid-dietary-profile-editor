@@ -78,7 +78,7 @@ const LoginScreen: React.FC = () => {
 
       <Stack
         gap={3}
-        className="select-provider-stack d-md-none text-center mx-auto"
+        className="select-provider-stack position-absolute top-50 start-50 translate-middle pb-5 d-md-none text-center mx-auto"
       >
         <img
           className="application-logo"
