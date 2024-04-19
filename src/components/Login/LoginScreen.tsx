@@ -62,7 +62,7 @@ const LoginScreen: React.FC = () => {
           </div>
         </Col>
 
-        <Col className="select-provider-login-col">
+        <Col md={5} className="select-provider-login-col">
           <Card className="select-provider-card mx-auto pb-1">
             <Card.Body>
               <Stack
