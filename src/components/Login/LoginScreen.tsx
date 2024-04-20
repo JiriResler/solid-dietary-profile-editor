@@ -58,7 +58,11 @@ const LoginScreen: React.FC = () => {
             <h5 className="mt-2">Manage your eating preferences profile</h5>
           </Stack>
           <div className="position-absolute bottom-0 start-50 translate-middle-x mb-3">
-            About | Source code | Created by Jiří Resler
+              <span className='clickable-text'>About</span>
+              <span> | </span>
+              <span className='clickable-text'>Source code</span>
+              <span> | </span>
+              <span>Created by Jiří Resler</span>
           </div>
         </Col>
 
