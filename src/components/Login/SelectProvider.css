@@ -6,6 +6,8 @@
 .provider-button {
   height: 49px;
   border-radius: 12px;
+  display: flex;
+  align-items: center;
 }
 
 .provider-icon {
