@@ -77,7 +77,7 @@ const LoginScreen: React.FC = () => {
           <div className="position-absolute bottom-0 start-50 translate-middle-x mb-3">
               <span className='clickable-text' onClick={() => setShowAboutModal(true)}>About</span>
               <span> | </span>
-              <span className='clickable-text'>Source code</span>
+              <a href="https://github.com/JiriResler/solid-dietary-profile-editor" target="_blank" className='link-without-decoration'>Source code</a>
               <span> | </span>
               <span>Created by Jiří Resler</span>
           </div>
