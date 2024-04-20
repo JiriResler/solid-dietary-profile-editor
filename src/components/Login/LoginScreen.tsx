@@ -7,9 +7,14 @@ import Stack from 'react-bootstrap/Stack'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Card from 'react-bootstrap/Card'
+import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button';
+import { useState } from 'react';
 
 const LoginScreen: React.FC = () => {
   const { language, setLanguage } = useContext(LanguageContext)
+
+  const [showAboutModal, setShowAboutModal] = useState(false);
 
   function setLanguageShorthand(languageLong: string) {
     if (languageLong === 'English') {
@@ -45,6 +50,18 @@ const LoginScreen: React.FC = () => {
 
   return (
     <>
+    <Modal show={showAboutModal} onHide={() => setShowAboutModal(false)} centered>
+        <Modal.Header closeButton>
+          <Modal.Title>Modal heading</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Woohoo, you are reading this text in a modal!</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={() => setShowAboutModal(false)}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
       <Row className="d-none d-lg-flex">
         <Col md={7} className="position-relative">
           <Stack className="w-75 text-center position-absolute top-50 start-50 translate-middle">
@@ -58,7 +75,7 @@ const LoginScreen: React.FC = () => {
             <h5 className="mt-2">Manage your eating preferences profile</h5>
           </Stack>
           <div className="position-absolute bottom-0 start-50 translate-middle-x mb-3">
-              <span className='clickable-text'>About</span>
+              <span className='clickable-text' onClick={() => setShowAboutModal(true)}>About</span>
               <span> | </span>
               <span className='clickable-text'>Source code</span>
               <span> | </span>
