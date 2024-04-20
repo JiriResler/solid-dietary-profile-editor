@@ -37,14 +37,13 @@ const SelectProvider: React.FC = () => {
             <span className="ms-3">Sign in with Solid</span>
           </Button>
 
-          <div className="why-solid-text">
-            <span
-              onClick={() => {
-                setShowProvidersModal(true)
-              }}
-            >
-              What is Solid?
-            </span>
+          <div
+            onClick={() => {
+              setShowProvidersModal(true)
+            }}
+            className="clickable-text w-50 mt-1 mx-auto"
+          >
+            What is Solid?
           </div>
 
           <div className="providers-divider">

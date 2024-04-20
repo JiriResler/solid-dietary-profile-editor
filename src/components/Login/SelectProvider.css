@@ -29,14 +29,6 @@
   height: 33px;
 }
 
-.why-solid-text {
-  cursor: pointer;
-}
-
-.why-solid-text:hover {
-  text-decoration: none;
-}
-
 .providers-divider {
   width: 100%;
   text-align: center;
