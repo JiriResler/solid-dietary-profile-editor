@@ -7,6 +7,7 @@
 
 .select-provider-stack {
   width: 250px;
+  height: 380px;
 }
 
 .select-provider-card {
@@ -24,4 +25,8 @@
 .link-without-decoration {
   text-decoration: none;
   color: black;
+}
+
+.clickable-text {
+  cursor: pointer;
 }
