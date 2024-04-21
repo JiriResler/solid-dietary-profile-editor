@@ -88,7 +88,7 @@ const LoginScreen: React.FC = () => {
             <Card.Body>
               <Stack
                 gap={3}
-                className="select-provider-stack text-center mx-auto"
+                className="select-provider-stack select-provider-stack-large-screen text-center mx-auto"
               >
                 <SelectProvider />
               </Stack>
