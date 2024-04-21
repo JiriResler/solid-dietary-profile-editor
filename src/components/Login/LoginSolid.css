@@ -9,6 +9,11 @@
   border-color: #6933ff;
 }
 
+.solid-provider-detail-element {
+  height: 49px;
+  border-radius: 12px;
+}
+
 .fade-in {
   animation: fade-in 1s;
 }
