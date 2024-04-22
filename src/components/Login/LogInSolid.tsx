@@ -34,7 +34,7 @@ const LogInSolid: React.FC<Props> = ({ setLoginWithSolid }) => {
       <Form.Select
         value={selectedOption}
         onChange={(e) => setSelectedOption(e.target.value)}
-        className='solid-provider-detail-element mb-4'
+        className='choose-solid-provider-element mb-4'
       >
         {identityProviders.map((opt) => {
           return <option key={opt}>{opt}</option>
@@ -48,14 +48,14 @@ const LogInSolid: React.FC<Props> = ({ setLoginWithSolid }) => {
           (import.meta.env.PROD ? '/solid-dietary-profile-editor/' : '')
         }
       >
-        <Button className="solid-login-button w-100 solid-provider-detail-element">
+        <Button className="solid-login-button w-100 choose-solid-provider-element">
           Redirect to provider
         </Button>
       </LoginButton>
 
       <Button
         variant="secondary"
-        className='solid-provider-detail-element w-100 mt-3'
+        className='choose-solid-provider-element w-100 mt-3'
         onClick={() => {
           setLoginWithSolid(false)
         }}
