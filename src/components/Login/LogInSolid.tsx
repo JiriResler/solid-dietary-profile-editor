@@ -34,7 +34,7 @@ const LogInSolid: React.FC<Props> = ({ setLoginWithSolid }) => {
       <Form.Select
         value={selectedOption}
         onChange={(e) => setSelectedOption(e.target.value)}
-        className='choose-solid-provider-element mb-4'
+        className="choose-solid-provider-element mb-4"
       >
         {identityProviders.map((opt) => {
           return <option key={opt}>{opt}</option>
@@ -55,7 +55,7 @@ const LogInSolid: React.FC<Props> = ({ setLoginWithSolid }) => {
 
       <Button
         variant="secondary"
-        className='choose-solid-provider-element w-100 mt-3'
+        className="choose-solid-provider-element w-100 mt-3"
         onClick={() => {
           setLoginWithSolid(false)
         }}

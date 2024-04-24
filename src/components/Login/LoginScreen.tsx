@@ -7,14 +7,14 @@ import Stack from 'react-bootstrap/Stack'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Card from 'react-bootstrap/Card'
-import Modal from 'react-bootstrap/Modal';
-import Button from 'react-bootstrap/Button';
-import { useState } from 'react';
+import Modal from 'react-bootstrap/Modal'
+import Button from 'react-bootstrap/Button'
+import { useState } from 'react'
 
 const LoginScreen: React.FC = () => {
   const { language, setLanguage } = useContext(LanguageContext)
 
-  const [showAboutModal, setShowAboutModal] = useState(false);
+  const [showAboutModal, setShowAboutModal] = useState(false)
 
   function setLanguageShorthand(languageLong: string) {
     if (languageLong === 'English') {
@@ -50,7 +50,11 @@ const LoginScreen: React.FC = () => {
 
   return (
     <>
-    <Modal show={showAboutModal} onHide={() => setShowAboutModal(false)} centered>
+      <Modal
+        show={showAboutModal}
+        onHide={() => setShowAboutModal(false)}
+        centered
+      >
         <Modal.Header closeButton>
           <Modal.Title>Modal heading</Modal.Title>
         </Modal.Header>
@@ -72,14 +76,27 @@ const LoginScreen: React.FC = () => {
               alt="application_logo"
             />
 
-            <h4 className="mt-3 w-50 mx-auto">Manage your eating preferences profile</h4>
+            <h4 className="mt-3 w-50 mx-auto">
+              Manage your eating preferences profile
+            </h4>
           </Stack>
           <div className="position-absolute bottom-0 start-50 translate-middle-x mb-3">
-              <span className='clickable-text' onClick={() => setShowAboutModal(true)}>About</span>
-              <span> | </span>
-              <a href="https://github.com/JiriResler/solid-dietary-profile-editor" target="_blank" className='link-without-decoration'>Source code</a>
-              <span> | </span>
-              <span>Created by Jiří Resler</span>
+            <span
+              className="clickable-text"
+              onClick={() => setShowAboutModal(true)}
+            >
+              About
+            </span>
+            <span> | </span>
+            <a
+              href="https://github.com/JiriResler/solid-dietary-profile-editor"
+              target="_blank"
+              className="link-without-decoration"
+            >
+              Source code
+            </a>
+            <span> | </span>
+            <span>Created by Jiří Resler</span>
           </div>
         </Col>
 
