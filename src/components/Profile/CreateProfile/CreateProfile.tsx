@@ -78,7 +78,7 @@ const CreateProfile: React.FC<Props> = ({
 
   return (
     <Stack className="create-profile-stack position-relative">
-      <Stepper activeStep={0} alternativeLabel className="mt-4">
+      <Stepper activeStep={currentStep - 1} alternativeLabel className="mt-4">
         {steps.map((label) => (
           <Step key={label}>
             <StepLabel>{label}</StepLabel>
@@ -136,9 +136,18 @@ const CreateProfile: React.FC<Props> = ({
         )}
       </div>
 
-      <div className="position-absolute bottom-0 start-50 translate-middle-x mb-3 w-100">
-        <Button className="w-100">Next</Button>
-        <Button variant="secondary" className="w-100 mt-2">
+      <div className="position-absolute bottom-0 start-50 translate-middle-x mb-2 w-100">
+        <Button
+          className="w-100"
+          onClick={() => setCurrentStep(currentStep + 1)}
+        >
+          Next
+        </Button>
+        <Button
+          variant="secondary"
+          className="w-100 mt-2"
+          onClick={() => setCurrentStep(currentStep - 1)}
+        >
           Back
         </Button>
       </div>
