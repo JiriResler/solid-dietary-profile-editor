@@ -1,16 +1,15 @@
 import { useEffect, useState } from 'react'
-import { auth } from '../../../firebase'
+// import { auth } from '../../../firebase'
 import Button from 'react-bootstrap/Button'
 import Stack from 'react-bootstrap/Stack'
 import './CreateProfile.css'
 import SelectAllergens from './SelectAllergens'
-import CreateProfileNavigation from './CreateProfileNavigation'
 import SelectDiets from './SelectDiets'
 import { Allergen, Diet, TastePreferences } from './profileDataTypes'
 import { LoginMethod } from '../../loginMethodEnum'
-import { useSession } from '@inrupt/solid-ui-react'
+// import { useSession } from '@inrupt/solid-ui-react'
 import SelectTastePreferences from './SelectTastePreferences'
-import { saveProfileFirebase, saveProfileSolid } from './saveProfile'
+// import { saveProfileFirebase, saveProfileSolid } from './saveProfile'
 import { loadProfileCreationData } from './loadProfileCreationData'
 
 type Props = {
@@ -20,14 +19,14 @@ type Props = {
 }
 
 const CreateProfile: React.FC<Props> = ({
-  loginMethod,
+  // loginMethod,
   startStep,
-  setEditProfile,
+  // setEditProfile,
 }) => {
-  const { session } = useSession()
+  // const { session } = useSession()
 
   // Number of steps in profile creation
-  const numberOfSteps = 3
+  // const numberOfSteps = 3
 
   const [currentStep, setCurrentStep] = useState(startStep)
 
@@ -50,31 +49,31 @@ const CreateProfile: React.FC<Props> = ({
     void loadProfileCreationData(setAllergenArray)
   }, [])
 
-  function saveProfile() {
-    if (loginMethod === LoginMethod.SOLID) {
-      void saveProfileSolid(
-        session,
-        selectedAllergens,
-        selectedDiets,
-        selectedTastePreferences,
-      )
-    }
+  // function saveProfile() {
+  //   if (loginMethod === LoginMethod.SOLID) {
+  //     void saveProfileSolid(
+  //       session,
+  //       selectedAllergens,
+  //       selectedDiets,
+  //       selectedTastePreferences,
+  //     )
+  //   }
 
-    if (loginMethod === LoginMethod.FIREBASE) {
-      void saveProfileFirebase(
-        auth,
-        selectedAllergens,
-        selectedDiets,
-        selectedTastePreferences,
-      )
-    }
+  //   if (loginMethod === LoginMethod.FIREBASE) {
+  //     void saveProfileFirebase(
+  //       auth,
+  //       selectedAllergens,
+  //       selectedDiets,
+  //       selectedTastePreferences,
+  //     )
+  //   }
 
-    setEditProfile(false)
-  }
+  //   setEditProfile(false)
+  // }
 
   return (
     <>
-      <div className="mainContainer mt-3 mx-auto">
+      <div className="">
         {currentStep === 0 && (
           <Stack
             gap={3}
@@ -123,13 +122,6 @@ const CreateProfile: React.FC<Props> = ({
           />
         )}
       </div>
-
-      <CreateProfileNavigation
-        currentStep={currentStep}
-        numberOfSteps={numberOfSteps}
-        setCurrentStep={setCurrentStep}
-        saveProfile={saveProfile}
-      />
     </>
   )
 }
