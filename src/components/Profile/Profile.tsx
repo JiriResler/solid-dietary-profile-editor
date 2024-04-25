@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import CreateProfile from './CreateProfile/CreateProfile'
+// import CreateProfile from './CreateProfile/CreateProfile'
 import { LoginMethod } from '../loginMethodEnum'
 import './Profile.css'
 import { useSession } from '@inrupt/solid-ui-react'
@@ -11,7 +11,6 @@ import Card from 'react-bootstrap/Card'
 import Stack from 'react-bootstrap/Stack'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-import OffCanvasMenu from './OffCanvasMenu'
 import getPodUrl from '../getPodUrl'
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
@@ -28,6 +27,11 @@ type Props = {
   loginMethod: LoginMethod
 }
 
+const userProfileTestData = {
+  allergicTo: ["Celery", "Gluten"],
+  onDiets: ["Vegetarian"],
+}
+
 const Profile: React.FC<Props> = ({ loginMethod }) => {
   const { session } = useSession()
 
@@ -37,7 +41,7 @@ const Profile: React.FC<Props> = ({ loginMethod }) => {
 
   const [showImportProfileModal, setShowImportProfileModal] = useState(false)
 
-  const [editProfile, setEditProfile] = useState(false)
+  // const [editProfile, setEditProfile] = useState(false)
 
   useEffect(() => {
     void loadUserProfile()
@@ -168,34 +172,28 @@ const Profile: React.FC<Props> = ({ loginMethod }) => {
   //   return <h1>Loading profile data</h1>
   // }
 
-  if (userProfile === null) {
-    return (
-      <CreateProfile
-        loginMethod={loginMethod}
-        startStep={1}
-        setEditProfile={setEditProfile}
-      />
-    )
-  }
+  // if (userProfile === null) {
+  //   return (
+  //     <CreateProfile
+  //       loginMethod={loginMethod}
+  //       startStep={1}
+  //       setEditProfile={setEditProfile}
+  //     />
+  //   )
+  // }
 
-  if (editProfile) {
-    return (
-      <CreateProfile
-        loginMethod={loginMethod}
-        startStep={1}
-        setEditProfile={setEditProfile}
-      />
-    )
-  }
+  // if (editProfile) {
+  //   return (
+  //     <CreateProfile
+  //       loginMethod={loginMethod}
+  //       startStep={1}
+  //       setEditProfile={setEditProfile}
+  //     />
+  //   )
+  // }
 
   return (
     <>
-      <OffCanvasMenu
-        setShowExportProfileModal={setShowExportProfileModal}
-        setShowImportProfileModal={setShowImportProfileModal}
-        setEditProfile={setEditProfile}
-      />
-
       <Modal
         show={showExportProfileModal}
         onHide={() => {
@@ -279,18 +277,18 @@ const Profile: React.FC<Props> = ({ loginMethod }) => {
         </Row>
 
         <Card>
-          <Card.Header>
-            <span className="text-bold">Allergens</span>
-          </Card.Header>
           <Card.Body>
+            <Card.Title>Allergens</Card.Title>
+
             <Card.Subtitle className="mb-2 text-muted">
               You are allergic to
             </Card.Subtitle>
+
             <Card.Text>
-              {userProfile.allergicTo.map((allergen) => {
+              {userProfileTestData.allergicTo.map((allergen) => {
                 return (
                   <div key={allergen}>
-                    - {allergen}{' '}
+                    {allergen}{' '}
                     <img
                       src="images/info_icon.svg"
                       alt="information icon"
@@ -304,6 +302,34 @@ const Profile: React.FC<Props> = ({ loginMethod }) => {
             </Card.Text>
           </Card.Body>
         </Card>
+
+        <Card>
+          <Card.Body>
+          <Card.Title>Diets</Card.Title>
+            <Card.Subtitle className="mb-2 text-muted">
+              Your diets are
+            </Card.Subtitle>
+
+            <Card.Text>
+              {userProfileTestData.onDiets.map((diet) => {
+                return (
+                  <div key={diet}>
+                    {diet}{' '}
+                    <img
+                      src="images/info_icon.svg"
+                      alt="information icon"
+                      onClick={() => {
+                        alert('click')
+                      }}
+                    />
+                  </div>
+                )
+              })}
+            </Card.Text>
+          </Card.Body>
+        </Card>
+
+        
       </Stack>
     </>
   )
