@@ -60,16 +60,11 @@ const dietList: Diet[] = [
 ]
 
 type Props = {
-  currentStep: number
   selectedDiets: Set<Diet>
   setSelectedDiets: React.Dispatch<React.SetStateAction<Set<Diet>>>
 }
 
-const SelectDiets: React.FC<Props> = ({
-  currentStep,
-  selectedDiets,
-  setSelectedDiets,
-}) => {
+const SelectDiets: React.FC<Props> = ({ selectedDiets, setSelectedDiets }) => {
   const [showModal, setShowModal] = useState(false)
 
   function handleCheckboxOnChange(diet: Diet) {
@@ -86,7 +81,7 @@ const SelectDiets: React.FC<Props> = ({
 
   return (
     <>
-      <h1>{currentStep}. Which diets are you on?</h1>
+      <h3>Which diets are you on?</h3>
       <Row>
         {dietList.map((diet: Diet) => {
           return (

@@ -16,7 +16,6 @@ interface AllergenDescription extends Allergen {
 
 type Props = {
   allergenArray: Allergen[]
-  currentStep: number
   selectedAllergens: Set<Allergen>
   setSelectedAllergens: React.Dispatch<React.SetStateAction<Set<Allergen>>>
 }
@@ -29,7 +28,6 @@ type AllergenResponse = {
 
 const SelectAllergens: React.FC<Props> = ({
   allergenArray,
-  currentStep,
   selectedAllergens,
   setSelectedAllergens,
 }) => {
@@ -90,7 +88,7 @@ const SelectAllergens: React.FC<Props> = ({
 
   return (
     <>
-      <h1>{currentStep}. What are you allergic to?</h1>
+      <h3>What are you allergic to?</h3>
 
       <Row>
         {allergenArray.map((allergen: Allergen) => {

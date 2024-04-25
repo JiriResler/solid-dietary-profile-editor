@@ -9,7 +9,6 @@ import Form from 'react-bootstrap/Form'
 import Stack from 'react-bootstrap/Stack'
 
 type Props = {
-  currentStep: number
   selectedTastePreferences: TastePreferences
   setSelectedTastePreferences: React.Dispatch<
     React.SetStateAction<TastePreferences>
@@ -24,7 +23,6 @@ const SelectComponents = {
 }
 
 const SelectTastePreferences: React.FC<Props> = ({
-  currentStep,
   selectedTastePreferences,
   setSelectedTastePreferences,
 }) => {
@@ -121,8 +119,8 @@ const SelectTastePreferences: React.FC<Props> = ({
 
   return (
     <>
-      <h1>{currentStep}. Specify your taste preferences</h1>
-      <h3>Which world cuisines do you like?</h3>
+      <h3> Specify your taste preferences</h3>
+      <h4>Which world cuisines do you like?</h4>
       <Select
         options={menuOptions}
         value={selectedTastePreferences.cuisines}

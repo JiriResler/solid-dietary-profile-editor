@@ -78,7 +78,7 @@ const CreateProfile: React.FC<Props> = ({
 
   return (
     <Stack className="create-profile-stack position-relative">
-      <Stepper activeStep={currentStep - 1} alternativeLabel className="mt-4">
+      <Stepper activeStep={currentStep - 1} alternativeLabel className="mt-5">
         {steps.map((label) => (
           <Step key={label}>
             <StepLabel>{label}</StepLabel>
@@ -86,7 +86,7 @@ const CreateProfile: React.FC<Props> = ({
         ))}
       </Stepper>
 
-      <div className="mx-auto mt-3">
+      <div className="mx-auto text-center border mt-4">
         {currentStep === 0 && (
           <Stack
             gap={3}
@@ -113,7 +113,6 @@ const CreateProfile: React.FC<Props> = ({
         {currentStep === 1 && (
           <SelectAllergens
             allergenArray={allergenArray}
-            currentStep={currentStep}
             selectedAllergens={selectedAllergens}
             setSelectedAllergens={setSelectedAllergens}
           />
@@ -121,7 +120,6 @@ const CreateProfile: React.FC<Props> = ({
 
         {currentStep === 2 && (
           <SelectDiets
-            currentStep={currentStep}
             selectedDiets={selectedDiets}
             setSelectedDiets={setSelectedDiets}
           />
@@ -129,7 +127,6 @@ const CreateProfile: React.FC<Props> = ({
 
         {currentStep === 3 && (
           <SelectTastePreferences
-            currentStep={currentStep}
             selectedTastePreferences={selectedTastePreferences}
             setSelectedTastePreferences={setSelectedTastePreferences}
           />
