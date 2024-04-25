@@ -10,3 +10,9 @@
 .create-profile-stack {
   height: 100dvh;
 }
+
+.create-profile-navigation-button {
+  height: 48px;
+  border-radius: 12px;
+  width: 100%;
+}
