@@ -16,3 +16,27 @@
   border-radius: 12px;
   width: 100%;
 }
+
+.app-primary-color-button {
+  background-color: #2541b2;
+  color: white;
+  border-color: #2541b2;
+}
+
+.app-primary-color-button:hover,
+.app-primary-color-button:active:focus {
+  background-color: #1c3bb8;
+  border-color: #1c3bb8;
+}
+
+.app-secondary-color-button {
+  background-color: #252323;
+  color: white;
+  border-color: #252323;
+}
+
+.app-secondary-color-button:hover,
+.app-secondary-color-button:active:focus {
+  background-color: #222020;
+  border-color: #222020;
+}

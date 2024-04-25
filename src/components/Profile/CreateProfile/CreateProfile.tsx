@@ -138,14 +138,13 @@ const CreateProfile: React.FC<Props> = ({
 
       <div className="position-absolute bottom-0 start-50 translate-middle-x mb-2 w-100">
         <Button
-          className="create-profile-navigation-button"
+          className="create-profile-navigation-button app-primary-color-button"
           onClick={() => setCurrentStep(currentStep + 1)}
         >
           Next
         </Button>
         <Button
-          variant="secondary"
-          className="create-profile-navigation-button mt-2"
+          className="create-profile-navigation-button app-secondary-color-button mt-2"
           onClick={() => setCurrentStep(currentStep - 1)}
         >
           Back
