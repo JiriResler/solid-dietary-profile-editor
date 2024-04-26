@@ -192,7 +192,7 @@ const SelectAllergens: React.FC<Props> = ({
 <div className='mt-3'>
         {allergenListTestData.map((allergen: Allergen) => {
           return (
-              <Stack direction="horizontal" gap={3} className='w-75 mx-auto mt-1'>
+              <Stack direction="horizontal" gap={3} className='mx-auto mt-2'>
                 <Form.Check
                   checked={selectedAllergens.has(allergen)}
                   onChange={() => {
