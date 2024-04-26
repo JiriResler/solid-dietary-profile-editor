@@ -86,7 +86,7 @@ const CreateProfile: React.FC<Props> = ({
         ))}
       </Stepper>
 
-      <div className="mx-auto text-center border mt-4">
+      <div className="mx-auto text-center mt-4">
         {currentStep === 0 && (
           <Stack
             gap={3}

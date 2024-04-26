@@ -1,6 +1,4 @@
 import Stack from 'react-bootstrap/Stack'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
 import Form from 'react-bootstrap/Form'
 import './SelectAllergens.css'
 import { Allergen } from './profileDataTypes'
@@ -26,8 +24,109 @@ type AllergenResponse = {
   results: { bindings: Array<{ desc: { value: string } }> }
 }
 
+const allergenListTestData: Allergen[] = [
+  {
+    iri: 'iri1',
+    label: 'Celery',
+    menuLegendNumber: 0,
+    iconUrl: 'https://personal-restaurant-menu-viewer-app.solidcommunity.net/public/allergen_icons/celery.svg',
+    sameAsIri: 'iri',
+  },
+  {
+    iri: 'iri2',
+    label: 'Gluten',
+    menuLegendNumber: 0,
+    iconUrl: 'https://personal-restaurant-menu-viewer-app.solidcommunity.net/public/allergen_icons/gluten.svg',
+    sameAsIri: 'iri',
+  },
+  {
+    iri: 'iri3',
+    label: 'Crustaceans',
+    menuLegendNumber: 0,
+    iconUrl: 'https://personal-restaurant-menu-viewer-app.solidcommunity.net/public/allergen_icons/gluten.svg',
+    sameAsIri: 'iri',
+  },
+  {
+    iri: 'iri1',
+    label: 'Celery',
+    menuLegendNumber: 0,
+    iconUrl: 'https://personal-restaurant-menu-viewer-app.solidcommunity.net/public/allergen_icons/celery.svg',
+    sameAsIri: 'iri',
+  },
+  {
+    iri: 'iri2',
+    label: 'Gluten',
+    menuLegendNumber: 0,
+    iconUrl: 'https://personal-restaurant-menu-viewer-app.solidcommunity.net/public/allergen_icons/gluten.svg',
+    sameAsIri: 'iri',
+  },
+  {
+    iri: 'iri3',
+    label: 'Crustaceans',
+    menuLegendNumber: 0,
+    iconUrl: 'https://personal-restaurant-menu-viewer-app.solidcommunity.net/public/allergen_icons/gluten.svg',
+    sameAsIri: 'iri',
+  },
+  {
+    iri: 'iri1',
+    label: 'Celery',
+    menuLegendNumber: 0,
+    iconUrl: 'https://personal-restaurant-menu-viewer-app.solidcommunity.net/public/allergen_icons/celery.svg',
+    sameAsIri: 'iri',
+  },
+  {
+    iri: 'iri2',
+    label: 'Gluten',
+    menuLegendNumber: 0,
+    iconUrl: 'https://personal-restaurant-menu-viewer-app.solidcommunity.net/public/allergen_icons/gluten.svg',
+    sameAsIri: 'iri',
+  },
+  {
+    iri: 'iri3',
+    label: 'Crustaceans',
+    menuLegendNumber: 0,
+    iconUrl: 'https://personal-restaurant-menu-viewer-app.solidcommunity.net/public/allergen_icons/gluten.svg',
+    sameAsIri: 'iri',
+  },
+  {
+    iri: 'iri1',
+    label: 'Celery',
+    menuLegendNumber: 0,
+    iconUrl: 'https://personal-restaurant-menu-viewer-app.solidcommunity.net/public/allergen_icons/celery.svg',
+    sameAsIri: 'iri',
+  },
+  {
+    iri: 'iri2',
+    label: 'Gluten',
+    menuLegendNumber: 0,
+    iconUrl: 'https://personal-restaurant-menu-viewer-app.solidcommunity.net/public/allergen_icons/gluten.svg',
+    sameAsIri: 'iri',
+  },
+  {
+    iri: 'iri3',
+    label: 'Crustaceans',
+    menuLegendNumber: 0,
+    iconUrl: 'https://personal-restaurant-menu-viewer-app.solidcommunity.net/public/allergen_icons/gluten.svg',
+    sameAsIri: 'iri',
+  },
+  {
+    iri: 'iri1',
+    label: 'Celery',
+    menuLegendNumber: 0,
+    iconUrl: 'https://personal-restaurant-menu-viewer-app.solidcommunity.net/public/allergen_icons/celery.svg',
+    sameAsIri: 'iri',
+  },
+  {
+    iri: 'iri2',
+    label: 'Gluten',
+    menuLegendNumber: 0,
+    iconUrl: 'https://personal-restaurant-menu-viewer-app.solidcommunity.net/public/allergen_icons/gluten.svg',
+    sameAsIri: 'iri',
+  },
+]
+
 const SelectAllergens: React.FC<Props> = ({
-  allergenArray,
+  // allergenArray,
   selectedAllergens,
   setSelectedAllergens,
 }) => {
@@ -90,11 +189,10 @@ const SelectAllergens: React.FC<Props> = ({
     <>
       <h3>What are you allergic to?</h3>
 
-      <Row>
-        {allergenArray.map((allergen: Allergen) => {
+<div className='mt-3'>
+        {allergenListTestData.map((allergen: Allergen) => {
           return (
-            <Col key={allergen.iri} xs={6}>
-              <Stack direction="horizontal" gap={2}>
+              <Stack direction="horizontal" gap={3} className='w-75 mx-auto mt-1'>
                 <Form.Check
                   checked={selectedAllergens.has(allergen)}
                   onChange={() => {
@@ -103,7 +201,7 @@ const SelectAllergens: React.FC<Props> = ({
                   type="checkbox"
                 />
                 <img src={allergen.iconUrl} className="allergen-icon" />
-                <div>{allergen.label}</div>
+                <span className='w-50 text-start'>{allergen.label}</span>
                 <img
                   src="images/info_icon.svg"
                   alt="information icon"
@@ -113,10 +211,9 @@ const SelectAllergens: React.FC<Props> = ({
                   }}
                 />
               </Stack>
-            </Col>
           )
         })}
-      </Row>
+        </div>
 
       {allergenDescription !== null && (
         <Modal

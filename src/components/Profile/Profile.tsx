@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-// import CreateProfile from './CreateProfile/CreateProfile'
+import CreateProfile from './CreateProfile/CreateProfile'
 import { LoginMethod } from '../loginMethodEnum'
 import './Profile.css'
 import { useSession } from '@inrupt/solid-ui-react'
@@ -41,7 +41,7 @@ const Profile: React.FC<Props> = ({ loginMethod }) => {
 
   const [showImportProfileModal, setShowImportProfileModal] = useState(false)
 
-  // const [editProfile, setEditProfile] = useState(false)
+  const [editProfile, setEditProfile] = useState(false)
 
   useEffect(() => {
     void loadUserProfile()
@@ -172,25 +172,25 @@ const Profile: React.FC<Props> = ({ loginMethod }) => {
   //   return <h1>Loading profile data</h1>
   // }
 
-  // if (userProfile === null) {
-  //   return (
-  //     <CreateProfile
-  //       loginMethod={loginMethod}
-  //       startStep={1}
-  //       setEditProfile={setEditProfile}
-  //     />
-  //   )
-  // }
+  if (userProfile === null) {
+    return (
+      <CreateProfile
+        loginMethod={loginMethod}
+        startStep={1}
+        setEditProfile={setEditProfile}
+      />
+    )
+  }
 
-  // if (editProfile) {
-  //   return (
-  //     <CreateProfile
-  //       loginMethod={loginMethod}
-  //       startStep={1}
-  //       setEditProfile={setEditProfile}
-  //     />
-  //   )
-  // }
+  if (editProfile) {
+    return (
+      <CreateProfile
+        loginMethod={loginMethod}
+        startStep={1}
+        setEditProfile={setEditProfile}
+      />
+    )
+  }
 
   return (
     <>
