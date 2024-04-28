@@ -28,8 +28,8 @@ type Props = {
 }
 
 const userProfileTestData = {
-  allergicTo: ["Celery", "Gluten"],
-  onDiets: ["Vegetarian"],
+  allergicTo: ['Celery', 'Gluten'],
+  onDiets: ['Vegetarian'],
 }
 
 const Profile: React.FC<Props> = ({ loginMethod }) => {
@@ -305,7 +305,7 @@ const Profile: React.FC<Props> = ({ loginMethod }) => {
 
         <Card>
           <Card.Body>
-          <Card.Title>Diets</Card.Title>
+            <Card.Title>Diets</Card.Title>
             <Card.Subtitle className="mb-2 text-muted">
               Your diets are
             </Card.Subtitle>
@@ -328,8 +328,6 @@ const Profile: React.FC<Props> = ({ loginMethod }) => {
             </Card.Text>
           </Card.Body>
         </Card>
-
-        
       </Stack>
     </>
   )

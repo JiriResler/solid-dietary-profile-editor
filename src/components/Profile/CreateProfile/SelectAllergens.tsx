@@ -29,98 +29,112 @@ const allergenListTestData: Allergen[] = [
     iri: 'iri1',
     label: 'Celery',
     menuLegendNumber: 0,
-    iconUrl: 'https://personal-restaurant-menu-viewer-app.solidcommunity.net/public/allergen_icons/celery.svg',
+    iconUrl:
+      'https://personal-restaurant-menu-viewer-app.solidcommunity.net/public/allergen_icons/celery.svg',
     sameAsIri: 'iri',
   },
   {
     iri: 'iri2',
     label: 'Gluten',
     menuLegendNumber: 0,
-    iconUrl: 'https://personal-restaurant-menu-viewer-app.solidcommunity.net/public/allergen_icons/gluten.svg',
+    iconUrl:
+      'https://personal-restaurant-menu-viewer-app.solidcommunity.net/public/allergen_icons/gluten.svg',
     sameAsIri: 'iri',
   },
   {
     iri: 'iri3',
     label: 'Crustaceans',
     menuLegendNumber: 0,
-    iconUrl: 'https://personal-restaurant-menu-viewer-app.solidcommunity.net/public/allergen_icons/gluten.svg',
+    iconUrl:
+      'https://personal-restaurant-menu-viewer-app.solidcommunity.net/public/allergen_icons/gluten.svg',
     sameAsIri: 'iri',
   },
   {
     iri: 'iri1',
     label: 'Celery',
     menuLegendNumber: 0,
-    iconUrl: 'https://personal-restaurant-menu-viewer-app.solidcommunity.net/public/allergen_icons/celery.svg',
+    iconUrl:
+      'https://personal-restaurant-menu-viewer-app.solidcommunity.net/public/allergen_icons/celery.svg',
     sameAsIri: 'iri',
   },
   {
     iri: 'iri2',
     label: 'Gluten',
     menuLegendNumber: 0,
-    iconUrl: 'https://personal-restaurant-menu-viewer-app.solidcommunity.net/public/allergen_icons/gluten.svg',
+    iconUrl:
+      'https://personal-restaurant-menu-viewer-app.solidcommunity.net/public/allergen_icons/gluten.svg',
     sameAsIri: 'iri',
   },
   {
     iri: 'iri3',
     label: 'Crustaceans',
     menuLegendNumber: 0,
-    iconUrl: 'https://personal-restaurant-menu-viewer-app.solidcommunity.net/public/allergen_icons/gluten.svg',
+    iconUrl:
+      'https://personal-restaurant-menu-viewer-app.solidcommunity.net/public/allergen_icons/gluten.svg',
     sameAsIri: 'iri',
   },
   {
     iri: 'iri1',
     label: 'Celery',
     menuLegendNumber: 0,
-    iconUrl: 'https://personal-restaurant-menu-viewer-app.solidcommunity.net/public/allergen_icons/celery.svg',
+    iconUrl:
+      'https://personal-restaurant-menu-viewer-app.solidcommunity.net/public/allergen_icons/celery.svg',
     sameAsIri: 'iri',
   },
   {
     iri: 'iri2',
     label: 'Gluten',
     menuLegendNumber: 0,
-    iconUrl: 'https://personal-restaurant-menu-viewer-app.solidcommunity.net/public/allergen_icons/gluten.svg',
+    iconUrl:
+      'https://personal-restaurant-menu-viewer-app.solidcommunity.net/public/allergen_icons/gluten.svg',
     sameAsIri: 'iri',
   },
   {
     iri: 'iri3',
     label: 'Crustaceans',
     menuLegendNumber: 0,
-    iconUrl: 'https://personal-restaurant-menu-viewer-app.solidcommunity.net/public/allergen_icons/gluten.svg',
+    iconUrl:
+      'https://personal-restaurant-menu-viewer-app.solidcommunity.net/public/allergen_icons/gluten.svg',
     sameAsIri: 'iri',
   },
   {
     iri: 'iri1',
     label: 'Celery',
     menuLegendNumber: 0,
-    iconUrl: 'https://personal-restaurant-menu-viewer-app.solidcommunity.net/public/allergen_icons/celery.svg',
+    iconUrl:
+      'https://personal-restaurant-menu-viewer-app.solidcommunity.net/public/allergen_icons/celery.svg',
     sameAsIri: 'iri',
   },
   {
     iri: 'iri2',
     label: 'Gluten',
     menuLegendNumber: 0,
-    iconUrl: 'https://personal-restaurant-menu-viewer-app.solidcommunity.net/public/allergen_icons/gluten.svg',
+    iconUrl:
+      'https://personal-restaurant-menu-viewer-app.solidcommunity.net/public/allergen_icons/gluten.svg',
     sameAsIri: 'iri',
   },
   {
     iri: 'iri3',
     label: 'Crustaceans',
     menuLegendNumber: 0,
-    iconUrl: 'https://personal-restaurant-menu-viewer-app.solidcommunity.net/public/allergen_icons/gluten.svg',
+    iconUrl:
+      'https://personal-restaurant-menu-viewer-app.solidcommunity.net/public/allergen_icons/gluten.svg',
     sameAsIri: 'iri',
   },
   {
     iri: 'iri1',
     label: 'Celery',
     menuLegendNumber: 0,
-    iconUrl: 'https://personal-restaurant-menu-viewer-app.solidcommunity.net/public/allergen_icons/celery.svg',
+    iconUrl:
+      'https://personal-restaurant-menu-viewer-app.solidcommunity.net/public/allergen_icons/celery.svg',
     sameAsIri: 'iri',
   },
   {
     iri: 'iri2',
     label: 'Gluten',
     menuLegendNumber: 0,
-    iconUrl: 'https://personal-restaurant-menu-viewer-app.solidcommunity.net/public/allergen_icons/gluten.svg',
+    iconUrl:
+      'https://personal-restaurant-menu-viewer-app.solidcommunity.net/public/allergen_icons/gluten.svg',
     sameAsIri: 'iri',
   },
 ]
@@ -189,31 +203,31 @@ const SelectAllergens: React.FC<Props> = ({
     <>
       <h3>What are you allergic to?</h3>
 
-<div className='mt-3'>
+      <div className="mt-3">
         {allergenListTestData.map((allergen: Allergen) => {
           return (
-              <Stack direction="horizontal" gap={3} className='mx-auto mt-2'>
-                <Form.Check
-                  checked={selectedAllergens.has(allergen)}
-                  onChange={() => {
-                    handleCheckboxOnChange(allergen)
-                  }}
-                  type="checkbox"
-                />
-                <img src={allergen.iconUrl} className="allergen-icon" />
-                <span className='w-50 text-start'>{allergen.label}</span>
-                <img
-                  src="images/info_icon.svg"
-                  alt="information icon"
-                  className="onHoverPointer"
-                  onClick={() => {
-                    void displayAllergenDescription(allergen)
-                  }}
-                />
-              </Stack>
+            <Stack direction="horizontal" gap={3} className="mx-auto mt-2">
+              <Form.Check
+                checked={selectedAllergens.has(allergen)}
+                onChange={() => {
+                  handleCheckboxOnChange(allergen)
+                }}
+                type="checkbox"
+              />
+              <img src={allergen.iconUrl} className="allergen-icon" />
+              <span className="w-50 text-start">{allergen.label}</span>
+              <img
+                src="images/info_icon.svg"
+                alt="information icon"
+                className="onHoverPointer"
+                onClick={() => {
+                  void displayAllergenDescription(allergen)
+                }}
+              />
+            </Stack>
           )
         })}
-        </div>
+      </div>
 
       {allergenDescription !== null && (
         <Modal
