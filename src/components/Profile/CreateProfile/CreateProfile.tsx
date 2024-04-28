@@ -77,7 +77,7 @@ const CreateProfile: React.FC<Props> = ({
   // }
 
   return (
-    <Stack className="create-profile-stack position-relative">
+    <Stack gap={3} className="create-profile-stack position-relative">
       <Stepper activeStep={currentStep - 1} alternativeLabel className="mt-3">
         {steps.map((label) => (
           <Step key={label}>
@@ -86,7 +86,11 @@ const CreateProfile: React.FC<Props> = ({
         ))}
       </Stepper>
 
-      <div className="mx-auto text-center mt-3">
+      <div className="text-center">
+        <h3>What are you allergic to?</h3>
+      </div>
+
+      <div className="user-preferences-controls bg-success overflow-auto mx-auto">
         {currentStep === 0 && (
           <Stack
             gap={3}

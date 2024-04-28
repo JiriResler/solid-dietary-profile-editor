@@ -40,3 +40,7 @@
   background-color: #222020;
   border-color: #222020;
 }
+
+.user-preferences-controls {
+  height: calc(100dvh - 100px) !important;
+}
