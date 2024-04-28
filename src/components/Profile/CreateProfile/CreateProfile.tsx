@@ -90,7 +90,7 @@ const CreateProfile: React.FC<Props> = ({
         <h3>What are you allergic to?</h3>
       </div>
 
-      <div className="user-preferences-controls overflow-auto mx-auto">
+      <div className="user-preferences-controls bg-success overflow-auto mx-auto">
         {currentStep === 0 && (
           <Stack
             gap={3}

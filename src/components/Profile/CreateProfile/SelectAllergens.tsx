@@ -212,7 +212,7 @@ const SelectAllergens: React.FC<Props> = ({
               type="checkbox"
             />
             <img src={allergen.iconUrl} className="allergen-icon" />
-            <span className="w-50 text-start">{allergen.label}</span>
+            <span className="w-50">{allergen.label}</span>
             <img
               src="images/info_icon.svg"
               alt="information icon"
