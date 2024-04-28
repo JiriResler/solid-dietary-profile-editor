@@ -42,5 +42,5 @@
 }
 
 .user-preferences-controls {
-  height: calc(100dvh - 100px) !important;
+  height: 55dvh;
 }
