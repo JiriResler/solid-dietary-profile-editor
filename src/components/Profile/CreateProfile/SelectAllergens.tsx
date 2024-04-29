@@ -203,7 +203,11 @@ const SelectAllergens: React.FC<Props> = ({
     <>
       {allergenListTestData.map((allergen: Allergen) => {
         return (
-          <Stack direction="horizontal" gap={3} className="mx-auto mt-2">
+          <Stack
+            direction="horizontal"
+            gap={3}
+            className="allergen-horizontal-stack mx-auto mt-2"
+          >
             <Form.Check
               checked={selectedAllergens.has(allergen)}
               onChange={() => {
@@ -212,7 +216,7 @@ const SelectAllergens: React.FC<Props> = ({
               type="checkbox"
             />
             <img src={allergen.iconUrl} className="allergen-icon" />
-            <span className="w-50">{allergen.label}</span>
+            <span className="w-50 text-start">{allergen.label}</span>
             <img
               src="images/info_icon.svg"
               alt="information icon"

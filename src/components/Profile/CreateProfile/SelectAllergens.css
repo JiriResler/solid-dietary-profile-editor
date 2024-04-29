@@ -21,3 +21,7 @@
 .onHoverPointer {
   cursor: pointer;
 }
+
+.allergen-horizontal-stack {
+  width: 200px;
+}
