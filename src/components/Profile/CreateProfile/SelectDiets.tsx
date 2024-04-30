@@ -108,7 +108,7 @@ const SelectDiets: React.FC<Props> = ({ selectedDiets, setSelectedDiets }) => {
         )
       })}
 
-      <span className="onHoverPointer">Show more options v</span>
+      <div className="onHoverPointer mt-4">Show more options v</div>
 
       {/* <h3 className="mt-3">Are you looking for something else?</h3>
       <Select
