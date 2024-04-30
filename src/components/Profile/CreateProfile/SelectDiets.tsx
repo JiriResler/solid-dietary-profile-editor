@@ -67,6 +67,8 @@ type Props = {
 const SelectDiets: React.FC<Props> = ({ selectedDiets, setSelectedDiets }) => {
   const [showModal, setShowModal] = useState(false)
 
+  const [showMoreDietOptions, setShowMoreDietOptions] = useState(false)
+
   function handleCheckboxOnChange(diet: Diet) {
     const newDietSet = new Set(selectedDiets)
 
@@ -81,43 +83,6 @@ const SelectDiets: React.FC<Props> = ({ selectedDiets, setSelectedDiets }) => {
 
   return (
     <>
-      {dietList.slice(0, 2).map((diet: Diet) => {
-        return (
-          <Stack
-            direction="horizontal"
-            gap={3}
-            className="diet-horizontal-stack mx-auto mt-2"
-          >
-            <Form.Check
-              checked={selectedDiets.has(diet)}
-              onChange={() => {
-                handleCheckboxOnChange(diet)
-              }}
-              type="checkbox"
-            />
-            <span className="w-50 text-start">{diet.label}</span>
-            <img
-              src="images/info_icon.svg"
-              alt="information icon"
-              className="onHoverPointer"
-              onClick={() => {
-                setShowModal(true)
-              }}
-            />
-          </Stack>
-        )
-      })}
-
-      <div className="onHoverPointer mt-4">Show more options v</div>
-
-      {/* <h3 className="mt-3">Are you looking for something else?</h3>
-      <Select
-        options={[
-          { value: 'val1', label: 'label1' },
-          { value: 'val2', label: 'label2' },
-        ]}
-      /> */}
-
       <Modal
         size="lg"
         centered
@@ -168,6 +133,81 @@ const SelectDiets: React.FC<Props> = ({ selectedDiets, setSelectedDiets }) => {
           </Button>
         </Modal.Footer>
       </Modal>
+
+      {dietList.slice(0, 2).map((diet: Diet) => {
+        return (
+          <Stack
+            direction="horizontal"
+            gap={3}
+            className="diet-horizontal-stack mx-auto mt-2"
+          >
+            <Form.Check
+              checked={selectedDiets.has(diet)}
+              onChange={() => {
+                handleCheckboxOnChange(diet)
+              }}
+              type="checkbox"
+            />
+            <span className="w-50 text-start">{diet.label}</span>
+            <img
+              src="images/info_icon.svg"
+              alt="information icon"
+              className="onHoverPointer"
+              onClick={() => {
+                setShowModal(true)
+              }}
+            />
+          </Stack>
+        )
+      })}
+
+      <div
+        onClick={() => setShowMoreDietOptions(!showMoreDietOptions)}
+        className="onHoverPointer mt-4"
+      >
+        {showMoreDietOptions
+          ? 'Show less diet options ^'
+          : 'Show more diet options v'}
+      </div>
+
+      {showMoreDietOptions && (
+        <div className="mt-3">
+          {dietList.slice(2).map((diet: Diet) => {
+            return (
+              <Stack
+                direction="horizontal"
+                gap={3}
+                className="diet-horizontal-stack mx-auto mt-2"
+              >
+                <Form.Check
+                  checked={selectedDiets.has(diet)}
+                  onChange={() => {
+                    handleCheckboxOnChange(diet)
+                  }}
+                  type="checkbox"
+                />
+                <span className="w-50 text-start">{diet.label}</span>
+                <img
+                  src="images/info_icon.svg"
+                  alt="information icon"
+                  className="onHoverPointer"
+                  onClick={() => {
+                    setShowModal(true)
+                  }}
+                />
+              </Stack>
+            )
+          })}
+
+          <h3 className="mt-3">Are you looking for something else?</h3>
+          <Select
+            options={[
+              { value: 'val1', label: 'label1' },
+              { value: 'val2', label: 'label2' },
+            ]}
+          />
+        </div>
+      )}
     </>
   )
 }
