@@ -1,5 +1,4 @@
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
+import Stack from 'react-bootstrap/Stack'
 import Form from 'react-bootstrap/Form'
 import { Diet } from './profileDataTypes'
 import { useState } from 'react'
@@ -7,6 +6,7 @@ import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 import Carousel from 'react-bootstrap/Carousel'
 import Select from 'react-select'
+import './SelectDiets.css'
 
 const dietList: Diet[] = [
   {
@@ -81,45 +81,42 @@ const SelectDiets: React.FC<Props> = ({ selectedDiets, setSelectedDiets }) => {
 
   return (
     <>
-      <h3>Which diets are you on?</h3>
-      <Row>
-        {dietList.map((diet: Diet) => {
-          return (
-            <Col key={diet.iri} xs={6}>
-              <Row>
-                <Col xs={9}>
-                  <Form.Check
-                    checked={selectedDiets.has(diet)}
-                    onChange={() => {
-                      handleCheckboxOnChange(diet)
-                    }}
-                    type="checkbox"
-                    label={diet.label}
-                  />
-                </Col>
-                <Col>
-                  <img
-                    style={{ cursor: 'pointer' }}
-                    src="images/info_icon.svg"
-                    alt="information icon"
-                    onClick={() => {
-                      setShowModal(true)
-                    }}
-                  />
-                </Col>
-              </Row>
-            </Col>
-          )
-        })}
-      </Row>
+      {dietList.slice(0, 2).map((diet: Diet) => {
+        return (
+          <Stack
+            direction="horizontal"
+            gap={3}
+            className="diet-horizontal-stack mx-auto mt-2"
+          >
+            <Form.Check
+              checked={selectedDiets.has(diet)}
+              onChange={() => {
+                handleCheckboxOnChange(diet)
+              }}
+              type="checkbox"
+            />
+            <span className="w-50 text-start">{diet.label}</span>
+            <img
+              src="images/info_icon.svg"
+              alt="information icon"
+              className="onHoverPointer"
+              onClick={() => {
+                setShowModal(true)
+              }}
+            />
+          </Stack>
+        )
+      })}
 
-      <h3 className="mt-3">Are you looking for something else?</h3>
+      <span className="onHoverPointer">Show more options v</span>
+
+      {/* <h3 className="mt-3">Are you looking for something else?</h3>
       <Select
         options={[
           { value: 'val1', label: 'label1' },
           { value: 'val2', label: 'label2' },
         ]}
-      />
+      /> */}
 
       <Modal
         size="lg"
