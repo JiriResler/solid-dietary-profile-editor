@@ -135,7 +135,6 @@ const SelectTastePreferences: React.FC<Props> = ({
 
   return (
     <>
-      <h3> Specify your taste preferences</h3>
       <h4>Which world cuisines do you like?</h4>
       {worldCuisines.map((cuisine) => {
         return (
@@ -211,8 +210,12 @@ const SelectTastePreferences: React.FC<Props> = ({
         Savory
       </Stack>
 
-      <h3>How spicy do you like your food to be?</h3>
-      <Stack direction="horizontal" gap={2}>
+      <h4 className="mt-3">If you like spicy food, how spicy should it be?</h4>
+      <Stack
+        direction="horizontal"
+        gap={2}
+        className="cuisine-horizontal-stack mx-auto"
+      >
         <Form.Check
           type="checkbox"
           checked={selectedTastePreferences.spiciness.includes(
@@ -224,9 +227,13 @@ const SelectTastePreferences: React.FC<Props> = ({
             )
           }}
         />
-        Mild
+        Mildly
       </Stack>
-      <Stack direction="horizontal" gap={2}>
+      <Stack
+        direction="horizontal"
+        gap={2}
+        className="cuisine-horizontal-stack mx-auto mt-2"
+      >
         <Form.Check
           type="checkbox"
           checked={selectedTastePreferences.spiciness.includes(
@@ -240,7 +247,11 @@ const SelectTastePreferences: React.FC<Props> = ({
         />
         Medium
       </Stack>
-      <Stack direction="horizontal" gap={2}>
+      <Stack
+        direction="horizontal"
+        gap={2}
+        className="cuisine-horizontal-stack mx-auto mt-2"
+      >
         <Form.Check
           type={'checkbox'}
           checked={selectedTastePreferences.spiciness.includes(
@@ -252,7 +263,7 @@ const SelectTastePreferences: React.FC<Props> = ({
             )
           }}
         />
-        Hot
+        Very
       </Stack>
     </>
   )
