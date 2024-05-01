@@ -136,24 +136,22 @@ const SelectTastePreferences: React.FC<Props> = ({
   return (
     <>
       <h3>Specify your taste preferences</h3>
+
       <h4>Which world cuisines do you like?</h4>
-      {worldCuisines.map((cuisine) => {
-        return (
-          <Stack
-            direction="horizontal"
-            gap={3}
-            className="cuisine-horizontal-stack mx-auto mt-2"
-          >
-            <Form.Check type="checkbox" />
-            <span className="w-50 text-start">{cuisine}</span>
-            <img
-              src="images/info_icon.svg"
-              alt="information icon"
-              className="onHoverPointer"
-            />
-          </Stack>
-        )
-      })}
+      <div className="width-fit-content mx-auto text-start">
+        {worldCuisines.map((cuisine) => {
+          return (
+            <Stack direction="horizontal" gap={3}>
+              <Form.Check type="checkbox" label={cuisine} className="w-100" />
+              <img
+                src="images/info_icon.svg"
+                alt="information icon"
+                className="onHoverPointer"
+              />
+            </Stack>
+          )
+        })}
+      </div>
 
       <Select
         className="mt-3"
@@ -173,13 +171,10 @@ const SelectTastePreferences: React.FC<Props> = ({
       />
 
       <h4 className="mt-3">Which taste of food do you like?</h4>
-      <Stack
-        direction="horizontal"
-        gap={2}
-        className="cuisine-horizontal-stack mx-auto"
-      >
+      <div className="width-fit-content text-start mx-auto">
         <Form.Check
           type="checkbox"
+          label="Sweet"
           checked={selectedTastePreferences.desserts.includes(
             'http://dbpedia.org/resource/Sweetness',
           )}
@@ -189,16 +184,10 @@ const SelectTastePreferences: React.FC<Props> = ({
             )
           }}
         />
-        Sweet
-      </Stack>
 
-      <Stack
-        direction="horizontal"
-        gap={2}
-        className="cuisine-horizontal-stack mx-auto mt-2"
-      >
         <Form.Check
           type="checkbox"
+          label="Savory"
           checked={selectedTastePreferences.desserts.includes(
             'http://www.wikidata.org/entity/Q3324978',
           )}
@@ -208,17 +197,13 @@ const SelectTastePreferences: React.FC<Props> = ({
             )
           }}
         />
-        Savory
-      </Stack>
+      </div>
 
       <h4 className="mt-3">If you like spicy food, how spicy should it be?</h4>
-      <Stack
-        direction="horizontal"
-        gap={2}
-        className="cuisine-horizontal-stack mx-auto"
-      >
+      <div className="width-fit-content text-start mx-auto">
         <Form.Check
           type="checkbox"
+          label="Mildly"
           checked={selectedTastePreferences.spiciness.includes(
             'http://www.wikidata.org/entity/Q96278776',
           )}
@@ -228,15 +213,10 @@ const SelectTastePreferences: React.FC<Props> = ({
             )
           }}
         />
-        Mildly
-      </Stack>
-      <Stack
-        direction="horizontal"
-        gap={2}
-        className="cuisine-horizontal-stack mx-auto mt-2"
-      >
+
         <Form.Check
           type="checkbox"
+          label="Medium"
           checked={selectedTastePreferences.spiciness.includes(
             'http://www.wikidata.org/entity/Q17525443',
           )}
@@ -246,15 +226,10 @@ const SelectTastePreferences: React.FC<Props> = ({
             )
           }}
         />
-        Medium
-      </Stack>
-      <Stack
-        direction="horizontal"
-        gap={2}
-        className="cuisine-horizontal-stack mx-auto mt-2"
-      >
+
         <Form.Check
           type={'checkbox'}
+          label="Very"
           checked={selectedTastePreferences.spiciness.includes(
             'http://www.wikidata.org/entity/Q28128222',
           )}
@@ -264,8 +239,7 @@ const SelectTastePreferences: React.FC<Props> = ({
             )
           }}
         />
-        Very
-      </Stack>
+      </div>
     </>
   )
 }
