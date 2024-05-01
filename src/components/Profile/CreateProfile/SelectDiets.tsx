@@ -134,6 +134,7 @@ const SelectDiets: React.FC<Props> = ({ selectedDiets, setSelectedDiets }) => {
         </Modal.Footer>
       </Modal>
 
+      <h3 className="mb-3">Which diets are you on?</h3>
       {dietList.slice(0, 2).map((diet: Diet) => {
         return (
           <Stack

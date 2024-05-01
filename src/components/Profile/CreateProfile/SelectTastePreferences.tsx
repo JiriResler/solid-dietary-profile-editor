@@ -135,6 +135,7 @@ const SelectTastePreferences: React.FC<Props> = ({
 
   return (
     <>
+      <h3>Specify your taste preferences</h3>
       <h4>Which world cuisines do you like?</h4>
       {worldCuisines.map((cuisine) => {
         return (

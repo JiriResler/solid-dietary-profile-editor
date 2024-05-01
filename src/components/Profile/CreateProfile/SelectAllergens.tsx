@@ -201,6 +201,7 @@ const SelectAllergens: React.FC<Props> = ({
 
   return (
     <>
+      <h3 className="mb-3">What are you allergic to?</h3>
       {allergenListTestData.map((allergen: Allergen) => {
         return (
           <Stack

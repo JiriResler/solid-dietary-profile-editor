@@ -86,11 +86,6 @@ const CreateProfile: React.FC<Props> = ({
         ))}
       </Stepper>
 
-      <div className="text-center">
-        {currentStep === 1 && <h3>What are you allergic to?</h3>}
-        {currentStep === 2 && <h3>Which diets are you on?</h3>}
-      </div>
-
       <div className="user-preferences-controls overflow-auto text-center">
         {currentStep === 0 && (
           <Stack
