@@ -7,6 +7,22 @@ import { fetchCuisines, transformCuisinesResponse } from './loadFromWikidata'
 import CustomSelectMenu from './CustomSelectMenu'
 import Form from 'react-bootstrap/Form'
 import Stack from 'react-bootstrap/Stack'
+import './SelectTastePreferences.css'
+
+const worldCuisines = [
+  'French',
+  'Indian',
+  'Japanese',
+  'Mexican',
+  'Italian',
+  'Thai',
+  'Chinese',
+  'Greek',
+  'Spanish',
+  'Turkish',
+  'American',
+  'Vietnamese',
+]
 
 type Props = {
   selectedTastePreferences: TastePreferences
@@ -121,7 +137,26 @@ const SelectTastePreferences: React.FC<Props> = ({
     <>
       <h3> Specify your taste preferences</h3>
       <h4>Which world cuisines do you like?</h4>
+      {worldCuisines.map((cuisine) => {
+        return (
+          <Stack
+            direction="horizontal"
+            gap={3}
+            className="cuisine-horizontal-stack mx-auto mt-2"
+          >
+            <Form.Check type="checkbox" />
+            <span className="w-50 text-start">{cuisine}</span>
+            <img
+              src="images/info_icon.svg"
+              alt="information icon"
+              className="onHoverPointer"
+            />
+          </Stack>
+        )
+      })}
+
       <Select
+        className="mt-3"
         options={menuOptions}
         value={selectedTastePreferences.cuisines}
         filterOption={selectMenuOptionFilter}
@@ -133,7 +168,7 @@ const SelectTastePreferences: React.FC<Props> = ({
         isDisabled={loadingCuisines ? true : false}
         isLoading={loadingCuisines ? true : false}
         placeholder={
-          loadingCuisines ? 'Loading data...' : 'Search for cuisines...'
+          loadingCuisines ? 'Loading data...' : 'Search for more cuisines...'
         }
       />
       <h3>What kind of desserts do you like?</h3>
