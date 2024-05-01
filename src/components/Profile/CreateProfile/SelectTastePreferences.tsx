@@ -154,7 +154,7 @@ const SelectTastePreferences: React.FC<Props> = ({
       </div>
 
       <Select
-        className="mt-3"
+        className="mt-3 w-75 mx-auto"
         options={menuOptions}
         value={selectedTastePreferences.cuisines}
         filterOption={selectMenuOptionFilter}

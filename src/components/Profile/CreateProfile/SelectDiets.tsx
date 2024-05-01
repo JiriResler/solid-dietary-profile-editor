@@ -202,6 +202,7 @@ const SelectDiets: React.FC<Props> = ({ selectedDiets, setSelectedDiets }) => {
 
           <h3 className="mt-3">Are you looking for something else?</h3>
           <Select
+            className="mt-3 w-75 mx-auto"
             options={[
               { value: 'val1', label: 'label1' },
               { value: 'val2', label: 'label2' },
