@@ -171,8 +171,13 @@ const SelectTastePreferences: React.FC<Props> = ({
           loadingCuisines ? 'Loading data...' : 'Search for more cuisines...'
         }
       />
-      <h3>What kind of desserts do you like?</h3>
-      <Stack direction="horizontal" gap={2}>
+
+      <h4 className="mt-3">Which taste of food do you like?</h4>
+      <Stack
+        direction="horizontal"
+        gap={2}
+        className="cuisine-horizontal-stack mx-auto"
+      >
         <Form.Check
           type="checkbox"
           checked={selectedTastePreferences.desserts.includes(
@@ -186,7 +191,12 @@ const SelectTastePreferences: React.FC<Props> = ({
         />
         Sweet
       </Stack>
-      <Stack direction="horizontal" gap={2}>
+
+      <Stack
+        direction="horizontal"
+        gap={2}
+        className="cuisine-horizontal-stack mx-auto mt-2"
+      >
         <Form.Check
           type="checkbox"
           checked={selectedTastePreferences.desserts.includes(
