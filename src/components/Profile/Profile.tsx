@@ -171,15 +171,15 @@ const Profile: React.FC<Props> = ({ loginMethod }) => {
   //   return <h1>Loading profile data</h1>
   // }
 
-  if (userProfile === null) {
-    return (
-      <CreateProfile
-        loginMethod={loginMethod}
-        startStep={1}
-        setEditProfile={setEditProfile}
-      />
-    )
-  }
+  // if (userProfile === null) {
+  //   return (
+  //     <CreateProfile
+  //       loginMethod={loginMethod}
+  //       startStep={1}
+  //       setEditProfile={setEditProfile}
+  //     />
+  //   )
+  // }
 
   if (editProfile) {
     return (
