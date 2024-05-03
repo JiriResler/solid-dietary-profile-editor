@@ -7,7 +7,7 @@ import LoginScreen from './Login/LoginScreen'
 import { handleIncomingRedirect } from '@inrupt/solid-client-authn-browser'
 import { LoginMethod } from './loginMethodEnum'
 
-const RouterWrapper: React.FC = () => {
+const ApplicationRouter: React.FC = () => {
   const { session, sessionRequestInProgress } = useSession()
   const [user] = useAuthState(auth)
 
@@ -59,4 +59,4 @@ const RouterWrapper: React.FC = () => {
   )
 }
 
-export default RouterWrapper
+export default ApplicationRouter
