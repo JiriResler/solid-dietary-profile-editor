@@ -9,11 +9,12 @@ import { doc, getDoc } from 'firebase/firestore'
 import { db, auth } from '../../firebase'
 import Card from 'react-bootstrap/Card'
 import Stack from 'react-bootstrap/Stack'
-import Row from 'react-bootstrap/Row'
-import Col from 'react-bootstrap/Col'
+// import Row from 'react-bootstrap/Row'
+// import Col from 'react-bootstrap/Col'
 import getPodUrl from '../getPodUrl'
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
+import Container from 'react-bootstrap/Container'
 
 type UserProfile = {
   allergicTo: string[]
@@ -257,8 +258,11 @@ const Profile: React.FC<Props> = ({ loginMethod }) => {
         </Modal.Footer>
       </Modal>
 
-      <Stack gap={3} className="mt-4">
-        <Row className="w-75">
+      <div className="profile-overview-user-information"></div>
+
+      <Container>
+        <Stack gap={3} className="mt-4">
+          {/* <Row className="w-75">
           <Col xs={4}>
             <img
               src="images/profile_picture_default.svg"
@@ -274,61 +278,62 @@ const Profile: React.FC<Props> = ({ loginMethod }) => {
               <Col>Email</Col>
             </Row>
           </Col>
-        </Row>
+        </Row> */}
 
-        <Card>
-          <Card.Body>
-            <Card.Title>Allergens</Card.Title>
+          <Card>
+            <Card.Body>
+              <Card.Title>Allergens</Card.Title>
 
-            <Card.Subtitle className="mb-2 text-muted">
-              You are allergic to
-            </Card.Subtitle>
+              <Card.Subtitle className="mb-2 text-muted">
+                You are allergic to
+              </Card.Subtitle>
 
-            <Card.Text>
-              {userProfileTestData.allergicTo.map((allergen) => {
-                return (
-                  <div key={allergen}>
-                    {allergen}{' '}
-                    <img
-                      src="images/info_icon.svg"
-                      alt="information icon"
-                      onClick={() => {
-                        alert('click')
-                      }}
-                    />
-                  </div>
-                )
-              })}
-            </Card.Text>
-          </Card.Body>
-        </Card>
+              <Card.Text>
+                {userProfileTestData.allergicTo.map((allergen) => {
+                  return (
+                    <div key={allergen}>
+                      {allergen}{' '}
+                      <img
+                        src="images/info_icon.svg"
+                        alt="information icon"
+                        onClick={() => {
+                          alert('click')
+                        }}
+                      />
+                    </div>
+                  )
+                })}
+              </Card.Text>
+            </Card.Body>
+          </Card>
 
-        <Card>
-          <Card.Body>
-            <Card.Title>Diets</Card.Title>
-            <Card.Subtitle className="mb-2 text-muted">
-              Your diets are
-            </Card.Subtitle>
+          <Card>
+            <Card.Body>
+              <Card.Title>Diets</Card.Title>
+              <Card.Subtitle className="mb-2 text-muted">
+                Your diets are
+              </Card.Subtitle>
 
-            <Card.Text>
-              {userProfileTestData.onDiets.map((diet) => {
-                return (
-                  <div key={diet}>
-                    {diet}{' '}
-                    <img
-                      src="images/info_icon.svg"
-                      alt="information icon"
-                      onClick={() => {
-                        alert('click')
-                      }}
-                    />
-                  </div>
-                )
-              })}
-            </Card.Text>
-          </Card.Body>
-        </Card>
-      </Stack>
+              <Card.Text>
+                {userProfileTestData.onDiets.map((diet) => {
+                  return (
+                    <div key={diet}>
+                      {diet}{' '}
+                      <img
+                        src="images/info_icon.svg"
+                        alt="information icon"
+                        onClick={() => {
+                          alert('click')
+                        }}
+                      />
+                    </div>
+                  )
+                })}
+              </Card.Text>
+            </Card.Body>
+          </Card>
+        </Stack>
+      </Container>
     </>
   )
 }

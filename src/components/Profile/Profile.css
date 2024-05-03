@@ -5,3 +5,8 @@
 .text-bold {
   font-weight: bold;
 }
+
+.profile-overview-user-information {
+  background-color: blue;
+  height: 20px;
+}

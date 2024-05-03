@@ -14,6 +14,7 @@ import { loadProfileCreationData } from './loadProfileCreationData'
 import Stepper from '@mui/material/Stepper'
 import Step from '@mui/material/Step'
 import StepLabel from '@mui/material/StepLabel'
+import Container from 'react-bootstrap/Container'
 
 type Props = {
   loginMethod: LoginMethod
@@ -77,77 +78,79 @@ const CreateProfile: React.FC<Props> = ({
   // }
 
   return (
-    <Stack gap={3} className="create-profile-stack position-relative">
-      <Stepper activeStep={currentStep - 1} alternativeLabel className="mt-3">
-        {steps.map((label) => (
-          <Step key={label}>
-            <StepLabel>{label}</StepLabel>
-          </Step>
-        ))}
-      </Stepper>
+    <Container>
+      <Stack gap={3} className="create-profile-stack position-relative">
+        <Stepper activeStep={currentStep - 1} alternativeLabel className="mt-3">
+          {steps.map((label) => (
+            <Step key={label}>
+              <StepLabel>{label}</StepLabel>
+            </Step>
+          ))}
+        </Stepper>
 
-      <div className="user-preferences-controls overflow-auto text-center">
-        {currentStep === 0 && (
-          <Stack
-            gap={3}
-            className="welcome-screen-stack mt-5 text-center mx-auto"
-          >
-            <h1>Welcome!</h1>
-            <div>
-              You can create a new profile or import an already existing one.
-            </div>
-            <Button
-              onClick={() => {
-                setCurrentStep(currentStep + 1)
-              }}
-              className="welcome-screen-button mx-auto"
+        <div className="user-preferences-controls overflow-auto text-center">
+          {currentStep === 0 && (
+            <Stack
+              gap={3}
+              className="welcome-screen-stack mt-5 text-center mx-auto"
             >
-              Create a new profile
-            </Button>
-            <Button className="welcome-screen-button mx-auto">
-              Import an existing profile
-            </Button>
-          </Stack>
-        )}
+              <h1>Welcome!</h1>
+              <div>
+                You can create a new profile or import an already existing one.
+              </div>
+              <Button
+                onClick={() => {
+                  setCurrentStep(currentStep + 1)
+                }}
+                className="welcome-screen-button mx-auto"
+              >
+                Create a new profile
+              </Button>
+              <Button className="welcome-screen-button mx-auto">
+                Import an existing profile
+              </Button>
+            </Stack>
+          )}
 
-        {currentStep === 1 && (
-          <SelectAllergens
-            allergenArray={allergenArray}
-            selectedAllergens={selectedAllergens}
-            setSelectedAllergens={setSelectedAllergens}
-          />
-        )}
+          {currentStep === 1 && (
+            <SelectAllergens
+              allergenArray={allergenArray}
+              selectedAllergens={selectedAllergens}
+              setSelectedAllergens={setSelectedAllergens}
+            />
+          )}
 
-        {currentStep === 2 && (
-          <SelectDiets
-            selectedDiets={selectedDiets}
-            setSelectedDiets={setSelectedDiets}
-          />
-        )}
+          {currentStep === 2 && (
+            <SelectDiets
+              selectedDiets={selectedDiets}
+              setSelectedDiets={setSelectedDiets}
+            />
+          )}
 
-        {currentStep === 3 && (
-          <SelectTastePreferences
-            selectedTastePreferences={selectedTastePreferences}
-            setSelectedTastePreferences={setSelectedTastePreferences}
-          />
-        )}
-      </div>
+          {currentStep === 3 && (
+            <SelectTastePreferences
+              selectedTastePreferences={selectedTastePreferences}
+              setSelectedTastePreferences={setSelectedTastePreferences}
+            />
+          )}
+        </div>
 
-      <div className="position-absolute bottom-0 start-50 translate-middle-x mb-2 w-100">
-        <Button
-          className="create-profile-navigation-button app-primary-color-button"
-          onClick={() => setCurrentStep(currentStep + 1)}
-        >
-          Next
-        </Button>
-        <Button
-          className="create-profile-navigation-button app-secondary-color-button mt-2"
-          onClick={() => setCurrentStep(currentStep - 1)}
-        >
-          Back
-        </Button>
-      </div>
-    </Stack>
+        <div className="position-absolute bottom-0 start-50 translate-middle-x mb-2 w-100">
+          <Button
+            className="create-profile-navigation-button app-primary-color-button"
+            onClick={() => setCurrentStep(currentStep + 1)}
+          >
+            Next
+          </Button>
+          <Button
+            className="create-profile-navigation-button app-secondary-color-button mt-2"
+            onClick={() => setCurrentStep(currentStep - 1)}
+          >
+            Back
+          </Button>
+        </div>
+      </Stack>
+    </Container>
   )
 }
 

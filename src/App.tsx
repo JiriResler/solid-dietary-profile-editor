@@ -1,15 +1,12 @@
 import { SessionProvider } from '@inrupt/solid-ui-react'
 import IntlProviderWrapper from './components/IntlProviderWrapper'
-import RouterWrapper from './components/RouterWrapper'
-import { Container as BootstrapContainer } from 'react-bootstrap'
+import ApplicationRouter from './components/ApplicationRouter'
 
 const App: React.FC = () => {
   return (
     <SessionProvider>
       <IntlProviderWrapper>
-        <BootstrapContainer fluid>
-          <RouterWrapper />
-        </BootstrapContainer>
+        <ApplicationRouter />
       </IntlProviderWrapper>
     </SessionProvider>
   )
