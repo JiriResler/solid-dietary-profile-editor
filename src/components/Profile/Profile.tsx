@@ -9,8 +9,6 @@ import { doc, getDoc } from 'firebase/firestore'
 import { db, auth } from '../../firebase'
 import Card from 'react-bootstrap/Card'
 import Stack from 'react-bootstrap/Stack'
-// import Row from 'react-bootstrap/Row'
-// import Col from 'react-bootstrap/Col'
 import getPodUrl from '../getPodUrl'
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
@@ -258,7 +256,30 @@ const Profile: React.FC<Props> = ({ loginMethod }) => {
         </Modal.Footer>
       </Modal>
 
-      <div className="profile-overview-user-information"></div>
+      <div className="profile-overview-user-information position-relative">
+        <Stack className="w-50 text-center mx-auto bg-warning">
+          <img
+            src="images/profile_picture_default.svg"
+            alt="Profile icon"
+            style={{ width: '75px' }}
+            className="mx-auto mt-5"
+          />
+          <span className="text-bold">Name</span>
+          Email
+        </Stack>
+
+        <div className="position-absolute top-0 end-0 mt-4 me-4">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="32"
+            height="32"
+            fill="white"
+            viewBox="0 0 16 16"
+          >
+            <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0" />
+          </svg>
+        </div>
+      </div>
 
       <Container>
         <Stack gap={3} className="mt-4">
