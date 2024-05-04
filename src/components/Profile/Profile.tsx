@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import CreateProfile from './CreateProfile/CreateProfile'
 import { LoginMethod } from '../loginMethodEnum'
 import './Profile.css'
@@ -13,6 +13,7 @@ import getPodUrl from '../getPodUrl'
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 import Container from 'react-bootstrap/Container'
+import Dropdown from 'react-bootstrap/Dropdown'
 
 type UserProfile = {
   allergicTo: string[]
@@ -21,6 +22,29 @@ type UserProfile = {
   likesDessertTaste: string[]
   likesSpiciness: string[]
 }
+
+type CustomToggleProps = {
+  children?: React.ReactNode
+  onClick?: (
+    event: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
+  ) => NonNullable<unknown>
+}
+
+const CustomToggle = React.forwardRef(
+  (props: CustomToggleProps, ref: React.Ref<HTMLAnchorElement>) => (
+    <a
+      href=""
+      ref={ref}
+      onClick={(e) => {
+        e.preventDefault()
+        if (props.onClick) props.onClick(e)
+      }}
+    >
+      {props.children}
+      <span style={{ paddingLeft: '5px' }}>&#x25bc;</span>
+    </a>
+  ),
+)
 
 type Props = {
   loginMethod: LoginMethod
@@ -269,38 +293,23 @@ const Profile: React.FC<Props> = ({ loginMethod }) => {
         </Stack>
 
         <div className="position-absolute top-0 end-0 mt-4 me-4">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="32"
-            height="32"
-            fill="white"
-            viewBox="0 0 16 16"
-          >
-            <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0" />
-          </svg>
+          <Dropdown>
+            <Dropdown.Toggle as={CustomToggle} />
+
+            <Dropdown.Menu className="mt-1 me-4">
+              <Dropdown.Item eventKey="1">Red</Dropdown.Item>
+              <Dropdown.Item eventKey="2">Blue</Dropdown.Item>
+              <Dropdown.Item eventKey="3" active>
+                Orange
+              </Dropdown.Item>
+              <Dropdown.Item eventKey="1">Red-Orange</Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
         </div>
       </div>
 
       <Container>
         <Stack gap={3} className="mt-4">
-          {/* <Row className="w-75">
-          <Col xs={4}>
-            <img
-              src="images/profile_picture_default.svg"
-              alt="Profile icon"
-              style={{ width: '75px' }}
-            />
-          </Col>
-          <Col className="my-auto">
-            <Row>
-              <Col xs={12}>
-                <span className="text-bold">Name</span>
-              </Col>
-              <Col>Email</Col>
-            </Row>
-          </Col>
-        </Row> */}
-
           <Card>
             <Card.Body>
               <Card.Title>Allergens</Card.Title>

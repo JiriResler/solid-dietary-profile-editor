@@ -10,3 +10,7 @@
   background-color: #2541B2;
   height: 220px;
 }
+
+.dropdown-menu {
+  width: 200px;
+}
