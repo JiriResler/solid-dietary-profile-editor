@@ -26,23 +26,29 @@ type UserProfile = {
 type CustomToggleProps = {
   children?: React.ReactNode
   onClick?: (
-    event: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
+    event: React.MouseEvent<HTMLDivElement, MouseEvent>,
   ) => NonNullable<unknown>
 }
 
 const CustomToggle = React.forwardRef(
-  (props: CustomToggleProps, ref: React.Ref<HTMLAnchorElement>) => (
-    <a
-      href=""
+  (props: CustomToggleProps, ref: React.Ref<HTMLDivElement>) => (
+    <div
       ref={ref}
       onClick={(e) => {
         e.preventDefault()
         if (props.onClick) props.onClick(e)
       }}
     >
-      {props.children}
-      <span style={{ paddingLeft: '5px' }}>&#x25bc;</span>
-    </a>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="32"
+        height="32"
+        fill="white"
+        viewBox="0 0 16 16"
+      >
+        <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0" />
+      </svg>
+    </div>
   ),
 )
 
