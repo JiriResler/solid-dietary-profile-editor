@@ -14,6 +14,7 @@ import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 import Container from 'react-bootstrap/Container'
 import Dropdown from 'react-bootstrap/Dropdown'
+import { signOut } from 'firebase/auth'
 
 type UserProfile = {
   allergicTo: string[]
@@ -303,12 +304,19 @@ const Profile: React.FC<Props> = ({ loginMethod }) => {
             <Dropdown.Toggle as={CustomToggle} />
 
             <Dropdown.Menu className="mt-1 me-4">
-              <Dropdown.Item eventKey="1">Red</Dropdown.Item>
-              <Dropdown.Item eventKey="2">Blue</Dropdown.Item>
-              <Dropdown.Item eventKey="3" active>
-                Orange
+              <Dropdown.Item
+                onClick={() => {
+                  signOut(auth).catch((error: Error) => {
+                    console.log(error.message)
+                  })
+
+                  session.logout().catch((error: Error) => {
+                    console.log(error.message)
+                  })
+                }}
+              >
+                Sign out
               </Dropdown.Item>
-              <Dropdown.Item eventKey="1">Red-Orange</Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
         </div>
