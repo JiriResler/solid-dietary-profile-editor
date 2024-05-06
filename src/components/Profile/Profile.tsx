@@ -350,7 +350,7 @@ const Profile: React.FC<Props> = ({ loginMethod }) => {
               </Card.Text>
             </Card.Body>
 
-            <Card.Body>
+            <Card.Body className='profile-card-body'>
               <Card.Title>Diets</Card.Title>
               <Card.Subtitle className="mb-2 text-muted">
                 Your diets are
@@ -371,6 +371,42 @@ const Profile: React.FC<Props> = ({ loginMethod }) => {
                     </div>
                   )
                 })}
+              </Card.Text>
+            </Card.Body>
+
+            <Card.Body>
+              <Card.Title>Taste preferences</Card.Title>
+              <Card.Subtitle className="mb-2 text-muted">
+                Favored world cuisines
+              </Card.Subtitle>
+
+              <Card.Text>  
+                <div>
+                  {'Chinese'}{' '}
+                  <img
+                    src="images/info_icon.svg"
+                    alt="information icon"
+                    onClick={() => {
+                      alert('click')
+                    }}
+                  />
+                </div>
+              </Card.Text>
+
+              <Card.Subtitle className="mb-2 text-muted">
+                Preferred taste of desserts
+              </Card.Subtitle>
+
+              <Card.Text>  
+                <div>Sweet</div>
+              </Card.Text>
+
+              <Card.Subtitle className="mb-2 text-muted">
+                Liked level of spiciness
+              </Card.Subtitle>
+
+              <Card.Text>  
+                <div>Mild</div>
               </Card.Text>
             </Card.Body>
           </Card>
