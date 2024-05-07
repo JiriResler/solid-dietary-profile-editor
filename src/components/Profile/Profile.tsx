@@ -289,12 +289,12 @@ const Profile: React.FC<Props> = ({ loginMethod }) => {
       </Modal>
 
       <div className="profile-overview-user-information position-relative">
-        <Stack className="w-50 text-center mx-auto bg-warning">
+        <Stack className="w-50 text-center position-absolute top-50 start-50 translate-middle">
           <img
             src="images/profile_picture_default.svg"
             alt="Profile icon"
             style={{ width: '75px' }}
-            className="mx-auto mt-5"
+            className='mx-auto'
           />
           <span className="text-bold">Name</span>
           Email
