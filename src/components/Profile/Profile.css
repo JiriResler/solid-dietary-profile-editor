@@ -24,3 +24,7 @@
 .profile-card-body {
   padding-bottom: 0cm;
 }
+
+.dropdown-menu-item {
+  height: 50px;
+}
