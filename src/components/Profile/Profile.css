@@ -2,8 +2,13 @@
   width: 150pt !important;
 }
 
-.text-bold {
+.user-name {
+  color: white;
   font-weight: bold;
+}
+
+.user-email {
+  color: white;
 }
 
 .profile-overview-user-information {

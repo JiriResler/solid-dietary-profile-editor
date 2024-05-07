@@ -296,8 +296,8 @@ const Profile: React.FC<Props> = ({ loginMethod }) => {
             style={{ width: '75px' }}
             className='mx-auto'
           />
-          <span className="text-bold">Name</span>
-          Email
+          <span className="user-name mt-2">Name</span>
+          <span className='user-email mt-1'>Email</span>
         </Stack>
 
         <div className="position-absolute top-0 end-0 mt-4">
