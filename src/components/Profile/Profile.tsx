@@ -41,7 +41,7 @@ const CustomToggle = React.forwardRef(
       }}
     >
       <svg
-        className='me-4'
+        className='me-4 onHoverPointer'
         xmlns="http://www.w3.org/2000/svg"
         width="32"
         height="32"

@@ -28,3 +28,7 @@
 .dropdown-menu-item {
   height: 50px;
 }
+
+.onHoverPointer {
+  cursor: pointer;
+}
