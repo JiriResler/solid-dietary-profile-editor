@@ -60,7 +60,7 @@ type Props = {
 
 const userProfileTestData = {
   allergicTo: ['Celery', 'Gluten'],
-  onDiets: ['Vegetarian'],
+  onDiets: ['Vegetarian', 'Vegan'],
 }
 
 const Profile: React.FC<Props> = ({ loginMethod }) => {
@@ -440,11 +440,11 @@ const Profile: React.FC<Props> = ({ loginMethod }) => {
                 Your diets are
               </Card.Subtitle>
 
-              <Card.Text>
+              <Card.Text className="width-fit-content">
                 {userProfileTestData.onDiets.map((diet) => {
                   return (
-                    <div key={diet}>
-                      {diet}{' '}
+                    <Stack key={diet} direction="horizontal" gap={2}>
+                      <span className="w-100">{diet}</span>
                       <img
                         src="images/info_icon.svg"
                         alt="information icon"
@@ -452,7 +452,7 @@ const Profile: React.FC<Props> = ({ loginMethod }) => {
                           alert('click')
                         }}
                       />
-                    </div>
+                    </Stack>
                   )
                 })}
               </Card.Text>
