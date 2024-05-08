@@ -8,7 +8,7 @@ import CustomSelectMenu from './CustomSelectMenu'
 import Form from 'react-bootstrap/Form'
 import Stack from 'react-bootstrap/Stack'
 import './SelectTastePreferences.css'
-import Slider from '@mui/material/Slider';
+import Slider from '@mui/material/Slider'
 
 const worldCuisines = [
   'French',
@@ -119,7 +119,6 @@ const SelectTastePreferences: React.FC<Props> = ({
     setSelectedTastePreferences(newTastePreferences)
   }
 
-
   return (
     <>
       <h3>Specify your taste preferences</h3>
@@ -185,10 +184,7 @@ const SelectTastePreferences: React.FC<Props> = ({
           }}
         />
 
-        <Form.Check
-          type="checkbox"
-          label="Doesn't matter"
-        />
+        <Form.Check type="checkbox" label="Doesn't matter" />
       </div>
 
       <h4 className="mt-3">Do you like spicy food?</h4>

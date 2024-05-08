@@ -80,7 +80,11 @@ const CreateProfile: React.FC<Props> = ({
   return (
     <Container>
       <Stack gap={3} className="create-profile-stack position-relative">
-        <Stepper activeStep={currentStep - 1} alternativeLabel className="create-profile-stepper mt-3">
+        <Stepper
+          activeStep={currentStep - 1}
+          alternativeLabel
+          className="create-profile-stepper mt-3"
+        >
           {steps.map((label) => (
             <Step key={label}>
               <StepLabel>{label}</StepLabel>
