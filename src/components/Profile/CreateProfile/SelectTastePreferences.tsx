@@ -8,6 +8,7 @@ import CustomSelectMenu from './CustomSelectMenu'
 import Form from 'react-bootstrap/Form'
 import Stack from 'react-bootstrap/Stack'
 import './SelectTastePreferences.css'
+import Slider from '@mui/material/Slider';
 
 const worldCuisines = [
   'French',
@@ -22,6 +23,21 @@ const worldCuisines = [
   'Turkish',
   'American',
   'Vietnamese',
+]
+
+const marks = [
+  {
+    value: 0,
+    label: 'Mild',
+  },
+  {
+    value: 50,
+    label: 'Medium',
+  },
+  {
+    value: 100,
+    label: 'Hot',
+  },
 ]
 
 type Props = {
@@ -103,35 +119,6 @@ const SelectTastePreferences: React.FC<Props> = ({
     setSelectedTastePreferences(newTastePreferences)
   }
 
-  function handleSpicinessCheckboxOnChange(spicinessValueIRI: string) {
-    const newTastePreferences: TastePreferences = {
-      cuisines: [],
-      desserts: [...selectedTastePreferences.desserts],
-      spiciness: [],
-    }
-
-    const cuisinesCopy: SelectMenuOption[] = []
-
-    // Create a deep copy of the cuisines array
-    selectedTastePreferences.cuisines.forEach((cuisine) =>
-      cuisinesCopy.push(Object.assign({}, cuisine)),
-    )
-
-    newTastePreferences.cuisines = cuisinesCopy
-
-    if (selectedTastePreferences.spiciness.includes(spicinessValueIRI)) {
-      newTastePreferences.spiciness = selectedTastePreferences.spiciness.filter(
-        (value) => {
-          return value !== spicinessValueIRI
-        },
-      )
-    } else {
-      newTastePreferences.spiciness = [...selectedTastePreferences.spiciness]
-      newTastePreferences.spiciness.push(spicinessValueIRI)
-    }
-
-    setSelectedTastePreferences(newTastePreferences)
-  }
 
   return (
     <>
@@ -170,7 +157,7 @@ const SelectTastePreferences: React.FC<Props> = ({
         }
       />
 
-      <h4 className="mt-3">Which taste of food do you like?</h4>
+      <h4 className="mt-3">Which taste of desserts do you prefer?</h4>
       <div className="width-fit-content text-start mx-auto">
         <Form.Check
           type="checkbox"
@@ -197,47 +184,23 @@ const SelectTastePreferences: React.FC<Props> = ({
             )
           }}
         />
+
+        <Form.Check
+          type="checkbox"
+          label="Doesn't matter"
+        />
       </div>
 
-      <h4 className="mt-3">If you like spicy food, how spicy should it be?</h4>
-      <div className="width-fit-content text-start mx-auto">
-        <Form.Check
-          type="checkbox"
-          label="Mildly"
-          checked={selectedTastePreferences.spiciness.includes(
-            'http://www.wikidata.org/entity/Q96278776',
-          )}
-          onChange={() => {
-            handleSpicinessCheckboxOnChange(
-              'http://www.wikidata.org/entity/Q96278776',
-            )
-          }}
-        />
+      <h4 className="mt-3">Do you like spicy food?</h4>
+      <Form.Switch />
 
-        <Form.Check
-          type="checkbox"
-          label="Medium"
-          checked={selectedTastePreferences.spiciness.includes(
-            'http://www.wikidata.org/entity/Q17525443',
-          )}
-          onChange={() => {
-            handleSpicinessCheckboxOnChange(
-              'http://www.wikidata.org/entity/Q17525443',
-            )
-          }}
-        />
-
-        <Form.Check
-          type={'checkbox'}
-          label="Very"
-          checked={selectedTastePreferences.spiciness.includes(
-            'http://www.wikidata.org/entity/Q28128222',
-          )}
-          onChange={() => {
-            handleSpicinessCheckboxOnChange(
-              'http://www.wikidata.org/entity/Q28128222',
-            )
-          }}
+      <div className="w-75 mx-auto">
+        <Slider
+          aria-label="Restricted values"
+          defaultValue={0}
+          step={null}
+          valueLabelDisplay="auto"
+          marks={marks}
         />
       </div>
     </>
