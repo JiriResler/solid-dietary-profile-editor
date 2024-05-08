@@ -213,13 +213,13 @@ const Profile: React.FC<Props> = ({ loginMethod }) => {
   //   )
   // }
 
-  return (
-    <CreateProfile
-      loginMethod={loginMethod}
-      startStep={0}
-      setEditProfile={setEditProfile}
-    />
-  )
+  // return (
+  //   <CreateProfile
+  //     loginMethod={loginMethod}
+  //     startStep={0}
+  //     setEditProfile={setEditProfile}
+  //   />
+  // )
 
   if (editProfile) {
     return (
@@ -415,19 +415,20 @@ const Profile: React.FC<Props> = ({ loginMethod }) => {
                 You are allergic to
               </Card.Subtitle>
 
-              <Card.Text>
+              <Card.Text className="width-fit-content">
                 {userProfileTestData.allergicTo.map((allergen) => {
                   return (
-                    <div key={allergen}>
-                      {allergen}{' '}
+                    <Stack key={allergen} direction="horizontal" gap={2}>
+                      <span className="w-100">{allergen}</span>
                       <img
                         src="images/info_icon.svg"
                         alt="information icon"
+                        className="onHoverPointer"
                         onClick={() => {
                           alert('click')
                         }}
                       />
-                    </div>
+                    </Stack>
                   )
                 })}
               </Card.Text>
