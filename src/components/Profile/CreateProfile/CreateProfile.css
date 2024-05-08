@@ -42,5 +42,16 @@
 }
 
 .user-preferences-controls {
-  height: 55dvh;
+  /* 
+    height = full height - stepper height - step navigation height - approximate container borders 
+  */
+  height: calc(100dvh - 60px - 90px - 50px);
+}
+
+.create-profile-stepper {
+  height: 60px;
+}
+
+.create-profile-step-navigation {
+  height: 90px;
 }
