@@ -77,6 +77,31 @@ const CreateProfile: React.FC<Props> = ({
   //   setEditProfile(false)
   // }
 
+  if (currentStep === 0) {
+    return (
+      <Stack
+        gap={3}
+        className="welcome-screen-stack position-absolute top-50 start-50 translate-middle pb-5 text-center mx-auto"
+      >
+        <h1>Welcome!</h1>
+        <div>
+          You can create a new profile or import an already existing one.
+        </div>
+        <Button
+          onClick={() => {
+            setCurrentStep(currentStep + 1)
+          }}
+          className="welcome-screen-button mx-auto"
+        >
+          Create a new profile
+        </Button>
+        <Button className="welcome-screen-button mx-auto">
+          Import an existing profile
+        </Button>
+      </Stack>
+    )
+  }
+
   return (
     <Container>
       <Stack gap={3} className="create-profile-stack position-relative">
@@ -93,29 +118,6 @@ const CreateProfile: React.FC<Props> = ({
         </Stepper>
 
         <div className="user-preferences-controls overflow-auto text-center">
-          {currentStep === 0 && (
-            <Stack
-              gap={3}
-              className="welcome-screen-stack mt-5 text-center mx-auto"
-            >
-              <h1>Welcome!</h1>
-              <div>
-                You can create a new profile or import an already existing one.
-              </div>
-              <Button
-                onClick={() => {
-                  setCurrentStep(currentStep + 1)
-                }}
-                className="welcome-screen-button mx-auto"
-              >
-                Create a new profile
-              </Button>
-              <Button className="welcome-screen-button mx-auto">
-                Import an existing profile
-              </Button>
-            </Stack>
-          )}
-
           {currentStep === 1 && (
             <SelectAllergens
               allergenArray={allergenArray}
