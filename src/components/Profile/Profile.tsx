@@ -61,6 +61,7 @@ type Props = {
 const userProfileTestData = {
   allergicTo: ['Celery', 'Gluten'],
   onDiets: ['Vegetarian', 'Vegan'],
+  worldCuisines: ['Chinese', 'Itailan'],
 }
 
 const Profile: React.FC<Props> = ({ loginMethod }) => {
@@ -464,17 +465,21 @@ const Profile: React.FC<Props> = ({ loginMethod }) => {
                 Favored world cuisines
               </Card.Subtitle>
 
-              <Card.Text>
-                <div>
-                  {'Chinese'}{' '}
-                  <img
-                    src="images/info_icon.svg"
-                    alt="information icon"
-                    onClick={() => {
-                      alert('click')
-                    }}
-                  />
-                </div>
+              <Card.Text className="width-fit-content">
+                {userProfileTestData.worldCuisines.map((cuisine) => {
+                  return (
+                    <Stack key={cuisine} direction="horizontal" gap={2}>
+                      <span className="w-100">{cuisine}</span>
+                      <img
+                        src="images/info_icon.svg"
+                        alt="information icon"
+                        onClick={() => {
+                          alert('click')
+                        }}
+                      />
+                    </Stack>
+                  )
+                })}
               </Card.Text>
 
               <Card.Subtitle className="mb-2 text-muted">
