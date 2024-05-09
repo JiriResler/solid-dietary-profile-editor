@@ -17,7 +17,9 @@ const SelectProvider: React.FC = () => {
         setShowProvidersModal={setShowProvidersModal}
       />
 
-      <div className="select-provider-heading">Select an identity provider</div>
+      <span className="select-provider-heading">
+        Select an identity provider
+      </span>
 
       {loginWithSolid && <LogInSolid setLoginWithSolid={setLoginWithSolid} />}
 
