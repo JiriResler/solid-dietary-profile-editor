@@ -317,10 +317,10 @@ const Profile: React.FC<Props> = ({ loginMethod }) => {
               <Dropdown.Item className="dropdown-menu-item position-relative">
                 <div className="position-absolute top-50 translate-middle-y">
                   <svg
-                    className="me-3"
+                    className="dropdown-item-icon me-3"
                     xmlns="http://www.w3.org/2000/svg"
-                    width="26"
-                    height="26"
+                    width="16"
+                    height="16"
                     fill="currentColor"
                     viewBox="0 0 16 16"
                   >
@@ -337,10 +337,10 @@ const Profile: React.FC<Props> = ({ loginMethod }) => {
               <Dropdown.Item className="dropdown-menu-item position-relative">
                 <div className="position-absolute top-50 translate-middle-y">
                   <svg
-                    className="me-3"
+                    className="dropdown-item-icon me-3"
                     xmlns="http://www.w3.org/2000/svg"
-                    width="26"
-                    height="26"
+                    width="16"
+                    height="16"
                     fill="currentColor"
                     viewBox="0 0 16 16"
                   >
@@ -354,10 +354,10 @@ const Profile: React.FC<Props> = ({ loginMethod }) => {
               <Dropdown.Item className="dropdown-menu-item position-relative">
                 <div className="position-absolute top-50 translate-middle-y">
                   <svg
-                    className="me-3"
+                    className="dropdown-item-icon me-3"
                     xmlns="http://www.w3.org/2000/svg"
-                    width="26"
-                    height="26"
+                    width="16"
+                    height="16"
                     fill="currentColor"
                     viewBox="0 0 16 16"
                   >
@@ -382,10 +382,10 @@ const Profile: React.FC<Props> = ({ loginMethod }) => {
               >
                 <div className="position-absolute top-50 translate-middle-y">
                   <svg
-                    className="me-3"
+                    className="dropdown-item-icon me-3"
                     xmlns="http://www.w3.org/2000/svg"
-                    width="26"
-                    height="26"
+                    width="16"
+                    height="16"
                     fill="currentColor"
                     viewBox="0 0 16 16"
                   >

@@ -32,3 +32,8 @@
 .onHoverPointer {
   cursor: pointer;
 }
+
+.dropdown-item-icon {
+  width: 22px;
+  height: 22px;
+}
