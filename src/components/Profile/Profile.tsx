@@ -407,7 +407,7 @@ const Profile: React.FC<Props> = ({ loginMethod }) => {
       </div>
 
       <Container>
-        <Stack gap={3} className="mt-4">
+        <Stack gap={3} className="mt-3">
           <Card>
             <Card.Body className="profile-card-body">
               <Card.Title>Allergens</Card.Title>
