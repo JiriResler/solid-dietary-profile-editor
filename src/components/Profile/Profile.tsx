@@ -41,7 +41,7 @@ const CustomToggle = React.forwardRef(
       }}
     >
       <svg
-        className="me-4 onHoverPointer"
+        className="onHoverPointer"
         xmlns="http://www.w3.org/2000/svg"
         width="32"
         height="32"
@@ -298,18 +298,18 @@ const Profile: React.FC<Props> = ({ loginMethod }) => {
       </Modal>
 
       <div className="profile-overview-user-information position-relative">
-        <Stack className="w-50 text-center position-absolute top-50 start-50 translate-middle">
+        <Stack gap={1} className="w-50 text-center position-absolute top-50 start-50 translate-middle">
           <img
             src="images/profile_picture_default.svg"
             alt="Profile icon"
             style={{ width: '75px' }}
             className="mx-auto"
           />
-          <span className="user-name mt-2">Name</span>
-          <span className="user-email mt-1">Email</span>
+          <span className="user-name">John Smith</span>
+          <span className="user-email">john.smith@email.com</span>
         </Stack>
 
-        <div className="position-absolute top-0 end-0 mt-4">
+        <div className="position-absolute top-0 end-0 mt-4 me-4">
           <Dropdown>
             <Dropdown.Toggle as={CustomToggle} />
 
