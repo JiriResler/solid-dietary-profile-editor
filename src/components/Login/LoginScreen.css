@@ -7,18 +7,27 @@
 
 .select-provider-stack {
   width: 250px;
+}
+
+.select-provider-stack-small-screen {
   height: 650px;
+}
+
+.select-provider-stack-large-screen {
+  height: 315px;
 }
 
 .select-provider-card {
   width: 320px;
 }
 
+.login-screen-row {
+  height: 100dvh;
+}
+
 .select-provider-login-col {
-  height: 100vh;
   background-color: #2541b2;
   display: flex;
-  justify-content: center;
   align-items: center;
 }
 
