@@ -70,7 +70,7 @@ const LoginScreen: React.FC = () => {
       <Container fluid>
         <Row className="login-screen-row d-none d-lg-flex">
           <Col md={7} className="position-relative">
-            <Stack className="w-50 text-center position-absolute top-50 start-50 translate-middle">
+            <Stack className="w-75 text-center position-absolute top-50 start-50 translate-middle">
               <h2>
                 Welcome to the personal eating preferences profile editor!
               </h2>
@@ -104,8 +104,8 @@ const LoginScreen: React.FC = () => {
             </div>
           </Col>
 
-          <Col md={5} className="select-provider-login-col">
-            <Card className="select-provider-card mx-auto pb-1">
+          <Col md={5} className="select-provider-login-col position-relative">
+            <Card className="select-provider-card position-absolute top-50 start-50 translate-middle">
               <Card.Body>
                 <Stack
                   gap={3}

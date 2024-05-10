@@ -14,7 +14,7 @@
 }
 
 .select-provider-stack-large-screen {
-  height: 315px;
+  height: 325px;
 }
 
 .select-provider-card {
@@ -27,8 +27,6 @@
 
 .select-provider-login-col {
   background-color: #2541b2;
-  display: flex;
-  align-items: center;
 }
 
 .link-without-decoration {
