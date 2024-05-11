@@ -6,7 +6,7 @@ import './CreateProfile.css'
 import SelectAllergens from './SelectAllergens'
 import SelectDiets from './SelectDiets'
 import { Allergen, Diet, TastePreferences } from './profileDataTypes'
-import { LoginMethod } from '../../loginMethodEnum'
+// import { LoginMethod } from '../../loginMethodEnum'
 // import { useSession } from '@inrupt/solid-ui-react'
 import SelectTastePreferences from './SelectTastePreferences'
 // import { saveProfileFirebase, saveProfileSolid } from './saveProfile'
@@ -17,8 +17,8 @@ import StepLabel from '@mui/material/StepLabel'
 import Container from 'react-bootstrap/Container'
 
 type Props = {
-  loginMethod: LoginMethod
-  setEditProfile: React.Dispatch<React.SetStateAction<boolean>>
+  // loginMethod: LoginMethod
+  // setEditProfile: React.Dispatch<React.SetStateAction<boolean>>
   startStep: number
 }
 
@@ -142,18 +142,49 @@ const CreateProfile: React.FC<Props> = ({
         </div>
 
         <div className="create-profile-step-navigation position-absolute bottom-0 start-50 translate-middle-x mb-2 w-100">
-          <Button
-            className="create-profile-navigation-button app-primary-color-button"
-            onClick={() => setCurrentStep(currentStep + 1)}
-          >
-            Next
-          </Button>
-          <Button
-            className="create-profile-navigation-button app-secondary-color-button mt-2"
-            onClick={() => setCurrentStep(currentStep - 1)}
-          >
-            Back
-          </Button>
+          {currentStep === 1 && (
+            <Button
+              className="create-profile-navigation-button app-primary-color-button"
+              onClick={() => setCurrentStep(currentStep + 1)}
+            >
+              Next
+            </Button>
+          )}
+
+          {currentStep === 2 && (
+            <>
+              <Button
+                className="create-profile-navigation-button app-primary-color-button"
+                onClick={() => setCurrentStep(currentStep + 1)}
+              >
+                Next
+              </Button>
+              <Button
+                className="create-profile-navigation-button app-secondary-color-button mt-2"
+                onClick={() => setCurrentStep(currentStep - 1)}
+              >
+                Back
+              </Button>
+            </>
+          )}
+
+          {currentStep === 3 && (
+            <>
+              <Button
+                variant="success"
+                className="create-profile-navigation-button"
+                onClick={() => alert('Saving profile not yet implemented')}
+              >
+                Save profile
+              </Button>
+              <Button
+                className="create-profile-navigation-button app-secondary-color-button mt-2"
+                onClick={() => setCurrentStep(currentStep - 1)}
+              >
+                Back
+              </Button>
+            </>
+          )}
         </div>
       </Stack>
     </Container>
