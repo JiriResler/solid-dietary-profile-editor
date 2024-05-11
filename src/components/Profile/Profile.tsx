@@ -214,14 +214,6 @@ const Profile: React.FC<Props> = ({ loginMethod }) => {
   //   )
   // }
 
-  // return (
-  //   <CreateProfile
-  //     loginMethod={loginMethod}
-  //     startStep={0}
-  //     setEditProfile={setEditProfile}
-  //   />
-  // )
-
   if (editProfile) {
     return (
       <CreateProfile
@@ -298,7 +290,10 @@ const Profile: React.FC<Props> = ({ loginMethod }) => {
       </Modal>
 
       <div className="profile-overview-user-information position-relative">
-        <Stack gap={1} className="w-50 text-center position-absolute top-50 start-50 translate-middle">
+        <Stack
+          gap={1}
+          className="w-50 text-center position-absolute top-50 start-50 translate-middle"
+        >
           <img
             src="images/profile_picture_default.svg"
             alt="Profile icon"
@@ -314,7 +309,10 @@ const Profile: React.FC<Props> = ({ loginMethod }) => {
             <Dropdown.Toggle as={CustomToggle} />
 
             <Dropdown.Menu className="mt-2">
-              <Dropdown.Item className="dropdown-menu-item position-relative">
+              <Dropdown.Item
+                className="dropdown-menu-item position-relative"
+                onClick={() => setEditProfile(true)}
+              >
                 <div className="position-absolute top-50 translate-middle-y">
                   <svg
                     className="dropdown-item-icon me-3"
