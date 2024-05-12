@@ -8,7 +8,6 @@ import CustomSelectMenu from './CustomSelectMenu'
 import Form from 'react-bootstrap/Form'
 import Stack from 'react-bootstrap/Stack'
 import './SelectTastePreferences.css'
-import Slider from '@mui/material/Slider'
 
 const worldCuisines = [
   'French',
@@ -23,21 +22,6 @@ const worldCuisines = [
   'Turkish',
   'American',
   'Vietnamese',
-]
-
-const marks = [
-  {
-    value: 0,
-    label: 'Mild',
-  },
-  {
-    value: 50,
-    label: 'Medium',
-  },
-  {
-    value: 100,
-    label: 'Hot',
-  },
 ]
 
 type Props = {
@@ -63,6 +47,8 @@ const SelectTastePreferences: React.FC<Props> = ({
   >([])
 
   const [loadingCuisines, setLoadingCuisines] = useState(false)
+
+  const [userLikesSpicyFood, setUserLikesSpicyFood] = useState(false)
 
   useEffect(() => {
     setLoadingCuisines(true)
@@ -158,12 +144,12 @@ const SelectTastePreferences: React.FC<Props> = ({
 
       <h4 className="mt-3">Which taste of desserts do you prefer?</h4>
       <div className="width-fit-content text-start mx-auto">
+        <Form.Check type="radio" label="Doesn't matter" />
+
         <Form.Check
-          type="checkbox"
+          type="radio"
           label="Sweet"
-          checked={selectedTastePreferences.desserts.includes(
-            'http://dbpedia.org/resource/Sweetness',
-          )}
+          checked={false}
           onChange={() => {
             handleDessertCheckboxOnChange(
               'http://dbpedia.org/resource/Sweetness',
@@ -172,33 +158,35 @@ const SelectTastePreferences: React.FC<Props> = ({
         />
 
         <Form.Check
-          type="checkbox"
+          type="radio"
           label="Savory"
-          checked={selectedTastePreferences.desserts.includes(
-            'http://www.wikidata.org/entity/Q3324978',
-          )}
+          checked={false}
           onChange={() => {
             handleDessertCheckboxOnChange(
               'http://www.wikidata.org/entity/Q3324978',
             )
           }}
         />
-
-        <Form.Check type="checkbox" label="Doesn't matter" />
       </div>
 
       <h4 className="mt-3">Do you like spicy food?</h4>
-      <Form.Switch />
 
-      <div className="w-75 mx-auto">
-        <Slider
-          aria-label="Restricted values"
-          defaultValue={0}
-          step={null}
-          valueLabelDisplay="auto"
-          marks={marks}
-        />
-      </div>
+      <Form.Switch
+        label={userLikesSpicyFood ? 'Yes' : 'No'}
+        className="width-fit-content mx-auto"
+        onClick={() => setUserLikesSpicyFood(!userLikesSpicyFood)}
+      />
+
+      {userLikesSpicyFood && (
+        <>
+          <span>How spicy should it be?</span>
+          <div className="width-fit-content mx-auto text-start">
+            <Form.Check type="radio" label="Mild" checked={true} />
+            <Form.Check type="radio" label="Medium" checked={false} />
+            <Form.Check type="radio" label="Hot" checked={false} />
+          </div>
+        </>
+      )}
     </>
   )
 }
