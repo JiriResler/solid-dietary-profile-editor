@@ -1,15 +1,15 @@
 import { useEffect, useState } from 'react'
-// import { auth } from '../../../firebase'
+import { auth } from '../../../firebase'
 import Button from 'react-bootstrap/Button'
 import Stack from 'react-bootstrap/Stack'
 import './CreateProfile.css'
 import SelectAllergens from './SelectAllergens'
 import SelectDiets from './SelectDiets'
 import { Allergen, Diet, TastePreferences } from './profileDataTypes'
-// import { LoginMethod } from '../../loginMethodEnum'
-// import { useSession } from '@inrupt/solid-ui-react'
+import { LoginMethod } from '../../loginMethodEnum'
+import { useSession } from '@inrupt/solid-ui-react'
 import SelectTastePreferences from './SelectTastePreferences'
-// import { saveProfileFirebase, saveProfileSolid } from './saveProfile'
+import { saveProfileFirebase, saveProfileSolid } from './saveProfile'
 import { loadProfileCreationData } from './loadProfileCreationData'
 import Stepper from '@mui/material/Stepper'
 import Step from '@mui/material/Step'
@@ -17,20 +17,17 @@ import StepLabel from '@mui/material/StepLabel'
 import Container from 'react-bootstrap/Container'
 
 type Props = {
-  // loginMethod: LoginMethod
-  // setEditProfile: React.Dispatch<React.SetStateAction<boolean>>
+  loginMethod: LoginMethod
+  setEditProfile: React.Dispatch<React.SetStateAction<boolean>>
   startStep: number
 }
 
 const CreateProfile: React.FC<Props> = ({
-  // loginMethod,
+  loginMethod,
   startStep,
-  // setEditProfile,
+  setEditProfile,
 }) => {
-  // const { session } = useSession()
-
-  // Number of steps in profile creation
-  // const numberOfSteps = 3
+  const { session } = useSession()
 
   const steps = ['Allergens', 'Diets', 'Taste preferences']
 
@@ -55,27 +52,27 @@ const CreateProfile: React.FC<Props> = ({
     void loadProfileCreationData(setAllergenArray)
   }, [])
 
-  // function saveProfile() {
-  //   if (loginMethod === LoginMethod.SOLID) {
-  //     void saveProfileSolid(
-  //       session,
-  //       selectedAllergens,
-  //       selectedDiets,
-  //       selectedTastePreferences,
-  //     )
-  //   }
+  function saveProfile() {
+    if (loginMethod === LoginMethod.SOLID) {
+      void saveProfileSolid(
+        session,
+        selectedAllergens,
+        selectedDiets,
+        selectedTastePreferences,
+      )
+    }
 
-  //   if (loginMethod === LoginMethod.FIREBASE) {
-  //     void saveProfileFirebase(
-  //       auth,
-  //       selectedAllergens,
-  //       selectedDiets,
-  //       selectedTastePreferences,
-  //     )
-  //   }
+    if (loginMethod === LoginMethod.FIREBASE) {
+      void saveProfileFirebase(
+        auth,
+        selectedAllergens,
+        selectedDiets,
+        selectedTastePreferences,
+      )
+    }
 
-  //   setEditProfile(false)
-  // }
+    setEditProfile(false)
+  }
 
   if (currentStep === 0) {
     return (

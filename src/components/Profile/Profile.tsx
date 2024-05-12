@@ -215,7 +215,13 @@ const Profile: React.FC<Props> = ({ loginMethod }) => {
   // }
 
   if (editProfile) {
-    return <CreateProfile startStep={1} />
+    return (
+      <CreateProfile
+        startStep={1}
+        setEditProfile={setEditProfile}
+        loginMethod={loginMethod}
+      />
+    )
   }
 
   return (
