@@ -1,14 +1,48 @@
 import { fetch } from '@inrupt/solid-client-authn-browser'
 import {
   getSolidDataset,
-  getThing,
+  // getThing,
   getUrl,
   getStringEnglish,
   getInteger,
 } from '@inrupt/solid-client'
 import { Allergen } from './profileDataTypes'
+import N3 from 'n3'
+import { fromRdfJsDataset, getThing } from '@inrupt/solid-client'
 
-export function loadAllergenList() {
+export async function loadAllergenList() {
+  const getAllergenListURL =
+    'https://raw.githubusercontent.com/JiriResler/personalized-restaurant-menu-viewer-application-ontology/main/ontology.ttl'
+
+  const response = await fetch(getAllergenListURL)
+
+  const responseText = await response.text()
+
+  const parser = new N3.Parser()
+
+  const store = new N3.Store()
+
+  try {
+    const parsed = parser.parse(responseText)
+
+    for (const { subject, predicate, object, graph } of parsed) {
+      store.addQuad(subject, predicate, object, graph)
+    }
+
+    const solidDataset = fromRdfJsDataset(store)
+
+    const listOfAllergens = getThing(
+      solidDataset,
+      'https://raw.githubusercontent.com/JiriResler/personalized-restaurant-menu-viewer-application-ontology/main/ontology#List_of_most_common_allergens',
+    )
+
+    const listURL = getUrl(listOfAllergens, 'https://schema.org/url')
+
+    console.log(listURL)
+  } catch (error) {
+    console.log(error)
+  }
+
   return [
     {
       IRI: 'iri1',
