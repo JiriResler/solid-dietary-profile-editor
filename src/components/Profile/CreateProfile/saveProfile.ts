@@ -76,7 +76,7 @@ export async function saveProfileSolid(
     user = addUrl(
       user,
       'https://github.com/JiriResler/solid-choose-well-ontology/blob/main/choosewell#allergicTo',
-      allergen.iri,
+      allergen.IRI,
     )
   }
 
@@ -139,7 +139,7 @@ export async function saveProfileFirebase(
   // todo: make this code easier to read by splitting it to more lines
   const profileData: FirestoreUserProfile = {
     allergicTo: Array.from(selectedAllergens.values()).map(
-      (allergen) => allergen.iri,
+      (allergen) => allergen.IRI,
     ),
     onDiets: Array.from(selectedDiets.values()).map((diet) => diet.iri),
     likesCuisines: selectedTastePreferences.cuisines.map(

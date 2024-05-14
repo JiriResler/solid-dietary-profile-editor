@@ -2,10 +2,11 @@ import Stack from 'react-bootstrap/Stack'
 import Form from 'react-bootstrap/Form'
 import './SelectAllergens.css'
 import { Allergen } from './profileDataTypes'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 import Carousel from 'react-bootstrap/Carousel'
+import { loadAllergenList } from './loadProfileCreationData'
 
 interface AllergenDescription extends Allergen {
   descriptionText: string
@@ -13,7 +14,6 @@ interface AllergenDescription extends Allergen {
 }
 
 type Props = {
-  allergenArray: Allergen[]
   selectedAllergens: Set<Allergen>
   setSelectedAllergens: React.Dispatch<React.SetStateAction<Set<Allergen>>>
 }
@@ -24,132 +24,25 @@ type AllergenResponse = {
   results: { bindings: Array<{ desc: { value: string } }> }
 }
 
-const allergenListTestData: Allergen[] = [
-  {
-    iri: 'iri1',
-    label: 'Celery',
-    menuLegendNumber: 0,
-    iconUrl:
-      'https://personal-restaurant-menu-viewer-app.solidcommunity.net/public/allergen_icons/celery.svg',
-    sameAsIri: 'iri',
-  },
-  {
-    iri: 'iri2',
-    label: 'Gluten',
-    menuLegendNumber: 0,
-    iconUrl:
-      'https://personal-restaurant-menu-viewer-app.solidcommunity.net/public/allergen_icons/gluten.svg',
-    sameAsIri: 'iri',
-  },
-  {
-    iri: 'iri3',
-    label: 'Crustaceans',
-    menuLegendNumber: 0,
-    iconUrl:
-      'https://personal-restaurant-menu-viewer-app.solidcommunity.net/public/allergen_icons/gluten.svg',
-    sameAsIri: 'iri',
-  },
-  {
-    iri: 'iri1',
-    label: 'Celery',
-    menuLegendNumber: 0,
-    iconUrl:
-      'https://personal-restaurant-menu-viewer-app.solidcommunity.net/public/allergen_icons/celery.svg',
-    sameAsIri: 'iri',
-  },
-  {
-    iri: 'iri2',
-    label: 'Gluten',
-    menuLegendNumber: 0,
-    iconUrl:
-      'https://personal-restaurant-menu-viewer-app.solidcommunity.net/public/allergen_icons/gluten.svg',
-    sameAsIri: 'iri',
-  },
-  {
-    iri: 'iri3',
-    label: 'Crustaceans',
-    menuLegendNumber: 0,
-    iconUrl:
-      'https://personal-restaurant-menu-viewer-app.solidcommunity.net/public/allergen_icons/gluten.svg',
-    sameAsIri: 'iri',
-  },
-  {
-    iri: 'iri1',
-    label: 'Celery',
-    menuLegendNumber: 0,
-    iconUrl:
-      'https://personal-restaurant-menu-viewer-app.solidcommunity.net/public/allergen_icons/celery.svg',
-    sameAsIri: 'iri',
-  },
-  {
-    iri: 'iri2',
-    label: 'Gluten',
-    menuLegendNumber: 0,
-    iconUrl:
-      'https://personal-restaurant-menu-viewer-app.solidcommunity.net/public/allergen_icons/gluten.svg',
-    sameAsIri: 'iri',
-  },
-  {
-    iri: 'iri3',
-    label: 'Crustaceans',
-    menuLegendNumber: 0,
-    iconUrl:
-      'https://personal-restaurant-menu-viewer-app.solidcommunity.net/public/allergen_icons/gluten.svg',
-    sameAsIri: 'iri',
-  },
-  {
-    iri: 'iri1',
-    label: 'Celery',
-    menuLegendNumber: 0,
-    iconUrl:
-      'https://personal-restaurant-menu-viewer-app.solidcommunity.net/public/allergen_icons/celery.svg',
-    sameAsIri: 'iri',
-  },
-  {
-    iri: 'iri2',
-    label: 'Gluten',
-    menuLegendNumber: 0,
-    iconUrl:
-      'https://personal-restaurant-menu-viewer-app.solidcommunity.net/public/allergen_icons/gluten.svg',
-    sameAsIri: 'iri',
-  },
-  {
-    iri: 'iri3',
-    label: 'Crustaceans',
-    menuLegendNumber: 0,
-    iconUrl:
-      'https://personal-restaurant-menu-viewer-app.solidcommunity.net/public/allergen_icons/gluten.svg',
-    sameAsIri: 'iri',
-  },
-  {
-    iri: 'iri1',
-    label: 'Celery',
-    menuLegendNumber: 0,
-    iconUrl:
-      'https://personal-restaurant-menu-viewer-app.solidcommunity.net/public/allergen_icons/celery.svg',
-    sameAsIri: 'iri',
-  },
-  {
-    iri: 'iri2',
-    label: 'Gluten',
-    menuLegendNumber: 0,
-    iconUrl:
-      'https://personal-restaurant-menu-viewer-app.solidcommunity.net/public/allergen_icons/gluten.svg',
-    sameAsIri: 'iri',
-  },
-]
-
 const SelectAllergens: React.FC<Props> = ({
-  // allergenArray,
   selectedAllergens,
   setSelectedAllergens,
 }) => {
   const [showAllergenDescriptionModal, setShowAllergenDescriptionModal] =
     useState(false)
 
+  // Array for storing a list of allergens loaded from the internet
+  const [allergenList, setAllergenList] = useState<Allergen[]>([])
+
   // Allergen with its description to show in a modal
   const [allergenDescription, setAllergenDescription] =
     useState<AllergenDescription | null>(null)
+
+  useEffect(() => {
+    const allergenList = loadAllergenList()
+
+    setAllergenList(allergenList)
+  }, [])
 
   function handleCheckboxOnChange(allergen: Allergen) {
     const newAllergenSet = new Set(selectedAllergens)
@@ -202,7 +95,10 @@ const SelectAllergens: React.FC<Props> = ({
   return (
     <>
       <h3 className="mb-3">What are you allergic to?</h3>
-      {allergenListTestData.map((allergen: Allergen) => {
+
+      {allergenList.length === 0 && <span>Loading data...</span>}
+
+      {allergenList.map((allergen: Allergen) => {
         return (
           <Stack
             direction="horizontal"

@@ -1,7 +1,7 @@
 import SelectMenuOption from './selectMenuOptionType'
 
 export type Allergen = {
-  iri: string
+  IRI: string
   label: string
   menuLegendNumber: number
   iconUrl: string

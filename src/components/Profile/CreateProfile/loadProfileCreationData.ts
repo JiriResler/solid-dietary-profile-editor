@@ -8,7 +8,28 @@ import {
 } from '@inrupt/solid-client'
 import { Allergen } from './profileDataTypes'
 
-export async function loadProfileCreationData(
+export function loadAllergenList() {
+  return [
+    {
+      IRI: 'iri1',
+      label: 'Celery',
+      menuLegendNumber: 0,
+      iconUrl:
+        'https://personal-restaurant-menu-viewer-app.solidcommunity.net/public/allergen_icons/celery.svg',
+      sameAsIri: 'iri',
+    },
+    {
+      IRI: 'iri2',
+      label: 'Gluten',
+      menuLegendNumber: 0,
+      iconUrl:
+        'https://personal-restaurant-menu-viewer-app.solidcommunity.net/public/allergen_icons/gluten.svg',
+      sameAsIri: 'iri',
+    },
+  ]
+}
+
+async function loadProfileCreationData(
   setAllergenArray: React.Dispatch<React.SetStateAction<Allergen[]>>,
 ) {
   await fetchAllergenArray(setAllergenArray)
@@ -101,7 +122,7 @@ async function fetchAllergenArray(
     }
 
     const allergen: Allergen = {
-      iri: allergenUrl,
+      IRI: allergenUrl,
       label: allergenLabel,
       menuLegendNumber: allergenNumber,
       iconUrl: allergenIconUrl,

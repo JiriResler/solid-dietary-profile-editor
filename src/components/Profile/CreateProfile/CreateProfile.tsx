@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { auth } from '../../../firebase'
 import Button from 'react-bootstrap/Button'
 import Stack from 'react-bootstrap/Stack'
@@ -10,7 +10,6 @@ import { LoginMethod } from '../../loginMethodEnum'
 import { useSession } from '@inrupt/solid-ui-react'
 import SelectTastePreferences from './SelectTastePreferences'
 import { saveProfileFirebase, saveProfileSolid } from './saveProfile'
-import { loadProfileCreationData } from './loadProfileCreationData'
 import Stepper from '@mui/material/Stepper'
 import Step from '@mui/material/Step'
 import StepLabel from '@mui/material/StepLabel'
@@ -33,8 +32,6 @@ const CreateProfile: React.FC<Props> = ({
 
   const [currentStep, setCurrentStep] = useState(startStep)
 
-  const [allergenArray, setAllergenArray] = useState<Allergen[]>([])
-
   const [selectedAllergens, setSelectedAllergens] = useState(
     new Set<Allergen>(),
   )
@@ -47,10 +44,6 @@ const CreateProfile: React.FC<Props> = ({
       desserts: [],
       spiciness: [],
     })
-
-  useEffect(() => {
-    void loadProfileCreationData(setAllergenArray)
-  }, [])
 
   function saveProfile() {
     if (loginMethod === LoginMethod.SOLID) {
@@ -117,7 +110,6 @@ const CreateProfile: React.FC<Props> = ({
         <div className="user-preferences-controls overflow-auto text-center">
           {currentStep === 1 && (
             <SelectAllergens
-              allergenArray={allergenArray}
               selectedAllergens={selectedAllergens}
               setSelectedAllergens={setSelectedAllergens}
             />
