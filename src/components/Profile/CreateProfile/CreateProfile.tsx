@@ -162,7 +162,7 @@ const CreateProfile: React.FC<Props> = ({
               <Button
                 variant="success"
                 className="create-profile-navigation-button"
-                onClick={() => alert('Saving profile not yet implemented')}
+                onClick={() => saveProfile()}
               >
                 Save profile
               </Button>
