@@ -39,9 +39,14 @@ const SelectAllergens: React.FC<Props> = ({
     useState<AllergenDescription | null>(null)
 
   useEffect(() => {
-    const allergenList = loadAllergenList()
-
-    setAllergenList(allergenList)
+    loadAllergenList()
+      .then((value) => {
+        if (value === undefined) {
+          return
+        }
+        setAllergenList(value)
+      })
+      .catch((error) => console.error(error))
   }, [])
 
   function handleCheckboxOnChange(allergen: Allergen) {
