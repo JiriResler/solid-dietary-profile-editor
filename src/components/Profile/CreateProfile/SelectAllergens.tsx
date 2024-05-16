@@ -41,12 +41,15 @@ const SelectAllergens: React.FC<Props> = ({
   useEffect(() => {
     loadAllergenList()
       .then((value) => {
-        if (value === undefined) {
-          return
-        }
         setAllergenList(value)
       })
-      .catch((error) => console.error(error))
+      .catch((error) => {
+        alert(
+          'Could not load data. For more information check the developer console.',
+        )
+
+        console.error(error)
+      })
   }, [])
 
   function handleCheckboxOnChange(allergen: Allergen) {

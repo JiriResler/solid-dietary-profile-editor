@@ -24,7 +24,9 @@ export async function loadAllergenList() {
   )
 
   if (listOfAllergens === null) {
-    return
+    throw new Error(
+      'Could not find list of allergens Thing in parsed turtle file.',
+    )
   }
 
   // Get sequence from a thing
