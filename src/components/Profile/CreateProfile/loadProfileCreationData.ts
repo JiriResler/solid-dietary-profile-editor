@@ -9,6 +9,7 @@ import {
 import { Allergen } from './profileDataTypes'
 import N3 from 'n3'
 import { RDFS, OWL } from '@inrupt/vocab-common-rdf'
+import ONTOLOGY from './commonRdfVocab'
 
 // Loads a list of most common allergens from the internet and returns an array of Allergens.
 export async function loadAllergenList() {
@@ -128,10 +129,7 @@ async function loadAllergenData(allergenUrl: string) {
 
 // Reads allergen data from a Thing and returns an Allergen.
 function getAllergenFromThing(thing: Thing) {
-  const allergenNumber = getInteger(
-    thing,
-    'https://raw.githubusercontent.com/JiriResler/personalized-restaurant-menu-viewer-application-ontology/main/ontology#allergenNumber',
-  )
+  const allergenNumber = getInteger(thing, ONTOLOGY.allergenNumber)
 
   if (allergenNumber === null) {
     throw new Error('Alergen number value is missing in RDF allergen file.')
@@ -143,10 +141,7 @@ function getAllergenFromThing(thing: Thing) {
     throw new Error('Allergen label value is missing in RDF allergen file.')
   }
 
-  const allergenIconUrl = getUrl(
-    thing,
-    'https://raw.githubusercontent.com/JiriResler/personalized-restaurant-menu-viewer-application-ontology/main/ontology#hasIcon',
-  )
+  const allergenIconUrl = getUrl(thing, ONTOLOGY.hasIcon)
 
   if (allergenIconUrl === null) {
     throw new Error('Allergen icon URL value is missing in RDF allergen file.')
