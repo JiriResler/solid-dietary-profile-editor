@@ -4,6 +4,7 @@ import {
   getStringEnglish,
   getInteger,
   fromRdfJsDataset,
+  Thing,
 } from '@inrupt/solid-client'
 import { Allergen } from './profileDataTypes'
 import N3 from 'n3'
@@ -29,30 +30,7 @@ export async function loadAllergenList() {
   }
 
   // Get sequence from a thing
-  const allergenUrlArray = []
-  let counter = 1
-
-  const sequenceContainsItemPredicate =
-    'http://www.w3.org/1999/02/22-rdf-syntax-ns#_'
-
-  // eslint-disable-next-line no-constant-condition
-  while (true) {
-    const sequenceContainsItemPredicateFull =
-      sequenceContainsItemPredicate + counter
-
-    const allergenUrl = getUrl(
-      listOfAllergens,
-      sequenceContainsItemPredicateFull,
-    )
-
-    if (allergenUrl === null) {
-      break
-    }
-
-    allergenUrlArray.push(allergenUrl)
-
-    counter = counter + 1
-  }
+  const allergenUrlArray = readUrlSequenceFromThing(listOfAllergens)
 
   // Load information about each allergen
   for (const allergenUrl of allergenUrlArray) {
@@ -149,7 +127,32 @@ function parseTurtleFile(turtleFile: string) {
   }
 }
 
-// Read a sequence of URLs from a Thing.
-function readUrlSequenceFromDataset() {}
+// Reads a sequence from a Thing and returns an array of URLs as string[].
+function readUrlSequenceFromThing(thing: Thing) {
+  const allergenUrlArray = []
 
-async function loadAllergenData() {}
+  let counter = 1
+
+  const sequenceContainsItemPredicate =
+    'http://www.w3.org/1999/02/22-rdf-syntax-ns#_'
+
+  // eslint-disable-next-line no-constant-condition
+  while (true) {
+    const sequencePredicateWithCounter = sequenceContainsItemPredicate + counter
+
+    const allergenUrl = getUrl(thing, sequencePredicateWithCounter)
+
+    if (allergenUrl === null) {
+      break
+    }
+
+    allergenUrlArray.push(allergenUrl)
+
+    counter = counter + 1
+  }
+
+  return allergenUrlArray
+}
+
+// Loads information about an allergen from the internet and returns an Allergen.
+async function loadAllergenData(allergenUrl: string) {}
