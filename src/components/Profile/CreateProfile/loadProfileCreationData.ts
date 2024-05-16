@@ -4,7 +4,6 @@ import {
   getStringEnglish,
   getInteger,
   fromRdfJsDataset,
-  SolidDataset,
 } from '@inrupt/solid-client'
 import { Allergen } from './profileDataTypes'
 import N3 from 'n3'
@@ -16,7 +15,9 @@ export async function loadAllergenList() {
   const allergenListFileUrl =
     'https://raw.githubusercontent.com/JiriResler/personalized-restaurant-menu-viewer-application-ontology/main/resource/List_of_most_common_allergens.ttl'
 
-  const listAsRdfDataset = await fetchRdfDataset(allergenListFileUrl)
+  const allergenListTurtle = await fetchTurtleFile(allergenListFileUrl)
+
+  const listAsRdfDataset = parseTurtleFile(allergenListTurtle)
 
   const listOfAllergens = getThing(
     listAsRdfDataset,
@@ -57,7 +58,9 @@ export async function loadAllergenList() {
   for (const allergenUrl of allergenUrlArray) {
     const allergenFileUrl = allergenUrl + '.ttl'
 
-    const allergenDataset = await fetchRdfDataset(allergenFileUrl)
+    const turtleFile = await fetchTurtleFile(allergenFileUrl)
+
+    const allergenDataset = parseTurtleFile(turtleFile)
 
     const allergenThing = getThing(allergenDataset, allergenUrl)
 
@@ -109,20 +112,44 @@ export async function loadAllergenList() {
   return allergenList
 }
 
-// Retrieves a turtle file from the internet and uses a parser to create a Dataset
-async function fetchRdfDataset(url: string): Promise<SolidDataset> {
-  const fetchedResponse = await fetch(url)
+// Retrieves a turtle file from the internet and returns a string containing its RDF data.
+async function fetchTurtleFile(turtleFileUrl: string) {
+  const fetchedResponse = await fetch(turtleFileUrl)
+
+  if (!fetchedResponse.ok) {
+    throw new Error(
+      'Retreiving a turtle file from ' +
+        turtleFileUrl +
+        ' failed with HTTP status ' +
+        fetchedResponse.status +
+        '.',
+    )
+  }
 
   const allergenListInTurtle = await fetchedResponse.text()
 
+  return allergenListInTurtle
+}
+
+// Parses a text containing RDF data in turtle and returns a SolidDataset.
+function parseTurtleFile(turtleFile: string) {
   const parser = new N3.Parser()
 
   try {
-    const store = new N3.Store(parser.parse(allergenListInTurtle))
+    const store = new N3.Store(parser.parse(turtleFile))
 
     // Create a solid dataset from parsed store
     return fromRdfJsDataset(store)
   } catch (error) {
+    console.error(error)
+
+    console.log(turtleFile)
+
     throw new Error('Parsing of turtle file failed.')
   }
 }
+
+// Read a sequence of URLs from a Thing.
+function readUrlSequenceFromDataset() {}
+
+async function loadAllergenData() {}
