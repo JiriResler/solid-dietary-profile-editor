@@ -122,37 +122,51 @@ async function loadAllergenData(allergenUrl: string) {
     throw new Error('Allergen definition was not found in file.')
   }
 
+  return getAllergenFromThing(allergenThing)
+}
+
+// Reads data from a Thing and returns an Allergen.
+function getAllergenFromThing(thing: Thing) {
   const allergenNumber = getInteger(
-    allergenThing,
+    thing,
     'https://raw.githubusercontent.com/JiriResler/personalized-restaurant-menu-viewer-application-ontology/main/ontology#allergenNumber',
   )
 
+  if (allergenNumber === null) {
+    throw new Error('Alergen number value is missing in RDF allergen file.')
+  }
+
   const allergenLabel = getStringEnglish(
-    allergenThing,
+    thing,
     'http://www.w3.org/2000/01/rdf-schema#label',
   )
 
+  if (allergenLabel === null) {
+    throw new Error('Allergen label value is missing in RDF allergen file.')
+  }
+
   const allergenIconUrl = getUrl(
-    allergenThing,
+    thing,
     'https://raw.githubusercontent.com/JiriResler/personalized-restaurant-menu-viewer-application-ontology/main/ontology#hasIcon',
   )
 
+  if (allergenIconUrl === null) {
+    throw new Error('Allergen icon URL value is missing in RDF allergen file.')
+  }
+
   const allergenSameAsIri = getUrl(
-    allergenThing,
+    thing,
     'http://www.w3.org/2002/07/owl#sameAs',
   )
 
-  if (
-    allergenNumber === null ||
-    allergenLabel === null ||
-    allergenIconUrl === null ||
-    allergenSameAsIri === null
-  ) {
-    throw new Error('Some important value is missing in RDF allergen file.')
+  if (allergenSameAsIri === null) {
+    throw new Error(
+      'Allergen same as IRI value is missing in RDF allergen file.',
+    )
   }
 
   return {
-    IRI: allergenUrl,
+    IRI: thing.url,
     label: allergenLabel,
     menuLegendNumber: allergenNumber,
     iconUrl: allergenIconUrl,
