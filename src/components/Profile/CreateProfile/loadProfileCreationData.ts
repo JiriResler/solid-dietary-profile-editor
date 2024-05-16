@@ -11,8 +11,6 @@ import N3 from 'n3'
 
 // Loads a list of most common allergens from the internet and returns an array of Allergens.
 export async function loadAllergenList() {
-  const allergenList: Allergen[] = []
-
   const allergenListFileUrl =
     'https://raw.githubusercontent.com/JiriResler/personalized-restaurant-menu-viewer-application-ontology/main/resource/List_of_most_common_allergens.ttl'
 
@@ -32,57 +30,11 @@ export async function loadAllergenList() {
   // Get sequence from a thing
   const allergenUrlArray = readUrlSequenceFromThing(listOfAllergens)
 
+  const allergenList: Allergen[] = []
+
   // Load information about each allergen
   for (const allergenUrl of allergenUrlArray) {
-    const allergenFileUrl = allergenUrl + '.ttl'
-
-    const turtleFile = await fetchTurtleFile(allergenFileUrl)
-
-    const allergenDataset = parseTurtleFile(turtleFile)
-
-    const allergenThing = getThing(allergenDataset, allergenUrl)
-
-    if (allergenThing === null) {
-      return
-    }
-
-    const allergenNumber = getInteger(
-      allergenThing,
-      'https://raw.githubusercontent.com/JiriResler/personalized-restaurant-menu-viewer-application-ontology/main/ontology#allergenNumber',
-    )
-
-    const allergenLabel = getStringEnglish(
-      allergenThing,
-      'http://www.w3.org/2000/01/rdf-schema#label',
-    )
-
-    const allergenIconUrl = getUrl(
-      allergenThing,
-      'https://raw.githubusercontent.com/JiriResler/personalized-restaurant-menu-viewer-application-ontology/main/ontology#hasIcon',
-    )
-
-    const allergenSameAsIri = getUrl(
-      allergenThing,
-      'http://www.w3.org/2002/07/owl#sameAs',
-    )
-
-    if (
-      allergenNumber === null ||
-      allergenLabel === null ||
-      allergenIconUrl === null ||
-      allergenSameAsIri === null
-    ) {
-      console.log('Some value is missing in parsed RDF allergen file.')
-      return
-    }
-
-    const allergen: Allergen = {
-      IRI: allergenUrl,
-      label: allergenLabel,
-      menuLegendNumber: allergenNumber,
-      iconUrl: allergenIconUrl,
-      sameAsIri: allergenSameAsIri,
-    }
+    const allergen = await loadAllergenData(allergenUrl)
 
     allergenList.push(allergen)
   }
@@ -154,5 +106,54 @@ function readUrlSequenceFromThing(thing: Thing) {
   return allergenUrlArray
 }
 
-// Loads information about an allergen from the internet and returns an Allergen.
-async function loadAllergenData(allergenUrl: string) {}
+// Loads a turtle file describing an allergen from the internet and returns an Allergen.
+async function loadAllergenData(allergenUrl: string) {
+  const allergenFileUrl = allergenUrl + '.ttl'
+
+  const turtleFile = await fetchTurtleFile(allergenFileUrl)
+
+  const allergenDataset = parseTurtleFile(turtleFile)
+
+  const allergenThing = getThing(allergenDataset, allergenUrl)
+
+  if (allergenThing === null) {
+    throw new Error('Allergen definition was not found in file.')
+  }
+
+  const allergenNumber = getInteger(
+    allergenThing,
+    'https://raw.githubusercontent.com/JiriResler/personalized-restaurant-menu-viewer-application-ontology/main/ontology#allergenNumber',
+  )
+
+  const allergenLabel = getStringEnglish(
+    allergenThing,
+    'http://www.w3.org/2000/01/rdf-schema#label',
+  )
+
+  const allergenIconUrl = getUrl(
+    allergenThing,
+    'https://raw.githubusercontent.com/JiriResler/personalized-restaurant-menu-viewer-application-ontology/main/ontology#hasIcon',
+  )
+
+  const allergenSameAsIri = getUrl(
+    allergenThing,
+    'http://www.w3.org/2002/07/owl#sameAs',
+  )
+
+  if (
+    allergenNumber === null ||
+    allergenLabel === null ||
+    allergenIconUrl === null ||
+    allergenSameAsIri === null
+  ) {
+    throw new Error('Some important value is missing in RDF allergen file.')
+  }
+
+  return {
+    IRI: allergenUrl,
+    label: allergenLabel,
+    menuLegendNumber: allergenNumber,
+    iconUrl: allergenIconUrl,
+    sameAsIri: allergenSameAsIri,
+  }
+}
