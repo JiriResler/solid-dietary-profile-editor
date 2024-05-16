@@ -125,7 +125,7 @@ async function loadAllergenData(allergenUrl: string) {
   return getAllergenFromThing(allergenThing)
 }
 
-// Reads data from a Thing and returns an Allergen.
+// Reads allergen data from a Thing and returns an Allergen.
 function getAllergenFromThing(thing: Thing) {
   const allergenNumber = getInteger(
     thing,
