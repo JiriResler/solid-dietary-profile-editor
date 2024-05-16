@@ -8,6 +8,7 @@ import {
 } from '@inrupt/solid-client'
 import { Allergen } from './profileDataTypes'
 import N3 from 'n3'
+import { RDFS, OWL } from '@inrupt/vocab-common-rdf'
 
 // Loads a list of most common allergens from the internet and returns an array of Allergens.
 export async function loadAllergenList() {
@@ -136,10 +137,7 @@ function getAllergenFromThing(thing: Thing) {
     throw new Error('Alergen number value is missing in RDF allergen file.')
   }
 
-  const allergenLabel = getStringEnglish(
-    thing,
-    'http://www.w3.org/2000/01/rdf-schema#label',
-  )
+  const allergenLabel = getStringEnglish(thing, RDFS.label)
 
   if (allergenLabel === null) {
     throw new Error('Allergen label value is missing in RDF allergen file.')
@@ -154,10 +152,7 @@ function getAllergenFromThing(thing: Thing) {
     throw new Error('Allergen icon URL value is missing in RDF allergen file.')
   }
 
-  const allergenSameAsIri = getUrl(
-    thing,
-    'http://www.w3.org/2002/07/owl#sameAs',
-  )
+  const allergenSameAsIri = getUrl(thing, OWL.sameAs)
 
   if (allergenSameAsIri === null) {
     throw new Error(
