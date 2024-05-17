@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react'
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 import Carousel from 'react-bootstrap/Carousel'
-import { loadAllergenList } from './loadProfileCreationData'
+import loadAllergenList from './loadProfileCreationData'
 
 interface AllergenDescription extends Allergen {
   descriptionText: string

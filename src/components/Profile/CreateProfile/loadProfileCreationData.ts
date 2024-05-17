@@ -12,7 +12,7 @@ import { RDFS, OWL } from '@inrupt/vocab-common-rdf'
 import ONTOLOGY from './commonRdfVocab'
 
 // Loads a list of most common allergens from the internet and returns an array of Allergens.
-export async function loadAllergenList() {
+export default async function loadAllergenList() {
   const allergenListFileUrl =
     'https://raw.githubusercontent.com/JiriResler/personalized-restaurant-menu-viewer-application-ontology/main/resource/List_of_most_common_allergens.ttl'
 
@@ -128,7 +128,7 @@ async function loadAllergenData(allergenUrl: string) {
 }
 
 // Reads allergen data from a Thing and returns an Allergen.
-function getAllergenFromThing(thing: Thing) {
+export function getAllergenFromThing(thing: Thing) {
   const allergenNumber = getInteger(thing, ONTOLOGY.allergenNumber)
 
   if (allergenNumber === null) {
