@@ -128,7 +128,7 @@ async function loadAllergenData(allergenUrl: string) {
 }
 
 // Reads allergen data from a Thing and returns an Allergen.
-export function getAllergenFromThing(thing: Thing) {
+export function getAllergenFromThing(thing: Thing): Allergen {
   const allergenNumber = getInteger(thing, ONTOLOGY.allergenNumber)
 
   if (allergenNumber === null) {
@@ -156,7 +156,7 @@ export function getAllergenFromThing(thing: Thing) {
   }
 
   return {
-    IRI: thing.url,
+    iri: thing.url,
     label: allergenLabel,
     menuLegendNumber: allergenNumber,
     iconUrl: allergenIconUrl,

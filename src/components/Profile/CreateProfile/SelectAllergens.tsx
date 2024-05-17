@@ -14,8 +14,8 @@ interface AllergenDescription extends Allergen {
 }
 
 type Props = {
-  selectedAllergens: Set<Allergen>
-  setSelectedAllergens: React.Dispatch<React.SetStateAction<Set<Allergen>>>
+  selectedAllergens: string[]
+  setSelectedAllergens: React.Dispatch<React.SetStateAction<string[]>>
 }
 
 // responseJSON.results.bindings[0].desc.value
@@ -31,41 +31,42 @@ const SelectAllergens: React.FC<Props> = ({
   const [showAllergenDescriptionModal, setShowAllergenDescriptionModal] =
     useState(false)
 
-  // Array for storing a list of allergens loaded from the internet
-  const [allergenList, setAllergenList] = useState<Allergen[]>([])
+  // Allergen data loaded from the internet to display to the user.
+  const [allergenDisplayList, setAllergenDisplayList] = useState<Allergen[]>([])
 
-  // Allergen with its description to show in a modal
+  // Allergen with its description to show in modal.
   const [allergenDescription, setAllergenDescription] =
     useState<AllergenDescription | null>(null)
 
   useEffect(() => {
     loadAllergenList()
       .then((value) => {
-        setAllergenList(value)
+        setAllergenDisplayList(value)
       })
       .catch((error) => {
         alert(
           'Could not load data. For more information check the developer console.',
         )
-
         console.error(error)
       })
   }, [])
 
-  function handleCheckboxOnChange(allergen: Allergen) {
-    const newAllergenSet = new Set(selectedAllergens)
+  // Adds or removes an Allergen IRI from selected allergens.
+  function handleAllergenCheckboxOnChange(allergen: Allergen) {
+    let newSelectedAllergens = Array.from(selectedAllergens)
 
-    if (newAllergenSet.has(allergen)) {
-      newAllergenSet.delete(allergen)
+    if (newSelectedAllergens.includes(allergen.iri)) {
+      newSelectedAllergens = newSelectedAllergens.filter(
+        (iri) => iri !== allergen.iri,
+      )
     } else {
-      newAllergenSet.add(allergen)
+      newSelectedAllergens.push(allergen.iri)
     }
 
-    setSelectedAllergens(newAllergenSet)
+    setSelectedAllergens(newSelectedAllergens)
   }
 
   // Allergen IRIs are all from DBPedia
-  // todo: add loading state when fetching data
   async function displayAllergenDescription(allergen: Allergen) {
     // Allergen IRI in DBPedia
     const allergenKnowledgeGraphIri = allergen.sameAsIri
@@ -104,9 +105,9 @@ const SelectAllergens: React.FC<Props> = ({
     <>
       <h3 className="mb-3">What are you allergic to?</h3>
 
-      {allergenList.length === 0 && <span>Loading data...</span>}
+      {allergenDisplayList.length === 0 && <span>Loading data...</span>}
 
-      {allergenList.map((allergen: Allergen) => {
+      {allergenDisplayList.map((allergen: Allergen) => {
         return (
           <Stack
             direction="horizontal"
@@ -114,9 +115,9 @@ const SelectAllergens: React.FC<Props> = ({
             className="allergen-horizontal-stack mx-auto mt-2"
           >
             <Form.Check
-              checked={selectedAllergens.has(allergen)}
+              checked={selectedAllergens.includes(allergen.iri)}
               onChange={() => {
-                handleCheckboxOnChange(allergen)
+                handleAllergenCheckboxOnChange(allergen)
               }}
               type="checkbox"
             />
