@@ -11,38 +11,39 @@ import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 import { useState } from 'react'
 import Container from 'react-bootstrap/Container'
+import { FormattedMessage } from 'react-intl'
 
 const LoginScreen: React.FC = () => {
   const { language, setLanguage } = useContext(LanguageContext)
 
   const [showAboutModal, setShowAboutModal] = useState(false)
 
-  function setLanguageShorthand(languageLong: string) {
-    if (languageLong === 'English') {
+  function setLanguageContext(language: string) {
+    if (language === 'English') {
       setLanguage('en')
     }
 
-    if (languageLong === 'Slovensky') {
+    if (language === 'Slovensky') {
       setLanguage('sk')
     }
 
-    if (languageLong === 'Česky') {
+    if (language === 'Česky') {
       setLanguage('cs')
     }
 
     return
   }
 
-  function languageFullName(languageShorthand: string) {
-    if (languageShorthand === 'en') {
+  function languageFullName(locale: string) {
+    if (locale === 'en') {
       return 'English'
     }
 
-    if (languageShorthand === 'sk') {
+    if (locale === 'sk') {
       return 'Slovensky'
     }
 
-    if (languageShorthand === 'cs') {
+    if (locale === 'cs') {
       return 'Česky'
     }
 
@@ -128,7 +129,12 @@ const LoginScreen: React.FC = () => {
             alt="application_logo"
           />
 
-          <h5>Manage your personal eating preferences profile</h5>
+          <h5>
+            <FormattedMessage
+              id="manageYourProfileLoginScreenHeading"
+              defaultMessage="Manage your personal eating preferences profile"
+            />
+          </h5>
 
           <SelectProvider />
         </Stack>
@@ -136,7 +142,7 @@ const LoginScreen: React.FC = () => {
         <div className="position-absolute bottom-0 start-0 ms-3 mb-3">
           <Form.Select
             value={languageFullName(language)}
-            onChange={(e) => setLanguageShorthand(e.target.value)}
+            onChange={(e) => setLanguageContext(e.target.value)}
           >
             <option key="en">English</option>
             <option key="sk">Slovensky</option>
