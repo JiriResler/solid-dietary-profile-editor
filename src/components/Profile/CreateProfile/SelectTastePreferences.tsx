@@ -8,6 +8,7 @@ import CustomSelectMenu from './CustomSelectMenu'
 import Form from 'react-bootstrap/Form'
 import Stack from 'react-bootstrap/Stack'
 import './SelectTastePreferences.css'
+import { FormattedMessage } from 'react-intl'
 
 const worldCuisines = [
   'French',
@@ -107,9 +108,19 @@ const SelectTastePreferences: React.FC<Props> = ({
 
   return (
     <>
-      <h3>Specify your taste preferences</h3>
+      <h3>
+        <FormattedMessage
+          id="specifyYourTastePreferences"
+          defaultMessage="Specify your taste preferences"
+        />
+      </h3>
 
-      <h4>Which world cuisines do you like?</h4>
+      <h4>
+        <FormattedMessage
+          id="whichWorldCuisinesDoYouLike"
+          defaultMessage="Which world cuisines do you like?"
+        />
+      </h4>
       <div className="width-fit-content mx-auto text-start">
         {worldCuisines.map((cuisine) => {
           return (
@@ -138,17 +149,49 @@ const SelectTastePreferences: React.FC<Props> = ({
         isDisabled={loadingCuisines ? true : false}
         isLoading={loadingCuisines ? true : false}
         placeholder={
-          loadingCuisines ? 'Loading data...' : 'Search for more cuisines...'
+          loadingCuisines ?
+            <FormattedMessage
+              id="loadingData"
+              defaultMessage="Loading data..."
+            />
+            : <FormattedMessage
+              id="searchForMoreCuisines"
+              defaultMessage="Search for more cuisines..."
+            />
         }
       />
 
-      <h4 className="mt-3">Which taste of desserts do you prefer?</h4>
+      <h4 className="mt-3">
+        <FormattedMessage
+          id="whichTasteOfDessertsDoYouPrefer"
+          defaultMessage="Which taste of desserts do you prefer?"
+        />
+      </h4>
       <div className="width-fit-content text-start mx-auto">
-        <Form.Check type="radio" label="Doesn't matter" />
+        <Form.Check
+          type="radio"
+          label={
+            <FormattedMessage
+              id="savory"
+              defaultMessage="Savory"
+            />
+          }
+          checked={false}
+          onChange={() => {
+            handleDessertCheckboxOnChange(
+              'http://www.wikidata.org/entity/Q3324978',
+            )
+          }}
+        />
 
         <Form.Check
           type="radio"
-          label="Sweet"
+          label={
+            <FormattedMessage
+              id="sweet"
+              defaultMessage="Sweet"
+            />
+          }
           checked={false}
           onChange={() => {
             handleDessertCheckboxOnChange(
@@ -157,33 +200,71 @@ const SelectTastePreferences: React.FC<Props> = ({
           }}
         />
 
-        <Form.Check
-          type="radio"
-          label="Savory"
-          checked={false}
-          onChange={() => {
-            handleDessertCheckboxOnChange(
-              'http://www.wikidata.org/entity/Q3324978',
-            )
-          }}
+        <Form.Check type="radio" label={
+          <FormattedMessage
+            id="doesNotMatter"
+            defaultMessage="Doesn't matter"
+          />
+        }
         />
       </div>
 
-      <h4 className="mt-3">Do you like spicy food?</h4>
+      <h4 className="mt-3">
+        <FormattedMessage
+          id="doYouLikeSpicyFood"
+          defaultMessage="Do you like spicy food?"
+        />
+      </h4>
 
       <Form.Switch
-        label={userLikesSpicyFood ? 'Yes' : 'No'}
+        label={userLikesSpicyFood ?
+          <FormattedMessage
+            id="yes"
+            defaultMessage="Yes"
+          />
+          :
+          <FormattedMessage
+            id="no"
+            defaultMessage="No"
+          />
+        }
         className="width-fit-content mx-auto"
         onClick={() => setUserLikesSpicyFood(!userLikesSpicyFood)}
       />
 
       {userLikesSpicyFood && (
         <>
-          <span>How spicy should it be?</span>
+          <span>
+            <FormattedMessage
+              id="howSpicyShouldItBe"
+              defaultMessage="How spicy should it be?"
+            />
+          </span>
           <div className="width-fit-content mx-auto text-start">
-            <Form.Check type="radio" label="Mild" checked={true} />
-            <Form.Check type="radio" label="Medium" checked={false} />
-            <Form.Check type="radio" label="Hot" checked={false} />
+            <Form.Check type="radio" label={
+              <FormattedMessage
+                id="mild"
+                defaultMessage="Mild"
+              />
+            } 
+            checked={true} 
+            />
+            <Form.Check type="radio" label={
+              <FormattedMessage
+                id="medium"
+                defaultMessage="Medium"
+              />
+            }
+             checked={false} 
+             />
+            <Form.Check type="radio" label={
+              <FormattedMessage
+                id="hot"
+                defaultMessage="Hot"
+              />
+            } 
+            checked={false} 
+            />
           </div>
         </>
       )}

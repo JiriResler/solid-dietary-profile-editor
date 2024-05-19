@@ -37,6 +37,21 @@ type Messages = {
   showLessDietOptions: string
   showMoreDietOptions: string
   isYourDietNotListed: string
+  specifyYourTastePreferences: string
+  whichWorldCuisinesDoYouLike: string
+  loadingData: string
+  searchForMoreCuisines: string
+  whichTasteOfDessertsDoYouPrefer: string
+  doesNotMatter: string
+  sweet: string
+  savory: string
+  doYouLikeSpicyFood: string
+  yes: string
+  no: string
+  howSpicyShouldItBe: string
+  mild: string
+  medium: string
+  hot: string
 }
 
 const messagesInSlovak: Messages = {
@@ -73,6 +88,21 @@ const messagesInSlovak: Messages = {
   showLessDietOptions: 'Zobraziť menej možností',
   showMoreDietOptions: 'Zobraziť viac možností',
   isYourDietNotListed: 'Chýba vaša diéta v zozname?',
+  specifyYourTastePreferences: 'Špecifikujte vaše chuťové preferencie',
+  whichWorldCuisinesDoYouLike: 'Ktoré svetové kuchyne máte radi?',
+  loadingData: 'Načítavam dáta',
+  searchForMoreCuisines: 'Hľadať ďalšie svetové kuchyne...',
+  whichTasteOfDessertsDoYouPrefer: 'Aké zákusky máte radšej?',
+  doesNotMatter: 'Nezáleží',
+  sweet: 'Sladké',
+  savory: 'Slané',
+  doYouLikeSpicyFood: 'Obľubujete pálivé jedlo?',
+  yes: 'Áno',
+  no: 'Nie',
+  howSpicyShouldItBe: 'Ako veľmi pálivé by malo byť?',
+  mild: 'Jemne',
+  medium: 'Stredne',
+  hot: 'Veľmi',
 }
 
 // const cs_messages: Messages = {
