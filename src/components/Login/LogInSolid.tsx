@@ -3,6 +3,7 @@ import Form from 'react-bootstrap/Form'
 import { LoginButton } from '@inrupt/solid-ui-react'
 import { useState } from 'react'
 import './LoginSolid.css'
+import { FormattedMessage } from 'react-intl'
 
 const solidIdProviders: string[] = [
   'https://solidcommunity.net/',
@@ -49,7 +50,10 @@ const LogInSolid: React.FC<Props> = ({ setLoginWithSolid }) => {
         }
       >
         <Button className="solid-login-button w-100 choose-solid-provider-element">
-          Redirect to provider
+          <FormattedMessage
+            id="redirectToProvider"
+            defaultMessage="Redirect to provider"
+          />
         </Button>
       </LoginButton>
 
@@ -60,7 +64,10 @@ const LogInSolid: React.FC<Props> = ({ setLoginWithSolid }) => {
           setLoginWithSolid(false)
         }}
       >
-        Back
+        <FormattedMessage
+          id="goBack"
+          defaultMessage="Back"
+        />
       </Button>
     </div>
   )

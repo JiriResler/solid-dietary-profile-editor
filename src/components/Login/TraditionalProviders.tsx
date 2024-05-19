@@ -2,6 +2,7 @@ import './TraditionalProviders.css'
 import Button from 'react-bootstrap/Button'
 import { auth, facebook, google } from '../../firebase'
 import { signInWithPopup } from 'firebase/auth'
+import { FormattedMessage } from 'react-intl'
 
 // todo: sign out from all providers before signing in
 const TraditionalProviders: React.FC = () => {
@@ -19,8 +20,14 @@ const TraditionalProviders: React.FC = () => {
           className="provider-icon ms-1"
         />
 
-        <span className="ms-3">Sign in with Facebook</span>
+        <span className="ms-3">
+          <FormattedMessage
+            id="signInWithFacebook"
+            defaultMessage="Sign in with Facebook"
+          />
+        </span>
       </Button>
+
       <Button
         onClick={() => {
           void signInWithPopup(auth, google)
@@ -32,7 +39,12 @@ const TraditionalProviders: React.FC = () => {
           alt="Google logo"
           className="provider-icon ms-1"
         />
-        <span className="ms-3">Sign in with Google</span>
+        <span className="ms-3">
+        <FormattedMessage
+            id="signInWithGoogle"
+            defaultMessage="Sign in with Google"
+          />
+          </span>
       </Button>
     </>
   )

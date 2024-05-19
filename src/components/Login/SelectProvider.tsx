@@ -4,6 +4,7 @@ import LogInSolid from './LogInSolid'
 import { useState } from 'react'
 import './SelectProvider.css'
 import TraditionalProviders from './TraditionalProviders'
+import { FormattedMessage } from 'react-intl'
 
 const SelectProvider: React.FC = () => {
   const [loginWithSolid, setLoginWithSolid] = useState(false)
@@ -18,7 +19,10 @@ const SelectProvider: React.FC = () => {
       />
 
       <span className="select-provider-heading">
-        Select an identity provider
+        <FormattedMessage
+          id="selectIdentityProvider"
+          defaultMessage="Select an identity provider"
+        />
       </span>
 
       {loginWithSolid && <LogInSolid setLoginWithSolid={setLoginWithSolid} />}
@@ -36,7 +40,12 @@ const SelectProvider: React.FC = () => {
               alt="Solid logo"
               className="solid-icon"
             />
-            <span className="ms-3">Sign in with Solid</span>
+            <span className="ms-3">
+              <FormattedMessage
+                id="signInWithSolid"
+                defaultMessage="Sign in with Solid"
+              />
+            </span>
           </Button>
 
           <div
@@ -45,11 +54,19 @@ const SelectProvider: React.FC = () => {
             }}
             className="clickable-text w-50 mt-1 mx-auto"
           >
-            What is Solid?
+            <FormattedMessage
+              id="whatIsSolid"
+              defaultMessage="What is Solid?"
+            />
           </div>
 
           <div className="providers-divider">
-            <span>or</span>
+            <span>
+              <FormattedMessage
+                id="signInDivider"
+                defaultMessage="or"
+              />
+            </span>
           </div>
 
           <TraditionalProviders />

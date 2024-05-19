@@ -5,10 +5,26 @@ import { PropsWithChildren } from 'react'
 
 type Messages = {
   manageYourProfileLoginScreenHeading: string
+  selectIdentityProvider: string
+  signInWithSolid: string
+  whatIsSolid: string
+  signInDivider: string
+  signInWithFacebook: string
+  signInWithGoogle: string
+  redirectToProvider: string
+  goBack: string
 }
 
 const messagesInSlovak: Messages = {
-  manageYourProfileLoginScreenHeading: 'Spravujte svoj osobny dietny profil',
+  manageYourProfileLoginScreenHeading: 'Spravujte svoj osobný diétny profil',
+  selectIdentityProvider: 'Vyberte spôsob prihlásenia',
+  signInWithSolid: 'Solid',
+  whatIsSolid: 'Čo je to Solid?',
+  signInDivider: 'alebo',
+  signInWithFacebook: 'Prihlásiť sa cez Facebook',
+  signInWithGoogle: 'Prihlasit sa uctom Google',
+  redirectToProvider: 'Prejsť na poskytovateľa',
+  goBack: 'Späť',
 }
 
 // const cs_messages: Messages = {
