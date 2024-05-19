@@ -33,6 +33,10 @@ type Messages = {
   whatAreYouAllergicTo: string
   nextStep: string
   saveProfile: string
+  whichDietsAreYouOn: string
+  showLessDietOptions: string
+  showMoreDietOptions: string
+  isYourDietNotListed: string
 }
 
 const messagesInSlovak: Messages = {
@@ -65,6 +69,10 @@ const messagesInSlovak: Messages = {
   whatAreYouAllergicTo: 'Na čo máte alergiu?',
   nextStep: 'Ďalej',
   saveProfile: 'Uložiť profil',
+  whichDietsAreYouOn: 'Ktoré diéty dodržiavate?',
+  showLessDietOptions: 'Zobraziť menej možností',
+  showMoreDietOptions: 'Zobraziť viac možností',
+  isYourDietNotListed: 'Chýba vaša diéta v zozname?',
 }
 
 // const cs_messages: Messages = {

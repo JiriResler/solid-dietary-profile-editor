@@ -7,6 +7,7 @@ import Button from 'react-bootstrap/Button'
 import Carousel from 'react-bootstrap/Carousel'
 import Select from 'react-select'
 import './SelectDiets.css'
+import { FormattedMessage } from 'react-intl'
 
 const dietList: Diet[] = [
   {
@@ -134,7 +135,12 @@ const SelectDiets: React.FC<Props> = ({ selectedDiets, setSelectedDiets }) => {
         </Modal.Footer>
       </Modal>
 
-      <h3 className="mb-3">Which diets are you on?</h3>
+      <h3 className="mb-3">
+        <FormattedMessage
+          id="whichDietsAreYouOn"
+          defaultMessage="Which diets are you on?"
+        />
+      </h3>
       {dietList.slice(0, 2).map((diet: Diet) => {
         return (
           <Stack
@@ -167,8 +173,17 @@ const SelectDiets: React.FC<Props> = ({ selectedDiets, setSelectedDiets }) => {
         className="onHoverPointer mt-4"
       >
         {showMoreDietOptions
-          ? 'Show less diet options ^'
-          : 'Show more diet options v'}
+          ?
+          <FormattedMessage
+            id="showLessDietOptions"
+            defaultMessage="Show less diet options"
+          />
+          :
+          <FormattedMessage
+            id="showMoreDietOptions"
+            defaultMessage="Show more diet options"
+          />
+        }
       </div>
 
       {showMoreDietOptions && (
@@ -200,7 +215,13 @@ const SelectDiets: React.FC<Props> = ({ selectedDiets, setSelectedDiets }) => {
             )
           })}
 
-          <h3 className="mt-3">Are you looking for something else?</h3>
+          <h3 className="mt-3">
+            <FormattedMessage
+              id="isYourDietNotListed"
+              defaultMessage="Is your diet not listed?"
+            />
+          </h3>
+
           <Select
             className="mt-3 w-75 mx-auto"
             options={[
