@@ -17,6 +17,11 @@ type Messages = {
   aboutTheApplication: string
   sourceCode: string
   createdBy: string
+  editProfile: string
+  importProfile: string
+  downloadProfile: string
+  userManual: string
+  signOut: string
 }
 
 const messagesInSlovak: Messages = {
@@ -33,6 +38,11 @@ const messagesInSlovak: Messages = {
   aboutTheApplication: 'O aplikácii',
   sourceCode: 'Zdrojový kód',
   createdBy: 'Vytvoril',
+  editProfile: 'Editovať profil',
+  importProfile: 'Importovať profil',
+  downloadProfile: 'Stiahnuť profil',
+  userManual: 'Používateľská príručka',
+  signOut: 'Odhlásiť sa',
 }
 
 // const cs_messages: Messages = {
