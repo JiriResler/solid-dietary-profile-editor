@@ -22,6 +22,14 @@ type Messages = {
   downloadProfile: string
   userManual: string
   signOut: string
+  allergens: string
+  allergicTo: string
+  diets: string
+  onDiets: string
+  tastePreferences: string
+  worldCuisines: string
+  tasteOfDesserts: string
+  tasteSpiciness: string
 }
 
 const messagesInSlovak: Messages = {
@@ -43,6 +51,14 @@ const messagesInSlovak: Messages = {
   downloadProfile: 'Stiahnuť profil',
   userManual: 'Používateľská príručka',
   signOut: 'Odhlásiť sa',
+  allergens: 'Alergény',
+  allergicTo: 'Ste alergický na',
+  diets: 'Diéty',
+  onDiets: 'Vaše diéty sú',
+  tastePreferences: 'Chuťové preferencie',
+  worldCuisines: 'Obľúbené svetové kuchyne',
+  tasteOfDesserts: 'Preferovaná chuť zákuskov',
+  tasteSpiciness: 'Úroveň štipľavosti',
 }
 
 // const cs_messages: Messages = {

@@ -447,10 +447,18 @@ const Profile: React.FC<Props> = ({ loginMethod }) => {
         <Stack gap={3} className="mt-3">
           <Card>
             <Card.Body className="profile-card-body">
-              <Card.Title>Allergens</Card.Title>
+              <Card.Title>
+                <FormattedMessage
+                  id="allergens"
+                  defaultMessage="Allergens"
+                />
+              </Card.Title>
 
               <Card.Subtitle className="mb-2 text-muted">
-                You are allergic to
+                <FormattedMessage
+                  id="allergicTo"
+                  defaultMessage="You are allergic to"
+                />
               </Card.Subtitle>
 
               <Card.Text className="width-fit-content">
@@ -473,9 +481,17 @@ const Profile: React.FC<Props> = ({ loginMethod }) => {
             </Card.Body>
 
             <Card.Body className="profile-card-body">
-              <Card.Title>Diets</Card.Title>
+              <Card.Title>
+                <FormattedMessage
+                  id="diets"
+                  defaultMessage="Diets"
+                />
+              </Card.Title>
               <Card.Subtitle className="mb-2 text-muted">
-                Your diets are
+                <FormattedMessage
+                  id="onDiets"
+                  defaultMessage="Your diets are"
+                />
               </Card.Subtitle>
 
               <Card.Text className="width-fit-content">
@@ -497,9 +513,17 @@ const Profile: React.FC<Props> = ({ loginMethod }) => {
             </Card.Body>
 
             <Card.Body>
-              <Card.Title>Taste preferences</Card.Title>
+              <Card.Title>
+                <FormattedMessage
+                  id="tastePreferences"
+                  defaultMessage="Taste preferences"
+                />
+              </Card.Title>
               <Card.Subtitle className="mb-2 text-muted">
-                Favored world cuisines
+                <FormattedMessage
+                  id="worldCuisines"
+                  defaultMessage="Favored world cuisines"
+                />
               </Card.Subtitle>
 
               <Card.Text className="width-fit-content">
@@ -520,7 +544,10 @@ const Profile: React.FC<Props> = ({ loginMethod }) => {
               </Card.Text>
 
               <Card.Subtitle className="mb-2 text-muted">
-                Preferred taste of desserts
+                <FormattedMessage
+                  id="tasteOfDesserts"
+                  defaultMessage="Preferred taste of desserts"
+                />
               </Card.Subtitle>
 
               <Card.Text>
@@ -528,7 +555,10 @@ const Profile: React.FC<Props> = ({ loginMethod }) => {
               </Card.Text>
 
               <Card.Subtitle className="mb-2 text-muted">
-                Liked level of spiciness
+                <FormattedMessage
+                  id="tasteSpiciness"
+                  defaultMessage="Liked level of spiciness"
+                />
               </Card.Subtitle>
 
               <Card.Text>
