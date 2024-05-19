@@ -13,18 +13,26 @@ type Messages = {
   signInWithGoogle: string
   redirectToProvider: string
   goBack: string
+  welcomeToTheApplication: string
+  aboutTheApplication: string
+  sourceCode: string
+  createdBy: string
 }
 
 const messagesInSlovak: Messages = {
-  manageYourProfileLoginScreenHeading: 'Spravujte svoj osobný diétny profil',
+  manageYourProfileLoginScreenHeading: 'Spravujte svoj diétny profil',
   selectIdentityProvider: 'Vyberte spôsob prihlásenia',
   signInWithSolid: 'Solid',
   whatIsSolid: 'Čo je to Solid?',
   signInDivider: 'alebo',
   signInWithFacebook: 'Prihlásiť sa cez Facebook',
-  signInWithGoogle: 'Prihlasit sa uctom Google',
+  signInWithGoogle: 'Prihlásiť sa účtom Google',
   redirectToProvider: 'Prejsť na poskytovateľa',
   goBack: 'Späť',
+  welcomeToTheApplication: 'Vitajte v personálnom editore diétneho profilu!',
+  aboutTheApplication: 'O aplikácii',
+  sourceCode: 'Zdrojový kód',
+  createdBy: 'Vytvoril',
 }
 
 // const cs_messages: Messages = {

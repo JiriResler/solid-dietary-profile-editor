@@ -73,8 +73,12 @@ const LoginScreen: React.FC = () => {
           <Col md={7} className="position-relative">
             <Stack className="w-75 text-center position-absolute top-50 start-50 translate-middle">
               <h2>
-                Welcome to the personal eating preferences profile editor!
+                <FormattedMessage
+                  id="welcomeToTheApplication"
+                  defaultMessage="Welcome to the personal eating preferences profile editor!"
+                />
               </h2>
+
               <img
                 className="application-logo"
                 src="images/app_logo.svg"
@@ -82,7 +86,10 @@ const LoginScreen: React.FC = () => {
               />
 
               <h4 className="mt-3 w-50 mx-auto">
-                Manage your eating preferences profile
+                <FormattedMessage
+                  id="manageYourProfileLoginScreenHeading"
+                  defaultMessage="Manage your eating preferences profile"
+                />
               </h4>
             </Stack>
             <div className="position-absolute bottom-0 start-50 translate-middle-x mb-3">
@@ -90,7 +97,10 @@ const LoginScreen: React.FC = () => {
                 className="clickable-text"
                 onClick={() => setShowAboutModal(true)}
               >
-                About
+                <FormattedMessage
+                  id="aboutTheApplication"
+                  defaultMessage="About"
+                />
               </span>
               <span> | </span>
               <a
@@ -98,10 +108,18 @@ const LoginScreen: React.FC = () => {
                 target="_blank"
                 className="link-without-decoration"
               >
-                Source code
+                <FormattedMessage
+                  id="sourceCode"
+                  defaultMessage="Source code"
+                />
               </a>
               <span> | </span>
-              <span>Created by Jiří Resler</span>
+              <span>
+                <FormattedMessage
+                  id="createdBy"
+                  defaultMessage="Created by"
+                /> {' '} Jiří Resler
+              </span>
             </div>
           </Col>
 
