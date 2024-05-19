@@ -30,6 +30,9 @@ type Messages = {
   worldCuisines: string
   tasteOfDesserts: string
   tasteSpiciness: string
+  whatAreYouAllergicTo: string
+  nextStep: string
+  saveProfile: string
 }
 
 const messagesInSlovak: Messages = {
@@ -59,6 +62,9 @@ const messagesInSlovak: Messages = {
   worldCuisines: 'Obľúbené svetové kuchyne',
   tasteOfDesserts: 'Preferovaná chuť zákuskov',
   tasteSpiciness: 'Úroveň štipľavosti',
+  whatAreYouAllergicTo: 'Na čo máte alergiu?',
+  nextStep: 'Ďalej',
+  saveProfile: 'Uložiť profil',
 }
 
 // const cs_messages: Messages = {

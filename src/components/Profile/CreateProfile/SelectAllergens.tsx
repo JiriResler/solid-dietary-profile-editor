@@ -7,6 +7,7 @@ import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 import Carousel from 'react-bootstrap/Carousel'
 import loadAllergenList from './loadProfileCreationData'
+import { FormattedMessage } from 'react-intl'
 
 interface AllergenDescription extends Allergen {
   descriptionText: string
@@ -103,7 +104,12 @@ const SelectAllergens: React.FC<Props> = ({
 
   return (
     <>
-      <h3 className="mb-3">What are you allergic to?</h3>
+      <h3 className="mb-3">
+        <FormattedMessage
+          id="whatAreYouAllergicTo"
+          defaultMessage="What are you allergic to?"
+        />
+      </h3>
 
       {allergenDisplayList.length === 0 && <span>Loading data...</span>}
 

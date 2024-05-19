@@ -14,6 +14,7 @@ import Stepper from '@mui/material/Stepper'
 import Step from '@mui/material/Step'
 import StepLabel from '@mui/material/StepLabel'
 import Container from 'react-bootstrap/Container'
+import { FormattedMessage } from 'react-intl'
 
 type Props = {
   loginMethod: LoginMethod
@@ -135,7 +136,10 @@ const CreateProfile: React.FC<Props> = ({
               className="create-profile-navigation-button app-primary-color-button"
               onClick={() => setCurrentStep(currentStep + 1)}
             >
-              Next
+              <FormattedMessage
+                id="nextStep"
+                defaultMessage="Next"
+              />
             </Button>
           )}
 
@@ -145,13 +149,19 @@ const CreateProfile: React.FC<Props> = ({
                 className="create-profile-navigation-button app-primary-color-button"
                 onClick={() => setCurrentStep(currentStep + 1)}
               >
-                Next
+                <FormattedMessage
+                  id="nextStep"
+                  defaultMessage="Next"
+                />
               </Button>
               <Button
                 className="create-profile-navigation-button app-secondary-color-button mt-2"
                 onClick={() => setCurrentStep(currentStep - 1)}
               >
-                Back
+                <FormattedMessage
+                  id="goBack"
+                  defaultMessage="Back"
+                />
               </Button>
             </>
           )}
@@ -163,13 +173,19 @@ const CreateProfile: React.FC<Props> = ({
                 className="create-profile-navigation-button"
                 onClick={() => saveProfile()}
               >
-                Save profile
+                <FormattedMessage
+                id="saveProfile"
+                defaultMessage="Back"
+              />
               </Button>
               <Button
                 className="create-profile-navigation-button app-secondary-color-button mt-2"
                 onClick={() => setCurrentStep(currentStep - 1)}
               >
-                Back
+                <FormattedMessage
+                  id="goBack"
+                  defaultMessage="Back"
+                />
               </Button>
             </>
           )}
