@@ -276,7 +276,7 @@ const Profile: React.FC<Props> = ({ loginMethod }) => {
           />
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="success" onClick={() => { }}>
+          <Button variant="success" onClick={() => {}}>
             Import
           </Button>
           <Button
@@ -430,11 +430,8 @@ const Profile: React.FC<Props> = ({ loginMethod }) => {
                     />
                   </svg>
 
-                  <span className='sign-out'>
-                    <FormattedMessage
-                      id="signOut"
-                      defaultMessage="Sign out"
-                    />
+                  <span className="sign-out">
+                    <FormattedMessage id="signOut" defaultMessage="Sign out" />
                   </span>
                 </div>
               </Dropdown.Item>
@@ -448,10 +445,7 @@ const Profile: React.FC<Props> = ({ loginMethod }) => {
           <Card>
             <Card.Body className="profile-card-body">
               <Card.Title>
-                <FormattedMessage
-                  id="allergens"
-                  defaultMessage="Allergens"
-                />
+                <FormattedMessage id="allergens" defaultMessage="Allergens" />
               </Card.Title>
 
               <Card.Subtitle className="mb-2 text-muted">
@@ -482,10 +476,7 @@ const Profile: React.FC<Props> = ({ loginMethod }) => {
 
             <Card.Body className="profile-card-body">
               <Card.Title>
-                <FormattedMessage
-                  id="diets"
-                  defaultMessage="Diets"
-                />
+                <FormattedMessage id="diets" defaultMessage="Diets" />
               </Card.Title>
               <Card.Subtitle className="mb-2 text-muted">
                 <FormattedMessage

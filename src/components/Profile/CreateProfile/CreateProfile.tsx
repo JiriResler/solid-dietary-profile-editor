@@ -136,10 +136,7 @@ const CreateProfile: React.FC<Props> = ({
               className="create-profile-navigation-button app-primary-color-button"
               onClick={() => setCurrentStep(currentStep + 1)}
             >
-              <FormattedMessage
-                id="nextStep"
-                defaultMessage="Next"
-              />
+              <FormattedMessage id="nextStep" defaultMessage="Next" />
             </Button>
           )}
 
@@ -149,19 +146,13 @@ const CreateProfile: React.FC<Props> = ({
                 className="create-profile-navigation-button app-primary-color-button"
                 onClick={() => setCurrentStep(currentStep + 1)}
               >
-                <FormattedMessage
-                  id="nextStep"
-                  defaultMessage="Next"
-                />
+                <FormattedMessage id="nextStep" defaultMessage="Next" />
               </Button>
               <Button
                 className="create-profile-navigation-button app-secondary-color-button mt-2"
                 onClick={() => setCurrentStep(currentStep - 1)}
               >
-                <FormattedMessage
-                  id="goBack"
-                  defaultMessage="Back"
-                />
+                <FormattedMessage id="goBack" defaultMessage="Back" />
               </Button>
             </>
           )}
@@ -173,19 +164,13 @@ const CreateProfile: React.FC<Props> = ({
                 className="create-profile-navigation-button"
                 onClick={() => saveProfile()}
               >
-                <FormattedMessage
-                id="saveProfile"
-                defaultMessage="Back"
-              />
+                <FormattedMessage id="saveProfile" defaultMessage="Back" />
               </Button>
               <Button
                 className="create-profile-navigation-button app-secondary-color-button mt-2"
                 onClick={() => setCurrentStep(currentStep - 1)}
               >
-                <FormattedMessage
-                  id="goBack"
-                  defaultMessage="Back"
-                />
+                <FormattedMessage id="goBack" defaultMessage="Back" />
               </Button>
             </>
           )}

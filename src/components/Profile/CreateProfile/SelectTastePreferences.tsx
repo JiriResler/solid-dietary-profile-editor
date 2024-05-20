@@ -149,15 +149,17 @@ const SelectTastePreferences: React.FC<Props> = ({
         isDisabled={loadingCuisines ? true : false}
         isLoading={loadingCuisines ? true : false}
         placeholder={
-          loadingCuisines ?
+          loadingCuisines ? (
             <FormattedMessage
               id="loadingData"
               defaultMessage="Loading data..."
             />
-            : <FormattedMessage
+          ) : (
+            <FormattedMessage
               id="searchForMoreCuisines"
               defaultMessage="Search for more cuisines..."
             />
+          )
         }
       />
 
@@ -170,12 +172,7 @@ const SelectTastePreferences: React.FC<Props> = ({
       <div className="width-fit-content text-start mx-auto">
         <Form.Check
           type="radio"
-          label={
-            <FormattedMessage
-              id="savory"
-              defaultMessage="Savory"
-            />
-          }
+          label={<FormattedMessage id="savory" defaultMessage="Savory" />}
           checked={false}
           onChange={() => {
             handleDessertCheckboxOnChange(
@@ -186,12 +183,7 @@ const SelectTastePreferences: React.FC<Props> = ({
 
         <Form.Check
           type="radio"
-          label={
-            <FormattedMessage
-              id="sweet"
-              defaultMessage="Sweet"
-            />
-          }
+          label={<FormattedMessage id="sweet" defaultMessage="Sweet" />}
           checked={false}
           onChange={() => {
             handleDessertCheckboxOnChange(
@@ -200,12 +192,14 @@ const SelectTastePreferences: React.FC<Props> = ({
           }}
         />
 
-        <Form.Check type="radio" label={
-          <FormattedMessage
-            id="doesNotMatter"
-            defaultMessage="Doesn't matter"
-          />
-        }
+        <Form.Check
+          type="radio"
+          label={
+            <FormattedMessage
+              id="doesNotMatter"
+              defaultMessage="Doesn't matter"
+            />
+          }
         />
       </div>
 
@@ -217,16 +211,12 @@ const SelectTastePreferences: React.FC<Props> = ({
       </h4>
 
       <Form.Switch
-        label={userLikesSpicyFood ?
-          <FormattedMessage
-            id="yes"
-            defaultMessage="Yes"
-          />
-          :
-          <FormattedMessage
-            id="no"
-            defaultMessage="No"
-          />
+        label={
+          userLikesSpicyFood ? (
+            <FormattedMessage id="yes" defaultMessage="Yes" />
+          ) : (
+            <FormattedMessage id="no" defaultMessage="No" />
+          )
         }
         className="width-fit-content mx-auto"
         onClick={() => setUserLikesSpicyFood(!userLikesSpicyFood)}
@@ -241,29 +231,20 @@ const SelectTastePreferences: React.FC<Props> = ({
             />
           </span>
           <div className="width-fit-content mx-auto text-start">
-            <Form.Check type="radio" label={
-              <FormattedMessage
-                id="mild"
-                defaultMessage="Mild"
-              />
-            } 
-            checked={true} 
+            <Form.Check
+              type="radio"
+              label={<FormattedMessage id="mild" defaultMessage="Mild" />}
+              checked={true}
             />
-            <Form.Check type="radio" label={
-              <FormattedMessage
-                id="medium"
-                defaultMessage="Medium"
-              />
-            }
-             checked={false} 
-             />
-            <Form.Check type="radio" label={
-              <FormattedMessage
-                id="hot"
-                defaultMessage="Hot"
-              />
-            } 
-            checked={false} 
+            <Form.Check
+              type="radio"
+              label={<FormattedMessage id="medium" defaultMessage="Medium" />}
+              checked={false}
+            />
+            <Form.Check
+              type="radio"
+              label={<FormattedMessage id="hot" defaultMessage="Hot" />}
+              checked={false}
             />
           </div>
         </>

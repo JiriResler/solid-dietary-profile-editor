@@ -64,10 +64,7 @@ const LogInSolid: React.FC<Props> = ({ setLoginWithSolid }) => {
           setLoginWithSolid(false)
         }}
       >
-        <FormattedMessage
-          id="goBack"
-          defaultMessage="Back"
-        />
+        <FormattedMessage id="goBack" defaultMessage="Back" />
       </Button>
     </div>
   )

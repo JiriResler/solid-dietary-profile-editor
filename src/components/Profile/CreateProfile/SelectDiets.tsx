@@ -172,18 +172,17 @@ const SelectDiets: React.FC<Props> = ({ selectedDiets, setSelectedDiets }) => {
         onClick={() => setShowMoreDietOptions(!showMoreDietOptions)}
         className="onHoverPointer mt-4"
       >
-        {showMoreDietOptions
-          ?
+        {showMoreDietOptions ? (
           <FormattedMessage
             id="showLessDietOptions"
             defaultMessage="Show less diet options"
           />
-          :
+        ) : (
           <FormattedMessage
             id="showMoreDietOptions"
             defaultMessage="Show more diet options"
           />
-        }
+        )}
       </div>
 
       {showMoreDietOptions && (

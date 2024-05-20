@@ -40,11 +40,11 @@ const TraditionalProviders: React.FC = () => {
           className="provider-icon ms-1"
         />
         <span className="ms-3">
-        <FormattedMessage
+          <FormattedMessage
             id="signInWithGoogle"
             defaultMessage="Sign in with Google"
           />
-          </span>
+        </span>
       </Button>
     </>
   )

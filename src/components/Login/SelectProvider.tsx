@@ -62,10 +62,7 @@ const SelectProvider: React.FC = () => {
 
           <div className="providers-divider">
             <span>
-              <FormattedMessage
-                id="signInDivider"
-                defaultMessage="or"
-              />
+              <FormattedMessage id="signInDivider" defaultMessage="or" />
             </span>
           </div>
 

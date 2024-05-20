@@ -115,10 +115,8 @@ const LoginScreen: React.FC = () => {
               </a>
               <span> | </span>
               <span>
-                <FormattedMessage
-                  id="createdBy"
-                  defaultMessage="Created by"
-                /> {' '} Jiří Resler
+                <FormattedMessage id="createdBy" defaultMessage="Created by" />{' '}
+                Jiří Resler
               </span>
             </div>
           </Col>
