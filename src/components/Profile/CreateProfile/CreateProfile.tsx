@@ -164,7 +164,10 @@ const CreateProfile: React.FC<Props> = ({
                 className="create-profile-navigation-button"
                 onClick={() => saveProfile()}
               >
-                <FormattedMessage id="saveProfile" defaultMessage="Back" />
+                <FormattedMessage
+                  id="saveProfile"
+                  defaultMessage="Save profile"
+                />
               </Button>
               <Button
                 className="create-profile-navigation-button app-secondary-color-button mt-2"
