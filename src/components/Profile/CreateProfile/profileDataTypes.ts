@@ -2,7 +2,7 @@ import SelectMenuOption from './selectMenuOptionType'
 
 export type Allergen = {
   iri: string
-  label: string
+  currentLanguageLabel: string
   menuLegendNumber: number
   iconUrl: string
   sameAsIri: string

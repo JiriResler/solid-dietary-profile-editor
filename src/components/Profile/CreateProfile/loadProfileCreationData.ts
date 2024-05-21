@@ -1,7 +1,7 @@
 import {
   getThing,
   getUrl,
-  getStringEnglish,
+  getStringWithLocale,
   getInteger,
   fromRdfJsDataset,
   Thing,
@@ -12,7 +12,7 @@ import { RDFS, OWL } from '@inrupt/vocab-common-rdf'
 import ONTOLOGY from './commonRdfVocab'
 
 // Loads a list of most common allergens from the internet and returns an array of Allergens.
-export default async function loadAllergenList() {
+export default async function loadAllergenList(locale: string) {
   const allergenListFileUrl =
     'https://raw.githubusercontent.com/JiriResler/personalized-restaurant-menu-viewer-application-ontology/main/resource/List_of_major_allergens'
 
@@ -35,7 +35,7 @@ export default async function loadAllergenList() {
 
   // Load information about each allergen
   for (const allergenUrl of allergenUrlArray) {
-    const allergen = await loadAllergenData(allergenUrl)
+    const allergen = await loadAllergenData(allergenUrl, locale)
 
     allergenList.push(allergen)
   }
@@ -108,7 +108,7 @@ function readUrlSequenceFromThing(thing: Thing) {
 }
 
 // Loads a turtle file describing an allergen from the internet and returns an Allergen.
-async function loadAllergenData(allergenUrl: string) {
+async function loadAllergenData(allergenUrl: string, locale: string) {
   const allergenFileUrl = allergenUrl + '.ttl'
 
   const turtleFile = await fetchTurtleFile(allergenFileUrl)
@@ -121,21 +121,25 @@ async function loadAllergenData(allergenUrl: string) {
     throw new Error('Allergen definition was not found in file.')
   }
 
-  return getAllergenFromThing(allergenThing)
+  return getAllergenFromThing(allergenThing, locale)
 }
 
 // Reads allergen data from a Thing and returns an Allergen.
-export function getAllergenFromThing(thing: Thing): Allergen {
+export function getAllergenFromThing(thing: Thing, locale: string): Allergen {
   const allergenNumber = getInteger(thing, ONTOLOGY.allergenNumber)
 
   if (allergenNumber === null) {
     throw new Error('Alergen number value is missing in RDF allergen file.')
   }
 
-  const allergenLabel = getStringEnglish(thing, RDFS.label)
+  const allergenLabel = getStringWithLocale(thing, RDFS.label, locale)
 
   if (allergenLabel === null) {
-    throw new Error('Allergen label value is missing in RDF allergen file.')
+    throw new Error(
+      'Allergen label value for ' +
+        locale +
+        ' is missing in RDF allergen file.',
+    )
   }
 
   const allergenIconUrl = getUrl(thing, ONTOLOGY.hasIcon)
@@ -154,7 +158,7 @@ export function getAllergenFromThing(thing: Thing): Allergen {
 
   return {
     iri: thing.url,
-    label: allergenLabel,
+    currentLanguageLabel: allergenLabel,
     menuLegendNumber: allergenNumber,
     iconUrl: allergenIconUrl,
     sameAsIri: allergenSameAsIri,

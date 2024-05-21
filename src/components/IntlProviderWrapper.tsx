@@ -106,12 +106,16 @@ const messagesInSlovak: Messages = {
 }
 
 // const cs_messages: Messages = {
-  
+
 // }
 
 const IntlProviderWrapper: React.FC<PropsWithChildren> = (props) => {
-  const [languageLocale, setLanguageLocale] = useState('en')
-  const languageContextInitialValue = { language: languageLocale, setLanguage: setLanguageLocale }
+  const [selectedLanguageLocale, setSelectedLanguageLocale] = useState('en')
+
+  const languageContextInitialValue = {
+    selectedLanguage: selectedLanguageLocale,
+    setSelectedLanguage: setSelectedLanguageLocale,
+  }
 
   function getCurrentLocaleMessages(locale: string) {
     if (locale === 'sk') {
@@ -128,8 +132,8 @@ const IntlProviderWrapper: React.FC<PropsWithChildren> = (props) => {
   return (
     <LanguageContext.Provider value={languageContextInitialValue}>
       <IntlProvider
-        messages={getCurrentLocaleMessages(languageLocale)}
-        locale={languageLocale}
+        messages={getCurrentLocaleMessages(selectedLanguageLocale)}
+        locale={selectedLanguageLocale}
       >
         {props.children}
       </IntlProvider>

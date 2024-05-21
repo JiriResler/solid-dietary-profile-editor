@@ -14,21 +14,21 @@ import Container from 'react-bootstrap/Container'
 import { FormattedMessage } from 'react-intl'
 
 const LoginScreen: React.FC = () => {
-  const { language, setLanguage } = useContext(LanguageContext)
+  const { selectedLanguage, setSelectedLanguage } = useContext(LanguageContext)
 
   const [showAboutModal, setShowAboutModal] = useState(false)
 
   function setLanguageContext(language: string) {
     if (language === 'English') {
-      setLanguage('en')
+      setSelectedLanguage('en')
     }
 
     if (language === 'Slovensky') {
-      setLanguage('sk')
+      setSelectedLanguage('sk')
     }
 
     if (language === 'Česky') {
-      setLanguage('cs')
+      setSelectedLanguage('cs')
     }
 
     return
@@ -157,7 +157,7 @@ const LoginScreen: React.FC = () => {
 
         <div className="position-absolute bottom-0 start-0 ms-3 mb-3">
           <Form.Select
-            value={languageFullName(language)}
+            value={languageFullName(selectedLanguage)}
             onChange={(e) => setLanguageContext(e.target.value)}
           >
             <option key="en">English</option>

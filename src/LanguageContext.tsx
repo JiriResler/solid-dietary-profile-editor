@@ -1,14 +1,14 @@
 import React, { Dispatch } from 'react'
 
 interface LanguageContext {
-  language: string
-  setLanguage: Dispatch<React.SetStateAction<string>>
+  selectedLanguage: string
+  setSelectedLanguage: Dispatch<React.SetStateAction<string>>
 }
 
 // Context for currently selected language by the user.
 const LanguageContext = React.createContext<LanguageContext>({
-  language: '',
-  setLanguage: () => {},
+  selectedLanguage: '',
+  setSelectedLanguage: () => {},
 })
 
 export default LanguageContext

@@ -8,6 +8,8 @@ import Button from 'react-bootstrap/Button'
 import Carousel from 'react-bootstrap/Carousel'
 import loadAllergenList from './loadProfileCreationData'
 import { FormattedMessage } from 'react-intl'
+import { useContext } from 'react'
+import LanguageContext from '../../../LanguageContext'
 
 interface AllergenDescription extends Allergen {
   descriptionText: string
@@ -29,20 +31,22 @@ const SelectAllergens: React.FC<Props> = ({
   selectedAllergens,
   setSelectedAllergens,
 }) => {
-  const [showAllergenDescriptionModal, setShowAllergenDescriptionModal] =
-    useState(false)
+  const { selectedLanguage } = useContext(LanguageContext)
 
   // Allergen data loaded from the internet to display to the user.
   const [allergenDisplayList, setAllergenDisplayList] = useState<Allergen[]>([])
+
+  const [showAllergenDescriptionModal, setShowAllergenDescriptionModal] =
+    useState(false)
 
   // Allergen with its description to show in modal.
   const [allergenDescription, setAllergenDescription] =
     useState<AllergenDescription | null>(null)
 
   useEffect(() => {
-    loadAllergenList()
-      .then((value) => {
-        setAllergenDisplayList(value)
+    loadAllergenList(selectedLanguage)
+      .then((allergenList) => {
+        setAllergenDisplayList(allergenList)
       })
       .catch((error) => {
         alert(
@@ -50,6 +54,7 @@ const SelectAllergens: React.FC<Props> = ({
         )
         console.error(error)
       })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   // Adds or removes an Allergen IRI from selected allergens.
@@ -128,7 +133,9 @@ const SelectAllergens: React.FC<Props> = ({
               type="checkbox"
             />
             <img src={allergen.iconUrl} className="allergen-icon" />
-            <span className="w-50 text-start">{allergen.label}</span>
+            <span className="w-50 text-start">
+              {allergen.currentLanguageLabel}
+            </span>
             <img
               src="images/info_icon.svg"
               alt="information icon"
@@ -152,7 +159,7 @@ const SelectAllergens: React.FC<Props> = ({
         >
           <Modal.Header closeButton>
             <Modal.Title>
-              <div>{allergenDescription.label}</div>
+              <div>{allergenDescription.currentLanguageLabel}</div>
               <div className="legendNumberText">
                 Menu legend number: {allergenDescription.menuLegendNumber}
               </div>
