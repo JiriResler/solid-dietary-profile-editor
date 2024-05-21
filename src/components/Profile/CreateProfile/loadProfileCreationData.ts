@@ -14,16 +14,13 @@ import ONTOLOGY from './commonRdfVocab'
 // Loads a list of most common allergens from the internet and returns an array of Allergens.
 export default async function loadAllergenList() {
   const allergenListFileUrl =
-    'https://raw.githubusercontent.com/JiriResler/personalized-restaurant-menu-viewer-application-ontology/main/resource/List_of_most_common_allergens.ttl'
+    'https://raw.githubusercontent.com/JiriResler/personalized-restaurant-menu-viewer-application-ontology/main/resource/List_of_major_allergens'
 
-  const allergenListTurtle = await fetchTurtleFile(allergenListFileUrl)
+  const allergenListTurtle = await fetchTurtleFile(allergenListFileUrl + '.ttl')
 
   const listAsRdfDataset = parseTurtleFile(allergenListTurtle)
 
-  const listOfAllergens = getThing(
-    listAsRdfDataset,
-    'https://raw.githubusercontent.com/JiriResler/personalized-restaurant-menu-viewer-application-ontology/main/resource/List_of_most_common_allergens',
-  )
+  const listOfAllergens = getThing(listAsRdfDataset, allergenListFileUrl)
 
   if (listOfAllergens === null) {
     throw new Error(
