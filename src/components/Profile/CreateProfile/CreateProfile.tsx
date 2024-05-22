@@ -5,7 +5,7 @@ import Stack from 'react-bootstrap/Stack'
 import './CreateProfile.css'
 import SelectAllergens from './SelectAllergens'
 import SelectDiets from './SelectDiets'
-import { Diet, TastePreferences } from './profileDataTypes'
+import { TastePreferences } from './profileDataTypes'
 import { LoginMethod } from '../../loginMethodEnum'
 import { useSession } from '@inrupt/solid-ui-react'
 import SelectTastePreferences from './SelectTastePreferences'
@@ -33,10 +33,11 @@ const CreateProfile: React.FC<Props> = ({
 
   const [currentStep, setCurrentStep] = useState(startStep)
 
-  // An array of allergen URLs currently selected by the user.
+  // An array with URLs of allergens which are currently selected by the user.
   const [selectedAllergens, setSelectedAllergens] = useState<string[]>([])
 
-  const [selectedDiets, setSelectedDiets] = useState(new Set<Diet>())
+  // An array with URLs of diets which are currently selected by the user.
+  const [selectedDiets, setSelectedDiets] = useState<string[]>([])
 
   const [selectedTastePreferences, setSelectedTastePreferences] =
     useState<TastePreferences>({

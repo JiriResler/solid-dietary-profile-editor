@@ -12,8 +12,8 @@ import LanguageContext from '../../../LanguageContext'
 import { loadDietList } from './loadProfileCreationData'
 
 type Props = {
-  selectedDiets: Set<Diet>
-  setSelectedDiets: React.Dispatch<React.SetStateAction<Set<Diet>>>
+  selectedDiets: string[]
+  setSelectedDiets: React.Dispatch<React.SetStateAction<string[]>>
 }
 
 const SelectDiets: React.FC<Props> = ({ selectedDiets, setSelectedDiets }) => {
@@ -40,16 +40,17 @@ const SelectDiets: React.FC<Props> = ({ selectedDiets, setSelectedDiets }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  function handleCheckboxOnChange(diet: Diet) {
-    const newDietSet = new Set(selectedDiets)
+  // Adds or removes a Diet IRI from the array of selected diets.
+  function handleDietCheckboxOnChange(diet: Diet) {
+    let newSelectedDiets = Array.from(selectedDiets)
 
-    if (newDietSet.has(diet)) {
-      newDietSet.delete(diet)
+    if (newSelectedDiets.includes(diet.iri)) {
+      newSelectedDiets = newSelectedDiets.filter((iri) => iri !== diet.iri)
     } else {
-      newDietSet.add(diet)
+      newSelectedDiets.push(diet.iri)
     }
 
-    setSelectedDiets(newDietSet)
+    setSelectedDiets(newSelectedDiets)
   }
 
   return (
@@ -120,9 +121,9 @@ const SelectDiets: React.FC<Props> = ({ selectedDiets, setSelectedDiets }) => {
             className="diet-horizontal-stack mx-auto mt-2"
           >
             <Form.Check
-              checked={selectedDiets.has(diet)}
+              checked={selectedDiets.includes(diet.iri)}
               onChange={() => {
-                handleCheckboxOnChange(diet)
+                handleDietCheckboxOnChange(diet)
               }}
               type="checkbox"
             />
@@ -166,9 +167,9 @@ const SelectDiets: React.FC<Props> = ({ selectedDiets, setSelectedDiets }) => {
                 className="diet-horizontal-stack mx-auto mt-2"
               >
                 <Form.Check
-                  checked={selectedDiets.has(diet)}
+                  checked={selectedDiets.includes(diet.iri)}
                   onChange={() => {
-                    handleCheckboxOnChange(diet)
+                    handleDietCheckboxOnChange(diet)
                   }}
                   type="checkbox"
                 />

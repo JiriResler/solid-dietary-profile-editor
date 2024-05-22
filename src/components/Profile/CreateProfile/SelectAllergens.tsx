@@ -56,7 +56,7 @@ const SelectAllergens: React.FC<Props> = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  // Adds or removes an Allergen IRI from selected allergens.
+  // Adds or removes an Allergen IRI from the array of selected allergens.
   function handleAllergenCheckboxOnChange(allergen: Allergen) {
     let newSelectedAllergens = Array.from(selectedAllergens)
 
