@@ -1,64 +1,15 @@
 import Stack from 'react-bootstrap/Stack'
 import Form from 'react-bootstrap/Form'
 import { Diet } from './profileDataTypes'
-import { useState } from 'react'
+import { useEffect, useState, useContext } from 'react'
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 import Carousel from 'react-bootstrap/Carousel'
 import Select from 'react-select'
 import './SelectDiets.css'
 import { FormattedMessage } from 'react-intl'
-
-const dietList: Diet[] = [
-  {
-    label: 'Vegetarian',
-    iri: 'http://dbpedia.org/resource/Vegetarianism',
-  },
-  {
-    label: 'Vegan',
-    iri: 'http://dbpedia.org/resource/Veganism',
-  },
-  {
-    label: 'Mediterranean',
-    iri: 'http://dbpedia.org/resource/Mediterranean_diet',
-  },
-  {
-    label: 'Ketogenic',
-    iri: 'http://dbpedia.org/resource/Ketogenic_diet',
-  },
-  {
-    label: 'Atkins',
-    iri: 'http://dbpedia.org/resource/Atkins_diet',
-  },
-  {
-    label: 'Paleolithic',
-    iri: 'http://dbpedia.org/resource/Paleolithic_diet',
-  },
-  {
-    label: 'Pescetarian',
-    iri: 'http://dbpedia.org/resource/Pescetarianism',
-  },
-  {
-    label: 'Raw',
-    iri: 'http://dbpedia.org/resource/Raw_foodism',
-  },
-  {
-    label: 'Fruitarian',
-    iri: 'http://dbpedia.org/resource/Fruitarianism',
-  },
-  {
-    label: 'Diabetic',
-    iri: 'http://dbpedia.org/resource/Diet_in_diabetes',
-  },
-  {
-    label: 'DASH',
-    iri: 'http://dbpedia.org/resource/DASH_diet',
-  },
-  {
-    label: 'MIND',
-    iri: 'http://dbpedia.org/resource/MIND_diet',
-  },
-]
+import LanguageContext from '../../../LanguageContext'
+import { loadDietList } from './loadProfileCreationData'
 
 type Props = {
   selectedDiets: Set<Diet>
@@ -66,9 +17,28 @@ type Props = {
 }
 
 const SelectDiets: React.FC<Props> = ({ selectedDiets, setSelectedDiets }) => {
+  const { selectedLanguage } = useContext(LanguageContext)
+
+  // Allergen data loaded from the internet to display to the user.
+  const [dietDisplayList, setDietDisplayList] = useState<Diet[]>([])
+
   const [showModal, setShowModal] = useState(false)
 
   const [showMoreDietOptions, setShowMoreDietOptions] = useState(false)
+
+  useEffect(() => {
+    loadDietList(selectedLanguage)
+      .then((dietList) => {
+        setDietDisplayList(dietList)
+      })
+      .catch((error) => {
+        alert(
+          'Could not load diet data. For more information check the developer console.',
+        )
+        console.error(error)
+      })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   function handleCheckboxOnChange(diet: Diet) {
     const newDietSet = new Set(selectedDiets)
@@ -141,7 +111,8 @@ const SelectDiets: React.FC<Props> = ({ selectedDiets, setSelectedDiets }) => {
           defaultMessage="Which diets are you on?"
         />
       </h3>
-      {dietList.slice(0, 2).map((diet: Diet) => {
+
+      {dietDisplayList.slice(0, 2).map((diet: Diet) => {
         return (
           <Stack
             direction="horizontal"
@@ -155,7 +126,7 @@ const SelectDiets: React.FC<Props> = ({ selectedDiets, setSelectedDiets }) => {
               }}
               type="checkbox"
             />
-            <span className="w-50 text-start">{diet.label}</span>
+            <span className="w-50 text-start">{diet.currentLanguageLabel}</span>
             <img
               src="images/info_icon.svg"
               alt="information icon"
@@ -187,7 +158,7 @@ const SelectDiets: React.FC<Props> = ({ selectedDiets, setSelectedDiets }) => {
 
       {showMoreDietOptions && (
         <div className="mt-3">
-          {dietList.slice(2).map((diet: Diet) => {
+          {dietDisplayList.slice(2).map((diet: Diet) => {
             return (
               <Stack
                 direction="horizontal"
@@ -201,7 +172,9 @@ const SelectDiets: React.FC<Props> = ({ selectedDiets, setSelectedDiets }) => {
                   }}
                   type="checkbox"
                 />
-                <span className="w-50 text-start">{diet.label}</span>
+                <span className="w-50 text-start">
+                  {diet.currentLanguageLabel}
+                </span>
                 <img
                   src="images/info_icon.svg"
                   alt="information icon"

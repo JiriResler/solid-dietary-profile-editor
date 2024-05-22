@@ -2,14 +2,13 @@ import Stack from 'react-bootstrap/Stack'
 import Form from 'react-bootstrap/Form'
 import './SelectAllergens.css'
 import { Allergen } from './profileDataTypes'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useContext } from 'react'
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 import Carousel from 'react-bootstrap/Carousel'
-import loadAllergenList from './loadProfileCreationData'
 import { FormattedMessage } from 'react-intl'
-import { useContext } from 'react'
 import LanguageContext from '../../../LanguageContext'
+import { loadAllergenList } from './loadProfileCreationData'
 
 interface AllergenDescription extends Allergen {
   descriptionText: string
@@ -50,7 +49,7 @@ const SelectAllergens: React.FC<Props> = ({
       })
       .catch((error) => {
         alert(
-          'Could not load data. For more information check the developer console.',
+          'Could not load allergen data. For more information check the developer console.',
         )
         console.error(error)
       })

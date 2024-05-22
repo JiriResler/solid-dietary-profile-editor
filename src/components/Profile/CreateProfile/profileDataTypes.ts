@@ -9,8 +9,9 @@ export type Allergen = {
 }
 
 export type Diet = {
-  label: string
   iri: string
+  currentLanguageLabel: string
+  sameAsIri: string
 }
 
 export type TastePreferences = {
