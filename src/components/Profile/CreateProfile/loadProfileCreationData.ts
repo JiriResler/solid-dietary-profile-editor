@@ -44,7 +44,9 @@ export async function loadAllergenList(locale: string): Promise<Allergen[]> {
   return allergenList
 }
 
-// Loads a list of popular diets from the internet.
+// Loads a list of most popular diets from the internet.
+// The list can be found here:
+// https://github.com/JiriResler/personalized-restaurant-menu-viewer-application-ontology/blob/main/resource/List_of_popular_diets.ttl
 export async function loadDietList(locale: string): Promise<Diet[]> {
   const dietListFileUrl =
     'https://raw.githubusercontent.com/JiriResler/personalized-restaurant-menu-viewer-application-ontology/main/resource/List_of_popular_diets'
@@ -73,6 +75,21 @@ export async function loadDietList(locale: string): Promise<Diet[]> {
   }
 
   return listOfDiets
+}
+
+// Loads a prefetched result of a SPARQL query which retrieves diets from DBPedia. It can be found here:
+// https://github.com/JiriResler/personalized-restaurant-menu-viewer-application-ontology/blob/main/prefetched-dbpedia-sparql-query-results/diets-en.ttl
+export async function loadDietsFromDBPedia() {
+  const prefetchedSparqlQueryResultUrl =
+    'https://raw.githubusercontent.com/JiriResler/personalized-restaurant-menu-viewer-application-ontology/main/prefetched-dbpedia-sparql-query-results/diets-en'
+
+  const queryResult = await fetchTurtleFile(
+    prefetchedSparqlQueryResultUrl + '.ttl',
+  )
+
+  const queryResultDataset = parseTurtleFile(queryResult)
+
+  console.log(queryResultDataset)
 }
 
 // Retrieves a turtle file from the internet and returns a string containing its RDF data.

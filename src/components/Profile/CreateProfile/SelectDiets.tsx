@@ -9,7 +9,10 @@ import Select from 'react-select'
 import './SelectDiets.css'
 import { FormattedMessage } from 'react-intl'
 import LanguageContext from '../../../LanguageContext'
-import { loadDietList } from './loadProfileCreationData'
+import {
+  loadDietsFromDBPedia,
+  loadDietList as loadMostPopularDiets,
+} from './loadProfileCreationData'
 
 type Props = {
   selectedDiets: string[]
@@ -27,9 +30,20 @@ const SelectDiets: React.FC<Props> = ({ selectedDiets, setSelectedDiets }) => {
   const [showMoreDietOptions, setShowMoreDietOptions] = useState(false)
 
   useEffect(() => {
-    loadDietList(selectedLanguage)
+    loadMostPopularDiets(selectedLanguage)
       .then((dietList) => {
         setDietDisplayList(dietList)
+      })
+      .catch((error) => {
+        alert(
+          'Could not load diet data. For more information check the developer console.',
+        )
+        console.error(error)
+      })
+
+    loadDietsFromDBPedia()
+      .then(() => {
+        console.log('fetching done')
       })
       .catch((error) => {
         alert(
