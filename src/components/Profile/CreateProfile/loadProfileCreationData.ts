@@ -123,7 +123,7 @@ function parseTurtleFile(turtleFile: string) {
   } catch (error) {
     console.error(error)
 
-    console.log(turtleFile)
+    console.error('Error: Failed to parse this file:' + turtleFile)
 
     throw new Error('Parsing of turtle file failed.')
   }
