@@ -1,10 +1,10 @@
 import { components, MenuProps } from 'react-select'
-import SelectMenuOption from './selectMenuOptionType'
+import selectSearchOptionType from './selectSearchOptionType'
 
 const CustomSelectMenu = ({
   children,
   ...props
-}: MenuProps<SelectMenuOption, true>) => {
+}: MenuProps<selectSearchOptionType, true>) => {
   if (props.selectProps.inputValue.length === 0) {
     return null
   }

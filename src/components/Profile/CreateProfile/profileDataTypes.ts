@@ -1,4 +1,4 @@
-import SelectMenuOption from './selectMenuOptionType'
+import selectSearchOptionType from './selectSearchOptionType'
 
 export type Allergen = {
   iri: string
@@ -15,7 +15,7 @@ export type Diet = {
 }
 
 export type TastePreferences = {
-  cuisines: ReadonlyArray<SelectMenuOption>
+  cuisines: ReadonlyArray<selectSearchOptionType>
   desserts: string[]
   spiciness: string[]
 }

@@ -13,6 +13,7 @@ import {
   loadDietsFromDBPedia,
   loadDietList as loadMostPopularDiets,
 } from './loadProfileCreationData'
+import selectSearchOptionType from './selectSearchOptionType'
 
 type Props = {
   selectedDiets: string[]
@@ -24,6 +25,11 @@ const SelectDiets: React.FC<Props> = ({ selectedDiets, setSelectedDiets }) => {
 
   // Allergen data loaded from the internet to display to the user.
   const [dietDisplayList, setDietDisplayList] = useState<Diet[]>([])
+
+  // List of diet options to show in a Select component.
+  const [searchDietsOptions, setSearchDietsOptions] = useState<
+    ReadonlyArray<selectSearchOptionType>
+  >([])
 
   const [showModal, setShowModal] = useState(false)
 

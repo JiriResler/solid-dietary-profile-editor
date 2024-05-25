@@ -1,7 +1,7 @@
-import SelectMenuOption from './selectMenuOptionType'
+import selectSearchOptionType from './selectSearchOptionType'
 
 const selectMenuOptionFilter = (
-  option: SelectMenuOption,
+  option: selectSearchOptionType,
   searchText: string,
 ) => {
   if (option.label.toLowerCase().startsWith(searchText.toLowerCase())) {

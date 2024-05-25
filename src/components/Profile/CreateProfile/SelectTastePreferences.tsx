@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { TastePreferences } from './profileDataTypes'
 import Select, { MultiValue } from 'react-select'
 import selectMenuOptionFilter from './selectMenuOptionFilter'
-import SelectMenuOption from './selectMenuOptionType'
+import selectSearchOptionType from './selectSearchOptionType'
 import { fetchCuisines, transformCuisinesResponse } from './loadFromWikidata'
 import CustomSelectMenu from './CustomSelectMenu'
 import Form from 'react-bootstrap/Form'
@@ -44,7 +44,7 @@ const SelectTastePreferences: React.FC<Props> = ({
   setSelectedTastePreferences,
 }) => {
   const [menuOptions, setMenuOptions] = useState<
-    ReadonlyArray<SelectMenuOption>
+    ReadonlyArray<selectSearchOptionType>
   >([])
 
   const [loadingCuisines, setLoadingCuisines] = useState(false)
@@ -66,7 +66,7 @@ const SelectTastePreferences: React.FC<Props> = ({
     setMenuOptions(cuisinesList)
   }
 
-  function handleSelectOnChange(cuisinesArray: MultiValue<SelectMenuOption>) {
+  function handleSelectOnChange(cuisinesArray: MultiValue<selectSearchOptionType>) {
     const newTastePreferences: TastePreferences = {
       cuisines: cuisinesArray,
       desserts: [...selectedTastePreferences.desserts],
@@ -83,7 +83,7 @@ const SelectTastePreferences: React.FC<Props> = ({
       spiciness: [...selectedTastePreferences.spiciness],
     }
 
-    const cuisinesCopy: SelectMenuOption[] = []
+    const cuisinesCopy: selectSearchOptionType[] = []
 
     // Create a deep copy of the cuisines array
     selectedTastePreferences.cuisines.forEach((cuisine) =>

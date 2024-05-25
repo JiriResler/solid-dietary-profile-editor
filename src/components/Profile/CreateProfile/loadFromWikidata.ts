@@ -2,7 +2,7 @@ import {
   WikidataCuisineResponse,
   CuisineResponseBinding,
 } from './DBPediaResponseType'
-import SelectMenuOption from './selectMenuOptionType'
+import selectSearchOptionType from './selectSearchOptionType'
 
 export async function fetchCuisines() {
   const endpointUrl = 'https://query.wikidata.org/sparql'
@@ -27,7 +27,7 @@ export async function fetchCuisines() {
 export function transformCuisinesResponse(
   cuisinesResponseArr: CuisineResponseBinding[],
 ) {
-  const resultCuisinesArr: SelectMenuOption[] = []
+  const resultCuisinesArr: selectSearchOptionType[] = []
 
   for (const responseCuisine of cuisinesResponseArr) {
     // Make result labels have capital first letter
@@ -37,7 +37,7 @@ export function transformCuisinesResponse(
 
     resultLabel += responseCuisine.cuisineLabel.value.slice(1)
 
-    const resultCuisine: SelectMenuOption = {
+    const resultCuisine: selectSearchOptionType = {
       value: responseCuisine.cuisineIRI.value,
       label: resultLabel,
     }
