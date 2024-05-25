@@ -5,7 +5,7 @@ import { useEffect, useState, useContext } from 'react'
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 import Carousel from 'react-bootstrap/Carousel'
-import Select from 'react-select'
+import Select, { createFilter } from 'react-select'
 import './SelectDiets.css'
 import { FormattedMessage } from 'react-intl'
 import LanguageContext from '../../../LanguageContext'
@@ -14,6 +14,13 @@ import {
   loadDietList as loadMostPopularDiets,
 } from './loadProfileCreationData'
 import selectSearchOptionType from './selectSearchOptionType'
+import CustomSelectMenu from './CustomSelectMenu'
+
+const SelectComponents = {
+  DropdownIndicator: () => null,
+  IndicatorSeparator: () => null,
+  Menu: CustomSelectMenu,
+}
 
 type Props = {
   selectedDiets: string[]
@@ -226,9 +233,14 @@ const SelectDiets: React.FC<Props> = ({
 
           <Select
             className="mt-3 w-75 mx-auto"
+            isMulti
+            components={SelectComponents}
             options={searchDietOptions}
             value={selectedDietOptions}
-            isMulti
+            filterOption={createFilter({
+              matchFrom: 'start',
+              stringify: (option) => `${option.label}`,
+            })}
             onChange={setSelectedDietOptions}
           />
         </div>
