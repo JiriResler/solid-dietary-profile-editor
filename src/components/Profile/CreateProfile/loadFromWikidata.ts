@@ -1,7 +1,7 @@
 import {
   WikidataCuisineResponse,
   CuisineResponseBinding,
-} from './fetchResponseInterfaces'
+} from './DBPediaResponseType'
 import SelectMenuOption from './selectMenuOptionType'
 
 export async function fetchCuisines() {

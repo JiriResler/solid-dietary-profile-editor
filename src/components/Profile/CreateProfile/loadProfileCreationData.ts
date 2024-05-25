@@ -11,6 +11,7 @@ import { Allergen, Diet } from './profileDataTypes'
 import N3 from 'n3'
 import { RDFS, OWL } from '@inrupt/vocab-common-rdf'
 import ONTOLOGY from './commonRdfVocab'
+import { DBPediaResponse } from './DBPediaResponseType'
 
 // Loads a list of major allergens from the internet.
 export async function loadAllergenList(locale: string): Promise<Allergen[]> {
@@ -80,16 +81,14 @@ export async function loadDietList(locale: string): Promise<Diet[]> {
 // Loads a prefetched result of a SPARQL query which retrieves diets from DBPedia. It can be found here:
 // https://github.com/JiriResler/personalized-restaurant-menu-viewer-application-ontology/blob/main/prefetched-dbpedia-sparql-query-results/diets-en.ttl
 export async function loadDietsFromDBPedia() {
-  const prefetchedSparqlQueryResultUrl =
-    'https://raw.githubusercontent.com/JiriResler/personalized-restaurant-menu-viewer-application-ontology/main/prefetched-dbpedia-sparql-query-results/diets-en'
+  const prefetchedQueryResultLocation =
+    'https://raw.githubusercontent.com/JiriResler/personalized-restaurant-menu-viewer-application-ontology/main/prefetched-dbpedia-sparql-query-results/diets-en.json'
 
-  const queryResult = await fetchTurtleFile(
-    prefetchedSparqlQueryResultUrl + '.ttl',
-  )
+  const queryResultResponse = await fetch(prefetchedQueryResultLocation)
 
-  const queryResultDataset = parseTurtleFile(queryResult)
+  const queryResult = (await queryResultResponse.json()) as DBPediaResponse
 
-  console.log(queryResultDataset)
+  console.log(queryResult)
 }
 
 // Retrieves a turtle file from the internet and returns a string containing its RDF data.
