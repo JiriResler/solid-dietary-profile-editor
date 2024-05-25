@@ -64,7 +64,7 @@ const messagesInSlovak: Messages = {
   signInWithGoogle: 'Prihlásiť sa účtom Google',
   redirectToProvider: 'Prejsť na poskytovateľa',
   goBack: 'Späť',
-  welcomeToTheApplication: 'Vitajte v personálnom editore diétneho profilu!',
+  welcomeToTheApplication: 'Vitajte v editore vášho diétneho profilu!',
   aboutTheApplication: 'O aplikácii',
   sourceCode: 'Zdrojový kód',
   createdBy: 'Vytvoril',

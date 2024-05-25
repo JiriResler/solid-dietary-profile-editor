@@ -15,6 +15,7 @@ import Step from '@mui/material/Step'
 import StepLabel from '@mui/material/StepLabel'
 import Container from 'react-bootstrap/Container'
 import { FormattedMessage } from 'react-intl'
+import selectSearchOptionType from './selectSearchOptionType'
 
 type Props = {
   loginMethod: LoginMethod
@@ -33,11 +34,16 @@ const CreateProfile: React.FC<Props> = ({
 
   const [currentStep, setCurrentStep] = useState(startStep)
 
-  // An array with URLs of allergens which are currently selected by the user.
+  // Array with URLs of allergens which are currently selected by the user.
   const [selectedAllergens, setSelectedAllergens] = useState<string[]>([])
 
-  // An array with URLs of diets which are currently selected by the user.
+  // Array with URLs of diets which are currently selected by the user.
   const [selectedDiets, setSelectedDiets] = useState<string[]>([])
+
+  // Array of diets which are chosen via Select component.
+  const [selectedDietOptions, setSelectedDietOptions] = useState<
+    ReadonlyArray<selectSearchOptionType>
+  >([])
 
   const [selectedTastePreferences, setSelectedTastePreferences] =
     useState<TastePreferences>({
@@ -120,6 +126,8 @@ const CreateProfile: React.FC<Props> = ({
             <SelectDiets
               selectedDiets={selectedDiets}
               setSelectedDiets={setSelectedDiets}
+              selectedDietOptions={selectedDietOptions}
+              setSelectedDietOptions={setSelectedDietOptions}
             />
           )}
 

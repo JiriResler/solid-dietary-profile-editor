@@ -18,9 +18,18 @@ import selectSearchOptionType from './selectSearchOptionType'
 type Props = {
   selectedDiets: string[]
   setSelectedDiets: React.Dispatch<React.SetStateAction<string[]>>
+  selectedDietOptions: ReadonlyArray<selectSearchOptionType>
+  setSelectedDietOptions: React.Dispatch<
+    React.SetStateAction<ReadonlyArray<selectSearchOptionType>>
+  >
 }
 
-const SelectDiets: React.FC<Props> = ({ selectedDiets, setSelectedDiets }) => {
+const SelectDiets: React.FC<Props> = ({
+  selectedDiets,
+  setSelectedDiets,
+  selectedDietOptions,
+  setSelectedDietOptions,
+}) => {
   const { selectedLanguage } = useContext(LanguageContext)
 
   // Allergen data loaded from the internet to display to the user.
@@ -215,7 +224,13 @@ const SelectDiets: React.FC<Props> = ({ selectedDiets, setSelectedDiets }) => {
             />
           </h3>
 
-          <Select className="mt-3 w-75 mx-auto" options={searchDietOptions} />
+          <Select
+            className="mt-3 w-75 mx-auto"
+            options={searchDietOptions}
+            value={selectedDietOptions}
+            isMulti
+            onChange={setSelectedDietOptions}
+          />
         </div>
       )}
     </>
