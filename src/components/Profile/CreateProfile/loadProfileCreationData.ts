@@ -12,6 +12,7 @@ import N3 from 'n3'
 import { RDFS, OWL } from '@inrupt/vocab-common-rdf'
 import ONTOLOGY from './commonRdfVocab'
 import { DBPediaResponse } from './DBPediaResponseType'
+import selectSearchOptionType from './selectSearchOptionType'
 
 // Loads a list of major allergens from the internet.
 export async function loadAllergenList(locale: string): Promise<Allergen[]> {
@@ -80,7 +81,9 @@ export async function loadDietList(locale: string): Promise<Diet[]> {
 
 // Loads a prefetched result of a SPARQL query which retrieves diets from DBPedia. It can be found here:
 // https://github.com/JiriResler/personalized-restaurant-menu-viewer-application-ontology/blob/main/prefetched-dbpedia-sparql-query-results/diets-en.ttl
-export async function loadDietsFromDBPedia() {
+export async function loadDietsFromDBPedia(): Promise<
+  ReadonlyArray<selectSearchOptionType>
+> {
   const prefetchedQueryResultLocation =
     'https://raw.githubusercontent.com/JiriResler/personalized-restaurant-menu-viewer-application-ontology/main/prefetched-dbpedia-sparql-query-results/diets-en.json'
 
@@ -88,7 +91,23 @@ export async function loadDietsFromDBPedia() {
 
   const queryResult = (await queryResultResponse.json()) as DBPediaResponse
 
-  console.log(queryResult)
+  return transformQueryResultToSelectOptionsArray(queryResult)
+}
+
+// Creates an array of options for Select component.
+function transformQueryResultToSelectOptionsArray(
+  queryResult: DBPediaResponse,
+): ReadonlyArray<selectSearchOptionType> {
+  const optionsArray: selectSearchOptionType[] = []
+
+  for (const queryResultRecord of queryResult.results.bindings) {
+    optionsArray.push({
+      value: queryResultRecord.iri.value,
+      label: queryResultRecord.label.value,
+    })
+  }
+
+  return optionsArray as ReadonlyArray<selectSearchOptionType>
 }
 
 // Retrieves a turtle file from the internet and returns a string containing its RDF data.

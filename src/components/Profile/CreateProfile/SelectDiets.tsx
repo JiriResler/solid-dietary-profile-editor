@@ -27,7 +27,7 @@ const SelectDiets: React.FC<Props> = ({ selectedDiets, setSelectedDiets }) => {
   const [dietDisplayList, setDietDisplayList] = useState<Diet[]>([])
 
   // List of diet options to show in a Select component.
-  const [searchDietsOptions, setSearchDietsOptions] = useState<
+  const [searchDietOptions, setSearchDietOptions] = useState<
     ReadonlyArray<selectSearchOptionType>
   >([])
 
@@ -48,8 +48,8 @@ const SelectDiets: React.FC<Props> = ({ selectedDiets, setSelectedDiets }) => {
       })
 
     loadDietsFromDBPedia()
-      .then(() => {
-        console.log('fetching done')
+      .then((dietOptions) => {
+        setSearchDietOptions(dietOptions)
       })
       .catch((error) => {
         alert(
@@ -215,13 +215,7 @@ const SelectDiets: React.FC<Props> = ({ selectedDiets, setSelectedDiets }) => {
             />
           </h3>
 
-          <Select
-            className="mt-3 w-75 mx-auto"
-            options={[
-              { value: 'val1', label: 'label1' },
-              { value: 'val2', label: 'label2' },
-            ]}
-          />
+          <Select className="mt-3 w-75 mx-auto" options={searchDietOptions} />
         </div>
       )}
     </>
