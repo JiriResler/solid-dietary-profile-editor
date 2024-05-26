@@ -224,25 +224,29 @@ const SelectDiets: React.FC<Props> = ({
             )
           })}
 
-          <h3 className="mt-3">
-            <FormattedMessage
-              id="isYourDietNotListed"
-              defaultMessage="Is your diet not listed?"
-            />
-          </h3>
+          {selectedLanguage === 'en' && (
+            <>
+              <h3 className="mt-3">
+                <FormattedMessage
+                  id="isYourDietNotListed"
+                  defaultMessage="Is your diet not listed?"
+                />
+              </h3>
 
-          <Select
-            className="mt-3 w-75 mx-auto"
-            isMulti
-            components={SelectComponents}
-            options={searchDietOptions}
-            value={selectedDietOptions}
-            filterOption={createFilter({
-              matchFrom: 'start',
-              stringify: (option) => `${option.label}`,
-            })}
-            onChange={setSelectedDietOptions}
-          />
+              <Select
+                className="mt-3 w-75 mx-auto"
+                isMulti
+                components={SelectComponents}
+                options={searchDietOptions}
+                value={selectedDietOptions}
+                filterOption={createFilter({
+                  matchFrom: 'start',
+                  stringify: (option) => `${option.label}`,
+                })}
+                onChange={setSelectedDietOptions}
+              />
+            </>
+          )}
         </div>
       )}
     </>
