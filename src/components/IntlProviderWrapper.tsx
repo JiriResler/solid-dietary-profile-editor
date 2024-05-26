@@ -37,6 +37,7 @@ type Messages = {
   showLessDietOptions: string
   showMoreDietOptions: string
   isYourDietNotListed: string
+  searchForMoreDiets: string
   specifyYourTastePreferences: string
   whichWorldCuisinesDoYouLike: string
   loadingData: string
@@ -88,6 +89,7 @@ const messagesInSlovak: Messages = {
   showLessDietOptions: 'Zobraziť menej možností',
   showMoreDietOptions: 'Zobraziť viac možností',
   isYourDietNotListed: 'Chýba vaša diéta v zozname?',
+  searchForMoreDiets: 'Hľadať ďalšie diéty...',
   specifyYourTastePreferences: 'Špecifikujte vaše chuťové preferencie',
   whichWorldCuisinesDoYouLike: 'Ktoré svetové kuchyne máte radi?',
   loadingData: 'Načítavam dáta',

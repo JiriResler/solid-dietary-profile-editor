@@ -27,9 +27,9 @@ const LoginScreen: React.FC = () => {
       setSelectedLanguage('sk')
     }
 
-    if (language === 'Česky') {
-      setSelectedLanguage('cs')
-    }
+    // if (language === 'Česky') {
+    //   setSelectedLanguage('cs')
+    // }
 
     return
   }
@@ -43,9 +43,9 @@ const LoginScreen: React.FC = () => {
       return 'Slovensky'
     }
 
-    if (locale === 'cs') {
-      return 'Česky'
-    }
+    // if (locale === 'cs') {
+    //   return 'Česky'
+    // }
 
     return
   }
@@ -162,7 +162,7 @@ const LoginScreen: React.FC = () => {
           >
             <option key="en">English</option>
             <option key="sk">Slovensky</option>
-            <option key="cs">Česky</option>
+            {/* <option key="cs">Česky</option> */}
           </Form.Select>
         </div>
       </Container>

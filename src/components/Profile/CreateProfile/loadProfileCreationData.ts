@@ -49,7 +49,7 @@ export async function loadAllergenList(locale: string): Promise<Allergen[]> {
 // Loads a list of most popular diets from the internet.
 // The list can be found here:
 // https://github.com/JiriResler/personalized-restaurant-menu-viewer-application-ontology/blob/main/resource/List_of_popular_diets.ttl
-export async function loadDietList(locale: string): Promise<Diet[]> {
+export async function loadMostPopularDiets(locale: string): Promise<Diet[]> {
   const dietListFileUrl =
     'https://raw.githubusercontent.com/JiriResler/personalized-restaurant-menu-viewer-application-ontology/main/resource/List_of_popular_diets'
 
