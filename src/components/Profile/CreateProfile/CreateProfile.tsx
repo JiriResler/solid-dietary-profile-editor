@@ -5,7 +5,6 @@ import Stack from 'react-bootstrap/Stack'
 import './CreateProfile.css'
 import SelectAllergens from './SelectAllergens'
 import SelectDiets from './SelectDiets'
-import { TastePreferences } from './profileDataTypes'
 import { LoginMethod } from '../../loginMethodEnum'
 import { useSession } from '@inrupt/solid-ui-react'
 import SelectTastePreferences from './SelectTastePreferences'
@@ -38,26 +37,31 @@ const CreateProfile: React.FC<Props> = ({
   const [selectedAllergens, setSelectedAllergens] = useState<string[]>([])
 
   // Array with URLs of diets which are currently selected by the user.
-  const [selectedDiets, setSelectedDiets] = useState<string[]>([])
+  const [selectedDietsViaCheckboxes, setSelectedDietsViaCheckboxes] = useState<
+    string[]
+  >([])
 
   // Array of diets which are chosen via Select component.
-  const [selectedDietOptions, setSelectedDietOptions] = useState<
+  const [selectedDietsViaSearch, setSelectedDietsViaSearch] = useState<
     ReadonlyArray<selectSearchOptionType>
   >([])
 
-  const [selectedTastePreferences, setSelectedTastePreferences] =
-    useState<TastePreferences>({
-      cuisines: [],
-      desserts: [],
-      spiciness: [],
-    })
+  // World cuisines selected with checkboxes.
+  const [
+    selectedWorldCuisinesViaCheckboxes,
+    setSelectedWorldCuisinesViaCheckboxes,
+  ] = useState<string[]>([])
+
+  // Array of world cuisines which are chosen via Select component.
+  const [selectedWorldCuisinesViaSearch, setSelectedWorldCuisinesViaSearch] =
+    useState<ReadonlyArray<selectSearchOptionType>>([])
 
   function saveProfile() {
     if (loginMethod === LoginMethod.SOLID) {
       void saveProfileSolid(
         session,
         selectedAllergens,
-        selectedDiets,
+        selectedDietsViaCheckboxes,
         selectedTastePreferences,
       )
     }
@@ -66,7 +70,7 @@ const CreateProfile: React.FC<Props> = ({
       void saveProfileFirebase(
         auth,
         selectedAllergens,
-        selectedDiets,
+        selectedDietsViaCheckboxes,
         selectedTastePreferences,
       )
     }
@@ -124,17 +128,25 @@ const CreateProfile: React.FC<Props> = ({
 
           {currentStep === 2 && (
             <SelectDiets
-              selectedDiets={selectedDiets}
-              setSelectedDiets={setSelectedDiets}
-              selectedDietOptions={selectedDietOptions}
-              setSelectedDietOptions={setSelectedDietOptions}
+              selectedDietsViaCheckboxes={selectedDietsViaCheckboxes}
+              setSelectedDietsViaCheckboxes={setSelectedDietsViaCheckboxes}
+              selectedDietsViaSearch={selectedDietsViaSearch}
+              setSelectedDietsViaSearch={setSelectedDietsViaSearch}
             />
           )}
 
           {currentStep === 3 && (
             <SelectTastePreferences
-              selectedTastePreferences={selectedTastePreferences}
-              setSelectedTastePreferences={setSelectedTastePreferences}
+              selectedWorldCuisinesViaCheckboxes={
+                selectedWorldCuisinesViaCheckboxes
+              }
+              setSelectedWorldCuisinesViaCheckboxes={
+                setSelectedWorldCuisinesViaCheckboxes
+              }
+              selectedWorldCuisinesViaSearch={selectedWorldCuisinesViaSearch}
+              setSelectedWorldCuisinesViaSearch={
+                setSelectedWorldCuisinesViaSearch
+              }
             />
           )}
         </div>

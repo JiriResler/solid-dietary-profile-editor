@@ -13,19 +13,19 @@ import SearchForMoreDiets from './SearchForMoreDiets'
 import { loadMostPopularDiets } from './loadProfileCreationData'
 
 type Props = {
-  selectedDiets: string[]
-  setSelectedDiets: React.Dispatch<React.SetStateAction<string[]>>
-  selectedDietOptions: ReadonlyArray<selectSearchOptionType>
-  setSelectedDietOptions: React.Dispatch<
+  selectedDietsViaCheckboxes: string[]
+  setSelectedDietsViaCheckboxes: React.Dispatch<React.SetStateAction<string[]>>
+  selectedDietsViaSearch: ReadonlyArray<selectSearchOptionType>
+  setSelectedDietsViaSearch: React.Dispatch<
     React.SetStateAction<ReadonlyArray<selectSearchOptionType>>
   >
 }
 
 const SelectDiets: React.FC<Props> = ({
-  selectedDiets,
-  setSelectedDiets,
-  selectedDietOptions,
-  setSelectedDietOptions,
+  selectedDietsViaCheckboxes,
+  setSelectedDietsViaCheckboxes,
+  selectedDietsViaSearch,
+  setSelectedDietsViaSearch,
 }) => {
   const { selectedLanguage } = useContext(LanguageContext)
 
@@ -58,7 +58,7 @@ const SelectDiets: React.FC<Props> = ({
 
   // Adds or removes a Diet IRI from the array of selected diets.
   function handleDietCheckboxOnChange(diet: Diet) {
-    let newSelectedDiets = Array.from(selectedDiets)
+    let newSelectedDiets = Array.from(selectedDietsViaCheckboxes)
 
     if (newSelectedDiets.includes(diet.iri)) {
       newSelectedDiets = newSelectedDiets.filter((iri) => iri !== diet.iri)
@@ -66,7 +66,7 @@ const SelectDiets: React.FC<Props> = ({
       newSelectedDiets.push(diet.iri)
     }
 
-    setSelectedDiets(newSelectedDiets)
+    setSelectedDietsViaCheckboxes(newSelectedDiets)
   }
 
   if (loadingDietDisplayList) {
@@ -141,7 +141,7 @@ const SelectDiets: React.FC<Props> = ({
             className="diet-horizontal-stack mx-auto mt-2"
           >
             <Form.Check
-              checked={selectedDiets.includes(diet.iri)}
+              checked={selectedDietsViaCheckboxes.includes(diet.iri)}
               onChange={() => {
                 handleDietCheckboxOnChange(diet)
               }}
@@ -187,7 +187,7 @@ const SelectDiets: React.FC<Props> = ({
                 className="diet-horizontal-stack mx-auto mt-2"
               >
                 <Form.Check
-                  checked={selectedDiets.includes(diet.iri)}
+                  checked={selectedDietsViaCheckboxes.includes(diet.iri)}
                   onChange={() => {
                     handleDietCheckboxOnChange(diet)
                   }}
@@ -218,8 +218,8 @@ const SelectDiets: React.FC<Props> = ({
               </h3>
 
               <SearchForMoreDiets
-                selectedDietOptions={selectedDietOptions}
-                setSelectedDietOptions={setSelectedDietOptions}
+                selectedDietOptions={selectedDietsViaSearch}
+                setSelectedDietOptions={setSelectedDietsViaSearch}
               />
             </>
           )}

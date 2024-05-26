@@ -1,110 +1,65 @@
-import { useEffect, useState } from 'react'
-import { TastePreferences } from './profileDataTypes'
-import Select, { MultiValue } from 'react-select'
-import selectMenuOptionFilter from './selectMenuOptionFilter'
+import { useState } from 'react'
 import selectSearchOptionType from './selectSearchOptionType'
-import { fetchCuisines, transformCuisinesResponse } from './loadFromWikidata'
-import CustomSelectMenu from './CustomSelectMenu'
 import Form from 'react-bootstrap/Form'
 import Stack from 'react-bootstrap/Stack'
 import './SelectTastePreferences.css'
 import { FormattedMessage } from 'react-intl'
 
-const worldCuisines = [
-  'French',
-  'Indian',
-  'Japanese',
-  'Mexican',
-  'Italian',
-  'Thai',
-  'Chinese',
-  'Greek',
-  'Spanish',
-  'Turkish',
-  'American',
-  'Vietnamese',
+type WorldCuisine = {
+  iri: string
+  label: string
+}
+
+const popularWorldCuisinesEn: WorldCuisine[] = [
+  { iri: 'iri1', label: 'French' },
+  { iri: 'iri2', label: 'Indian' },
+  { iri: '', label: 'Japanese' },
+  { iri: '', label: 'Mexican' },
+  { iri: '', label: 'Italian' },
+  { iri: '', label: 'Thai' },
+  { iri: '', label: 'Chinese' },
+  { iri: '', label: 'Greek' },
+  { iri: '', label: 'Turkish' },
+  { iri: '', label: 'American' },
 ]
 
 type Props = {
-  selectedTastePreferences: TastePreferences
-  setSelectedTastePreferences: React.Dispatch<
-    React.SetStateAction<TastePreferences>
+  selectedWorldCuisinesViaCheckboxes: string[]
+  setSelectedWorldCuisinesViaCheckboxes: React.Dispatch<
+    React.SetStateAction<string[]>
+  >
+  selectedWorldCuisinesViaSearch: ReadonlyArray<selectSearchOptionType>
+  setSelectedWorldCuisinesViaSearch: React.Dispatch<
+    React.SetStateAction<ReadonlyArray<selectSearchOptionType>>
   >
 }
 
-const SelectComponents = {
-  DropdownIndicator: () => null,
-  IndicatorSeparator: () => null,
-  ClearIndicator: () => null,
-  Menu: CustomSelectMenu,
-}
-
 const SelectTastePreferences: React.FC<Props> = ({
-  selectedTastePreferences,
-  setSelectedTastePreferences,
+  selectedWorldCuisinesViaCheckboxes,
+  setSelectedWorldCuisinesViaCheckboxes,
+  selectedWorldCuisinesViaSearch,
+  setSelectedWorldCuisinesViaSearch,
 }) => {
-  const [menuOptions, setMenuOptions] = useState<
-    ReadonlyArray<selectSearchOptionType>
-  >([])
-
-  const [loadingCuisines, setLoadingCuisines] = useState(false)
-
   const [userLikesSpicyFood, setUserLikesSpicyFood] = useState(false)
 
-  useEffect(() => {
-    setLoadingCuisines(true)
-    void fetchAndSetCuisines()
-  }, [])
-
-  async function fetchAndSetCuisines() {
-    const cuisinesResponse = await fetchCuisines()
-
-    const cuisinesList = transformCuisinesResponse(cuisinesResponse)
-
-    setLoadingCuisines(false)
-
-    setMenuOptions(cuisinesList)
-  }
-
-  function handleSelectOnChange(cuisinesArray: MultiValue<selectSearchOptionType>) {
-    const newTastePreferences: TastePreferences = {
-      cuisines: cuisinesArray,
-      desserts: [...selectedTastePreferences.desserts],
-      spiciness: [...selectedTastePreferences.spiciness],
-    }
-
-    setSelectedTastePreferences(newTastePreferences)
-  }
-
-  function handleDessertCheckboxOnChange(dessertValueIRI: string) {
-    const newTastePreferences: TastePreferences = {
-      cuisines: [],
-      desserts: [],
-      spiciness: [...selectedTastePreferences.spiciness],
-    }
-
-    const cuisinesCopy: selectSearchOptionType[] = []
-
-    // Create a deep copy of the cuisines array
-    selectedTastePreferences.cuisines.forEach((cuisine) =>
-      cuisinesCopy.push(Object.assign({}, cuisine)),
+  // Adds or removes a WorldCuisine IRI from the array of selected world cuisines via checkboxes.
+  function handleWorldCuisineCheckboxOnChange(cuisine: WorldCuisine) {
+    let newSelectedWorldCuisines = Array.from(
+      selectedWorldCuisinesViaCheckboxes,
     )
 
-    newTastePreferences.cuisines = cuisinesCopy
-
-    if (selectedTastePreferences.desserts.includes(dessertValueIRI)) {
-      newTastePreferences.desserts = selectedTastePreferences.desserts.filter(
-        (value) => {
-          return value !== dessertValueIRI
-        },
+    if (newSelectedWorldCuisines.includes(cuisine.iri)) {
+      newSelectedWorldCuisines = newSelectedWorldCuisines.filter(
+        (iri) => iri !== cuisine.iri,
       )
     } else {
-      newTastePreferences.desserts = [...selectedTastePreferences.desserts]
-      newTastePreferences.desserts.push(dessertValueIRI)
+      newSelectedWorldCuisines.push(cuisine.iri)
     }
 
-    setSelectedTastePreferences(newTastePreferences)
+    setSelectedWorldCuisinesViaCheckboxes(newSelectedWorldCuisines)
   }
+
+  function handleDessertCheckboxOnChange(dessertValueIRI: string) {}
 
   return (
     <>
@@ -122,10 +77,20 @@ const SelectTastePreferences: React.FC<Props> = ({
         />
       </h4>
       <div className="width-fit-content mx-auto text-start">
-        {worldCuisines.map((cuisine) => {
+        {popularWorldCuisinesEn.map((cuisine) => {
           return (
             <Stack direction="horizontal" gap={3}>
-              <Form.Check type="checkbox" label={cuisine} className="w-100" />
+              <Form.Check
+                type="checkbox"
+                checked={selectedWorldCuisinesViaCheckboxes.includes(
+                  cuisine.iri,
+                )}
+                onChange={() => {
+                  handleWorldCuisineCheckboxOnChange(cuisine)
+                }}
+                label={cuisine.label}
+                className="w-100"
+              />
               <img
                 src="images/info_icon.svg"
                 alt="information icon"
@@ -135,33 +100,6 @@ const SelectTastePreferences: React.FC<Props> = ({
           )
         })}
       </div>
-
-      <Select
-        className="mt-3 w-75 mx-auto"
-        options={menuOptions}
-        value={selectedTastePreferences.cuisines}
-        filterOption={selectMenuOptionFilter}
-        isMulti
-        onChange={(newArray) => {
-          handleSelectOnChange(newArray)
-        }}
-        components={SelectComponents}
-        isDisabled={loadingCuisines ? true : false}
-        isLoading={loadingCuisines ? true : false}
-        placeholder={
-          loadingCuisines ? (
-            <FormattedMessage
-              id="loadingData"
-              defaultMessage="Loading data..."
-            />
-          ) : (
-            <FormattedMessage
-              id="searchForMoreCuisines"
-              defaultMessage="Search for more cuisines..."
-            />
-          )
-        }
-      />
 
       <h4 className="mt-3">
         <FormattedMessage
