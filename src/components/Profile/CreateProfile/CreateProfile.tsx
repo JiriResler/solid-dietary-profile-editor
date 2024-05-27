@@ -15,6 +15,7 @@ import StepLabel from '@mui/material/StepLabel'
 import Container from 'react-bootstrap/Container'
 import { FormattedMessage } from 'react-intl'
 import selectSearchOptionType from './selectSearchOptionType'
+import { DessertTaste } from './dessertTasteEnum'
 
 type Props = {
   loginMethod: LoginMethod
@@ -33,15 +34,15 @@ const CreateProfile: React.FC<Props> = ({
 
   const [currentStep, setCurrentStep] = useState(startStep)
 
-  // Array with URLs of allergens which are currently selected by the user.
+  // URLs of allergens which are selected by the user.
   const [selectedAllergens, setSelectedAllergens] = useState<string[]>([])
 
-  // Array with URLs of diets which are currently selected by the user.
+  // Diets selected with checkboxes.
   const [selectedDietsViaCheckboxes, setSelectedDietsViaCheckboxes] = useState<
     string[]
   >([])
 
-  // Array of diets which are chosen via Select component.
+  // Diets which are chosen via Select component.
   const [selectedDietsViaSearch, setSelectedDietsViaSearch] = useState<
     ReadonlyArray<selectSearchOptionType>
   >([])
@@ -52,9 +53,14 @@ const CreateProfile: React.FC<Props> = ({
     setSelectedWorldCuisinesViaCheckboxes,
   ] = useState<string[]>([])
 
-  // Array of world cuisines which are chosen via Select component.
+  // World cuisines which are chosen via Select component.
   const [selectedWorldCuisinesViaSearch, setSelectedWorldCuisinesViaSearch] =
     useState<ReadonlyArray<selectSearchOptionType>>([])
+
+  // Prefered taste of desserts by the user.
+  const [dessertTastePreference, setDessertTastePreference] = useState<
+    DessertTaste | undefined
+  >(undefined)
 
   function saveProfile() {
     if (loginMethod === LoginMethod.SOLID) {
@@ -147,6 +153,8 @@ const CreateProfile: React.FC<Props> = ({
               setSelectedWorldCuisinesViaSearch={
                 setSelectedWorldCuisinesViaSearch
               }
+              dessertTastePreference={dessertTastePreference}
+              setDessertTastePreference={setDessertTastePreference}
             />
           )}
         </div>

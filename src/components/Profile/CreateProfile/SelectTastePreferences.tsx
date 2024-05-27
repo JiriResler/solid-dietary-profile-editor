@@ -6,6 +6,7 @@ import './SelectTastePreferences.css'
 import { FormattedMessage } from 'react-intl'
 import LanguageContext from '../../../LanguageContext'
 import SearchForMoreWorldCuisines from './SearchForMoreWorldCuisines'
+import { DessertTaste } from './dessertTasteEnum'
 
 type WorldCuisine = {
   iri: string
@@ -34,6 +35,10 @@ type Props = {
   setSelectedWorldCuisinesViaSearch: React.Dispatch<
     React.SetStateAction<ReadonlyArray<selectSearchOptionType>>
   >
+  dessertTastePreference: DessertTaste | undefined
+  setDessertTastePreference: React.Dispatch<
+    React.SetStateAction<DessertTaste | undefined>
+  >
 }
 
 const SelectTastePreferences: React.FC<Props> = ({
@@ -41,6 +46,8 @@ const SelectTastePreferences: React.FC<Props> = ({
   setSelectedWorldCuisinesViaCheckboxes,
   selectedWorldCuisinesViaSearch,
   setSelectedWorldCuisinesViaSearch,
+  dessertTastePreference,
+  setDessertTastePreference,
 }) => {
   const { selectedLanguage } = useContext(LanguageContext)
 
@@ -62,8 +69,6 @@ const SelectTastePreferences: React.FC<Props> = ({
 
     setSelectedWorldCuisinesViaCheckboxes(newSelectedWorldCuisines)
   }
-
-  function handleDessertCheckboxOnChange(dessertValueIRI: string) {}
 
   return (
     <>
@@ -122,29 +127,8 @@ const SelectTastePreferences: React.FC<Props> = ({
           defaultMessage="Which taste of desserts do you prefer?"
         />
       </h4>
+
       <div className="width-fit-content text-start mx-auto">
-        <Form.Check
-          type="radio"
-          label={<FormattedMessage id="savory" defaultMessage="Savory" />}
-          checked={false}
-          onChange={() => {
-            handleDessertCheckboxOnChange(
-              'http://www.wikidata.org/entity/Q3324978',
-            )
-          }}
-        />
-
-        <Form.Check
-          type="radio"
-          label={<FormattedMessage id="sweet" defaultMessage="Sweet" />}
-          checked={false}
-          onChange={() => {
-            handleDessertCheckboxOnChange(
-              'http://dbpedia.org/resource/Sweetness',
-            )
-          }}
-        />
-
         <Form.Check
           type="radio"
           label={
@@ -153,6 +137,28 @@ const SelectTastePreferences: React.FC<Props> = ({
               defaultMessage="Doesn't matter"
             />
           }
+          checked={dessertTastePreference === undefined}
+          onChange={() => {
+            setDessertTastePreference(undefined)
+          }}
+        />
+
+        <Form.Check
+          type="radio"
+          label={<FormattedMessage id="sweet" defaultMessage="Sweet" />}
+          checked={dessertTastePreference === DessertTaste.SWEET}
+          onChange={() => {
+            setDessertTastePreference(DessertTaste.SWEET)
+          }}
+        />
+
+        <Form.Check
+          type="radio"
+          label={<FormattedMessage id="savory" defaultMessage="Savory" />}
+          checked={dessertTastePreference === DessertTaste.SAVORY}
+          onChange={() => {
+            setDessertTastePreference(DessertTaste.SAVORY)
+          }}
         />
       </div>
 
