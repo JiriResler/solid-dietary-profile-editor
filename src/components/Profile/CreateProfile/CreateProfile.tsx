@@ -16,6 +16,7 @@ import Container from 'react-bootstrap/Container'
 import { FormattedMessage } from 'react-intl'
 import selectSearchOptionType from './selectSearchOptionType'
 import { DessertTaste } from './dessertTasteEnum'
+import { SpicinessLevel } from './spicinessLevelEnum'
 
 type Props = {
   loginMethod: LoginMethod
@@ -57,9 +58,17 @@ const CreateProfile: React.FC<Props> = ({
   const [selectedWorldCuisinesViaSearch, setSelectedWorldCuisinesViaSearch] =
     useState<ReadonlyArray<selectSearchOptionType>>([])
 
-  // Prefered taste of desserts by the user.
+  // Preferred taste of desserts by the user.
   const [dessertTastePreference, setDessertTastePreference] = useState<
     DessertTaste | undefined
+  >(undefined)
+
+  // Whether user likes spicy food or not.
+  const [userLikesSpicyFood, setUserLikesSpicyFood] = useState(false)
+
+  // Preferred spiciness level of food by the user.
+  const [levelOfSpicinessPreference, setLevelOfSpicinessPreference] = useState<
+    SpicinessLevel | undefined
   >(undefined)
 
   function saveProfile() {
@@ -155,6 +164,10 @@ const CreateProfile: React.FC<Props> = ({
               }
               dessertTastePreference={dessertTastePreference}
               setDessertTastePreference={setDessertTastePreference}
+              levelOfSpicinessPreference={levelOfSpicinessPreference}
+              setLevelOfSpicinessPreference={setLevelOfSpicinessPreference}
+              userLikesSpicyFood={userLikesSpicyFood}
+              setUserLikesSpicyFood={setUserLikesSpicyFood}
             />
           )}
         </div>

@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react'
+import { useContext } from 'react'
 import selectSearchOptionType from './selectSearchOptionType'
 import Form from 'react-bootstrap/Form'
 import Stack from 'react-bootstrap/Stack'
@@ -7,6 +7,7 @@ import { FormattedMessage } from 'react-intl'
 import LanguageContext from '../../../LanguageContext'
 import SearchForMoreWorldCuisines from './SearchForMoreWorldCuisines'
 import { DessertTaste } from './dessertTasteEnum'
+import { SpicinessLevel } from './spicinessLevelEnum'
 
 type WorldCuisine = {
   iri: string
@@ -39,6 +40,12 @@ type Props = {
   setDessertTastePreference: React.Dispatch<
     React.SetStateAction<DessertTaste | undefined>
   >
+  levelOfSpicinessPreference: SpicinessLevel | undefined
+  setLevelOfSpicinessPreference: React.Dispatch<
+    React.SetStateAction<SpicinessLevel | undefined>
+  >
+  userLikesSpicyFood: boolean
+  setUserLikesSpicyFood: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 const SelectTastePreferences: React.FC<Props> = ({
@@ -48,10 +55,12 @@ const SelectTastePreferences: React.FC<Props> = ({
   setSelectedWorldCuisinesViaSearch,
   dessertTastePreference,
   setDessertTastePreference,
+  levelOfSpicinessPreference,
+  setLevelOfSpicinessPreference,
+  userLikesSpicyFood,
+  setUserLikesSpicyFood,
 }) => {
   const { selectedLanguage } = useContext(LanguageContext)
-
-  const [userLikesSpicyFood, setUserLikesSpicyFood] = useState(false)
 
   // Adds or removes a WorldCuisine IRI from the array of selected world cuisines via checkboxes.
   function handleWorldCuisineCheckboxOnChange(cuisine: WorldCuisine) {
@@ -170,6 +179,7 @@ const SelectTastePreferences: React.FC<Props> = ({
       </h4>
 
       <Form.Switch
+        checked={userLikesSpicyFood}
         label={
           userLikesSpicyFood ? (
             <FormattedMessage id="yes" defaultMessage="Yes" />
@@ -178,7 +188,13 @@ const SelectTastePreferences: React.FC<Props> = ({
           )
         }
         className="width-fit-content mx-auto"
-        onClick={() => setUserLikesSpicyFood(!userLikesSpicyFood)}
+        onChange={() => {
+          setUserLikesSpicyFood(!userLikesSpicyFood)
+
+          if (userLikesSpicyFood === false) {
+            setLevelOfSpicinessPreference(undefined)
+          }
+        }}
       />
 
       {userLikesSpicyFood && (
@@ -193,17 +209,26 @@ const SelectTastePreferences: React.FC<Props> = ({
             <Form.Check
               type="radio"
               label={<FormattedMessage id="mild" defaultMessage="Mild" />}
-              checked={true}
+              checked={levelOfSpicinessPreference === SpicinessLevel.MILD}
+              onChange={() => {
+                setLevelOfSpicinessPreference(SpicinessLevel.MILD)
+              }}
             />
             <Form.Check
               type="radio"
               label={<FormattedMessage id="medium" defaultMessage="Medium" />}
-              checked={false}
+              checked={levelOfSpicinessPreference === SpicinessLevel.MEDIUM}
+              onChange={() => {
+                setLevelOfSpicinessPreference(SpicinessLevel.MEDIUM)
+              }}
             />
             <Form.Check
               type="radio"
               label={<FormattedMessage id="hot" defaultMessage="Hot" />}
-              checked={false}
+              checked={levelOfSpicinessPreference === SpicinessLevel.HOT}
+              onChange={() => {
+                setLevelOfSpicinessPreference(SpicinessLevel.HOT)
+              }}
             />
           </div>
         </>
