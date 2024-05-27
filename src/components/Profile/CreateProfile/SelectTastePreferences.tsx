@@ -191,8 +191,10 @@ const SelectTastePreferences: React.FC<Props> = ({
         onChange={() => {
           setUserLikesSpicyFood(!userLikesSpicyFood)
 
-          if (userLikesSpicyFood === false) {
+          if (userLikesSpicyFood) {
             setLevelOfSpicinessPreference(undefined)
+          } else {
+            setLevelOfSpicinessPreference(SpicinessLevel.MILD)
           }
         }}
       />
@@ -205,6 +207,7 @@ const SelectTastePreferences: React.FC<Props> = ({
               defaultMessage="How spicy should it be?"
             />
           </span>
+
           <div className="width-fit-content mx-auto text-start">
             <Form.Check
               type="radio"
@@ -214,6 +217,7 @@ const SelectTastePreferences: React.FC<Props> = ({
                 setLevelOfSpicinessPreference(SpicinessLevel.MILD)
               }}
             />
+
             <Form.Check
               type="radio"
               label={<FormattedMessage id="medium" defaultMessage="Medium" />}
@@ -222,6 +226,7 @@ const SelectTastePreferences: React.FC<Props> = ({
                 setLevelOfSpicinessPreference(SpicinessLevel.MEDIUM)
               }}
             />
+
             <Form.Check
               type="radio"
               label={<FormattedMessage id="hot" defaultMessage="Hot" />}
