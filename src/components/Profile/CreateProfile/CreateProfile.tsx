@@ -31,8 +31,6 @@ const CreateProfile: React.FC<Props> = ({
 }) => {
   const { session } = useSession()
 
-  const steps = ['Allergens', 'Diets', 'Taste preferences']
-
   const [currentStep, setCurrentStep] = useState(startStep)
 
   // URLs of allergens which are selected by the user.
@@ -126,11 +124,26 @@ const CreateProfile: React.FC<Props> = ({
           alternativeLabel
           className="create-profile-stepper mt-3"
         >
-          {steps.map((label) => (
-            <Step key={label}>
-              <StepLabel>{label}</StepLabel>
-            </Step>
-          ))}
+          <Step>
+            <StepLabel>
+              <FormattedMessage id="allergens" defaultMessage="Allergens" />
+            </StepLabel>
+          </Step>
+
+          <Step>
+            <StepLabel>
+              <FormattedMessage id="diets" defaultMessage="Diets" />
+            </StepLabel>
+          </Step>
+
+          <Step>
+            <StepLabel>
+              <FormattedMessage
+                id="tastePreferences"
+                defaultMessage="Taste preferences"
+              />
+            </StepLabel>
+          </Step>
         </Stepper>
 
         <div className="user-preferences-controls overflow-auto text-center">
