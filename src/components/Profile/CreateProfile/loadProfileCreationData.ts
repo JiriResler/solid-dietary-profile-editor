@@ -46,9 +46,7 @@ export async function loadAllergenList(locale: string): Promise<Allergen[]> {
   return allergenList
 }
 
-// Loads a list of most popular diets from the internet.
-// The list can be found here:
-// https://github.com/JiriResler/personalized-restaurant-menu-viewer-application-ontology/blob/main/resource/List_of_popular_diets.ttl
+// Loads a list of popular diets.
 export async function loadMostPopularDiets(locale: string): Promise<Diet[]> {
   const dietListFileUrl =
     'https://raw.githubusercontent.com/JiriResler/personalized-restaurant-menu-viewer-application-ontology/main/resource/List_of_popular_diets'
@@ -79,13 +77,26 @@ export async function loadMostPopularDiets(locale: string): Promise<Diet[]> {
   return listOfDiets
 }
 
-// Loads a prefetched result of a SPARQL query which retrieves diets from DBPedia. It can be found here:
-// https://github.com/JiriResler/personalized-restaurant-menu-viewer-application-ontology/blob/main/prefetched-dbpedia-sparql-query-results/diets-en.ttl
+// Loads a prefetched result of a SPARQL query which retrieves diets from DBPedia.
 export async function loadDietsFromDBPedia(): Promise<
   ReadonlyArray<selectSearchOptionType>
 > {
   const prefetchedQueryResultLocation =
     'https://raw.githubusercontent.com/JiriResler/personalized-restaurant-menu-viewer-application-ontology/main/prefetched-dbpedia-sparql-query-results/diets-en.json'
+
+  const queryResultResponse = await fetch(prefetchedQueryResultLocation)
+
+  const queryResult = (await queryResultResponse.json()) as DBPediaResponse
+
+  return transformQueryResultToSelectOptionsArray(queryResult)
+}
+
+// Loads a prefetched result of a SPARQL query which retrieves world cuisines from DBPedia.
+export async function loadWorldCuisineSearchOptions(): Promise<
+  ReadonlyArray<selectSearchOptionType>
+> {
+  const prefetchedQueryResultLocation =
+    'https://raw.githubusercontent.com/JiriResler/personalized-restaurant-menu-viewer-application-ontology/main/prefetched-dbpedia-sparql-query-results/world-cuisines-en.json'
 
   const queryResultResponse = await fetch(prefetchedQueryResultLocation)
 

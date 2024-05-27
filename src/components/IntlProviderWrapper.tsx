@@ -41,7 +41,7 @@ type Messages = {
   specifyYourTastePreferences: string
   whichWorldCuisinesDoYouLike: string
   loadingData: string
-  searchForMoreCuisines: string
+  searchForMoreWorldCuisines: string
   whichTasteOfDessertsDoYouPrefer: string
   doesNotMatter: string
   sweet: string
@@ -93,7 +93,7 @@ const messagesInSlovak: Messages = {
   specifyYourTastePreferences: 'Špecifikujte vaše chuťové preferencie',
   whichWorldCuisinesDoYouLike: 'Ktoré svetové kuchyne máte radi?',
   loadingData: 'Načítavam dáta',
-  searchForMoreCuisines: 'Hľadať ďalšie svetové kuchyne...',
+  searchForMoreWorldCuisines: 'Hľadať ďalšie svetové kuchyne...',
   whichTasteOfDessertsDoYouPrefer: 'Aké zákusky máte radšej?',
   doesNotMatter: 'Nezáleží',
   sweet: 'Sladké',

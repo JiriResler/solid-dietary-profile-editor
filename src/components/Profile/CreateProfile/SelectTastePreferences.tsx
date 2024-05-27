@@ -1,9 +1,11 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import selectSearchOptionType from './selectSearchOptionType'
 import Form from 'react-bootstrap/Form'
 import Stack from 'react-bootstrap/Stack'
 import './SelectTastePreferences.css'
 import { FormattedMessage } from 'react-intl'
+import LanguageContext from '../../../LanguageContext'
+import SearchForMoreWorldCuisines from './SearchForMoreWorldCuisines'
 
 type WorldCuisine = {
   iri: string
@@ -40,6 +42,8 @@ const SelectTastePreferences: React.FC<Props> = ({
   selectedWorldCuisinesViaSearch,
   setSelectedWorldCuisinesViaSearch,
 }) => {
+  const { selectedLanguage } = useContext(LanguageContext)
+
   const [userLikesSpicyFood, setUserLikesSpicyFood] = useState(false)
 
   // Adds or removes a WorldCuisine IRI from the array of selected world cuisines via checkboxes.
@@ -100,6 +104,17 @@ const SelectTastePreferences: React.FC<Props> = ({
           )
         })}
       </div>
+
+      {selectedLanguage === 'en' && (
+        <>
+          <SearchForMoreWorldCuisines
+            selectedWorldCuisinesViaSearch={selectedWorldCuisinesViaSearch}
+            setSelectedWorldCuisinesViaSearch={
+              setSelectedWorldCuisinesViaSearch
+            }
+          />
+        </>
+      )}
 
       <h4 className="mt-3">
         <FormattedMessage
