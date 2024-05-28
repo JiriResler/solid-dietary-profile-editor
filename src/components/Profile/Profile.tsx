@@ -423,9 +423,11 @@ const Profile: React.FC<Props> = ({ loginMethod }) => {
                     console.log(error.message)
                   })
 
-                  session.logout().catch((error: Error) => {
-                    console.log(error.message)
-                  })
+                  session
+                    .logout({ logoutType: 'app' })
+                    .catch((error: Error) => {
+                      console.log(error.message)
+                    })
                 }}
               >
                 <div className="position-absolute top-50 translate-middle-y">

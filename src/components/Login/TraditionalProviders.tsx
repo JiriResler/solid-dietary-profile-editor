@@ -1,7 +1,7 @@
 import './TraditionalProviders.css'
 import Button from 'react-bootstrap/Button'
 import { auth, facebook, google } from '../../firebase'
-import { signInWithRedirect } from 'firebase/auth'
+import { signInWithPopup } from 'firebase/auth'
 import { FormattedMessage } from 'react-intl'
 
 // todo: sign out from all providers before signing in
@@ -10,7 +10,7 @@ const TraditionalProviders: React.FC = () => {
     <>
       <Button
         onClick={() => {
-          void signInWithRedirect(auth, facebook)
+          void signInWithPopup(auth, facebook)
         }}
         className="provider-button facebook-button text-start"
       >
@@ -30,7 +30,7 @@ const TraditionalProviders: React.FC = () => {
 
       <Button
         onClick={() => {
-          void signInWithRedirect(auth, google)
+          void signInWithPopup(auth, google)
         }}
         className="provider-button google-button text-start"
       >
