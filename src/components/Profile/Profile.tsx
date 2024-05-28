@@ -189,11 +189,11 @@ const Profile: React.FC<Props> = ({ loginMethod }) => {
         console.error(
           'Cannot load profile picture because currentUser.photoURL is null.',
         )
-        return ''
+        return 'images/profile_picture_default.svg'
       }
     } else {
       console.error('Cannot load profile picture because currentUser is null.')
-      return ''
+      return 'images/profile_picture_default.svg'
     }
   }
 
