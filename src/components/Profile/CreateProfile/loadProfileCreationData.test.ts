@@ -1,6 +1,7 @@
 import { describe, test, assert } from 'vitest'
 import { Thing } from '@inrupt/solid-client'
 import { getAllergenFromThing } from './loadProfileCreationData'
+import { Allergen } from './profileDataTypes'
 
 describe('Load profile creation data', () => {
   test('Allergen created from a correct Thing returns an Allergen with correct values.', () => {
@@ -38,9 +39,9 @@ describe('Load profile creation data', () => {
       },
     }
 
-    const expectedAllergen = {
-      IRI: thing.url,
-      label:
+    const expectedAllergen: Allergen = {
+      iri: thing.url,
+      currentLanguageLabel:
         thing.predicates['http://www.w3.org/2000/01/rdf-schema#label']
           .langStrings!.en[0],
       menuLegendNumber: parseInt(
@@ -56,7 +57,7 @@ describe('Load profile creation data', () => {
         thing.predicates['http://www.w3.org/2002/07/owl#sameAs'].namedNodes![0],
     }
 
-    const actualAllergen = getAllergenFromThing(thing)
+    const actualAllergen = getAllergenFromThing(thing, 'en')
 
     assert.deepEqual(actualAllergen, expectedAllergen)
   })

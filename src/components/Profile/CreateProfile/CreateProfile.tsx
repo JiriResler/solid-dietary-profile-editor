@@ -1,14 +1,14 @@
 import { useState } from 'react'
-import { auth } from '../../../firebase'
+// import { auth } from '../../../firebase'
 import Button from 'react-bootstrap/Button'
 import Stack from 'react-bootstrap/Stack'
 import './CreateProfile.css'
 import SelectAllergens from './SelectAllergens'
 import SelectDiets from './SelectDiets'
 import { LoginMethod } from '../../loginMethodEnum'
-import { useSession } from '@inrupt/solid-ui-react'
+// import { useSession } from '@inrupt/solid-ui-react'
 import SelectTastePreferences from './SelectTastePreferences'
-import { saveProfileFirebase, saveProfileSolid } from './saveProfile'
+// import { saveProfileFirebase, saveProfileSolid } from './saveProfile'
 import Stepper from '@mui/material/Stepper'
 import Step from '@mui/material/Step'
 import StepLabel from '@mui/material/StepLabel'
@@ -25,11 +25,11 @@ type Props = {
 }
 
 const CreateProfile: React.FC<Props> = ({
-  loginMethod,
+  // loginMethod,
   startStep,
-  setEditProfile,
+  // setEditProfile,
 }) => {
-  const { session } = useSession()
+  // const { session } = useSession()
 
   const [currentStep, setCurrentStep] = useState(startStep)
 
@@ -69,27 +69,27 @@ const CreateProfile: React.FC<Props> = ({
     SpicinessLevel | undefined
   >(undefined)
 
-  function saveProfile() {
-    if (loginMethod === LoginMethod.SOLID) {
-      void saveProfileSolid(
-        session,
-        selectedAllergens,
-        selectedDietsViaCheckboxes,
-        selectedTastePreferences,
-      )
-    }
+  // function saveProfile() {
+  //   if (loginMethod === LoginMethod.SOLID) {
+  //     void saveProfileSolid(
+  //       session,
+  //       selectedAllergens,
+  //       selectedDietsViaCheckboxes,
+  //       selectedTastePreferences,
+  //     )
+  //   }
 
-    if (loginMethod === LoginMethod.FIREBASE) {
-      void saveProfileFirebase(
-        auth,
-        selectedAllergens,
-        selectedDietsViaCheckboxes,
-        selectedTastePreferences,
-      )
-    }
+  //   if (loginMethod === LoginMethod.FIREBASE) {
+  //     void saveProfileFirebase(
+  //       auth,
+  //       selectedAllergens,
+  //       selectedDietsViaCheckboxes,
+  //       selectedTastePreferences,
+  //     )
+  //   }
 
-    setEditProfile(false)
-  }
+  //   setEditProfile(false)
+  // }
 
   if (currentStep === 0) {
     return (
@@ -217,7 +217,7 @@ const CreateProfile: React.FC<Props> = ({
               <Button
                 variant="success"
                 className="create-profile-navigation-button"
-                onClick={() => saveProfile()}
+                // onClick={() => saveProfile()}
               >
                 <FormattedMessage
                   id="saveProfile"
