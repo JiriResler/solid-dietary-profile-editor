@@ -76,6 +76,8 @@ const Profile: React.FC<Props> = ({ loginMethod }) => {
 
   const [editProfile, setEditProfile] = useState(false)
 
+  const currentUser = auth.currentUser
+
   useEffect(() => {
     void loadUserProfile()
 
@@ -177,6 +179,22 @@ const Profile: React.FC<Props> = ({ loginMethod }) => {
     document.body.appendChild(linkElement) // Required for this to work in FireFox
     linkElement.click()
     document.body.removeChild(linkElement)
+  }
+
+  function getProfilePictureUrl(): string {
+    if (currentUser !== null) {
+      if (currentUser.photoURL !== null) {
+        return currentUser.photoURL
+      } else {
+        console.error(
+          'Cannot load profile picture because currentUser.photoURL is null.',
+        )
+        return ''
+      }
+    } else {
+      console.error('Cannot load profile picture because currentUser is null.')
+      return ''
+    }
   }
 
   const readJsonFile = (file: Blob) =>
@@ -296,13 +314,12 @@ const Profile: React.FC<Props> = ({ loginMethod }) => {
           className="w-50 text-center position-absolute top-50 start-50 translate-middle"
         >
           <img
-            src="images/profile_picture_default.svg"
+            src={getProfilePictureUrl()}
             alt="Profile icon"
-            style={{ width: '75px' }}
-            className="mx-auto"
+            className="profile-photo mx-auto"
           />
-          <span className="user-name">John Smith</span>
-          <span className="user-email">john.smith@email.com</span>
+          <span className="user-name">{currentUser?.displayName}</span>
+          <span className="user-email">{currentUser?.email}</span>
         </Stack>
 
         <div className="position-absolute top-0 end-0 mt-4 me-4">

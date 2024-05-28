@@ -41,3 +41,8 @@
 .sign-out {
   color:red
 }
+
+.profile-photo {
+  width: 75px;
+  border-radius: 50%;
+}
