@@ -146,77 +146,88 @@ const CreateProfile: React.FC<Props> = ({
           </Step>
         </Stepper>
 
-        <div className="user-preferences-controls overflow-auto text-center">
-          {currentStep === 1 && (
-            <SelectAllergens
-              selectedAllergens={selectedAllergens}
-              setSelectedAllergens={setSelectedAllergens}
-            />
-          )}
+        {currentStep === 1 && (
+          <>
+            <div className="select-allergens-input-controls overflow-auto text-center">
+              <h3 className="mb-3">
+                <FormattedMessage
+                  id="whatAreYouAllergicTo"
+                  defaultMessage="What are you allergic to?"
+                />
+              </h3>
 
-          {currentStep === 2 && (
-            <SelectDiets
-              selectedDietsViaCheckboxes={selectedDietsViaCheckboxes}
-              setSelectedDietsViaCheckboxes={setSelectedDietsViaCheckboxes}
-              selectedDietsViaSearch={selectedDietsViaSearch}
-              setSelectedDietsViaSearch={setSelectedDietsViaSearch}
-            />
-          )}
+              <SelectAllergens
+                selectedAllergens={selectedAllergens}
+                setSelectedAllergens={setSelectedAllergens}
+              />
+            </div>
 
-          {currentStep === 3 && (
-            <SelectTastePreferences
-              selectedWorldCuisinesViaCheckboxes={
-                selectedWorldCuisinesViaCheckboxes
-              }
-              setSelectedWorldCuisinesViaCheckboxes={
-                setSelectedWorldCuisinesViaCheckboxes
-              }
-              selectedWorldCuisinesViaSearch={selectedWorldCuisinesViaSearch}
-              setSelectedWorldCuisinesViaSearch={
-                setSelectedWorldCuisinesViaSearch
-              }
-              dessertTastePreference={dessertTastePreference}
-              setDessertTastePreference={setDessertTastePreference}
-              levelOfSpicinessPreference={levelOfSpicinessPreference}
-              setLevelOfSpicinessPreference={setLevelOfSpicinessPreference}
-              userLikesSpicyFood={userLikesSpicyFood}
-              setUserLikesSpicyFood={setUserLikesSpicyFood}
-            />
-          )}
-        </div>
-
-        <div className="create-profile-step-navigation position-absolute bottom-0 start-50 translate-middle-x mb-2 w-100">
-          {currentStep === 1 && (
-            <Button
-              className="create-profile-navigation-button app-primary-color-button"
-              onClick={() => setCurrentStep(currentStep + 1)}
-            >
-              <FormattedMessage id="nextStep" defaultMessage="Next" />
-            </Button>
-          )}
-
-          {currentStep === 2 && (
-            <>
+            <div className="position-absolute bottom-0 start-50 translate-middle-x mb-2 w-100">
               <Button
-                className="create-profile-navigation-button app-primary-color-button"
+                className="step-navigation-button app-primary-color-button"
+                onClick={() => setCurrentStep(currentStep + 1)}
+              >
+                <FormattedMessage id="nextStep" defaultMessage="Next" />
+              </Button>
+            </div>
+          </>
+        )}
+
+        {currentStep === 2 && (
+          <>
+            <div className="select-diet-and-taste-preferences-input-controls overflow-auto text-center">
+              <SelectDiets
+                selectedDietsViaCheckboxes={selectedDietsViaCheckboxes}
+                setSelectedDietsViaCheckboxes={setSelectedDietsViaCheckboxes}
+                selectedDietsViaSearch={selectedDietsViaSearch}
+                setSelectedDietsViaSearch={setSelectedDietsViaSearch}
+              />
+            </div>
+
+            <div className="select-diet-and-taste-preferences-step-navigation-buttons position-absolute bottom-0 start-50 translate-middle-x mb-2 w-100">
+              <Button
+                className="step-navigation-button app-primary-color-button"
                 onClick={() => setCurrentStep(currentStep + 1)}
               >
                 <FormattedMessage id="nextStep" defaultMessage="Next" />
               </Button>
               <Button
-                className="create-profile-navigation-button app-secondary-color-button mt-2"
+                className="step-navigation-button app-secondary-color-button mt-2"
                 onClick={() => setCurrentStep(currentStep - 1)}
               >
                 <FormattedMessage id="goBack" defaultMessage="Back" />
               </Button>
-            </>
-          )}
+            </div>
+          </>
+        )}
 
-          {currentStep === 3 && (
-            <>
+        {currentStep === 3 && (
+          <>
+            <div className="select-diet-and-taste-preferences-input-controls overflow-auto text-center">
+              <SelectTastePreferences
+                selectedWorldCuisinesViaCheckboxes={
+                  selectedWorldCuisinesViaCheckboxes
+                }
+                setSelectedWorldCuisinesViaCheckboxes={
+                  setSelectedWorldCuisinesViaCheckboxes
+                }
+                selectedWorldCuisinesViaSearch={selectedWorldCuisinesViaSearch}
+                setSelectedWorldCuisinesViaSearch={
+                  setSelectedWorldCuisinesViaSearch
+                }
+                dessertTastePreference={dessertTastePreference}
+                setDessertTastePreference={setDessertTastePreference}
+                levelOfSpicinessPreference={levelOfSpicinessPreference}
+                setLevelOfSpicinessPreference={setLevelOfSpicinessPreference}
+                userLikesSpicyFood={userLikesSpicyFood}
+                setUserLikesSpicyFood={setUserLikesSpicyFood}
+              />
+            </div>
+
+            <div className="select-diet-and-taste-preferences-step-navigation-buttons position-absolute bottom-0 start-50 translate-middle-x mb-2 w-100">
               <Button
                 variant="success"
-                className="create-profile-navigation-button"
+                className="step-navigation-button"
                 // onClick={() => saveProfile()}
               >
                 <FormattedMessage
@@ -225,14 +236,14 @@ const CreateProfile: React.FC<Props> = ({
                 />
               </Button>
               <Button
-                className="create-profile-navigation-button app-secondary-color-button mt-2"
+                className="step-navigation-button app-secondary-color-button mt-2"
                 onClick={() => setCurrentStep(currentStep - 1)}
               >
                 <FormattedMessage id="goBack" defaultMessage="Back" />
               </Button>
-            </>
-          )}
-        </div>
+            </div>
+          </>
+        )}
       </Stack>
     </Container>
   )

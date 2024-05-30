@@ -11,7 +11,7 @@
   height: 100dvh;
 }
 
-.create-profile-navigation-button {
+.step-navigation-button {
   height: 40px;
   border-radius: 12px;
   width: 100%;
@@ -41,17 +41,24 @@
   border-color: #222020;
 }
 
-.user-preferences-controls {
+.select-allergens-input-controls {
   /* 
-    height = full height - stepper height - step navigation height - approximate container borders 
+    height = full height - stepper height - step navigation button height - approximate spaces between components
   */
-  height: calc(100dvh - 60px - 90px - 50px);
+  height: calc(100dvh - 60px - 40px - 50px);
+}
+
+.select-diet-and-taste-preferences-input-controls {
+  /* 
+    height = full height - stepper height - step navigation buttons height - approximate spaces between components 
+  */
+  height: calc(100dvh - 60px - 80px - 60px);
 }
 
 .create-profile-stepper {
   height: 60px;
 }
 
-.create-profile-step-navigation {
+.select-diet-and-taste-preferences-step-navigation-buttons {
   height: 90px;
 }
