@@ -78,7 +78,7 @@ export async function loadMostPopularDiets(locale: string): Promise<Diet[]> {
 }
 
 // Loads a prefetched result of a SPARQL query which retrieves diets from DBPedia.
-export async function loadDietsFromDBPedia(): Promise<
+export async function loadDietSearchOptions(): Promise<
   ReadonlyArray<selectSearchOptionType>
 > {
   const prefetchedQueryResultLocation =
@@ -106,7 +106,7 @@ export async function loadWorldCuisineSearchOptions(): Promise<
 }
 
 // Creates an array of options for Select component.
-function transformQueryResultToSelectOptionsArray(
+export function transformQueryResultToSelectOptionsArray(
   queryResult: DBPediaResponse,
 ): ReadonlyArray<selectSearchOptionType> {
   const optionsArray: selectSearchOptionType[] = []
@@ -128,10 +128,10 @@ async function fetchTurtleFile(turtleFileUrl: string) {
   if (!fetchedResponse.ok) {
     throw new Error(
       'Retreiving a turtle file from ' +
-        turtleFileUrl +
-        ' failed with HTTP status ' +
-        fetchedResponse.status +
-        '.',
+      turtleFileUrl +
+      ' failed with HTTP status ' +
+      fetchedResponse.status +
+      '.',
     )
   }
 
@@ -215,8 +215,8 @@ export function getAllergenFromThing(thing: Thing, locale: string): Allergen {
   if (allergenLabel === null) {
     throw new Error(
       'Allergen label value for ' +
-        locale +
-        ' is missing in RDF allergen file.',
+      locale +
+      ' is missing in RDF allergen file.',
     )
   }
 
@@ -267,10 +267,10 @@ function getDietFromThing(thing: Thing, locale: string): Diet {
   if (dietLabel === null) {
     console.error(
       'Label in ' +
-        locale +
-        ' locale is missing for resource ' +
-        thing.url +
-        '.',
+      locale +
+      ' locale is missing for resource ' +
+      thing.url +
+      '.',
     )
 
     dietLabel = getStringEnglish(thing, RDFS.label)
@@ -285,8 +285,8 @@ function getDietFromThing(thing: Thing, locale: string): Diet {
   if (dietSameAsIri === null) {
     throw new Error(
       'The owl:sameAs value is missing in RDF file for resource ' +
-        thing.url +
-        '.',
+      thing.url +
+      '.',
     )
   }
 

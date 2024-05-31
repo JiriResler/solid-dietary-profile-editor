@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import Select, { createFilter } from 'react-select'
 import CustomSelectMenu from './CustomSelectMenu'
 import selectSearchOptionType from './selectSearchOptionType'
-import { loadDietsFromDBPedia } from './loadProfileCreationData'
+import { loadDietSearchOptions } from './loadProfileCreationData'
 import { FormattedMessage } from 'react-intl'
 
 const SelectComponents = {
@@ -32,7 +32,7 @@ const SearchForMoreDiets: React.FC<Props> = ({
   useEffect(() => {
     setLoadingDietOptions(true)
 
-    loadDietsFromDBPedia()
+    loadDietSearchOptions()
       .then((dietOptions) => {
         setSearchDietOptions(dietOptions)
 
