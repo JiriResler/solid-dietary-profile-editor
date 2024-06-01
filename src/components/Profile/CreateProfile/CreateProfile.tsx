@@ -152,12 +152,14 @@ const CreateProfile: React.FC<Props> = ({
           className="create-profile-stepper mt-3"
           connector={<CustomStepConnector />}
           sx={{
-            '& .MuiSvgIcon-root.Mui-active': {
-              color: '#2541b2',
-            },
-            '& .MuiSvgIcon-root.Mui-completed': {
-              color: '#2541b2',
-            },
+            '& .MuiStepLabel-iconContainer.Mui-active > .MuiSvgIcon-root.Mui-active':
+              {
+                color: '#2541b2',
+              },
+            '& .MuiStepLabel-iconContainer.Mui-completed > .MuiSvgIcon-root.Mui-completed':
+              {
+                color: '#2541b2',
+              },
             '& .MuiStepLabel-labelContainer': {
               height: '50px',
               position: 'relative',
