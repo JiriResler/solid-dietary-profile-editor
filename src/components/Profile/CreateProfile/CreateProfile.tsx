@@ -17,6 +17,8 @@ import { FormattedMessage } from 'react-intl'
 import selectSearchOptionType from './selectSearchOptionType'
 import { DessertTaste } from './dessertTasteEnum'
 import { SpicinessLevel } from './spicinessLevelEnum'
+import { styled } from '@mui/material/styles';
+import StepConnector, { stepConnectorClasses } from '@mui/material/StepConnector';
 
 type Props = {
   loginMethod: LoginMethod
@@ -91,6 +93,29 @@ const CreateProfile: React.FC<Props> = ({
   //   setEditProfile(false)
   // }
 
+  const CustomStepConnector = styled(StepConnector)(() => ({
+    [`&.${stepConnectorClasses.alternativeLabel}`]: {
+      top: 10,
+      left: 'calc(-50% + 12px)',
+      right: 'calc(50% + 12px)',
+    },
+    [`&.${stepConnectorClasses.active}`]: {
+      [`& .${stepConnectorClasses.line}`]: {
+        borderColor: '#1c3bb8',
+      },
+    },
+    [`&.${stepConnectorClasses.completed}`]: {
+      [`& .${stepConnectorClasses.line}`]: {
+        borderColor: '#1c3bb8',
+      },
+    },
+    [`& .${stepConnectorClasses.line}`]: {
+      borderColor: '#eaeaf0',
+      borderTopWidth: 3,
+      borderRadius: 1,
+    },
+  }));
+
   if (currentStep === 0) {
     return (
       <Stack
@@ -123,20 +148,21 @@ const CreateProfile: React.FC<Props> = ({
           activeStep={currentStep - 1}
           alternativeLabel
           className="create-profile-stepper mt-3"
+          connector={<CustomStepConnector />}
         >
-          <Step>
-            <StepLabel>
+          <Step key="step1">
+            <StepLabel >
               <FormattedMessage id="allergens" defaultMessage="Allergens" />
             </StepLabel>
           </Step>
 
-          <Step>
+          <Step key="step2">
             <StepLabel>
               <FormattedMessage id="diets" defaultMessage="Diets" />
             </StepLabel>
           </Step>
 
-          <Step>
+          <Step key="step3">
             <StepLabel>
               <FormattedMessage
                 id="tastePreferences"
@@ -228,7 +254,7 @@ const CreateProfile: React.FC<Props> = ({
               <Button
                 variant="success"
                 className="step-navigation-button"
-                // onClick={() => saveProfile()}
+              // onClick={() => saveProfile()}
               >
                 <FormattedMessage
                   id="saveProfile"
