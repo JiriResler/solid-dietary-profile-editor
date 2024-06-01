@@ -17,8 +17,10 @@ import { FormattedMessage } from 'react-intl'
 import selectSearchOptionType from './selectSearchOptionType'
 import { DessertTaste } from './dessertTasteEnum'
 import { SpicinessLevel } from './spicinessLevelEnum'
-import { styled } from '@mui/material/styles';
-import StepConnector, { stepConnectorClasses } from '@mui/material/StepConnector';
+import { styled } from '@mui/material/styles'
+import StepConnector, {
+  stepConnectorClasses,
+} from '@mui/material/StepConnector'
 
 type Props = {
   loginMethod: LoginMethod
@@ -114,7 +116,7 @@ const CreateProfile: React.FC<Props> = ({
       borderTopWidth: 3,
       borderRadius: 1,
     },
-  }));
+  }))
 
   if (currentStep === 0) {
     return (
@@ -149,9 +151,28 @@ const CreateProfile: React.FC<Props> = ({
           alternativeLabel
           className="create-profile-stepper mt-3"
           connector={<CustomStepConnector />}
+          sx={{
+            '& .MuiSvgIcon-root.Mui-active': {
+              color: '#2541b2',
+            },
+            '& .MuiSvgIcon-root.Mui-completed': {
+              color: '#2541b2',
+            },
+            '& .MuiStepLabel-labelContainer': {
+              height: '50px',
+              position: 'relative',
+            },
+            '& .MuiStepLabel-label': {
+              margin: '0',
+              position: 'absolute',
+              top: '50%',
+              left: '50%',
+              transform: 'translate(-50%, -50%)',
+            },
+          }}
         >
           <Step key="step1">
-            <StepLabel >
+            <StepLabel>
               <FormattedMessage id="allergens" defaultMessage="Allergens" />
             </StepLabel>
           </Step>
@@ -164,10 +185,12 @@ const CreateProfile: React.FC<Props> = ({
 
           <Step key="step3">
             <StepLabel>
-              <FormattedMessage
-                id="tastePreferences"
-                defaultMessage="Taste preferences"
-              />
+              <div className="mt-2">
+                <FormattedMessage
+                  id="tastePreferences"
+                  defaultMessage="Taste preferences"
+                />
+              </div>
             </StepLabel>
           </Step>
         </Stepper>
@@ -254,7 +277,7 @@ const CreateProfile: React.FC<Props> = ({
               <Button
                 variant="success"
                 className="step-navigation-button"
-              // onClick={() => saveProfile()}
+                // onClick={() => saveProfile()}
               >
                 <FormattedMessage
                   id="saveProfile"
