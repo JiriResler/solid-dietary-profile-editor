@@ -206,14 +206,12 @@ const CreateProfile: React.FC<Props> = ({
               />
             </div>
 
-            <div className="position-absolute bottom-0 start-50 translate-middle-x mb-2 w-100">
-              <Button
-                className="step-navigation-button app-primary-color-button"
-                onClick={() => setCurrentStep(currentStep + 1)}
-              >
-                <FormattedMessage id="nextStep" defaultMessage="Next" />
-              </Button>
-            </div>
+            <Button
+              className="position-absolute bottom-0 start-50 translate-middle-x step-forward-navigation-button app-primary-color-button mb-2"
+              onClick={() => setCurrentStep(currentStep + 1)}
+            >
+              <FormattedMessage id="nextStep" defaultMessage="Next" />
+            </Button>
           </>
         )}
 
