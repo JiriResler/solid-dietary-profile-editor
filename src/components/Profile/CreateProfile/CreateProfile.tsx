@@ -190,43 +190,56 @@ const CreateProfile: React.FC<Props> = ({
           </Step>
         </Stepper>
 
+        <div className="select-preferences-input-controls overflow-auto text-center">
+          {currentStep === 1 && (
+            <SelectAllergens
+              selectedAllergens={selectedAllergens}
+              setSelectedAllergens={setSelectedAllergens}
+            />
+          )}
+
+          {currentStep === 2 && (
+            <SelectDiets
+              selectedDietsViaCheckboxes={selectedDietsViaCheckboxes}
+              setSelectedDietsViaCheckboxes={setSelectedDietsViaCheckboxes}
+              selectedDietsViaSearch={selectedDietsViaSearch}
+              setSelectedDietsViaSearch={setSelectedDietsViaSearch}
+            />
+          )}
+          {currentStep === 3 && (
+            <SelectTastePreferences
+              selectedWorldCuisinesViaCheckboxes={
+                selectedWorldCuisinesViaCheckboxes
+              }
+              setSelectedWorldCuisinesViaCheckboxes={
+                setSelectedWorldCuisinesViaCheckboxes
+              }
+              selectedWorldCuisinesViaSearch={selectedWorldCuisinesViaSearch}
+              setSelectedWorldCuisinesViaSearch={
+                setSelectedWorldCuisinesViaSearch
+              }
+              dessertTastePreference={dessertTastePreference}
+              setDessertTastePreference={setDessertTastePreference}
+              levelOfSpicinessPreference={levelOfSpicinessPreference}
+              setLevelOfSpicinessPreference={setLevelOfSpicinessPreference}
+              userLikesSpicyFood={userLikesSpicyFood}
+              setUserLikesSpicyFood={setUserLikesSpicyFood}
+            />
+          )}
+        </div>
+
         {currentStep === 1 && (
-          <>
-            <div className="select-allergens-input-controls overflow-auto text-center">
-              <h3 className="mb-3">
-                <FormattedMessage
-                  id="whatAreYouAllergicTo"
-                  defaultMessage="What are you allergic to?"
-                />
-              </h3>
-
-              <SelectAllergens
-                selectedAllergens={selectedAllergens}
-                setSelectedAllergens={setSelectedAllergens}
-              />
-            </div>
-
-            <Button
-              className="position-absolute bottom-0 start-50 translate-middle-x step-forward-navigation-button app-primary-color-button mb-2"
-              onClick={() => setCurrentStep(currentStep + 1)}
-            >
-              <FormattedMessage id="nextStep" defaultMessage="Next" />
-            </Button>
-          </>
+          <Button
+            className="position-absolute bottom-0 start-50 translate-middle-x step-forward-navigation-button app-primary-color-button mb-2"
+            onClick={() => setCurrentStep(currentStep + 1)}
+          >
+            <FormattedMessage id="nextStep" defaultMessage="Next" />
+          </Button>
         )}
 
         {currentStep === 2 && (
           <>
-            <div className="select-diet-and-taste-preferences-input-controls overflow-auto text-center">
-              <SelectDiets
-                selectedDietsViaCheckboxes={selectedDietsViaCheckboxes}
-                setSelectedDietsViaCheckboxes={setSelectedDietsViaCheckboxes}
-                selectedDietsViaSearch={selectedDietsViaSearch}
-                setSelectedDietsViaSearch={setSelectedDietsViaSearch}
-              />
-            </div>
-
-            <div className="select-diet-and-taste-preferences-step-navigation-buttons position-absolute bottom-0 start-50 translate-middle-x mb-2 w-100">
+            <div className="position-absolute bottom-0 start-50 translate-middle-x mb-2 w-100">
               <Button
                 className="step-navigation-button app-primary-color-button"
                 onClick={() => setCurrentStep(currentStep + 1)}
@@ -245,27 +258,6 @@ const CreateProfile: React.FC<Props> = ({
 
         {currentStep === 3 && (
           <>
-            <div className="select-diet-and-taste-preferences-input-controls overflow-auto text-center">
-              <SelectTastePreferences
-                selectedWorldCuisinesViaCheckboxes={
-                  selectedWorldCuisinesViaCheckboxes
-                }
-                setSelectedWorldCuisinesViaCheckboxes={
-                  setSelectedWorldCuisinesViaCheckboxes
-                }
-                selectedWorldCuisinesViaSearch={selectedWorldCuisinesViaSearch}
-                setSelectedWorldCuisinesViaSearch={
-                  setSelectedWorldCuisinesViaSearch
-                }
-                dessertTastePreference={dessertTastePreference}
-                setDessertTastePreference={setDessertTastePreference}
-                levelOfSpicinessPreference={levelOfSpicinessPreference}
-                setLevelOfSpicinessPreference={setLevelOfSpicinessPreference}
-                userLikesSpicyFood={userLikesSpicyFood}
-                setUserLikesSpicyFood={setUserLikesSpicyFood}
-              />
-            </div>
-
             <div className="select-diet-and-taste-preferences-step-navigation-buttons position-absolute bottom-0 start-50 translate-middle-x mb-2 w-100">
               <Button
                 variant="success"
