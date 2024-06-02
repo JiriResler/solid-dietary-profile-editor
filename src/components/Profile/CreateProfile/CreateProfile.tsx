@@ -145,7 +145,10 @@ const CreateProfile: React.FC<Props> = ({
 
   return (
     <Container>
-      <Stack gap={3} className="create-profile-stack position-relative">
+      <Stack
+        gap={3}
+        className="create-profile-stack position-relative text-center"
+      >
         <Stepper
           activeStep={currentStep - 1}
           alternativeLabel
@@ -190,7 +193,7 @@ const CreateProfile: React.FC<Props> = ({
           </Step>
         </Stepper>
 
-        <div className="select-preferences-input-controls overflow-auto text-center">
+        <div className="select-preferences-input-controls overflow-auto">
           {currentStep === 1 && (
             <SelectAllergens
               selectedAllergens={selectedAllergens}
@@ -228,40 +231,46 @@ const CreateProfile: React.FC<Props> = ({
           )}
         </div>
 
-        {currentStep === 1 && (
-          <Button
-            className="position-absolute bottom-0 start-50 translate-middle-x step-forward-navigation-button app-primary-color-button mb-2"
-            onClick={() => setCurrentStep(currentStep + 1)}
-          >
-            <FormattedMessage id="nextStep" defaultMessage="Next" />
-          </Button>
-        )}
+        <div className="position-absolute bottom-0 start-50 translate-middle-x w-100">
+          {currentStep === 1 && (
+            <Button
+              className="step-forward-navigation-button app-primary-color-button mb-2"
+              onClick={() => setCurrentStep(currentStep + 1)}
+            >
+              <FormattedMessage id="nextStep" defaultMessage="Next" />
+            </Button>
+          )}
 
-        {currentStep === 2 && (
-          <>
-            <div className="position-absolute bottom-0 start-50 translate-middle-x mb-2 w-100">
+          {currentStep === 2 && (
+            <>
               <Button
-                className="step-navigation-button app-primary-color-button"
+                className="step-back-navigation-button app-secondary-color-button mb-2"
+                onClick={() => setCurrentStep(currentStep - 1)}
+              >
+                {'<'}
+              </Button>
+
+              <Button
+                className="step-forward-navigation-button app-primary-color-button mb-2 ms-3"
                 onClick={() => setCurrentStep(currentStep + 1)}
               >
                 <FormattedMessage id="nextStep" defaultMessage="Next" />
               </Button>
+            </>
+          )}
+
+          {currentStep === 3 && (
+            <>
               <Button
-                className="step-navigation-button app-secondary-color-button mt-2"
+                className="step-back-navigation-button app-secondary-color-button mb-2"
                 onClick={() => setCurrentStep(currentStep - 1)}
               >
-                <FormattedMessage id="goBack" defaultMessage="Back" />
+                {'<'}
               </Button>
-            </div>
-          </>
-        )}
 
-        {currentStep === 3 && (
-          <>
-            <div className="select-diet-and-taste-preferences-step-navigation-buttons position-absolute bottom-0 start-50 translate-middle-x mb-2 w-100">
               <Button
                 variant="success"
-                className="step-navigation-button"
+                className="step-forward-navigation-button mb-2 ms-3"
                 // onClick={() => saveProfile()}
               >
                 <FormattedMessage
@@ -269,15 +278,9 @@ const CreateProfile: React.FC<Props> = ({
                   defaultMessage="Save profile"
                 />
               </Button>
-              <Button
-                className="step-navigation-button app-secondary-color-button mt-2"
-                onClick={() => setCurrentStep(currentStep - 1)}
-              >
-                <FormattedMessage id="goBack" defaultMessage="Back" />
-              </Button>
-            </div>
-          </>
-        )}
+            </>
+          )}
+        </div>
       </Stack>
     </Container>
   )

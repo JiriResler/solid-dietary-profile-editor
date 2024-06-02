@@ -12,7 +12,6 @@ type Messages = {
   signInWithFacebook: string
   signInWithGoogle: string
   redirectToProvider: string
-  goBack: string
   welcomeToTheApplication: string
   aboutTheApplication: string
   sourceCode: string
@@ -64,7 +63,6 @@ const messagesInSlovak: Messages = {
   signInWithFacebook: 'Prihlásiť sa cez Facebook',
   signInWithGoogle: 'Prihlásiť sa účtom Google',
   redirectToProvider: 'Prejsť na poskytovateľa',
-  goBack: 'Späť',
   welcomeToTheApplication: 'Vitajte v editore vášho diétneho profilu!',
   aboutTheApplication: 'O aplikácii',
   sourceCode: 'Zdrojový kód',

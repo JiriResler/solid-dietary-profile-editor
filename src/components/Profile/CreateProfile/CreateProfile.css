@@ -21,6 +21,12 @@
   font-size: x-large;
 }
 
+.step-back-navigation-button {
+  height: 60px;
+  width: 60px;
+  border-radius: 12px;
+}
+
 .app-primary-color-button {
   background-color: #2541b2;
   color: white;
