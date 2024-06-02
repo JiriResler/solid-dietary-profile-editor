@@ -164,13 +164,6 @@ const CreateProfile: React.FC<Props> = ({
               height: '50px',
               position: 'relative',
             },
-            '& .MuiStepLabel-label': {
-              margin: '0',
-              position: 'absolute',
-              top: '50%',
-              left: '50%',
-              transform: 'translate(-50%, -50%)',
-            },
           }}
         >
           <Step key="step1">
@@ -187,7 +180,7 @@ const CreateProfile: React.FC<Props> = ({
 
           <Step key="step3">
             <StepLabel>
-              <div className="mt-2">
+              <div className="position-absolute top-50 start-50 translate-middle">
                 <FormattedMessage
                   id="tastePreferences"
                   defaultMessage="Taste preferences"
