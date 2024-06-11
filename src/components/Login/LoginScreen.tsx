@@ -12,6 +12,7 @@ import Button from 'react-bootstrap/Button'
 import { useState } from 'react'
 import Container from 'react-bootstrap/Container'
 import { FormattedMessage } from 'react-intl'
+import FBInit from './FBInit'
 
 const LoginScreen: React.FC = () => {
   const { selectedLanguage, setSelectedLanguage } = useContext(LanguageContext)
@@ -69,6 +70,7 @@ const LoginScreen: React.FC = () => {
       </Modal>
 
       <Container fluid>
+        <FBInit />
         <Row className="login-screen-row d-none d-lg-flex">
           <Col md={7} className="position-relative">
             <Stack className="w-75 text-center position-absolute top-50 start-50 translate-middle">
