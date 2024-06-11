@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useContext } from 'react'
 import Form from 'react-bootstrap/Form'
 import LanguageContext from '../../LanguageContext'
@@ -12,6 +13,7 @@ import Button from 'react-bootstrap/Button'
 import { useState } from 'react'
 import Container from 'react-bootstrap/Container'
 import { FormattedMessage } from 'react-intl'
+import { FacebookProvider, LoginButton } from 'react-facebook'
 
 const LoginScreen: React.FC = () => {
   const { selectedLanguage, setSelectedLanguage } = useContext(LanguageContext)
@@ -50,6 +52,14 @@ const LoginScreen: React.FC = () => {
     return
   }
 
+  function handleSuccess(response: any) {
+    console.log(response)
+  }
+
+  function handleError(error: any) {
+    console.log(error)
+  }
+
   return (
     <>
       <Modal
@@ -67,6 +77,16 @@ const LoginScreen: React.FC = () => {
           </Button>
         </Modal.Footer>
       </Modal>
+
+      <FacebookProvider appId="3665987363684602">
+        <LoginButton
+          scope="email"
+          onError={handleError}
+          onSuccess={handleSuccess}
+        >
+          Login via Facebook
+        </LoginButton>
+      </FacebookProvider>
 
       <Container fluid>
         <Row className="login-screen-row d-none d-lg-flex">
