@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useContext } from 'react'
 import Form from 'react-bootstrap/Form'
@@ -14,6 +16,8 @@ import { useState } from 'react'
 import Container from 'react-bootstrap/Container'
 import { FormattedMessage } from 'react-intl'
 import { FacebookProvider, LoginButton } from 'react-facebook'
+import { signInWithCredential, FacebookAuthProvider } from 'firebase/auth'
+import { auth } from '../../firebase'
 
 const LoginScreen: React.FC = () => {
   const { selectedLanguage, setSelectedLanguage } = useContext(LanguageContext)
@@ -53,7 +57,20 @@ const LoginScreen: React.FC = () => {
   }
 
   function handleSuccess(response: any) {
-    console.log(response)
+    // console.log(response)
+
+    // Build Firebase credential with the Facebook auth token.
+    const credential = FacebookAuthProvider.credential(
+      response.authResponse.accessToken,
+    )
+
+    signInWithCredential(auth, credential)
+      .then(() => {
+        console.log('sign in to Firebase finished.')
+      })
+      .catch((error) => {
+        console.error(error)
+      })
   }
 
   function handleError(error: any) {
