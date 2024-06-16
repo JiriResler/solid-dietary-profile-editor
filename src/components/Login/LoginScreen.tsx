@@ -174,20 +174,13 @@ const LoginScreen: React.FC = () => {
 
         <Stack
           gap={3}
-          className="select-provider-stack select-provider-stack-small-screen position-absolute top-50 start-50 translate-middle pb-5 d-lg-none text-center mx-auto"
+          className="select-provider-stack select-provider-stack-small-screen d-lg-none position-absolute top-50 start-50 translate-middle text-center"
         >
           <img
             className="application-logo"
             src="images/app_logo.svg"
             alt="application_logo"
           />
-
-          <h5>
-            <FormattedMessage
-              id="manageYourProfileLoginScreenHeading"
-              defaultMessage="Manage your personal eating preferences profile"
-            />
-          </h5>
 
           <SelectProvider />
         </Stack>
