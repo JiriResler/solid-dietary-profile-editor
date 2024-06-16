@@ -1,6 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useContext } from 'react'
 import Form from 'react-bootstrap/Form'
 import LanguageContext from '../../LanguageContext'
@@ -15,9 +12,6 @@ import Button from 'react-bootstrap/Button'
 import { useState } from 'react'
 import Container from 'react-bootstrap/Container'
 import { FormattedMessage } from 'react-intl'
-import { FacebookProvider, LoginButton } from 'react-facebook'
-import { signInWithCredential, FacebookAuthProvider } from 'firebase/auth'
-import { auth } from '../../firebase'
 
 const LoginScreen: React.FC = () => {
   const { selectedLanguage, setSelectedLanguage } = useContext(LanguageContext)
@@ -56,27 +50,6 @@ const LoginScreen: React.FC = () => {
     return
   }
 
-  function handleSuccess(response: any) {
-    // console.log(response)
-
-    // Build Firebase credential with the Facebook auth token.
-    const credential = FacebookAuthProvider.credential(
-      response.authResponse.accessToken,
-    )
-
-    signInWithCredential(auth, credential)
-      .then(() => {
-        console.log('sign in to Firebase finished.')
-      })
-      .catch((error) => {
-        console.error(error)
-      })
-  }
-
-  function handleError(error: any) {
-    console.log(error)
-  }
-
   return (
     <>
       <Modal
@@ -94,16 +67,6 @@ const LoginScreen: React.FC = () => {
           </Button>
         </Modal.Footer>
       </Modal>
-
-      <FacebookProvider appId="3665987363684602">
-        <LoginButton
-          scope="email"
-          onError={handleError}
-          onSuccess={handleSuccess}
-        >
-          Login via Facebook
-        </LoginButton>
-      </FacebookProvider>
 
       <Container fluid>
         <Row className="login-screen-row d-none d-lg-flex">
@@ -172,16 +135,16 @@ const LoginScreen: React.FC = () => {
           </Col>
         </Row>
 
+        <img
+          className="application-logo mt-5"
+          src="images/app_logo.svg"
+          alt="application_logo"
+        />
+
         <Stack
           gap={3}
-          className="select-provider-stack select-provider-stack-small-screen d-lg-none position-absolute top-50 start-50 translate-middle text-center"
+          className="select-provider-stack d-lg-none position-absolute top-50 start-50 translate-middle text-center"
         >
-          <img
-            className="application-logo"
-            src="images/app_logo.svg"
-            alt="application_logo"
-          />
-
           <SelectProvider />
         </Stack>
 
