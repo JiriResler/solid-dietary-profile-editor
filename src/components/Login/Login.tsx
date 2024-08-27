@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 import Form from 'react-bootstrap/Form'
 import LanguageContext from '../../LanguageContext'
-import './LoginScreen.css'
+import './Login.css'
 import SelectProvider from './SelectProvider'
 import Stack from 'react-bootstrap/Stack'
 import Row from 'react-bootstrap/Row'
@@ -13,7 +13,7 @@ import { useState } from 'react'
 import Container from 'react-bootstrap/Container'
 import { FormattedMessage } from 'react-intl'
 
-const LoginScreen: React.FC = () => {
+const Login: React.FC = () => {
   const { selectedLanguage, setSelectedLanguage } = useContext(LanguageContext)
 
   const [showAboutModal, setShowAboutModal] = useState(false)
@@ -163,4 +163,4 @@ const LoginScreen: React.FC = () => {
   )
 }
 
-export default LoginScreen
+export default Login
