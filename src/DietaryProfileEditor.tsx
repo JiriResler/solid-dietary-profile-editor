@@ -3,7 +3,6 @@ import IntlProviderWrapper from './components/IntlProviderWrapper'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Login from './components/Login/Login'
 import ProfileManagement from './components/ProfileManagement/ProfileManagement'
-import RequireAuth from './components/RequireAuth'
 
 const DietaryProfileEditor: React.FC = () => {
   return (
@@ -15,14 +14,7 @@ const DietaryProfileEditor: React.FC = () => {
           }
         >
           <Routes>
-            <Route
-              path="/"
-              element={
-                <RequireAuth>
-                  <ProfileManagement />
-                </RequireAuth>
-              }
-            />
+            <Route path="/" element={<ProfileManagement />} />
             <Route path="/login" element={<Login />} />
           </Routes>
         </BrowserRouter>
