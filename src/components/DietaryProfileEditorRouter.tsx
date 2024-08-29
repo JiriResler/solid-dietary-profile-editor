@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Login from './Login/Login'
 import RequireAuth from './RequireAuth'
-import ProfileManagement from './ProfileManagement'
+import ProfileManagement from './ProfileManagement/ProfileManagement'
 
 const DietaryProfileEditorRouter: React.FC = () => {
   return (
