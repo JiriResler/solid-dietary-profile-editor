@@ -3,7 +3,7 @@ import Login from './Login/Login'
 import RequireAuth from './RequireAuth'
 import ProfileManagement from './ProfileManagement'
 
-const DietaryProfileEditor: React.FC = () => {
+const DietaryProfileEditorRouter: React.FC = () => {
   return (
     <BrowserRouter
       basename={import.meta.env.DEV ? '/' : '/solid-dietary-profile-editor/'}
@@ -23,4 +23,4 @@ const DietaryProfileEditor: React.FC = () => {
   )
 }
 
-export default DietaryProfileEditor
+export default DietaryProfileEditorRouter

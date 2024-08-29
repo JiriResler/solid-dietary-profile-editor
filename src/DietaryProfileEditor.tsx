@@ -1,15 +1,15 @@
 import { SessionProvider } from '@inrupt/solid-ui-react'
 import IntlProviderWrapper from './components/IntlProviderWrapper'
-import DietaryProfileEditor from './components/DietaryProfileEditor'
+import DietaryProfileEditorRouter from './components/DietaryProfileEditorRouter'
 
-const App: React.FC = () => {
+const DietaryProfileEditor: React.FC = () => {
   return (
     <SessionProvider>
       <IntlProviderWrapper>
-        <DietaryProfileEditor />
+        <DietaryProfileEditorRouter />
       </IntlProviderWrapper>
     </SessionProvider>
   )
 }
 
-export default App
+export default DietaryProfileEditor
