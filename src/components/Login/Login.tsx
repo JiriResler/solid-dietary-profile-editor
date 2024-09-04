@@ -88,16 +88,16 @@ const Login: React.FC = () => {
 
       <Container fluid>
         <h3>
-          Redirect URL:{' '}
           {new URL(
-            '/login',
-            window.location.origin +
-              (import.meta.env.PROD ? '/solid-dietary-profile-editor' : ''),
+            '/solid-dietary-profile-editor/login',
+            window.location.origin,
           ).toString()}
         </h3>
         <h3>
-          import.meta.env.PROD value:{' '}
-          {import.meta.env.PROD === true ? 'true' : 'false'}
+          {window.location.origin +
+            (import.meta.env.PROD
+              ? '/solid-dietary-profile-editor/login'
+              : '/login')}
         </h3>
         <Row className="login-screen-row d-none d-lg-flex">
           <Col md={7} className="position-relative">
