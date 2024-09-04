@@ -44,10 +44,12 @@ const LogInSolid: React.FC<Props> = ({ setLoginWithSolid }) => {
 
       <LoginButton
         oidcIssuer={selectedOption}
-        redirectUrl={
+        redirectUrl={new URL(
+          '/login',
           window.location.origin +
-          (import.meta.env.PROD ? '/solid-dietary-profile-editor/' : '')
-        }
+            (import.meta.env.PROD ? '/solid-dietary-profile-editor' : ''),
+        ).toString()}
+        onError={console.error}
       >
         <Button className="solid-login-button w-100 choose-solid-provider-element">
           <FormattedMessage
