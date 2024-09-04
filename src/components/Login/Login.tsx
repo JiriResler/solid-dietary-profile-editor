@@ -87,15 +87,6 @@ const Login: React.FC = () => {
       </Modal>
 
       <Container fluid>
-        <h3>
-          {new URL(
-            import.meta.env.PROD
-              ? '/solid-dietary-profile-editor/login'
-              : '/login',
-            window.location.origin,
-          ).toString()}
-        </h3>
-
         <Row className="login-screen-row d-none d-lg-flex">
           <Col md={7} className="position-relative">
             <Stack className="w-75 text-center position-absolute top-50 start-50 translate-middle">
