@@ -4,6 +4,7 @@ import { LoginButton } from '@inrupt/solid-ui-react'
 import { useState } from 'react'
 import './LoginSolid.css'
 import { FormattedMessage } from 'react-intl'
+import Stack from 'react-bootstrap/Stack'
 
 const solidIdProviders: string[] = [
   'https://solidcommunity.net/',
@@ -31,16 +32,32 @@ const LogInSolid: React.FC<Props> = ({ setLoginWithSolid }) => {
   const [selectedOption, setSelectedOption] = useState(solidIdProviders[0])
 
   return (
-    <div className="fade-in">
+    <Stack gap={3} className="fade-in">
+      <span className="select-provider-heading">
+        <FormattedMessage
+          id="selectASolidProvider"
+          defaultMessage="Select a Solid provider"
+        />
+      </span>
+
       <Form.Select
         value={selectedOption}
         onChange={(e) => setSelectedOption(e.target.value)}
-        className="choose-solid-provider-element mb-4"
+        className="choose-solid-provider-element"
       >
         {identityProviders.map((opt) => {
           return <option key={opt}>{opt}</option>
         })}
       </Form.Select>
+
+      <span className="select-provider-heading-smaller">
+        <FormattedMessage
+          id="typeInProviderUrl"
+          defaultMessage="Or type in a provider URL"
+        />
+      </span>
+
+      <Form.Control type="text" placeholder="Place a provider URL" />
 
       <LoginButton
         oidcIssuer={selectedOption}
@@ -52,7 +69,7 @@ const LogInSolid: React.FC<Props> = ({ setLoginWithSolid }) => {
         ).toString()}
         onError={console.error}
       >
-        <Button className="solid-login-button w-100 choose-solid-provider-element">
+        <Button className="solid-login-button w-100 choose-solid-provider-element mt-4">
           <FormattedMessage
             id="redirectToProvider"
             defaultMessage="Redirect to provider"
@@ -62,14 +79,14 @@ const LogInSolid: React.FC<Props> = ({ setLoginWithSolid }) => {
 
       <Button
         variant="secondary"
-        className="choose-solid-provider-element w-100 mt-3"
+        className="choose-solid-provider-element w-100"
         onClick={() => {
           setLoginWithSolid(false)
         }}
       >
         <FormattedMessage id="goBack" defaultMessage="Back" />
       </Button>
-    </div>
+    </Stack>
   )
 }
 

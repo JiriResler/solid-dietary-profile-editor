@@ -52,6 +52,8 @@ type Messages = {
   mild: string
   medium: string
   hot: string
+  selectASolidProvider: string
+  typeInProviderUrl: string
 }
 
 const messagesInSlovak: Messages = {
@@ -103,6 +105,8 @@ const messagesInSlovak: Messages = {
   mild: 'Jemne',
   medium: 'Stredne',
   hot: 'Veľmi',
+  selectASolidProvider: 'Vyberte poskytovateľa Solid',
+  typeInProviderUrl: 'Alebo vložte poskytovateľovu URL',
 }
 
 // const cs_messages: Messages = {
