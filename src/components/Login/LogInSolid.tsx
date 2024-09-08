@@ -25,12 +25,12 @@ const LogInSolid: React.FC<Props> = ({ setLoginWithSolid }) => {
 
   const [providerUrl, setProviderUrl] = useState('')
 
-  const fullProviderUrls = {
+  const providerNameAndUrls = {
     'Inrupt Pod Spaces': 'https://login.inrupt.com/',
-    'Data Pod': 'https://datapod.igrant.io/login',
+    'Data Pod': 'https://datapod.igrant.io/',
     'solidcommunity.net': 'https://solidcommunity.net/',
     'solidweb.org': 'https://solidweb.org/',
-    'redpencil.io': 'https://solid.redpencil.io/idp/login/',
+    'redpencil.io': 'https://solid.redpencil.io/',
   }
 
   return (
