@@ -7,20 +7,12 @@ import { FormattedMessage } from 'react-intl'
 import Stack from 'react-bootstrap/Stack'
 
 const solidIdProviders: string[] = [
-  'https://solidcommunity.net/',
-  'https://login.inrupt.com/',
-  'https://inrupt.net/',
-  'https://solidweb.org/',
+  'Inrupt Pod Spaces',
+  'Data Pod',
+  'solidcommunity.net',
+  'solidweb.org',
+  'redpencil.io',
 ]
-
-// todo Make provider urls prettier - names instead of full urls
-
-// const solidIdProviders: string[] = [
-//   'solidcommunity.net',
-//   'inrupt.com (PodSpaces)',
-//   'inrupt.net',
-//   'solidweb.org',
-// ]
 
 type Props = {
   setLoginWithSolid: React.Dispatch<React.SetStateAction<boolean>>
@@ -29,7 +21,7 @@ type Props = {
 const LogInSolid: React.FC<Props> = ({ setLoginWithSolid }) => {
   const identityProviders: string[] = solidIdProviders
 
-  const [selectedOption, setSelectedOption] = useState(solidIdProviders[0])
+  const [selectedOption, setSelectedOption] = useState('')
 
   return (
     <Stack gap={3} className="fade-in">
@@ -45,6 +37,12 @@ const LogInSolid: React.FC<Props> = ({ setLoginWithSolid }) => {
         onChange={(e) => setSelectedOption(e.target.value)}
         className="choose-solid-provider-element"
       >
+        <option key="defaultOption" hidden>
+          <FormattedMessage
+            id="chooseSolidProvider"
+            defaultMessage="Choose a Solid provider"
+          />
+        </option>
         {identityProviders.map((opt) => {
           return <option key={opt}>{opt}</option>
         })}

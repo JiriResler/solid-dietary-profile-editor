@@ -54,6 +54,8 @@ type Messages = {
   hot: string
   selectASolidProvider: string
   typeInProviderUrl: string
+  chooseSolidProvider: string
+  goBack: string
 }
 
 const messagesInSlovak: Messages = {
@@ -107,6 +109,8 @@ const messagesInSlovak: Messages = {
   hot: 'Veľmi',
   selectASolidProvider: 'Vyberte poskytovateľa Solid',
   typeInProviderUrl: 'Alebo vložte poskytovateľovu URL',
+  chooseSolidProvider: 'Zvoľte Solid poskytovateľa',
+  goBack: 'Späť',
 }
 
 // const cs_messages: Messages = {
