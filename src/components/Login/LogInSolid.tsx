@@ -23,6 +23,16 @@ const LogInSolid: React.FC<Props> = ({ setLoginWithSolid }) => {
 
   const [selectedOption, setSelectedOption] = useState('')
 
+  const [providerUrl, setProviderUrl] = useState('')
+
+  const fullProviderUrls = {
+    'Inrupt Pod Spaces': 'https://login.inrupt.com/',
+    'Data Pod': 'https://datapod.igrant.io/login',
+    'solidcommunity.net': 'https://solidcommunity.net/',
+    'solidweb.org': 'https://solidweb.org/',
+    'redpencil.io': 'https://solid.redpencil.io/idp/login/',
+  }
+
   return (
     <Stack gap={3} className="fade-in">
       <span className="select-provider-heading">
@@ -34,7 +44,10 @@ const LogInSolid: React.FC<Props> = ({ setLoginWithSolid }) => {
 
       <Form.Select
         value={selectedOption}
-        onChange={(e) => setSelectedOption(e.target.value)}
+        onChange={(e) => {
+          setSelectedOption(e.target.value)
+          setProviderUrl(e.target.value)
+        }}
         className="choose-solid-provider-element"
       >
         <option key="defaultOption" hidden>
@@ -55,7 +68,11 @@ const LogInSolid: React.FC<Props> = ({ setLoginWithSolid }) => {
         />
       </span>
 
-      <Form.Control type="text" placeholder="Place a provider URL" />
+      <Form.Control
+        type="text"
+        placeholder="Place a provider URL"
+        value={providerUrl}
+      />
 
       <LoginButton
         oidcIssuer={selectedOption}
