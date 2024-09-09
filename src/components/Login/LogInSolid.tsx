@@ -10,6 +10,10 @@ type Props = {
   setLoginWithSolid: React.Dispatch<React.SetStateAction<boolean>>
 }
 
+/**
+ * Enables a user to log in via Solid. Contains controls for selecting a Solid provider and a Login button for redirecting to the provider.
+ * @param setLoginWithSolid A function for setting a state variable indicating whether a user wishes to log in vith Solid.
+ */
 const LogInSolid: React.FC<Props> = ({ setLoginWithSolid }) => {
   const [selectedOption, setSelectedOption] = useState('')
 
@@ -23,7 +27,9 @@ const LogInSolid: React.FC<Props> = ({ setLoginWithSolid }) => {
     'redpencil.io': 'https://solid.redpencil.io/',
   }
 
-  // Sets current Select option and changes provider URL in the text field.
+  /**
+   * Sets current Select option and changes provider URL in the text field.
+   */
   function handleSelectOnChange(e: React.ChangeEvent<HTMLSelectElement>) {
     const newValue = e.target.value
 
