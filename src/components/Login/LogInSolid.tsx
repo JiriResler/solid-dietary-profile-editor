@@ -6,21 +6,11 @@ import './LoginSolid.css'
 import { FormattedMessage } from 'react-intl'
 import Stack from 'react-bootstrap/Stack'
 
-const solidIdProviders: string[] = [
-  'Inrupt Pod Spaces',
-  'Data Pod',
-  'solidcommunity.net',
-  'solidweb.org',
-  'redpencil.io',
-]
-
 type Props = {
   setLoginWithSolid: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 const LogInSolid: React.FC<Props> = ({ setLoginWithSolid }) => {
-  const identityProviders: string[] = solidIdProviders
-
   const [selectedOption, setSelectedOption] = useState('')
 
   const [providerUrl, setProviderUrl] = useState('')
@@ -46,7 +36,7 @@ const LogInSolid: React.FC<Props> = ({ setLoginWithSolid }) => {
         value={selectedOption}
         onChange={(e) => {
           setSelectedOption(e.target.value)
-          setProviderUrl(e.target.value)
+          setProviderUrl(providerNameAndUrls[e.target.value])
         }}
         className="choose-solid-provider-element"
       >
@@ -56,7 +46,7 @@ const LogInSolid: React.FC<Props> = ({ setLoginWithSolid }) => {
             defaultMessage="Choose a Solid provider"
           />
         </option>
-        {identityProviders.map((opt) => {
+        {Object.keys(providerNameAndUrls).map((opt) => {
           return <option key={opt}>{opt}</option>
         })}
       </Form.Select>
