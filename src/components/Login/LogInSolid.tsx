@@ -36,7 +36,11 @@ const LogInSolid: React.FC<Props> = ({ setLoginWithSolid }) => {
         value={selectedOption}
         onChange={(e) => {
           setSelectedOption(e.target.value)
-          setProviderUrl(providerNameAndUrls[e.target.value])
+          setProviderUrl(
+            providerNameAndUrls[
+              e.target.value as keyof typeof providerNameAndUrls
+            ],
+          )
         }}
         className="choose-solid-provider-element"
       >
