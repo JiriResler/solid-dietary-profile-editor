@@ -23,6 +23,17 @@ const LogInSolid: React.FC<Props> = ({ setLoginWithSolid }) => {
     'redpencil.io': 'https://solid.redpencil.io/',
   }
 
+  // Sets current Select option and changes provider URL in the text field.
+  function handleSelectOnChange(e: React.ChangeEvent<HTMLSelectElement>) {
+    const newValue = e.target.value
+
+    setSelectedOption(newValue)
+
+    setProviderUrl(
+      providerNameAndUrls[newValue as keyof typeof providerNameAndUrls],
+    )
+  }
+
   return (
     <Stack gap={3} className="fade-in">
       <span className="select-provider-heading">
@@ -34,14 +45,7 @@ const LogInSolid: React.FC<Props> = ({ setLoginWithSolid }) => {
 
       <Form.Select
         value={selectedOption}
-        onChange={(e) => {
-          setSelectedOption(e.target.value)
-          setProviderUrl(
-            providerNameAndUrls[
-              e.target.value as keyof typeof providerNameAndUrls
-            ],
-          )
-        }}
+        onChange={(e) => handleSelectOnChange(e)}
         className="choose-solid-provider-element"
       >
         <option key="defaultOption" hidden>
@@ -50,6 +54,7 @@ const LogInSolid: React.FC<Props> = ({ setLoginWithSolid }) => {
             defaultMessage="Choose a Solid provider"
           />
         </option>
+
         {Object.keys(providerNameAndUrls).map((opt) => {
           return <option key={opt}>{opt}</option>
         })}
@@ -66,10 +71,11 @@ const LogInSolid: React.FC<Props> = ({ setLoginWithSolid }) => {
         type="text"
         placeholder="Place a provider URL"
         value={providerUrl}
+        onChange={(e) => setProviderUrl(e.target.value)}
       />
 
       <LoginButton
-        oidcIssuer={selectedOption}
+        oidcIssuer={providerUrl}
         redirectUrl={new URL(
           import.meta.env.PROD
             ? '/solid-dietary-profile-editor/login'
