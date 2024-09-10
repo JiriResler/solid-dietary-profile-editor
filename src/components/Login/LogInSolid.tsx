@@ -40,6 +40,23 @@ const LogInSolid: React.FC<Props> = ({ setLoginWithSolid }) => {
     )
   }
 
+  /**
+   * Logs the login error to the console and informs the user that something went wrong while trying to log in via the Solid provider.
+   */
+  function handleOnLoginError(error: Error) {
+    console.error(`Error while logging in: ${error.message}`)
+
+    const alertMessage = `
+      Login failed. Possible reasons include: 
+
+      1. The Solid provider URL is invalid or incorrect. 
+      2. You are not connected to the internet. 
+      3. There may be an issue with the Solid provider.
+    `
+
+    alert(alertMessage)
+  }
+
   return (
     <Stack gap={3} className="fade-in">
       <span className="select-provider-heading">
@@ -88,7 +105,9 @@ const LogInSolid: React.FC<Props> = ({ setLoginWithSolid }) => {
             : '/login',
           window.location.origin,
         ).toString()}
-        onError={console.error}
+        onError={(error) => {
+          handleOnLoginError(error)
+        }}
       >
         <Button className="solid-login-button w-100 choose-solid-provider-element mt-4">
           <FormattedMessage
