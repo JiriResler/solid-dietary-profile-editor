@@ -15,7 +15,7 @@ type Props = {
  * @param setLoginWithSolid A function for setting a state variable indicating whether a user wishes to log in vith Solid.
  */
 const LogInSolid: React.FC<Props> = ({ setLoginWithSolid }) => {
-  const [selectedOption, setSelectedOption] = useState('')
+  const [selectedProviderName, setSelectedProviderName] = useState('')
 
   const [providerUrl, setProviderUrl] = useState('')
 
@@ -33,7 +33,7 @@ const LogInSolid: React.FC<Props> = ({ setLoginWithSolid }) => {
   function handleSelectOnChange(e: React.ChangeEvent<HTMLSelectElement>) {
     const newValue = e.target.value
 
-    setSelectedOption(newValue)
+    setSelectedProviderName(newValue)
 
     setProviderUrl(
       providerNameAndUrls[newValue as keyof typeof providerNameAndUrls],
@@ -57,6 +57,37 @@ const LogInSolid: React.FC<Props> = ({ setLoginWithSolid }) => {
     alert(alertMessage)
   }
 
+  /**
+   * Returns an object's key by its associated value.
+   */
+  function getKeyByValue(targetObject: object, value: string) {
+    return Object.keys(targetObject).find(
+      (key) => targetObject[key as keyof typeof targetObject] === value,
+    )
+  }
+
+  /**
+   * Sets Solid provider URL state variable and changes current Select option if the URL is one of the listed providers'.
+   */
+  function handleOnProviderUrlChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const newUrl = e.target.value
+
+    setProviderUrl(newUrl)
+
+    if (Object.values(providerNameAndUrls).includes(newUrl)) {
+      const providerName = getKeyByValue(providerNameAndUrls, newUrl)
+
+      // This will never happen
+      if (providerName === undefined) {
+        return
+      }
+
+      setSelectedProviderName(providerName)
+    } else {
+      setSelectedProviderName('')
+    }
+  }
+
   return (
     <Stack gap={3} className="fade-in">
       <span className="select-provider-heading">
@@ -67,7 +98,7 @@ const LogInSolid: React.FC<Props> = ({ setLoginWithSolid }) => {
       </span>
 
       <Form.Select
-        value={selectedOption}
+        value={selectedProviderName}
         onChange={(e) => handleSelectOnChange(e)}
         className="choose-solid-provider-element"
       >
@@ -94,7 +125,9 @@ const LogInSolid: React.FC<Props> = ({ setLoginWithSolid }) => {
         type="text"
         placeholder="Place a provider URL"
         value={providerUrl}
-        onChange={(e) => setProviderUrl(e.target.value)}
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+          handleOnProviderUrlChange(e)
+        }
       />
 
       <LoginButton
