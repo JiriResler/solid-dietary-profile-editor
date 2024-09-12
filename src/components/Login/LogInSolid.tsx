@@ -101,7 +101,7 @@ const LogInSolid: React.FC<LogInSolidProps> = ({ setLoginWithSolid }) => {
   }
 
   return (
-    <Stack gap={3} className="fade-in border">
+    <Stack gap={3} className="fade-in">
       <span className="select-provider-heading">
         <FormattedMessage
           id="selectASolidProvider"
