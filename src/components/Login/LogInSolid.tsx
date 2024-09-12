@@ -3,7 +3,7 @@ import Form from 'react-bootstrap/Form'
 import { LoginButton } from '@inrupt/solid-ui-react'
 import { useState } from 'react'
 import './LoginSolid.css'
-import { FormattedMessage } from 'react-intl'
+import { FormattedMessage, useIntl } from 'react-intl'
 import Stack from 'react-bootstrap/Stack'
 
 type LogInSolidProps = {
@@ -18,6 +18,8 @@ const LogInSolid: React.FC<LogInSolidProps> = ({ setLoginWithSolid }) => {
   const [selectedProviderName, setSelectedProviderName] = useState('')
 
   const [providerUrl, setProviderUrl] = useState('')
+
+  const intl = useIntl()
 
   const providerNameAndUrls = {
     'Inrupt Pod Spaces': 'https://login.inrupt.com/',
@@ -100,6 +102,16 @@ const LogInSolid: React.FC<LogInSolidProps> = ({ setLoginWithSolid }) => {
     ).toString()
   }
 
+  /**
+   * Returns a string for the provider URL text input placeholder.
+   */
+  function getProviderUrlPlaceholder() {
+    return intl.formatMessage({
+      id: 'providerUrlPlaceholder',
+      defaultMessage: 'Place a provider URL',
+    })
+  }
+
   return (
     <Stack gap={3} className="fade-in">
       <span className="select-provider-heading">
@@ -133,7 +145,7 @@ const LogInSolid: React.FC<LogInSolidProps> = ({ setLoginWithSolid }) => {
 
       <Form.Control
         type="text"
-        placeholder="Place a provider URL"
+        placeholder={getProviderUrlPlaceholder()}
         value={providerUrl}
         onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
           handleOnProviderUrlChange(e)
