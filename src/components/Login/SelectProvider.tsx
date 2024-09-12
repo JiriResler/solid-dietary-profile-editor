@@ -33,7 +33,7 @@ const SelectProvider: React.FC = () => {
             onClick={() => {
               setLoginWithSolid(true)
             }}
-            className="provider-button solid-button text-start"
+            className="login-screen-button solid-button text-start"
           >
             <img
               src="images/logo_solid.svg"

@@ -15,7 +15,7 @@ const TraditionalProviders: React.FC = () => {
         onClick={() => {
           void signInWithRedirect(auth, facebook).then(() => navigate('/'))
         }}
-        className="provider-button facebook-button text-start"
+        className="login-screen-button facebook-button text-start"
       >
         <img
           src="images/facebook_round_white_icon.svg"
@@ -35,7 +35,7 @@ const TraditionalProviders: React.FC = () => {
         onClick={() => {
           void signInWithPopup(auth, google).then(() => navigate('/'))
         }}
-        className="provider-button google-button text-start"
+        className="login-screen-button google-button text-start"
       >
         <img
           src="images/google_g_logo.svg"

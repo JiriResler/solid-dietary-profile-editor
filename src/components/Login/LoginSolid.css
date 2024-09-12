@@ -1,21 +1,5 @@
-.solid-login-button {
-  background-color: #7c4dff;
-  border-color: #7c4dff;
-}
-
-.solid-login-button:hover,
-.solid-login-button:active:focus {
-  background-color: #6933ff;
-  border-color: #6933ff;
-}
-
-.choose-solid-provider-element {
-  height: 48px;
-  border-radius: 12px;
-}
-
-.select-provider-heading-smaller {
-  font-size: medium;
+.select-solid-provider {
+  height: 45px;
 }
 
 .fade-in {

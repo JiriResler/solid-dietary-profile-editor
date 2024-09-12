@@ -100,7 +100,7 @@ const LogInSolid: React.FC<LogInSolidProps> = ({ setLoginWithSolid }) => {
       <Form.Select
         value={selectedProviderName}
         onChange={(e) => handleSelectOnChange(e)}
-        className="choose-solid-provider-element"
+        className="select-solid-provider"
       >
         <option key="defaultOption" hidden>
           <FormattedMessage
@@ -114,7 +114,7 @@ const LogInSolid: React.FC<LogInSolidProps> = ({ setLoginWithSolid }) => {
         })}
       </Form.Select>
 
-      <span className="select-provider-heading-smaller">
+      <span>
         <FormattedMessage
           id="typeInProviderUrl"
           defaultMessage="Or type in a provider URL"
@@ -142,7 +142,7 @@ const LogInSolid: React.FC<LogInSolidProps> = ({ setLoginWithSolid }) => {
           handleOnLoginError(error)
         }}
       >
-        <Button className="solid-login-button w-100 choose-solid-provider-element mt-2">
+        <Button className="login-screen-button solid-button w-100 mt-2">
           <FormattedMessage
             id="redirectToProvider"
             defaultMessage="Redirect to provider"
@@ -152,7 +152,7 @@ const LogInSolid: React.FC<LogInSolidProps> = ({ setLoginWithSolid }) => {
 
       <Button
         variant="secondary"
-        className="choose-solid-provider-element w-100"
+        className="login-screen-button w-100"
         onClick={() => {
           setLoginWithSolid(false)
         }}
