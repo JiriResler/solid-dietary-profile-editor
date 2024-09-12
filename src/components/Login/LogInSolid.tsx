@@ -88,8 +88,20 @@ const LogInSolid: React.FC<LogInSolidProps> = ({ setLoginWithSolid }) => {
     }
   }
 
+  /**
+   * Creates a redirect URL based on whether code runs in production mode and returns it.
+   */
+  function getRedirectUrl() {
+    const productionMode = import.meta.env.PROD
+
+    return new URL(
+      productionMode ? '/solid-dietary-profile-editor/login' : '/login',
+      window.location.origin,
+    ).toString()
+  }
+
   return (
-    <Stack gap={3} className="fade-in">
+    <Stack gap={3} className="fade-in border">
       <span className="select-provider-heading">
         <FormattedMessage
           id="selectASolidProvider"
@@ -114,12 +126,10 @@ const LogInSolid: React.FC<LogInSolidProps> = ({ setLoginWithSolid }) => {
         })}
       </Form.Select>
 
-      <span>
-        <FormattedMessage
-          id="typeInProviderUrl"
-          defaultMessage="Or type in a provider URL"
-        />
-      </span>
+      <FormattedMessage
+        id="typeInProviderUrl"
+        defaultMessage="Or type in a provider URL"
+      />
 
       <Form.Control
         type="text"
@@ -132,15 +142,8 @@ const LogInSolid: React.FC<LogInSolidProps> = ({ setLoginWithSolid }) => {
 
       <LoginButton
         oidcIssuer={providerUrl}
-        redirectUrl={new URL(
-          import.meta.env.PROD
-            ? '/solid-dietary-profile-editor/login'
-            : '/login',
-          window.location.origin,
-        ).toString()}
-        onError={(error) => {
-          handleOnLoginError(error)
-        }}
+        redirectUrl={getRedirectUrl()}
+        onError={(error) => handleOnLoginError(error)}
       >
         <Button className="login-screen-button solid-button w-100 mt-2">
           <FormattedMessage
