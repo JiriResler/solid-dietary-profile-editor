@@ -127,7 +127,7 @@ const LogInSolid: React.FC<LogInSolidProps> = ({ setLoginWithSolid }) => {
       </Form.Select>
 
       <FormattedMessage
-        id="typeInProviderUrl"
+        id="typeInProviderUrlHeading"
         defaultMessage="Or type in a provider URL"
       />
 

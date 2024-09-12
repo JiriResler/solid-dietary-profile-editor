@@ -53,7 +53,8 @@ type Messages = {
   medium: string
   hot: string
   selectASolidProvider: string
-  typeInProviderUrl: string
+  typeInProviderUrlHeading: string
+  providerUrlPlaceholder: string
   chooseSolidProvider: string
   goBack: string
 }
@@ -108,7 +109,8 @@ const messagesInSlovak: Messages = {
   medium: 'Stredne',
   hot: 'Veľmi',
   selectASolidProvider: 'Vyberte poskytovateľa Solid',
-  typeInProviderUrl: 'Alebo vložte poskytovateľovu URL',
+  typeInProviderUrlHeading: 'Alebo vložte poskytovateľovu URL',
+  providerUrlPlaceholder: 'Zadajte URL poskytovateľa',
   chooseSolidProvider: 'Zvoľte Solid poskytovateľa',
   goBack: 'Späť',
 }
