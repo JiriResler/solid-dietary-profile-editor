@@ -1,6 +1,9 @@
 import { describe, test, expect, assert } from 'vitest'
 import { Thing } from '@inrupt/solid-client'
-import { getAllergenFromThing, transformQueryResultToSelectOptionsArray } from './loadProfileCreationData'
+import {
+  getAllergenFromThing,
+  transformQueryResultToSelectOptionsArray,
+} from './loadProfileCreationData'
 import { Allergen } from './profileDataTypes'
 import { DBPediaResponse } from './DBPediaResponseType'
 
@@ -16,11 +19,11 @@ describe('Load profile creation data', () => {
           ],
         },
         'https://raw.githubusercontent.com/JiriResler/personalized-restaurant-menu-viewer-application-ontology/main/ontology#allergenNumber':
-        {
-          literals: {
-            'http://www.w3.org/2001/XMLSchema#integer': ['4'],
+          {
+            literals: {
+              'http://www.w3.org/2001/XMLSchema#integer': ['4'],
+            },
           },
-        },
         'http://www.w3.org/2000/01/rdf-schema#label': {
           langStrings: {
             en: ['Fish'],
@@ -29,11 +32,11 @@ describe('Load profile creation data', () => {
           },
         },
         'https://raw.githubusercontent.com/JiriResler/personalized-restaurant-menu-viewer-application-ontology/main/ontology#hasIcon':
-        {
-          namedNodes: [
-            'https://raw.githubusercontent.com/JiriResler/personalized-restaurant-menu-viewer-application-ontology/main/resource/fish.svg',
-          ],
-        },
+          {
+            namedNodes: [
+              'https://raw.githubusercontent.com/JiriResler/personalized-restaurant-menu-viewer-application-ontology/main/resource/fish.svg',
+            ],
+          },
         'http://www.w3.org/2002/07/owl#sameAs': {
           namedNodes: ['http://dbpedia.org/resource/Fish'],
         },
@@ -74,11 +77,11 @@ describe('Load profile creation data', () => {
           ],
         },
         'https://raw.githubusercontent.com/JiriResler/personalized-restaurant-menu-viewer-application-ontology/main/ontology#allergenNumber':
-        {
-          literals: {
-            'http://www.w3.org/2001/XMLSchema#integer': ['4'],
+          {
+            literals: {
+              'http://www.w3.org/2001/XMLSchema#integer': ['4'],
+            },
           },
-        },
         'http://www.w3.org/2000/01/rdf-schema#label': {
           langStrings: {
             en: ['Fish'],
@@ -87,11 +90,11 @@ describe('Load profile creation data', () => {
           },
         },
         'https://raw.githubusercontent.com/JiriResler/personalized-restaurant-menu-viewer-application-ontology/main/ontology#hasIcon':
-        {
-          namedNodes: [
-            'https://raw.githubusercontent.com/JiriResler/personalized-restaurant-menu-viewer-application-ontology/main/resource/fish.svg',
-          ],
-        },
+          {
+            namedNodes: [
+              'https://raw.githubusercontent.com/JiriResler/personalized-restaurant-menu-viewer-application-ontology/main/resource/fish.svg',
+            ],
+          },
       },
     }
 
@@ -108,27 +111,31 @@ describe('Load profile creation data', () => {
         bindings: [
           {
             iri: {
-              value: 'iri1'
+              value: 'iri1',
             },
             label: {
-              value: 'label1'
-            }
+              value: 'label1',
+            },
           },
           {
             iri: {
-              value: 'iri2'
+              value: 'iri2',
             },
             label: {
-              value: 'label2'
-            }
+              value: 'label2',
+            },
           },
-        ]
-      }
+        ],
+      },
     }
 
-    const expectedOptionsArray = [{ value: 'iri1', label: 'label1' }, { value: 'iri2', label: 'label2' }]
+    const expectedOptionsArray = [
+      { value: 'iri1', label: 'label1' },
+      { value: 'iri2', label: 'label2' },
+    ]
 
-    const actualOptionsArray = transformQueryResultToSelectOptionsArray(responseMock)
+    const actualOptionsArray =
+      transformQueryResultToSelectOptionsArray(responseMock)
 
     assert.deepEqual(actualOptionsArray, expectedOptionsArray)
   })
