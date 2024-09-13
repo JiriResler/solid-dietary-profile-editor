@@ -5,6 +5,7 @@ import { useState } from 'react'
 import './LoginSolid.css'
 import { FormattedMessage, useIntl } from 'react-intl'
 import Stack from 'react-bootstrap/Stack'
+import { getKeyByValue, getRedirectUrl } from './loginSolidHelpers'
 
 type LogInSolidProps = {
   setLoginWithSolid: React.Dispatch<React.SetStateAction<boolean>>
@@ -60,15 +61,6 @@ const LogInSolid: React.FC<LogInSolidProps> = ({ setLoginWithSolid }) => {
   }
 
   /**
-   * Returns an object's key by its associated value.
-   */
-  function getKeyByValue(targetObject: object, value: string) {
-    return Object.keys(targetObject).find(
-      (key) => targetObject[key as keyof typeof targetObject] === value,
-    )
-  }
-
-  /**
    * Sets Solid provider URL state variable and changes current Select option if the URL is one of the listed providers'.
    */
   function handleOnProviderUrlChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -88,18 +80,6 @@ const LogInSolid: React.FC<LogInSolidProps> = ({ setLoginWithSolid }) => {
     } else {
       setSelectedProviderName('')
     }
-  }
-
-  /**
-   * Creates a redirect URL based on whether code runs in production mode and returns it.
-   */
-  function getRedirectUrl() {
-    const productionMode = import.meta.env.PROD
-
-    return new URL(
-      productionMode ? '/solid-dietary-profile-editor/login' : '/login',
-      window.location.origin,
-    ).toString()
   }
 
   /**
