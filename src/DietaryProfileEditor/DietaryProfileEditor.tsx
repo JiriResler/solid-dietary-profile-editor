@@ -1,8 +1,8 @@
 import { SessionProvider } from '@inrupt/solid-ui-react'
-import IntlProviderWrapper from './components/IntlProviderWrapper'
+import IntlProviderWrapper from './IntlProviderWrapper'
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
-import Login from './components/Login/Login'
-import ProfileManagement from './components/ProfileManagement/ProfileManagement'
+import Login from './Login/Login'
+import ProfileManagement from './ProfileManagement/ProfileManagement'
 
 const DietaryProfileEditor: React.FC = () => {
   const applicationBasePath = import.meta.env.DEV

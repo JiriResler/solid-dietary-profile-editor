@@ -1,6 +1,6 @@
 import { IntlProvider } from 'react-intl'
 import { useState } from 'react'
-import LanguageContext from '../LanguageContext'
+import LanguageContext from './LanguageContext'
 import { PropsWithChildren } from 'react'
 
 type Messages = {

@@ -5,7 +5,6 @@ import { signInWithPopup, signInWithRedirect } from 'firebase/auth'
 import { FormattedMessage } from 'react-intl'
 import { useNavigate } from 'react-router-dom'
 
-// todo: sign out from all providers before signing in
 const TraditionalProviders: React.FC = () => {
   const navigate = useNavigate()
 

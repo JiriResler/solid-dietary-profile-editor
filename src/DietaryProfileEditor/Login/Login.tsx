@@ -1,6 +1,6 @@
 import { useContext } from 'react'
 import Form from 'react-bootstrap/Form'
-import LanguageContext from '../../LanguageContext'
+import LanguageContext from '../LanguageContext'
 import './Login.css'
 import SelectProvider from './SelectProvider'
 import Stack from 'react-bootstrap/Stack'

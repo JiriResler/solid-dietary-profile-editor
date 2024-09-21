@@ -6,7 +6,7 @@ import { useEffect, useState, useContext } from 'react'
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 import Carousel from 'react-bootstrap/Carousel'
-import LanguageContext from '../../../LanguageContext'
+import LanguageContext from '../../LanguageContext'
 import { loadAllergenList } from './loadProfileCreationData'
 import { FormattedMessage } from 'react-intl'
 
