@@ -58,6 +58,7 @@ type Messages = {
   chooseSolidProvider: string
   goBack: string
   loginSolidErrorMessage: string
+  emptyUrlAlert: string
 }
 
 const messagesInSlovak: Messages = {
@@ -121,6 +122,7 @@ const messagesInSlovak: Messages = {
       2. Zadaná URL poskytovateľa Solid nie je správna.
       3. Problém je na strane poskytovateľa Solid.
     `,
+  emptyUrlAlert: 'Vyberte poskytovateľa alebo zadajte poskytovateľovu URL.',
 }
 
 // const cs_messages: Messages = {

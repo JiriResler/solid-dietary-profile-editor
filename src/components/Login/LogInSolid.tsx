@@ -95,6 +95,24 @@ const LogInSolid: React.FC<LogInSolidProps> = ({ setLoginWithSolid }) => {
     })
   }
 
+  /**
+   * Displays a message if the user tries to log in without selecting a Solid provider or typing in a provider URL.
+   */
+  function handleEmptyProviderUrlClick(
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
+  ) {
+    if (providerUrl === '') {
+      e.stopPropagation()
+
+      const alertMessage = intl.formatMessage({
+        id: 'emptyUrlAlert',
+        defaultMessage: 'Select a provider or type in a provider URL.',
+      })
+
+      alert(alertMessage)
+    }
+  }
+
   return (
     <Stack gap={3} className="fade-in">
       <span className="select-provider-heading">
@@ -140,7 +158,10 @@ const LogInSolid: React.FC<LogInSolidProps> = ({ setLoginWithSolid }) => {
         redirectUrl={getRedirectUrl()}
         onError={(error) => handleOnLoginError(error)}
       >
-        <Button className="login-screen-button solid-button w-100 mt-2">
+        <Button
+          className="login-screen-button solid-button w-100 mt-2"
+          onClick={(e) => handleEmptyProviderUrlClick(e)}
+        >
           <FormattedMessage
             id="redirectToProvider"
             defaultMessage="Redirect to provider"
