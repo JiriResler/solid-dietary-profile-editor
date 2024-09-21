@@ -5,14 +5,14 @@ import Login from './components/Login/Login'
 import ProfileManagement from './components/ProfileManagement/ProfileManagement'
 
 const DietaryProfileEditor: React.FC = () => {
+  const applicationBasePath = import.meta.env.DEV
+    ? '/'
+    : '/solid-dietary-profile-editor/'
+
   return (
     <SessionProvider restorePreviousSession>
       <IntlProviderWrapper>
-        <BrowserRouter
-          basename={
-            import.meta.env.DEV ? '/' : '/solid-dietary-profile-editor/'
-          }
-        >
+        <BrowserRouter basename={applicationBasePath}>
           <Routes>
             <Route path="/" element={<ProfileManagement />} />
             <Route path="/login" element={<Login />} />
