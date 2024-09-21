@@ -57,6 +57,7 @@ type Messages = {
   providerUrlPlaceholder: string
   chooseSolidProvider: string
   goBack: string
+  loginSolidErrorMessage: string
 }
 
 const messagesInSlovak: Messages = {
@@ -113,6 +114,13 @@ const messagesInSlovak: Messages = {
   providerUrlPlaceholder: 'Zadajte URL poskytovateľa',
   chooseSolidProvider: 'Zvoľte Solid poskytovateľa',
   goBack: 'Späť',
+  loginSolidErrorMessage: `
+      Prihlásenie sa nepodarilo. Možné dôvody sú: 
+
+      1. Nemáte pripojenie na internet.  
+      2. Zadaná URL poskytovateľa Solid nie je správna.
+      3. Problém je na strane poskytovateľa Solid.
+    `,
 }
 
 // const cs_messages: Messages = {
