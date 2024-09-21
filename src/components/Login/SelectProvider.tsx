@@ -1,6 +1,6 @@
 import Button from 'react-bootstrap/Button'
 import ProviderComparisonModalWrapper from './ProviderComparisonModalWrapper'
-import LogInSolid from './LogInSolid'
+import LoginSolid from './LoginSolid'
 import { useState } from 'react'
 import './SelectProvider.css'
 import TraditionalProviders from './TraditionalProviders'
@@ -25,7 +25,7 @@ const SelectProvider: React.FC = () => {
         />
       </span>
 
-      {loginWithSolid && <LogInSolid setLoginWithSolid={setLoginWithSolid} />}
+      {loginWithSolid && <LoginSolid setLoginWithSolid={setLoginWithSolid} />}
 
       {!loginWithSolid && (
         <>

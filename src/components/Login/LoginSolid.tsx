@@ -15,7 +15,7 @@ type LogInSolidProps = {
  * Enables a user to log in via Solid. Contains controls for selecting a Solid provider and a Login button for redirecting to the provider.
  * @param setLoginWithSolid A function for setting a state variable indicating whether a user wishes to log in vith Solid.
  */
-const LogInSolid: React.FC<LogInSolidProps> = ({ setLoginWithSolid }) => {
+const LoginSolid: React.FC<LogInSolidProps> = ({ setLoginWithSolid }) => {
   const [selectedProviderName, setSelectedProviderName] = useState('')
 
   const [providerUrl, setProviderUrl] = useState('')
@@ -182,4 +182,4 @@ const LogInSolid: React.FC<LogInSolidProps> = ({ setLoginWithSolid }) => {
   )
 }
 
-export default LogInSolid
+export default LoginSolid
