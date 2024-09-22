@@ -116,7 +116,10 @@ const SelectSolidProvider: React.FC<SelectSolidProviderProps> = ({
   }
 
   return (
-    <Stack gap={3} className="fade-in">
+    <Stack
+      gap={3}
+      className="select-provider-stack position-absolute top-50 start-50 translate-middle text-center fade-in"
+    >
       <span className="select-provider-heading">
         <FormattedMessage
           id="selectASolidProvider"
