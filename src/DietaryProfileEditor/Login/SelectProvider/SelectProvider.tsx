@@ -1,10 +1,11 @@
 import Button from 'react-bootstrap/Button'
-import ProviderComparisonModalWrapper from './ProviderComparisonModalWrapper'
-import LoginSolid from './LoginSolid'
+import ProviderComparisonModalWrapper from '../ProviderComparisonModalWrapper'
+import LoginSolid from '../LoginSolid'
 import { useState } from 'react'
 import './SelectProvider.css'
-import TraditionalProviders from './TraditionalProviders'
+import TraditionalProviders from '../TraditionalProviders'
 import { FormattedMessage } from 'react-intl'
+import Stack from 'react-bootstrap/Stack'
 
 const SelectProvider: React.FC = () => {
   const [loginWithSolid, setLoginWithSolid] = useState(false)
@@ -12,7 +13,10 @@ const SelectProvider: React.FC = () => {
   const [showProvidersModal, setShowProvidersModal] = useState(false)
 
   return (
-    <>
+    <Stack
+      gap={3}
+      className="select-provider-stack position-absolute top-50 start-50 translate-middle text-center"
+    >
       <ProviderComparisonModalWrapper
         showProvidersModal={showProvidersModal}
         setShowProvidersModal={setShowProvidersModal}
@@ -69,7 +73,7 @@ const SelectProvider: React.FC = () => {
           <TraditionalProviders />
         </>
       )}
-    </>
+    </Stack>
   )
 }
 

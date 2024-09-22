@@ -2,8 +2,7 @@ import { useContext } from 'react'
 import Form from 'react-bootstrap/Form'
 import LanguageContext from '../LanguageContext'
 import './Login.css'
-import SelectProvider from './SelectProvider'
-import Stack from 'react-bootstrap/Stack'
+import SelectProvider from './SelectProvider/SelectProvider'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Card from 'react-bootstrap/Card'
@@ -15,6 +14,7 @@ import { useSession } from '@inrupt/solid-ui-react'
 // import { useAuthState } from 'react-firebase-hooks/auth'
 import { Navigate } from 'react-router-dom'
 // import { auth } from '../../firebase'
+import Stack from 'react-bootstrap/Stack'
 
 const Login: React.FC = () => {
   const { session: solidSession } = useSession()
@@ -157,17 +157,7 @@ const Login: React.FC = () => {
       </div>
 
       <div className="d-lg-none">
-        <Stack
-          gap={3}
-          className="select-provider-stack position-absolute top-50 start-50 translate-middle text-center"
-        >
-          <img
-            className="application-logo mt-5"
-            src="images/app_logo.svg"
-            alt="application_logo"
-          />
-          <SelectProvider />
-        </Stack>
+        <SelectProvider />
       </div>
 
       <div className="position-absolute bottom-0 start-0 ms-3 mb-3">
