@@ -1,6 +1,6 @@
 import Button from 'react-bootstrap/Button'
 import ProviderComparisonModalWrapper from '../ProviderComparisonModalWrapper'
-import LoginSolid from '../LoginSolid'
+import SelectSolidProvider from './SelectSolidProvider/SelectSolidProvider'
 import { useState } from 'react'
 import './SelectProvider.css'
 import TraditionalProviders from '../TraditionalProviders'
@@ -13,67 +13,71 @@ const SelectProvider: React.FC = () => {
   const [showProvidersModal, setShowProvidersModal] = useState(false)
 
   return (
-    <Stack
-      gap={3}
-      className="select-provider-stack position-absolute top-50 start-50 translate-middle text-center"
-    >
+    <>
       <ProviderComparisonModalWrapper
         showProvidersModal={showProvidersModal}
         setShowProvidersModal={setShowProvidersModal}
       />
 
-      <span className="select-provider-heading">
-        <FormattedMessage
-          id="selectIdentityProvider"
-          defaultMessage="Select an identity provider"
-        />
-      </span>
+      <Stack
+        gap={3}
+        className="select-provider-stack position-absolute top-50 start-50 translate-middle text-center"
+      >
+        {loginWithSolid && (
+          <SelectSolidProvider setLoginWithSolid={setLoginWithSolid} />
+        )}
 
-      {loginWithSolid && <LoginSolid setLoginWithSolid={setLoginWithSolid} />}
-
-      {!loginWithSolid && (
-        <>
-          <Button
-            onClick={() => {
-              setLoginWithSolid(true)
-            }}
-            className="login-screen-button solid-button text-start"
-          >
-            <img
-              src="images/logo_solid.svg"
-              alt="Solid logo"
-              className="solid-icon"
-            />
-            <span className="ms-3">
+        {!loginWithSolid && (
+          <>
+            <span className="select-provider-heading">
               <FormattedMessage
-                id="signInWithSolid"
-                defaultMessage="Sign in with Solid"
+                id="selectIdentityProvider"
+                defaultMessage="Select an identity provider"
               />
             </span>
-          </Button>
 
-          <div
-            onClick={() => {
-              setShowProvidersModal(true)
-            }}
-            className="clickable-text w-50 mt-1 mx-auto"
-          >
-            <FormattedMessage
-              id="whatIsSolid"
-              defaultMessage="What is Solid?"
-            />
-          </div>
+            <Button
+              onClick={() => {
+                setLoginWithSolid(true)
+              }}
+              className="login-screen-button solid-button text-start"
+            >
+              <img
+                src="images/logo_solid.svg"
+                alt="Solid logo"
+                className="solid-icon"
+              />
+              <span className="ms-3">
+                <FormattedMessage
+                  id="signInWithSolid"
+                  defaultMessage="Sign in with Solid"
+                />
+              </span>
+            </Button>
 
-          <div className="providers-divider">
-            <span>
-              <FormattedMessage id="signInDivider" defaultMessage="or" />
-            </span>
-          </div>
+            <div
+              onClick={() => {
+                setShowProvidersModal(true)
+              }}
+              className="clickable-text w-50 mt-1 mx-auto"
+            >
+              <FormattedMessage
+                id="whatIsSolid"
+                defaultMessage="What is Solid?"
+              />
+            </div>
 
-          <TraditionalProviders />
-        </>
-      )}
-    </Stack>
+            <div className="providers-divider">
+              <span>
+                <FormattedMessage id="signInDivider" defaultMessage="or" />
+              </span>
+            </div>
+
+            <TraditionalProviders />
+          </>
+        )}
+      </Stack>
+    </>
   )
 }
 
