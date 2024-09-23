@@ -2,6 +2,17 @@
   height: 45px;
 }
 
+.login-solid-back-button {
+  background-color: #575c55;
+  border-color: #575c55;
+}
+
+.login-solid-back-button:hover,
+.login-solid-back-button:active {
+  background-color: #50534f !important;
+  border-color: #50534f !important;
+}
+
 .fade-in {
   animation: fade-in 1s;
 }
