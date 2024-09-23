@@ -8,12 +8,6 @@
   border-color: #1877f2;
 }
 
-.facebook-button:hover,
-.facebook-button:active:focus {
-  background-color: #0467e9;
-  border-color: #0467e9;
-}
-
 .google-button {
   background-color: white;
   border-color: #5a58588a;
@@ -21,8 +15,8 @@
 }
 
 .google-button:hover,
-.google-button:active:focus {
-  background-color: white;
-  border-color: #5a58588a;
-  color: black;
+.google-button:active {
+  background-color: white !important;
+  border-color: #5a58588a !important;
+  color: black !important;
 }

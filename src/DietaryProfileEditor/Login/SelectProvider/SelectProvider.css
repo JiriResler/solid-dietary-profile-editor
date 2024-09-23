@@ -27,9 +27,9 @@
 }
 
 .solid-button:hover,
-.solid-button:active:focus {
-  background-color: #6933ff;
-  border-color: #6933ff;
+.solid-button:active {
+  background-color: #6933ff !important;
+  border-color: #6933ff !important;
 }
 
 .solid-icon {
