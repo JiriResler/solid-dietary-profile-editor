@@ -125,7 +125,9 @@ const messagesInSlovak: Messages = {
       3. Problém je na strane poskytovateľa Solid.
     `,
   emptyUrlAlert: 'Vyberte poskytovateľa alebo zadajte poskytovateľovu URL.',
-  solidDescription: 'missing translation',
+  solidDescription: `
+    Solid vám umožňuje mať kontrolu nad tým kde sú vaše dáta uložené a kto k nim má prístup. Na začiatok si budete musieť u poskytovateľa Solid zaobstarať jedinečné WebID. Taktiež sa môžete prihlásiť pod vaším Google alebo Facebook účtom, pričom vaše dáta budú uložené na serveroch týchto poskytovateľov. Solid môžete začať používať aj neskôr a vaše dáta si v rámci aplikácie preniesť. Viac sa dozviete na oficiálnej stránke projektu Solid.
+  `,
   closeModal: 'Zavrieť',
 }
 
