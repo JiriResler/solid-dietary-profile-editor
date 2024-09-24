@@ -1,5 +1,5 @@
 import Button from 'react-bootstrap/Button'
-import ProviderComparisonModalWrapper from '../ProviderComparisonModalWrapper'
+import Modal from 'react-bootstrap/Modal'
 import SelectSolidProvider from './SelectSolidProvider/SelectSolidProvider'
 import { useState } from 'react'
 import './SelectProvider.css'
@@ -10,7 +10,7 @@ import Stack from 'react-bootstrap/Stack'
 const SelectProvider: React.FC = () => {
   const [loginWithSolid, setLoginWithSolid] = useState(false)
 
-  const [showProvidersModal, setShowProvidersModal] = useState(false)
+  const [showSolidModal, setShowSolidModal] = useState(false)
 
   if (loginWithSolid) {
     return <SelectSolidProvider setLoginWithSolid={setLoginWithSolid} />
@@ -18,10 +18,28 @@ const SelectProvider: React.FC = () => {
 
   return (
     <>
-      <ProviderComparisonModalWrapper
-        showProvidersModal={showProvidersModal}
-        setShowProvidersModal={setShowProvidersModal}
-      />
+      <Modal
+        size="lg"
+        centered
+        show={showSolidModal}
+        onHide={() => {
+          setShowSolidModal(false)
+        }}
+      >
+        <Modal.Body>
+          Woohoo, you are reading this text in a modal! <br />
+          <div className="mt-3 text-end">
+            <Button
+              variant="secondary"
+              onClick={() => {
+                setShowSolidModal(false)
+              }}
+            >
+              Close
+            </Button>
+          </div>
+        </Modal.Body>
+      </Modal>
 
       <Stack
         gap={3}
@@ -55,7 +73,7 @@ const SelectProvider: React.FC = () => {
 
         <div
           onClick={() => {
-            setShowProvidersModal(true)
+            setShowSolidModal(true)
           }}
           className="clickable-text w-50 mt-1 mx-auto"
         >
