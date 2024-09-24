@@ -59,6 +59,8 @@ type Messages = {
   goBack: string
   loginSolidErrorMessage: string
   emptyUrlAlert: string
+  solidDescription: string
+  closeModal: string
 }
 
 const messagesInSlovak: Messages = {
@@ -123,6 +125,8 @@ const messagesInSlovak: Messages = {
       3. Problém je na strane poskytovateľa Solid.
     `,
   emptyUrlAlert: 'Vyberte poskytovateľa alebo zadajte poskytovateľovu URL.',
+  solidDescription: 'missing translation',
+  closeModal: 'Zavrieť',
 }
 
 // const cs_messages: Messages = {

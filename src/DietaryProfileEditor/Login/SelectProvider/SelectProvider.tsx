@@ -27,7 +27,8 @@ const SelectProvider: React.FC = () => {
         }}
       >
         <Modal.Body>
-          Woohoo, you are reading this text in a modal! <br />
+          <FormattedMessage id="solidDescription" defaultMessage="default" />{' '}
+          <br />
           <div className="mt-3 text-end">
             <Button
               variant="secondary"
@@ -35,7 +36,7 @@ const SelectProvider: React.FC = () => {
                 setShowSolidModal(false)
               }}
             >
-              Close
+              <FormattedMessage id="closeModal" defaultMessage="Close" />
             </Button>
           </div>
         </Modal.Body>
