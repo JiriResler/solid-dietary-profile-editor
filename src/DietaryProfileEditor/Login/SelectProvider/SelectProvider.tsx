@@ -13,7 +13,7 @@ const SelectProvider: React.FC = () => {
   const [showSolidModal, setShowSolidModal] = useState(false)
 
   const solidDescriptionText = `
-    Solid lets you control where your data is stored and who can access it. To get started, create a WebID with a Solid provider. You can also sign in using Google or Facebook, with your data stored on their servers. You can switch to Solid later without losing your data. Learn more on the Solid project website.
+    <b>Solid</b> lets you control where your data is stored and who can access it. To get started, create a WebID with a Solid provider. You can also sign in using Google or Facebook, with your data stored on their servers. You can switch to Solid later without losing your data. Learn more on the <a>Solid project website</a>.
   `
 
   if (loginWithSolid) {
@@ -34,6 +34,14 @@ const SelectProvider: React.FC = () => {
           <FormattedMessage
             id="solidDescription"
             defaultMessage={solidDescriptionText}
+            values={{
+              b: (chunks) => <b>{chunks}</b>,
+              a: (chunks) => (
+                <a target="_blank" href="https://solidproject.org/">
+                  {chunks}
+                </a>
+              ),
+            }}
           />{' '}
           <br />
           <div className="mt-3 text-end">
