@@ -3,14 +3,18 @@ import Modal from 'react-bootstrap/Modal'
 import SelectSolidProvider from './SelectSolidProvider/SelectSolidProvider'
 import { useState } from 'react'
 import './SelectProvider.css'
-import TraditionalProviders from '../TraditionalProviders'
 import { FormattedMessage } from 'react-intl'
 import Stack from 'react-bootstrap/Stack'
+import { auth, facebook, google } from '../../../firebase'
+import { signInWithPopup, signInWithRedirect } from 'firebase/auth'
+import { useNavigate } from 'react-router-dom'
 
 const SelectProvider: React.FC = () => {
   const [loginWithSolid, setLoginWithSolid] = useState(false)
 
   const [showSolidModal, setShowSolidModal] = useState(false)
+
+  const navigate = useNavigate()
 
   const solidDescriptionText = `
     Solid lets you control where your data is stored and who can access it. To get started, create a WebID with a Solid provider. You can also sign in using Google or Facebook, with your data stored on their servers. You can switch to Solid later without losing your data. Learn more on the Solid project website.
@@ -94,7 +98,44 @@ const SelectProvider: React.FC = () => {
           </span>
         </div>
 
-        <TraditionalProviders />
+        <Button
+          onClick={() => {
+            void signInWithRedirect(auth, facebook).then(() => navigate('/'))
+          }}
+          className="login-screen-button facebook-button text-start"
+        >
+          <img
+            src="images/facebook_round_white_icon.svg"
+            alt="Facebook logo"
+            className="provider-icon ms-1"
+          />
+
+          <span className="ms-3">
+            <FormattedMessage
+              id="signInWithFacebook"
+              defaultMessage="Sign in with Facebook"
+            />
+          </span>
+        </Button>
+
+        <Button
+          onClick={() => {
+            void signInWithPopup(auth, google).then(() => navigate('/'))
+          }}
+          className="login-screen-button google-button text-start"
+        >
+          <img
+            src="images/google_g_logo.svg"
+            alt="Google logo"
+            className="provider-icon ms-1"
+          />
+          <span className="ms-3">
+            <FormattedMessage
+              id="signInWithGoogle"
+              defaultMessage="Sign in with Google"
+            />
+          </span>
+        </Button>
       </Stack>
     </>
   )
