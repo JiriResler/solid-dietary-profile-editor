@@ -11,17 +11,17 @@ import Button from 'react-bootstrap/Button'
 import { useState } from 'react'
 import { FormattedMessage } from 'react-intl'
 import { useSession } from '@inrupt/solid-ui-react'
-// import { useAuthState } from 'react-firebase-hooks/auth'
+import { useAuthState } from 'react-firebase-hooks/auth'
 import { Navigate } from 'react-router-dom'
-// import { auth } from '../../firebase'
+import { auth } from '../../firebase'
 import Stack from 'react-bootstrap/Stack'
 
 const Login: React.FC = () => {
   const { session: solidSession } = useSession()
 
-  // const [firebaseUser] = useAuthState(auth)
+  const [firebaseUser] = useAuthState(auth)
 
-  // const authed = solidSession.info.isLoggedIn || firebaseUser !== null
+  const authed = solidSession.info.isLoggedIn || firebaseUser !== null
 
   const { selectedLanguage, setSelectedLanguage } = useContext(LanguageContext)
 
@@ -59,13 +59,9 @@ const Login: React.FC = () => {
     return
   }
 
-  if (solidSession.info.isLoggedIn) {
+  if (authed) {
     return <Navigate to="/" replace />
   }
-
-  // if (authed) {
-  //   return <Navigate to="/" replace />
-  // }
 
   return (
     <>

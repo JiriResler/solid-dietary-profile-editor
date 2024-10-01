@@ -1,5 +1,5 @@
 import { useSession } from '@inrupt/solid-ui-react'
-// import { useAuthState } from 'react-firebase-hooks/auth'
+import { useAuthState } from 'react-firebase-hooks/auth'
 import { Navigate } from 'react-router-dom'
 import { auth } from '../../firebase'
 import { LoginMethod } from '../loginMethodEnum'
@@ -9,19 +9,15 @@ import { useNavigate } from 'react-router-dom'
 const ProfileManagement: React.FC = () => {
   const { session: solidSession } = useSession()
 
-  // const [firebaseUser] = useAuthState(auth)
+  const [firebaseUser] = useAuthState(auth)
 
-  // const authed = solidSession.info.isLoggedIn || firebaseUser !== null
+  const authed = solidSession.info.isLoggedIn || firebaseUser !== null
 
   const navigate = useNavigate()
 
-  if (!solidSession.info.isLoggedIn) {
+  if (!authed) {
     return <Navigate to="/login" replace />
   }
-
-  // if (!authed) {
-  //   return <Navigate to="/login" replace />
-  // }
 
   const loginMethod: LoginMethod = solidSession.info.isLoggedIn
     ? LoginMethod.SOLID
