@@ -6,7 +6,7 @@ import './SelectProvider.css'
 import { FormattedMessage } from 'react-intl'
 import Stack from 'react-bootstrap/Stack'
 import { auth, facebook, google } from '../../../firebase'
-import { signInWithPopup, signInWithRedirect } from 'firebase/auth'
+import { signInWithPopup } from 'firebase/auth'
 import { useNavigate } from 'react-router-dom'
 
 const SelectProvider: React.FC = () => {
@@ -108,7 +108,7 @@ const SelectProvider: React.FC = () => {
 
         <Button
           onClick={() => {
-            void signInWithRedirect(auth, facebook).then(() => navigate('/'))
+            void signInWithPopup(auth, facebook).then(() => navigate('/'))
           }}
           className="login-screen-button facebook-button text-start"
         >
