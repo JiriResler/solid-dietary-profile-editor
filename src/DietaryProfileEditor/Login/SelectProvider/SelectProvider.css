@@ -48,3 +48,26 @@
   background: white;
   padding: 0 25px;
 }
+
+.more-providers {
+  width: 175pt;
+  animation: fade-in 1s;
+}
+
+.facebook-button {
+  background-color: #1877f2;
+  border-color: #1877f2;
+}
+
+.google-button {
+  background-color: white;
+  border-color: #5a58588a;
+  color: black;
+}
+
+.google-button:hover,
+.google-button:active {
+  background-color: white !important;
+  border-color: #5a58588a !important;
+  color: black !important;
+}
