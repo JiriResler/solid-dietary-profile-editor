@@ -5,20 +5,50 @@ import { useState } from 'react'
 import './SelectProvider.css'
 import { FormattedMessage } from 'react-intl'
 import Stack from 'react-bootstrap/Stack'
-import { auth, facebook, google } from '../../../firebase'
-import { signInWithPopup } from 'firebase/auth'
+import { auth, google } from '../../../firebase'
+import {
+  signInWithPopup,
+  signInWithCredential,
+  FacebookAuthProvider,
+} from 'firebase/auth'
 import { useNavigate } from 'react-router-dom'
+import { useLogin } from 'react-facebook'
 
 const SelectProvider: React.FC = () => {
   const [loginWithSolid, setLoginWithSolid] = useState(false)
 
   const [showSolidModal, setShowSolidModal] = useState(false)
 
+  const { login } = useLogin()
+
   const navigate = useNavigate()
 
   const solidDescriptionText = `
     <b>Solid</b> lets you control where your data is stored and who can access it. To get started, create a WebID with a Solid provider. You can also sign in using Google or Facebook, with your data stored on their servers. You can switch to Solid later without losing your data. Learn more on the <a>Solid project website</a>.
   `
+
+  async function handleFacebookLogin() {
+    try {
+      const loginResponse = await login({
+        scope: 'email',
+      })
+
+      // Build Firebase credential with the Facebook auth token.
+      const credential = FacebookAuthProvider.credential(
+        loginResponse.authResponse.accessToken,
+      )
+
+      signInWithCredential(auth, credential)
+        .then(() => {
+          navigate('/')
+        })
+        .catch((error) => {
+          console.error(error)
+        })
+    } catch (error) {
+      console.error(error)
+    }
+  }
 
   if (loginWithSolid) {
     return <SelectSolidProvider setLoginWithSolid={setLoginWithSolid} />
@@ -107,9 +137,7 @@ const SelectProvider: React.FC = () => {
         </div>
 
         <Button
-          onClick={() => {
-            void signInWithPopup(auth, facebook).then(() => navigate('/'))
-          }}
+          onClick={() => void handleFacebookLogin()}
           className="login-screen-button facebook-button text-start"
         >
           <img
