@@ -9,7 +9,7 @@ import { auth, google } from '../../../firebase'
 import {
   signInWithCredential,
   FacebookAuthProvider,
-  signInWithRedirect,
+  signInWithPopup,
 } from 'firebase/auth'
 import { useNavigate } from 'react-router-dom'
 import { useLogin } from 'react-facebook'
@@ -51,7 +51,7 @@ const SelectProvider: React.FC = () => {
   }
 
   function handleGoogleLogin() {
-    signInWithRedirect(auth, google)
+    signInWithPopup(auth, google)
       .then(() => navigate('/'))
       .catch((error) => {
         console.error(error)
