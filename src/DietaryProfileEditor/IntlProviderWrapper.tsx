@@ -61,6 +61,7 @@ type Messages = {
   emptyUrlAlert: string
   solidDescription: string
   closeModal: string
+  loginFirebaseErrorMessage: string
 }
 
 const messagesInSlovak: Messages = {

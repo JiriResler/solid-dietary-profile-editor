@@ -3,7 +3,7 @@ import Modal from 'react-bootstrap/Modal'
 import SelectSolidProvider from './SelectSolidProvider/SelectSolidProvider'
 import { useState } from 'react'
 import './SelectProvider.css'
-import { FormattedMessage } from 'react-intl'
+import { FormattedMessage, useIntl } from 'react-intl'
 import Stack from 'react-bootstrap/Stack'
 import { auth, google } from '../../../firebase'
 import {
@@ -21,12 +21,23 @@ const SelectProvider: React.FC = () => {
 
   const { login } = useLogin()
 
+  const intl = useIntl()
+
   const navigate = useNavigate()
 
   const solidDescriptionText = `
     <b>Solid</b> lets you control where your data is stored and who can access it. To get started, create a WebID with a Solid provider. You can also sign in using Google or Facebook, with your data stored on their servers. You can switch to Solid later without losing your data. Learn more on the <a>Solid project website</a>.
   `
 
+  const firebaseLoginErrorMessage = intl.formatMessage({
+    id: 'loginFirebaseErrorMessage',
+    defaultMessage:
+      'Login failed. The reason may be that you are not connected to internet, the login process was cancelled or there is an issue with the selected provider.',
+  })
+
+  /**
+   * Activates the Facebook sign in flow and signs in the user to Firebase with obtained access token.
+   */
   async function handleFacebookLogin() {
     try {
       const loginResponse = await login({
@@ -43,10 +54,11 @@ const SelectProvider: React.FC = () => {
           navigate('/')
         })
         .catch((error) => {
-          console.error(error)
+          throw error
         })
     } catch (error) {
       console.error(error)
+      alert(firebaseLoginErrorMessage)
     }
   }
 
