@@ -7,9 +7,9 @@ import { FormattedMessage } from 'react-intl'
 import Stack from 'react-bootstrap/Stack'
 import { auth, google } from '../../../firebase'
 import {
-  signInWithPopup,
   signInWithCredential,
   FacebookAuthProvider,
+  signInWithRedirect,
 } from 'firebase/auth'
 import { useNavigate } from 'react-router-dom'
 import { useLogin } from 'react-facebook'
@@ -48,6 +48,14 @@ const SelectProvider: React.FC = () => {
     } catch (error) {
       console.error(error)
     }
+  }
+
+  function handleGoogleLogin() {
+    signInWithRedirect(auth, google)
+      .then(() => navigate('/'))
+      .catch((error) => {
+        console.error(error)
+      })
   }
 
   if (loginWithSolid) {
@@ -155,9 +163,7 @@ const SelectProvider: React.FC = () => {
         </Button>
 
         <Button
-          onClick={() => {
-            void signInWithPopup(auth, google).then(() => navigate('/'))
-          }}
+          onClick={() => handleGoogleLogin()}
           className="login-screen-button google-button text-start"
         >
           <img
