@@ -141,12 +141,7 @@ const Login: React.FC = () => {
           <Col md={5} className="select-provider-login-col position-relative">
             <Card className="select-provider-card position-absolute top-50 start-50 translate-middle">
               <Card.Body>
-                <Stack
-                  gap={3}
-                  className="select-provider-stack select-provider-stack-large-screen text-center mx-auto"
-                >
-                  <SelectProvider />
-                </Stack>
+                <SelectProvider />
               </Card.Body>
             </Card>
           </Col>

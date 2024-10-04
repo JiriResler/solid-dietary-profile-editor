@@ -5,12 +5,9 @@
   margin-right: auto;
 }
 
-.select-provider-stack-large-screen {
-  height: 325px;
-}
-
 .select-provider-card {
   width: 320px;
+  height: 500px;
 }
 
 .login-screen-row {
