@@ -14,6 +14,9 @@ import {
 import { useNavigate } from 'react-router-dom'
 import { useLogin } from 'react-facebook'
 
+/**
+ * Allows the user to select an identity provider to sign in with and triggers the authentication process.
+ */
 const SelectProvider: React.FC = () => {
   const [loginWithSolid, setLoginWithSolid] = useState(false)
 
@@ -62,6 +65,9 @@ const SelectProvider: React.FC = () => {
     }
   }
 
+  /**
+   * Activates Google sign in flow.
+   */
   function handleGoogleLogin() {
     signInWithPopup(auth, google)
       .then(() => navigate('/'))
