@@ -69,7 +69,7 @@ const SelectSolidProvider: React.FC<SelectSolidProviderProps> = ({
    * Sets Solid provider URL state variable and changes current Select option if the URL is one of the listed providers'.
    */
   function handleOnProviderUrlChange(e: React.ChangeEvent<HTMLInputElement>) {
-    const newUrl = e.target.value
+    const newUrl = e.target.value.trim()
 
     setProviderUrl(newUrl)
 
@@ -166,6 +166,7 @@ const SelectSolidProvider: React.FC<SelectSolidProviderProps> = ({
         <Button
           className="login-screen-button solid-button w-100 mt-2"
           onClick={(e) => handleEmptyProviderUrlClick(e)}
+          disabled={providerUrl.length === 0}
         >
           <FormattedMessage
             id="redirectToProvider"
