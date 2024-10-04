@@ -10,7 +10,7 @@ describe('SelectSolidProviderHelper functions', () => {
     }
   })
 
-  test('should return the existing key for a valid value', () => {
+  test('getKeyByValue should return the existing key for a valid value', () => {
     const value = 'testValue'
     const expectedKey = 'testKey'
 
@@ -19,7 +19,7 @@ describe('SelectSolidProviderHelper functions', () => {
     expect(actualKey).toEqual(expectedKey)
   })
 
-  test('should return undefined for a non-existing value', () => {
+  test('getKeyByValue should return undefined for a non-existing value', () => {
     const value = 'nonExistingValue'
     const expectedKey = undefined
 
@@ -28,7 +28,7 @@ describe('SelectSolidProviderHelper functions', () => {
     expect(actualKey).toEqual(expectedKey)
   })
 
-  test('should return undefined if the object is empty', () => {
+  test('getKeyByValue should return undefined if the object is empty', () => {
     const emptyObj = {}
     const value = 'testValue'
     const expectedKey = undefined
