@@ -21,7 +21,8 @@
   height: 27px;
 }
 
-.solid-button {
+.solid-button,
+.solid-button:disabled {
   background-color: #7c4dff;
   border-color: #7c4dff;
 }
