@@ -65,7 +65,7 @@ type Messages = {
 }
 
 const messagesInSlovak: Messages = {
-  manageYourProfileLoginScreenHeading: 'Spravujte svoj diétny profil',
+  manageYourProfileLoginScreenHeading: 'Spravujte svoje jedálne preferencie',
   selectIdentityProvider: 'Vyberte spôsob prihlásenia',
   signInWithSolid: 'Solid',
   whatIsSolid: 'Čo je to Solid?',
@@ -130,6 +130,7 @@ const messagesInSlovak: Messages = {
     <b>Solid</b> vám umožňuje mať kontrolu nad tým kde sú vaše dáta uložené a kto k nim má prístup. Na začiatok si budete musieť u poskytovateľa Solid zaobstarať vaše WebID. Taktiež sa môžete prihlásiť pod vaším Google alebo Facebook účtom, pričom vaše dáta budú uložené na serveroch týchto poskytovateľov. Solid môžete začať používať aj neskôr a vaše dáta si v rámci aplikácie preniesť. Viac sa dozviete na <a>oficiálnej stránke</a> projektu Solid.
   `,
   closeModal: 'Zavrieť',
+  loginFirebaseErrorMessage: 'Missing translation',
 }
 
 // const cs_messages: Messages = {

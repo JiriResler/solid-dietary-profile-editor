@@ -88,26 +88,27 @@ const Login: React.FC = () => {
         <Row className="d-none d-lg-flex login-screen-row">
           <Col md={7} className="position-relative">
             <Stack className="w-75 text-center position-absolute top-50 start-50 translate-middle">
-              <h2>
+              <h2 className="w-50 mx-auto">
                 <FormattedMessage
                   id="welcomeToTheApplication"
-                  defaultMessage="Welcome to the personal eating preferences profile editor!"
+                  defaultMessage="Welcome to the Dietary Profile Editor"
                 />
               </h2>
 
               <img
-                className="application-logo"
+                className="application-logo mt-1"
                 src="images/app_logo.svg"
                 alt="application_logo"
               />
 
-              <h4 className="mt-3 w-50 mx-auto">
+              <h4 className="w-50 mx-auto">
                 <FormattedMessage
                   id="manageYourProfileLoginScreenHeading"
-                  defaultMessage="Manage your eating preferences profile"
+                  defaultMessage="Manage your dietary preferences"
                 />
               </h4>
             </Stack>
+
             <div className="position-absolute bottom-0 start-50 translate-middle-x mb-3">
               <span
                 className="clickable-text"
