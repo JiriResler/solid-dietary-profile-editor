@@ -113,7 +113,7 @@ const SelectProvider: React.FC = () => {
 
       <Stack
         gap={3}
-        className="select-provider-stack position-absolute top-50 start-50 translate-middle text-center"
+        className="select-provider-stack position-absolute top-50 start-50 translate-middle text-center pb-1"
       >
         <span className="select-provider-heading">
           <FormattedMessage
