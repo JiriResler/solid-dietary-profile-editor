@@ -6,15 +6,3 @@ export function getKeyByValue(targetObject: object, value: string) {
     (key) => targetObject[key as keyof typeof targetObject] === value,
   )
 }
-
-/**
- * Creates a redirect URL based on whether code runs in production mode and returns it.
- */
-export function getRedirectUrl() {
-  const productionMode = import.meta.env.PROD
-
-  return new URL(
-    productionMode ? '/solid-dietary-profile-editor/login' : '/login',
-    window.location.origin,
-  ).toString()
-}

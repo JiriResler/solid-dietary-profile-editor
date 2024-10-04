@@ -5,7 +5,7 @@ import { useState } from 'react'
 import './SelectSolidProvider.css'
 import { FormattedMessage, useIntl } from 'react-intl'
 import Stack from 'react-bootstrap/Stack'
-import { getKeyByValue, getRedirectUrl } from './SelectSolidProviderHelpers'
+import { getKeyByValue } from './SelectSolidProviderHelpers'
 
 type SelectSolidProviderProps = {
   setLoginWithSolid: React.Dispatch<React.SetStateAction<boolean>>
@@ -95,6 +95,18 @@ const SelectSolidProvider: React.FC<SelectSolidProviderProps> = ({
       id: 'providerUrlPlaceholder',
       defaultMessage: 'Place a provider URL',
     })
+  }
+
+  /**
+   * Creates a redirect URL based on whether code runs in production mode and returns it.
+   */
+  function getRedirectUrl() {
+    const productionMode = import.meta.env.PROD
+
+    return new URL(
+      productionMode ? '/solid-dietary-profile-editor/login' : '/login',
+      window.location.origin,
+    ).toString()
   }
 
   return (
