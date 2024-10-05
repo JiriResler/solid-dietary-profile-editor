@@ -109,6 +109,16 @@ const SelectSolidProvider: React.FC<SelectSolidProviderProps> = ({
     ).toString()
   }
 
+  /**
+   * Returns the default intl message for the select component.
+   */
+  function defaultSelectOptionMessage() {
+    return intl.formatMessage({
+      id: 'chooseSolidProvider',
+      defaultMessage: 'Choose a Solid provider',
+    })
+  }
+
   return (
     <Stack
       gap={3}
@@ -127,10 +137,7 @@ const SelectSolidProvider: React.FC<SelectSolidProviderProps> = ({
         className="select-solid-provider"
       >
         <option key="defaultOption" hidden>
-          <FormattedMessage
-            id="chooseSolidProvider"
-            defaultMessage="Choose a Solid provider"
-          />
+          {defaultSelectOptionMessage()}
         </option>
 
         {Object.keys(providerNameAndUrls).map((opt) => {
