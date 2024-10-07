@@ -15,6 +15,7 @@ import { useAuthState } from 'react-firebase-hooks/auth'
 import { Navigate } from 'react-router-dom'
 import { auth } from '../../firebase'
 import Stack from 'react-bootstrap/Stack'
+import CircularProgress from '@mui/material/CircularProgress'
 
 const Login: React.FC = () => {
   const { session: solidSession } = useSession()
@@ -26,6 +27,10 @@ const Login: React.FC = () => {
   const { selectedLanguage, setSelectedLanguage } = useContext(LanguageContext)
 
   const [showAboutModal, setShowAboutModal] = useState(false)
+
+  const [showLoadingModal, setShowLoadingModal] = useState(true)
+
+  const [loginError] = useState(false)
 
   function setLanguageContext(language: string) {
     if (language === 'English') {
@@ -83,6 +88,26 @@ const Login: React.FC = () => {
               Close
             </Button>
           </Modal.Footer>
+        </Modal>
+
+        <Modal show={showLoadingModal} centered>
+          <Modal.Body className="text-center">
+            <CircularProgress />
+            <h3>Loading</h3>
+          </Modal.Body>
+          {loginError && (
+            <>
+              <Modal.Body>A login error occured.</Modal.Body>
+              <Modal.Footer>
+                <Button
+                  variant="secondary"
+                  onClick={() => setShowLoadingModal(false)}
+                >
+                  Close
+                </Button>
+              </Modal.Footer>
+            </>
+          )}
         </Modal>
 
         <Row className="d-none d-lg-flex login-screen-row">
