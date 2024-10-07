@@ -5,13 +5,11 @@ import './LoginLoadingModal.css'
 
 type LoginLoadingModalProps = {
   showLoadingModal: boolean
-  setShowLoadingModal: React.Dispatch<React.SetStateAction<boolean>>
   loginError: boolean
 }
 
 const LoginLoadingModal: React.FC<LoginLoadingModalProps> = ({
   showLoadingModal,
-  setShowLoadingModal,
   loginError,
 }) => {
   return (
@@ -27,7 +25,7 @@ const LoginLoadingModal: React.FC<LoginLoadingModalProps> = ({
           <Modal.Footer>
             <Button
               variant="secondary"
-              onClick={() => setShowLoadingModal(false)}
+              //   onClick={() => setShowLoadingModal(false)}
             >
               Close
             </Button>

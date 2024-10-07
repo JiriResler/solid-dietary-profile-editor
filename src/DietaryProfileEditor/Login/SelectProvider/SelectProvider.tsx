@@ -14,10 +14,16 @@ import {
 import { useNavigate } from 'react-router-dom'
 import { useLogin } from 'react-facebook'
 
+type SelectProviderProps = {
+  setFirebaseAuthInProgress: React.Dispatch<React.SetStateAction<boolean>>
+}
+
 /**
  * Allows the user to select an identity provider to sign in with and triggers the authentication process.
  */
-const SelectProvider: React.FC = () => {
+const SelectProvider: React.FC<SelectProviderProps> = ({
+  setFirebaseAuthInProgress,
+}) => {
   const [loginWithSolid, setLoginWithSolid] = useState(false)
 
   const [showSolidModal, setShowSolidModal] = useState(false)
@@ -43,6 +49,8 @@ const SelectProvider: React.FC = () => {
    */
   async function handleFacebookLogin() {
     try {
+      setFirebaseAuthInProgress(true)
+
       const loginResponse = await login({
         scope: 'email',
       })
@@ -62,6 +70,8 @@ const SelectProvider: React.FC = () => {
     } catch (error) {
       console.error(error)
       alert(firebaseLoginErrorMessage)
+    } finally {
+      setFirebaseAuthInProgress(false)
     }
   }
 
@@ -69,11 +79,14 @@ const SelectProvider: React.FC = () => {
    * Activates Google sign in flow.
    */
   function handleGoogleLogin() {
+    setFirebaseAuthInProgress(true)
+
     signInWithPopup(auth, google)
       .then(() => navigate('/'))
       .catch((error) => {
         console.error(error)
       })
+      .finally(() => setFirebaseAuthInProgress(false))
   }
 
   if (loginWithSolid) {

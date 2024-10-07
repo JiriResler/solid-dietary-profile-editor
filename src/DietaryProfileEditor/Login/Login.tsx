@@ -18,17 +18,19 @@ import Stack from 'react-bootstrap/Stack'
 import LoginLoadingModal from './LoginLoadingModal'
 
 const Login: React.FC = () => {
-  const { session: solidSession } = useSession()
+  const { session: solidSession, sessionRequestInProgress } = useSession()
 
   const [firebaseUser] = useAuthState(auth)
 
   const authed = solidSession.info.isLoggedIn || firebaseUser !== null
 
+  const [firebaseAuthInProgress, setFirebaseAuthInProgress] = useState(false)
+
+  const authInProgress = sessionRequestInProgress || firebaseAuthInProgress
+
   const { selectedLanguage, setSelectedLanguage } = useContext(LanguageContext)
 
   const [showAboutModal, setShowAboutModal] = useState(false)
-
-  const [showLoadingModal, setShowLoadingModal] = useState(true)
 
   const [loginError] = useState(false)
 
@@ -91,8 +93,7 @@ const Login: React.FC = () => {
         </Modal>
 
         <LoginLoadingModal
-          showLoadingModal={showLoadingModal}
-          setShowLoadingModal={setShowLoadingModal}
+          showLoadingModal={authInProgress}
           loginError={loginError}
         />
 
@@ -152,7 +153,9 @@ const Login: React.FC = () => {
           <Col md={5} className="select-provider-login-col position-relative">
             <Card className="select-provider-card position-absolute top-50 start-50 translate-middle">
               <Card.Body>
-                <SelectProvider />
+                <SelectProvider
+                  setFirebaseAuthInProgress={setFirebaseAuthInProgress}
+                />
               </Card.Body>
             </Card>
           </Col>
@@ -160,7 +163,7 @@ const Login: React.FC = () => {
       </div>
 
       <div className="d-lg-none">
-        <SelectProvider />
+        <SelectProvider setFirebaseAuthInProgress={setFirebaseAuthInProgress} />
       </div>
 
       <div className="position-absolute bottom-0 start-0 ms-3 mb-3">
