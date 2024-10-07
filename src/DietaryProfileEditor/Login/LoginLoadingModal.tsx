@@ -1,6 +1,7 @@
 import CircularProgress from '@mui/material/CircularProgress'
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
+import './LoginLoadingModal.css'
 
 type LoginLoadingModalProps = {
   showLoadingModal: boolean
@@ -14,11 +15,12 @@ const LoginLoadingModal: React.FC<LoginLoadingModalProps> = ({
   loginError,
 }) => {
   return (
-    <Modal show={showLoadingModal} centered>
-      <Modal.Body className="text-center">
-        <CircularProgress />
-        <h3>Loading</h3>
+    <Modal show={showLoadingModal} size="sm" centered className="text-center">
+      <Modal.Body>
+        <CircularProgress className="mt-3 circular-progress" />
+        <h3 className="mt-2">Loading</h3>
       </Modal.Body>
+
       {loginError && (
         <>
           <Modal.Body>A login error occured.</Modal.Body>
