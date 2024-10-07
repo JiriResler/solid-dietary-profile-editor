@@ -15,7 +15,7 @@ import { useAuthState } from 'react-firebase-hooks/auth'
 import { Navigate } from 'react-router-dom'
 import { auth } from '../../firebase'
 import Stack from 'react-bootstrap/Stack'
-import CircularProgress from '@mui/material/CircularProgress'
+import LoginLoadingModal from './LoginLoadingModal'
 
 const Login: React.FC = () => {
   const { session: solidSession } = useSession()
@@ -90,25 +90,11 @@ const Login: React.FC = () => {
           </Modal.Footer>
         </Modal>
 
-        <Modal show={showLoadingModal} centered>
-          <Modal.Body className="text-center">
-            <CircularProgress />
-            <h3>Loading</h3>
-          </Modal.Body>
-          {loginError && (
-            <>
-              <Modal.Body>A login error occured.</Modal.Body>
-              <Modal.Footer>
-                <Button
-                  variant="secondary"
-                  onClick={() => setShowLoadingModal(false)}
-                >
-                  Close
-                </Button>
-              </Modal.Footer>
-            </>
-          )}
-        </Modal>
+        <LoginLoadingModal
+          showLoadingModal={showLoadingModal}
+          setShowLoadingModal={setShowLoadingModal}
+          loginError={loginError}
+        />
 
         <Row className="d-none d-lg-flex login-screen-row">
           <Col md={7} className="position-relative">
