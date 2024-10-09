@@ -13,6 +13,7 @@ import {
 } from 'firebase/auth'
 import { useNavigate } from 'react-router-dom'
 import { useLogin } from 'react-facebook'
+import Spinner from 'react-bootstrap/Spinner'
 
 type SelectProviderProps = {
   setFirebaseAuthInProgress: React.Dispatch<React.SetStateAction<boolean>>
@@ -29,6 +30,10 @@ const SelectProvider: React.FC<SelectProviderProps> = ({
   const [showSolidModal, setShowSolidModal] = useState(false)
 
   const { login } = useLogin()
+
+  const [facebokLoginInProgress, setFacebokLoginInProgress] = useState(false)
+
+  const [googleLoginInProgress, setGoogleLoginInProgress] = useState(false)
 
   const intl = useIntl()
 
@@ -49,7 +54,7 @@ const SelectProvider: React.FC<SelectProviderProps> = ({
    */
   async function handleFacebookLogin() {
     try {
-      setFirebaseAuthInProgress(true)
+      setFacebokLoginInProgress(true)
 
       const loginResponse = await login({
         scope: 'email',
@@ -71,7 +76,7 @@ const SelectProvider: React.FC<SelectProviderProps> = ({
       console.error(error)
       alert(firebaseLoginErrorMessage)
     } finally {
-      setFirebaseAuthInProgress(false)
+      setFacebokLoginInProgress(false)
     }
   }
 
@@ -177,20 +182,28 @@ const SelectProvider: React.FC<SelectProviderProps> = ({
 
         <Button
           onClick={() => void handleFacebookLogin()}
-          className="login-screen-button facebook-button text-start"
+          className="login-screen-button facebook-button"
         >
-          <img
-            src="images/facebook_round_white_icon.svg"
-            alt="Facebook logo"
-            className="provider-icon ms-1"
-          />
+          {facebokLoginInProgress ? (
+            <Spinner animation="border" role="status" size="sm">
+              <span className="visually-hidden">Loading...</span>
+            </Spinner>
+          ) : (
+            <div className="text-start">
+              <img
+                src="images/facebook_round_white_icon.svg"
+                alt="Facebook logo"
+                className="provider-icon ms-1"
+              />
 
-          <span className="ms-3">
-            <FormattedMessage
-              id="signInWithFacebook"
-              defaultMessage="Sign in with Facebook"
-            />
-          </span>
+              <span className="ms-3">
+                <FormattedMessage
+                  id="signInWithFacebook"
+                  defaultMessage="Sign in with Facebook"
+                />
+              </span>
+            </div>
+          )}
         </Button>
 
         <Button
