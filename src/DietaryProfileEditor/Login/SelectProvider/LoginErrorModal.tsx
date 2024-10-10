@@ -3,9 +3,16 @@ import Button from 'react-bootstrap/Button'
 
 const LoginErrorModal: React.FC = () => {
   return (
-    <Modal show={false} onHide={() => {}} centered>
+    <Modal show={true} onHide={() => {}} centered>
       <Modal.Header closeButton>
-        <Modal.Title>Login Error</Modal.Title>
+        <Modal.Title>
+          <img
+            src="images/alert-warning.svg"
+            alt="Solid logo"
+            className="warning-icon pe-3"
+          />
+          Login Error
+        </Modal.Title>
       </Modal.Header>
       <Modal.Body>Woohoo, you are reading this text in a modal!</Modal.Body>
       <Modal.Footer>
