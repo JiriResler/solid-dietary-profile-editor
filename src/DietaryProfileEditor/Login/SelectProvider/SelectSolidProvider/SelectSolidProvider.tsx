@@ -6,6 +6,8 @@ import './SelectSolidProvider.css'
 import { FormattedMessage, useIntl } from 'react-intl'
 import Stack from 'react-bootstrap/Stack'
 import { getKeyByValue } from './SelectSolidProviderHelpers'
+import Spinner from 'react-bootstrap/Spinner'
+import { useSession } from '@inrupt/solid-ui-react'
 
 type SelectSolidProviderProps = {
   setLoginWithSolid: React.Dispatch<React.SetStateAction<boolean>>
@@ -18,6 +20,8 @@ type SelectSolidProviderProps = {
 const SelectSolidProvider: React.FC<SelectSolidProviderProps> = ({
   setLoginWithSolid,
 }) => {
+  const { sessionRequestInProgress } = useSession()
+
   const [selectedProviderName, setSelectedProviderName] = useState('')
 
   const [providerUrl, setProviderUrl] = useState('')
@@ -168,10 +172,16 @@ const SelectSolidProvider: React.FC<SelectSolidProviderProps> = ({
           redirectUrl={getRedirectUrl()}
           onError={(error) => handleOnLoginError(error)}
         >
-          <FormattedMessage
-            id="redirectToProvider"
-            defaultMessage="Redirect to provider"
-          />
+          {!sessionRequestInProgress ? (
+            <FormattedMessage
+              id="redirectToProvider"
+              defaultMessage="Redirect to provider"
+            />
+          ) : (
+            <Spinner animation="border" role="status" size="sm">
+              <span className="visually-hidden">Loading...</span>
+            </Spinner>
+          )}
         </LoginButton>
       </Button>
 

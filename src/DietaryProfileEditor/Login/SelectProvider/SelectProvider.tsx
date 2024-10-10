@@ -21,7 +21,7 @@ import Spinner from 'react-bootstrap/Spinner'
 const SelectProvider: React.FC = () => {
   const [loginWithSolid, setLoginWithSolid] = useState(false)
 
-  const [showSolidModal, setShowSolidModal] = useState(false)
+  const [showAboutSolidModal, setShowAboutSolidModal] = useState(false)
 
   const { login } = useLogin()
 
@@ -97,9 +97,9 @@ const SelectProvider: React.FC = () => {
       <Modal
         size="lg"
         centered
-        show={showSolidModal}
+        show={showAboutSolidModal}
         onHide={() => {
-          setShowSolidModal(false)
+          setShowAboutSolidModal(false)
         }}
       >
         <Modal.Body>
@@ -120,7 +120,7 @@ const SelectProvider: React.FC = () => {
             <Button
               variant="secondary"
               onClick={() => {
-                setShowSolidModal(false)
+                setShowAboutSolidModal(false)
               }}
             >
               <FormattedMessage id="closeModal" defaultMessage="Close" />
@@ -161,7 +161,7 @@ const SelectProvider: React.FC = () => {
 
         <div
           onClick={() => {
-            setShowSolidModal(true)
+            setShowAboutSolidModal(true)
           }}
           className="clickable-text w-50 mt-1 mx-auto"
         >
