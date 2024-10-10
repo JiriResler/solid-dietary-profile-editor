@@ -8,6 +8,7 @@ import Stack from 'react-bootstrap/Stack'
 import { getKeyByValue } from './SelectSolidProviderHelpers'
 import Spinner from 'react-bootstrap/Spinner'
 import { useSession } from '@inrupt/solid-ui-react'
+import LoginErrorModal from '../LoginErrorModal'
 
 type SelectSolidProviderProps = {
   setLoginWithSolid: React.Dispatch<React.SetStateAction<boolean>>
@@ -25,6 +26,10 @@ const SelectSolidProvider: React.FC<SelectSolidProviderProps> = ({
   const [selectedProviderName, setSelectedProviderName] = useState('')
 
   const [providerUrl, setProviderUrl] = useState('')
+
+  const [loginCausedError, setLoginCausedError] = useState(false)
+
+  const [loginErrorMessage, setLoginErrorMessage] = useState('')
 
   const intl = useIntl()
 
@@ -50,12 +55,12 @@ const SelectSolidProvider: React.FC<SelectSolidProviderProps> = ({
   }
 
   /**
-   * Logs the login error to the console and informs the user that something went wrong while trying to log in via the Solid provider.
+   * Logs the login error to the console and informs the user that something went wrong while trying to log in vith a Solid provider.
    */
   function handleOnLoginError(error: Error) {
-    console.error('Login error:', error)
+    console.error(error)
 
-    const alertMessage = intl.formatMessage({
+    const errorMessage = intl.formatMessage({
       id: 'loginSolidErrorMessage',
       defaultMessage: `
       Login failed. Possible reasons include: 
@@ -66,7 +71,8 @@ const SelectSolidProvider: React.FC<SelectSolidProviderProps> = ({
     `,
     })
 
-    alert(alertMessage)
+    setLoginErrorMessage(errorMessage)
+    setLoginCausedError(true)
   }
 
   /**
@@ -124,76 +130,84 @@ const SelectSolidProvider: React.FC<SelectSolidProviderProps> = ({
   }
 
   return (
-    <Stack
-      gap={3}
-      className="select-provider-stack position-absolute top-50 start-50 translate-middle text-center pb-1 fade-in"
-    >
-      <span className="select-provider-heading">
-        <FormattedMessage
-          id="selectASolidProvider"
-          defaultMessage="Select a Solid provider"
-        />
-      </span>
-
-      <Form.Select
-        value={selectedProviderName}
-        onChange={(e) => handleSelectOnChange(e)}
-        className="solid-provider-select"
-      >
-        <option key="defaultOption" hidden>
-          {defaultSelectOptionMessage()}
-        </option>
-
-        {Object.keys(providerNameAndUrls).map((opt) => {
-          return <option key={opt}>{opt}</option>
-        })}
-      </Form.Select>
-
-      <FormattedMessage
-        id="typeInProviderUrlHeading"
-        defaultMessage="Or type in a provider URL"
+    <>
+      <LoginErrorModal
+        show={loginCausedError}
+        setShow={setLoginCausedError}
+        message={loginErrorMessage}
       />
 
-      <Form.Control
-        type="text"
-        placeholder={getProviderUrlPlaceholder()}
-        value={providerUrl}
-        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-          handleOnProviderUrlChange(e)
-        }
-      />
-
-      <Button
-        className="login-screen-button solid-button w-100 mt-2"
-        disabled={providerUrl.length === 0}
+      <Stack
+        gap={3}
+        className="select-provider-stack position-absolute top-50 start-50 translate-middle text-center pb-1 fade-in"
       >
-        <LoginButton
-          oidcIssuer={providerUrl}
-          redirectUrl={getRedirectUrl()}
-          onError={(error) => handleOnLoginError(error)}
+        <span className="select-provider-heading">
+          <FormattedMessage
+            id="selectASolidProvider"
+            defaultMessage="Select a Solid provider"
+          />
+        </span>
+
+        <Form.Select
+          value={selectedProviderName}
+          onChange={(e) => handleSelectOnChange(e)}
+          className="solid-provider-select"
         >
-          {!sessionRequestInProgress ? (
-            <FormattedMessage
-              id="redirectToProvider"
-              defaultMessage="Redirect to provider"
-            />
-          ) : (
-            <Spinner animation="border" role="status" size="sm">
-              <span className="visually-hidden">Loading...</span>
-            </Spinner>
-          )}
-        </LoginButton>
-      </Button>
+          <option key="defaultOption" hidden>
+            {defaultSelectOptionMessage()}
+          </option>
 
-      <Button
-        className="login-screen-button secondary-button w-100"
-        onClick={() => {
-          setLoginWithSolid(false)
-        }}
-      >
-        <FormattedMessage id="goBack" defaultMessage="Back" />
-      </Button>
-    </Stack>
+          {Object.keys(providerNameAndUrls).map((opt) => {
+            return <option key={opt}>{opt}</option>
+          })}
+        </Form.Select>
+
+        <FormattedMessage
+          id="typeInProviderUrlHeading"
+          defaultMessage="Or type in a provider URL"
+        />
+
+        <Form.Control
+          type="text"
+          placeholder={getProviderUrlPlaceholder()}
+          value={providerUrl}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+            handleOnProviderUrlChange(e)
+          }
+        />
+
+        <Button
+          className="login-screen-button solid-button w-100 mt-2"
+          disabled={providerUrl.length === 0}
+        >
+          <LoginButton
+            oidcIssuer={providerUrl}
+            redirectUrl={getRedirectUrl()}
+            onError={(error) => handleOnLoginError(error)}
+          >
+            {!sessionRequestInProgress ? (
+              <FormattedMessage
+                id="redirectToProvider"
+                defaultMessage="Redirect to provider"
+              />
+            ) : (
+              <Spinner animation="border" role="status" size="sm">
+                <span className="visually-hidden">Loading...</span>
+              </Spinner>
+            )}
+          </LoginButton>
+        </Button>
+
+        <Button
+          className="login-screen-button secondary-button w-100"
+          onClick={() => {
+            setLoginWithSolid(false)
+          }}
+        >
+          <FormattedMessage id="goBack" defaultMessage="Back" />
+        </Button>
+      </Stack>
+    </>
   )
 }
 
