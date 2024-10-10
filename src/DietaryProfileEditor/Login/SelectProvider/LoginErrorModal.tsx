@@ -1,5 +1,6 @@
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
+import { FormattedMessage } from 'react-intl'
 
 type LoginErrorModalProps = {
   show: boolean
@@ -21,7 +22,8 @@ const LoginErrorModal: React.FC<LoginErrorModalProps> = ({
             alt="Solid logo"
             className="warning-icon pe-3"
           />
-          Login Error
+
+          <FormattedMessage id="loginFailed" defaultMessage="Login failed" />
         </Modal.Title>
       </Modal.Header>
 

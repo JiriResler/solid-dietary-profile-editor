@@ -49,7 +49,7 @@ const SelectProvider: React.FC = () => {
   })
 
   /**
-   * Activates the Facebook sign in flow and signs in the user to Firebase with obtained access token.
+   * Activates the Facebook sign in flow and signs in the user to Firebase with the obtained access token.
    */
   async function handleFacebookLogin() {
     try {
@@ -70,9 +70,19 @@ const SelectProvider: React.FC = () => {
         })
         .catch((error) => {
           setLoginCausedError(true)
+
+          const errorMessage = intl.formatMessage({
+            id: 'firebaseLoginErrorMessage',
+            defaultMessage:
+              'Login failed because there is an issue with the backend authentication service.',
+          })
+
+          setLoginErrorMessage(errorMessage)
+
           throw error
         })
     } catch (error) {
+      // No need to show LoginErrorModal as the Facebook popup window itself shows an error message to the user.
       console.error(error)
     } finally {
       setFacebokLoginInProgress(false)
@@ -134,7 +144,11 @@ const SelectProvider: React.FC = () => {
         </Modal.Body>
       </Modal>
 
-      <LoginErrorModal show={loginCausedError} setShow={setLoginCausedError} />
+      <LoginErrorModal
+        show={loginCausedError}
+        setShow={setLoginCausedError}
+        message={loginErrorMessage}
+      />
 
       <Stack
         gap={3}
