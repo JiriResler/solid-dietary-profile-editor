@@ -27,10 +27,14 @@
   border-color: #7c4dff;
 }
 
-.solid-button:hover,
+.solid-button:hover {
+  background-color: #6933ff;
+  border-color: #6933ff;
+}
+
 .solid-button:active {
-  background-color: #6933ff !important;
-  border-color: #6933ff !important;
+  background-color: #7c4dff !important;
+  border-color: #7c4dff !important;
 }
 
 .solid-icon {
