@@ -15,16 +15,10 @@ import { useNavigate } from 'react-router-dom'
 import { useLogin } from 'react-facebook'
 import Spinner from 'react-bootstrap/Spinner'
 
-type SelectProviderProps = {
-  setFirebaseAuthInProgress: React.Dispatch<React.SetStateAction<boolean>>
-}
-
 /**
  * Allows the user to select an identity provider to sign in with and triggers the authentication process.
  */
-const SelectProvider: React.FC<SelectProviderProps> = ({
-  setFirebaseAuthInProgress,
-}) => {
+const SelectProvider: React.FC = () => {
   const [loginWithSolid, setLoginWithSolid] = useState(false)
 
   const [showSolidModal, setShowSolidModal] = useState(false)
@@ -84,14 +78,14 @@ const SelectProvider: React.FC<SelectProviderProps> = ({
    * Activates Google sign in flow.
    */
   function handleGoogleLogin() {
-    setFirebaseAuthInProgress(true)
+    setGoogleLoginInProgress(true)
 
     signInWithPopup(auth, google)
       .then(() => navigate('/'))
       .catch((error) => {
         console.error(error)
       })
-      .finally(() => setFirebaseAuthInProgress(false))
+      .finally(() => setGoogleLoginInProgress(false))
   }
 
   if (loginWithSolid) {
@@ -184,11 +178,7 @@ const SelectProvider: React.FC<SelectProviderProps> = ({
           onClick={() => void handleFacebookLogin()}
           className="login-screen-button facebook-button"
         >
-          {facebokLoginInProgress ? (
-            <Spinner animation="border" role="status" size="sm">
-              <span className="visually-hidden">Loading...</span>
-            </Spinner>
-          ) : (
+          {!facebokLoginInProgress ? (
             <div className="text-start">
               <img
                 src="images/facebook_round_white_icon.svg"
@@ -203,24 +193,37 @@ const SelectProvider: React.FC<SelectProviderProps> = ({
                 />
               </span>
             </div>
+          ) : (
+            <Spinner animation="border" role="status" size="sm">
+              <span className="visually-hidden">Loading...</span>
+            </Spinner>
           )}
         </Button>
 
         <Button
           onClick={() => handleGoogleLogin()}
-          className="login-screen-button google-button text-start"
+          className="login-screen-button google-button"
         >
-          <img
-            src="images/google_g_logo.svg"
-            alt="Google logo"
-            className="provider-icon ms-1"
-          />
-          <span className="ms-3">
-            <FormattedMessage
-              id="signInWithGoogle"
-              defaultMessage="Sign in with Google"
-            />
-          </span>
+          {!googleLoginInProgress ? (
+            <div className="text-start">
+              <img
+                src="images/google_g_logo.svg"
+                alt="Google logo"
+                className="provider-icon ms-1"
+              />
+
+              <span className="ms-3">
+                <FormattedMessage
+                  id="signInWithGoogle"
+                  defaultMessage="Sign in with Google"
+                />
+              </span>
+            </div>
+          ) : (
+            <Spinner animation="border" role="status" size="sm">
+              <span className="visually-hidden">Loading...</span>
+            </Spinner>
+          )}
         </Button>
       </Stack>
     </>
