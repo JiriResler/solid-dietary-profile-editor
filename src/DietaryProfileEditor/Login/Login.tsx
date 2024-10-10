@@ -120,16 +120,18 @@ const Login: React.FC = () => {
                 />
               </span>
               <span> | </span>
+
               <a
                 href="https://github.com/JiriResler/solid-dietary-profile-editor"
                 target="_blank"
-                className="link-without-decoration"
+                className="link-without-decoration clickable-text"
               >
                 <FormattedMessage
                   id="sourceCode"
                   defaultMessage="Source code"
                 />
               </a>
+
               <span> | </span>
               <span>
                 <FormattedMessage id="createdBy" defaultMessage="Created by" />{' '}
