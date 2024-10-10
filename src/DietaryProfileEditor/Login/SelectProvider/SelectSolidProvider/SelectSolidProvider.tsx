@@ -138,7 +138,7 @@ const SelectSolidProvider: React.FC<SelectSolidProviderProps> = ({
       <Form.Select
         value={selectedProviderName}
         onChange={(e) => handleSelectOnChange(e)}
-        className="select-solid-provider"
+        className="solid-provider-select"
       >
         <option key="defaultOption" hidden>
           {defaultSelectOptionMessage()}
@@ -186,7 +186,7 @@ const SelectSolidProvider: React.FC<SelectSolidProviderProps> = ({
       </Button>
 
       <Button
-        className="login-screen-button login-solid-back-button w-100"
+        className="login-screen-button secondary-button w-100"
         onClick={() => {
           setLoginWithSolid(false)
         }}

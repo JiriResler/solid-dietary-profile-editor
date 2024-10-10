@@ -14,6 +14,7 @@ import {
 import { useNavigate } from 'react-router-dom'
 import { useLogin } from 'react-facebook'
 import Spinner from 'react-bootstrap/Spinner'
+import LoginErrorModal from './LoginErrorModal'
 
 /**
  * Allows the user to select an identity provider to sign in with and triggers the authentication process.
@@ -64,11 +65,11 @@ const SelectProvider: React.FC = () => {
           navigate('/')
         })
         .catch((error) => {
+
           throw error
         })
     } catch (error) {
       console.error(error)
-      alert(firebaseLoginErrorMessage)
     } finally {
       setFacebokLoginInProgress(false)
     }
@@ -128,6 +129,8 @@ const SelectProvider: React.FC = () => {
           </div>
         </Modal.Body>
       </Modal>
+
+      <LoginErrorModal />
 
       <Stack
         gap={3}

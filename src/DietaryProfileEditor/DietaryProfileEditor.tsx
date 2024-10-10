@@ -5,6 +5,7 @@ import Login from './Login/Login'
 import ProfileManagement from './ProfileManagement/ProfileManagement'
 import Container from 'react-bootstrap/Container'
 import { FacebookProvider } from 'react-facebook'
+import './DietaryProfileEditor.css'
 
 const DietaryProfileEditor: React.FC = () => {
   const applicationBasePath = import.meta.env.DEV
