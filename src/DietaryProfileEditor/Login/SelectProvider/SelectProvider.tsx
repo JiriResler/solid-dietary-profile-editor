@@ -42,12 +42,6 @@ const SelectProvider: React.FC = () => {
     <b>Solid</b> lets you control where your data is stored and who can access it. To get started, create a WebID with a Solid provider. You can also sign in using Google or Facebook, with your data stored on their servers. You can switch to Solid later without losing your data. Learn more on the Solid's <a>project website</a>.
   `
 
-  const firebaseLoginErrorMessage = intl.formatMessage({
-    id: 'loginFirebaseErrorMessage',
-    defaultMessage:
-      'Login failed. The reason may be that you are not connected to internet, the login process was cancelled or there is an issue with the selected provider.',
-  })
-
   /**
    * Activates the Facebook sign in flow and signs in the user to Firebase with the obtained access token.
    */
@@ -69,15 +63,14 @@ const SelectProvider: React.FC = () => {
           navigate('/')
         })
         .catch((error) => {
-          setLoginCausedError(true)
-
           const errorMessage = intl.formatMessage({
-            id: 'firebaseLoginErrorMessage',
+            id: 'firebaseLoginErrorMessageFacebook',
             defaultMessage:
               'Login failed because there is an issue with the backend authentication service.',
           })
 
           setLoginErrorMessage(errorMessage)
+          setLoginCausedError(true)
 
           throw error
         })
@@ -99,6 +92,15 @@ const SelectProvider: React.FC = () => {
       .then(() => navigate('/'))
       .catch((error) => {
         console.error(error)
+
+        const errorMessage = intl.formatMessage({
+          id: 'firebaseLoginErrorMessageGoogle',
+          defaultMessage:
+            'Login failed because either you are not connected to the internet or there is an issue with the backend authentication service.',
+        })
+
+        setLoginErrorMessage(errorMessage)
+        setLoginCausedError(true)
       })
       .finally(() => setGoogleLoginInProgress(false))
   }

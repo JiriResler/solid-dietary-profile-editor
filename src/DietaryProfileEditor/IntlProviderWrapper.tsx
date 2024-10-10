@@ -61,7 +61,8 @@ type Messages = {
   emptyUrlAlert: string
   solidDescription: string
   closeModal: string
-  firebaseLoginErrorMessage: string
+  firebaseLoginErrorMessageFacebook: string
+  firebaseLoginErrorMessageGoogle: string
   loginFailed: string
 }
 
@@ -131,8 +132,10 @@ const messagesInSlovak: Messages = {
     <b>Solid</b> vám umožňuje mať kontrolu nad tým kde sú vaše dáta uložené a kto k nim má prístup. Na začiatok si budete musieť u poskytovateľa Solid zaobstarať vaše WebID. Taktiež sa môžete prihlásiť pod vaším Google alebo Facebook účtom, pričom vaše dáta budú uložené na serveroch týchto poskytovateľov. Solid môžete začať používať aj neskôr a vaše dáta si v rámci aplikácie preniesť. Viac sa dozviete na <a>oficiálnej stránke</a> projektu Solid.
   `,
   closeModal: 'Zavrieť',
-  firebaseLoginErrorMessage:
+  firebaseLoginErrorMessageFacebook:
     'Prihlásenie zlyhalo z dôvodu chyby v prihlasovacej službe.',
+  firebaseLoginErrorMessageGoogle:
+    'Prihlásenie zlyhalo pretože buď nemáte prístup na internet alebo z dôvodu chyby v prihlasovacej službe.',
   loginFailed: 'Prihlásenie bolo neúspešné',
 }
 
