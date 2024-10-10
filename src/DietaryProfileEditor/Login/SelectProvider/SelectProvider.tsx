@@ -35,7 +35,7 @@ const SelectProvider: React.FC = () => {
   const navigate = useNavigate()
 
   const solidDescriptionText = `
-    <b>Solid</b> lets you control where your data is stored and who can access it. To get started, create a WebID with a Solid provider. You can also sign in using Google or Facebook, with your data stored on their servers. You can switch to Solid later without losing your data. Learn more on the <a>Solid project website</a>.
+    <b>Solid</b> lets you control where your data is stored and who can access it. To get started, create a WebID with a Solid provider. You can also sign in using Google or Facebook, with your data stored on their servers. You can switch to Solid later without losing your data. Learn more on the Solid's <a>project website</a>.
   `
 
   const firebaseLoginErrorMessage = intl.formatMessage({
