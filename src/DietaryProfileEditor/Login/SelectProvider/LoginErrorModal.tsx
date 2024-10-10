@@ -1,9 +1,19 @@
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 
-const LoginErrorModal: React.FC = () => {
+type LoginErrorModalProps = {
+  show: boolean
+  setShow: React.Dispatch<React.SetStateAction<boolean>>
+  message: string
+}
+
+const LoginErrorModal: React.FC<LoginErrorModalProps> = ({
+  show,
+  setShow,
+  message,
+}) => {
   return (
-    <Modal show={true} onHide={() => {}} centered>
+    <Modal show={show} onHide={() => setShow(false)} centered>
       <Modal.Header closeButton>
         <Modal.Title>
           <img
@@ -14,9 +24,11 @@ const LoginErrorModal: React.FC = () => {
           Login Error
         </Modal.Title>
       </Modal.Header>
-      <Modal.Body>Woohoo, you are reading this text in a modal!</Modal.Body>
+
+      <Modal.Body>{message}</Modal.Body>
+
       <Modal.Footer>
-        <Button className="secondary-button" onClick={() => {}}>
+        <Button className="secondary-button" onClick={() => setShow(false)}>
           Close
         </Button>
       </Modal.Footer>

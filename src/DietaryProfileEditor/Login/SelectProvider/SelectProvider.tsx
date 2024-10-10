@@ -30,6 +30,10 @@ const SelectProvider: React.FC = () => {
 
   const [googleLoginInProgress, setGoogleLoginInProgress] = useState(false)
 
+  const [loginCausedError, setLoginCausedError] = useState(false)
+
+  const [loginErrorMessage, setLoginErrorMessage] = useState('')
+
   const intl = useIntl()
 
   const navigate = useNavigate()
@@ -65,7 +69,7 @@ const SelectProvider: React.FC = () => {
           navigate('/')
         })
         .catch((error) => {
-
+          setLoginCausedError(true)
           throw error
         })
     } catch (error) {
@@ -130,7 +134,7 @@ const SelectProvider: React.FC = () => {
         </Modal.Body>
       </Modal>
 
-      <LoginErrorModal />
+      <LoginErrorModal show={loginCausedError} setShow={setLoginCausedError} />
 
       <Stack
         gap={3}
