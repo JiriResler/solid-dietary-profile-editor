@@ -155,7 +155,7 @@ const SelectProvider: React.FC = () => {
         message={loginErrorMessage}
       />
 
-      <Fade in={true} appear={allowFadeAnimation}>
+      <Fade in={true} appear={allowFadeAnimation} timeout={500}>
         <Stack
           gap={3}
           className="select-provider-stack position-absolute top-50 start-50 translate-middle text-center pb-1"

@@ -137,7 +137,7 @@ const SelectSolidProvider: React.FC<SelectSolidProviderProps> = ({
         setShow={setLoginCausedError}
         message={loginErrorMessage}
       />
-      <Fade in={true}>
+      <Fade in={true} timeout={500}>
         <Stack
           gap={3}
           className="select-provider-stack position-absolute top-50 start-50 translate-middle text-center pb-1"
