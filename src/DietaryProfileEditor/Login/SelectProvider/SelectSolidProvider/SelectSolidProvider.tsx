@@ -9,6 +9,7 @@ import { getKeyByValue } from './SelectSolidProviderHelpers'
 import Spinner from 'react-bootstrap/Spinner'
 import { useSession } from '@inrupt/solid-ui-react'
 import LoginErrorModal from '../LoginErrorModal'
+import Fade from '@mui/material/Fade'
 
 type SelectSolidProviderProps = {
   setLoginWithSolid: React.Dispatch<React.SetStateAction<boolean>>
@@ -136,77 +137,78 @@ const SelectSolidProvider: React.FC<SelectSolidProviderProps> = ({
         setShow={setLoginCausedError}
         message={loginErrorMessage}
       />
-
-      <Stack
-        gap={3}
-        className="select-provider-stack position-absolute top-50 start-50 translate-middle text-center pb-1"
-      >
-        <span className="select-provider-heading">
-          <FormattedMessage
-            id="selectASolidProvider"
-            defaultMessage="Select a Solid provider"
-          />
-        </span>
-
-        <Form.Select
-          value={selectedProviderName}
-          onChange={(e) => handleSelectOnChange(e)}
-          className="solid-provider-select"
+      <Fade in={true}>
+        <Stack
+          gap={3}
+          className="select-provider-stack position-absolute top-50 start-50 translate-middle text-center pb-1"
         >
-          <option key="defaultOption" hidden>
-            {defaultSelectOptionMessage()}
-          </option>
+          <span className="select-provider-heading">
+            <FormattedMessage
+              id="selectASolidProvider"
+              defaultMessage="Select a Solid provider"
+            />
+          </span>
 
-          {Object.keys(providerNameAndUrls).map((opt) => {
-            return <option key={opt}>{opt}</option>
-          })}
-        </Form.Select>
-
-        <FormattedMessage
-          id="typeInProviderUrlHeading"
-          defaultMessage="Or type in a provider URL"
-        />
-
-        <Form.Control
-          type="text"
-          placeholder={getProviderUrlPlaceholder()}
-          value={providerUrl}
-          onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-            handleOnProviderUrlChange(e)
-          }
-        />
-
-        <Button
-          className="login-screen-button solid-button w-100 mt-2"
-          disabled={providerUrl.length === 0}
-        >
-          <LoginButton
-            oidcIssuer={providerUrl}
-            redirectUrl={getRedirectUrl()}
-            onError={(error) => handleOnLoginError(error)}
+          <Form.Select
+            value={selectedProviderName}
+            onChange={(e) => handleSelectOnChange(e)}
+            className="solid-provider-select"
           >
-            {!sessionRequestInProgress ? (
-              <FormattedMessage
-                id="redirectToProvider"
-                defaultMessage="Redirect to provider"
-              />
-            ) : (
-              <Spinner animation="border" role="status" size="sm">
-                <span className="visually-hidden">Loading...</span>
-              </Spinner>
-            )}
-          </LoginButton>
-        </Button>
+            <option key="defaultOption" hidden>
+              {defaultSelectOptionMessage()}
+            </option>
 
-        <Button
-          className="login-screen-button secondary-button w-100"
-          onClick={() => {
-            setLoginWithSolid(false)
-          }}
-        >
-          <FormattedMessage id="goBack" defaultMessage="Back" />
-        </Button>
-      </Stack>
+            {Object.keys(providerNameAndUrls).map((opt) => {
+              return <option key={opt}>{opt}</option>
+            })}
+          </Form.Select>
+
+          <FormattedMessage
+            id="typeInProviderUrlHeading"
+            defaultMessage="Or type in a provider URL"
+          />
+
+          <Form.Control
+            type="text"
+            placeholder={getProviderUrlPlaceholder()}
+            value={providerUrl}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+              handleOnProviderUrlChange(e)
+            }
+          />
+
+          <Button
+            className="login-screen-button solid-button w-100 mt-2"
+            disabled={providerUrl.length === 0}
+          >
+            <LoginButton
+              oidcIssuer={providerUrl}
+              redirectUrl={getRedirectUrl()}
+              onError={(error) => handleOnLoginError(error)}
+            >
+              {!sessionRequestInProgress ? (
+                <FormattedMessage
+                  id="redirectToProvider"
+                  defaultMessage="Redirect to provider"
+                />
+              ) : (
+                <Spinner animation="border" role="status" size="sm">
+                  <span className="visually-hidden">Loading...</span>
+                </Spinner>
+              )}
+            </LoginButton>
+          </Button>
+
+          <Button
+            className="login-screen-button secondary-button w-100"
+            onClick={() => {
+              setLoginWithSolid(false)
+            }}
+          >
+            <FormattedMessage id="goBack" defaultMessage="Back" />
+          </Button>
+        </Stack>
+      </Fade>
     </>
   )
 }
