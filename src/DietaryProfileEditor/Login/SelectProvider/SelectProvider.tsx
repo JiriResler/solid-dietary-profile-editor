@@ -135,7 +135,7 @@ const SelectProvider: React.FC = () => {
           <br />
           <div className="mt-3 text-end">
             <Button
-              variant="secondary"
+              className="secondary-button"
               onClick={() => {
                 setShowAboutSolidModal(false)
               }}

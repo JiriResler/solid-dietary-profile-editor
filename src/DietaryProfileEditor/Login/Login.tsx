@@ -77,10 +77,10 @@ const Login: React.FC = () => {
           <Modal.Body>Woohoo, you are reading this text in a modal!</Modal.Body>
           <Modal.Footer>
             <Button
-              variant="secondary"
+              className="secondary-button"
               onClick={() => setShowAboutModal(false)}
             >
-              Close
+              <FormattedMessage id="closeModal" defaultMessage="Close" />
             </Button>
           </Modal.Footer>
         </Modal>
