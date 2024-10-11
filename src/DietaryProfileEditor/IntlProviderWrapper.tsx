@@ -64,6 +64,8 @@ type Messages = {
   firebaseLoginErrorMessageFacebook: string
   firebaseLoginErrorMessageGoogle: string
   loginFailed: string
+  aboutApplicationTitle: string
+  aboutApplicationBody: string
 }
 
 const messagesInSlovak: Messages = {
@@ -137,6 +139,9 @@ const messagesInSlovak: Messages = {
   firebaseLoginErrorMessageGoogle:
     'Prihlásenie zlyhalo pretože buď nemáte prístup na internet alebo z dôvodu chyby v prihlasovacej službe.',
   loginFailed: 'Prihlásenie bolo neúspešné',
+  aboutApplicationTitle: 'O aplikácii',
+  aboutApplicationBody:
+    '<b>Editor diétneho profilu</b> slúži pre ľudí ktorí radi jedia v reštauráciách a sú obmedzovaní alergiami alebo majú iné jedálne preferencie. Aplikácia vám umožňuje uložiť a spravovať váš diétny profil. Výnimočná je v tom, že umožňuje použiť technológiu <b>Solid</b>, a tým pádom budú vaše dáta uložené decentralizovaným spôsobom a budete mať kontrolu nad tým kto ich môže vidieť, čo zaručí vyššiu mieru súkromia.',
 }
 
 // const cs_messages: Messages = {

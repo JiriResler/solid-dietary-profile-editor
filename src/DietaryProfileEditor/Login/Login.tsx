@@ -25,7 +25,11 @@ const Login: React.FC = () => {
 
   const { selectedLanguage, setSelectedLanguage } = useContext(LanguageContext)
 
-  const [showAboutModal, setShowAboutModal] = useState(false)
+  const [showAboutApplicationModal, setShowAboutApplicationModal] =
+    useState(false)
+
+  const aboutApplicationText =
+    '<b>Dietary Profile Editor</b> is designed for people who enjoy dining out but have specific dietary needs, such as food allergies. It allows you to save and manage your dietary preferences. What sets it apart is the option to use <b>Solid</b>, a technology that stores your data in a decentralized way, giving you full control over who can access it, ensuring a higher level of privacy.'
 
   function setLanguageContext(language: string) {
     if (language === 'English') {
@@ -67,18 +71,33 @@ const Login: React.FC = () => {
     <>
       <div>
         <Modal
-          show={showAboutModal}
-          onHide={() => setShowAboutModal(false)}
+          show={showAboutApplicationModal}
+          onHide={() => setShowAboutApplicationModal(false)}
           centered
         >
           <Modal.Header closeButton>
-            <Modal.Title>Modal heading</Modal.Title>
+            <Modal.Title>
+              <FormattedMessage
+                id="aboutApplicationTitle"
+                defaultMessage="About the application"
+              />
+            </Modal.Title>
           </Modal.Header>
-          <Modal.Body>Woohoo, you are reading this text in a modal!</Modal.Body>
+
+          <Modal.Body>
+            <FormattedMessage
+              id="aboutApplicationBody"
+              defaultMessage={aboutApplicationText}
+              values={{
+                b: (chunks) => <b>{chunks}</b>,
+              }}
+            />
+          </Modal.Body>
+
           <Modal.Footer>
             <Button
               className="secondary-button"
-              onClick={() => setShowAboutModal(false)}
+              onClick={() => setShowAboutApplicationModal(false)}
             >
               <FormattedMessage id="closeModal" defaultMessage="Close" />
             </Button>
@@ -112,7 +131,7 @@ const Login: React.FC = () => {
             <div className="position-absolute bottom-0 start-50 translate-middle-x mb-3">
               <span
                 className="clickable-text"
-                onClick={() => setShowAboutModal(true)}
+                onClick={() => setShowAboutApplicationModal(true)}
               >
                 <FormattedMessage
                   id="aboutTheApplication"
