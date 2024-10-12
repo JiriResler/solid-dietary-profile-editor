@@ -86,7 +86,7 @@ const SelectProvider: React.FC = () => {
   }
 
   /**
-   * Activates Google sign in flow.
+   * Activates the Google sign in flow.
    */
   function handleGoogleLogin() {
     setGoogleLoginInProgress(true)

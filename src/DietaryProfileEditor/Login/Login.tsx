@@ -16,6 +16,9 @@ import { Navigate } from 'react-router-dom'
 import { auth } from '../../firebase'
 import Stack from 'react-bootstrap/Stack'
 
+/**
+ * Displays the login screen and allows the user to switch application language.
+ */
 const Login: React.FC = () => {
   const { session: solidSession } = useSession()
 
@@ -31,6 +34,9 @@ const Login: React.FC = () => {
   const aboutApplicationText =
     '<b>Dietary Profile Editor</b> is designed for people who enjoy dining out but have specific dietary needs, such as food allergies. It allows you to save and manage your dietary preferences. What sets it apart is the option to use <b>Solid</b>, a technology that stores your data in a decentralized way, giving you full control over who can access it, ensuring a higher level of privacy.'
 
+  /**
+   * Sets the application language.
+   */
   function setLanguageContext(language: string) {
     if (language === 'English') {
       setSelectedLanguage('en')
@@ -47,6 +53,9 @@ const Login: React.FC = () => {
     return
   }
 
+  /**
+   * Returns full language name based on the provided locale.
+   */
   function languageFullName(locale: string) {
     if (locale === 'en') {
       return 'English'
