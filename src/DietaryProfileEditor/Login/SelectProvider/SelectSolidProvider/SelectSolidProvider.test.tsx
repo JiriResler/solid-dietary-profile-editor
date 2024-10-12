@@ -26,7 +26,15 @@ describe('SelectSolidProvider', () => {
     expect(redirectButton).toBeDisabled()
   })
 
-  //   test('Provider URL field should match selected provider', () => {})
+  test('Provider URL field should match selected provider', () => {
+    const providerSelect = screen.getByRole('combobox')
+
+    fireEvent.change(providerSelect, { target: { value: 'Data Pod' } })
+
+    const providerUrlTextField = screen.getByRole('textbox')
+
+    expect(providerUrlTextField).toHaveValue('https://datapod.igrant.io/')
+  })
 
   //   test("Typing a known provider's URL should change selected provider", () => {})
 
