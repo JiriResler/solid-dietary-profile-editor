@@ -99,9 +99,9 @@ const SelectSolidProvider: React.FC<SelectSolidProviderProps> = ({
   }
 
   /**
-   * Returns a string for the provider URL text input placeholder.
+   * Returns the placeholder for the Solid provider URL text input.
    */
-  function getProviderUrlPlaceholder() {
+  function getProviderUrlInputPlaceholder() {
     return intl.formatMessage({
       id: 'providerUrlPlaceholder',
       defaultMessage: 'Place a provider URL',
@@ -170,7 +170,7 @@ const SelectSolidProvider: React.FC<SelectSolidProviderProps> = ({
 
           <Form.Control
             type="text"
-            placeholder={getProviderUrlPlaceholder()}
+            placeholder={getProviderUrlInputPlaceholder()}
             value={providerUrl}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
               handleOnProviderUrlChange(e)
