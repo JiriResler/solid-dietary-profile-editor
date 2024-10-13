@@ -123,9 +123,7 @@ const messagesInSlovak: Messages = {
   providerUrlPlaceholder: 'Zadajte URL poskytovateľa',
   chooseSolidProvider: 'Zvoľte Solid poskytovateľa',
   goBack: 'Späť',
-  loginSolidErrorMessage: `
-      Prihlásenie bolo neúspešné. Možné dôvody sú: 
-
+  loginSolidErrorMessage: `Možné dôvody sú:
       1. Nie ste pripojení na internet.
       2. Zadaná URL poskytovateľa je nesprávna.
       3. Problém je na strane zvoleného Solid poskytovateľa.

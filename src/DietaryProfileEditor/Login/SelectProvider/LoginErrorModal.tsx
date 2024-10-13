@@ -1,6 +1,7 @@
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 import { FormattedMessage } from 'react-intl'
+import './LoginErrorModal.css'
 
 type LoginErrorModalProps = {
   show: boolean
@@ -27,7 +28,7 @@ const LoginErrorModal: React.FC<LoginErrorModalProps> = ({
         </Modal.Title>
       </Modal.Header>
 
-      <Modal.Body>{message}</Modal.Body>
+      <Modal.Body className="modal-body">{message}</Modal.Body>
 
       <Modal.Footer>
         <Button className="secondary-button" onClick={() => setShow(false)}>

@@ -85,10 +85,8 @@ const SelectSolidProvider: React.FC<SelectSolidProviderProps> = ({
     } else {
       errorMessage = intl.formatMessage({
         id: 'loginSolidErrorMessage',
-        defaultMessage: `
-        Login failed. Possible reasons include: 
-  
-        1. You are not connected to the internet.  
+        defaultMessage: `Possible reasons include:
+        1. You are not connected to the internet.
         2. The provider URL is incorrect.
         3. There may be an issue with the selected Solid provider.
       `,
