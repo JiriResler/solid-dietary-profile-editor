@@ -6,7 +6,7 @@ import { FormattedMessage, useIntl } from 'react-intl'
 import Stack from 'react-bootstrap/Stack'
 import { getKeyByValue } from './SelectSolidProviderHelpers'
 import Spinner from 'react-bootstrap/Spinner'
-import LoginErrorModal from '../LoginErrorModal'
+import LoginErrorModal from '../LoginErrorModal/LoginErrorModal'
 import Fade from '@mui/material/Fade'
 import { login } from '@inrupt/solid-client-authn-browser'
 

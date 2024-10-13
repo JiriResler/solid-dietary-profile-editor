@@ -14,7 +14,7 @@ import {
 import { useNavigate } from 'react-router-dom'
 import { useLogin } from 'react-facebook'
 import Spinner from 'react-bootstrap/Spinner'
-import LoginErrorModal from './LoginErrorModal'
+import LoginErrorModal from './LoginErrorModal/LoginErrorModal'
 import Fade from '@mui/material/Fade'
 
 /**
