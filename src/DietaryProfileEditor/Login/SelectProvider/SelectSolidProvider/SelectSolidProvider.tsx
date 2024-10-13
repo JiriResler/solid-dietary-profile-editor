@@ -6,7 +6,6 @@ import { FormattedMessage, useIntl } from 'react-intl'
 import Stack from 'react-bootstrap/Stack'
 import { getKeyByValue } from './SelectSolidProviderHelpers'
 import Spinner from 'react-bootstrap/Spinner'
-import { useSession } from '@inrupt/solid-ui-react'
 import LoginErrorModal from '../LoginErrorModal'
 import Fade from '@mui/material/Fade'
 import { login } from '@inrupt/solid-client-authn-browser'
@@ -22,13 +21,13 @@ type SelectSolidProviderProps = {
 const SelectSolidProvider: React.FC<SelectSolidProviderProps> = ({
   setLoginWithSolid,
 }) => {
-  const { sessionRequestInProgress } = useSession()
-
   const [selectedProviderName, setSelectedProviderName] = useState('')
 
   const [providerUrl, setProviderUrl] = useState('')
 
   const [loginCausedError, setLoginCausedError] = useState(false)
+
+  const [loginInProgress, setLoginInProgress] = useState(false)
 
   const [loginErrorMessage, setLoginErrorMessage] = useState('')
 
@@ -40,6 +39,21 @@ const SelectSolidProvider: React.FC<SelectSolidProviderProps> = ({
     'solidcommunity.net': 'https://solidcommunity.net/',
     'solidweb.org': 'https://solidweb.org/',
     'redpencil.io': 'https://solid.redpencil.io/',
+  }
+
+  function handleSolidLogin() {
+    setLoginInProgress(true)
+
+    login({
+      oidcIssuer: providerUrl,
+      redirectUrl: getRedirectUrl(),
+    })
+      .catch((error: Error) => {
+        handleOnLoginError(error)
+      })
+      .finally(() => {
+        setLoginInProgress(false)
+      })
   }
 
   /**
@@ -188,16 +202,11 @@ const SelectSolidProvider: React.FC<SelectSolidProviderProps> = ({
           />
 
           <Button
-            onClick={() => {
-              void login({
-                oidcIssuer: providerUrl,
-                redirectUrl: getRedirectUrl(),
-              })
-            }}
+            onClick={() => handleSolidLogin()}
             className="login-screen-button solid-button mt-2 w-100"
             disabled={providerUrl.length === 0}
           >
-            {!sessionRequestInProgress ? (
+            {!loginInProgress ? (
               <FormattedMessage
                 id="redirectToProvider"
                 defaultMessage="Redirect to provider"
