@@ -188,7 +188,7 @@ const SelectSolidProvider: React.FC<SelectSolidProviderProps> = ({
           />
 
           <Button
-            className="login-screen-button solid-button w-100 mt-2"
+            className="login-screen-button solid-button mt-2"
             disabled={providerUrl.length === 0}
           >
             <LoginButton
