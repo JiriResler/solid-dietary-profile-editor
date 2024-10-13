@@ -187,14 +187,14 @@ const SelectSolidProvider: React.FC<SelectSolidProviderProps> = ({
             }
           />
 
-          <Button
-            className="login-screen-button solid-button mt-2"
-            disabled={providerUrl.length === 0}
+          <LoginButton
+            oidcIssuer={providerUrl}
+            redirectUrl={getRedirectUrl()}
+            onError={(error) => handleOnLoginError(error)}
           >
-            <LoginButton
-              oidcIssuer={providerUrl}
-              redirectUrl={getRedirectUrl()}
-              onError={(error) => handleOnLoginError(error)}
+            <Button
+              className="login-screen-button solid-button mt-2 w-100"
+              disabled={providerUrl.length === 0}
             >
               {!sessionRequestInProgress ? (
                 <FormattedMessage
@@ -206,8 +206,8 @@ const SelectSolidProvider: React.FC<SelectSolidProviderProps> = ({
                   <span className="visually-hidden">Loading...</span>
                 </Spinner>
               )}
-            </LoginButton>
-          </Button>
+            </Button>
+          </LoginButton>
 
           <Button
             className="login-screen-button secondary-button w-100"
