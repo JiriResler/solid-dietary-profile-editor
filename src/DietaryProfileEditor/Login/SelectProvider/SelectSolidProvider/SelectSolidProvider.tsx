@@ -1,6 +1,5 @@
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
-import { LoginButton } from '@inrupt/solid-ui-react'
 import { useState } from 'react'
 import './SelectSolidProvider.css'
 import { FormattedMessage, useIntl } from 'react-intl'
@@ -10,6 +9,7 @@ import Spinner from 'react-bootstrap/Spinner'
 import { useSession } from '@inrupt/solid-ui-react'
 import LoginErrorModal from '../LoginErrorModal'
 import Fade from '@mui/material/Fade'
+import { login } from '@inrupt/solid-client-authn-browser'
 
 type SelectSolidProviderProps = {
   setLoginWithSolid: React.Dispatch<React.SetStateAction<boolean>>
@@ -187,27 +187,27 @@ const SelectSolidProvider: React.FC<SelectSolidProviderProps> = ({
             }
           />
 
-          <LoginButton
-            oidcIssuer={providerUrl}
-            redirectUrl={getRedirectUrl()}
-            onError={(error) => handleOnLoginError(error)}
+          <Button
+            onClick={() => {
+              void login({
+                oidcIssuer: providerUrl,
+                redirectUrl: getRedirectUrl(),
+              })
+            }}
+            className="login-screen-button solid-button mt-2 w-100"
+            disabled={providerUrl.length === 0}
           >
-            <Button
-              className="login-screen-button solid-button mt-2 w-100"
-              disabled={providerUrl.length === 0}
-            >
-              {!sessionRequestInProgress ? (
-                <FormattedMessage
-                  id="redirectToProvider"
-                  defaultMessage="Redirect to provider"
-                />
-              ) : (
-                <Spinner animation="border" role="status" size="sm">
-                  <span className="visually-hidden">Loading...</span>
-                </Spinner>
-              )}
-            </Button>
-          </LoginButton>
+            {!sessionRequestInProgress ? (
+              <FormattedMessage
+                id="redirectToProvider"
+                defaultMessage="Redirect to provider"
+              />
+            ) : (
+              <Spinner animation="border" role="status" size="sm">
+                <span className="visually-hidden">Loading...</span>
+              </Spinner>
+            )}
+          </Button>
 
           <Button
             className="login-screen-button secondary-button w-100"

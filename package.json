@@ -13,6 +13,7 @@
   "dependencies": {
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
+    "@inrupt/solid-client-authn-browser": "^2.2.6",
     "@inrupt/solid-ui-react": "^2.9.0",
     "@inrupt/vocab-common-rdf": "^1.0.5",
     "@mui/material": "^5.15.15",
