@@ -66,6 +66,7 @@ type Messages = {
   loginFailed: string
   aboutApplicationTitle: string
   aboutApplicationBody: string
+  loginSolidInvalidUrlErrorMessage: string
 }
 
 const messagesInSlovak: Messages = {
@@ -123,11 +124,11 @@ const messagesInSlovak: Messages = {
   chooseSolidProvider: 'Zvoľte Solid poskytovateľa',
   goBack: 'Späť',
   loginSolidErrorMessage: `
-      Prihlásenie sa nepodarilo. Možné dôvody sú: 
+      Prihlásenie bolo neúspešné. Možné dôvody sú: 
 
-      1. Nemáte pripojenie na internet.  
-      2. Zadaná URL poskytovateľa Solid nie je správna.
-      3. Problém je na strane poskytovateľa Solid.
+      1. Nie ste pripojení na internet.
+      2. Zadaná URL poskytovateľa je nesprávna.
+      3. Problém je na strane zvoleného Solid poskytovateľa.
     `,
   emptyUrlAlert: 'Vyberte poskytovateľa alebo zadajte poskytovateľovu URL.',
   solidDescription: `
@@ -142,6 +143,7 @@ const messagesInSlovak: Messages = {
   aboutApplicationTitle: 'O aplikácii',
   aboutApplicationBody:
     '<b>Editor diétneho profilu</b> slúži pre ľudí ktorí radi jedia v reštauráciách a sú obmedzovaní alergiami alebo majú iné jedálne preferencie. Aplikácia vám umožňuje uložiť a spravovať váš diétny profil. Výnimočná je v tom, že umožňuje použiť technológiu <b>Solid</b>, a tým pádom budú vaše dáta uložené decentralizovaným spôsobom a budete mať kontrolu nad tým kto ich môže vidieť, čo zaručí vyššiu mieru súkromia.',
+  loginSolidInvalidUrlErrorMessage: 'Zadaná URL adresa je neplatná.',
 }
 
 // const cs_messages: Messages = {

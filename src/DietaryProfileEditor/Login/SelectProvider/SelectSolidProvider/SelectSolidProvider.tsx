@@ -58,19 +58,28 @@ const SelectSolidProvider: React.FC<SelectSolidProviderProps> = ({
   /**
    * Logs the login error to the console and informs the user that something went wrong while trying to log in vith a Solid provider.
    */
-  function handleOnLoginError(error: Error) {
-    console.error(error)
+  function handleOnLoginError(loginError: Error) {
+    console.error(loginError)
 
-    const errorMessage = intl.formatMessage({
-      id: 'loginSolidErrorMessage',
-      defaultMessage: `
-      Login failed. Possible reasons include: 
+    let errorMessage
 
-      1. You are not connected to the internet.  
-      2. The Solid provider URL is invalid or incorrect.
-      3. There may be an issue with the Solid provider.
-    `,
-    })
+    if (loginError.message.includes('is not a valid URL')) {
+      errorMessage = intl.formatMessage({
+        id: 'loginSolidInvalidUrlErrorMessage',
+        defaultMessage: 'The provider URL is not valid.',
+      })
+    } else {
+      errorMessage = intl.formatMessage({
+        id: 'loginSolidErrorMessage',
+        defaultMessage: `
+        Login failed. Possible reasons include: 
+  
+        1. You are not connected to the internet.  
+        2. The provider URL is incorrect.
+        3. There may be an issue with the selected Solid provider.
+      `,
+      })
+    }
 
     setLoginErrorMessage(errorMessage)
     setLoginCausedError(true)
@@ -137,6 +146,7 @@ const SelectSolidProvider: React.FC<SelectSolidProviderProps> = ({
         setShow={setLoginCausedError}
         message={loginErrorMessage}
       />
+
       <Fade in={true} timeout={500}>
         <Stack
           gap={3}
