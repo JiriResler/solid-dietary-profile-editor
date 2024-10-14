@@ -9,13 +9,13 @@ import { doc, getDoc } from 'firebase/firestore'
 import { db, auth } from '../../firebase'
 import Card from 'react-bootstrap/Card'
 import Stack from 'react-bootstrap/Stack'
-import getPodUrl from '../getPodUrl'
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 import Container from 'react-bootstrap/Container'
 import Dropdown from 'react-bootstrap/Dropdown'
 import { signOut } from 'firebase/auth'
 import { FormattedMessage } from 'react-intl'
+import { getPodUrlAll } from '@inrupt/solid-client'
 
 type UserProfile = {
   allergicTo: string[]
@@ -84,9 +84,29 @@ const Profile: React.FC<Props> = ({ loginMethod }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
+  async function getPodUrl() {
+    if (session.info.webId === undefined) {
+      return
+    }
+
+    const userWebID: string = session.info.webId
+
+    const podUrls = await getPodUrlAll(userWebID, {
+      fetch: fetch,
+    }).catch((error: Error) => console.log(error.message))
+
+    if (podUrls === undefined) {
+      throw new Error('Array with pod URLs is undefined')
+    }
+
+    const firstPodUrl = podUrls[0]
+
+    return firstPodUrl
+  }
+
   async function loadUserProfile() {
     if (loginMethod === LoginMethod.SOLID) {
-      const podUrl = await getPodUrl(session)
+      const podUrl = await getPodUrl()
 
       const profileLocation = 'eatingPreferencesProfile/profile'
 
@@ -94,7 +114,7 @@ const Profile: React.FC<Props> = ({ loginMethod }) => {
 
       // todo If profile not found, ...
       const profileDataset = await getSolidDataset(profileUrl, {
-        fetch: fetch as undefined,
+        fetch: fetch,
       })
 
       const userThing = getThing(profileDataset, profileUrl + '#me')
@@ -160,7 +180,7 @@ const Profile: React.FC<Props> = ({ loginMethod }) => {
       setUserProfile(userProfile.data() as UserProfile)
     }
 
-    const profilePodUrl = await getPodUrl(session)
+    const profilePodUrl = await getPodUrl()
 
     // todo: throw error
     if (profilePodUrl === undefined) {
