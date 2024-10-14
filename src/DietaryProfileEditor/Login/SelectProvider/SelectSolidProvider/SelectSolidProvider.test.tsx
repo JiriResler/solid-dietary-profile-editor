@@ -14,6 +14,28 @@ describe('SelectSolidProvider', () => {
     )
   })
 
+  test('Provider URL field should match selected provider', () => {
+    const providerSelect = screen.getByRole('combobox')
+
+    fireEvent.change(providerSelect, { target: { value: 'Data Pod' } })
+
+    const providerUrlTextField = screen.getByRole('textbox')
+
+    expect(providerUrlTextField).toHaveValue('https://datapod.igrant.io/')
+  })
+
+  test("Typing a known provider's URL should change selected provider", () => {
+    const providerUrlTextField = screen.getByRole('textbox')
+
+    fireEvent.change(providerUrlTextField, {
+      target: { value: 'https://login.inrupt.com/' },
+    })
+
+    const providerSelect = screen.getByRole('combobox')
+
+    expect(providerSelect).toHaveValue('Inrupt Pod Spaces')
+  })
+
   test('Provider redirect button should be disabled when provider URL input field is empty', () => {
     const providerUrlTextField = screen.getByRole('textbox')
 
@@ -26,17 +48,15 @@ describe('SelectSolidProvider', () => {
     expect(redirectButton).toBeDisabled()
   })
 
-  test('Provider URL field should match selected provider', () => {
+  test('Changing a known provider URL removes selected provider', () => {
     const providerSelect = screen.getByRole('combobox')
 
     fireEvent.change(providerSelect, { target: { value: 'Data Pod' } })
 
     const providerUrlTextField = screen.getByRole('textbox')
 
-    expect(providerUrlTextField).toHaveValue('https://datapod.igrant.io/')
+    fireEvent.change(providerUrlTextField, { target: { value: '' } })
+
+    expect(providerSelect).toHaveValue('Choose a Solid provider')
   })
-
-  //   test("Typing a known provider's URL should change selected provider", () => {})
-
-  //   test('Changing a known provider URL removes selected provider', () => {})
 })
