@@ -1,8 +1,8 @@
-.select-provider-stack {
+.select-login-method-stack {
   width: 250px;
 }
 
-.select-provider-heading {
+.select-login-method-heading {
   font-size: large;
   font-weight: 500;
 }
@@ -10,11 +10,6 @@
 .login-screen-button {
   height: 50px;
   border-radius: 12px;
-}
-
-.provider-button {
-  display: flex;
-  align-items: center;
 }
 
 .provider-icon {
@@ -57,7 +52,7 @@
 }
 
 
-.providers-divider {
+.login-screen-divider {
   width: 100%;
   text-align: center;
   border-bottom: 1px solid black;
@@ -65,14 +60,9 @@
   margin: 10px 0 20px;
 }
 
-.providers-divider span {
+.login-screen-divider span {
   background: white;
   padding: 0 25px;
-}
-
-.more-providers {
-  width: 175pt;
-  animation: fade-in 1s;
 }
 
 .facebook-button {

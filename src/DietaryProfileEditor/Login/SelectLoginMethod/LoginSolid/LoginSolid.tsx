@@ -162,9 +162,9 @@ const LoginSolid: React.FC<SelectSolidProviderProps> = ({
       <Fade in={true} timeout={500}>
         <Stack
           gap={3}
-          className="select-provider-stack position-absolute top-50 start-50 translate-middle text-center pb-1"
+          className="select-login-method-stack position-absolute top-50 start-50 translate-middle text-center pb-1"
         >
-          <span className="select-provider-heading">
+          <span className="select-login-method-heading">
             <FormattedMessage
               id="selectASolidProvider"
               defaultMessage="Select a Solid provider"
