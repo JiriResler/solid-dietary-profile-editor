@@ -41,6 +41,22 @@
   height: 33px;
 }
 
+.email-and-password-button {
+  background-color: #252323;
+  border-color: #252323;
+}
+
+.email-and-password-button:hover {
+  background-color: #302d2d;
+  border-color: #302d2d;
+}
+
+.email-and-password-button:active {
+  background-color: #252323 !important;
+  border-color: #252323 !important;
+}
+
+
 .providers-divider {
   width: 100%;
   text-align: center;

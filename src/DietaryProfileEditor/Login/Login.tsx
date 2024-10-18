@@ -105,7 +105,7 @@ const Login: React.FC = () => {
 
           <Modal.Footer>
             <Button
-              className="secondary-button"
+              variant="secondary"
               onClick={() => setShowAboutApplicationModal(false)}
             >
               <FormattedMessage id="closeModal" defaultMessage="Close" />

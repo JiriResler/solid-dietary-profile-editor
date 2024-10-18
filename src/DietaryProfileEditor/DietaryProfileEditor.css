@@ -1,18 +1,3 @@
-.secondary-button {
-  background-color: #252323;
-  border-color: #252323;
-}
-
-.secondary-button:hover {
-  background-color: #302d2d;
-  border-color: #302d2d;
-}
-
-.secondary-button:active {
-  background-color: #252323 !important;
-  border-color: #252323 !important;
-}
-
 .warning-icon {
   height: 50px;
 }

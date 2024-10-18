@@ -31,7 +31,7 @@ const LoginErrorModal: React.FC<LoginErrorModalProps> = ({
       <Modal.Body className="modal-body">{message}</Modal.Body>
 
       <Modal.Footer>
-        <Button className="secondary-button" onClick={() => setShow(false)}>
+        <Button variant="secondary" onClick={() => setShow(false)}>
           Close
         </Button>
       </Modal.Footer>

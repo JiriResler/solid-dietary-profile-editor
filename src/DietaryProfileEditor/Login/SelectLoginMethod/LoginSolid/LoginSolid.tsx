@@ -217,7 +217,8 @@ const LoginSolid: React.FC<SelectSolidProviderProps> = ({
           </Button>
 
           <Button
-            className="login-screen-button secondary-button w-100"
+            className="login-screen-button w-100"
+            variant="secondary"
             onClick={() => {
               setLoginWithSolid(false)
             }}

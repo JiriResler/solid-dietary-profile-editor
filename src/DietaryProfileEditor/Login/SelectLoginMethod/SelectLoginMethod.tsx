@@ -138,7 +138,7 @@ const SelectLoginMethod: React.FC = () => {
           <br />
           <div className="mt-3 text-end">
             <Button
-              className="secondary-button"
+              variant="secondary"
               onClick={() => {
                 setShowAboutSolidModal(false)
               }}
@@ -205,7 +205,12 @@ const SelectLoginMethod: React.FC = () => {
             </span>
           </div>
 
-          <Button>Email and password</Button>
+          <Button className="login-screen-button email-and-password-button">
+            <FormattedMessage
+              id="emailAndPassword"
+              defaultMessage="Email and password"
+            />
+          </Button>
 
           <Button
             onClick={() => void handleFacebookLogin()}

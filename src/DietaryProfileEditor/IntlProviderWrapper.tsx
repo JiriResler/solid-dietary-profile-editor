@@ -67,6 +67,7 @@ type Messages = {
   aboutApplicationTitle: string
   aboutApplicationBody: string
   loginSolidInvalidUrlErrorMessage: string
+  emailAndPassword: string
 }
 
 const messagesInSlovak: Messages = {
@@ -142,6 +143,7 @@ const messagesInSlovak: Messages = {
   aboutApplicationBody:
     '<b>Editor diétneho profilu</b> slúži pre ľudí ktorí radi jedia v reštauráciách a sú obmedzovaní alergiami alebo majú iné jedálne preferencie. Aplikácia vám umožňuje uložiť a spravovať váš diétny profil. Výnimočná je v tom, že umožňuje použiť technológiu <b>Solid</b>, a tým pádom budú vaše dáta uložené decentralizovaným spôsobom a budete mať kontrolu nad tým kto ich môže vidieť, čo zaručí vyššiu mieru súkromia.',
   loginSolidInvalidUrlErrorMessage: 'Zadaná URL adresa je neplatná.',
+  emailAndPassword: 'Email a heslo',
 }
 
 // const cs_messages: Messages = {
