@@ -1,8 +1,8 @@
 import Button from 'react-bootstrap/Button'
 import Modal from 'react-bootstrap/Modal'
-import SelectSolidProvider from './SelectSolidProvider/SelectSolidProvider'
+import LoginSolid from './LoginSolid/LoginSolid'
 import { useState } from 'react'
-import './SelectProvider.css'
+import './SelectLoginMethod.css'
 import { FormattedMessage, useIntl } from 'react-intl'
 import Stack from 'react-bootstrap/Stack'
 import { auth, google } from '../../../firebase'
@@ -20,7 +20,7 @@ import Fade from '@mui/material/Fade'
 /**
  * Allows the user to select an identity provider to sign in with and triggers the authentication process.
  */
-const SelectProvider: React.FC = () => {
+const SelectLoginMethod: React.FC = () => {
   const [loginWithSolid, setLoginWithSolid] = useState(false)
 
   const [showAboutSolidModal, setShowAboutSolidModal] = useState(false)
@@ -109,7 +109,7 @@ const SelectProvider: React.FC = () => {
   }
 
   if (loginWithSolid) {
-    return <SelectSolidProvider setLoginWithSolid={setLoginWithSolid} />
+    return <LoginSolid setLoginWithSolid={setLoginWithSolid} />
   }
 
   return (
@@ -162,8 +162,8 @@ const SelectProvider: React.FC = () => {
         >
           <span className="select-provider-heading">
             <FormattedMessage
-              id="selectIdentityProvider"
-              defaultMessage="Select an identity provider"
+              id="selectSignInMethod"
+              defaultMessage="Select a sign in method"
             />
           </span>
 
@@ -204,6 +204,8 @@ const SelectProvider: React.FC = () => {
               <FormattedMessage id="signInDivider" defaultMessage="or" />
             </span>
           </div>
+
+          <Button>Email and password</Button>
 
           <Button
             onClick={() => void handleFacebookLogin()}
@@ -262,4 +264,4 @@ const SelectProvider: React.FC = () => {
   )
 }
 
-export default SelectProvider
+export default SelectLoginMethod

@@ -1,15 +1,15 @@
 import { beforeEach, describe, expect, test, vi } from 'vitest'
 import { render, screen, fireEvent } from '@testing-library/react'
-import SelectSolidProvider from './SelectSolidProvider'
+import LoginSolid from './LoginSolid'
 import { IntlProvider } from 'react-intl'
 
-describe('SelectSolidProvider', () => {
+describe('LoginSolid', () => {
   const propFnMock = vi.fn()
 
   beforeEach(() => {
     render(
       <IntlProvider locale="en">
-        <SelectSolidProvider setLoginWithSolid={propFnMock} />
+        <LoginSolid setLoginWithSolid={propFnMock} />
       </IntlProvider>,
     )
   })

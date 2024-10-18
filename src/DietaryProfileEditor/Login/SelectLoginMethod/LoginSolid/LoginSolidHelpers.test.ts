@@ -1,7 +1,7 @@
 import { describe, test, expect, beforeEach } from 'vitest'
-import { getKeyByValue } from './SelectSolidProviderHelpers'
+import { getKeyByValue } from './LoginSolidHelpers'
 
-describe('SelectSolidProviderHelper functions', () => {
+describe('LoginSolidHelper functions', () => {
   let obj: object
 
   beforeEach(() => {

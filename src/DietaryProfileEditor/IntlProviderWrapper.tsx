@@ -5,7 +5,7 @@ import { PropsWithChildren } from 'react'
 
 type Messages = {
   manageYourProfileLoginScreenHeading: string
-  selectIdentityProvider: string
+  selectSignInMethod: string
   signInWithSolid: string
   whatIsSolid: string
   signInDivider: string
@@ -71,7 +71,7 @@ type Messages = {
 
 const messagesInSlovak: Messages = {
   manageYourProfileLoginScreenHeading: 'Spravujte svoje jedálne preferencie',
-  selectIdentityProvider: 'Vyberte spôsob prihlásenia',
+  selectSignInMethod: 'Vyberte spôsob prihlásenia',
   signInWithSolid: 'Solid',
   whatIsSolid: 'Čo je to Solid?',
   signInDivider: 'alebo',

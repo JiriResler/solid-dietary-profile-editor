@@ -2,7 +2,7 @@ import { useContext } from 'react'
 import Form from 'react-bootstrap/Form'
 import LanguageContext from '../LanguageContext'
 import './Login.css'
-import SelectProvider from './SelectProvider/SelectProvider'
+import SelectLoginMethod from './SelectLoginMethod/SelectLoginMethod'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Card from 'react-bootstrap/Card'
@@ -171,7 +171,7 @@ const Login: React.FC = () => {
           <Col md={5} className="select-provider-login-col position-relative">
             <Card className="select-provider-card position-absolute top-50 start-50 translate-middle">
               <Card.Body>
-                <SelectProvider />
+                <SelectLoginMethod />
               </Card.Body>
             </Card>
           </Col>
@@ -179,7 +179,7 @@ const Login: React.FC = () => {
       </div>
 
       <div className="d-lg-none">
-        <SelectProvider />
+        <SelectLoginMethod />
       </div>
 
       <div className="position-absolute bottom-0 start-0 ms-3 mb-3">

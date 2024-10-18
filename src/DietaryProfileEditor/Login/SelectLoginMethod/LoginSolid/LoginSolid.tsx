@@ -1,10 +1,10 @@
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 import { useState } from 'react'
-import './SelectSolidProvider.css'
+import './LoginSolid.css'
 import { FormattedMessage, useIntl } from 'react-intl'
 import Stack from 'react-bootstrap/Stack'
-import { getKeyByValue } from './SelectSolidProviderHelpers'
+import { getKeyByValue } from './LoginSolidHelpers'
 import Spinner from 'react-bootstrap/Spinner'
 import LoginErrorModal from '../LoginErrorModal/LoginErrorModal'
 import Fade from '@mui/material/Fade'
@@ -18,7 +18,7 @@ type SelectSolidProviderProps = {
  * Enables a user to log in via Solid. Contains controls for selecting a Solid provider and a Login button for redirecting to the provider.
  * @param setLoginWithSolid A function for setting a state variable indicating whether a user wishes to log in vith Solid.
  */
-const SelectSolidProvider: React.FC<SelectSolidProviderProps> = ({
+const LoginSolid: React.FC<SelectSolidProviderProps> = ({
   setLoginWithSolid,
 }) => {
   const [selectedProviderName, setSelectedProviderName] = useState('')
@@ -230,4 +230,4 @@ const SelectSolidProvider: React.FC<SelectSolidProviderProps> = ({
   )
 }
 
-export default SelectSolidProvider
+export default LoginSolid
