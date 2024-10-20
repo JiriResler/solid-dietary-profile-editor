@@ -10,7 +10,7 @@ import LoginErrorModal from '../LoginErrorModal/LoginErrorModal'
 import Fade from '@mui/material/Fade'
 import { login } from '@inrupt/solid-client-authn-browser'
 
-type SelectSolidProviderProps = {
+type LoginSolidProps = {
   setLoginWithSolid: React.Dispatch<React.SetStateAction<boolean>>
 }
 
@@ -18,9 +18,7 @@ type SelectSolidProviderProps = {
  * Enables a user to log in via Solid. Contains controls for selecting a Solid provider and a Login button for redirecting to the provider.
  * @param setLoginWithSolid A function for setting a state variable indicating whether a user wishes to log in vith Solid.
  */
-const LoginSolid: React.FC<SelectSolidProviderProps> = ({
-  setLoginWithSolid,
-}) => {
+const LoginSolid: React.FC<LoginSolidProps> = ({ setLoginWithSolid }) => {
   const [selectedProviderName, setSelectedProviderName] = useState('')
 
   const [providerUrl, setProviderUrl] = useState('')

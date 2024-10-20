@@ -16,12 +16,16 @@ import { useLogin } from 'react-facebook'
 import Spinner from 'react-bootstrap/Spinner'
 import LoginErrorModal from './LoginErrorModal/LoginErrorModal'
 import Fade from '@mui/material/Fade'
+import LoginEmailAndPassword from './LoginEmailAndPassword/LoginEmailAndPassword'
 
 /**
  * Allows the user to select an identity provider to sign in with and triggers the authentication process.
  */
 const SelectLoginMethod: React.FC = () => {
   const [loginWithSolid, setLoginWithSolid] = useState(false)
+
+  const [loginWithEmailAndPassword, setLoginWithEmailAndPassword] =
+    useState(false)
 
   const [showAboutSolidModal, setShowAboutSolidModal] = useState(false)
 
@@ -110,6 +114,14 @@ const SelectLoginMethod: React.FC = () => {
 
   if (loginWithSolid) {
     return <LoginSolid setLoginWithSolid={setLoginWithSolid} />
+  }
+
+  if (loginWithEmailAndPassword) {
+    return (
+      <LoginEmailAndPassword
+        setLoginWithEmailAndPassword={setLoginWithEmailAndPassword}
+      />
+    )
   }
 
   return (
@@ -205,7 +217,10 @@ const SelectLoginMethod: React.FC = () => {
             </span>
           </div>
 
-          <Button className="login-screen-button email-and-password-button">
+          <Button
+            className="login-screen-button email-and-password-button"
+            onClick={() => setLoginWithEmailAndPassword(true)}
+          >
             <FormattedMessage
               id="emailAndPassword"
               defaultMessage="Email and password"
