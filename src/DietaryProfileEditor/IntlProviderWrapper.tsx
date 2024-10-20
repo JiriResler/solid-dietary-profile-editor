@@ -70,6 +70,7 @@ type Messages = {
   emailAndPassword: string
   loginWithEmail: string
   password: string
+  signIn: string
 }
 
 const messagesInSlovak: Messages = {
@@ -148,6 +149,7 @@ const messagesInSlovak: Messages = {
   emailAndPassword: 'Email a heslo',
   loginWithEmail: 'Prihláste sa pomocou emailu',
   password: 'Heslo',
+  signIn: 'Prihlásiť sa',
 }
 
 // const cs_messages: Messages = {

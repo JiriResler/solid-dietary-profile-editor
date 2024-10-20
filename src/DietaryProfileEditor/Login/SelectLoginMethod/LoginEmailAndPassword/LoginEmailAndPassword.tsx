@@ -60,7 +60,9 @@ const LoginEmailAndPassword: React.FC<LoginEmailAndPasswordProps> = ({
           }}
         />
 
-        <Button>Login</Button>
+        <Button className="login-screen-button email-and-password-button">
+          <FormattedMessage id="signIn" defaultMessage="Sign in" />
+        </Button>
         <Button
           className="login-screen-button w-100"
           variant="secondary"
