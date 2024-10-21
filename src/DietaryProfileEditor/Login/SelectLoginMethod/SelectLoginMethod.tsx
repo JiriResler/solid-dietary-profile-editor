@@ -19,7 +19,7 @@ import Fade from '@mui/material/Fade'
 import LoginEmailAndPassword from './LoginEmailAndPassword/LoginEmailAndPassword'
 
 /**
- * Allows the user to select an identity provider to sign in with and triggers the authentication process.
+ * Allows the user to choose which authentication method to sign in with.
  */
 const SelectLoginMethod: React.FC = () => {
   const [loginWithSolid, setLoginWithSolid] = useState(false)

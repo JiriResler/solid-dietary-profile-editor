@@ -10,6 +10,10 @@ type LoginEmailAndPasswordProps = {
   setLoginWithEmailAndPassword: React.Dispatch<React.SetStateAction<boolean>>
 }
 
+/**
+ * Enables a user to sign in or sign up using their email and password.
+ * @param setLoginWithEmailAndPassword A function for setting the state variable for switching content on the login screen.
+ */
 const LoginEmailAndPassword: React.FC<LoginEmailAndPasswordProps> = ({
   setLoginWithEmailAndPassword,
 }) => {
