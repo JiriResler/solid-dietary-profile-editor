@@ -5,6 +5,7 @@ import React from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 import Fade from '@mui/material/Fade'
 import Stack from 'react-bootstrap/Stack'
+import './LoginEmailAndPassword.css'
 
 type LoginEmailAndPasswordProps = {
   setLoginWithEmailAndPassword: React.Dispatch<React.SetStateAction<boolean>>
@@ -67,6 +68,14 @@ const LoginEmailAndPassword: React.FC<LoginEmailAndPasswordProps> = ({
         <Button className="login-screen-button email-and-password-button">
           <FormattedMessage id="signIn" defaultMessage="Sign in" />
         </Button>
+
+        <span className="create-account-span mx-auto">
+          <FormattedMessage
+            id="createAccount"
+            defaultMessage="Create an account"
+          />
+        </span>
+
         <Button
           className="login-screen-button w-100"
           variant="secondary"

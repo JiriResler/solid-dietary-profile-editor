@@ -71,6 +71,7 @@ type Messages = {
   loginWithEmail: string
   password: string
   signIn: string
+  createAccount: string
 }
 
 const messagesInSlovak: Messages = {
@@ -150,6 +151,7 @@ const messagesInSlovak: Messages = {
   loginWithEmail: 'Prihláste sa pomocou emailu',
   password: 'Heslo',
   signIn: 'Prihlásiť sa',
+  createAccount: 'Vytvoriť účet',
 }
 
 // const cs_messages: Messages = {
