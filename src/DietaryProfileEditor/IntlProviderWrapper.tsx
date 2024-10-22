@@ -71,6 +71,7 @@ type Messages = {
   loginWithEmail: string
   password: string
   signIn: string
+  newAccount: string
   createAccount: string
 }
 
@@ -151,6 +152,7 @@ const messagesInSlovak: Messages = {
   loginWithEmail: 'Prihláste sa pomocou emailu',
   password: 'Heslo',
   signIn: 'Prihlásiť sa',
+  newAccount: 'Ak ste noví, je taktiež možné',
   createAccount: 'Vytvoriť účet',
 }
 

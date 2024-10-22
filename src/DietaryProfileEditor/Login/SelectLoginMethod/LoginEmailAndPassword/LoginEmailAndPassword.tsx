@@ -69,12 +69,21 @@ const LoginEmailAndPassword: React.FC<LoginEmailAndPasswordProps> = ({
           <FormattedMessage id="signIn" defaultMessage="Sign in" />
         </Button>
 
-        <span className="create-account-span mx-auto">
-          <FormattedMessage
-            id="createAccount"
-            defaultMessage="Create an account"
-          />
-        </span>
+        <div>
+          <span>
+            <FormattedMessage
+              id="newAccount"
+              defaultMessage="If you are new, you can also"
+            />
+          </span>
+          <br />
+          <span className="create-account-span mx-auto">
+            <FormattedMessage
+              id="createAccount"
+              defaultMessage="Create an account"
+            />
+          </span>
+        </div>
 
         <Button
           className="login-screen-button w-100"
