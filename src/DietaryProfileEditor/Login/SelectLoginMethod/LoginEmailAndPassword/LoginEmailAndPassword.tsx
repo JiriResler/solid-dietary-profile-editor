@@ -6,6 +6,7 @@ import { FormattedMessage, useIntl } from 'react-intl'
 import Fade from '@mui/material/Fade'
 import Stack from 'react-bootstrap/Stack'
 import './LoginEmailAndPassword.css'
+import CreateEmailAccount from './CreateEmailAccount/CreateEmailAccount'
 
 type LoginEmailAndPasswordProps = {
   setLoginWithEmailAndPassword: React.Dispatch<React.SetStateAction<boolean>>
@@ -22,6 +23,8 @@ const LoginEmailAndPassword: React.FC<LoginEmailAndPasswordProps> = ({
 
   const [loginPassword, setLoginPassword] = useState('')
 
+  const [createNewAccount, setCreateNewAccount] = useState(false)
+
   const intl = useIntl()
 
   /**
@@ -32,6 +35,10 @@ const LoginEmailAndPassword: React.FC<LoginEmailAndPasswordProps> = ({
       id: 'password',
       defaultMessage: 'Password',
     })
+  }
+
+  if (createNewAccount) {
+    return <CreateEmailAccount setCreateNewAccount={setCreateNewAccount} />
   }
 
   return (
@@ -77,7 +84,10 @@ const LoginEmailAndPassword: React.FC<LoginEmailAndPasswordProps> = ({
             />
           </span>
           <br />
-          <span className="create-account-span mx-auto">
+          <span
+            className="create-account-span mx-auto"
+            onClick={() => setCreateNewAccount(true)}
+          >
             <FormattedMessage
               id="createAccount"
               defaultMessage="Create an account"
