@@ -23,12 +23,72 @@ const CreateEmailAccount: React.FC<CreateEmailAccountProps> = ({
 
   const [repeatNewPassword, setRepeatNewPassword] = useState('')
 
+  const intl = useIntl()
+
+  /**
+   * Returns the placeholder for the new user password input.
+   */
+  function getNewPasswordInputPlaceholder() {
+    return intl.formatMessage({
+      id: 'password',
+      defaultMessage: 'Password',
+    })
+  }
+
+  /**
+   * Returns the placeholder for the repeat user password input.
+   */
+  function getRepeatPasswordInputPlaceholder() {
+    return intl.formatMessage({
+      id: 'repeatPassword',
+      defaultMessage: 'Repeat password',
+    })
+  }
+
   return (
     <Fade in={true} timeout={500}>
       <Stack
         gap={3}
         className="select-login-method-stack position-absolute top-50 start-50 translate-middle text-center pb-1"
       >
+        <span className="select-login-method-heading">
+          <FormattedMessage
+            id="createYourAccount"
+            defaultMessage="Create a new account"
+          />
+        </span>
+
+        <Form.Control
+          type="text"
+          placeholder={'Email'}
+          value={userEmail}
+          onChange={(e) => {
+            setUserEmail(e.target.value)
+          }}
+        />
+
+        <Form.Control
+          type="password"
+          placeholder={getNewPasswordInputPlaceholder()}
+          value={newPassword}
+          onChange={(e) => {
+            setNewPassword(e.target.value)
+          }}
+        />
+
+        <Form.Control
+          type="password"
+          placeholder={getRepeatPasswordInputPlaceholder()}
+          value={repeatNewPassword}
+          onChange={(e) => {
+            setRepeatNewPassword(e.target.value)
+          }}
+        />
+
+        <Button className="login-screen-button email-and-password-button">
+          <FormattedMessage id="signUp" defaultMessage="Sign up" />
+        </Button>
+
         <Button
           className="login-screen-button w-100"
           variant="secondary"
