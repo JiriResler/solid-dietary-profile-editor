@@ -5,6 +5,7 @@ import React from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 import Fade from '@mui/material/Fade'
 import Stack from 'react-bootstrap/Stack'
+import LoginBackButton from '../../LoginBackButton/LoginBackButton'
 
 type CreateEmailAccountProps = {
   setCreateNewAccount: React.Dispatch<React.SetStateAction<boolean>>
@@ -51,6 +52,8 @@ const CreateEmailAccount: React.FC<CreateEmailAccountProps> = ({
         gap={3}
         className="select-login-method-stack position-absolute top-50 start-50 translate-middle text-center pb-1"
       >
+        <LoginBackButton setParentComponentScreenState={setCreateNewAccount} />
+
         <span className="select-login-method-heading">
           <FormattedMessage
             id="createYourAccount"
@@ -87,16 +90,6 @@ const CreateEmailAccount: React.FC<CreateEmailAccountProps> = ({
 
         <Button className="login-screen-button email-and-password-button">
           <FormattedMessage id="signUp" defaultMessage="Sign up" />
-        </Button>
-
-        <Button
-          className="login-screen-button w-100"
-          variant="secondary"
-          onClick={() => {
-            setCreateNewAccount(false)
-          }}
-        >
-          <FormattedMessage id="goBack" defaultMessage="Back" />
         </Button>
       </Stack>
     </Fade>
