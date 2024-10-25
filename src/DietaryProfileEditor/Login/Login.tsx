@@ -168,8 +168,8 @@ const Login: React.FC = () => {
             </div>
           </Col>
 
-          <Col md={5} className="select-provider-login-col position-relative">
-            <Card className="select-provider-card position-absolute top-50 start-50 translate-middle">
+          <Col md={5} className="choose-sign-in-method-col position-relative">
+            <Card className="choose-sign-in-method-card position-absolute top-50 start-50 translate-middle">
               <Card.Body>
                 <SelectLoginMethod />
               </Card.Body>

@@ -5,16 +5,16 @@
   margin-right: auto;
 }
 
-.select-provider-card {
+.choose-sign-in-method-card {
   width: 320px;
-  height: 365px;
+  height: 425px;
 }
 
 .login-screen-row {
   height: 100dvh;
 }
 
-.select-provider-login-col {
+.choose-sign-in-method-col {
   background-color: #2541b2;
 }
 
