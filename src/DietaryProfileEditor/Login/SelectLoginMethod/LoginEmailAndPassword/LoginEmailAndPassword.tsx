@@ -7,6 +7,7 @@ import Fade from '@mui/material/Fade'
 import Stack from 'react-bootstrap/Stack'
 import './LoginEmailAndPassword.css'
 import CreateEmailAccount from './CreateEmailAccount/CreateEmailAccount'
+import LoginBackButton from '../LoginBackButton/LoginBackButton'
 
 type LoginEmailAndPasswordProps = {
   setLoginWithEmailAndPassword: React.Dispatch<React.SetStateAction<boolean>>
@@ -47,6 +48,10 @@ const LoginEmailAndPassword: React.FC<LoginEmailAndPasswordProps> = ({
         gap={3}
         className="select-login-method-stack position-absolute top-50 start-50 translate-middle text-center pb-1"
       >
+        <LoginBackButton
+          setParentComponentScreenState={setLoginWithEmailAndPassword}
+        />
+
         <span className="select-login-method-heading">
           <FormattedMessage
             id="loginWithEmail"
@@ -94,16 +99,6 @@ const LoginEmailAndPassword: React.FC<LoginEmailAndPasswordProps> = ({
             />
           </span>
         </div>
-
-        <Button
-          className="login-screen-button w-100"
-          variant="secondary"
-          onClick={() => {
-            setLoginWithEmailAndPassword(false)
-          }}
-        >
-          <FormattedMessage id="goBack" defaultMessage="Back" />
-        </Button>
       </Stack>
     </Fade>
   )

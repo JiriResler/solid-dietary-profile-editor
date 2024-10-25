@@ -9,6 +9,7 @@ import Spinner from 'react-bootstrap/Spinner'
 import LoginErrorModal from '../LoginErrorModal/LoginErrorModal'
 import Fade from '@mui/material/Fade'
 import { login } from '@inrupt/solid-client-authn-browser'
+import LoginBackButton from '../LoginBackButton/LoginBackButton'
 
 type LoginSolidProps = {
   setLoginWithSolid: React.Dispatch<React.SetStateAction<boolean>>
@@ -162,6 +163,8 @@ const LoginSolid: React.FC<LoginSolidProps> = ({ setLoginWithSolid }) => {
           gap={3}
           className="select-login-method-stack position-absolute top-50 start-50 translate-middle text-center pb-1"
         >
+          <LoginBackButton setParentComponentScreenState={setLoginWithSolid} />
+
           <span className="select-login-method-heading">
             <FormattedMessage
               id="selectASolidProvider"
@@ -212,16 +215,6 @@ const LoginSolid: React.FC<LoginSolidProps> = ({ setLoginWithSolid }) => {
                 <span className="visually-hidden">Loading...</span>
               </Spinner>
             )}
-          </Button>
-
-          <Button
-            className="login-screen-button w-100"
-            variant="secondary"
-            onClick={() => {
-              setLoginWithSolid(false)
-            }}
-          >
-            <FormattedMessage id="goBack" defaultMessage="Back" />
           </Button>
         </Stack>
       </Fade>
