@@ -221,10 +221,19 @@ const SelectLoginMethod: React.FC = () => {
             className="login-screen-button email-and-password-button"
             onClick={() => setLoginWithEmailAndPassword(true)}
           >
-            <FormattedMessage
-              id="emailAndPassword"
-              defaultMessage="Email and password"
-            />
+            <div className="text-start">
+              <img
+                src="images/envelope-fill.svg"
+                alt="Email envelope"
+                className="provider-icon ms-1"
+              />
+              <span className="ms-3">
+                <FormattedMessage
+                  id="emailAndPassword"
+                  defaultMessage="Email and password"
+                />
+              </span>
+            </div>
           </Button>
 
           <Button
