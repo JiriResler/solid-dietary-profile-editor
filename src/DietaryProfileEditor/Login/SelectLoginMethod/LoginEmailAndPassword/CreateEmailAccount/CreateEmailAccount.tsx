@@ -61,36 +61,47 @@ const CreateEmailAccount: React.FC<CreateEmailAccountProps> = ({
           />
         </span>
 
-        <Form.Control
-          type="text"
-          placeholder={'Email'}
-          value={userEmail}
-          onChange={(e) => {
-            setUserEmail(e.target.value)
-          }}
-        />
+        <Form>
+          <Form.Group className="mb-3" controlId="createAccountEmail">
+            <Form.Control
+              type="email"
+              placeholder={'Email'}
+              value={userEmail}
+              onChange={(e) => {
+                setUserEmail(e.target.value)
+              }}
+            />
+          </Form.Group>
 
-        <Form.Control
-          type="password"
-          placeholder={getNewPasswordInputPlaceholder()}
-          value={newPassword}
-          onChange={(e) => {
-            setNewPassword(e.target.value)
-          }}
-        />
+          <Form.Group className="mb-3" controlId="createAccountPassword">
+            <Form.Control
+              type="password"
+              placeholder={getNewPasswordInputPlaceholder()}
+              value={newPassword}
+              onChange={(e) => {
+                setNewPassword(e.target.value)
+              }}
+            />
+          </Form.Group>
 
-        <Form.Control
-          type="password"
-          placeholder={getRepeatPasswordInputPlaceholder()}
-          value={repeatNewPassword}
-          onChange={(e) => {
-            setRepeatNewPassword(e.target.value)
-          }}
-        />
+          <Form.Group className="mb-4" controlId="createAccountRepeatPassword">
+            <Form.Control
+              type="password"
+              placeholder={getRepeatPasswordInputPlaceholder()}
+              value={repeatNewPassword}
+              onChange={(e) => {
+                setRepeatNewPassword(e.target.value)
+              }}
+            />
+          </Form.Group>
 
-        <Button className="login-screen-button email-and-password-button">
-          <FormattedMessage id="signUp" defaultMessage="Sign up" />
-        </Button>
+          <Button
+            className="login-screen-button email-and-password-button w-100"
+            type="submit"
+          >
+            <FormattedMessage id="signUp" defaultMessage="Sign up" />
+          </Button>
+        </Form>
       </Stack>
     </Fade>
   )

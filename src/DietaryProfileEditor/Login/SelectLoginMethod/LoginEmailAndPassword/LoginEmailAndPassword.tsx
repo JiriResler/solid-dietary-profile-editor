@@ -60,7 +60,7 @@ const LoginEmailAndPassword: React.FC<LoginEmailAndPasswordProps> = ({
         </span>
 
         <Form.Control
-          type="text"
+          type="email"
           placeholder={'Email'}
           value={loginEmail}
           onChange={(e) => {
