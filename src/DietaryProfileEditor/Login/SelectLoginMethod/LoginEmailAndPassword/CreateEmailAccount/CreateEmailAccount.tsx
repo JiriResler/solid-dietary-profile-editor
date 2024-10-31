@@ -22,8 +22,6 @@ const CreateEmailAccount: React.FC<CreateEmailAccountProps> = ({
 
   const [newPassword, setNewPassword] = useState('')
 
-  const [repeatNewPassword, setRepeatNewPassword] = useState('')
-
   const intl = useIntl()
 
   /**
@@ -33,16 +31,6 @@ const CreateEmailAccount: React.FC<CreateEmailAccountProps> = ({
     return intl.formatMessage({
       id: 'password',
       defaultMessage: 'Password',
-    })
-  }
-
-  /**
-   * Returns the placeholder for the repeat user password input.
-   */
-  function getRepeatPasswordInputPlaceholder() {
-    return intl.formatMessage({
-      id: 'repeatPassword',
-      defaultMessage: 'Repeat password',
     })
   }
 
@@ -82,18 +70,6 @@ const CreateEmailAccount: React.FC<CreateEmailAccountProps> = ({
               value={newPassword}
               onChange={(e) => {
                 setNewPassword(e.target.value)
-              }}
-            />
-          </Form.Group>
-
-          <Form.Group className="mb-4" controlId="createAccountRepeatPassword">
-            <Form.Control
-              type="password"
-              required
-              placeholder={getRepeatPasswordInputPlaceholder()}
-              value={repeatNewPassword}
-              onChange={(e) => {
-                setRepeatNewPassword(e.target.value)
               }}
             />
           </Form.Group>
