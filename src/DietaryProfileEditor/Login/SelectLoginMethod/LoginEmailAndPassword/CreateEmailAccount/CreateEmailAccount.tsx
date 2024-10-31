@@ -45,7 +45,7 @@ const CreateEmailAccount: React.FC<CreateEmailAccountProps> = ({
         <span className="select-login-method-heading">
           <FormattedMessage
             id="createYourAccount"
-            defaultMessage="Create a new account"
+            defaultMessage="Create an email account"
           />
         </span>
 
