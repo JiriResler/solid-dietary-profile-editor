@@ -65,6 +65,7 @@ const CreateEmailAccount: React.FC<CreateEmailAccountProps> = ({
           <Form.Group className="mb-3" controlId="createAccountEmail">
             <Form.Control
               type="email"
+              required
               placeholder={'Email'}
               value={userEmail}
               onChange={(e) => {
@@ -76,6 +77,7 @@ const CreateEmailAccount: React.FC<CreateEmailAccountProps> = ({
           <Form.Group className="mb-3" controlId="createAccountPassword">
             <Form.Control
               type="password"
+              required
               placeholder={getNewPasswordInputPlaceholder()}
               value={newPassword}
               onChange={(e) => {
@@ -87,6 +89,7 @@ const CreateEmailAccount: React.FC<CreateEmailAccountProps> = ({
           <Form.Group className="mb-4" controlId="createAccountRepeatPassword">
             <Form.Control
               type="password"
+              required
               placeholder={getRepeatPasswordInputPlaceholder()}
               value={repeatNewPassword}
               onChange={(e) => {
