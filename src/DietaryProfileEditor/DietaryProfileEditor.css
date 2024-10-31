@@ -1,3 +1,7 @@
 .warning-icon {
   height: 50px;
 }
+
+.form-control:focus{
+  box-shadow: none;
+}
