@@ -49,7 +49,7 @@ const CreateEmailAccount: React.FC<CreateEmailAccountProps> = ({
           />
         </span>
 
-        <Form noValidate>
+        <Form noValidate validated>
           <Form.Group className="mb-3" controlId="createAccountEmail">
             <Form.Control
               type="email"
