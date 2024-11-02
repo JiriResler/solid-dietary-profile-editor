@@ -61,6 +61,13 @@ const CreateEmailAccount: React.FC<CreateEmailAccountProps> = ({
                 setUserEmail(e.target.value)
               }}
             />
+
+            <Form.Control.Feedback type="invalid" className="text-start ms-2">
+              <FormattedMessage
+                id="provideValidEmail"
+                defaultMessage="Provide a valid email"
+              />
+            </Form.Control.Feedback>
           </Form.Group>
 
           <Form.Group className="mb-3" controlId="createAccountPassword">

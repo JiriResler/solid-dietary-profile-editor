@@ -75,6 +75,7 @@ type Messages = {
   createAccount: string
   createYourAccount: string
   signUp: string
+  provideValidEmail: string
 }
 
 const messagesInSlovak: Messages = {
@@ -158,6 +159,7 @@ const messagesInSlovak: Messages = {
   createAccount: 'Vytvoriť účet',
   createYourAccount: 'Založte si účet',
   signUp: 'Zaregistrovať sa',
+  provideValidEmail: 'Zadajte platnú emailovú adresu',
 }
 
 // const cs_messages: Messages = {
