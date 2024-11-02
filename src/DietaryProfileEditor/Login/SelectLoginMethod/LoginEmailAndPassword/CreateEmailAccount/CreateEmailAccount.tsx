@@ -53,6 +53,7 @@ const CreateEmailAccount: React.FC<CreateEmailAccountProps> = ({
           <Form.Group className="mb-3" controlId="createAccountEmail">
             <Form.Control
               type="email"
+              className="login-form-control"
               required
               placeholder={'Email'}
               value={userEmail}
@@ -65,6 +66,7 @@ const CreateEmailAccount: React.FC<CreateEmailAccountProps> = ({
           <Form.Group className="mb-3" controlId="createAccountPassword">
             <Form.Control
               type="password"
+              className="login-form-control"
               required
               placeholder={getNewPasswordInputPlaceholder()}
               value={newPassword}

@@ -30,3 +30,15 @@
 .clickable-text:hover {
   color: #3b3b3b;
 }
+
+.was-validated .login-form-control:valid {
+  background-image: none;
+}
+
+.was-validated .login-form-control:invalid {
+  background-image: none;
+}
+
+.login-error-warning-icon {
+  height: 50px;
+}

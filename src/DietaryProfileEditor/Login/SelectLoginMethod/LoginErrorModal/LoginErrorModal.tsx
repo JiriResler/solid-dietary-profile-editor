@@ -21,7 +21,7 @@ const LoginErrorModal: React.FC<LoginErrorModalProps> = ({
           <img
             src="images/alert-warning.svg"
             alt="Solid logo"
-            className="warning-icon pe-3"
+            className="login-error-warning-icon pe-3"
           />
 
           <FormattedMessage id="loginFailed" defaultMessage="Login failed" />
