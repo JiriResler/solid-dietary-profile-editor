@@ -219,7 +219,10 @@ const SelectLoginMethod: React.FC = () => {
 
           <Button
             className="login-screen-button email-and-password-button"
-            onClick={() => setLoginWithEmailAndPassword(true)}
+            onClick={() => {
+              setLoginWithEmailAndPassword(true)
+              setAllowFadeAnimation(true)
+            }}
           >
             <div className="text-start">
               <img
