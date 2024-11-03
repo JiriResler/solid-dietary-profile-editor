@@ -6,6 +6,7 @@ import { FormattedMessage, useIntl } from 'react-intl'
 import Fade from '@mui/material/Fade'
 import Stack from 'react-bootstrap/Stack'
 import LoginBackButton from '../../LoginBackButton/LoginBackButton'
+import './CreateEmailAccount.css'
 
 type CreateEmailAccountProps = {
   setCreateNewAccount: React.Dispatch<React.SetStateAction<boolean>>
@@ -65,7 +66,7 @@ const CreateEmailAccount: React.FC<CreateEmailAccountProps> = ({
             <Form.Control.Feedback type="invalid" className="text-start ms-2">
               <FormattedMessage
                 id="provideValidEmail"
-                defaultMessage="Provide a valid email"
+                defaultMessage="Provide a valid email address"
               />
             </Form.Control.Feedback>
           </Form.Group>
@@ -81,6 +82,37 @@ const CreateEmailAccount: React.FC<CreateEmailAccountProps> = ({
                 setNewPassword(e.target.value)
               }}
             />
+
+            <div className="password-requirements mt-1 text-start ms-2">
+              <FormattedMessage
+                id="passwordMustContain"
+                defaultMessage="A password must contain"
+              />
+
+              <ul>
+                <li>
+                  <FormattedMessage
+                    id="atLeastEightChars"
+                    defaultMessage="At least 8 characters"
+                  />
+                </li>
+                <li>
+                  <FormattedMessage
+                    id="lowerCaseLetter"
+                    defaultMessage="A lower case letter"
+                  />
+                </li>
+                <li>
+                  <FormattedMessage
+                    id="upperCaseLetter"
+                    defaultMessage="An upper case letter"
+                  />
+                </li>
+                <li>
+                  <FormattedMessage id="number" defaultMessage="A number" />
+                </li>
+              </ul>
+            </div>
           </Form.Group>
 
           <Button

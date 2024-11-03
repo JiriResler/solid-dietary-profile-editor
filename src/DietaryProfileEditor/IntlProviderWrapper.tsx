@@ -76,6 +76,11 @@ type Messages = {
   createYourAccount: string
   signUp: string
   provideValidEmail: string
+  passwordMustContain: string
+  atLeastEightChars: string
+  lowerCaseLetter: string
+  upperCaseLetter: string
+  number: string
 }
 
 const messagesInSlovak: Messages = {
@@ -160,6 +165,11 @@ const messagesInSlovak: Messages = {
   createYourAccount: 'Založte si účet',
   signUp: 'Zaregistrovať sa',
   provideValidEmail: 'Zadajte platnú emailovú adresu',
+  passwordMustContain: 'Heslo musí obsahovať',
+  atLeastEightChars: 'Aspoň 8 znakov',
+  lowerCaseLetter: 'Malé písmeno',
+  upperCaseLetter: 'Veľké písmeno',
+  number: 'Číslo',
 }
 
 // const cs_messages: Messages = {

@@ -1,0 +1,13 @@
+ul {
+  list-style-type: none;
+}
+
+ul li:before {
+  content: '-';
+  margin-left: -20px;
+  padding-right: 10px;
+}
+
+.password-requirements {
+  font-size: 11pt;
+}
