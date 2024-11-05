@@ -21,7 +21,14 @@ const CreateEmailAccount: React.FC<CreateEmailAccountProps> = ({
 }) => {
   const [userEmail, setUserEmail] = useState('')
 
-  const [newPassword, setNewPassword] = useState('')
+  const [userEmailIsValid, setUserEmailIsValid] = useState(false)
+
+  const [userEmailValidated, setUserEmailValidated] = useState(false)
+
+  const [userEmailTextFieldTouched, setUserEmailTextFieldTouched] =
+    useState(false)
+
+  const [userPassword, setUserPassword] = useState('')
 
   const intl = useIntl()
 
@@ -33,6 +40,39 @@ const CreateEmailAccount: React.FC<CreateEmailAccountProps> = ({
       id: 'password',
       defaultMessage: 'Password',
     })
+  }
+
+  /**
+   * Validates user email and marks it as validated so that appropriate styles can be applied.
+   */
+  function validateUserEmail(email: string) {
+    if (email.includes('@')) {
+      setUserEmailIsValid(true)
+    } else {
+      setUserEmailIsValid(false)
+    }
+
+    setUserEmailValidated(true)
+  }
+
+  /**
+   * Calls the email validation function and marks email input field as touched.
+   */
+  function handleEmailOnBlur() {
+    validateUserEmail(userEmail)
+    setUserEmailTextFieldTouched(true)
+  }
+
+  /**
+   * Sets the user email state variable and validates it if the input field has been touched.
+   * @param newEmail Newly entered email string.
+   */
+  function handleEmailOnChange(newEmail: string) {
+    if (userEmailTextFieldTouched) {
+      validateUserEmail(newEmail)
+    }
+
+    setUserEmail(newEmail)
   }
 
   return (
@@ -50,7 +90,7 @@ const CreateEmailAccount: React.FC<CreateEmailAccountProps> = ({
           />
         </span>
 
-        <Form noValidate validated>
+        <Form noValidate>
           <Form.Group className="mb-3" controlId="createAccountEmail">
             <Form.Control
               type="email"
@@ -58,9 +98,9 @@ const CreateEmailAccount: React.FC<CreateEmailAccountProps> = ({
               required
               placeholder={'Email'}
               value={userEmail}
-              onChange={(e) => {
-                setUserEmail(e.target.value)
-              }}
+              onChange={(e) => handleEmailOnChange(e.target.value)}
+              onBlur={() => handleEmailOnBlur()}
+              isInvalid={!userEmailIsValid && userEmailValidated}
             />
 
             <Form.Control.Feedback type="invalid" className="text-start ms-2">
@@ -77,9 +117,9 @@ const CreateEmailAccount: React.FC<CreateEmailAccountProps> = ({
               className="login-form-control"
               required
               placeholder={getNewPasswordInputPlaceholder()}
-              value={newPassword}
+              value={userPassword}
               onChange={(e) => {
-                setNewPassword(e.target.value)
+                setUserPassword(e.target.value)
               }}
             />
 
