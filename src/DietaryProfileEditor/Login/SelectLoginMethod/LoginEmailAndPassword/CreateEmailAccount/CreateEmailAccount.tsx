@@ -69,7 +69,7 @@ const CreateEmailAccount: React.FC<CreateEmailAccountProps> = ({
    * @param newPassword Currently typed in password.
    */
   function handlePasswordOnChange(newPassword: string) {
-    const passwordValid = isStrongPassword(newPassword)
+    const passwordValid = isStrongPassword(newPassword, { minSymbols: 0 })
 
     if (passwordValid) {
       setUserPasswordIsValid(true)
