@@ -8,6 +8,7 @@ import Stack from 'react-bootstrap/Stack'
 import LoginBackButton from '../../LoginBackButton/LoginBackButton'
 import './CreateEmailAccount.css'
 import isEmail from 'validator/lib/isEmail'
+import isStrongPassword from 'validator/lib/isStrongPassword'
 
 type CreateEmailAccountProps = {
   setCreateNewAccount: React.Dispatch<React.SetStateAction<boolean>>
@@ -30,6 +31,11 @@ const CreateEmailAccount: React.FC<CreateEmailAccountProps> = ({
     useState(false)
 
   const [userPassword, setUserPassword] = useState('')
+
+  const [userPasswordIsValid, setUserPasswordIsValid] = useState(false)
+
+  const [userPasswordTextFieldTouched, setUserPasswordTextFieldTouched] =
+    useState(false)
 
   const intl = useIntl()
 
@@ -56,6 +62,23 @@ const CreateEmailAccount: React.FC<CreateEmailAccountProps> = ({
     }
 
     setUserEmailValidated(true)
+  }
+
+  /**
+   * Runs password validation and sets component state variables.
+   * @param newPassword Currently typed in password.
+   */
+  function handlePasswordOnChange(newPassword: string) {
+    const passwordValid = isStrongPassword(newPassword)
+
+    if (passwordValid) {
+      setUserPasswordIsValid(true)
+    } else {
+      setUserPasswordIsValid(false)
+    }
+
+    setUserPassword(newPassword)
+    setUserPasswordTextFieldTouched(true)
   }
 
   /**
@@ -122,8 +145,9 @@ const CreateEmailAccount: React.FC<CreateEmailAccountProps> = ({
               placeholder={getNewPasswordInputPlaceholder()}
               value={userPassword}
               onChange={(e) => {
-                setUserPassword(e.target.value)
+                handlePasswordOnChange(e.target.value)
               }}
+              isInvalid={userPasswordTextFieldTouched && !userPasswordIsValid}
             />
 
             <div className="password-requirements mt-1 text-start ms-2">
