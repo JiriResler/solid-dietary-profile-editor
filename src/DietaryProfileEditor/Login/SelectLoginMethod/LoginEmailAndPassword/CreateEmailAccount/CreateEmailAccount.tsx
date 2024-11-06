@@ -7,6 +7,7 @@ import Fade from '@mui/material/Fade'
 import Stack from 'react-bootstrap/Stack'
 import LoginBackButton from '../../LoginBackButton/LoginBackButton'
 import './CreateEmailAccount.css'
+import isEmail from 'validator/lib/isEmail'
 
 type CreateEmailAccountProps = {
   setCreateNewAccount: React.Dispatch<React.SetStateAction<boolean>>
@@ -46,7 +47,9 @@ const CreateEmailAccount: React.FC<CreateEmailAccountProps> = ({
    * Validates user email and marks it as validated so that appropriate styles can be applied.
    */
   function validateUserEmail(email: string) {
-    if (email.includes('@')) {
+    const emailValid = isEmail(email)
+
+    if (emailValid) {
       setUserEmailIsValid(true)
     } else {
       setUserEmailIsValid(false)
