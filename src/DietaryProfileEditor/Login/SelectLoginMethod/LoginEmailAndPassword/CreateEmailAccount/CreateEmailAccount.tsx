@@ -150,7 +150,7 @@ const CreateEmailAccount: React.FC<CreateEmailAccountProps> = ({
               isInvalid={userPasswordTextFieldTouched && !userPasswordIsValid}
             />
 
-            <div className="password-requirements mt-1 text-start ms-2">
+            <div className="password-requirements-text mt-1 text-start ms-2">
               <FormattedMessage
                 id="passwordMustContain"
                 defaultMessage="A password must contain"
