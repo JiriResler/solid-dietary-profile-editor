@@ -101,6 +101,22 @@ const CreateEmailAccount: React.FC<CreateEmailAccountProps> = ({
     setUserEmail(newEmail)
   }
 
+  /**
+   * Validates the new account form and sends a request to Firebase.
+   */
+  function handleNewAccountFormSubmit(e: React.FormEvent<HTMLFormElement>) {
+    const formNotValid =
+      !isEmail(userEmail) || !isStrongPassword(userPassword, { minSymbols: 0 })
+
+    if (formNotValid) {
+      alert('User email or password is not valid')
+      e.preventDefault()
+      return
+    }
+
+    
+  }
+
   return (
     <Fade in={true} timeout={500}>
       <Stack
@@ -116,7 +132,7 @@ const CreateEmailAccount: React.FC<CreateEmailAccountProps> = ({
           />
         </span>
 
-        <Form noValidate>
+        <Form noValidate onSubmit={(e) => handleNewAccountFormSubmit(e)}>
           <Form.Group className="mb-3" controlId="createAccountEmail">
             <Form.Control
               type="email"
