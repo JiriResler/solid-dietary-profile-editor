@@ -26,9 +26,9 @@ const LoginSolid: React.FC<LoginSolidProps> = ({ setLoginWithSolid }) => {
 
   const [loginCausedError, setLoginCausedError] = useState(false)
 
-  const [loginInProgress, setLoginInProgress] = useState(false)
-
   const [loginErrorMessage, setLoginErrorMessage] = useState('')
+
+  const [loginInProgress, setLoginInProgress] = useState(false)
 
   const intl = useIntl()
 
@@ -40,6 +40,9 @@ const LoginSolid: React.FC<LoginSolidProps> = ({ setLoginWithSolid }) => {
     'redpencil.io': 'https://solid.redpencil.io/',
   }
 
+  /**
+   * Redirects the user to the selected Solid provider.
+   */
   function handleSolidLogin() {
     setLoginInProgress(true)
 
