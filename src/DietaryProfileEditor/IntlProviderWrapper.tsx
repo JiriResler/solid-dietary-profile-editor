@@ -81,6 +81,7 @@ type Messages = {
   upperCaseLetter: string
   number: string
   close: string
+  signUpFailed: string
 }
 
 const messagesInSlovak: Messages = {
@@ -170,6 +171,7 @@ const messagesInSlovak: Messages = {
   upperCaseLetter: 'Veľké písmeno',
   number: 'Číslo',
   close: 'Zatvoriť',
+  signUpFailed: 'Nepodarilo sa vytvoriť účet',
 }
 
 // const cs_messages: Messages = {

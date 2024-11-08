@@ -12,7 +12,7 @@ import isStrongPassword from 'validator/lib/isStrongPassword'
 import { createUserWithEmailAndPassword } from 'firebase/auth'
 import { auth } from '../../../../../firebase'
 import Spinner from 'react-bootstrap/Spinner'
-
+import ErrorModal from '../../../../ErrorModal/ErrorModal'
 
 type CreateEmailAccountProps = {
   setCreateNewAccount: React.Dispatch<React.SetStateAction<boolean>>
@@ -28,6 +28,10 @@ const CreateEmailAccount: React.FC<CreateEmailAccountProps> = ({
   const intl = useIntl()
 
   const [signUpInProgress, setSignUpInProgress] = useState(false)
+
+  const [signUpCausedError, setSignUpCausedError] = useState(false)
+
+  const [signUpErrorMessage, setSignUpErrorMessage] = useState('')
 
   const [userEmail, setUserEmail] = useState('')
 
@@ -135,99 +139,113 @@ const CreateEmailAccount: React.FC<CreateEmailAccountProps> = ({
   }
 
   return (
-    <Fade in={true} timeout={500}>
-      <Stack
-        gap={3}
-        className="select-login-method-stack position-absolute top-50 start-50 translate-middle text-center pb-1"
-      >
-        <LoginBackButton setParentComponentScreenState={setCreateNewAccount} />
+    <>
+      <ErrorModal
+        show={signUpCausedError}
+        setShow={setSignUpCausedError}
+        titleMessage={intl.formatMessage({
+          id: 'signUpFailed',
+          defaultMessage: 'Sign up failed',
+        })}
+        bodyMessage={signUpErrorMessage}
+      />
 
-        <span className="select-login-method-heading">
-          <FormattedMessage
-            id="createYourAccount"
-            defaultMessage="Create an email account"
+      <Fade in={true} timeout={500}>
+        <Stack
+          gap={3}
+          className="select-login-method-stack position-absolute top-50 start-50 translate-middle text-center pb-1"
+        >
+          <LoginBackButton
+            setParentComponentScreenState={setCreateNewAccount}
           />
-        </span>
 
-        <Form noValidate onSubmit={(e) => handleNewAccountFormSubmit(e)}>
-          <Form.Group className="mb-3" controlId="createAccountEmail">
-            <Form.Control
-              type="email"
-              required
-              placeholder={'Email'}
-              value={userEmail}
-              onChange={(e) => handleEmailOnChange(e.target.value)}
-              onBlur={() => handleEmailOnBlur()}
-              isInvalid={!userEmailIsValid && userEmailValidated}
+          <span className="select-login-method-heading">
+            <FormattedMessage
+              id="createYourAccount"
+              defaultMessage="Create an email account"
             />
+          </span>
 
-            <Form.Control.Feedback type="invalid" className="text-start ms-2">
-              <FormattedMessage
-                id="provideValidEmail"
-                defaultMessage="Provide a valid email address"
-              />
-            </Form.Control.Feedback>
-          </Form.Group>
-
-          <Form.Group className="mb-3" controlId="createAccountPassword">
-            <Form.Control
-              type="password"
-              required
-              placeholder={getNewPasswordInputPlaceholder()}
-              value={userPassword}
-              onChange={(e) => {
-                handlePasswordOnChange(e.target.value)
-              }}
-              isInvalid={userPasswordTextFieldTouched && !userPasswordIsValid}
-            />
-
-            <div className="password-requirements-text mt-1 text-start ms-2">
-              <FormattedMessage
-                id="passwordMustContain"
-                defaultMessage="A password must contain"
+          <Form noValidate onSubmit={(e) => handleNewAccountFormSubmit(e)}>
+            <Form.Group className="mb-3" controlId="createAccountEmail">
+              <Form.Control
+                type="email"
+                required
+                placeholder={'Email'}
+                value={userEmail}
+                onChange={(e) => handleEmailOnChange(e.target.value)}
+                onBlur={() => handleEmailOnBlur()}
+                isInvalid={!userEmailIsValid && userEmailValidated}
               />
 
-              <ul>
-                <li>
-                  <FormattedMessage
-                    id="atLeastEightChars"
-                    defaultMessage="At least 8 characters"
-                  />
-                </li>
-                <li>
-                  <FormattedMessage
-                    id="lowerCaseLetter"
-                    defaultMessage="A lower case letter"
-                  />
-                </li>
-                <li>
-                  <FormattedMessage
-                    id="upperCaseLetter"
-                    defaultMessage="An upper case letter"
-                  />
-                </li>
-                <li>
-                  <FormattedMessage id="number" defaultMessage="A number" />
-                </li>
-              </ul>
-            </div>
-          </Form.Group>
+              <Form.Control.Feedback type="invalid" className="text-start ms-2">
+                <FormattedMessage
+                  id="provideValidEmail"
+                  defaultMessage="Provide a valid email address"
+                />
+              </Form.Control.Feedback>
+            </Form.Group>
 
-          <Button
-            className="login-screen-button email-and-password-button w-100"
-            type="submit"
-          >
-            {!signUpInProgress ? (
-              <FormattedMessage id="signUp" defaultMessage="Sign up" />
-            ) : (
-              <Spinner animation="border" role="status" size="sm">
-                <span className="visually-hidden">Loading...</span>
-              </Spinner>
-            )}
-          </Button>
-        </Form>
-      </Stack>
-    </Fade>
+            <Form.Group className="mb-3" controlId="createAccountPassword">
+              <Form.Control
+                type="password"
+                required
+                placeholder={getNewPasswordInputPlaceholder()}
+                value={userPassword}
+                onChange={(e) => {
+                  handlePasswordOnChange(e.target.value)
+                }}
+                isInvalid={userPasswordTextFieldTouched && !userPasswordIsValid}
+              />
+
+              <div className="password-requirements-text mt-1 text-start ms-2">
+                <FormattedMessage
+                  id="passwordMustContain"
+                  defaultMessage="A password must contain"
+                />
+
+                <ul>
+                  <li>
+                    <FormattedMessage
+                      id="atLeastEightChars"
+                      defaultMessage="At least 8 characters"
+                    />
+                  </li>
+                  <li>
+                    <FormattedMessage
+                      id="lowerCaseLetter"
+                      defaultMessage="A lower case letter"
+                    />
+                  </li>
+                  <li>
+                    <FormattedMessage
+                      id="upperCaseLetter"
+                      defaultMessage="An upper case letter"
+                    />
+                  </li>
+                  <li>
+                    <FormattedMessage id="number" defaultMessage="A number" />
+                  </li>
+                </ul>
+              </div>
+            </Form.Group>
+
+            <Button
+              className="login-screen-button email-and-password-button w-100"
+              type="submit"
+            >
+              {!signUpInProgress ? (
+                <FormattedMessage id="signUp" defaultMessage="Sign up" />
+              ) : (
+                <Spinner animation="border" role="status" size="sm">
+                  <span className="visually-hidden">Loading...</span>
+                </Spinner>
+              )}
+            </Button>
+          </Form>
+        </Stack>
+      </Fade>
+    </>
   )
 }
 
