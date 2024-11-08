@@ -131,16 +131,6 @@ const LoginSolid: React.FC<LoginSolidProps> = ({ setLoginWithSolid }) => {
     ).toString()
   }
 
-  /**
-   * Returns the default intl message for the select component.
-   */
-  function defaultSelectOptionMessage() {
-    return intl.formatMessage({
-      id: 'chooseSolidProvider',
-      defaultMessage: 'Choose a Solid provider',
-    })
-  }
-
   return (
     <>
       <ErrorModal
@@ -173,7 +163,10 @@ const LoginSolid: React.FC<LoginSolidProps> = ({ setLoginWithSolid }) => {
             className="solid-provider-select"
           >
             <option key="defaultOption" hidden>
-              {defaultSelectOptionMessage()}
+              {intl.formatMessage({
+                id: 'chooseSolidProvider',
+                defaultMessage: 'Choose a Solid provider',
+              })}
             </option>
 
             {Object.keys(providerNameAndUrls).map((opt) => {
