@@ -9,6 +9,8 @@ import LoginBackButton from '../../LoginBackButton/LoginBackButton'
 import './CreateEmailAccount.css'
 import isEmail from 'validator/lib/isEmail'
 import isStrongPassword from 'validator/lib/isStrongPassword'
+import { createUserWithEmailAndPassword } from 'firebase/auth'
+import { auth } from '../../../../../firebase'
 
 type CreateEmailAccountProps = {
   setCreateNewAccount: React.Dispatch<React.SetStateAction<boolean>>
@@ -105,16 +107,23 @@ const CreateEmailAccount: React.FC<CreateEmailAccountProps> = ({
    * Validates the new account form and sends a request to Firebase.
    */
   function handleNewAccountFormSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault()
+
     const formNotValid =
       !isEmail(userEmail) || !isStrongPassword(userPassword, { minSymbols: 0 })
 
     if (formNotValid) {
       alert('User email or password is not valid')
-      e.preventDefault()
       return
     }
 
-    
+    createUserWithEmailAndPassword(auth, userEmail, userPassword)
+      .then((userCredential) => {
+        
+      })
+      .catch((error) => {
+        console.error(error)
+      })
   }
 
   return (
