@@ -11,6 +11,7 @@ import isEmail from 'validator/lib/isEmail'
 import isStrongPassword from 'validator/lib/isStrongPassword'
 import { createUserWithEmailAndPassword } from 'firebase/auth'
 import { auth } from '../../../../../firebase'
+import Spinner from 'react-bootstrap/Spinner'
 
 type CreateEmailAccountProps = {
   setCreateNewAccount: React.Dispatch<React.SetStateAction<boolean>>
@@ -23,6 +24,10 @@ type CreateEmailAccountProps = {
 const CreateEmailAccount: React.FC<CreateEmailAccountProps> = ({
   setCreateNewAccount,
 }) => {
+  const intl = useIntl()
+
+  const [signUpInProgress, setSignUpInProgress] = useState(false)
+
   const [userEmail, setUserEmail] = useState('')
 
   const [userEmailIsValid, setUserEmailIsValid] = useState(false)
@@ -38,8 +43,6 @@ const CreateEmailAccount: React.FC<CreateEmailAccountProps> = ({
 
   const [userPasswordTextFieldTouched, setUserPasswordTextFieldTouched] =
     useState(false)
-
-  const intl = useIntl()
 
   /**
    * Returns the placeholder for the new user password input.
@@ -109,20 +112,24 @@ const CreateEmailAccount: React.FC<CreateEmailAccountProps> = ({
   function handleNewAccountFormSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
 
+    setSignUpInProgress(true)
+
     const formNotValid =
       !isEmail(userEmail) || !isStrongPassword(userPassword, { minSymbols: 0 })
 
     if (formNotValid) {
       alert('User email or password is not valid')
+
+      setSignUpInProgress(false)
       return
     }
 
     createUserWithEmailAndPassword(auth, userEmail, userPassword)
-      .then((userCredential) => {
-        
-      })
       .catch((error) => {
         console.error(error)
+      })
+      .finally(() => {
+        setSignUpInProgress(false)
       })
   }
 
@@ -209,7 +216,13 @@ const CreateEmailAccount: React.FC<CreateEmailAccountProps> = ({
             className="login-screen-button email-and-password-button w-100"
             type="submit"
           >
-            <FormattedMessage id="signUp" defaultMessage="Sign up" />
+            {!signUpInProgress ? (
+              <FormattedMessage id="signUp" defaultMessage="Sign up" />
+            ) : (
+              <Spinner animation="border" role="status" size="sm">
+                <span className="visually-hidden">Loading...</span>
+              </Spinner>
+            )}
           </Button>
         </Form>
       </Stack>
