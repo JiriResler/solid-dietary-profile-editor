@@ -6,7 +6,7 @@ import { FormattedMessage, useIntl } from 'react-intl'
 import Stack from 'react-bootstrap/Stack'
 import { getKeyByValue } from './LoginSolidHelpers'
 import Spinner from 'react-bootstrap/Spinner'
-import LoginErrorModal from '../LoginErrorModal/LoginErrorModal'
+import ErrorModal from '../../../ErrorModal/ErrorModal'
 import Fade from '@mui/material/Fade'
 import { login } from '@inrupt/solid-client-authn-browser'
 import LoginBackButton from '../LoginBackButton/LoginBackButton'
@@ -74,23 +74,14 @@ const LoginSolid: React.FC<LoginSolidProps> = ({ setLoginWithSolid }) => {
   function handleOnLoginError(loginError: Error) {
     console.error(loginError)
 
-    let errorMessage
-
-    if (loginError.message.includes('is not a valid URL')) {
-      errorMessage = intl.formatMessage({
-        id: 'loginSolidInvalidUrlErrorMessage',
-        defaultMessage: 'The provider URL is not valid.',
-      })
-    } else {
-      errorMessage = intl.formatMessage({
-        id: 'loginSolidErrorMessage',
-        defaultMessage: `Possible reasons include:
+    const errorMessage = intl.formatMessage({
+      id: 'loginSolidErrorMessage',
+      defaultMessage: `Possible reasons include:
         1. You are not connected to the internet.
         2. The provider URL is incorrect.
         3. There may be an issue with the selected Solid provider.
       `,
-      })
-    }
+    })
 
     setLoginErrorMessage(errorMessage)
     setLoginCausedError(true)
@@ -152,10 +143,14 @@ const LoginSolid: React.FC<LoginSolidProps> = ({ setLoginWithSolid }) => {
 
   return (
     <>
-      <LoginErrorModal
+      <ErrorModal
         show={loginCausedError}
         setShow={setLoginCausedError}
-        message={loginErrorMessage}
+        titleMessage={intl.formatMessage({
+          id: 'loginFailed',
+          defaultMessage: 'Login failed',
+        })}
+        bodyMessage={loginErrorMessage}
       />
 
       <Fade in={true} timeout={500}>

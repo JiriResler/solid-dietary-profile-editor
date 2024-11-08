@@ -1,18 +1,20 @@
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 import { FormattedMessage } from 'react-intl'
-import './LoginErrorModal.css'
+import './ErrorModal.css'
 
-type LoginErrorModalProps = {
+type ErrorModalProps = {
   show: boolean
   setShow: React.Dispatch<React.SetStateAction<boolean>>
-  message: string
+  titleMessage: string
+  bodyMessage: string
 }
 
-const LoginErrorModal: React.FC<LoginErrorModalProps> = ({
+const ErrorModal: React.FC<ErrorModalProps> = ({
   show,
   setShow,
-  message,
+  titleMessage,
+  bodyMessage,
 }) => {
   return (
     <Modal show={show} onHide={() => setShow(false)} centered>
@@ -23,20 +25,19 @@ const LoginErrorModal: React.FC<LoginErrorModalProps> = ({
             alt="Solid logo"
             className="login-error-warning-icon pe-3"
           />
-
-          <FormattedMessage id="loginFailed" defaultMessage="Login failed" />
+          {titleMessage}
         </Modal.Title>
       </Modal.Header>
 
-      <Modal.Body className="modal-body">{message}</Modal.Body>
+      <Modal.Body className="modal-body">{bodyMessage}</Modal.Body>
 
       <Modal.Footer>
         <Button variant="secondary" onClick={() => setShow(false)}>
-          Close
+          <FormattedMessage id="close" defaultMessage="Close" />
         </Button>
       </Modal.Footer>
     </Modal>
   )
 }
 
-export default LoginErrorModal
+export default ErrorModal

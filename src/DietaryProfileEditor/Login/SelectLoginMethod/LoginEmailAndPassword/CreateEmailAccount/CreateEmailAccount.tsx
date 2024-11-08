@@ -13,6 +13,7 @@ import { createUserWithEmailAndPassword } from 'firebase/auth'
 import { auth } from '../../../../../firebase'
 import Spinner from 'react-bootstrap/Spinner'
 
+
 type CreateEmailAccountProps = {
   setCreateNewAccount: React.Dispatch<React.SetStateAction<boolean>>
 }
