@@ -83,6 +83,7 @@ type Messages = {
   close: string
   signUpFailed: string
   singUpDefaultErrorMessage: string
+  signUpEmailInUse: string
 }
 
 const messagesInSlovak: Messages = {
@@ -175,6 +176,8 @@ const messagesInSlovak: Messages = {
   signUpFailed: 'Chyba pri vytváraní účtu',
   singUpDefaultErrorMessage:
     'Účet sa nepodarilo vytvoriť. Skontrolujte prosím vaše internetové pripojenie a skúste to znovu.',
+  signUpEmailInUse:
+    'Pre zadanú emailovú adresu už existuje účet. Zvoľte prosím inú adresu alebo sa prihláste.',
 }
 
 // const cs_messages: Messages = {

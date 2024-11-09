@@ -130,13 +130,17 @@ const CreateEmailAccount: React.FC<CreateEmailAccountProps> = ({
     }
 
     createUserWithEmailAndPassword(auth, userEmail, userPassword)
-      .catch((error) => {
+      .catch((error: Error) => {
         console.error(error)
 
         let errorMessage
 
-        if () {
-          errorMessage = intl.formatMessage({ id: '', defaultMessage: '' })
+        if (error.message.includes('auth/email-already-in-use')) {
+          errorMessage = intl.formatMessage({
+            id: 'signUpEmailInUse',
+            defaultMessage:
+              'The email address you entered is already in use. Please choose a different one.',
+          })
         } else {
           errorMessage = intl.formatMessage({
             id: 'singUpDefaultErrorMessage',
