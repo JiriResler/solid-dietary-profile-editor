@@ -133,7 +133,20 @@ const CreateEmailAccount: React.FC<CreateEmailAccountProps> = ({
       .catch((error) => {
         console.error(error)
 
-        
+        let errorMessage
+
+        if () {
+          errorMessage = intl.formatMessage({ id: '', defaultMessage: '' })
+        } else {
+          errorMessage = intl.formatMessage({
+            id: 'singUpDefaultErrorMessage',
+            defaultMessage:
+              'There was an error during sign-up. Please check your internet connection and try again.',
+          })
+        }
+
+        setSignUpErrorMessage(errorMessage)
+        setSignUpCausedError(true)
       })
       .finally(() => {
         setSignUpInProgress(false)

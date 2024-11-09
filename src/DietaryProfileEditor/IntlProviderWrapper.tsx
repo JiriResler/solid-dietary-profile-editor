@@ -82,6 +82,7 @@ type Messages = {
   number: string
   close: string
   signUpFailed: string
+  singUpDefaultErrorMessage: string
 }
 
 const messagesInSlovak: Messages = {
@@ -171,7 +172,9 @@ const messagesInSlovak: Messages = {
   upperCaseLetter: 'Veľké písmeno',
   number: 'Číslo',
   close: 'Zatvoriť',
-  signUpFailed: 'Nepodarilo sa vytvoriť účet',
+  signUpFailed: 'Chyba pri vytváraní účtu',
+  singUpDefaultErrorMessage:
+    'Účet sa nepodarilo vytvoriť. Skontrolujte prosím vaše internetové pripojenie a skúste to znovu.',
 }
 
 // const cs_messages: Messages = {
