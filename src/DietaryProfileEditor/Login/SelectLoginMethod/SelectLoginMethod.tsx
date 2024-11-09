@@ -14,7 +14,7 @@ import {
 import { useNavigate } from 'react-router-dom'
 import { useLogin } from 'react-facebook'
 import Spinner from 'react-bootstrap/Spinner'
-import LoginErrorModal from '../../ErrorModal/LoginErrorModal'
+import ErrorModal from '../../ErrorModal/ErrorModal'
 import Fade from '@mui/material/Fade'
 import LoginEmailAndPassword from './LoginEmailAndPassword/LoginEmailAndPassword'
 
@@ -82,7 +82,7 @@ const SelectLoginMethod: React.FC = () => {
           throw error
         })
     } catch (error) {
-      // No need to show LoginErrorModal as the Facebook popup window itself shows an error message to the user.
+      // No need to show ErrorModal as the Facebook popup window itself shows an error message to the user.
       console.error(error)
     } finally {
       setFacebokLoginInProgress(false)
@@ -161,10 +161,14 @@ const SelectLoginMethod: React.FC = () => {
         </Modal.Body>
       </Modal>
 
-      <LoginErrorModal
+      <ErrorModal
         show={loginCausedError}
         setShow={setLoginCausedError}
-        message={loginErrorMessage}
+        titleMessage={intl.formatMessage({
+          id: 'loginFailed',
+          defaultMessage: 'Login failed',
+        })}
+        bodyMessage={loginErrorMessage}
       />
 
       <Fade in={true} appear={allowFadeAnimation} timeout={500}>

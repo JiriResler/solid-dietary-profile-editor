@@ -132,6 +132,8 @@ const CreateEmailAccount: React.FC<CreateEmailAccountProps> = ({
     createUserWithEmailAndPassword(auth, userEmail, userPassword)
       .catch((error) => {
         console.error(error)
+
+        
       })
       .finally(() => {
         setSignUpInProgress(false)
