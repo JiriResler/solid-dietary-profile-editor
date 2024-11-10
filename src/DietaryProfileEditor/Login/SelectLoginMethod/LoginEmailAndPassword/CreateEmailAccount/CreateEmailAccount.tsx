@@ -123,7 +123,14 @@ const CreateEmailAccount: React.FC<CreateEmailAccountProps> = ({
       !isEmail(userEmail) || !isStrongPassword(userPassword, { minSymbols: 0 })
 
     if (formNotValid) {
-      alert('User email or password is not valid')
+      const errorMessage = intl.formatMessage({
+        id: 'emailOrPasswordInvalid',
+        defaultMessage:
+          'The email or password you entered is incorrect. Please check your details and try again.',
+      })
+
+      setSignUpErrorMessage(errorMessage)
+      setSignUpCausedError(true)
 
       setSignUpInProgress(false)
       return
