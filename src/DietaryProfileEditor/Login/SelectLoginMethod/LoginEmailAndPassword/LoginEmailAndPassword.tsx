@@ -8,6 +8,7 @@ import Stack from 'react-bootstrap/Stack'
 import './LoginEmailAndPassword.css'
 import CreateEmailAccount from './CreateEmailAccount/CreateEmailAccount'
 import LoginBackButton from '../LoginBackButton/LoginBackButton'
+import isEmail from 'validator/lib/isEmail'
 
 type LoginEmailAndPasswordProps = {
   setLoginWithEmailAndPassword: React.Dispatch<React.SetStateAction<boolean>>
@@ -20,13 +21,26 @@ type LoginEmailAndPasswordProps = {
 const LoginEmailAndPassword: React.FC<LoginEmailAndPasswordProps> = ({
   setLoginWithEmailAndPassword,
 }) => {
-  const [loginEmail, setLoginEmail] = useState('')
-
-  const [loginPassword, setLoginPassword] = useState('')
-
   const [createNewAccount, setCreateNewAccount] = useState(false)
 
   const intl = useIntl()
+
+  const [loginInProgress, setLoginInProgress] = useState(false)
+
+  const [loginCausedError, setLoginCausedError] = useState(false)
+
+  const [loginErrorMessage, setLoginErrorMessage] = useState('')
+
+  const [loginEmail, setLoginEmail] = useState('')
+
+  const [loginEmailIsValid, setLoginEmailIsValid] = useState(false)
+
+  const [loginEmailValidated, setLoginEmailValidated] = useState(false)
+
+  const [loginEmailTextFieldTouched, setLoginEmailTextFieldTouched] =
+    useState(false)
+
+  const [loginPassword, setLoginPassword] = useState('')
 
   /**
    * Returns the placeholder for the user password input.
@@ -36,6 +50,41 @@ const LoginEmailAndPassword: React.FC<LoginEmailAndPasswordProps> = ({
       id: 'password',
       defaultMessage: 'Password',
     })
+  }
+
+  /**
+   * Validates user email and marks it as validated so that appropriate styles can be applied.
+   */
+  function validateLoginEmail(email: string) {
+    const emailValid = isEmail(email)
+
+    if (emailValid) {
+      setLoginEmailIsValid(true)
+    } else {
+      setLoginEmailIsValid(false)
+    }
+
+    setLoginEmailValidated(true)
+  }
+
+  /**
+   * Calls the email validation function and marks email input field as touched.
+   */
+  function handleEmailOnBlur() {
+    validateLoginEmail(loginEmail)
+    setLoginEmailTextFieldTouched(true)
+  }
+
+  /**
+   * Sets the user email state variable and validates it if the input field has been touched.
+   * @param newEmail Newly entered email string.
+   */
+  function handleEmailOnChange(newEmail: string) {
+    if (loginEmailTextFieldTouched) {
+      validateLoginEmail(newEmail)
+    }
+
+    setLoginEmail(newEmail)
   }
 
   if (createNewAccount) {
@@ -64,10 +113,10 @@ const LoginEmailAndPassword: React.FC<LoginEmailAndPasswordProps> = ({
             <Form.Control
               type="email"
               placeholder={'Email'}
+              onBlur={() => handleEmailOnBlur()}
               value={loginEmail}
-              onChange={(e) => {
-                setLoginEmail(e.target.value)
-              }}
+              isInvalid={!loginEmailIsValid && loginEmailValidated}
+              onChange={(e) => handleEmailOnChange(e.target.value)}
             />
 
             <Form.Control
