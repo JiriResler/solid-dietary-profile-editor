@@ -52,34 +52,41 @@ const LoginEmailAndPassword: React.FC<LoginEmailAndPasswordProps> = ({
           setParentComponentScreenState={setLoginWithEmailAndPassword}
         />
 
-        <span className="select-login-method-heading">
-          <FormattedMessage
-            id="loginWithEmail"
-            defaultMessage="Sign in with your email"
-          />
-        </span>
+        <Form noValidate>
+          <Stack gap={3}>
+            <span className="select-login-method-heading">
+              <FormattedMessage
+                id="loginWithEmail"
+                defaultMessage="Sign in with your email"
+              />
+            </span>
 
-        <Form.Control
-          type="email"
-          placeholder={'Email'}
-          value={loginEmail}
-          onChange={(e) => {
-            setLoginEmail(e.target.value)
-          }}
-        />
+            <Form.Control
+              type="email"
+              placeholder={'Email'}
+              value={loginEmail}
+              onChange={(e) => {
+                setLoginEmail(e.target.value)
+              }}
+            />
 
-        <Form.Control
-          type="password"
-          placeholder={getPasswordInputPlaceholder()}
-          value={loginPassword}
-          onChange={(e) => {
-            setLoginPassword(e.target.value)
-          }}
-        />
+            <Form.Control
+              type="password"
+              placeholder={getPasswordInputPlaceholder()}
+              value={loginPassword}
+              onChange={(e) => {
+                setLoginPassword(e.target.value)
+              }}
+            />
 
-        <Button className="login-screen-button email-and-password-button">
-          <FormattedMessage id="signIn" defaultMessage="Sign in" />
-        </Button>
+            <Button
+              type="submit"
+              className="login-screen-button email-and-password-button"
+            >
+              <FormattedMessage id="signIn" defaultMessage="Sign in" />
+            </Button>
+          </Stack>
+        </Form>
 
         <div>
           <span>
