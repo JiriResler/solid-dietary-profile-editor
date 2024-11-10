@@ -185,76 +185,83 @@ const CreateEmailAccount: React.FC<CreateEmailAccountProps> = ({
             setParentComponentScreenState={setCreateNewAccount}
           />
 
-          <span className="select-login-method-heading">
-            <FormattedMessage
-              id="createYourAccount"
-              defaultMessage="Create an email account"
-            />
-          </span>
-
           <Form noValidate onSubmit={(e) => handleNewAccountFormSubmit(e)}>
-            <Form.Group className="mb-3" controlId="createAccountEmail">
-              <Form.Control
-                type="email"
-                required
-                placeholder={'Email'}
-                value={userEmail}
-                onChange={(e) => handleEmailOnChange(e.target.value)}
-                onBlur={() => handleEmailOnBlur()}
-                isInvalid={!userEmailIsValid && userEmailValidated}
-              />
-
-              <Form.Control.Feedback type="invalid" className="text-start ms-2">
+            <Stack gap={3}>
+              <span className="select-login-method-heading">
                 <FormattedMessage
-                  id="provideValidEmail"
-                  defaultMessage="Provide a valid email address"
+                  id="createYourAccount"
+                  defaultMessage="Create an email account"
                 />
-              </Form.Control.Feedback>
-            </Form.Group>
+              </span>
 
-            <Form.Group className="mb-3" controlId="createAccountPassword">
-              <Form.Control
-                type="password"
-                required
-                placeholder={getNewPasswordInputPlaceholder()}
-                value={userPassword}
-                onChange={(e) => {
-                  handlePasswordOnChange(e.target.value)
-                }}
-                isInvalid={userPasswordTextFieldTouched && !userPasswordIsValid}
-              />
-
-              <div className="password-requirements-text mt-1 text-start ms-2">
-                <FormattedMessage
-                  id="passwordMustContain"
-                  defaultMessage="A password must contain"
+              <Form.Group controlId="createAccountEmail">
+                <Form.Control
+                  type="email"
+                  required
+                  placeholder={'Email'}
+                  value={userEmail}
+                  onChange={(e) => handleEmailOnChange(e.target.value)}
+                  onBlur={() => handleEmailOnBlur()}
+                  isInvalid={!userEmailIsValid && userEmailValidated}
                 />
 
-                <ul>
-                  <li>
-                    <FormattedMessage
-                      id="atLeastEightChars"
-                      defaultMessage="At least 8 characters"
-                    />
-                  </li>
-                  <li>
-                    <FormattedMessage
-                      id="lowerCaseLetter"
-                      defaultMessage="A lower case letter"
-                    />
-                  </li>
-                  <li>
-                    <FormattedMessage
-                      id="upperCaseLetter"
-                      defaultMessage="An upper case letter"
-                    />
-                  </li>
-                  <li>
-                    <FormattedMessage id="number" defaultMessage="A number" />
-                  </li>
-                </ul>
-              </div>
-            </Form.Group>
+                <Form.Control.Feedback
+                  type="invalid"
+                  className="text-start ms-2"
+                >
+                  <FormattedMessage
+                    id="provideValidEmail"
+                    defaultMessage="Provide a valid email address"
+                  />
+                </Form.Control.Feedback>
+              </Form.Group>
+
+              <Form.Group controlId="createAccountPassword">
+                <Form.Control
+                  type="password"
+                  required
+                  placeholder={getNewPasswordInputPlaceholder()}
+                  value={userPassword}
+                  onChange={(e) => {
+                    handlePasswordOnChange(e.target.value)
+                  }}
+                  isInvalid={
+                    userPasswordTextFieldTouched && !userPasswordIsValid
+                  }
+                />
+
+                <div className="password-requirements-text mt-1 text-start ms-2">
+                  <FormattedMessage
+                    id="passwordMustContain"
+                    defaultMessage="A password must contain"
+                  />
+
+                  <ul>
+                    <li>
+                      <FormattedMessage
+                        id="atLeastEightChars"
+                        defaultMessage="At least 8 characters"
+                      />
+                    </li>
+                    <li>
+                      <FormattedMessage
+                        id="lowerCaseLetter"
+                        defaultMessage="A lower case letter"
+                      />
+                    </li>
+                    <li>
+                      <FormattedMessage
+                        id="upperCaseLetter"
+                        defaultMessage="An upper case letter"
+                      />
+                    </li>
+                    <li>
+                      <FormattedMessage id="number" defaultMessage="A number" />
+                    </li>
+                  </ul>
+                </div>
+              </Form.Group>
+            </Stack>
 
             <Button
               className="login-screen-button email-and-password-button w-100"
