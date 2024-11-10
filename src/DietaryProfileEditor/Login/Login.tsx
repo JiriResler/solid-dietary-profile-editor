@@ -186,6 +186,7 @@ const Login: React.FC = () => {
         <Form.Select
           value={languageFullName(selectedLanguage)}
           onChange={(e) => setLanguageContext(e.target.value)}
+          className="form-control"
         >
           <option key="en">English</option>
           <option key="sk">Slovensky</option>

@@ -163,7 +163,7 @@ const LoginSolid: React.FC<LoginSolidProps> = ({ setLoginWithSolid }) => {
           <Form.Select
             value={selectedProviderName}
             onChange={(e) => handleSelectOnChange(e)}
-            className="solid-provider-select"
+            className="solid-provider-select form-control"
           >
             <option key="defaultOption" hidden>
               {intl.formatMessage({
