@@ -11,6 +11,8 @@ import LoginBackButton from '../LoginBackButton/LoginBackButton'
 import isEmail from 'validator/lib/isEmail'
 import ErrorModal from '../../../ErrorModal/ErrorModal'
 import Spinner from 'react-bootstrap/Spinner'
+import { signInWithEmailAndPassword } from 'firebase/auth'
+import { auth } from '../../../../firebase'
 
 type LoginEmailAndPasswordProps = {
   setLoginWithEmailAndPassword: React.Dispatch<React.SetStateAction<boolean>>
@@ -113,7 +115,14 @@ const LoginEmailAndPassword: React.FC<LoginEmailAndPasswordProps> = ({
       return
     }
 
-    
+    signInWithEmailAndPassword(auth, loginEmail, loginPassword)
+      .catch((error: Error) => {
+        console.error(error)
+        
+      })
+      .finally(() => {
+        setLoginInProgress(false)
+      })
   }
 
   if (createNewAccount) {
