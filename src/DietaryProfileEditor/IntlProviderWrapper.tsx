@@ -85,6 +85,7 @@ type Messages = {
   singUpDefaultErrorMessage: string
   signUpEmailInUse: string
   emailOrPasswordInvalid: string
+  loginCredentialsNotValid: string
 }
 
 const messagesInSlovak: Messages = {
@@ -181,6 +182,8 @@ const messagesInSlovak: Messages = {
     'Pre zadanú emailovú adresu už existuje účet. Zvoľte prosím inú adresu alebo sa prihláste.',
   emailOrPasswordInvalid:
     'Zadaný email alebo heslo sú nesprávne. Skontrolujte si prosím údaje a skúste to znovu.',
+  loginCredentialsNotValid:
+    'Buď je zadaný email v nesprávnom formáte alebo ste nezadali heslo. Skontrolujte prosím vaše prihlasovacie údaje a skúste to znovu.',
 }
 
 // const cs_messages: Messages = {

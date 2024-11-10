@@ -9,6 +9,8 @@ import './LoginEmailAndPassword.css'
 import CreateEmailAccount from './CreateEmailAccount/CreateEmailAccount'
 import LoginBackButton from '../LoginBackButton/LoginBackButton'
 import isEmail from 'validator/lib/isEmail'
+import ErrorModal from '../../../ErrorModal/ErrorModal'
+import Spinner from 'react-bootstrap/Spinner'
 
 type LoginEmailAndPasswordProps = {
   setLoginWithEmailAndPassword: React.Dispatch<React.SetStateAction<boolean>>
@@ -87,76 +89,121 @@ const LoginEmailAndPassword: React.FC<LoginEmailAndPasswordProps> = ({
     setLoginEmail(newEmail)
   }
 
+  /**
+   * Validates the login form and sends a sign-in request to Firebase.
+   */
+  function handleLoginFormOnSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault()
+
+    setLoginInProgress(true)
+
+    const formNotValid = !isEmail(loginEmail) || loginPassword === ''
+
+    if (formNotValid) {
+      const errorMessage = intl.formatMessage({
+        id: 'loginCredentialsNotValid',
+        defaultMessage:
+          'The email you entered is invalid, or the password is missing. Please check your information and try again.',
+      })
+
+      setLoginErrorMessage(errorMessage)
+      setLoginCausedError(true)
+
+      setLoginInProgress(false)
+      return
+    }
+
+    
+  }
+
   if (createNewAccount) {
     return <CreateEmailAccount setCreateNewAccount={setCreateNewAccount} />
   }
 
   return (
-    <Fade in={true} timeout={500}>
-      <Stack
-        gap={3}
-        className="select-login-method-stack position-absolute top-50 start-50 translate-middle text-center pb-1"
-      >
-        <LoginBackButton
-          setParentComponentScreenState={setLoginWithEmailAndPassword}
-        />
+    <>
+      <ErrorModal
+        show={loginCausedError}
+        setShow={setLoginCausedError}
+        titleMessage={intl.formatMessage({
+          id: 'loginFailed',
+          defaultMessage: 'Login failed',
+        })}
+        bodyMessage={loginErrorMessage}
+      />
 
-        <Form noValidate>
-          <Stack gap={3}>
-            <span className="select-login-method-heading">
+      <Fade in={true} timeout={500}>
+        <Stack
+          gap={3}
+          className="select-login-method-stack position-absolute top-50 start-50 translate-middle text-center pb-1"
+        >
+          <LoginBackButton
+            setParentComponentScreenState={setLoginWithEmailAndPassword}
+          />
+
+          <Form noValidate onSubmit={(e) => handleLoginFormOnSubmit(e)}>
+            <Stack gap={3}>
+              <span className="select-login-method-heading">
+                <FormattedMessage
+                  id="loginWithEmail"
+                  defaultMessage="Sign in with your email"
+                />
+              </span>
+
+              <Form.Control
+                type="email"
+                placeholder={'Email'}
+                onBlur={() => handleEmailOnBlur()}
+                value={loginEmail}
+                isInvalid={!loginEmailIsValid && loginEmailValidated}
+                onChange={(e) => handleEmailOnChange(e.target.value)}
+              />
+
+              <Form.Control
+                type="password"
+                placeholder={getPasswordInputPlaceholder()}
+                value={loginPassword}
+                onChange={(e) => {
+                  setLoginPassword(e.target.value)
+                }}
+              />
+
+              <Button
+                type="submit"
+                className="login-screen-button email-and-password-button"
+              >
+                {!loginInProgress ? (
+                  <FormattedMessage id="signIn" defaultMessage="Sign in" />
+                ) : (
+                  <Spinner animation="border" role="status" size="sm">
+                    <span className="visually-hidden">Loading...</span>
+                  </Spinner>
+                )}
+              </Button>
+            </Stack>
+          </Form>
+
+          <div>
+            <span>
               <FormattedMessage
-                id="loginWithEmail"
-                defaultMessage="Sign in with your email"
+                id="newAccount"
+                defaultMessage="If you are new, you can also"
               />
             </span>
-
-            <Form.Control
-              type="email"
-              placeholder={'Email'}
-              onBlur={() => handleEmailOnBlur()}
-              value={loginEmail}
-              isInvalid={!loginEmailIsValid && loginEmailValidated}
-              onChange={(e) => handleEmailOnChange(e.target.value)}
-            />
-
-            <Form.Control
-              type="password"
-              placeholder={getPasswordInputPlaceholder()}
-              value={loginPassword}
-              onChange={(e) => {
-                setLoginPassword(e.target.value)
-              }}
-            />
-
-            <Button
-              type="submit"
-              className="login-screen-button email-and-password-button"
+            <br />
+            <span
+              className="create-account-span mx-auto"
+              onClick={() => setCreateNewAccount(true)}
             >
-              <FormattedMessage id="signIn" defaultMessage="Sign in" />
-            </Button>
-          </Stack>
-        </Form>
-
-        <div>
-          <span>
-            <FormattedMessage
-              id="newAccount"
-              defaultMessage="If you are new, you can also"
-            />
-          </span>
-          <br />
-          <span
-            className="create-account-span mx-auto"
-            onClick={() => setCreateNewAccount(true)}
-          >
-            <FormattedMessage
-              id="createAccount"
-              defaultMessage="Create an account"
-            />
-          </span>
-        </div>
-      </Stack>
-    </Fade>
+              <FormattedMessage
+                id="createAccount"
+                defaultMessage="Create an account"
+              />
+            </span>
+          </div>
+        </Stack>
+      </Fade>
+    </>
   )
 }
 

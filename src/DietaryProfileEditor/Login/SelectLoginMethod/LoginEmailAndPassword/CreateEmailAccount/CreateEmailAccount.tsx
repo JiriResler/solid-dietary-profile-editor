@@ -114,7 +114,7 @@ const CreateEmailAccount: React.FC<CreateEmailAccountProps> = ({
   /**
    * Validates the new account form and sends a request to Firebase.
    */
-  function handleNewAccountFormSubmit(e: React.FormEvent<HTMLFormElement>) {
+  function handleNewAccountFormOnSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
 
     setSignUpInProgress(true)
@@ -185,7 +185,7 @@ const CreateEmailAccount: React.FC<CreateEmailAccountProps> = ({
             setParentComponentScreenState={setCreateNewAccount}
           />
 
-          <Form noValidate onSubmit={(e) => handleNewAccountFormSubmit(e)}>
+          <Form noValidate onSubmit={(e) => handleNewAccountFormOnSubmit(e)}>
             <Stack gap={3}>
               <span className="select-login-method-heading">
                 <FormattedMessage
