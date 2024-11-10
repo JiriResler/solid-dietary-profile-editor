@@ -86,6 +86,7 @@ type Messages = {
   signUpEmailInUse: string
   emailOrPasswordInvalid: string
   loginCredentialsNotValid: string
+  emailLoginErrorMessage: string
 }
 
 const messagesInSlovak: Messages = {
@@ -183,7 +184,9 @@ const messagesInSlovak: Messages = {
   emailOrPasswordInvalid:
     'Zadaný email alebo heslo sú nesprávne. Skontrolujte si prosím údaje a skúste to znovu.',
   loginCredentialsNotValid:
-    'Buď je zadaný email v nesprávnom formáte alebo ste nezadali heslo. Skontrolujte prosím vaše prihlasovacie údaje a skúste to znovu.',
+    'Buďto je zadaný email v nesprávnom formáte alebo ste nezadali heslo. Skontrolujte prosím vaše prihlasovacie údaje a skúste to znovu.',
+  emailLoginErrorMessage:
+    'Prihlásenie bolo neúspešné kvôli nesprávnym prihlasovacím údajom.',
 }
 
 // const cs_messages: Messages = {

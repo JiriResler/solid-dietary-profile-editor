@@ -118,7 +118,14 @@ const LoginEmailAndPassword: React.FC<LoginEmailAndPasswordProps> = ({
     signInWithEmailAndPassword(auth, loginEmail, loginPassword)
       .catch((error: Error) => {
         console.error(error)
-        
+        const errorMessage = intl.formatMessage({
+          id: 'emailLoginErrorMessage',
+          defaultMessage:
+            'The credentials you entered are incorrect. Please check your details and try again.',
+        })
+
+        setLoginErrorMessage(errorMessage)
+        setLoginCausedError(true)
       })
       .finally(() => {
         setLoginInProgress(false)
