@@ -2,7 +2,7 @@ import { SessionProvider } from '@inrupt/solid-ui-react'
 import IntlProviderWrapper from './IntlProviderWrapper'
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import Login from './Login/Login'
-import ProfileManagement from './ProfileManagement/ProfileManagement'
+import DietaryProfileManagement from './DietaryProfileManagement/DietaryProfileManagement'
 import Container from 'react-bootstrap/Container'
 import { FacebookProvider } from 'react-facebook'
 import './DietaryProfileEditor.css'
@@ -22,7 +22,7 @@ const DietaryProfileEditor: React.FC = () => {
           <Container fluid>
             <BrowserRouter basename={applicationBasePath}>
               <Routes>
-                <Route path="/" element={<ProfileManagement />} />
+                <Route path="/" element={<DietaryProfileManagement />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="*" element={<Navigate to="/" replace />} />
               </Routes>
