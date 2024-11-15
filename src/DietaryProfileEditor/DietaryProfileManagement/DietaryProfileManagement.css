@@ -1,0 +1,19 @@
+.profile-overview-head-section {
+  background-color: #2541b2;
+  height: 180px;
+  border-radius: 0px 0px 40px 40px;
+}
+
+.user-name {
+  color: white;
+  font-weight: bold;
+}
+
+.user-email {
+  color: white;
+}
+
+.profile-photo {
+  width: 75px;
+  border-radius: 50%;
+}
