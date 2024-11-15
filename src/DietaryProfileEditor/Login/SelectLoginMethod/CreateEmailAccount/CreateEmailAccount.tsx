@@ -5,14 +5,14 @@ import React from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 import Fade from '@mui/material/Fade'
 import Stack from 'react-bootstrap/Stack'
-import LoginBackButton from '../../LoginBackButton/LoginBackButton'
+import LoginBackButton from '../LoginBackButton/LoginBackButton'
 import './CreateEmailAccount.css'
 import isEmail from 'validator/lib/isEmail'
 import isStrongPassword from 'validator/lib/isStrongPassword'
 import { createUserWithEmailAndPassword } from 'firebase/auth'
-import { auth } from '../../../../../firebase'
+import { auth } from '../../../../firebase'
 import Spinner from 'react-bootstrap/Spinner'
-import ErrorModal from '../../../../ErrorModal/ErrorModal'
+import ErrorModal from '../../../ErrorModal/ErrorModal'
 
 type CreateEmailAccountProps = {
   setCreateNewAccount: React.Dispatch<React.SetStateAction<boolean>>
