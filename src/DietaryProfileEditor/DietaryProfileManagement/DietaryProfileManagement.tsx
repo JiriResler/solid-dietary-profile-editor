@@ -42,7 +42,7 @@ const DietaryProfileManagement: React.FC = () => {
           <span className="profile-overview-heading ms-2">
             <FormattedMessage
               id="profileOverviewHeading"
-              defaultMessage="Your eating preferences"
+              defaultMessage="Your dietary profile"
             />
           </span>
         </Col>
