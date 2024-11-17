@@ -56,10 +56,10 @@ const ProfileOverview: React.FC = () => {
         </Col>
       </Row>
 
-      <Row>
-        <Col>
+      <Row className="mt-4">
+        <Col xs={12} lg={6} className=" pb-4">
           <Card>
-            <Card.Body className="profile-card-body">
+            <Card.Body>
               <Card.Title>
                 <FormattedMessage id="allergens" defaultMessage="Allergens" />
               </Card.Title>
@@ -92,9 +92,9 @@ const ProfileOverview: React.FC = () => {
           </Card>
         </Col>
 
-        <Col>
+        <Col xs={12} lg={6} className="pb-4">
           <Card>
-            <Card.Body className="profile-card-body">
+            <Card.Body>
               <Card.Title>
                 <FormattedMessage id="diets" defaultMessage="Diets" />
               </Card.Title>
