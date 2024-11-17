@@ -38,7 +38,7 @@ const DietaryProfileManagement: React.FC = () => {
   return (
     <>
       <Row className="profile-overview-head-section position-relative align-items-center">
-        <Col className="border">
+        <Col xs={10} md={11}>
           <span className="profile-overview-heading ms-2">
             <FormattedMessage
               id="profileOverviewHeading"
@@ -47,7 +47,7 @@ const DietaryProfileManagement: React.FC = () => {
           </span>
         </Col>
 
-        <Col className="border text-center">
+        <Col className="text-center">
           <Dropdown>
             <Dropdown.Toggle as={CustomToggle} />
           </Dropdown>
