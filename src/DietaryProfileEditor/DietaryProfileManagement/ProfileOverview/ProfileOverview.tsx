@@ -72,20 +72,19 @@ const ProfileOverview: React.FC = () => {
               </Card.Subtitle>
 
               <Card.Text className="width-fit-content">
-                <Stack direction="horizontal" gap={2}>
-                  <img
-                    src="images/allergens/crustaceans.svg"
-                    alt="allergen icon"
-                  />
-                  <span className="w-100">Allergen</span>
-                </Stack>
+                <Stack gap={1}>
+                  <div>
+                    <img
+                      src="images/allergens/crustaceans.svg"
+                      alt="allergen icon"
+                    />
+                    <span className="ms-2">Crustaceans</span>
+                  </div>
 
-                <Stack direction="horizontal" gap={2}>
-                  <img
-                    src="images/allergens/crustaceans.svg"
-                    alt="allergen icon"
-                  />
-                  <span className="w-100">Allergen</span>
+                  <div>
+                    <img src="images/allergens/soya.svg" alt="allergen icon" />
+                    <span className="ms-2">Soya</span>
+                  </div>
                 </Stack>
               </Card.Text>
             </Card.Body>
