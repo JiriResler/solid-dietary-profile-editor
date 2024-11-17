@@ -517,6 +517,7 @@ const Profile: React.FC<Props> = ({ loginMethod }) => {
               <Card.Title>
                 <FormattedMessage id="diets" defaultMessage="Diets" />
               </Card.Title>
+
               <Card.Subtitle className="mb-2 text-muted">
                 <FormattedMessage
                   id="onDiets"

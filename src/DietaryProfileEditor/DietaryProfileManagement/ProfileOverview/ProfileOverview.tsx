@@ -4,6 +4,8 @@ import { FormattedMessage } from 'react-intl'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Dropdown from 'react-bootstrap/Dropdown'
+import Card from 'react-bootstrap/Card'
+import Stack from 'react-bootstrap/Stack'
 
 const ProfileOverview: React.FC = () => {
   type CustomToggleProps = {
@@ -51,6 +53,70 @@ const ProfileOverview: React.FC = () => {
           <Dropdown>
             <Dropdown.Toggle as={CustomToggle} />
           </Dropdown>
+        </Col>
+      </Row>
+
+      <Row>
+        <Col>
+          <Card>
+            <Card.Body className="profile-card-body">
+              <Card.Title>
+                <FormattedMessage id="allergens" defaultMessage="Allergens" />
+              </Card.Title>
+
+              <Card.Subtitle className="mb-2 text-muted">
+                <FormattedMessage
+                  id="allergicTo"
+                  defaultMessage="You are allergic to"
+                />
+              </Card.Subtitle>
+
+              <Card.Text className="width-fit-content">
+                <Stack direction="horizontal" gap={2}>
+                  <img
+                    src="images/allergens/crustaceans.svg"
+                    alt="allergen icon"
+                  />
+                  <span className="w-100">Allergen</span>
+                </Stack>
+
+                <Stack direction="horizontal" gap={2}>
+                  <img
+                    src="images/allergens/crustaceans.svg"
+                    alt="allergen icon"
+                  />
+                  <span className="w-100">Allergen</span>
+                </Stack>
+              </Card.Text>
+            </Card.Body>
+          </Card>
+        </Col>
+
+        <Col>
+          <Card>
+            <Card.Body className="profile-card-body">
+              <Card.Title>
+                <FormattedMessage id="diets" defaultMessage="Diets" />
+              </Card.Title>
+
+              <Card.Subtitle className="mb-2 text-muted">
+                <FormattedMessage
+                  id="onDiets"
+                  defaultMessage="Your diets are"
+                />
+              </Card.Subtitle>
+
+              <Card.Text className="width-fit-content">
+                <Stack direction="horizontal" gap={2}>
+                  <span className="w-100">Diet</span>
+                </Stack>
+
+                <Stack direction="horizontal" gap={2}>
+                  <span className="w-100">Diet</span>
+                </Stack>
+              </Card.Text>
+            </Card.Body>
+          </Card>
         </Col>
       </Row>
     </>
