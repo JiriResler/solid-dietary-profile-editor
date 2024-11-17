@@ -77,13 +77,27 @@ const ProfileOverview: React.FC = () => {
                     <img
                       src="images/allergens/crustaceans.svg"
                       alt="allergen icon"
+                      className="allergen-icon"
                     />
                     <span className="ms-2">Crustaceans</span>
                   </div>
 
                   <div>
-                    <img src="images/allergens/soya.svg" alt="allergen icon" />
+                    <img
+                      src="images/allergens/soya.svg"
+                      alt="allergen icon"
+                      className="allergen-icon"
+                    />
                     <span className="ms-2">Soya</span>
+                  </div>
+
+                  <div>
+                    <img
+                      src="images/allergens/peanuts.svg"
+                      alt="allergen icon"
+                      className="allergen-icon"
+                    />
+                    <span className="ms-2">Peanuts</span>
                   </div>
                 </Stack>
               </Card.Text>
