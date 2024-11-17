@@ -1,4 +1,4 @@
-import Stack from 'react-bootstrap/Stack'
+import { FormattedMessage } from 'react-intl'
 import './DietaryProfileManagement.css'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
@@ -6,20 +6,14 @@ import Col from 'react-bootstrap/Col'
 const DietaryProfileManagement: React.FC = () => {
   return (
     <>
-      <Row className="profile-overview-head-section position-relative">
+      <Row className="profile-overview-head-section position-relative align-items-center">
         <Col>
-          <Stack
-            gap={1}
-            className="w-50 text-center position-absolute top-50 start-50 translate-middle"
-          >
-            <img
-              src={'images/profile_picture_default.svg'}
-              alt="Profile icon"
-              className="profile-photo mx-auto"
+          <span className="profile-overview-heading ms-2">
+            <FormattedMessage
+              id="profileOverviewHeading"
+              defaultMessage="Your eating preferences"
             />
-            <span className="user-name">John Smith</span>
-            <span className="user-email">john.smith@email.com</span>
-          </Stack>
+          </span>
 
           {/* <div className="position-absolute top-0 end-0 mt-4 me-4">
           <Dropdown>
