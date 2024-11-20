@@ -6,6 +6,7 @@ import Col from 'react-bootstrap/Col'
 import Dropdown from 'react-bootstrap/Dropdown'
 import Card from 'react-bootstrap/Card'
 import Stack from 'react-bootstrap/Stack'
+import Button from 'react-bootstrap/Button'
 
 const ProfileOverview: React.FC = () => {
   type CustomToggleProps = {
@@ -38,7 +39,7 @@ const ProfileOverview: React.FC = () => {
   )
 
   return (
-    <>
+    <div className="profile-overview-screen position-relative">
       <Row className="profile-overview-head-section position-relative align-items-center">
         <Col xs={10} md={11}>
           <span className="profile-overview-heading ms-2">
@@ -132,7 +133,11 @@ const ProfileOverview: React.FC = () => {
           </Card>
         </Col>
       </Row>
-    </>
+
+      <Button className="position-absolute bottom-0 end-0 mb-2">
+        Edit profile
+      </Button>
+    </div>
   )
 }
 
