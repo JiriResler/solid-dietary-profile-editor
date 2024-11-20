@@ -12,3 +12,9 @@
   font-size: x-large;
   font-weight: 500;
 }
+
+.edit-profile-button {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+}
