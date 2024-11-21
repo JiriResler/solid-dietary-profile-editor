@@ -264,7 +264,7 @@ const CreateEmailAccount: React.FC<CreateEmailAccountProps> = ({
             </Stack>
 
             <Button
-              className="login-screen-button email-and-password-button w-100"
+              className="login-screen-button secondary-button w-100"
               type="submit"
             >
               {!signUpInProgress ? (
