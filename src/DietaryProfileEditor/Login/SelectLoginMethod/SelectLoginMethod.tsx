@@ -222,7 +222,7 @@ const SelectLoginMethod: React.FC = () => {
           </div>
 
           <Button
-            className="login-screen-button secondary-button"
+            className="login-screen-button app-secondary-color-button"
             onClick={() => {
               setLoginWithEmailAndPassword(true)
               setAllowFadeAnimation(true)

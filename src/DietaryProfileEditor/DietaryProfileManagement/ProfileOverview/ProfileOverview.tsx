@@ -134,7 +134,7 @@ const ProfileOverview: React.FC = () => {
         </Col>
       </Row>
 
-      <Button className="edit-profile-button secondary-button position-absolute bottom-0 end-0 mb-3 me-3">
+      <Button className="edit-profile-button app-secondary-color-button position-absolute bottom-0 end-0 mb-3 me-3">
         <img
           src="images/pencil-square.svg"
           alt="Edit profile icon"

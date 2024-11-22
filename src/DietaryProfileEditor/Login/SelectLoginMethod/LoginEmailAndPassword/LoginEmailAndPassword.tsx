@@ -186,7 +186,7 @@ const LoginEmailAndPassword: React.FC<LoginEmailAndPasswordProps> = ({
 
               <Button
                 type="submit"
-                className="login-screen-button secondary-button"
+                className="login-screen-button app-secondary-color-button"
               >
                 {!loginInProgress ? (
                   <FormattedMessage id="signIn" defaultMessage="Sign in" />

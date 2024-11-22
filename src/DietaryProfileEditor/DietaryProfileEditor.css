@@ -7,17 +7,17 @@
   border-color: #575151;
 }
 
-.secondary-button {
+.app-secondary-color-button {
   background-color: #252323;
   border-color: #252323;
 }
 
-.secondary-button:hover {
+.app-secondary-color-button:hover {
   background-color: #302d2d;
   border-color: #302d2d;
 }
 
-.secondary-button:active {
+.app-secondary-color-button:active {
   background-color: #1d1b1b !important;
   border-color: #1d1b1b !important;
 }
