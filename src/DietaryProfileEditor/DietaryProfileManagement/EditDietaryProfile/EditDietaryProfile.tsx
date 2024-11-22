@@ -81,6 +81,10 @@ const EditDietaryProfile: React.FC = () => {
           </StepLabel>
         </Step>
       </Stepper>
+
+      <div className="edit-profile-main-content-section overflow-auto">
+        Lorem ipsum
+      </div>
     </Stack>
   )
 }
