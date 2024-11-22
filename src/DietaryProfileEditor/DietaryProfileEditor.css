@@ -7,6 +7,21 @@
   border-color: #575151;
 }
 
+.app-primary-color-button {
+  background-color: #2541b2;
+  border-color: #2541b2;
+}
+
+.app-primary-color-button:hover {
+  background-color: #1c3bb8;
+  border-color: #1c3bb8;
+}
+
+.app-primary-color-button:active {
+  background-color: #152e92 !important;
+  border-color: #152e92 !important;
+}
+
 .app-secondary-color-button {
   background-color: #252323;
   border-color: #252323;
