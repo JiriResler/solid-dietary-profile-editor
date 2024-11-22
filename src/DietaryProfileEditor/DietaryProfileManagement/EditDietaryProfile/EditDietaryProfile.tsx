@@ -9,6 +9,7 @@ import { styled } from '@mui/material/styles'
 import StepConnector, {
   stepConnectorClasses,
 } from '@mui/material/StepConnector'
+import EditProfileNavigation from './EditProfileNavigation/EditProfileNavigation'
 
 const EditDietaryProfile: React.FC = () => {
   const [currentStep] = useState(0)
@@ -84,6 +85,10 @@ const EditDietaryProfile: React.FC = () => {
 
       <div className="edit-profile-main-content-section overflow-auto">
         Lorem ipsum
+      </div>
+
+      <div className="position-absolute bottom-0 start-50 translate-middle-x w-100">
+        <EditProfileNavigation />
       </div>
     </Stack>
   )

@@ -1,0 +1,16 @@
+.navigation-button {
+  height: 60px;
+  border-radius: 12px;
+}
+
+.step-back-navigation-button {
+  width: 60px;
+}
+
+.step-forward-navigation-button {
+  /*
+      width =  100% - back button width - space between forward and back buttons 
+    */
+  width: calc(100% - 60px - 20px);
+  font-size: x-large;
+}
