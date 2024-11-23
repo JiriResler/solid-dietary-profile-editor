@@ -1,14 +1,1 @@
-.edit-profile-stack {
-  height: 100dvh;
-}
 
-.edit-profile-stepper {
-  height: 75px;
-}
-
-.edit-profile-main-content-section {
-  /* 
-    height = full height - stepper height - step navigation button height - approximate sum of spaces between elements on screen
-  */
-  height: calc(100dvh - 75px - 60px - 50px);
-}

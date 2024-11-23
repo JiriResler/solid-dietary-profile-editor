@@ -1,4 +1,5 @@
-import Stack from 'react-bootstrap/Stack'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
 import './EditDietaryProfile.css'
 import Stepper from '@mui/material/Stepper'
 import Step from '@mui/material/Step'
@@ -38,59 +39,65 @@ const EditDietaryProfile: React.FC = () => {
   }))
 
   return (
-    <Stack gap={3} className="edit-profile-stack position-relative text-center">
-      <Stepper
-        activeStep={currentStep}
-        alternativeLabel
-        className="edit-profile-stepper mt-3"
-        connector={<CustomStepConnector />}
-        sx={{
-          '& .MuiStepLabel-iconContainer.Mui-active > .MuiSvgIcon-root.Mui-active':
-            {
-              color: '#2541b2',
-            },
-          '& .MuiStepLabel-iconContainer.Mui-completed > .MuiSvgIcon-root.Mui-completed':
-            {
-              color: '#2541b2',
-            },
-          '& .MuiStepLabel-labelContainer': {
-            height: '50px',
-            position: 'relative',
-          },
-        }}
-      >
-        <Step key="step1">
-          <StepLabel>
-            <FormattedMessage id="allergens" defaultMessage="Allergens" />
-          </StepLabel>
-        </Step>
+    <>
+      <Row>
+        <Col>
+          <Stepper
+            activeStep={currentStep}
+            alternativeLabel
+            className="edit-profile-stepper mt-3"
+            connector={<CustomStepConnector />}
+            sx={{
+              '& .MuiStepLabel-iconContainer.Mui-active > .MuiSvgIcon-root.Mui-active':
+                {
+                  color: '#2541b2',
+                },
+              '& .MuiStepLabel-iconContainer.Mui-completed > .MuiSvgIcon-root.Mui-completed':
+                {
+                  color: '#2541b2',
+                },
+              '& .MuiStepLabel-labelContainer': {
+                height: '50px',
+                position: 'relative',
+              },
+            }}
+          >
+            <Step key="step1">
+              <StepLabel>
+                <FormattedMessage id="allergens" defaultMessage="Allergens" />
+              </StepLabel>
+            </Step>
 
-        <Step key="step2">
-          <StepLabel>
-            <FormattedMessage id="diets" defaultMessage="Diets" />
-          </StepLabel>
-        </Step>
+            <Step key="step2">
+              <StepLabel>
+                <FormattedMessage id="diets" defaultMessage="Diets" />
+              </StepLabel>
+            </Step>
 
-        <Step key="step3">
-          <StepLabel>
-            <div className="position-absolute top-50 start-50 translate-middle">
-              <FormattedMessage
-                id="tastePreferences"
-                defaultMessage="Taste preferences"
-              />
-            </div>
-          </StepLabel>
-        </Step>
-      </Stepper>
+            <Step key="step3">
+              <StepLabel>
+                <div className="position-absolute top-50 start-50 translate-middle">
+                  <FormattedMessage
+                    id="tastePreferences"
+                    defaultMessage="Taste preferences"
+                  />
+                </div>
+              </StepLabel>
+            </Step>
+          </Stepper>
+        </Col>
+      </Row>
 
-      <div className="edit-profile-main-content-section overflow-auto">
-        Lorem ipsum
-      </div>
+      <Row>
+        <Col>Main content</Col>
+      </Row>
 
-      <div className="position-absolute bottom-0 start-50 translate-middle-x w-100">
-        <EditProfileNavigation />
-      </div>
-    </Stack>
+      <Row>
+        <Col>
+          <EditProfileNavigation />
+        </Col>
+      </Row>
+    </>
   )
 }
 
