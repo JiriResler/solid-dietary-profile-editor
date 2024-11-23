@@ -1,8 +1,8 @@
 import Button from 'react-bootstrap/Button'
 import { FormattedMessage } from 'react-intl'
-import './EditProfileNavigation.css'
+import './EditProfileNavButtons.css'
 
-const EditProfileNavigation: React.FC = () => {
+const EditProfileNavButtons: React.FC = () => {
   return (
     <>
       <Button className="navigation-button step-back-navigation-button app-secondary-color-button mb-2">
@@ -16,4 +16,4 @@ const EditProfileNavigation: React.FC = () => {
   )
 }
 
-export default EditProfileNavigation
+export default EditProfileNavButtons

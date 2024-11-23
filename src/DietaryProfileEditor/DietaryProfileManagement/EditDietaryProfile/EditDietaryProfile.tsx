@@ -10,7 +10,7 @@ import { styled } from '@mui/material/styles'
 import StepConnector, {
   stepConnectorClasses,
 } from '@mui/material/StepConnector'
-import EditProfileNavigation from './EditProfileNavigation/EditProfileNavigation'
+import EditProfileNavButtons from './EditProfileNavigation/EditProfileNavButtons'
 
 const EditDietaryProfile: React.FC = () => {
   const [currentStep] = useState(0)
@@ -94,7 +94,7 @@ const EditDietaryProfile: React.FC = () => {
 
       <Row>
         <Col>
-          <EditProfileNavigation />
+          <EditProfileNavButtons />
         </Col>
       </Row>
     </>
