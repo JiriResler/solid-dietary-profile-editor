@@ -10,17 +10,17 @@ const EditDietaryProfile: React.FC = () => {
 
   return (
     <>
-      <Row>
+      <Row className="edit-profile-header bg-warning">
         <Col>
           <EditProfileNavStepper currentStep={currentStep} />
         </Col>
       </Row>
 
-      <Row>
+      <Row className="edit-profile-main-content bg-success">
         <Col>Main content</Col>
       </Row>
 
-      <Row>
+      <Row className="edit-profile-footer bg-danger">
         <Col>
           <EditProfileNavButtons />
         </Col>
