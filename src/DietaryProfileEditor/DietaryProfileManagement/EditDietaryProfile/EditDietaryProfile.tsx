@@ -2,7 +2,7 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import './EditDietaryProfile.css'
 import { useState } from 'react'
-import EditProfileNavButtons from './EditProfileNavigation/EditProfileNavButtons'
+import EditProfileNavButtons from './EditProfileNavButtons/EditProfileNavButtons'
 
 const EditDietaryProfile: React.FC = () => {
   const [currentStep] = useState(0)
