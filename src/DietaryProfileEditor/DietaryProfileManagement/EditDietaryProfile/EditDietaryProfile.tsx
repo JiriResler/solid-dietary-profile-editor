@@ -1,18 +1,15 @@
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import './EditDietaryProfile.css'
-import { useState } from 'react'
 import EditProfileNavStepper from './EditProfileNavStepper/EditProfileNavStepper'
 import EditProfileNavButtons from './EditProfileNavButtons/EditProfileNavButtons'
 
 const EditDietaryProfile: React.FC = () => {
-  const [currentStep] = useState(0)
-
   return (
     <>
       <Row className="edit-profile-header bg-warning">
         <Col>
-          <EditProfileNavStepper currentStep={currentStep} />
+          <EditProfileNavStepper />
         </Col>
       </Row>
 
