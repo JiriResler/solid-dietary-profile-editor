@@ -54,14 +54,16 @@ function CircularProgressWithLabel(
           variant="caption"
           component="div"
           sx={{ color: 'text.secondary' }}
-        >{`${Math.round(props.value)}%`}</Typography>
+        >
+          {`${'2 of 4'}`}
+        </Typography>
       </Box>
     </Box>
   )
 }
 
 const EditProfileNavStepper: React.FC = () => {
-  const [progress] = React.useState(33)
+  const [progress] = React.useState(50)
 
   return <CircularProgressWithLabel value={progress} />
 }
