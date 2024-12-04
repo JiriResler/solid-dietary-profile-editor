@@ -4,6 +4,8 @@ import CircularProgress, {
 } from '@mui/material/CircularProgress'
 import Typography from '@mui/material/Typography'
 import Box from '@mui/material/Box'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
 
 function CircularProgressWithLabel(
   props: CircularProgressProps & { value: number },
@@ -65,7 +67,18 @@ function CircularProgressWithLabel(
 const EditProfileNavStepper: React.FC = () => {
   const [progress] = React.useState(50)
 
-  return <CircularProgressWithLabel value={progress} />
+  return (
+    <Row className="h-100 align-items-center">
+      <Col className="text-end">
+        <CircularProgressWithLabel value={progress} />
+      </Col>
+
+      <Col>
+        <div>Step 2</div>
+        <div>Next: Step 3</div>
+      </Col>
+    </Row>
+  )
 }
 
 export default EditProfileNavStepper
