@@ -7,17 +7,17 @@ import EditProfileNavButtons from './EditProfileNavButtons/EditProfileNavButtons
 const EditDietaryProfile: React.FC = () => {
   return (
     <>
-      <Row className="edit-profile-header bg-warning">
+      <Row className="edit-profile-header">
         <Col>
           <EditProfileNavStepper />
         </Col>
       </Row>
 
-      <Row className="edit-profile-main-content bg-success">
+      <Row className="edit-profile-main-content">
         <Col>Main content</Col>
       </Row>
 
-      <Row className="edit-profile-footer bg-danger">
+      <Row className="edit-profile-footer">
         <Col>
           <EditProfileNavButtons />
         </Col>
