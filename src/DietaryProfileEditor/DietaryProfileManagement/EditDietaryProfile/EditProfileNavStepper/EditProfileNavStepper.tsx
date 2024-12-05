@@ -36,6 +36,7 @@ function CircularProgressWithLabel(
           variant="determinate"
           size="90px"
           thickness={6}
+          sx={{ color: '#2541b2' }}
           {...props}
         />
       </Box>
@@ -64,8 +65,8 @@ const EditProfileNavStepper: React.FC = () => {
   return (
     <Row className="h-100 align-items-center">
       <Col>
-        <h1>Step 2</h1>
-        <h5 className="text-secondary">Next: Step 3</h5>
+        <h1 className="ms-2">Step 2</h1>
+        <h5 className="text-secondary ms-2">Next: Step 3</h5>
       </Col>
 
       <Col className="mt-1 text-end">
