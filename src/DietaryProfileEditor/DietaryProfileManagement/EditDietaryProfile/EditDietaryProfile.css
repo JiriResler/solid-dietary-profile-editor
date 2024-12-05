@@ -1,5 +1,5 @@
 .edit-profile-header {
-  height: 90px;
+  height: 106px;
 }
 
 .edit-profile-footer {
@@ -8,5 +8,5 @@
 
 .edit-profile-main-content {
   /* Height is 100% of screen height minus header and footer */
-  height: calc(100dvh - (90px + 50px));
+  height: calc(100dvh - (106px + 50px));
 }
