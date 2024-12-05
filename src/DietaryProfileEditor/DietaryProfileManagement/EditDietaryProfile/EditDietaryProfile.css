@@ -3,10 +3,10 @@
 }
 
 .edit-profile-footer {
-  height: 50px;
+  height: 70px;
 }
 
 .edit-profile-main-content {
   /* Height is 100% of screen height minus header and footer */
-  height: calc(100dvh - (116px + 50px));
+  height: calc(100dvh - (116px + 70px));
 }

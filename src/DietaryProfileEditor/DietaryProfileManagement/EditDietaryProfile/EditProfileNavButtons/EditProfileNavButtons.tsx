@@ -1,18 +1,24 @@
 import Button from 'react-bootstrap/Button'
 import { FormattedMessage } from 'react-intl'
 import './EditProfileNavButtons.css'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
 
 const EditProfileNavButtons: React.FC = () => {
   return (
-    <>
-      <Button className="navigation-button step-back-navigation-button app-secondary-color-button mb-2">
-        {'<'}
-      </Button>
+    <Row className="h-100 align-items-center">
+      <Col>
+        <Button className="navigation-button app-secondary-color-button">
+          <FormattedMessage id="goBack" defaultMessage="Back" />
+        </Button>
+      </Col>
 
-      <Button className="navigation-button step-forward-navigation-button app-primary-color-button mb-2 ms-3">
-        <FormattedMessage id="nextStep" defaultMessage="Next" />
-      </Button>
-    </>
+      <Col className="text-end">
+        <Button className="navigation-button app-primary-color-button">
+          <FormattedMessage id="nextStep" defaultMessage="Next" />
+        </Button>
+      </Col>
+    </Row>
   )
 }
 
