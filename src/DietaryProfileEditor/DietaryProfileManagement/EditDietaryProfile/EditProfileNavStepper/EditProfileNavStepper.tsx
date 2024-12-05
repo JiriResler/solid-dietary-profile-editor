@@ -2,7 +2,7 @@ import * as React from 'react'
 import CircularProgress, {
   CircularProgressProps,
 } from '@mui/material/CircularProgress'
-import Typography from '@mui/material/Typography'
+import './EditProfileNavStepper.css'
 import Box from '@mui/material/Box'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
@@ -14,10 +14,10 @@ function CircularProgressWithLabel(
     <Box sx={{ position: 'relative', display: 'inline-flex' }}>
       <CircularProgress
         variant="determinate"
-        size="60px"
+        size="90px"
         thickness={6}
         value={100}
-        sx={{ color: 'gray' }}
+        sx={{ color: '#e3dfde' }}
       />
 
       <Box
@@ -34,7 +34,7 @@ function CircularProgressWithLabel(
       >
         <CircularProgress
           variant="determinate"
-          size="60px"
+          size="90px"
           thickness={6}
           {...props}
         />
@@ -52,13 +52,7 @@ function CircularProgressWithLabel(
           justifyContent: 'center',
         }}
       >
-        <Typography
-          variant="caption"
-          component="div"
-          sx={{ color: 'text.secondary' }}
-        >
-          {`${'2 of 4'}`}
-        </Typography>
+        <span className="inside-progress-text">2 of 4</span>
       </Box>
     </Box>
   )
