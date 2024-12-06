@@ -10,3 +10,12 @@
   /* Height is 100% of screen height minus header and footer */
   height: calc(100dvh - (116px + 70px));
 }
+
+.edit-profile-large-screen {
+  height: 100dvh;
+  background-color: #2541b2;
+}
+
+.edit-profile-card {
+  width: 650px;
+}
