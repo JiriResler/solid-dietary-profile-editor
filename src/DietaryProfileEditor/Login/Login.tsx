@@ -78,7 +78,7 @@ const Login: React.FC = () => {
 
   return (
     <>
-      <div className="d-none d-lg-flex login-screen-row">
+      <div className="d-none d-lg-flex">
         <Modal
           show={showAboutApplicationModal}
           onHide={() => setShowAboutApplicationModal(false)}
@@ -113,7 +113,7 @@ const Login: React.FC = () => {
           </Modal.Footer>
         </Modal>
 
-        <Row>
+        <Row className="login-screen-row">
           <Col md={7} className="position-relative">
             <Stack className="w-75 text-center position-absolute top-50 start-50 translate-middle">
               <h2 className="w-50 mx-auto">
