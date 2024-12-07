@@ -33,7 +33,7 @@ function EditProfileScreen() {
 const EditDietaryProfile: React.FC = () => {
   return (
     <>
-      <Row className="d-lg-none edit-profile-small-screen">
+      <Row className="d-lg-none edit-profile-small-screen mt-3">
         <Col>
           <EditProfileScreen />
         </Col>
