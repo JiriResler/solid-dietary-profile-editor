@@ -69,7 +69,7 @@ const EditProfileNavStepper: React.FC = () => {
         <h5 className="text-secondary ms-2">Next: Step 3</h5>
       </Col>
 
-      <Col className="mt-1 text-end">
+      <Col className="text-end">
         <CircularProgressWithLabel value={progress} />
       </Col>
     </Row>

@@ -17,7 +17,7 @@ function EditProfileScreen() {
         </Col>
       </Row>
 
-      <Row className="edit-profile-main-content">
+      <Row className="flex-fill mb-3">
         <Col>Main content</Col>
       </Row>
 
@@ -40,7 +40,7 @@ const EditDietaryProfile: React.FC = () => {
       <Row className="d-none d-lg-flex edit-profile-large-screen position-relative">
         <Col>
           <Card className="edit-profile-card position-absolute top-50 start-50 translate-middle">
-            <Card.Body>
+            <Card.Body className="d-flex flex-column align-items-stretch">
               <EditProfileScreen />
             </Card.Body>
           </Card>
