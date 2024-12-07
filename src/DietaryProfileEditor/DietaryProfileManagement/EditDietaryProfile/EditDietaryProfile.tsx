@@ -33,12 +33,14 @@ function EditProfileScreen() {
 const EditDietaryProfile: React.FC = () => {
   return (
     <>
-      <div className="d-lg-none">
-        <EditProfileScreen />
-      </div>
+      <Row className="d-lg-none edit-profile-small-screen bg-warning">
+        <Col className="d-flex flex-column align-items-stretch bg-success">
+          <EditProfileScreen />
+        </Col>
+      </Row>
 
-      <Row className="d-none d-lg-flex edit-profile-large-screen position-relative">
-        <Col>
+      <Row className="d-none d-lg-flex">
+        <Col className="edit-profile-large-screen position-relative">
           <Card className="edit-profile-card position-absolute top-50 start-50 translate-middle">
             <Card.Body className="d-flex flex-column align-items-stretch">
               <EditProfileScreen />

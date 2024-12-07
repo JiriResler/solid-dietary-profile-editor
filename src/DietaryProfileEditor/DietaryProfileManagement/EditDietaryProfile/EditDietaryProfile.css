@@ -11,6 +11,10 @@
   background-color: #2541b2;
 }
 
+.edit-profile-small-screen {
+  height: 95dvh;
+}
+
 .edit-profile-card {
   width: 768px;
   height: 95dvh;
