@@ -6,6 +6,7 @@ import './EditProfileNavStepper.css'
 import Box from '@mui/material/Box'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
+import { FormattedMessage } from 'react-intl'
 
 function CircularProgressWithLabel(
   props: CircularProgressProps & { value: number },
@@ -64,9 +65,14 @@ const EditProfileNavStepper: React.FC = () => {
 
   return (
     <Row className="h-100 align-items-center">
-      <Col>
+      <Col xs={9}>
         <div className="ms-2">
-          <h1>Step 2</h1>
+          <h1>
+            <FormattedMessage
+              id="allergiesAndFoodIntolerances"
+              defaultMessage="Allergens and Intolerances"
+            />
+          </h1>
           <h5 className="text-secondary">Next: Step 3</h5>
         </div>
       </Col>

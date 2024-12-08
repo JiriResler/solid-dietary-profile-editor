@@ -88,6 +88,7 @@ type Messages = {
   loginCredentialsNotValid: string
   emailLoginErrorMessage: string
   profileOverviewHeading: string
+  allergiesAndFoodIntolerances: string
 }
 
 const messagesInSlovak: Messages = {
@@ -189,6 +190,7 @@ const messagesInSlovak: Messages = {
   emailLoginErrorMessage:
     'Prihlásenie bolo neúspešné kvôli nesprávnym prihlasovacím údajom.',
   profileOverviewHeading: 'Vaše jedálne preferencie',
+  allergiesAndFoodIntolerances: 'Alergény a intolerancie',
 }
 
 // const cs_messages: Messages = {
