@@ -73,7 +73,8 @@ const EditProfileNavStepper: React.FC = () => {
               defaultMessage="Allergens and Intolerances"
             />
           </h1>
-          <h5 className="text-secondary">Next: Step 3</h5>
+
+          <h5 className="d-none d-lg-flex text-secondary">Next: Step 3</h5>
         </div>
       </Col>
 
