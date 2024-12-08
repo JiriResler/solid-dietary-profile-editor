@@ -65,7 +65,7 @@ const EditProfileNavStepper: React.FC = () => {
 
   return (
     <Row className="h-100 align-items-center">
-      <Col xs={9}>
+      <Col xs={8} lg={9}>
         <div className="ms-2">
           <h1>
             <FormattedMessage
@@ -77,7 +77,7 @@ const EditProfileNavStepper: React.FC = () => {
         </div>
       </Col>
 
-      <Col className="text-end">
+      <Col xs={4} lg={3} className="text-end">
         <CircularProgressWithLabel value={progress} />
       </Col>
     </Row>
