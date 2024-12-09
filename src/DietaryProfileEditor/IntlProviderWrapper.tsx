@@ -89,6 +89,13 @@ type Messages = {
   emailLoginErrorMessage: string
   profileOverviewHeading: string
   allergiesAndFoodIntolerances: string
+  gluten: string
+  crustaceans: string
+  eggs: string
+  fish: string
+  peanuts: string
+  soya: string
+  milk: string
 }
 
 const messagesInSlovak: Messages = {
@@ -191,6 +198,13 @@ const messagesInSlovak: Messages = {
     'Prihlásenie bolo neúspešné kvôli nesprávnym prihlasovacím údajom.',
   profileOverviewHeading: 'Vaše jedálne preferencie',
   allergiesAndFoodIntolerances: 'Alergény a intolerancie',
+  gluten: 'Lepok',
+  crustaceans: 'Kôrovce',
+  eggs: 'Vajcia',
+  fish: 'Ryby',
+  peanuts: 'Arašidy',
+  soya: 'Sója',
+  milk: 'Mlieko',
 }
 
 // const cs_messages: Messages = {
