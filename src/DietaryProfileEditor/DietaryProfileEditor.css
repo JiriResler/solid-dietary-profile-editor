@@ -1,8 +1,8 @@
-.form-control {
+.app-form-control {
   border-color: #575151;
 }
 
-.form-control:focus {
+.app-form-control:focus {
   box-shadow: none !important;
   border-color: #575151;
 }

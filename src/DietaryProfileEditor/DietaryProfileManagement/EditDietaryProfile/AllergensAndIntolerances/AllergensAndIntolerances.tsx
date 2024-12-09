@@ -21,7 +21,7 @@ const AllergensAndIntolerances: React.FC = () => {
           <Col xs={5} lg={3}>
             <div className="form-check">
               <input
-                className="form-check-input"
+                className="form-check-input app-form-control"
                 type="checkbox"
                 value=""
                 id="allergenCheckbox"
