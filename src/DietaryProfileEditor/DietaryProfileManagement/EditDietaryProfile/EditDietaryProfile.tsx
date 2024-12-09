@@ -5,6 +5,7 @@ import EditProfileNavStepper from './EditProfileNavStepper/EditProfileNavStepper
 import EditProfileNavButtons from './EditProfileNavButtons/EditProfileNavButtons'
 import Card from 'react-bootstrap/Card'
 import AllergensAndIntolerances from './AllergensAndIntolerances/AllergensAndIntolerances'
+import Form from 'react-bootstrap/Form'
 
 /**
  * Renders the edit profile screen with its header, main content and footer.
@@ -20,7 +21,9 @@ function EditProfileScreen() {
 
       <Row className="flex-fill mb-3 border">
         <Col>
-          <AllergensAndIntolerances />
+          <Form>
+            <AllergensAndIntolerances />
+          </Form>
         </Col>
       </Row>
 
