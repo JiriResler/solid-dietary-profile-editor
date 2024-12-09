@@ -4,6 +4,7 @@ import './EditDietaryProfile.css'
 import EditProfileNavStepper from './EditProfileNavStepper/EditProfileNavStepper'
 import EditProfileNavButtons from './EditProfileNavButtons/EditProfileNavButtons'
 import Card from 'react-bootstrap/Card'
+import AllergensAndIntolerances from './AllergensAndIntolerances/AllergensAndIntolerances'
 
 /**
  * Renders the edit profile screen with its header, main content and footer.
@@ -18,7 +19,9 @@ function EditProfileScreen() {
       </Row>
 
       <Row className="flex-fill mb-3">
-        <Col>Main content</Col>
+        <Col>
+          <AllergensAndIntolerances />
+        </Col>
       </Row>
 
       <Row className="edit-profile-footer">
