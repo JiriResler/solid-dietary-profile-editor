@@ -5,7 +5,7 @@ import { FormattedMessage } from 'react-intl'
 const AllergensAndIntolerances: React.FC = () => {
   return (
     <>
-      <Form.Group className="mb-3" controlId="formBasicCheckbox">
+      <Form.Group controlId="selectAllergens">
         <Form.Label>
           <h3>
             <FormattedMessage
@@ -15,7 +15,23 @@ const AllergensAndIntolerances: React.FC = () => {
           </h3>
         </Form.Label>
 
-        <Form.Check type="checkbox" label="Check me out" />
+        <div className="form-check">
+          <input
+            className="form-check-input"
+            type="checkbox"
+            value=""
+            id="allergenCheckbox"
+          />
+
+          <img
+            src="images/allergens/crustaceans.svg"
+            className="allergen-icon me-1"
+          />
+
+          <label className="form-check-label" htmlFor="allergenCheckbox">
+            Allergen
+          </label>
+        </div>
       </Form.Group>
     </>
   )
