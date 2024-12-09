@@ -19,7 +19,7 @@ function EditProfileScreen() {
         </Col>
       </Row>
 
-      <Row className="flex-fill mb-3 border">
+      <Row className="flex-fill mb-3">
         <Col>
           <Form>
             <AllergensAndIntolerances />
