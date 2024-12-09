@@ -18,7 +18,7 @@ const AllergensAndIntolerances: React.FC = () => {
         </Form.Label>
 
         <Row>
-          <Col>
+          <Col xs={5} lg={3}>
             <div className="form-check">
               <input
                 className="form-check-input"
@@ -56,7 +56,7 @@ const AllergensAndIntolerances: React.FC = () => {
             </div>
           </Col>
 
-          <Col>
+          <Col xs={5} lg={3}>
             <div className="form-check">
               <input
                 className="form-check-input"
