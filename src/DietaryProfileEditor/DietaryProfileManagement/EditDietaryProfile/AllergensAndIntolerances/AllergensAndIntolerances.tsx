@@ -156,23 +156,61 @@ const AllergensAndIntolerances: React.FC = () => {
           </Col>
 
           <Col xs={6} lg={3}>
-            <div className="form-check">
-              <input
-                className="form-check-input app-form-control application-form-checkbox"
-                type="checkbox"
-                value=""
-                id="eggsCheckbox"
-              />
+            <Stack>
+              <div className="form-check">
+                <input
+                  className="form-check-input app-form-control application-form-checkbox"
+                  type="checkbox"
+                  value=""
+                  id="nutsCheckbox"
+                />
 
-              <img
-                src="images/allergens/eggs.svg"
-                className="allergen-icon ms-1 me-1"
-              />
+                <img
+                  src="images/allergens/nuts.svg"
+                  className="allergen-icon ms-1 me-1"
+                />
 
-              <label className="form-check-label" htmlFor="eggsCheckbox">
-                <FormattedMessage id="id" defaultMessage="Allergen" />
-              </label>
-            </div>
+                <label className="form-check-label" htmlFor="nutsCheckbox">
+                  <FormattedMessage id="nuts" defaultMessage="Nuts" />
+                </label>
+              </div>
+
+              <div className="form-check">
+                <input
+                  className="form-check-input app-form-control application-form-checkbox"
+                  type="checkbox"
+                  value=""
+                  id="celeryCheckbox"
+                />
+
+                <img
+                  src="images/allergens/celery.svg"
+                  className="allergen-icon ms-1 me-1"
+                />
+
+                <label className="form-check-label" htmlFor="celeryCheckbox">
+                  <FormattedMessage id="celery" defaultMessage="Celery" />
+                </label>
+              </div>
+
+              <div className="form-check">
+                <input
+                  className="form-check-input app-form-control application-form-checkbox"
+                  type="checkbox"
+                  value=""
+                  id="eggsCheckbox"
+                />
+
+                <img
+                  src="images/allergens/eggs.svg"
+                  className="allergen-icon ms-1 me-1"
+                />
+
+                <label className="form-check-label" htmlFor="eggsCheckbox">
+                  <FormattedMessage id="id" defaultMessage="Allergen" />
+                </label>
+              </div>
+            </Stack>
           </Col>
         </Row>
       </Form.Group>

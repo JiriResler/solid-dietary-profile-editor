@@ -96,6 +96,8 @@ type Messages = {
   peanuts: string
   soya: string
   milk: string
+  nuts: string
+  celery: string
 }
 
 const messagesInSlovak: Messages = {
@@ -205,6 +207,8 @@ const messagesInSlovak: Messages = {
   peanuts: 'Arašidy',
   soya: 'Sója',
   milk: 'Mlieko',
+  nuts: 'Orechy',
+  celery: 'Zeler',
 }
 
 // const cs_messages: Messages = {
