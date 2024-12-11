@@ -21,7 +21,7 @@ const AllergensAndIntolerances: React.FC = () => {
           <Col xs={6} lg={3}>
             <div className="form-check">
               <input
-                className="form-check-input app-form-control"
+                className="form-check-input app-form-control application-form-checkbox"
                 type="checkbox"
                 value=""
                 id="glutenCheckbox"
@@ -29,7 +29,7 @@ const AllergensAndIntolerances: React.FC = () => {
 
               <img
                 src="images/allergens/gluten.svg"
-                className="allergen-icon me-1"
+                className="allergen-icon ms-1 me-1"
               />
 
               <label className="form-check-label" htmlFor="glutenCheckbox">
@@ -39,7 +39,7 @@ const AllergensAndIntolerances: React.FC = () => {
 
             <div className="form-check">
               <input
-                className="form-check-input app-form-control"
+                className="form-check-input app-form-control application-form-checkbox"
                 type="checkbox"
                 value=""
                 id="crustaceansCheckbox"
@@ -47,7 +47,7 @@ const AllergensAndIntolerances: React.FC = () => {
 
               <img
                 src="images/allergens/crustaceans.svg"
-                className="allergen-icon me-1"
+                className="allergen-icon ms-1 me-1"
               />
 
               <label className="form-check-label" htmlFor="crustaceansCheckbox">
@@ -60,7 +60,7 @@ const AllergensAndIntolerances: React.FC = () => {
 
             <div className="form-check">
               <input
-                className="form-check-input app-form-control"
+                className="form-check-input app-form-control application-form-checkbox"
                 type="checkbox"
                 value=""
                 id="eggsCheckbox"
@@ -68,7 +68,7 @@ const AllergensAndIntolerances: React.FC = () => {
 
               <img
                 src="images/allergens/eggs.svg"
-                className="allergen-icon me-1"
+                className="allergen-icon ms-1 me-1"
               />
 
               <label className="form-check-label" htmlFor="eggsCheckbox">
@@ -78,7 +78,7 @@ const AllergensAndIntolerances: React.FC = () => {
 
             <div className="form-check">
               <input
-                className="form-check-input app-form-control"
+                className="form-check-input app-form-control application-form-checkbox"
                 type="checkbox"
                 value=""
                 id="fishCheckbox"
@@ -86,7 +86,7 @@ const AllergensAndIntolerances: React.FC = () => {
 
               <img
                 src="images/allergens/fish.svg"
-                className="allergen-icon me-1"
+                className="allergen-icon ms-1 me-1"
               />
 
               <label className="form-check-label" htmlFor="fishCheckbox">
@@ -96,7 +96,7 @@ const AllergensAndIntolerances: React.FC = () => {
 
             <div className="form-check">
               <input
-                className="form-check-input app-form-control"
+                className="form-check-input app-form-control application-form-checkbox"
                 type="checkbox"
                 value=""
                 id="peanutsCheckbox"
@@ -104,7 +104,7 @@ const AllergensAndIntolerances: React.FC = () => {
 
               <img
                 src="images/allergens/peanuts.svg"
-                className="allergen-icon me-1"
+                className="allergen-icon ms-1 me-1"
               />
 
               <label className="form-check-label" htmlFor="peanutsCheckbox">
@@ -114,7 +114,7 @@ const AllergensAndIntolerances: React.FC = () => {
 
             <div className="form-check">
               <input
-                className="form-check-input app-form-control"
+                className="form-check-input app-form-control application-form-checkbox"
                 type="checkbox"
                 value=""
                 id="soyaCheckbox"
@@ -122,7 +122,7 @@ const AllergensAndIntolerances: React.FC = () => {
 
               <img
                 src="images/allergens/soya.svg"
-                className="allergen-icon me-1"
+                className="allergen-icon ms-1 me-1"
               />
 
               <label className="form-check-label" htmlFor="soyaCheckbox">
@@ -132,7 +132,7 @@ const AllergensAndIntolerances: React.FC = () => {
 
             <div className="form-check">
               <input
-                className="form-check-input app-form-control"
+                className="form-check-input app-form-control application-form-checkbox"
                 type="checkbox"
                 value=""
                 id="milkCheckbox"
@@ -140,7 +140,7 @@ const AllergensAndIntolerances: React.FC = () => {
 
               <img
                 src="images/allergens/milk.svg"
-                className="allergen-icon me-1"
+                className="allergen-icon ms-1 me-1"
               />
 
               <label className="form-check-label" htmlFor="milkCheckbox">
@@ -152,7 +152,7 @@ const AllergensAndIntolerances: React.FC = () => {
           <Col xs={6} lg={3}>
             <div className="form-check">
               <input
-                className="form-check-input app-form-control"
+                className="form-check-input app-form-control application-form-checkbox"
                 type="checkbox"
                 value=""
                 id="eggsCheckbox"
@@ -160,7 +160,7 @@ const AllergensAndIntolerances: React.FC = () => {
 
               <img
                 src="images/allergens/eggs.svg"
-                className="allergen-icon me-1"
+                className="allergen-icon ms-1 me-1"
               />
 
               <label className="form-check-label" htmlFor="eggsCheckbox">

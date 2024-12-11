@@ -7,6 +7,11 @@
   border-color: #575151;
 }
 
+.application-form-checkbox {
+  width: 20px;
+  height: 20px;
+}
+
 .app-primary-color-button {
   background-color: #2541b2;
   border-color: #2541b2;
