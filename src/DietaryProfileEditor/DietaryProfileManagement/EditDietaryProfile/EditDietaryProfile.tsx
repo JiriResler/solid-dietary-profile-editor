@@ -22,7 +22,13 @@ function EditProfileScreen() {
       <Row className="flex-fill mb-3">
         <Col>
           <Form>
-            <AllergensAndIntolerances />
+            <div className="d-lg-none">
+              <AllergensAndIntolerances />
+            </div>
+
+            <div className="d-none d-lg-block mt-2">
+              <AllergensAndIntolerances />
+            </div>
           </Form>
         </Col>
       </Row>
