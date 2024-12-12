@@ -8,7 +8,7 @@ import Stack from 'react-bootstrap/Stack'
 const AllergensAndIntolerances: React.FC = () => {
   return (
     <>
-      <Form.Group controlId="selectAllergens">
+      <Form.Group controlId="selectAllergens" className="ms-2">
         <Form.Label>
           <h3>
             <FormattedMessage
@@ -18,7 +18,7 @@ const AllergensAndIntolerances: React.FC = () => {
           </h3>
         </Form.Label>
 
-        <Row>
+        <Row className="allergen-checkbox-row">
           <Col xs={6} lg={3}>
             <Stack gap={1}>
               <div className="form-check">
