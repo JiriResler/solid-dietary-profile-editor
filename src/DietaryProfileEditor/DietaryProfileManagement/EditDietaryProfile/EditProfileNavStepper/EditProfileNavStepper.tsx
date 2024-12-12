@@ -74,7 +74,7 @@ const EditProfileNavStepper: React.FC = () => {
             />
           </h1>
 
-          <h5 className="d-none d-lg-flex text-secondary">Next: Step 3</h5>
+          <h4 className="d-none d-lg-flex text-secondary ms-2">Next: Step 3</h4>
         </div>
       </Col>
 
