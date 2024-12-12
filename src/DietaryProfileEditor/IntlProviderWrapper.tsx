@@ -98,6 +98,11 @@ type Messages = {
   milk: string
   nuts: string
   celery: string
+  mustard: string
+  sesame: string
+  sulphites: string
+  lupin: string
+  molluscs: string
 }
 
 const messagesInSlovak: Messages = {
@@ -209,6 +214,11 @@ const messagesInSlovak: Messages = {
   milk: 'Mlieko',
   nuts: 'Orechy',
   celery: 'Zeler',
+  mustard: 'Horčica',
+  sesame: 'Sezam',
+  sulphites: 'Siričitany',
+  lupin: 'Vlčí bôb',
+  molluscs: 'Mäkkýše',
 }
 
 // const cs_messages: Messages = {

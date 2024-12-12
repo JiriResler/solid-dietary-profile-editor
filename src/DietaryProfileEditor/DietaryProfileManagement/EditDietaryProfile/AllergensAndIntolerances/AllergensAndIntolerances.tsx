@@ -156,7 +156,7 @@ const AllergensAndIntolerances: React.FC = () => {
           </Col>
 
           <Col xs={6} lg={3}>
-            <Stack>
+            <Stack gap={1}>
               <div className="form-check">
                 <input
                   className="form-check-input app-form-control application-form-checkbox"
@@ -198,16 +198,88 @@ const AllergensAndIntolerances: React.FC = () => {
                   className="form-check-input app-form-control application-form-checkbox"
                   type="checkbox"
                   value=""
-                  id="eggsCheckbox"
+                  id="mustardCheckbox"
                 />
 
                 <img
-                  src="images/allergens/eggs.svg"
+                  src="images/allergens/mustard.svg"
                   className="allergen-icon ms-1 me-1"
                 />
 
-                <label className="form-check-label" htmlFor="eggsCheckbox">
-                  <FormattedMessage id="id" defaultMessage="Allergen" />
+                <label className="form-check-label" htmlFor="mustardCheckbox">
+                  <FormattedMessage id="mustard" defaultMessage="Mustard" />
+                </label>
+              </div>
+
+              <div className="form-check">
+                <input
+                  className="form-check-input app-form-control application-form-checkbox"
+                  type="checkbox"
+                  value=""
+                  id="sesameCheckbox"
+                />
+
+                <img
+                  src="images/allergens/sesame.svg"
+                  className="allergen-icon ms-1 me-1"
+                />
+
+                <label className="form-check-label" htmlFor="sesameCheckbox">
+                  <FormattedMessage id="sesame" defaultMessage="Sesame" />
+                </label>
+              </div>
+
+              <div className="form-check">
+                <input
+                  className="form-check-input app-form-control application-form-checkbox"
+                  type="checkbox"
+                  value=""
+                  id="sulphitesCheckbox"
+                />
+
+                <img
+                  src="images/allergens/sulphites.svg"
+                  className="allergen-icon ms-1 me-1"
+                />
+
+                <label className="form-check-label" htmlFor="sulphitesCheckbox">
+                  <FormattedMessage id="sulphites" defaultMessage="Sulphites" />
+                </label>
+              </div>
+
+              <div className="form-check">
+                <input
+                  className="form-check-input app-form-control application-form-checkbox"
+                  type="checkbox"
+                  value=""
+                  id="lupinCheckbox"
+                />
+
+                <img
+                  src="images/allergens/lupin.svg"
+                  className="allergen-icon ms-1 me-1"
+                />
+
+                <label className="form-check-label" htmlFor="lupinCheckbox">
+                  <FormattedMessage id="lupin" defaultMessage="Lupin" />
+                </label>
+              </div>
+
+              <div className="form-check">
+                <input
+                  className="form-check-input app-form-control application-form-checkbox"
+                  type="checkbox"
+                  value=""
+                  id="molluscsCheckbox"
+                />
+
+                <img
+                  src="images/allergens/molluscs.svg"
+                  className="allergen-icon ms-1 me-1"
+                />
+
+                <label className="form-check-label" htmlFor="molluscsCheckbox">
+                  <FormattedMessage id="molluscs" defaultMessage="Molluscs" />
                 </label>
               </div>
             </Stack>
