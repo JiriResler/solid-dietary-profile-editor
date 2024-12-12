@@ -10,12 +10,12 @@ const AllergensAndIntolerances: React.FC = () => {
     <>
       <Form.Group controlId="selectAllergens" className="ms-2">
         <Form.Label>
-          <h3>
+          <h4>
             <FormattedMessage
               id="whatAreYouAllergicTo"
               defaultMessage="What are you allergic to?"
             />
-          </h3>
+          </h4>
         </Form.Label>
 
         <Row className="allergen-checkbox-row">
