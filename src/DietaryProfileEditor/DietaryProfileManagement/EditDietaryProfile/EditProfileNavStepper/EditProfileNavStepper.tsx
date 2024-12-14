@@ -66,16 +66,14 @@ const EditProfileNavStepper: React.FC = () => {
   return (
     <Row className="h-100 align-items-center">
       <Col xs={8} lg={9}>
-        <div className="ms-2">
-          <h1>
-            <FormattedMessage
-              id="allergiesAndFoodIntolerances"
-              defaultMessage="Allergens and Intolerances"
-            />
-          </h1>
+        <h1>
+          <FormattedMessage
+            id="allergiesAndFoodIntolerances"
+            defaultMessage="Allergens and Intolerances"
+          />
+        </h1>
 
-          <h4 className="d-none d-lg-flex text-secondary ms-2">Next: Step 3</h4>
-        </div>
+        <h4 className="d-none d-lg-flex text-secondary ms-2">Next: Step 3</h4>
       </Col>
 
       <Col xs={4} lg={3} className="text-end">
