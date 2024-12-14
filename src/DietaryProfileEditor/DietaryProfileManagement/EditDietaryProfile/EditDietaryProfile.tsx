@@ -18,9 +18,13 @@ function EditProfileScreen() {
       </div>
 
       <div className="edit-profile-main-content flex-fill">
-        <Form>
-          <AllergensAndIntolerances />
-        </Form>
+        <div className="overflow-auto h-100">
+          <Form>
+            <AllergensAndIntolerances />
+            <AllergensAndIntolerances />
+            <AllergensAndIntolerances />
+          </Form>
+        </div>
       </div>
 
       <div className="edit-profile-footer">
