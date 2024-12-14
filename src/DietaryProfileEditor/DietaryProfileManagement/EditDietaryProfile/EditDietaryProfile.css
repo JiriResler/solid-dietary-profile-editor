@@ -1,21 +1,24 @@
+.edit-profile-screen {
+  
+}
+
+.edit-profile-main-content {
+  
+}
+
+.edit-profile-large-screen {
+  background-color: #2541b2;
+}
+
+.edit-profile-card {
+  width: 768px;
+  height: 95dvh;
+}
+
 .edit-profile-header {
   height: 100px;
 }
 
 .edit-profile-footer {
   height: 50px;
-}
-
-.edit-profile-large-screen {
-  height: 100dvh;
-  background-color: #2541b2;
-}
-
-.edit-profile-small-screen {
-  height: 95dvh;
-}
-
-.edit-profile-card {
-  width: 768px;
-  height: 95dvh;
 }

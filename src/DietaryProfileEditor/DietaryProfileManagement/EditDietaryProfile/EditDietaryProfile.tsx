@@ -12,41 +12,33 @@ import Form from 'react-bootstrap/Form'
  */
 function EditProfileScreen() {
   return (
-    <div className="d-flex flex-column align-items-stretch h-100">
-      <Row className="edit-profile-header">
-        <Col>
-          <EditProfileNavStepper />
-        </Col>
-      </Row>
+    <div className="edit-profile-screen">
+      <div className="edit-profile-header bg-warning">
+        <EditProfileNavStepper />
+      </div>
 
-      <Row className="flex-fill mt-2 mb-3">
-        <Col>
-          <Form>
-            <AllergensAndIntolerances />
-          </Form>
-        </Col>
-      </Row>
+      <div className="edit-profile-main-content bg-success">
+        <Form>
+          <AllergensAndIntolerances />
+        </Form>
+      </div>
 
-      <Row className="edit-profile-footer">
-        <Col>
-          <EditProfileNavButtons />
-        </Col>
-      </Row>
+      <div className="edit-profile-footer bg-danger">
+        <EditProfileNavButtons />
+      </div>
     </div>
   )
 }
 
 const EditDietaryProfile: React.FC = () => {
   return (
-    <>
-      <Row className="d-lg-none edit-profile-small-screen mt-3">
-        <Col>
-          <EditProfileScreen />
-        </Col>
-      </Row>
+    <div className="">
+      <div className="d-lg-none">
+        <EditProfileScreen />
+      </div>
 
-      <Row className="d-none d-lg-flex">
-        <Col className="edit-profile-large-screen position-relative">
+      <Row className="d-none d-lg-block position-relative edit-profile-large-screen h-100">
+        <Col className="">
           <Card className="edit-profile-card position-absolute top-50 start-50 translate-middle">
             <Card.Body>
               <EditProfileScreen />
@@ -54,7 +46,7 @@ const EditDietaryProfile: React.FC = () => {
           </Card>
         </Col>
       </Row>
-    </>
+    </div>
   )
 }
 
