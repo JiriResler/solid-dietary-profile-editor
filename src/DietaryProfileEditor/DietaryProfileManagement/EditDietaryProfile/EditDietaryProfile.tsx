@@ -12,18 +12,18 @@ import Form from 'react-bootstrap/Form'
  */
 function EditProfileScreen() {
   return (
-    <div className="edit-profile-screen">
-      <div className="edit-profile-header bg-warning">
+    <div className="d-flex flex-column h-100">
+      <div className="edit-profile-header">
         <EditProfileNavStepper />
       </div>
 
-      <div className="edit-profile-main-content bg-success">
+      <div className="edit-profile-main-content flex-fill">
         <Form>
           <AllergensAndIntolerances />
         </Form>
       </div>
 
-      <div className="edit-profile-footer bg-danger">
+      <div className="edit-profile-footer">
         <EditProfileNavButtons />
       </div>
     </div>
@@ -32,8 +32,8 @@ function EditProfileScreen() {
 
 const EditDietaryProfile: React.FC = () => {
   return (
-    <div className="">
-      <div className="d-lg-none">
+    <div className="edit-profile-screen">
+      <div className="d-lg-none h-100">
         <EditProfileScreen />
       </div>
 
