@@ -2,6 +2,11 @@
   height: 100dvh;
 }
 
+.edit-profile-small-screen-container {
+  padding-top: 13px;
+  padding-bottom: 13px;
+}
+
 .edit-profile-main-content {
   min-height: 0;
 }
@@ -18,12 +23,4 @@
 .edit-profile-card {
   width: 768px;
   height: 95dvh;
-}
-
-.edit-profile-header {
-  height: 100px;
-}
-
-.edit-profile-footer {
-  height: 50px;
 }

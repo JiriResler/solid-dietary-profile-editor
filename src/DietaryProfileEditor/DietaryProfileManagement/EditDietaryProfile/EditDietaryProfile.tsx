@@ -13,7 +13,7 @@ import Col from 'react-bootstrap/Col'
 function EditProfileScreen() {
   return (
     <div className="d-flex flex-column h-100">
-      <div className="edit-profile-header">
+      <div className="">
         <EditProfileNavStepper />
       </div>
 
@@ -27,7 +27,7 @@ function EditProfileScreen() {
         </div>
       </div>
 
-      <div className="edit-profile-footer">
+      <div className="">
         <EditProfileNavButtons />
       </div>
     </div>
@@ -37,7 +37,7 @@ function EditProfileScreen() {
 const EditDietaryProfile: React.FC = () => {
   return (
     <div className="edit-profile-screen">
-      <div className="d-lg-none h-100">
+      <div className="d-lg-none h-100 edit-profile-small-screen-container">
         <EditProfileScreen />
       </div>
 
