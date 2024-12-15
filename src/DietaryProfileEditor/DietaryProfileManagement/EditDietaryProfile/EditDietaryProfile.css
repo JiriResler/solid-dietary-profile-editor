@@ -6,6 +6,11 @@
   min-height: 0;
 }
 
+.overflow-content {
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
 .edit-profile-large-screen {
   background-color: #2541b2;
 }

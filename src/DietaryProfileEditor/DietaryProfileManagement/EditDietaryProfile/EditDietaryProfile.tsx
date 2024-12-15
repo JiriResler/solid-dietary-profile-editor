@@ -18,7 +18,7 @@ function EditProfileScreen() {
       </div>
 
       <div className="edit-profile-main-content flex-fill">
-        <div className="overflow-auto h-100">
+        <div className="overflow-content h-100">
           <Form>
             <AllergensAndIntolerances />
             <AllergensAndIntolerances />
