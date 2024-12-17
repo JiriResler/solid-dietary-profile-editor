@@ -17,7 +17,7 @@ function EditProfileScreen() {
         <EditProfileNavStepper />
       </div>
 
-      <div className="edit-profile-main-content flex-fill">
+      <div className="edit-profile-main-content flex-fill mt-1 mb-3">
         <div className="overflow-content h-100">
           <Form>
             <AllergensAndIntolerances />
