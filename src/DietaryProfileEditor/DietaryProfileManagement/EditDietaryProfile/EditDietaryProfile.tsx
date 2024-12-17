@@ -13,7 +13,7 @@ import Col from 'react-bootstrap/Col'
 function EditProfileScreen() {
   return (
     <div className="d-flex flex-column h-100">
-      <div className="">
+      <div>
         <EditProfileNavStepper />
       </div>
 
@@ -27,7 +27,7 @@ function EditProfileScreen() {
         </div>
       </div>
 
-      <div className="">
+      <div>
         <EditProfileNavButtons />
       </div>
     </div>
