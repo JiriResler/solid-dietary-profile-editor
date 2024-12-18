@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import ProfileOverview from './ProfileOverview/ProfileOverview'
 import './DietaryProfileManagement.css'
-import CreateDietaryProfile from './CreateDietaryProfile/CreateDietaryProfile'
+import DietaryPreferencesForm from './DietaryPreferencesForm/DietaryPreferencesForm'
 
 const DietaryProfileManagement: React.FC = () => {
   const [userProfileExists] = useState(false)
@@ -9,7 +9,7 @@ const DietaryProfileManagement: React.FC = () => {
   if (userProfileExists) {
     return <ProfileOverview />
   } else {
-    return <CreateDietaryProfile />
+    return <DietaryPreferencesForm />
   }
 }
 
