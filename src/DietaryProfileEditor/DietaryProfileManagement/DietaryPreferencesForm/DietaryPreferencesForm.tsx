@@ -8,7 +8,7 @@ import AllergensAndIntolerances from './AllergensAndIntolerances/AllergensAndInt
 import EditProfileNavButtons from './EditProfileNavButtons/EditProfileNavButtons'
 
 /**
- * Renders the actual dietary preferences form while DietaryPreferencesForm handles whether to display it on a large or small screen.
+ * Renders the actual dietary preferences form, while the DietaryPreferencesForm component manages screen size adaptations for large or small displays.
  */
 function ActualDietaryPreferencesForm() {
   return (
@@ -35,7 +35,7 @@ function ActualDietaryPreferencesForm() {
 }
 
 /**
- * Displays a form for the user to fill in their dietary preferences.
+ * Displays a form that allows the user to input or update their dietary preferences.
  */
 const DietaryPreferencesForm: React.FC = () => {
   return (
