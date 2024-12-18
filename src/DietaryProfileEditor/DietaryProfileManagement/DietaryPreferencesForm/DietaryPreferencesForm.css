@@ -1,27 +1,26 @@
-.edit-profile-screen {
-    height: 100dvh;
-  }
-  
-  .edit-profile-small-screen-container {
-    padding-top: 13px;
-    padding-bottom: 13px;
-  }
-  
-  .edit-profile-main-content {
-    min-height: 0;
-  }
-  
-  .overflow-content {
-    overflow-y: scroll;
-    overflow-x: hidden;
-  }
-  
-  .background-primary-color {
-    background-color: #2541b2;
-  }
-  
-  .edit-profile-card {
-    width: 768px;
-    height: 95dvh;
-  }
-  
+.dietary-preferences-form-screen {
+  height: 100dvh;
+}
+
+.form-small-screen-container {
+  padding-top: 13px;
+  padding-bottom: 13px;
+}
+
+.dietary-preferences-form-card {
+  width: 768px;
+  height: 95dvh;
+}
+
+.form-main-content {
+  min-height: 0;
+}
+
+.overflow-content {
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.background-primary-color {
+  background-color: #2541b2;
+}

@@ -17,7 +17,7 @@ function ActualDietaryPreferencesForm() {
         <EditProfileNavStepper />
       </div>
 
-      <div className="edit-profile-main-content flex-fill mt-1 mb-3">
+      <div className="form-main-content flex-fill mt-1 mb-3">
         <div className="overflow-content h-100">
           <Form>
             <AllergensAndIntolerances />
@@ -39,15 +39,15 @@ function ActualDietaryPreferencesForm() {
  */
 const DietaryPreferencesForm: React.FC = () => {
   return (
-    <div className="edit-profile-screen">
-      <div className="d-lg-none h-100 edit-profile-small-screen-container">
+    <div className="dietary-preferences-form-screen">
+      <div className="d-lg-none h-100 form-small-screen-container">
         <ActualDietaryPreferencesForm />
       </div>
 
       <div className="d-none d-lg-block h-100">
         <Row className="background-primary-color position-relative h-100">
           <Col>
-            <Card className="edit-profile-card position-absolute top-50 start-50 translate-middle">
+            <Card className="dietary-preferences-form-card position-absolute top-50 start-50 translate-middle">
               <Card.Body className="h-100">
                 <ActualDietaryPreferencesForm />
               </Card.Body>
