@@ -19,6 +19,7 @@
 .overflow-content {
   overflow-y: auto;
   overflow-x: hidden;
+  margin-right: -12px;
 }
 
 .background-primary-color {
