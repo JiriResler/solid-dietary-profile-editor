@@ -286,6 +286,19 @@ const AllergensAndIntolerances: React.FC = () => {
           </Col>
         </Row>
       </Form.Group>
+
+      <Form.Group controlId="selectIntolerances">
+        <Form.Label>
+          <h4>
+            <FormattedMessage
+              id="whatAreYourIntolerances"
+              defaultMessage="What are your food intolerances?"
+            />
+          </h4>
+        </Form.Label>
+
+
+      </Form.Group>
     </>
   )
 }

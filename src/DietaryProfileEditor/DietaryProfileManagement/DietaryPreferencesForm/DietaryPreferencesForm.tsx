@@ -21,8 +21,6 @@ function ActualDietaryPreferencesForm() {
         <div className="overflow-content h-100">
           <Form>
             <AllergensAndIntolerances />
-            <AllergensAndIntolerances />
-            <AllergensAndIntolerances />
           </Form>
         </div>
       </div>
