@@ -17,7 +17,7 @@
 }
 
 .overflow-content {
-  overflow-y: scroll;
+  overflow-y: auto;
   overflow-x: hidden;
 }
 
