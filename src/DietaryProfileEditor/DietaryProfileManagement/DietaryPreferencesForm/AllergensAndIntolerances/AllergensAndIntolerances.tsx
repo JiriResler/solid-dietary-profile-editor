@@ -287,7 +287,7 @@ const AllergensAndIntolerances: React.FC = () => {
         </Row>
       </Form.Group>
 
-      <Form.Group controlId="selectIntolerances">
+      <Form.Group controlId="selectIntolerances" className="mt-3">
         <Form.Label>
           <h4>
             <FormattedMessage
@@ -297,7 +297,13 @@ const AllergensAndIntolerances: React.FC = () => {
           </h4>
         </Form.Label>
 
-
+        <Form.Check type="checkbox" id="id1">
+          <Form.Check.Input
+            type="checkbox"
+            className="app-form-control application-form-checkbox"
+          />
+          <Form.Check.Label>Check me out!</Form.Check.Label>
+        </Form.Check>
       </Form.Group>
     </>
   )
