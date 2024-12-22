@@ -25,3 +25,7 @@
 .background-primary-color {
   background-color: #2541b2;
 }
+
+.dietary-preferences-form-select {
+  width: 325px;
+}

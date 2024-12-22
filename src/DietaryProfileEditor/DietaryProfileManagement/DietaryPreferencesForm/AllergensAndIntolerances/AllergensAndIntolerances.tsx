@@ -4,6 +4,7 @@ import { FormattedMessage } from 'react-intl'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Stack from 'react-bootstrap/Stack'
+import Select from 'react-select'
 
 const AllergensAndIntolerances: React.FC = () => {
   const allergenList = [
@@ -22,6 +23,51 @@ const AllergensAndIntolerances: React.FC = () => {
     'Lupin',
     'Molluscs',
   ]
+
+  const intoleranceList = [
+    {
+      label: 'Lactose',
+      value: 'lactose',
+    },
+    {
+      label: 'Caffeine',
+      value: 'caffeine',
+    },
+    {
+      label: 'Salicylates',
+      value: 'salicylates',
+    },
+    {
+      label: 'Amines',
+      value: 'amines',
+    },
+    {
+      label: 'High-FODMAP',
+      value: 'high-FODMAP',
+    },
+    {
+      label: 'Aspartame',
+      value: 'aspartame',
+    },
+    {
+      label: 'Yeast',
+      value: 'yeast',
+    },
+    {
+      label: 'Corn',
+      value: 'corn',
+    },
+    {
+      label: 'Sugar alcohols',
+      value: 'sugar-alcohols',
+    },
+  ]
+
+  const SelectComponents = {
+    DropdownIndicator: () => null,
+    IndicatorSeparator: () => null,
+    // Menu: CustomSelectMenu,
+  }
 
   return (
     <>
@@ -43,7 +89,7 @@ const AllergensAndIntolerances: React.FC = () => {
                   <Form.Check type="checkbox" id={allergen + 'Checkbox'}>
                     <Form.Check.Input
                       type="checkbox"
-                      className="app-form-control application-form-checkbox"
+                      className="app-form-control app-form-checkbox"
                     />
 
                     <img
@@ -70,7 +116,7 @@ const AllergensAndIntolerances: React.FC = () => {
                   <Form.Check type="checkbox" id={allergen + 'Checkbox'}>
                     <Form.Check.Input
                       type="checkbox"
-                      className="app-form-control application-form-checkbox"
+                      className="app-form-control app-form-checkbox"
                     />
 
                     <img
@@ -102,13 +148,15 @@ const AllergensAndIntolerances: React.FC = () => {
           </h4>
         </Form.Label>
 
-        <Form.Check type="checkbox" id="id1">
-          <Form.Check.Input
-            type="checkbox"
-            className="app-form-control application-form-checkbox"
-          />
-          <Form.Check.Label>Check me out!</Form.Check.Label>
-        </Form.Check>
+        <Select
+          className="dietary-preferences-form-select ms-2"
+          isMulti
+          components={SelectComponents}
+          options={intoleranceList}
+          // value={}
+          // onChange={}
+          placeholder={'Search for intolerances'}
+        />
       </Form.Group>
     </>
   )
