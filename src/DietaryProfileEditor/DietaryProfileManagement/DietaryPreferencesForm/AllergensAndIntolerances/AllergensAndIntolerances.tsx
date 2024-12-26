@@ -156,6 +156,7 @@ const AllergensAndIntolerances: React.FC = () => {
           // value={}
           // onChange={}
           placeholder={'Search for intolerances'}
+          menuPlacement="auto"
         />
       </Form.Group>
     </>
