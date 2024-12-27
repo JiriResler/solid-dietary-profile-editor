@@ -2,11 +2,6 @@
   border-color: #575151;
 }
 
-.app-form-control:focus {
-  box-shadow: none !important;
-  border-color: #575151;
-}
-
 .app-form-checkbox {
   width: 20px;
   height: 20px;
