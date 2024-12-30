@@ -148,6 +148,12 @@ const AllergensAndIntolerances: React.FC = () => {
           // onChange={}
           placeholder={'Search for intolerances'}
           menuPlacement="top"
+          styles={{
+            control: (baseStyles) => ({
+              ...baseStyles,
+              minHeight: '50px',
+            }),
+          }}
         />
       </Form.Group>
     </>
