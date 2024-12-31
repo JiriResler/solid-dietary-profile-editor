@@ -118,7 +118,12 @@ const AllergensAndIntolerances: React.FC = () => {
           <Col xs={6} lg={3}>
             <Stack gap={1}>
               {allergenList.slice(0, 7).map((allergen) => {
-                return <AllergenCheckbox allergenName={allergen} />
+                return (
+                  <AllergenCheckbox
+                    allergenName={allergen}
+                    key={allergen + 'Checkbox'}
+                  />
+                )
               })}
             </Stack>
           </Col>
@@ -126,7 +131,12 @@ const AllergensAndIntolerances: React.FC = () => {
           <Col xs={6} lg={3}>
             <Stack gap={1}>
               {allergenList.slice(7, 14).map((allergen) => {
-                return <AllergenCheckbox allergenName={allergen} />
+                return (
+                  <AllergenCheckbox
+                    allergenName={allergen}
+                    key={allergen + 'Checkbox'}
+                  />
+                )
               })}
             </Stack>
           </Col>
