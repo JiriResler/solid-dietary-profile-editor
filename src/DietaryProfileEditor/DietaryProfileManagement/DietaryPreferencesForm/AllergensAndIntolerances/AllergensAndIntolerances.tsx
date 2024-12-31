@@ -85,6 +85,7 @@ const AllergensAndIntolerances: React.FC = () => {
 
         <img
           src={'images/allergens/' + allergenName + '.svg'}
+          alt="Allergen icon"
           className="allergen-icon ms-1 me-1"
         />
 
@@ -100,7 +101,7 @@ const AllergensAndIntolerances: React.FC = () => {
 
   return (
     <>
-      <Form.Group controlId="selectAllergens">
+      <Form.Group controlId="selectAllergensFormGroup">
         <Form.Label>
           <h4>
             <FormattedMessage
@@ -129,7 +130,7 @@ const AllergensAndIntolerances: React.FC = () => {
         </Row>
       </Form.Group>
 
-      <Form.Group controlId="selectIntolerances" className="mt-3">
+      <Form.Group controlId="selectIntolerancesFormGroup" className="mt-3">
         <Form.Label>
           <h4>
             <FormattedMessage
