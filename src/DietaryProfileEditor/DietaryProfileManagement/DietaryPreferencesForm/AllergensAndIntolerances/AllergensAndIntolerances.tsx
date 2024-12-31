@@ -76,11 +76,14 @@ const AllergensAndIntolerances: React.FC = () => {
   const AllergenCheckbox: React.FC<AllergenCheckboxProps> = ({
     allergenName,
   }) => {
+    const inputId = allergenName + 'CheckboxInput'
+
     return (
       <Form.Check type="checkbox" id={allergenName + 'Checkbox'}>
         <Form.Check.Input
           type="checkbox"
           className="app-form-control app-form-checkbox"
+          id={inputId}
         />
 
         <img
@@ -89,7 +92,7 @@ const AllergensAndIntolerances: React.FC = () => {
           className="allergen-icon ms-1 me-1"
         />
 
-        <Form.Check.Label>
+        <Form.Check.Label htmlFor={inputId}>
           <FormattedMessage
             id={allergenName.toLowerCase()}
             defaultMessage={allergenName}
