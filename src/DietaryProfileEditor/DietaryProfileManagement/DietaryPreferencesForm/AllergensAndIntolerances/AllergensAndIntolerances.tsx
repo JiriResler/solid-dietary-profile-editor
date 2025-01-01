@@ -160,6 +160,7 @@ const AllergensAndIntolerances: React.FC = () => {
           options={intoleranceList}
           // value={}
           // onChange={}
+          aria-label="select-intolerances"
           placeholder={'Search for intolerances'}
           menuPlacement="top"
           styles={{
