@@ -19,6 +19,7 @@ function CircularProgressWithLabel(
         thickness={6}
         value={100}
         sx={{ color: '#e3dfde' }}
+        aria-hidden
       />
 
       <Box
@@ -38,6 +39,7 @@ function CircularProgressWithLabel(
           size="90px"
           thickness={6}
           sx={{ color: '#2541b2' }}
+          aria-label="dietary-preferences-form-progress"
           {...props}
         />
       </Box>
