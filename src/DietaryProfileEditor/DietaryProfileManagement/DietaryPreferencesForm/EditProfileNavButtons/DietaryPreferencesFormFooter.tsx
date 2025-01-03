@@ -1,10 +1,10 @@
 import Button from 'react-bootstrap/Button'
 import { FormattedMessage } from 'react-intl'
-import './EditProfileNavButtons.css'
+import './DietaryPreferencesFormFooter.css'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 
-const EditProfileNavButtons: React.FC = () => {
+const DietaryPreferencesFormFooter: React.FC = () => {
   return (
     <Row className="h-100 align-items-center">
       <Col>
@@ -22,4 +22,4 @@ const EditProfileNavButtons: React.FC = () => {
   )
 }
 
-export default EditProfileNavButtons
+export default DietaryPreferencesFormFooter

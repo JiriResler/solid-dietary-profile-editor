@@ -5,7 +5,7 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import DietaryPreferencesFormHeader from './EditProfileNavStepper/DietaryPreferencesFormHeader'
 import AllergensAndIntolerances from './AllergensAndIntolerances/AllergensAndIntolerances'
-import EditProfileNavButtons from './EditProfileNavButtons/EditProfileNavButtons'
+import DietaryPreferencesFormFooter from './EditProfileNavButtons/DietaryPreferencesFormFooter'
 
 /**
  * Renders the actual dietary preferences form, while the DietaryPreferencesForm component manages screen size adaptations for large or small displays.
@@ -26,7 +26,7 @@ function ActualDietaryPreferencesForm() {
       </div>
 
       <div>
-        <EditProfileNavButtons />
+        <DietaryPreferencesFormFooter />
       </div>
     </div>
   )
