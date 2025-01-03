@@ -205,7 +205,7 @@ const messagesInSlovak: Messages = {
   emailLoginErrorMessage:
     'Prihlásenie bolo neúspešné kvôli nesprávnym prihlasovacím údajom.',
   profileOverviewHeading: 'Vaše jedálne preferencie',
-  allergiesAndFoodIntolerances: 'Alergény a intolerancie',
+  allergiesAndFoodIntolerances: 'Alergie a intolerancie',
   gluten: 'Lepok',
   crustaceans: 'Kôrovce',
   eggs: 'Vajcia',

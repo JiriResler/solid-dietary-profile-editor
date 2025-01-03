@@ -68,14 +68,16 @@ const DietaryPreferencesFormHeader: React.FC = () => {
   return (
     <Row className="h-100 align-items-center">
       <Col xs={8} lg={9}>
-        <h1>
+        <div className="current-step-heading">
           <FormattedMessage
             id="allergiesAndFoodIntolerances"
-            defaultMessage="Allergens and Intolerances"
+            defaultMessage="Allergies and Intolerances"
           />
-        </h1>
+        </div>
 
-        <h4 className="d-none d-lg-flex text-secondary ms-2">Next: Step 3</h4>
+        <div className="next-step-heading d-none d-lg-flex text-secondary ms-2">
+          Next: Step 3
+        </div>
       </Col>
 
       <Col xs={4} lg={3} className="text-end">
