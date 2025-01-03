@@ -2,7 +2,7 @@ import * as React from 'react'
 import CircularProgress, {
   CircularProgressProps,
 } from '@mui/material/CircularProgress'
-import './EditProfileNavStepper.css'
+import './DietaryPreferencesFormHeader.css'
 import Box from '@mui/material/Box'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
@@ -62,7 +62,7 @@ function CircularProgressWithLabel(
   )
 }
 
-const EditProfileNavStepper: React.FC = () => {
+const DietaryPreferencesFormHeader: React.FC = () => {
   const [progress] = React.useState(50)
 
   return (
@@ -85,4 +85,4 @@ const EditProfileNavStepper: React.FC = () => {
   )
 }
 
-export default EditProfileNavStepper
+export default DietaryPreferencesFormHeader

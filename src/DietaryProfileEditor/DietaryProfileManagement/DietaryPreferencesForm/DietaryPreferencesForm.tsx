@@ -3,7 +3,7 @@ import Card from 'react-bootstrap/Card'
 import Form from 'react-bootstrap/Form'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-import EditProfileNavStepper from './EditProfileNavStepper/EditProfileNavStepper'
+import DietaryPreferencesFormHeader from './EditProfileNavStepper/DietaryPreferencesFormHeader'
 import AllergensAndIntolerances from './AllergensAndIntolerances/AllergensAndIntolerances'
 import EditProfileNavButtons from './EditProfileNavButtons/EditProfileNavButtons'
 
@@ -14,7 +14,7 @@ function ActualDietaryPreferencesForm() {
   return (
     <div className="d-flex flex-column h-100">
       <div>
-        <EditProfileNavStepper />
+        <DietaryPreferencesFormHeader />
       </div>
 
       <div className="form-main-content flex-fill mt-1 mb-3">
