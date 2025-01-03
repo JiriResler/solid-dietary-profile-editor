@@ -29,3 +29,8 @@
 .dietary-preferences-form-select {
   width: 275px;
 }
+
+.form-group-heading {
+  font-size: large;
+  padding-bottom: 5pt;
+}

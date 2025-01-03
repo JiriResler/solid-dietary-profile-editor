@@ -106,12 +106,12 @@ const AllergensAndIntolerances: React.FC = () => {
     <>
       <Form.Group controlId="selectAllergensFormGroup">
         <Form.Label>
-          <h4>
+          <div className="form-group-heading">
             <FormattedMessage
               id="whatAreYouAllergicTo"
               defaultMessage="What are you allergic to?"
             />
-          </h4>
+          </div>
         </Form.Label>
 
         <Row className="allergen-checkbox-row">
@@ -145,12 +145,12 @@ const AllergensAndIntolerances: React.FC = () => {
 
       <Form.Group controlId="selectIntolerancesFormGroup" className="mt-3">
         <Form.Label>
-          <h4>
+          <div className="form-group-heading">
             <FormattedMessage
               id="whatAreYourIntolerances"
               defaultMessage="What are your food intolerances?"
             />
-          </h4>
+          </div>
         </Form.Label>
 
         <Select
