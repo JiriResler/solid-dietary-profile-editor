@@ -1,9 +1,11 @@
 .current-step-heading {
-
+  font-size: x-large;
+  font-weight: 700;
 }
 
 .next-step-heading {
-  
+  font-size: large;
+  font-weight: 500;
 }
 
 .inside-progress-text {
