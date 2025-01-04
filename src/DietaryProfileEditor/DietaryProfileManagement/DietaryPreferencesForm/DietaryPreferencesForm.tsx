@@ -18,7 +18,7 @@ function ActualDietaryPreferencesForm() {
       </div>
 
       <div className="form-main-content flex-fill mt-1 mb-3">
-        <div className="overflow-content h-100">
+        <div className="overflow-content h-100" tabIndex={-1}>
           <Form>
             <AllergensAndIntolerances />
           </Form>
