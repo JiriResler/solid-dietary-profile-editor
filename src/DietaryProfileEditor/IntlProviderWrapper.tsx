@@ -104,6 +104,7 @@ type Messages = {
   lupin: string
   molluscs: string
   whatAreYourIntolerances: string
+  dietPreferences: string
 }
 
 const messagesInSlovak: Messages = {
@@ -221,6 +222,7 @@ const messagesInSlovak: Messages = {
   lupin: 'Vlčí bôb',
   molluscs: 'Mäkkýše',
   whatAreYourIntolerances: 'Aké sú vaše potravinové intolerancie?',
+  dietPreferences: 'Diéty',
 }
 
 // const cs_messages: Messages = {
