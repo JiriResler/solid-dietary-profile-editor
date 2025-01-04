@@ -105,6 +105,7 @@ type Messages = {
   molluscs: string
   whatAreYourIntolerances: string
   dietPreferences: string
+  whichDietsDoYouFollow: string
 }
 
 const messagesInSlovak: Messages = {
@@ -223,6 +224,7 @@ const messagesInSlovak: Messages = {
   molluscs: 'Mäkkýše',
   whatAreYourIntolerances: 'Aké sú vaše potravinové intolerancie?',
   dietPreferences: 'Diéty',
+  whichDietsDoYouFollow: 'Ktoré diéty dodržiavate?',
 }
 
 // const cs_messages: Messages = {
