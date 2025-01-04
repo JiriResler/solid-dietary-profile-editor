@@ -1,4 +1,3 @@
-import './AllergensAndIntolerances.css'
 import Form from 'react-bootstrap/Form'
 import { FormattedMessage } from 'react-intl'
 import Row from 'react-bootstrap/Row'
@@ -114,7 +113,7 @@ const AllergensAndIntolerances: React.FC = () => {
           </div>
         </Form.Label>
 
-        <Row className="allergen-checkbox-row">
+        <Row className="ms-auto">
           <Col xs={6} lg={3}>
             <Stack gap={1}>
               {allergenList.slice(0, 7).map((allergen) => {
