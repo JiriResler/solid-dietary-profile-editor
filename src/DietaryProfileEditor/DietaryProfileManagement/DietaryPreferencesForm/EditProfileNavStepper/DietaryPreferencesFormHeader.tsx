@@ -71,7 +71,7 @@ const DietaryPreferencesFormHeader: React.FC = () => {
         <div className="current-step-heading">
           <FormattedMessage
             id="allergiesAndFoodIntolerances"
-            defaultMessage="Allergies and Intolerances"
+            defaultMessage="Allergies and Food Intolerances"
           />
         </div>
 
