@@ -22,6 +22,31 @@ const DietPreferences: React.FC = () => {
     'The Zone Diet',
   ]
 
+  type DietCheckboxProps = {
+    dietName: string
+  }
+
+  const DietCheckbox: React.FC<DietCheckboxProps> = ({ dietName }) => {
+    const checkboxId = dietName.replace(/\s/g, '-').toLowerCase() + '-checkbox'
+
+    const checkboxInputId = checkboxId + '-input'
+
+    return (
+      <Form.Check id={checkboxId}>
+        <Form.Check.Input
+          className="app-form-control app-form-checkbox"
+          id={checkboxInputId}
+        />
+        <Form.Check.Label
+          htmlFor={checkboxInputId}
+          className="dietCheckboxLabel"
+        >
+          {dietName}
+        </Form.Check.Label>
+      </Form.Check>
+    )
+  }
+
   return (
     <Form.Group controlId="selectDietsFormGroup">
       <Form.Label>
@@ -37,31 +62,17 @@ const DietPreferences: React.FC = () => {
         <Col xs={6} lg={4}>
           <Stack gap={2}>
             {popularDietList.slice(0, 5).map((diet) => {
-              const checkboxId =
-                diet.replace(/\s/g, '-').toLowerCase() + '-checkbox'
-
-              const checkboxInputId = checkboxId + '-input'
-
-              return (
-                <Form.Check id={checkboxId}>
-                  <Form.Check.Input
-                    className="app-form-control app-form-checkbox"
-                    id={checkboxInputId}
-                  />
-                  <Form.Check.Label
-                    htmlFor={checkboxInputId}
-                    className="dietCheckboxLabel"
-                  >
-                    {diet}
-                  </Form.Check.Label>
-                </Form.Check>
-              )
+              return <DietCheckbox dietName={diet} />
             })}
           </Stack>
         </Col>
 
         <Col xs={6} lg={4}>
-          <Stack gap={1}></Stack>
+          <Stack gap={2}>
+            {popularDietList.slice(5, 10).map((diet) => {
+              return <DietCheckbox dietName={diet} />
+            })}
+          </Stack>
         </Col>
       </Row>
     </Form.Group>
