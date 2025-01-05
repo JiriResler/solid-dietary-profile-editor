@@ -79,9 +79,7 @@ const DietaryPreferencesFormHeader: React.FC = () => {
           />
         </div>
 
-        <div className="next-step-heading d-none d-lg-flex text-secondary">
-          Next: Step 3
-        </div>
+        <div className="next-step-heading text-secondary">Next: Step 3</div>
       </Col>
 
       <Col xs={4} lg={3} className="text-end">
