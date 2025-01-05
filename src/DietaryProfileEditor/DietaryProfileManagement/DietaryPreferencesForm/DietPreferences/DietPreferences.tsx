@@ -4,6 +4,7 @@ import { FormattedMessage } from 'react-intl'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Stack from 'react-bootstrap/Stack'
+import Select from 'react-select'
 
 /**
  * Displays options and collects input from the user about their diet preferences.
@@ -21,6 +22,12 @@ const DietPreferences: React.FC = () => {
     'Vegetarian Diet',
     'The Zone Diet',
   ]
+
+  const SelectComponents = {
+    DropdownIndicator: () => null,
+    IndicatorSeparator: () => null,
+    // Menu: CustomSelectMenu,
+  }
 
   type DietCheckboxProps = {
     dietName: string
@@ -75,6 +82,36 @@ const DietPreferences: React.FC = () => {
           </Stack>
         </Col>
       </Row>
+
+      <Select
+        className="dietary-preferences-form-select ms-2 mt-4"
+        isMulti
+        components={SelectComponents}
+        options={[
+          {
+            label: 'Diet 1',
+            value: 'diet1',
+          },
+          {
+            label: 'Diet 2',
+            value: 'diet2',
+          },
+          {
+            label: 'Diet 3',
+            value: 'diet3',
+          },
+        ]}
+        // value={}
+        // onChange={}
+        aria-label="select-more-diets"
+        placeholder={'Search for more diets'}
+        styles={{
+          control: (baseStyles) => ({
+            ...baseStyles,
+            minHeight: '50px',
+          }),
+        }}
+      />
     </Form.Group>
   )
 }
