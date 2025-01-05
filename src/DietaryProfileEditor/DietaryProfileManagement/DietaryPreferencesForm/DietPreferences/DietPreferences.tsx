@@ -1,6 +1,9 @@
 import './DietPreferences.css'
 import Form from 'react-bootstrap/Form'
 import { FormattedMessage } from 'react-intl'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
+import Stack from 'react-bootstrap/Stack'
 
 /**
  * Displays options and collects input from the user about their diet preferences.
@@ -20,7 +23,7 @@ const DietPreferences: React.FC = () => {
   ]
 
   return (
-    <Form.Group controlId="selectDietsFormGroup" className="mt-3">
+    <Form.Group controlId="selectDietsFormGroup">
       <Form.Label>
         <div className="form-group-heading">
           <FormattedMessage
@@ -30,8 +33,37 @@ const DietPreferences: React.FC = () => {
         </div>
       </Form.Label>
 
+      <Row className="ms-auto">
+        <Col xs={6} lg={4}>
+          <Stack gap={2}>
+            {popularDietList.slice(0, 5).map((diet) => {
+              const checkboxId =
+                diet.replace(/\s/g, '-').toLowerCase() + '-checkbox'
 
+              const checkboxInputId = checkboxId + '-input'
 
+              return (
+                <Form.Check id={checkboxId}>
+                  <Form.Check.Input
+                    className="app-form-control app-form-checkbox"
+                    id={checkboxInputId}
+                  />
+                  <Form.Check.Label
+                    htmlFor={checkboxInputId}
+                    className="dietCheckboxLabel"
+                  >
+                    {diet}
+                  </Form.Check.Label>
+                </Form.Check>
+              )
+            })}
+          </Stack>
+        </Col>
+
+        <Col xs={6} lg={4}>
+          <Stack gap={1}></Stack>
+        </Col>
+      </Row>
     </Form.Group>
   )
 }
