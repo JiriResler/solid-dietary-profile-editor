@@ -106,6 +106,7 @@ type Messages = {
   whatAreYourIntolerances: string
   dietPreferences: string
   whichDietsDoYouFollow: string
+  calorieTrackingGoal: string
 }
 
 const messagesInSlovak: Messages = {
@@ -225,6 +226,8 @@ const messagesInSlovak: Messages = {
   whatAreYourIntolerances: 'Aké sú vaše potravinové intolerancie?',
   dietPreferences: 'Diéty',
   whichDietsDoYouFollow: 'Ktoré diéty dodržiavate?',
+  calorieTrackingGoal:
+    'V prípade že si počítate kalórie, aký je váš denný príjem?',
 }
 
 // const cs_messages: Messages = {

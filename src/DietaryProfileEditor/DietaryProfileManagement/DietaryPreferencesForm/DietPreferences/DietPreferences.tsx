@@ -55,64 +55,82 @@ const DietPreferences: React.FC = () => {
   }
 
   return (
-    <Form.Group controlId="selectDietsFormGroup">
-      <Form.Label>
-        <div className="form-group-heading">
-          <FormattedMessage
-            id="whichDietsDoYouFollow"
-            defaultMessage="Which diets do you follow?"
-          />
-        </div>
-      </Form.Label>
+    <>
+      <Form.Group controlId="selectDietsFormGroup">
+        <Form.Label>
+          <div className="form-group-heading">
+            <FormattedMessage
+              id="whichDietsDoYouFollow"
+              defaultMessage="Which diets do you follow?"
+            />
+          </div>
+        </Form.Label>
 
-      <Row className="ms-auto">
-        <Col xs={6} lg={4}>
-          <Stack gap={2}>
-            {popularDietList.slice(0, 5).map((diet) => {
-              return <DietCheckbox dietName={diet} />
-            })}
-          </Stack>
-        </Col>
+        <Row className="ms-auto">
+          <Col xs={6} lg={4}>
+            <Stack gap={2}>
+              {popularDietList.slice(0, 5).map((diet) => {
+                return <DietCheckbox dietName={diet} />
+              })}
+            </Stack>
+          </Col>
 
-        <Col xs={6} lg={4}>
-          <Stack gap={2}>
-            {popularDietList.slice(5, 10).map((diet) => {
-              return <DietCheckbox dietName={diet} />
-            })}
-          </Stack>
-        </Col>
-      </Row>
+          <Col xs={6} lg={4}>
+            <Stack gap={2}>
+              {popularDietList.slice(5, 10).map((diet) => {
+                return <DietCheckbox dietName={diet} />
+              })}
+            </Stack>
+          </Col>
+        </Row>
 
-      <Select
-        className="dietary-preferences-form-select ms-2 mt-4"
-        isMulti
-        components={SelectComponents}
-        options={[
-          {
-            label: 'Diet 1',
-            value: 'diet1',
-          },
-          {
-            label: 'Diet 2',
-            value: 'diet2',
-          },
-          {
-            label: 'Diet 3',
-            value: 'diet3',
-          },
-        ]}
-        // value={}
-        // onChange={}
-        aria-label="select-more-diets"
-        placeholder={'Search for more diets'}
-        styles={{
-          control: (baseStyles) => ({
-            ...baseStyles,
-            minHeight: '50px',
-          }),
-        }}
-      />
-    </Form.Group>
+        <Select
+          className="dietary-preferences-form-select ms-2 mt-4"
+          isMulti
+          components={SelectComponents}
+          options={[
+            {
+              label: 'Diet 1',
+              value: 'diet1',
+            },
+            {
+              label: 'Diet 2',
+              value: 'diet2',
+            },
+            {
+              label: 'Diet 3',
+              value: 'diet3',
+            },
+          ]}
+          // value={}
+          // onChange={}
+          aria-label="select-more-diets"
+          placeholder={'Search for more diets'}
+          styles={{
+            control: (baseStyles) => ({
+              ...baseStyles,
+              minHeight: '50px',
+            }),
+          }}
+        />
+      </Form.Group>
+
+      <Form.Group controlId="calorieIntakeFormGroup" className="mt-4">
+        <Form.Label htmlFor="calorieIntakeFormGroup">
+          <div className="form-group-heading">
+            <FormattedMessage
+              id="calorieTrackingGoal"
+              defaultMessage="If you track calories, what is your daily intake goal?"
+            />
+          </div>
+        </Form.Label>
+
+        <Stack direction="horizontal" gap={3}>
+          <Form.Control id="dailyCalorieIntake" className="calorieInput ms-2" />
+          <Form.Label htmlFor="dailyCalorieIntake">kCal</Form.Label>
+        </Stack>
+      </Form.Group>
+    </>
   )
 }
 
