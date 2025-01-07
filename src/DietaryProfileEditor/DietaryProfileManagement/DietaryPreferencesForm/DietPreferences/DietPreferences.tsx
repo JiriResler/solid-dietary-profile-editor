@@ -116,21 +116,16 @@ const DietPreferences: React.FC = () => {
       </Form.Group>
 
       <Form.Group controlId="calorieIntakeFormGroup" className="mt-4">
-        <Form.Label htmlFor="calorieIntakeFormGroup">
-          <div className="form-group-heading">
-            <FormattedMessage
-              id="calorieTrackingGoal"
-              defaultMessage="If you track calories, what is your daily intake goal?"
-            />
-          </div>
+        <Form.Label className="form-group-heading">
+          <FormattedMessage
+            id="calorieTrackingGoal"
+            defaultMessage="If you track calories, what is your daily intake goal?"
+          />
         </Form.Label>
 
         <Stack direction="horizontal" gap={3}>
-          <Form.Control
-            id="dailyCalorieIntake"
-            className="app-form-control calorieInput ms-2"
-          />
-          <Form.Label htmlFor="dailyCalorieIntake">kCal</Form.Label>
+          <Form.Control className="app-form-control calorieInput ms-2" />
+          <div>kCal</div>
         </Stack>
       </Form.Group>
     </>
