@@ -78,7 +78,7 @@ const AllergensAndIntolerances: React.FC = () => {
     const inputId = allergenName + 'CheckboxInput'
 
     return (
-      <Form.Check type="checkbox" id={allergenName + 'Checkbox'}>
+      <Form.Check id={allergenName + 'Checkbox'}>
         <Form.Check.Input
           type="checkbox"
           className="app-form-control app-form-checkbox"
@@ -118,10 +118,7 @@ const AllergensAndIntolerances: React.FC = () => {
             <Stack gap={1}>
               {allergenList.slice(0, 7).map((allergen) => {
                 return (
-                  <AllergenCheckbox
-                    allergenName={allergen}
-                    key={allergen + 'Checkbox'}
-                  />
+                  <AllergenCheckbox allergenName={allergen} key={allergen} />
                 )
               })}
             </Stack>
@@ -131,10 +128,7 @@ const AllergensAndIntolerances: React.FC = () => {
             <Stack gap={1}>
               {allergenList.slice(7, 14).map((allergen) => {
                 return (
-                  <AllergenCheckbox
-                    allergenName={allergen}
-                    key={allergen + 'Checkbox'}
-                  />
+                  <AllergenCheckbox allergenName={allergen} key={allergen} />
                 )
               })}
             </Stack>

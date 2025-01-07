@@ -70,7 +70,7 @@ const DietPreferences: React.FC = () => {
           <Col xs={6} lg={4}>
             <Stack gap={2}>
               {popularDietList.slice(0, 5).map((diet) => {
-                return <DietCheckbox dietName={diet} />
+                return <DietCheckbox dietName={diet} key={diet} />
               })}
             </Stack>
           </Col>
@@ -78,7 +78,7 @@ const DietPreferences: React.FC = () => {
           <Col xs={6} lg={4}>
             <Stack gap={2}>
               {popularDietList.slice(5, 10).map((diet) => {
-                return <DietCheckbox dietName={diet} />
+                return <DietCheckbox dietName={diet} key={diet} />
               })}
             </Stack>
           </Col>
