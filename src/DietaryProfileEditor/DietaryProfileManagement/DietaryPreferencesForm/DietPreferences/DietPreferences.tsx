@@ -36,18 +36,10 @@ const DietPreferences: React.FC = () => {
   const DietCheckbox: React.FC<DietCheckboxProps> = ({ dietName }) => {
     const checkboxId = dietName.replace(/\s/g, '-').toLowerCase() + '-checkbox'
 
-    const checkboxInputId = checkboxId + '-input'
-
     return (
       <Form.Check id={checkboxId}>
-        <Form.Check.Input
-          className="app-form-control app-form-checkbox"
-          id={checkboxInputId}
-        />
-        <Form.Check.Label
-          htmlFor={checkboxInputId}
-          className="dietCheckboxLabel"
-        >
+        <Form.Check.Input className="app-form-control app-form-checkbox" />
+        <Form.Check.Label className="dietCheckboxLabel">
           {dietName}
         </Form.Check.Label>
       </Form.Check>
@@ -56,62 +48,60 @@ const DietPreferences: React.FC = () => {
 
   return (
     <>
-      <Form.Group controlId="selectDietsFormGroup">
-        <Form.Label className="form-group-heading">
-          <FormattedMessage
-            id="whichDietsDoYouFollow"
-            defaultMessage="Which diets do you follow?"
-          />
-        </Form.Label>
-
-        <Row className="ms-auto">
-          <Col xs={6} lg={4}>
-            <Stack gap={2}>
-              {popularDietList.slice(0, 5).map((diet) => {
-                return <DietCheckbox dietName={diet} key={diet} />
-              })}
-            </Stack>
-          </Col>
-
-          <Col xs={6} lg={4}>
-            <Stack gap={2}>
-              {popularDietList.slice(5, 10).map((diet) => {
-                return <DietCheckbox dietName={diet} key={diet} />
-              })}
-            </Stack>
-          </Col>
-        </Row>
-
-        <Select
-          className="dietary-preferences-form-select ms-2 mt-4"
-          isMulti
-          components={SelectComponents}
-          options={[
-            {
-              label: 'Diet 1',
-              value: 'diet1',
-            },
-            {
-              label: 'Diet 2',
-              value: 'diet2',
-            },
-            {
-              label: 'Diet 3',
-              value: 'diet3',
-            },
-          ]}
-          // value={}
-          // onChange={}
-          aria-label="select-more-diets"
-          placeholder={'Search for more diets'}
-          styles={{
-            control: (baseStyles) => ({
-              ...baseStyles,
-              minHeight: '50px',
-            }),
-          }}
+      <Form.Label className="form-group-heading">
+        <FormattedMessage
+          id="whichDietsDoYouFollow"
+          defaultMessage="Which diets do you follow?"
         />
-      </Form.Group>
+      </Form.Label>
+
+      <Row className="ms-auto">
+        <Col xs={6} lg={4}>
+          <Stack gap={2}>
+            {popularDietList.slice(0, 5).map((diet) => {
+              return <DietCheckbox dietName={diet} key={diet} />
+            })}
+          </Stack>
+        </Col>
+
+        <Col xs={6} lg={4}>
+          <Stack gap={2}>
+            {popularDietList.slice(5, 10).map((diet) => {
+              return <DietCheckbox dietName={diet} key={diet} />
+            })}
+          </Stack>
+        </Col>
+      </Row>
+
+      <Select
+        className="dietary-preferences-form-select ms-2 mt-4"
+        isMulti
+        components={SelectComponents}
+        options={[
+          {
+            label: 'Diet 1',
+            value: 'diet1',
+          },
+          {
+            label: 'Diet 2',
+            value: 'diet2',
+          },
+          {
+            label: 'Diet 3',
+            value: 'diet3',
+          },
+        ]}
+        // value={}
+        // onChange={}
+        aria-label="select-more-diets"
+        placeholder={'Search for more diets'}
+        styles={{
+          control: (baseStyles) => ({
+            ...baseStyles,
+            minHeight: '50px',
+          }),
+        }}
+      />
 
       <Form.Group controlId="calorieIntakeFormGroup" className="mt-4">
         <Form.Label className="form-group-heading">
