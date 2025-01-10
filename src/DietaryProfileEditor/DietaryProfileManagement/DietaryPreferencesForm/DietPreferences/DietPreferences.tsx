@@ -48,12 +48,12 @@ const DietPreferences: React.FC = () => {
 
   return (
     <>
-      <Form.Label className="form-group-heading">
+      <div className="form-group-heading">
         <FormattedMessage
           id="whichDietsDoYouFollow"
           defaultMessage="Which diets do you follow?"
         />
-      </Form.Label>
+      </div>
 
       <Row className="ms-auto">
         <Col xs={6} lg={4}>
