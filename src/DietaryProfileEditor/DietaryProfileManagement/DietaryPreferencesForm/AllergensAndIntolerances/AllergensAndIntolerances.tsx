@@ -124,34 +124,30 @@ const AllergensAndIntolerances: React.FC = () => {
         </Col>
       </Row>
 
-      <Form.Group controlId="selectIntolerancesFormGroup" className="mt-3">
-        <Form.Label>
-          <div className="form-group-heading">
-            <FormattedMessage
-              id="whatAreYourIntolerances"
-              defaultMessage="What are your food intolerances?"
-            />
-          </div>
-        </Form.Label>
-
-        <Select
-          className="dietary-preferences-form-select ms-2"
-          isMulti
-          components={SelectComponents}
-          options={intoleranceList}
-          // value={}
-          // onChange={}
-          aria-label="select-intolerances"
-          placeholder={'Search for intolerances'}
-          menuPlacement="top"
-          styles={{
-            control: (baseStyles) => ({
-              ...baseStyles,
-              minHeight: '50px',
-            }),
-          }}
+      <div className="form-group-heading mt-4">
+        <FormattedMessage
+          id="whatAreYourIntolerances"
+          defaultMessage="What are your food intolerances?"
         />
-      </Form.Group>
+      </div>
+
+      <Select
+        className="dietary-preferences-form-select ms-2 mt-1"
+        isMulti
+        components={SelectComponents}
+        options={intoleranceList}
+        // value={}
+        // onChange={}
+        aria-label="select-intolerances"
+        placeholder={'Search for intolerances'}
+        menuPlacement="top"
+        styles={{
+          control: (baseStyles) => ({
+            ...baseStyles,
+            minHeight: '50px',
+          }),
+        }}
+      />
     </>
   )
 }
