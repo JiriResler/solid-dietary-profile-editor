@@ -75,15 +75,11 @@ const AllergensAndIntolerances: React.FC = () => {
   const AllergenCheckbox: React.FC<AllergenCheckboxProps> = ({
     allergenName,
   }) => {
-    const inputId = allergenName + 'CheckboxInput'
+    const checkboxId = allergenName.toLowerCase() + '-checkbox'
 
     return (
-      <Form.Check id={allergenName + 'Checkbox'}>
-        <Form.Check.Input
-          type="checkbox"
-          className="app-form-control app-form-checkbox"
-          id={inputId}
-        />
+      <Form.Check id={checkboxId}>
+        <Form.Check.Input className="app-form-control app-form-checkbox" />
 
         <img
           src={'images/allergens/' + allergenName + '.svg'}
@@ -91,7 +87,7 @@ const AllergensAndIntolerances: React.FC = () => {
           className="allergen-icon ms-1 me-1"
         />
 
-        <Form.Check.Label htmlFor={inputId}>
+        <Form.Check.Label>
           <FormattedMessage
             id={allergenName.toLowerCase()}
             defaultMessage={allergenName}
@@ -103,38 +99,30 @@ const AllergensAndIntolerances: React.FC = () => {
 
   return (
     <>
-      <Form.Group controlId="selectAllergensFormGroup">
-        <Form.Label>
-          <div className="form-group-heading">
-            <FormattedMessage
-              id="whatAreYouAllergicTo"
-              defaultMessage="What are you allergic to?"
-            />
-          </div>
-        </Form.Label>
+      <div className="form-group-heading">
+        <FormattedMessage
+          id="whatAreYouAllergicTo"
+          defaultMessage="What are you allergic to?"
+        />
+      </div>
 
-        <Row className="ms-auto">
-          <Col xs={6} lg={3}>
-            <Stack gap={1}>
-              {allergenList.slice(0, 7).map((allergen) => {
-                return (
-                  <AllergenCheckbox allergenName={allergen} key={allergen} />
-                )
-              })}
-            </Stack>
-          </Col>
+      <Row className="ms-auto">
+        <Col xs={6} lg={3}>
+          <Stack gap={1}>
+            {allergenList.slice(0, 7).map((allergen) => {
+              return <AllergenCheckbox allergenName={allergen} key={allergen} />
+            })}
+          </Stack>
+        </Col>
 
-          <Col xs={6} lg={3}>
-            <Stack gap={1}>
-              {allergenList.slice(7, 14).map((allergen) => {
-                return (
-                  <AllergenCheckbox allergenName={allergen} key={allergen} />
-                )
-              })}
-            </Stack>
-          </Col>
-        </Row>
-      </Form.Group>
+        <Col xs={6} lg={3}>
+          <Stack gap={1}>
+            {allergenList.slice(7, 14).map((allergen) => {
+              return <AllergenCheckbox allergenName={allergen} key={allergen} />
+            })}
+          </Stack>
+        </Col>
+      </Row>
 
       <Form.Group controlId="selectIntolerancesFormGroup" className="mt-3">
         <Form.Label>
