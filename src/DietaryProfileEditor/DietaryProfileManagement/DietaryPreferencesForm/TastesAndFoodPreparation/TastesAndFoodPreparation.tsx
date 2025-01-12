@@ -1,4 +1,5 @@
 import './TastesAndFoodPreparation.css'
+import { FormattedMessage } from 'react-intl'
 
 /**
  *
@@ -6,7 +7,12 @@ import './TastesAndFoodPreparation.css'
 const TastesAndFoodPreparation: React.FC = () => {
   return (
     <>
-      <h1>hello from TastesAndFoodPreparation</h1>
+      <div className="form-group-heading">
+        <FormattedMessage
+          id="favoriteWorldCuisines"
+          defaultMessage="What are your favorite world cuisines?"
+        />
+      </div>
     </>
   )
 }

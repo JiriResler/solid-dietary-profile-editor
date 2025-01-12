@@ -69,13 +69,9 @@ const DietaryPreferencesFormHeader: React.FC = () => {
     <Row className="h-100 align-items-center">
       <Col xs={8} lg={9}>
         <div className="current-step-heading">
-          {/* <FormattedMessage
-            id="allergiesAndFoodIntolerances"
-            defaultMessage="Allergies and Food Intolerances"
-          /> */}
           <FormattedMessage
-            id="dietPreferences"
-            defaultMessage="Diet Preferences"
+            id="tastesAndFoodPreparation"
+            defaultMessage="Tastes and Food Preparation"
           />
         </div>
 
