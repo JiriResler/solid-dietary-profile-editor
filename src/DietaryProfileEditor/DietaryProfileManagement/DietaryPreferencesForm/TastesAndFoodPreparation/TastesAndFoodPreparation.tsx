@@ -15,7 +15,7 @@ const TastesAndFoodPreparation: React.FC = () => {
     'Indian',
     'French',
     'Chinese',
-    'Middle',
+    'Middle Eastern',
     'Spanish',
     'Japanese',
     'Thai',
@@ -92,6 +92,76 @@ const TastesAndFoodPreparation: React.FC = () => {
           defaultMessage="Which food ingredients do you like or dislike?"
         />
       </div>
+
+      <Row className="ms-auto">
+        <Col className="pb-4">
+          <div>What I like</div>
+
+          <Select
+            className="dietary-preferences-form-select mt-3"
+            isMulti
+            components={SelectComponents}
+            options={[
+              {
+                label: 'Ingredient 1',
+                value: 'ingredient1',
+              },
+              {
+                label: 'Ingredient 2',
+                value: 'ingredient2',
+              },
+              {
+                label: 'Ingredient 3',
+                value: 'ingredient3',
+              },
+            ]}
+            // value={}
+            // onChange={}
+            aria-label="preferred-ingrediences-select"
+            placeholder={'Search for an ingredient'}
+            styles={{
+              control: (baseStyles) => ({
+                ...baseStyles,
+                minHeight: '50px',
+              }),
+            }}
+          />
+        </Col>
+
+        <Col>
+          <div>What I don't like</div>
+
+          <Select
+            className="dietary-preferences-form-select mt-3"
+            isMulti
+            components={SelectComponents}
+            options={[
+              {
+                label: 'Ingredient 1',
+                value: 'ingredient1',
+              },
+              {
+                label: 'Ingredient 2',
+                value: 'ingredient2',
+              },
+              {
+                label: 'Ingredient 3',
+                value: 'ingredient3',
+              },
+            ]}
+            // value={}
+            // onChange={}
+            aria-label="disliked-ingrediences-select"
+            placeholder={'Search for an ingredient'}
+            styles={{
+              control: (baseStyles) => ({
+                ...baseStyles,
+                minHeight: '50px',
+              }),
+            }}
+          />
+        </Col>
+      </Row>
     </>
   )
 }
