@@ -5,6 +5,7 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Stack from 'react-bootstrap/Stack'
 import Select from 'react-select'
+import FormCheckbox from '../FormCheckbox/FormCheckbox'
 
 /**
  * Displays options and collects input from the user about their diet preferences.
@@ -29,23 +30,6 @@ const DietPreferences: React.FC = () => {
     // Menu: CustomSelectMenu,
   }
 
-  type DietCheckboxProps = {
-    dietName: string
-  }
-
-  const DietCheckbox: React.FC<DietCheckboxProps> = ({ dietName }) => {
-    const checkboxId = dietName.replace(/\s/g, '-').toLowerCase() + '-checkbox'
-
-    return (
-      <Form.Check id={checkboxId}>
-        <Form.Check.Input className="app-form-control app-form-checkbox" />
-        <Form.Check.Label className="dietCheckboxLabel">
-          {dietName}
-        </Form.Check.Label>
-      </Form.Check>
-    )
-  }
-
   return (
     <>
       <div className="form-group-heading">
@@ -59,7 +43,7 @@ const DietPreferences: React.FC = () => {
         <Col xs={6} lg={4}>
           <Stack gap={2}>
             {popularDietList.slice(0, 5).map((diet) => {
-              return <DietCheckbox dietName={diet} key={diet} />
+              return <FormCheckbox label={diet} key={diet} />
             })}
           </Stack>
         </Col>
@@ -67,7 +51,7 @@ const DietPreferences: React.FC = () => {
         <Col xs={6} lg={4}>
           <Stack gap={2}>
             {popularDietList.slice(5, 10).map((diet) => {
-              return <DietCheckbox dietName={diet} key={diet} />
+              return <FormCheckbox label={diet} key={diet} />
             })}
           </Stack>
         </Col>
