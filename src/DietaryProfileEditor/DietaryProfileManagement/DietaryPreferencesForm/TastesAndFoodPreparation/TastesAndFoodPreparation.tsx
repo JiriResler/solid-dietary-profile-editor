@@ -7,7 +7,7 @@ import FormCheckbox from '../FormCheckbox/FormCheckbox'
 import Select from 'react-select'
 
 /**
- *
+ * Collects user data on their taste preferences.
  */
 const TastesAndFoodPreparation: React.FC = () => {
   const popularCuisines = [
@@ -85,6 +85,13 @@ const TastesAndFoodPreparation: React.FC = () => {
           }),
         }}
       />
+
+      <div className="form-group-heading mt-4">
+        <FormattedMessage
+          id="foodIngredientsLikeOrDislike"
+          defaultMessage="Which food ingredients do you like or dislike?"
+        />
+      </div>
     </>
   )
 }

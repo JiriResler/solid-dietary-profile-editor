@@ -109,6 +109,7 @@ type Messages = {
   calorieTrackingGoal: string
   tastesAndFoodPreparation: string
   favoriteWorldCuisines: string
+  foodIngredientsLikeOrDislike: string
 }
 
 const messagesInSlovak: Messages = {
@@ -232,6 +233,8 @@ const messagesInSlovak: Messages = {
     'V prípade že si počítate kalórie, aký je váš denný príjem?',
   tastesAndFoodPreparation: 'Preferencie chutí',
   favoriteWorldCuisines: 'Aké sú vaše obľúbené svetové kuchyne?',
+  foodIngredientsLikeOrDislike:
+    'Ktoré ingrediencie máte radi a ktoré naopak nie?',
 }
 
 // const cs_messages: Messages = {
