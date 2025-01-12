@@ -4,6 +4,7 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Stack from 'react-bootstrap/Stack'
 import FormCheckbox from '../FormCheckbox/FormCheckbox'
+import Select from 'react-select'
 
 /**
  *
@@ -21,6 +22,12 @@ const TastesAndFoodPreparation: React.FC = () => {
     'Mexican',
     'Korean',
   ]
+
+  const SelectComponents = {
+    DropdownIndicator: () => null,
+    IndicatorSeparator: () => null,
+    // Menu: CustomSelectMenu,
+  }
 
   return (
     <>
@@ -48,6 +55,36 @@ const TastesAndFoodPreparation: React.FC = () => {
           </Stack>
         </Col>
       </Row>
+
+      <Select
+        className="dietary-preferences-form-select ms-2 mt-4"
+        isMulti
+        components={SelectComponents}
+        options={[
+          {
+            label: 'Cuisine 1',
+            value: 'cuisine1',
+          },
+          {
+            label: 'Cuisine 2',
+            value: 'cuisine2',
+          },
+          {
+            label: 'Cuisine 3',
+            value: 'cuisine3',
+          },
+        ]}
+        // value={}
+        // onChange={}
+        aria-label="select-more-cuisines"
+        placeholder={'Search for more cuisines'}
+        styles={{
+          control: (baseStyles) => ({
+            ...baseStyles,
+            minHeight: '50px',
+          }),
+        }}
+      />
     </>
   )
 }
