@@ -162,6 +162,13 @@ const TastesAndFoodPreparation: React.FC = () => {
           />
         </Col>
       </Row>
+
+      <div className="form-group-heading">
+        <FormattedMessage
+          id="doYouLikeSpicyFood"
+          defaultMessage="Do you like spicy food?"
+        />
+      </div>
     </>
   )
 }

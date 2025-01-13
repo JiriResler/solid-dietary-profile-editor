@@ -45,7 +45,6 @@ type Messages = {
   doesNotMatter: string
   sweet: string
   savory: string
-  doYouLikeSpicyFood: string
   yes: string
   no: string
   howSpicyShouldItBe: string
@@ -110,6 +109,7 @@ type Messages = {
   tastesAndFoodPreparation: string
   favoriteWorldCuisines: string
   foodIngredientsLikeOrDislike: string
+  doYouLikeSpicyFood: string
 }
 
 const messagesInSlovak: Messages = {
@@ -154,7 +154,6 @@ const messagesInSlovak: Messages = {
   doesNotMatter: 'Nezáleží',
   sweet: 'Sladké',
   savory: 'Slané',
-  doYouLikeSpicyFood: 'Obľubujete pálivé jedlo?',
   yes: 'Áno',
   no: 'Nie',
   howSpicyShouldItBe: 'Ako veľmi pálivé by malo byť?',
@@ -235,6 +234,7 @@ const messagesInSlovak: Messages = {
   favoriteWorldCuisines: 'Aké sú vaše obľúbené svetové kuchyne?',
   foodIngredientsLikeOrDislike:
     'Ktoré ingrediencie máte radi a ktoré naopak nie?',
+  doYouLikeSpicyFood: 'Máte radi pálivé jedlá?',
 }
 
 // const cs_messages: Messages = {
