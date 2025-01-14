@@ -1,5 +1,5 @@
 import './TastesAndFoodPreparation.css'
-import { FormattedMessage } from 'react-intl'
+import { FormattedMessage, useIntl } from 'react-intl'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Stack from 'react-bootstrap/Stack'
@@ -11,6 +11,8 @@ import Form from 'react-bootstrap/Form'
  * Collects user data on their taste preferences.
  */
 const TastesAndFoodPreparation: React.FC = () => {
+  const intl = useIntl()
+
   const popularCuisines = [
     'Italian',
     'Indian',
@@ -191,9 +193,29 @@ const TastesAndFoodPreparation: React.FC = () => {
       </div>
 
       <Stack gap={2} className="ms-3">
-        <RadioButton label="Option 1" key="spiciness-radio-button-1" />
-        <RadioButton label="Option 2" key="spiciness-radio-button-2" />
-        <RadioButton label="Option 3" key="spiciness-radio-button-3" />
+        <RadioButton
+          label={intl.formatMessage({
+            id: 'notSpecified',
+            defaultMessage: 'Not specified',
+          })}
+          key="spiciness-radio-button-1"
+        />
+
+        <RadioButton
+          label={intl.formatMessage({
+            id: 'notAtAll',
+            defaultMessage: 'Not at all',
+          })}
+          key="spiciness-radio-button-2"
+        />
+
+        <RadioButton
+          label={intl.formatMessage({
+            id: 'yesIDo',
+            defaultMessage: 'Yes, I do',
+          })}
+          key="spiciness-radio-button-3"
+        />
       </Stack>
     </>
   )
