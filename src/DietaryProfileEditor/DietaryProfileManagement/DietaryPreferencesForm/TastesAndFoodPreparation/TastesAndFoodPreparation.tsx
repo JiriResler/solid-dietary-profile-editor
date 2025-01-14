@@ -34,6 +34,9 @@ const TastesAndFoodPreparation: React.FC = () => {
     label: string
   }
 
+  /**
+   * Renders a radio button for selecting the user's food spiciness preference.
+   */
   const RadioButton: React.FC<RadioButtonProps> = ({ label }) => {
     return (
       <Form.Check id="">
