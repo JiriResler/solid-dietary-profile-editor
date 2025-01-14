@@ -5,6 +5,7 @@ import Col from 'react-bootstrap/Col'
 import Stack from 'react-bootstrap/Stack'
 import FormCheckbox from '../FormCheckbox/FormCheckbox'
 import Select from 'react-select'
+import Form from 'react-bootstrap/Form'
 
 /**
  * Collects user data on their taste preferences.
@@ -169,6 +170,38 @@ const TastesAndFoodPreparation: React.FC = () => {
           defaultMessage="Do you like spicy food?"
         />
       </div>
+
+      <Stack gap={2} className="ms-3">
+        <Form.Check id="option-1-radio-button">
+          <Form.Check.Input
+            type="radio"
+            className="app-form-control app-form-checkbox"
+          />
+          <Form.Check.Label className="checkbox-label">
+            Option 1
+          </Form.Check.Label>
+        </Form.Check>
+
+        <Form.Check id="option-2-radio-button">
+          <Form.Check.Input
+            type="radio"
+            className="app-form-control app-form-checkbox"
+          />
+          <Form.Check.Label className="checkbox-label">
+            Option 2
+          </Form.Check.Label>
+        </Form.Check>
+
+        <Form.Check id="option-3-radio-button">
+          <Form.Check.Input
+            type="radio"
+            className="app-form-control app-form-checkbox"
+          />
+          <Form.Check.Label className="checkbox-label">
+            Option 3
+          </Form.Check.Label>
+        </Form.Check>
+      </Stack>
     </>
   )
 }
