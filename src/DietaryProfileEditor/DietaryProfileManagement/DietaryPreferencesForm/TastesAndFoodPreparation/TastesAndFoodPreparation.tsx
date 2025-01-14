@@ -30,6 +30,22 @@ const TastesAndFoodPreparation: React.FC = () => {
     // Menu: CustomSelectMenu,
   }
 
+  type RadioButtonProps = {
+    label: string
+  }
+
+  const RadioButton: React.FC<RadioButtonProps> = ({ label }) => {
+    return (
+      <Form.Check id="">
+        <Form.Check.Input
+          type="radio"
+          className="app-form-control app-form-checkbox"
+        />
+        <Form.Check.Label className="checkbox-label">{label}</Form.Check.Label>
+      </Form.Check>
+    )
+  }
+
   return (
     <>
       <div className="form-group-heading">
@@ -172,35 +188,9 @@ const TastesAndFoodPreparation: React.FC = () => {
       </div>
 
       <Stack gap={2} className="ms-3">
-        <Form.Check id="option-1-radio-button">
-          <Form.Check.Input
-            type="radio"
-            className="app-form-control app-form-checkbox"
-          />
-          <Form.Check.Label className="checkbox-label">
-            Option 1
-          </Form.Check.Label>
-        </Form.Check>
-
-        <Form.Check id="option-2-radio-button">
-          <Form.Check.Input
-            type="radio"
-            className="app-form-control app-form-checkbox"
-          />
-          <Form.Check.Label className="checkbox-label">
-            Option 2
-          </Form.Check.Label>
-        </Form.Check>
-
-        <Form.Check id="option-3-radio-button">
-          <Form.Check.Input
-            type="radio"
-            className="app-form-control app-form-checkbox"
-          />
-          <Form.Check.Label className="checkbox-label">
-            Option 3
-          </Form.Check.Label>
-        </Form.Check>
+        <RadioButton label="Option 1" key="spiciness-radio-button-1" />
+        <RadioButton label="Option 2" key="spiciness-radio-button-2" />
+        <RadioButton label="Option 3" key="spiciness-radio-button-3" />
       </Stack>
     </>
   )
