@@ -189,7 +189,7 @@ const TastesAndFoodPreparation: React.FC = () => {
           />
         </Col>
 
-        <Col>
+        <Col className="pb-4">
           <div>What I don't like</div>
 
           <Select
