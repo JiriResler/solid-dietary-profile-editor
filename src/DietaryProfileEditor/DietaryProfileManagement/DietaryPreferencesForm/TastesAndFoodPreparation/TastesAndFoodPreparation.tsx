@@ -6,6 +6,7 @@ import Stack from 'react-bootstrap/Stack'
 import FormCheckbox from '../FormCheckbox/FormCheckbox'
 import Select from 'react-select'
 import Form from 'react-bootstrap/Form'
+import Slider from '@mui/material/Slider'
 
 /**
  * Collects user data on their taste preferences.
@@ -53,6 +54,25 @@ const TastesAndFoodPreparation: React.FC = () => {
       </Form.Check>
     )
   }
+
+  const spicinessSliderMarks = [
+    {
+      value: 0,
+      label: 'Mild',
+    },
+    {
+      value: 33,
+      label: 'Medium',
+    },
+    {
+      value: 66,
+      label: 'Hot',
+    },
+    {
+      value: 99,
+      label: 'Extra hot',
+    },
+  ]
 
   return (
     <>
@@ -219,6 +239,24 @@ const TastesAndFoodPreparation: React.FC = () => {
           })}
           key="spiciness-radio-button-3"
         />
+
+        <Row>
+          <Col xs={12} lg={4}>
+            <FormattedMessage
+              id="howSpicyShouldFoodBe"
+              defaultMessage="How spicy should it be?"
+            />
+          </Col>
+
+          <Col xs={9} lg={4}>
+            <Slider
+              aria-label="spiciness-slider"
+              step={33}
+              marks={spicinessSliderMarks}
+              sx={{ marginLeft: '8pt', marginTop: '-3pt' }}
+            />
+          </Col>
+        </Row>
       </Stack>
     </>
   )
