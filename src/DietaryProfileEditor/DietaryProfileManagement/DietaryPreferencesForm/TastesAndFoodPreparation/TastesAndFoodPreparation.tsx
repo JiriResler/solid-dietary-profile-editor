@@ -69,10 +69,26 @@ const TastesAndFoodPreparation: React.FC = () => {
       label: 'Hot',
     },
     {
-      value: 99,
+      value: 100,
       label: 'Extra hot',
     },
   ]
+
+  /**
+   * Returns a text label corresponding to the currently selected slider value.
+   */
+  function valueLabelFormat(value: number): string {
+    if (value >= 0 && value <= 32) {
+      return 'Mild'
+    } else if (value > 32 && value <= 65) {
+      return 'Medium'
+    } else if (value > 65 && value <= 98) {
+      return 'Hot'
+    } else if (value > 98) {
+      return 'Extra hot'
+    }
+    return ''
+  }
 
   return (
     <>
@@ -251,7 +267,8 @@ const TastesAndFoodPreparation: React.FC = () => {
           <Col xs={9} lg={4}>
             <Slider
               aria-label="spiciness-slider"
-              step={33}
+              getAriaValueText={valueLabelFormat}
+              step={100 / 3}
               marks={spicinessSliderMarks}
               sx={{ marginLeft: '8pt', marginTop: '-3pt' }}
             />
