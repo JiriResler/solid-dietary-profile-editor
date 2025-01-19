@@ -125,7 +125,7 @@ const TastesAndFoodPreparation: React.FC = () => {
       <Row className="ms-auto">
         <Col xs={6} lg={3}>
           <Stack gap={2}>
-            {popularCuisines.slice(0, 5).map((cuisine) => {
+            {popularCuisines.slice(0, 4).map((cuisine) => {
               return <FormCheckbox label={cuisine} key={cuisine} />
             })}
           </Stack>
@@ -133,7 +133,7 @@ const TastesAndFoodPreparation: React.FC = () => {
 
         <Col xs={6} lg={3}>
           <Stack gap={2}>
-            {popularCuisines.slice(5, 10).map((cuisine) => {
+            {popularCuisines.slice(4, 8).map((cuisine) => {
               return <FormCheckbox label={cuisine} key={cuisine} />
             })}
           </Stack>
@@ -143,7 +143,6 @@ const TastesAndFoodPreparation: React.FC = () => {
       <Select
         className="dietary-preferences-form-select ms-2 mt-4"
         isMulti
-        components={SelectComponents}
         options={[
           {
             label: 'Cuisine 1',
@@ -160,8 +159,8 @@ const TastesAndFoodPreparation: React.FC = () => {
         ]}
         // value={}
         // onChange={}
-        aria-label="select-more-cuisines"
-        placeholder={'Search for more cuisines'}
+        aria-label="more-cuisines-select"
+        placeholder={'Select more cuisines'}
         styles={{
           control: (baseStyles) => ({
             ...baseStyles,
@@ -184,7 +183,7 @@ const TastesAndFoodPreparation: React.FC = () => {
           <Select
             className="dietary-preferences-form-select mt-3"
             isMulti
-            components={SelectComponents}
+            components={IngredientSelectComponents}
             options={[
               {
                 label: 'Ingredient 1',
@@ -218,7 +217,7 @@ const TastesAndFoodPreparation: React.FC = () => {
           <Select
             className="dietary-preferences-form-select mt-3"
             isMulti
-            components={SelectComponents}
+            components={IngredientSelectComponents}
             options={[
               {
                 label: 'Ingredient 1',
