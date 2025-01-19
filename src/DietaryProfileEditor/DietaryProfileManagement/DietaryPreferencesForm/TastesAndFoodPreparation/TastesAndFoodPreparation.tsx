@@ -1,4 +1,3 @@
-import './TastesAndFoodPreparation.css'
 import { FormattedMessage, useIntl } from 'react-intl'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
