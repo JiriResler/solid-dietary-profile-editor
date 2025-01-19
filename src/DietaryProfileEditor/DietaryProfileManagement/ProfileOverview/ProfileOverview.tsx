@@ -42,10 +42,10 @@ const ProfileOverview: React.FC = () => {
     <div className="profile-overview-screen position-relative">
       <Row className="profile-overview-head-section position-relative align-items-center">
         <Col xs={10} md={11}>
-          <span className="profile-overview-heading ms-2">
+          <span className="ms-2">
             <FormattedMessage
               id="profileOverviewHeading"
-              defaultMessage="Your dietary profile"
+              defaultMessage="Dietary preferences profile"
             />
           </span>
         </Col>

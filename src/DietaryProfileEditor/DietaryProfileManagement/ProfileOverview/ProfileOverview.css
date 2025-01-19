@@ -5,22 +5,19 @@
 .profile-overview-head-section {
   background-color: #2541b2;
   height: 100px;
-}
-
-.profile-overview-heading {
   color: white;
   font-size: x-large;
   font-weight: 500;
 }
 
 .edit-profile-button {
-  width: 100px;
-  height: 100px;
+  width: 74px;
+  height: 74px;
   border-radius: 50%;
 }
 
 .edit-profile-icon {
-  width: 37px;
+  width: 28px;
 }
 
 .preferences-card-stack {
