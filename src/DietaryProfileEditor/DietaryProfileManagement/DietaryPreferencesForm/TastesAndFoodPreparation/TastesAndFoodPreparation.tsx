@@ -23,11 +23,34 @@ const TastesAndFoodPreparation: React.FC = () => {
     'Spanish',
     'Japanese',
     'Thai',
-    'Mexican',
-    'Korean',
   ]
 
-  const SelectComponents = {
+  const commonCookingMethods = [
+    'Baking',
+    'Grilling',
+    'Boiling',
+    'Roasting',
+    'Stir-frying',
+    'Sauteing',
+    'Steaming',
+    'Deep-frying',
+  ]
+
+  const otherCookingMethods = [
+    { label: 'Broiling', value: 'broiling' },
+    { label: 'Slow cooking', value: 'slow-cooking' },
+    { label: 'Poaching', value: 'poaching' },
+    { label: 'Sous Vide', value: 'sous-vide' },
+    { label: 'Searing', value: 'searing' },
+    { label: 'Smoking', value: 'smoking' },
+    { label: 'Pressure cooking', value: 'pressure-cooking' },
+    { label: 'Blanching', value: 'blanching' },
+    { label: 'Microwaving', value: 'microwaving' },
+    { label: 'Pickling/Fermenting', value: 'pickling-fermenting' },
+    { label: 'Raw/No-cook', value: 'raw-no-cook' },
+  ]
+
+  const IngredientSelectComponents = {
     DropdownIndicator: () => null,
     IndicatorSeparator: () => null,
     // Menu: CustomSelectMenu,
@@ -275,6 +298,47 @@ const TastesAndFoodPreparation: React.FC = () => {
           </Col>
         </Row>
       </Stack>
+
+      <div className="form-group-heading mt-3">
+        <FormattedMessage
+          id="whichCookingMethodsDoYouPrefer"
+          defaultMessage="Which cooking methods do you prefer?"
+        />
+      </div>
+
+      <Row className="ms-auto">
+        <Col xs={6} lg={3}>
+          <Stack gap={2}>
+            {commonCookingMethods.slice(0, 4).map((method) => {
+              return <FormCheckbox label={method} key={method} />
+            })}
+          </Stack>
+        </Col>
+
+        <Col xs={6} lg={3}>
+          <Stack gap={2}>
+            {commonCookingMethods.slice(4, 8).map((method) => {
+              return <FormCheckbox label={method} key={method} />
+            })}
+          </Stack>
+        </Col>
+      </Row>
+
+      <Select
+        className="dietary-preferences-form-select ms-2 mt-4"
+        isMulti
+        options={otherCookingMethods}
+        // value={}
+        // onChange={}
+        aria-label="more-cooking-methods-select"
+        placeholder={'Select more methods'}
+        styles={{
+          control: (baseStyles) => ({
+            ...baseStyles,
+            minHeight: '50px',
+          }),
+        }}
+      />
     </>
   )
 }

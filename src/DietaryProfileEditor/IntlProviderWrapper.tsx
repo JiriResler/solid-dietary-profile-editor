@@ -114,6 +114,7 @@ type Messages = {
   notAtAll: string
   yesIDo: string
   howSpicyShouldFoodBe: string
+  whichCookingMethodsDoYouPrefer: string
 }
 
 const messagesInSlovak: Messages = {
@@ -243,6 +244,8 @@ const messagesInSlovak: Messages = {
   notAtAll: 'Vôbec',
   yesIDo: 'Áno, mám',
   howSpicyShouldFoodBe: 'Zvoľte úroveň ostrosti',
+  whichCookingMethodsDoYouPrefer:
+    'Ktoré spôsoby prípravy jedla uprednostňujete?',
 }
 
 // const cs_messages: Messages = {
