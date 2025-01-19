@@ -22,3 +22,7 @@
 .edit-profile-icon {
   width: 37px;
 }
+
+.preferences-card-stack {
+  max-width: 450px;
+}

@@ -4,7 +4,7 @@ import './DietaryProfileManagement.css'
 import DietaryPreferencesForm from './DietaryPreferencesForm/DietaryPreferencesForm'
 
 const DietaryProfileManagement: React.FC = () => {
-  const [userProfileExists] = useState(false)
+  const [userProfileExists] = useState(true)
 
   if (userProfileExists) {
     return <ProfileOverview />

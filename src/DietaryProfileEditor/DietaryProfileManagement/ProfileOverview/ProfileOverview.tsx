@@ -57,82 +57,97 @@ const ProfileOverview: React.FC = () => {
         </Col>
       </Row>
 
-      <Row className="mt-4">
-        <Col xs={12} lg={6} className=" pb-4">
-          <Card>
-            <Card.Body>
-              <Card.Title>
-                <FormattedMessage id="allergens" defaultMessage="Allergens" />
-              </Card.Title>
+      <Stack gap={3} className="mt-3 preferences-card-stack">
+        <Card>
+          <Card.Body>
+            <Card.Title>
+              <FormattedMessage id="allergens" defaultMessage="Allergens" />
+            </Card.Title>
 
-              <Card.Subtitle className="mb-2 text-muted">
-                <FormattedMessage
-                  id="allergicTo"
-                  defaultMessage="You are allergic to"
-                />
-              </Card.Subtitle>
+            <Card.Subtitle className="mb-2 text-muted">
+              <FormattedMessage
+                id="allergicTo"
+                defaultMessage="You are allergic to"
+              />
+            </Card.Subtitle>
 
-              <Card.Text className="width-fit-content">
-                <Stack gap={1}>
-                  <div>
-                    <img
-                      src="images/allergens/crustaceans.svg"
-                      alt="allergen icon"
-                      className="allergen-icon"
-                    />
-                    <span className="ms-2">Crustaceans</span>
-                  </div>
+            <Card.Text className="width-fit-content">
+              <Stack gap={1}>
+                <div>
+                  <img
+                    src="images/allergens/Crustaceans.svg"
+                    alt="allergen icon"
+                    className="allergen-icon"
+                  />
+                  <span className="ms-2">Crustaceans</span>
+                </div>
 
-                  <div>
-                    <img
-                      src="images/allergens/soya.svg"
-                      alt="allergen icon"
-                      className="allergen-icon"
-                    />
-                    <span className="ms-2">Soya</span>
-                  </div>
+                <div>
+                  <img
+                    src="images/allergens/Soya.svg"
+                    alt="allergen icon"
+                    className="allergen-icon"
+                  />
+                  <span className="ms-2">Soya</span>
+                </div>
 
-                  <div>
-                    <img
-                      src="images/allergens/peanuts.svg"
-                      alt="allergen icon"
-                      className="allergen-icon"
-                    />
-                    <span className="ms-2">Peanuts</span>
-                  </div>
-                </Stack>
-              </Card.Text>
-            </Card.Body>
-          </Card>
-        </Col>
+                <div>
+                  <img
+                    src="images/allergens/Peanuts.svg"
+                    alt="allergen icon"
+                    className="allergen-icon"
+                  />
+                  <span className="ms-2">Peanuts</span>
+                </div>
+              </Stack>
+            </Card.Text>
+          </Card.Body>
+        </Card>
 
-        <Col xs={12} lg={6} className="pb-4">
-          <Card>
-            <Card.Body>
-              <Card.Title>
-                <FormattedMessage id="diets" defaultMessage="Diets" />
-              </Card.Title>
+        <Card>
+          <Card.Body>
+            <Card.Title>
+              <FormattedMessage id="diets" defaultMessage="Diets" />
+            </Card.Title>
 
-              <Card.Subtitle className="mb-2 text-muted">
-                <FormattedMessage
-                  id="onDiets"
-                  defaultMessage="Your diets are"
-                />
-              </Card.Subtitle>
+            <Card.Subtitle className="mb-2 text-muted">
+              <FormattedMessage id="onDiets" defaultMessage="Your diets are" />
+            </Card.Subtitle>
 
-              <Card.Text className="width-fit-content">
-                <Stack direction="horizontal" gap={2}>
-                  <span className="w-100">Diet</span>
-                </Stack>
+            <Card.Text className="width-fit-content">
+              <Stack direction="horizontal" gap={2}>
+                <span className="w-100">Diet</span>
+              </Stack>
 
-                <Stack direction="horizontal" gap={2}>
-                  <span className="w-100">Diet</span>
-                </Stack>
-              </Card.Text>
-            </Card.Body>
-          </Card>
-        </Col>
-      </Row>
+              <Stack direction="horizontal" gap={2}>
+                <span className="w-100">Diet</span>
+              </Stack>
+            </Card.Text>
+          </Card.Body>
+        </Card>
+
+        <Card>
+          <Card.Body>
+            <Card.Title>
+              <FormattedMessage id="id" defaultMessage="Tastes" />
+            </Card.Title>
+
+            <Card.Subtitle className="mb-2 text-muted">
+              <FormattedMessage id="onDiets" defaultMessage="Your diets are" />
+            </Card.Subtitle>
+
+            <Card.Text className="width-fit-content">
+              <Stack direction="horizontal" gap={2}>
+                <span className="w-100">Diet</span>
+              </Stack>
+
+              <Stack direction="horizontal" gap={2}>
+                <span className="w-100">Diet</span>
+              </Stack>
+            </Card.Text>
+          </Card.Body>
+        </Card>
+      </Stack>
 
       <Button className="edit-profile-button app-secondary-color-button position-absolute bottom-0 end-0 mb-3 me-3">
         <img
