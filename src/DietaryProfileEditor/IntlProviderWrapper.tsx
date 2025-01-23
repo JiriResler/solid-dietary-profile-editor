@@ -21,7 +21,6 @@ type Messages = {
   downloadProfile: string
   userManual: string
   signOut: string
-  allergens: string
   allergicTo: string
   diets: string
   onDiets: string
@@ -115,6 +114,7 @@ type Messages = {
   yesIDo: string
   howSpicyShouldFoodBe: string
   whichCookingMethodsDoYouPrefer: string
+  yourIntolerances: string
 }
 
 const messagesInSlovak: Messages = {
@@ -135,8 +135,7 @@ const messagesInSlovak: Messages = {
   downloadProfile: 'Stiahnuť profil',
   userManual: 'Používateľská príručka',
   signOut: 'Odhlásiť sa',
-  allergens: 'Alergény',
-  allergicTo: 'Ste alergický na',
+  allergicTo: 'Ste alergickí na',
   diets: 'Diéty',
   onDiets: 'Vaše diéty sú',
   tastePreferences: 'Chuťové preferencie',
@@ -246,6 +245,7 @@ const messagesInSlovak: Messages = {
   howSpicyShouldFoodBe: 'Zvoľte úroveň ostrosti',
   whichCookingMethodsDoYouPrefer:
     'Ktoré spôsoby prípravy jedla uprednostňujete?',
+  yourIntolerances: 'Máte intoleranciu na',
 }
 
 // const cs_messages: Messages = {

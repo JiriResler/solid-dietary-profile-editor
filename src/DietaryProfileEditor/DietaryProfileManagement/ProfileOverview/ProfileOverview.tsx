@@ -41,7 +41,7 @@ const ProfileOverview: React.FC = () => {
   return (
     <div className="profile-overview-screen position-relative">
       <Row className="profile-overview-head-section align-items-center">
-        <Col>
+        <Col className="ms-2">
           <FormattedMessage
             id="profileOverviewHeading"
             defaultMessage="Dietary profile"
@@ -59,18 +59,21 @@ const ProfileOverview: React.FC = () => {
         <Card>
           <Card.Body>
             <Card.Title>
-              <FormattedMessage id="allergens" defaultMessage="Allergens" />
+              <FormattedMessage
+                id="allergiesAndFoodIntolerances"
+                defaultMessage="Allergies and intolerances"
+              />
             </Card.Title>
 
-            <Card.Subtitle className="mb-2 text-muted">
+            <Card.Subtitle className="mt-2 mb-2 text-muted">
               <FormattedMessage
                 id="allergicTo"
                 defaultMessage="You are allergic to"
               />
             </Card.Subtitle>
 
-            <Card.Text className="width-fit-content">
-              <Stack gap={1}>
+            <Card.Text>
+              <Stack gap={1} className="ms-1">
                 <div>
                   <img
                     src="images/allergens/Crustaceans.svg"
@@ -88,15 +91,20 @@ const ProfileOverview: React.FC = () => {
                   />
                   <span className="ms-2">Soya</span>
                 </div>
+              </Stack>
+            </Card.Text>
 
-                <div>
-                  <img
-                    src="images/allergens/Peanuts.svg"
-                    alt="allergen icon"
-                    className="allergen-icon"
-                  />
-                  <span className="ms-2">Peanuts</span>
-                </div>
+            <Card.Subtitle className="mb-2 text-muted">
+              <FormattedMessage
+                id="yourIntolerances"
+                defaultMessage="Your have intolerance to"
+              />
+            </Card.Subtitle>
+
+            <Card.Text>
+              <Stack gap={1} className="ms-2">
+                <div>Amines</div>
+                <div>Corn</div>
               </Stack>
             </Card.Text>
           </Card.Body>
