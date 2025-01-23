@@ -102,10 +102,10 @@ const ProfileOverview: React.FC = () => {
             </Card.Subtitle>
 
             <Card.Text>
-              <Stack gap={1} className="ms-2">
-                <div>Amines</div>
-                <div>Corn</div>
-              </Stack>
+              <ul>
+                <li>Amines</li>
+                <li>Corn</li>
+              </ul>
             </Card.Text>
           </Card.Body>
         </Card>
