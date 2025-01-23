@@ -4,15 +4,15 @@
 
 .profile-overview-head-section {
   background-color: #2541b2;
-  height: 100px;
+  height: 90px;
   color: white;
   font-size: x-large;
   font-weight: 500;
 }
 
 .edit-profile-button {
-  width: 74px;
-  height: 74px;
+  width: 72px;
+  height: 72px;
   border-radius: 50%;
 }
 

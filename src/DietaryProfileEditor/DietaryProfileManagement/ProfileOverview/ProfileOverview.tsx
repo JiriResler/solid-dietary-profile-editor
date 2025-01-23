@@ -41,13 +41,11 @@ const ProfileOverview: React.FC = () => {
   return (
     <div className="profile-overview-screen position-relative">
       <Row className="profile-overview-head-section position-relative align-items-center">
-        <Col xs={10} md={11}>
-          <span className="ms-2">
-            <FormattedMessage
-              id="profileOverviewHeading"
-              defaultMessage="Dietary preferences profile"
-            />
-          </span>
+        <Col xs={10} md={11} className="ms-2">
+          <FormattedMessage
+            id="profileOverviewHeading"
+            defaultMessage="Dietary profile"
+          />
         </Col>
 
         <Col className="text-center">
