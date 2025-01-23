@@ -27,8 +27,8 @@ const ProfileOverview: React.FC = () => {
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          width="32"
-          height="32"
+          width="28"
+          height="28"
           fill="white"
           viewBox="0 0 16 16"
         >
@@ -40,16 +40,16 @@ const ProfileOverview: React.FC = () => {
 
   return (
     <div className="profile-overview-screen position-relative">
-      <Row className="profile-overview-head-section position-relative align-items-center">
-        <Col xs={10} md={11} className="ms-2">
+      <Row className="profile-overview-head-section align-items-center">
+        <Col>
           <FormattedMessage
             id="profileOverviewHeading"
             defaultMessage="Dietary profile"
           />
         </Col>
 
-        <Col className="text-center">
-          <Dropdown>
+        <Col className="position-relative h-100">
+          <Dropdown className="position-absolute top-50 end-0 translate-middle-y me-4">
             <Dropdown.Toggle as={CustomToggle} />
           </Dropdown>
         </Col>
