@@ -200,6 +200,20 @@ const ProfileOverview: React.FC = () => {
             </Card.Subtitle>
 
             <Card.Text className="ms-2">Not at all</Card.Text>
+
+            <Card.Subtitle className="mb-2 text-muted">
+              <FormattedMessage
+                id="preferredCookingMethods"
+                defaultMessage="Preferred cooking methods"
+              />
+            </Card.Subtitle>
+
+            <Card.Text>
+              <ul>
+                <li>Steaming</li>
+                <li>Pan frying</li>
+              </ul>
+            </Card.Text>
           </Card.Body>
         </Card>
       </Stack>
