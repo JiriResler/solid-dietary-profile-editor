@@ -116,6 +116,7 @@ type Messages = {
   whichCookingMethodsDoYouPrefer: string
   yourIntolerances: string
   dailyCalorieIntakeGoal: string
+  yourFavoriteCuisines: string
 }
 
 const messagesInSlovak: Messages = {
@@ -248,6 +249,7 @@ const messagesInSlovak: Messages = {
     'Ktoré spôsoby prípravy jedla uprednostňujete?',
   yourIntolerances: 'Máte intoleranciu na',
   dailyCalorieIntakeGoal: 'Váš denný príjem kalórií je',
+  yourFavoriteCuisines: 'Vaše obľúbené svetové kuchyne sú',
 }
 
 // const cs_messages: Messages = {

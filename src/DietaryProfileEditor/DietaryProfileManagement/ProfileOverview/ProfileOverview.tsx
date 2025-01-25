@@ -144,21 +144,24 @@ const ProfileOverview: React.FC = () => {
         <Card>
           <Card.Body>
             <Card.Title>
-              <FormattedMessage id="id" defaultMessage="Tastes" />
+              <FormattedMessage
+                id="tastesAndFoodPreparation"
+                defaultMessage="Tastes and Food Preparation"
+              />
             </Card.Title>
 
-            <Card.Subtitle className="mb-2 text-muted">
-              <FormattedMessage id="onDiets" defaultMessage="Your diets are" />
+            <Card.Subtitle className="mt-2 mb-2 text-muted">
+              <FormattedMessage
+                id="yourFavoriteCuisines"
+                defaultMessage="Your favorite cuisines are"
+              />
             </Card.Subtitle>
 
-            <Card.Text className="width-fit-content">
-              <Stack direction="horizontal" gap={2}>
-                <span className="w-100">Diet</span>
-              </Stack>
-
-              <Stack direction="horizontal" gap={2}>
-                <span className="w-100">Diet</span>
-              </Stack>
+            <Card.Text>
+              <ul>
+                <li>Chinese</li>
+                <li>Thai</li>
+              </ul>
             </Card.Text>
           </Card.Body>
         </Card>
