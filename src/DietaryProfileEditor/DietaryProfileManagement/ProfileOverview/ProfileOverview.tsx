@@ -39,7 +39,7 @@ const ProfileOverview: React.FC = () => {
   )
 
   return (
-    <div className="profile-overview-screen position-relative">
+    <div className="position-relative">
       <Row className="sticky-top profile-overview-head-section align-items-center">
         <Col className="ms-2">
           <FormattedMessage
@@ -218,7 +218,7 @@ const ProfileOverview: React.FC = () => {
         </Card>
       </Stack>
 
-      <Button className="edit-profile-button app-secondary-color-button position-absolute bottom-0 end-0 mb-3 me-3">
+      <Button className="position-absolute position-fixed bottom-0 end-0 mb-4 me-4 edit-profile-button app-secondary-color-button">
         <img
           src="images/pencil-square.svg"
           alt="Edit profile icon"
