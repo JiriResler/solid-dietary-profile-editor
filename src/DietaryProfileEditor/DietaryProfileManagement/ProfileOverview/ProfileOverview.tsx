@@ -55,7 +55,7 @@ const ProfileOverview: React.FC = () => {
         </Col>
       </Row>
 
-      <Stack gap={3} className="mt-3 preferences-card-stack">
+      <Stack gap={3} className="preferences-card-stack mt-3 mb-3">
         <Card>
           <Card.Body>
             <Card.Title>
