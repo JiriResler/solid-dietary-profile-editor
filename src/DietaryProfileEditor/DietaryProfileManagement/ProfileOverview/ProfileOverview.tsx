@@ -129,6 +129,15 @@ const ProfileOverview: React.FC = () => {
                 <li>Low-carb</li>
               </ul>
             </Card.Text>
+
+            <Card.Subtitle className="mb-2 text-muted">
+              <FormattedMessage
+                id="dailyCalorieIntakeGoal"
+                defaultMessage="Your daily calorie intake goal is"
+              />
+            </Card.Subtitle>
+
+            <Card.Text className="ms-2">2000 kCal</Card.Text>
           </Card.Body>
         </Card>
 

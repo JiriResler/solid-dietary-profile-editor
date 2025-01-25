@@ -115,6 +115,7 @@ type Messages = {
   howSpicyShouldFoodBe: string
   whichCookingMethodsDoYouPrefer: string
   yourIntolerances: string
+  dailyCalorieIntakeGoal: string
 }
 
 const messagesInSlovak: Messages = {
@@ -246,6 +247,7 @@ const messagesInSlovak: Messages = {
   whichCookingMethodsDoYouPrefer:
     'Ktoré spôsoby prípravy jedla uprednostňujete?',
   yourIntolerances: 'Máte intoleranciu na',
+  dailyCalorieIntakeGoal: 'Váš denný príjem kalórií je',
 }
 
 // const cs_messages: Messages = {
