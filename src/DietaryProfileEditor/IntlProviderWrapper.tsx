@@ -117,6 +117,8 @@ type Messages = {
   yourIntolerances: string
   dailyCalorieIntakeGoal: string
   yourFavoriteCuisines: string
+  likedIngredients: string
+  dislikedIngredients: string
 }
 
 const messagesInSlovak: Messages = {
@@ -250,6 +252,8 @@ const messagesInSlovak: Messages = {
   yourIntolerances: 'Máte intoleranciu na',
   dailyCalorieIntakeGoal: 'Váš denný príjem kalórií je',
   yourFavoriteCuisines: 'Vaše obľúbené svetové kuchyne sú',
+  likedIngredients: 'Obľúbené ingrediencie',
+  dislikedIngredients: 'Neobľúbené ingrediencie',
 }
 
 // const cs_messages: Messages = {

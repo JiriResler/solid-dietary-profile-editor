@@ -163,6 +163,34 @@ const ProfileOverview: React.FC = () => {
                 <li>Thai</li>
               </ul>
             </Card.Text>
+
+            <Card.Subtitle className="mb-2 text-muted">
+              <FormattedMessage
+                id="likedIngredients"
+                defaultMessage="You like ingredients"
+              />
+            </Card.Subtitle>
+
+            <Card.Text>
+              <ul>
+                <li>Chicken breast</li>
+                <li>Potato</li>
+              </ul>
+            </Card.Text>
+
+            <Card.Subtitle className="mb-2 text-muted">
+              <FormattedMessage
+                id="dislikedIngredients"
+                defaultMessage="You don't like ingredients"
+              />
+            </Card.Subtitle>
+
+            <Card.Text>
+              <ul>
+                <li>Tomato</li>
+                <li>Pork</li>
+              </ul>
+            </Card.Text>
           </Card.Body>
         </Card>
       </Stack>
