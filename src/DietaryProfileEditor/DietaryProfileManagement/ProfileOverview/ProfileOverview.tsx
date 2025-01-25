@@ -191,6 +191,15 @@ const ProfileOverview: React.FC = () => {
                 <li>Pork</li>
               </ul>
             </Card.Text>
+
+            <Card.Subtitle className="mb-2 text-muted">
+              <FormattedMessage
+                id="howSpicyYouLikeYourFood"
+                defaultMessage="How spicy you like your food"
+              />
+            </Card.Subtitle>
+
+            <Card.Text className="ms-2">Not at all</Card.Text>
           </Card.Body>
         </Card>
       </Stack>

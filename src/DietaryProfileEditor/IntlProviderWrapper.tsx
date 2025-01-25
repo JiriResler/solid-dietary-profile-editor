@@ -119,6 +119,7 @@ type Messages = {
   yourFavoriteCuisines: string
   likedIngredients: string
   dislikedIngredients: string
+  howSpicyYouLikeYourFood: string
 }
 
 const messagesInSlovak: Messages = {
@@ -254,6 +255,7 @@ const messagesInSlovak: Messages = {
   yourFavoriteCuisines: 'Vaše obľúbené svetové kuchyne sú',
   likedIngredients: 'Obľúbené ingrediencie',
   dislikedIngredients: 'Neobľúbené ingrediencie',
+  howSpicyYouLikeYourFood: 'Aké pikantné máte radi jedlo',
 }
 
 // const cs_messages: Messages = {
