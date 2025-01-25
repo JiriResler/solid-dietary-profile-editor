@@ -40,7 +40,7 @@ const ProfileOverview: React.FC = () => {
 
   return (
     <div className="profile-overview-screen position-relative">
-      <Row className="profile-overview-head-section align-items-center">
+      <Row className="sticky-top profile-overview-head-section align-items-center">
         <Col className="ms-2">
           <FormattedMessage
             id="profileOverviewHeading"
@@ -146,7 +146,7 @@ const ProfileOverview: React.FC = () => {
             <Card.Title>
               <FormattedMessage
                 id="tastesAndFoodPreparation"
-                defaultMessage="Tastes and Food Preparation"
+                defaultMessage="Tastes and food preparation"
               />
             </Card.Title>
 
