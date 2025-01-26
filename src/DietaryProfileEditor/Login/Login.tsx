@@ -140,6 +140,8 @@ const Login: React.FC = () => {
             <span
               className="clickable-text"
               onClick={() => setShowAboutApplicationModal(true)}
+              aria-label="show-about-modal"
+              tabIndex={2}
             >
               <FormattedMessage
                 id="aboutTheApplication"
@@ -182,6 +184,7 @@ const Login: React.FC = () => {
           value={languageFullName(selectedLanguage)}
           onChange={(e) => setLanguageContext(e.target.value)}
           className="app-form-control"
+          tabIndex={1}
         >
           <option key="en">English</option>
           <option key="sk">Slovensky</option>
