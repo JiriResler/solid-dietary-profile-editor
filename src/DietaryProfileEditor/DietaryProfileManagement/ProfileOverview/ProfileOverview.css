@@ -19,3 +19,7 @@
 .preferences-card-stack {
   max-width: 450px;
 }
+
+.no-bottom-margin {
+  margin-bottom: 0pt;
+}

@@ -102,7 +102,7 @@ const ProfileOverview: React.FC = () => {
             </Card.Subtitle>
 
             <Card.Text>
-              <ul>
+              <ul className="no-bottom-margin">
                 <li>Amines</li>
                 <li>Corn</li>
               </ul>
@@ -209,7 +209,7 @@ const ProfileOverview: React.FC = () => {
             </Card.Subtitle>
 
             <Card.Text>
-              <ul>
+              <ul className="no-bottom-margin">
                 <li>Steaming</li>
                 <li>Pan frying</li>
               </ul>
