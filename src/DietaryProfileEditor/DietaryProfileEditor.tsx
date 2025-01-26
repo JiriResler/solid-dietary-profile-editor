@@ -8,7 +8,7 @@ import { FacebookProvider } from 'react-facebook'
 import './DietaryProfileEditor.css'
 
 /**
- * Wraps the application in neccessary components and defines the application's routes.
+ * Wraps the application in necessary components and defines its routes.
  */
 const DietaryProfileEditor: React.FC = () => {
   const applicationBasePath = import.meta.env.DEV
