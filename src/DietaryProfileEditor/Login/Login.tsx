@@ -72,6 +72,17 @@ const Login: React.FC = () => {
     return
   }
 
+  /**
+   * Displays the About application modal when the Enter key is pressed.
+   */
+  const handleAboutApplicationKeyDown = (
+    event: React.KeyboardEvent<HTMLSpanElement>,
+  ) => {
+    if (event.key === 'Enter') {
+      setShowAboutApplicationModal(true)
+    }
+  }
+
   if (authed) {
     return <Navigate to="/" replace />
   }
@@ -142,6 +153,7 @@ const Login: React.FC = () => {
               onClick={() => setShowAboutApplicationModal(true)}
               aria-label="show-about-modal"
               tabIndex={2}
+              onKeyDown={handleAboutApplicationKeyDown}
             >
               <FormattedMessage
                 id="aboutTheApplication"
