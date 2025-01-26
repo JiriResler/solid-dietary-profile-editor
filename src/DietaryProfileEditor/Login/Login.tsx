@@ -78,7 +78,7 @@ const Login: React.FC = () => {
 
   return (
     <>
-      <div className="d-none d-lg-flex">
+      <Row className="d-none d-lg-flex login-screen-row">
         <Modal
           show={showAboutApplicationModal}
           onHide={() => setShowAboutApplicationModal(false)}
@@ -113,70 +113,65 @@ const Login: React.FC = () => {
           </Modal.Footer>
         </Modal>
 
-        <Row className="login-screen-row">
-          <Col md={7} className="position-relative">
-            <Stack className="w-75 text-center position-absolute top-50 start-50 translate-middle">
-              <h2 className="w-50 mx-auto">
-                <FormattedMessage
-                  id="welcomeToTheApplication"
-                  defaultMessage="Welcome to the Dietary Profile Editor"
-                />
-              </h2>
-
-              <img
-                className="application-logo mt-1"
-                src="images/app_logo.svg"
-                alt="application_logo"
+        <Col md={7} className="position-relative">
+          <Stack className="w-75 text-center position-absolute top-50 start-50 translate-middle">
+            <h2 className="w-50 mx-auto">
+              <FormattedMessage
+                id="welcomeToTheApplication"
+                defaultMessage="Welcome to the Dietary Profile Editor"
               />
+            </h2>
 
-              <h4 className="w-50 mx-auto">
-                <FormattedMessage
-                  id="manageYourProfileLoginScreenHeading"
-                  defaultMessage="Manage your dietary preferences"
-                />
-              </h4>
-            </Stack>
+            <img
+              className="application-logo mt-1"
+              src="images/app_logo.svg"
+              alt="application_logo"
+            />
 
-            <div className="position-absolute bottom-0 start-50 translate-middle-x mb-3">
-              <span
-                className="clickable-text"
-                onClick={() => setShowAboutApplicationModal(true)}
-              >
-                <FormattedMessage
-                  id="aboutTheApplication"
-                  defaultMessage="About"
-                />
-              </span>
-              <span> | </span>
+            <h4 className="w-50 mx-auto">
+              <FormattedMessage
+                id="manageYourProfileLoginScreenHeading"
+                defaultMessage="Manage your dietary preferences"
+              />
+            </h4>
+          </Stack>
 
-              <a
-                href="https://github.com/JiriResler/solid-dietary-profile-editor"
-                target="_blank"
-                className="link-without-decoration clickable-text"
-              >
-                <FormattedMessage
-                  id="sourceCode"
-                  defaultMessage="Source code"
-                />
-              </a>
+          <div className="position-absolute bottom-0 start-50 translate-middle-x mb-3">
+            <span
+              className="clickable-text"
+              onClick={() => setShowAboutApplicationModal(true)}
+            >
+              <FormattedMessage
+                id="aboutTheApplication"
+                defaultMessage="About"
+              />
+            </span>
+            <span> | </span>
 
-              <span> | </span>
-              <span>
-                <FormattedMessage id="createdBy" defaultMessage="Created by" />{' '}
-                Jiří Resler
-              </span>
-            </div>
-          </Col>
+            <a
+              href="https://github.com/JiriResler/solid-dietary-profile-editor"
+              target="_blank"
+              className="link-without-decoration clickable-text"
+            >
+              <FormattedMessage id="sourceCode" defaultMessage="Source code" />
+            </a>
 
-          <Col md={5} className="choose-sign-in-method-col position-relative">
-            <Card className="choose-sign-in-method-card position-absolute top-50 start-50 translate-middle">
-              <Card.Body>
-                <SelectLoginMethod />
-              </Card.Body>
-            </Card>
-          </Col>
-        </Row>
-      </div>
+            <span> | </span>
+            <span>
+              <FormattedMessage id="createdBy" defaultMessage="Created by" />{' '}
+              Jiří Resler
+            </span>
+          </div>
+        </Col>
+
+        <Col md={5} className="choose-sign-in-method-col position-relative">
+          <Card className="choose-sign-in-method-card position-absolute top-50 start-50 translate-middle">
+            <Card.Body>
+              <SelectLoginMethod />
+            </Card.Body>
+          </Card>
+        </Col>
+      </Row>
 
       <div className="d-lg-none">
         <SelectLoginMethod />
