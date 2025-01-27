@@ -194,6 +194,7 @@ const SelectLoginMethod: React.FC = () => {
               src="images/logo_solid.svg"
               alt="Solid logo"
               className="solid-icon"
+              draggable="false"
             />
             <span className="ms-3">
               <FormattedMessage
@@ -233,6 +234,7 @@ const SelectLoginMethod: React.FC = () => {
                 src="images/envelope-fill.svg"
                 alt="Email envelope"
                 className="provider-icon ms-1"
+                draggable="false"
               />
               <span className="ms-3">
                 <FormattedMessage
@@ -253,6 +255,7 @@ const SelectLoginMethod: React.FC = () => {
                   src="images/facebook_round_white_icon.svg"
                   alt="Facebook logo"
                   className="provider-icon ms-1"
+                  draggable="false"
                 />
 
                 <span className="ms-3">
@@ -279,6 +282,7 @@ const SelectLoginMethod: React.FC = () => {
                   src="images/google_g_logo.svg"
                   alt="Google logo"
                   className="provider-icon ms-1"
+                  draggable="false"
                 />
 
                 <span className="ms-3">

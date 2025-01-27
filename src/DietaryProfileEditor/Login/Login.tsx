@@ -137,6 +137,7 @@ const Login: React.FC = () => {
               className="application-logo mt-1"
               src="images/app_logo.svg"
               alt="application_logo"
+              draggable="false"
             />
 
             <h4 className="w-50 mx-auto">
