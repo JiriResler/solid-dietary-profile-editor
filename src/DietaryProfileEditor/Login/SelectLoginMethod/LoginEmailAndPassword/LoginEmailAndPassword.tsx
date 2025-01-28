@@ -173,6 +173,7 @@ const LoginEmailAndPassword: React.FC<LoginEmailAndPasswordProps> = ({
                 value={loginEmail}
                 isInvalid={!loginEmailIsValid && loginEmailValidated}
                 onChange={(e) => handleEmailOnChange(e.target.value)}
+                className="app-form-control"
               />
 
               <Form.Control
@@ -182,6 +183,7 @@ const LoginEmailAndPassword: React.FC<LoginEmailAndPasswordProps> = ({
                 onChange={(e) => {
                   setLoginPassword(e.target.value)
                 }}
+                className="app-form-control"
               />
 
               <Button

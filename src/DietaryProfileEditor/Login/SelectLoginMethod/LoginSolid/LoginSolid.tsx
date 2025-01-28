@@ -189,6 +189,7 @@ const LoginSolid: React.FC<LoginSolidProps> = ({ setLoginWithSolid }) => {
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
               handleOnProviderUrlChange(e)
             }
+            className="app-form-control"
           />
 
           <Button
