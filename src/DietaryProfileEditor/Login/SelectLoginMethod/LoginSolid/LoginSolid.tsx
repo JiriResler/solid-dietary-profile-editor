@@ -1,7 +1,6 @@
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 import { useState } from 'react'
-import './LoginSolid.css'
 import { FormattedMessage, useIntl } from 'react-intl'
 import Stack from 'react-bootstrap/Stack'
 import { getKeyByValue } from './LoginSolidHelpers'
@@ -163,7 +162,7 @@ const LoginSolid: React.FC<LoginSolidProps> = ({ setLoginWithSolid }) => {
           <Form.Select
             value={selectedProviderName}
             onChange={(e) => handleSelectOnChange(e)}
-            className="solid-provider-select app-form-control"
+            className="app-form-control"
           >
             <option key="defaultOption" hidden>
               {intl.formatMessage({
