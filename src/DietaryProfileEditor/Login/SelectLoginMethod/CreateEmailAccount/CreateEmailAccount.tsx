@@ -203,6 +203,7 @@ const CreateEmailAccount: React.FC<CreateEmailAccountProps> = ({
                   onChange={(e) => handleEmailOnChange(e.target.value)}
                   onBlur={() => handleEmailOnBlur()}
                   isInvalid={!userEmailIsValid && userEmailValidated}
+                  className="app-form-control"
                 />
 
                 <Form.Control.Feedback
@@ -228,6 +229,7 @@ const CreateEmailAccount: React.FC<CreateEmailAccountProps> = ({
                   isInvalid={
                     userPasswordTextFieldTouched && !userPasswordIsValid
                   }
+                  className="app-form-control"
                 />
 
                 <div className="password-requirements-text mt-1 text-start ms-2">
