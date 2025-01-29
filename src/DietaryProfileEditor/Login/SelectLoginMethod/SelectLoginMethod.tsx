@@ -112,6 +112,17 @@ const SelectLoginMethod: React.FC = () => {
       .finally(() => setGoogleLoginInProgress(false))
   }
 
+  /**
+   * Displays the About Solid modal when the Enter key is pressed.
+   */
+  const handleAboutSolidKeyDown = (
+    event: React.KeyboardEvent<HTMLSpanElement>,
+  ) => {
+    if (event.key === 'Enter') {
+      setShowAboutSolidModal(true)
+    }
+  }
+
   if (loginWithSolid) {
     return <LoginSolid setLoginWithSolid={setLoginWithSolid} />
   }
@@ -209,6 +220,9 @@ const SelectLoginMethod: React.FC = () => {
               setShowAboutSolidModal(true)
             }}
             className="clickable-text w-50 mt-1 mx-auto"
+            aria-label="show-about-solid-modal"
+            tabIndex={0}
+            onKeyDown={handleAboutSolidKeyDown}
           >
             <FormattedMessage
               id="whatIsSolid"
