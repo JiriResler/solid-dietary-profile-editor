@@ -8,7 +8,13 @@ import Card from 'react-bootstrap/Card'
 import Stack from 'react-bootstrap/Stack'
 import Button from 'react-bootstrap/Button'
 
-const ProfileOverview: React.FC = () => {
+type ProfileOverviewProps = {
+  setEditProfile: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+const ProfileOverview: React.FC<ProfileOverviewProps> = ({
+  setEditProfile,
+}) => {
   type CustomToggleProps = {
     children?: React.ReactNode
     onClick?: (
@@ -218,7 +224,10 @@ const ProfileOverview: React.FC = () => {
         </Card>
       </Stack>
 
-      <Button className="position-absolute position-fixed bottom-0 end-0 mb-4 me-4 edit-profile-button app-secondary-color-button">
+      <Button
+        className="position-absolute position-fixed bottom-0 end-0 mb-4 me-4 edit-profile-button app-secondary-color-button"
+        onClick={() => setEditProfile(true)}
+      >
         <img
           src="images/pencil-square.svg"
           alt="Edit profile icon"
