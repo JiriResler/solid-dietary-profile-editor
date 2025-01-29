@@ -2,7 +2,7 @@ import * as React from 'react'
 import CircularProgress, {
   CircularProgressProps,
 } from '@mui/material/CircularProgress'
-import './DietaryPreferencesFormHeader.css'
+import './FormHeader.css'
 import Box from '@mui/material/Box'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
@@ -62,7 +62,14 @@ function CircularProgressWithLabel(
   )
 }
 
-const DietaryPreferencesFormHeader: React.FC = () => {
+type HeaderProps = {
+  formStep: number
+}
+
+/**
+ * Displays information about the current step in the profile creation process.
+ */
+const FormHeader: React.FC<HeaderProps> = ({ formStep }) => {
   const [progress] = React.useState(50)
 
   return (
@@ -85,4 +92,4 @@ const DietaryPreferencesFormHeader: React.FC = () => {
   )
 }
 
-export default DietaryPreferencesFormHeader
+export default FormHeader
