@@ -15,7 +15,7 @@ function CircularProgressWithLabel(
     <Box sx={{ position: 'relative', display: 'inline-flex' }}>
       <CircularProgress
         variant="determinate"
-        size="90px"
+        size="80px"
         thickness={6}
         value={100}
         sx={{ color: '#e3dfde' }}
@@ -36,7 +36,7 @@ function CircularProgressWithLabel(
       >
         <CircularProgress
           variant="determinate"
-          size="90px"
+          size="80px"
           thickness={6}
           sx={{ color: '#2541b2' }}
           aria-label="dietary-preferences-form-progress"
