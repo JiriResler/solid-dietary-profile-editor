@@ -47,7 +47,7 @@ const DietaryPreferencesForm: React.FC = () => {
       </div>
 
       <div className="d-none d-lg-block h-100">
-        <Row className="background-primary-color position-relative h-100">
+        <Row className="form-background-color position-relative h-100">
           <Col>
             <Card className="dietary-preferences-form-card position-absolute top-50 start-50 translate-middle">
               <Card.Body className="h-100">
