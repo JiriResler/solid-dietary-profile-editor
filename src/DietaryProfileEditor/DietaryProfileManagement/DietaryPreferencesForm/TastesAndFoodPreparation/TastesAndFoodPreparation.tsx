@@ -291,7 +291,7 @@ const TastesAndFoodPreparation: React.FC = () => {
               getAriaValueText={valueLabelFormat}
               step={100 / 3}
               marks={spicinessSliderMarks}
-              sx={{ marginLeft: '8pt', marginTop: '-3pt' }}
+              sx={{ marginLeft: '8pt', marginTop: '-3pt', color: '#2541b2' }}
             />
           </Col>
         </Row>
