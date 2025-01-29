@@ -152,7 +152,7 @@ const Login: React.FC = () => {
             <span
               className="clickable-text"
               onClick={() => setShowAboutApplicationModal(true)}
-              aria-label="show-about-modal"
+              aria-label="show-about-application-modal"
               tabIndex={2}
               onKeyDown={handleAboutApplicationKeyDown}
             >
