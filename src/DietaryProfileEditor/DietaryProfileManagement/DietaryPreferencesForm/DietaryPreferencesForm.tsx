@@ -15,11 +15,15 @@ import React, { useState } from 'react'
  */
 const ActualDietaryPreferencesForm: React.FC = () => {
   const [formStep, setFormStep] = useState(0)
+  const totalNumberOfSteps = 3
 
   return (
     <div className="d-flex flex-column h-100">
       <div>
-        <FormHeader formStep={formStep} />
+        <FormHeader
+          formStep={formStep}
+          totalNumberOfSteps={totalNumberOfSteps}
+        />
       </div>
 
       <div className="form-main-content flex-fill mt-1 mb-3">

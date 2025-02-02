@@ -62,16 +62,41 @@ function CircularProgressWithLabel(
   )
 }
 
+/**
+ * Takes a step number and total steps as input and returns progress value in percentage.
+ */
+function calculateProgressValue(step: number, totalSteps: number): number {
+  if (totalSteps <= 0) {
+    console.error(
+      `Invalid totalSteps value: ${totalSteps}. It must be greater than 0.`,
+    )
+    return 0
+  }
+
+  if (step < 0 || step >= totalSteps) {
+    console.warn(
+      `Dietary preferences form step number out of range. Expected a number between 0 and ${
+        totalSteps - 1
+      }, but got ${step}.`,
+    )
+    return 0
+  }
+
+  return Math.round(((step + 1) / totalSteps) * 100)
+}
+
 type HeaderProps = {
   formStep: number
+  totalNumberOfSteps: number
 }
 
 /**
  * Displays information about the current step in the profile creation process.
  */
-const FormHeader: React.FC<HeaderProps> = ({ formStep }) => {
-  const [progress] = React.useState(50)
-
+const FormHeader: React.FC<HeaderProps> = ({
+  formStep,
+  totalNumberOfSteps,
+}) => {
   return (
     <Row className="h-100 align-items-center">
       <Col xs={8} lg={9}>
@@ -86,7 +111,9 @@ const FormHeader: React.FC<HeaderProps> = ({ formStep }) => {
       </Col>
 
       <Col xs={4} lg={3} className="text-end">
-        <CircularProgressWithLabel value={progress} />
+        <CircularProgressWithLabel
+          value={calculateProgressValue(formStep, totalNumberOfSteps)}
+        />
       </Col>
     </Row>
   )
