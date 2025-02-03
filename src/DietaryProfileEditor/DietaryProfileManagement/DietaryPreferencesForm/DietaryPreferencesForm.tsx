@@ -14,7 +14,7 @@ import React, { useState } from 'react'
  * Renders the actual dietary preferences form, while the DietaryPreferencesForm component manages screen size adaptations for large or small displays.
  */
 const ActualDietaryPreferencesForm: React.FC = () => {
-  const [formStep, setFormStep] = useState(0)
+  const [formStep] = useState(0)
   const totalNumberOfSteps = 3
 
   return (
