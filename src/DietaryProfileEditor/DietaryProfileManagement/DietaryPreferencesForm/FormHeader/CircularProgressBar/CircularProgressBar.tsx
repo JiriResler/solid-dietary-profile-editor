@@ -1,8 +1,7 @@
 import './CircularProgressBar.css'
-import CircularProgress, {
-  CircularProgressProps,
-} from '@mui/material/CircularProgress'
+import CircularProgress from '@mui/material/CircularProgress'
 import Box from '@mui/material/Box'
+import React from 'react'
 
 /**
  * Takes a step number and total steps as input and returns progress value in percentage.
@@ -27,12 +26,18 @@ function calculateProgressValue(step: number, totalSteps: number): number {
   return Math.round(((step + 1) / totalSteps) * 100)
 }
 
+type ProgressProps = {
+  currentStep: number
+  totalSteps: number
+}
+
 /**
  * Displays a circular progress indicator with the current step information.
  */
-function CircularProgressBar(
-  props: CircularProgressProps & { currentStep: number },
-) {
+const CircularProgressBar: React.FC<ProgressProps> = ({
+  currentStep,
+  totalSteps,
+}) => {
   return (
     <Box sx={{ position: 'relative', display: 'inline-flex' }}>
       <CircularProgress
@@ -62,8 +67,7 @@ function CircularProgressBar(
           thickness={6}
           sx={{ color: '#2541b2' }}
           aria-label="dietary-preferences-form-progress"
-          value={calculateProgressValue(props.currentStep, 3)}
-          {...props}
+          value={calculateProgressValue(currentStep, totalSteps)}
         />
       </Box>
 
@@ -80,7 +84,7 @@ function CircularProgressBar(
         }}
       >
         <span className="inside-progress-text">
-          {props.currentStep + 1} of 25
+          {currentStep + 1} of {totalSteps}
         </span>
       </Box>
     </Box>

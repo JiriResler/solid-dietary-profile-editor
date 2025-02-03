@@ -31,7 +31,10 @@ const FormHeader: React.FC<FormHeaderProps> = ({
       </Col>
 
       <Col xs={4} lg={3} className="text-end">
-        <CircularProgressBar currentStep={formStep} />
+        <CircularProgressBar
+          currentStep={formStep}
+          totalSteps={totalNumberOfSteps}
+        />
       </Col>
     </Row>
   )
