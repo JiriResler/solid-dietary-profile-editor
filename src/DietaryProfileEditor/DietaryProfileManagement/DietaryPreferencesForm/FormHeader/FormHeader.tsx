@@ -21,14 +21,42 @@ const FormHeader: React.FC<FormHeaderProps> = ({
     <Row className="h-100 align-items-center">
       <Col xs={8} lg={9}>
         <div className="current-step-heading">
-          <FormattedMessage
-            id="tastesAndFoodPreparation"
-            defaultMessage="Tastes and Food Preparation"
-          />
+          {formStep === 0 && (
+            <FormattedMessage
+              id="allergiesAndFoodIntolerances"
+              defaultMessage="Allergies and Food Intolerances"
+            />
+          )}
+
+          {formStep === 1 && (
+            <FormattedMessage
+              id="dietPreferences"
+              defaultMessage="Dieting Preferences"
+            />
+          )}
+
+          {formStep === 2 && (
+            <FormattedMessage
+              id="tastesAndFoodPreparation"
+              defaultMessage="Tastes and Food Preparation"
+            />
+          )}
         </div>
 
         <div className="d-none d-md-flex next-step-heading text-secondary">
-          Next: Step 3
+          <FormattedMessage id="nextStep" defaultMessage="Next" />:{' '}
+          {formStep === 0 && (
+            <FormattedMessage
+              id="dietPreferences"
+              defaultMessage="Dieting Preferences"
+            />
+          )}
+          {formStep === 1 && (
+            <FormattedMessage
+              id="tastesAndFoodPreparation"
+              defaultMessage="Tastes and Food Preparation"
+            />
+          )}
         </div>
       </Col>
 
