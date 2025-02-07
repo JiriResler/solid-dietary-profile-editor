@@ -1,10 +1,18 @@
 import Button from 'react-bootstrap/Button'
 import { FormattedMessage } from 'react-intl'
-import './DietaryPreferencesFormFooter.css'
+import './FormFooter.css'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 
-const DietaryPreferencesFormFooter: React.FC = () => {
+type FormFooterProps = {
+  formStep: number
+  setFormStep: React.Dispatch<React.SetStateAction<number>>
+}
+
+/**
+ * Renders form navigation buttons and manages navigation state.
+ */
+const FormFooter: React.FC<FormFooterProps> = ({ formStep, setFormStep }) => {
   return (
     <Row className="h-100 align-items-center">
       <Col>
@@ -22,4 +30,4 @@ const DietaryPreferencesFormFooter: React.FC = () => {
   )
 }
 
-export default DietaryPreferencesFormFooter
+export default FormFooter

@@ -5,7 +5,7 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import FormHeader from './FormHeader/FormHeader'
 import AllergensAndIntolerances from './AllergensAndIntolerances/AllergensAndIntolerances'
-import DietaryPreferencesFormFooter from './DietaryPreferencesFormFooter/DietaryPreferencesFormFooter'
+import FormFooter from './FormFooter/FormFooter'
 import DietPreferences from './DietPreferences/DietPreferences'
 import TastesAndFoodPreparation from './TastesAndFoodPreparation/TastesAndFoodPreparation'
 import React, { useState } from 'react'
@@ -14,7 +14,7 @@ import React, { useState } from 'react'
  * Renders the actual dietary preferences form, while the DietaryPreferencesForm component manages screen size adaptations for large or small displays.
  */
 const ActualDietaryPreferencesForm: React.FC = () => {
-  const [formStep] = useState(0)
+  const [formStep, setFormStep] = useState(0)
   const totalNumberOfSteps = 3
 
   return (
@@ -37,7 +37,7 @@ const ActualDietaryPreferencesForm: React.FC = () => {
       </div>
 
       <div>
-        <DietaryPreferencesFormFooter />
+        <FormFooter formStep={formStep} setFormStep={setFormStep} />
       </div>
     </div>
   )
