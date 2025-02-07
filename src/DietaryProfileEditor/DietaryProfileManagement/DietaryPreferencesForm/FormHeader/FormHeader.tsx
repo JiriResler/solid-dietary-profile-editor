@@ -27,7 +27,9 @@ const FormHeader: React.FC<FormHeaderProps> = ({
           />
         </div>
 
-        <div className="next-step-heading text-secondary">Next: Step 3</div>
+        <div className="d-none d-md-flex next-step-heading text-secondary">
+          Next: Step 3
+        </div>
       </Col>
 
       <Col xs={4} lg={3} className="text-end">
