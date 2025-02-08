@@ -37,7 +37,11 @@ const ActualDietaryPreferencesForm: React.FC = () => {
       </div>
 
       <div>
-        <FormFooter formStep={formStep} setFormStep={setFormStep} />
+        <FormFooter
+          formStep={formStep}
+          setFormStep={setFormStep}
+          totalNumberOfSteps={totalNumberOfSteps}
+        />
       </div>
     </div>
   )
