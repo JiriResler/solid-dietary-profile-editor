@@ -59,12 +59,20 @@ const FormFooter: React.FC<FormFooterProps> = ({
       </Col>
 
       <Col className="text-end">
-        <Button
-          className="navigation-button app-primary-color-button"
-          onClick={() => handleStepChange(StepDirection.Up)}
-        >
-          <FormattedMessage id="nextStep" defaultMessage="Next" />
-        </Button>
+        {formStep < totalNumberOfSteps - 1 && (
+          <Button
+            className="navigation-button app-primary-color-button"
+            onClick={() => handleStepChange(StepDirection.Up)}
+          >
+            <FormattedMessage id="nextStep" defaultMessage="Next" />
+          </Button>
+        )}
+
+        {formStep === totalNumberOfSteps - 1 && (
+          <Button className="navigation-button" variant="success">
+            <FormattedMessage id="finish" defaultMessage="Finish" />
+          </Button>
+        )}
       </Col>
     </Row>
   )
