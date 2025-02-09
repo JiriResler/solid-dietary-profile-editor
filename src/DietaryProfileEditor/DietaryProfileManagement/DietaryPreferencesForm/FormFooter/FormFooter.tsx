@@ -52,6 +52,7 @@ const FormFooter: React.FC<FormFooterProps> = ({
         <Button
           className="navigation-button app-secondary-color-button"
           onClick={() => handleStepChange(StepDirection.Down)}
+          disabled={formStep === 0}
         >
           <FormattedMessage id="goBack" defaultMessage="Back" />
         </Button>
