@@ -5,7 +5,18 @@ import Col from 'react-bootstrap/Col'
 import Stack from 'react-bootstrap/Stack'
 import Select from 'react-select'
 
-const AllergensAndIntolerances: React.FC = () => {
+type Props = {
+  selectedAllergens: string[]
+  setSelectedAllergens: React.Dispatch<React.SetStateAction<string[]>>
+}
+
+/**
+ * Renders controls for selecting allergens and intolerances while managing state updates.
+ */
+const AllergensAndIntolerances: React.FC<Props> = ({
+  selectedAllergens,
+  setSelectedAllergens,
+}) => {
   const allergenList = [
     'Gluten',
     'Crustaceans',

@@ -15,7 +15,10 @@ import React, { useState } from 'react'
  */
 const ActualDietaryPreferencesForm: React.FC = () => {
   const [formStep, setFormStep] = useState(0)
+
   const totalNumberOfSteps = 3
+
+  const [selectedAllergens, setSelectedAllergens] = useState<string[]>([])
 
   return (
     <div className="d-flex flex-column h-100">
@@ -29,7 +32,12 @@ const ActualDietaryPreferencesForm: React.FC = () => {
       <div className="form-main-content flex-fill mt-1 mb-3">
         <div className="overflow-content h-100" tabIndex={-1}>
           <Form>
-            {formStep === 0 && <AllergensAndIntolerances />}
+            {formStep === 0 && (
+              <AllergensAndIntolerances
+                selectedAllergens={selectedAllergens}
+                setSelectedAllergens={setSelectedAllergens}
+              />
+            )}
             {formStep === 1 && <DietPreferences />}
             {formStep === 2 && <TastesAndFoodPreparation />}
           </Form>
