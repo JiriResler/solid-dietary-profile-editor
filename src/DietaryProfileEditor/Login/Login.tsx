@@ -5,7 +5,6 @@ import './Login.css'
 import SelectLoginMethod from './SelectLoginMethod/SelectLoginMethod'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-import Card from 'react-bootstrap/Card'
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 import { useState } from 'react'
@@ -180,11 +179,7 @@ const Login: React.FC = () => {
         </Col>
 
         <Col md={5} className="choose-sign-in-method-col position-relative">
-          <Card className="choose-sign-in-method-card position-absolute top-50 start-50 translate-middle">
-            <Card.Body>
-              <SelectLoginMethod />
-            </Card.Body>
-          </Card>
+          <SelectLoginMethod />
         </Col>
       </Row>
 
