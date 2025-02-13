@@ -18,20 +18,20 @@ const AllergensAndIntolerances: React.FC<Props> = ({
   setSelectedAllergens,
 }) => {
   const allergenList = [
-    'Gluten',
-    'Crustaceans',
-    'Eggs',
-    'Fish',
-    'Peanuts',
-    'Soya',
-    'Milk',
-    'Nuts',
-    'Celery',
-    'Mustard',
-    'Sesame',
-    'Sulphites',
-    'Lupin',
-    'Molluscs',
+    { label: 'Gluten', iri: '' },
+    { label: 'Crustaceans', iri: '' },
+    { label: 'Eggs', iri: '' },
+    { label: 'Fish', iri: '' },
+    { label: 'Peanuts', iri: '' },
+    { label: 'Soya', iri: '' },
+    { label: 'Milk', iri: '' },
+    { label: 'Nuts', iri: '' },
+    { label: 'Celery', iri: '' },
+    { label: 'Mustard', iri: '' },
+    { label: 'Sesame', iri: '' },
+    { label: 'Sulphites', iri: '' },
+    { label: 'Lupin', iri: '' },
+    { label: 'Molluscs', iri: '' },
   ]
 
   const intoleranceList = [
@@ -81,16 +81,21 @@ const AllergensAndIntolerances: React.FC<Props> = ({
 
   type AllergenCheckboxProps = {
     allergenName: string
+    allergenIri: string
   }
 
   const AllergenCheckbox: React.FC<AllergenCheckboxProps> = ({
     allergenName,
+    allergenIri,
   }) => {
     const checkboxId = allergenName.toLowerCase() + '-checkbox'
 
     return (
       <Form.Check id={checkboxId}>
-        <Form.Check.Input className="app-form-control app-form-checkbox" />
+        <Form.Check.Input
+          checked={selectedAllergens.includes(allergenIri)}
+          className="app-form-control app-form-checkbox"
+        />
 
         <img
           src={'images/allergens/' + allergenName + '.svg'}
@@ -121,7 +126,13 @@ const AllergensAndIntolerances: React.FC<Props> = ({
         <Col xs={6} lg={3}>
           <Stack gap={1}>
             {allergenList.slice(0, 7).map((allergen) => {
-              return <AllergenCheckbox allergenName={allergen} key={allergen} />
+              return (
+                <AllergenCheckbox
+                  allergenName={allergen.label}
+                  allergenIri={allergen.iri}
+                  key={allergen.label}
+                />
+              )
             })}
           </Stack>
         </Col>
@@ -129,7 +140,13 @@ const AllergensAndIntolerances: React.FC<Props> = ({
         <Col xs={6} lg={3}>
           <Stack gap={1}>
             {allergenList.slice(7, 14).map((allergen) => {
-              return <AllergenCheckbox allergenName={allergen} key={allergen} />
+              return (
+                <AllergenCheckbox
+                  allergenName={allergen.label}
+                  allergenIri={allergen.iri}
+                  key={allergen.label}
+                />
+              )
             })}
           </Stack>
         </Col>
