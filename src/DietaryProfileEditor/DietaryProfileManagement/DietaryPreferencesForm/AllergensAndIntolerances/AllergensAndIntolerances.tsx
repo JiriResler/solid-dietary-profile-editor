@@ -90,11 +90,25 @@ const AllergensAndIntolerances: React.FC<Props> = ({
   }) => {
     const checkboxId = allergenName.toLowerCase() + '-checkbox'
 
+    /**
+     * Adds or removes an allergen's IRI from selectedAllergens.
+     */
+    function handleOnChange() {
+      if (selectedAllergens.includes(allergenIri)) {
+        setSelectedAllergens(
+          selectedAllergens.filter((iri) => iri != allergenIri),
+        )
+      } else {
+        setSelectedAllergens([...selectedAllergens, allergenIri])
+      }
+    }
+
     return (
       <Form.Check id={checkboxId}>
         <Form.Check.Input
-          checked={selectedAllergens.includes(allergenIri)}
           className="app-form-control app-form-checkbox"
+          checked={selectedAllergens.includes(allergenIri)}
+          onChange={handleOnChange}
         />
 
         <Form.Check.Label>
