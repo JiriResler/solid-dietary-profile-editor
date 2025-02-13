@@ -97,13 +97,12 @@ const AllergensAndIntolerances: React.FC<Props> = ({
           className="app-form-control app-form-checkbox"
         />
 
-        <img
-          src={'images/allergens/' + allergenName + '.svg'}
-          alt="Allergen icon"
-          className="allergen-icon ms-1 me-1"
-        />
-
         <Form.Check.Label>
+          <img
+            src={'images/allergens/' + allergenName + '.svg'}
+            alt="Allergen icon"
+            className="allergen-icon ms-1 me-1"
+          />
           <FormattedMessage
             id={allergenName.toLowerCase()}
             defaultMessage={allergenName}
