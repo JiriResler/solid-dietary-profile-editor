@@ -2,11 +2,9 @@ import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
 import { useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
-import Stack from 'react-bootstrap/Stack'
 import { getKeyByValue } from './LoginSolidHelpers'
 import Spinner from 'react-bootstrap/Spinner'
 import ErrorModal from '../../../ErrorModal/ErrorModal'
-import Fade from '@mui/material/Fade'
 import { login } from '@inrupt/solid-client-authn-browser'
 import LoginBackButton from '../LoginBackButton/LoginBackButton'
 
@@ -145,70 +143,63 @@ const LoginSolid: React.FC<LoginSolidProps> = ({ setLoginWithSolid }) => {
         bodyMessage={loginErrorMessage}
       />
 
-      <Fade in={true} timeout={500}>
-        <Stack
-          gap={3}
-          className="select-login-method-stack position-absolute top-50 start-50 translate-middle text-center pb-1"
-        >
-          <LoginBackButton setParentComponentScreenState={setLoginWithSolid} />
+      <LoginBackButton setParentComponentScreenState={setLoginWithSolid} />
 
-          <span className="select-login-method-heading">
-            <FormattedMessage
-              id="selectASolidProvider"
-              defaultMessage="Select a Solid provider"
-            />
-          </span>
+      <span className="select-login-method-heading">
+        <FormattedMessage
+          id="selectASolidProvider"
+          defaultMessage="Select a Solid provider"
+        />
+      </span>
 
-          <Form.Select
-            value={selectedProviderName}
-            onChange={(e) => handleSelectOnChange(e)}
-            className="app-form-control"
-          >
-            <option key="defaultOption" hidden>
-              {intl.formatMessage({
-                id: 'chooseSolidProvider',
-                defaultMessage: 'Choose a Solid provider',
-              })}
-            </option>
+      <Form.Select
+        value={selectedProviderName}
+        onChange={(e) => handleSelectOnChange(e)}
+        className="app-form-control"
+      >
+        <option key="defaultOption" hidden>
+          {intl.formatMessage({
+            id: 'chooseSolidProvider',
+            defaultMessage: 'Choose a Solid provider',
+          })}
+        </option>
 
-            {Object.keys(providerNameAndUrls).map((opt) => {
-              return <option key={opt}>{opt}</option>
-            })}
-          </Form.Select>
+        {Object.keys(providerNameAndUrls).map((opt) => {
+          return <option key={opt}>{opt}</option>
+        })}
+      </Form.Select>
 
+      <FormattedMessage
+        id="typeInProviderUrlHeading"
+        defaultMessage="Or type in a provider URL"
+      />
+
+      <Form.Control
+        type="text"
+        placeholder={getProviderUrlInputPlaceholder()}
+        value={providerUrl}
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+          handleOnProviderUrlChange(e)
+        }
+        className="app-form-control"
+      />
+
+      <Button
+        onClick={() => handleSolidLogin()}
+        className="login-screen-button solid-button mt-2 w-100"
+        disabled={providerUrl.length === 0}
+      >
+        {!loginInProgress ? (
           <FormattedMessage
-            id="typeInProviderUrlHeading"
-            defaultMessage="Or type in a provider URL"
+            id="redirectToProvider"
+            defaultMessage="Redirect to provider"
           />
-
-          <Form.Control
-            type="text"
-            placeholder={getProviderUrlInputPlaceholder()}
-            value={providerUrl}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              handleOnProviderUrlChange(e)
-            }
-            className="app-form-control"
-          />
-
-          <Button
-            onClick={() => handleSolidLogin()}
-            className="login-screen-button solid-button mt-2 w-100"
-            disabled={providerUrl.length === 0}
-          >
-            {!loginInProgress ? (
-              <FormattedMessage
-                id="redirectToProvider"
-                defaultMessage="Redirect to provider"
-              />
-            ) : (
-              <Spinner animation="border" role="status" size="sm">
-                <span className="visually-hidden">Loading...</span>
-              </Spinner>
-            )}
-          </Button>
-        </Stack>
-      </Fade>
+        ) : (
+          <Spinner animation="border" role="status" size="sm">
+            <span className="visually-hidden">Loading...</span>
+          </Spinner>
+        )}
+      </Button>
     </>
   )
 }

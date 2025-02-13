@@ -124,18 +124,6 @@ const SelectLoginMethod: React.FC = () => {
     }
   }
 
-  if (loginWithSolid) {
-    return <LoginSolid setLoginWithSolid={setLoginWithSolid} />
-  }
-
-  if (loginWithEmailAndPassword) {
-    return (
-      <LoginEmailAndPassword
-        setLoginWithEmailAndPassword={setLoginWithEmailAndPassword}
-      />
-    )
-  }
-
   return (
     <>
       <Modal
@@ -186,131 +174,145 @@ const SelectLoginMethod: React.FC = () => {
       <Fade in={true} appear={allowFadeAnimation} timeout={500}>
         <Card className="position-absolute top-50 start-50 translate-middle text-center pb-4 pt-3 ps-4 pe-4">
           <Stack gap={3} className="select-login-method-stack">
-            <span className="select-login-method-heading">
-              <FormattedMessage
-                id="selectSignInMethod"
-                defaultMessage="Select a sign in method"
-              />
-            </span>
-
-            <Button
-              onClick={() => {
-                setLoginWithSolid(true)
-                setAllowFadeAnimation(true)
-              }}
-              className="login-screen-button solid-button text-start"
-            >
-              <img
-                src="images/logo_solid.svg"
-                alt="Solid logo"
-                className="solid-icon"
-                draggable="false"
-              />
-              <span className="ms-3">
-                <FormattedMessage
-                  id="signInWithSolid"
-                  defaultMessage="Sign in with Solid"
-                />
-              </span>
-            </Button>
-
-            <div
-              onClick={() => {
-                setShowAboutSolidModal(true)
-              }}
-              className="clickable-text w-50 mt-1 mx-auto"
-              aria-label="show-about-solid-modal"
-              tabIndex={0}
-              onKeyDown={handleAboutSolidKeyDown}
-            >
-              <FormattedMessage
-                id="whatIsSolid"
-                defaultMessage="What is Solid?"
-              />
-            </div>
-
-            <div className="login-screen-divider">
-              <span>
-                <FormattedMessage id="signInDivider" defaultMessage="or" />
-              </span>
-            </div>
-
-            <Button
-              className="login-screen-button app-secondary-color-button"
-              onClick={() => {
-                setLoginWithEmailAndPassword(true)
-                setAllowFadeAnimation(true)
-              }}
-            >
-              <div className="text-start">
-                <img
-                  src="images/envelope-fill.svg"
-                  alt="Email envelope"
-                  className="provider-icon ms-1"
-                  draggable="false"
-                />
-                <span className="ms-3">
+            {!loginWithSolid && !loginWithEmailAndPassword && (
+              <>
+                <span className="select-login-method-heading">
                   <FormattedMessage
-                    id="emailAndPassword"
-                    defaultMessage="Email and password"
+                    id="selectSignInMethod"
+                    defaultMessage="Select a sign in method"
                   />
                 </span>
-              </div>
-            </Button>
 
-            <Button
-              onClick={() => void handleFacebookLogin()}
-              className="login-screen-button facebook-button"
-            >
-              {!facebokLoginInProgress ? (
-                <div className="text-start">
+                <Button
+                  onClick={() => {
+                    setLoginWithSolid(true)
+                    setAllowFadeAnimation(true)
+                  }}
+                  className="login-screen-button solid-button text-start"
+                >
                   <img
-                    src="images/facebook_round_white_icon.svg"
-                    alt="Facebook logo"
-                    className="provider-icon ms-1"
+                    src="images/logo_solid.svg"
+                    alt="Solid logo"
+                    className="solid-icon"
                     draggable="false"
                   />
-
                   <span className="ms-3">
                     <FormattedMessage
-                      id="signInWithFacebook"
-                      defaultMessage="Sign in with Facebook"
+                      id="signInWithSolid"
+                      defaultMessage="Sign in with Solid"
                     />
                   </span>
-                </div>
-              ) : (
-                <Spinner animation="border" role="status" size="sm">
-                  <span className="visually-hidden">Loading...</span>
-                </Spinner>
-              )}
-            </Button>
+                </Button>
 
-            <Button
-              onClick={() => handleGoogleLogin()}
-              className="login-screen-button google-button"
-            >
-              {!googleLoginInProgress ? (
-                <div className="text-start">
-                  <img
-                    src="images/google_g_logo.svg"
-                    alt="Google logo"
-                    className="provider-icon ms-1"
-                    draggable="false"
+                <div
+                  onClick={() => {
+                    setShowAboutSolidModal(true)
+                  }}
+                  className="clickable-text w-50 mt-1 mx-auto"
+                  aria-label="show-about-solid-modal"
+                  tabIndex={0}
+                  onKeyDown={handleAboutSolidKeyDown}
+                >
+                  <FormattedMessage
+                    id="whatIsSolid"
+                    defaultMessage="What is Solid?"
                   />
+                </div>
 
-                  <span className="ms-3">
-                    <FormattedMessage
-                      id="signInWithGoogle"
-                      defaultMessage="Sign in with Google"
-                    />
+                <div className="login-screen-divider">
+                  <span>
+                    <FormattedMessage id="signInDivider" defaultMessage="or" />
                   </span>
                 </div>
-              ) : (
-                <Spinner animation="border" role="status" size="sm">
-                  <span className="visually-hidden">Loading...</span>
-                </Spinner>
-              )}
-            </Button>
+
+                <Button
+                  className="login-screen-button app-secondary-color-button"
+                  onClick={() => {
+                    setLoginWithEmailAndPassword(true)
+                    setAllowFadeAnimation(true)
+                  }}
+                >
+                  <div className="text-start">
+                    <img
+                      src="images/envelope-fill.svg"
+                      alt="Email envelope"
+                      className="provider-icon ms-1"
+                      draggable="false"
+                    />
+                    <span className="ms-3">
+                      <FormattedMessage
+                        id="emailAndPassword"
+                        defaultMessage="Email and password"
+                      />
+                    </span>
+                  </div>
+                </Button>
+
+                <Button
+                  onClick={() => void handleFacebookLogin()}
+                  className="login-screen-button facebook-button"
+                >
+                  {!facebokLoginInProgress ? (
+                    <div className="text-start">
+                      <img
+                        src="images/facebook_round_white_icon.svg"
+                        alt="Facebook logo"
+                        className="provider-icon ms-1"
+                        draggable="false"
+                      />
+
+                      <span className="ms-3">
+                        <FormattedMessage
+                          id="signInWithFacebook"
+                          defaultMessage="Sign in with Facebook"
+                        />
+                      </span>
+                    </div>
+                  ) : (
+                    <Spinner animation="border" role="status" size="sm">
+                      <span className="visually-hidden">Loading...</span>
+                    </Spinner>
+                  )}
+                </Button>
+
+                <Button
+                  onClick={() => handleGoogleLogin()}
+                  className="login-screen-button google-button"
+                >
+                  {!googleLoginInProgress ? (
+                    <div className="text-start">
+                      <img
+                        src="images/google_g_logo.svg"
+                        alt="Google logo"
+                        className="provider-icon ms-1"
+                        draggable="false"
+                      />
+
+                      <span className="ms-3">
+                        <FormattedMessage
+                          id="signInWithGoogle"
+                          defaultMessage="Sign in with Google"
+                        />
+                      </span>
+                    </div>
+                  ) : (
+                    <Spinner animation="border" role="status" size="sm">
+                      <span className="visually-hidden">Loading...</span>
+                    </Spinner>
+                  )}
+                </Button>
+              </>
+            )}
+
+            {loginWithSolid && (
+              <LoginSolid setLoginWithSolid={setLoginWithSolid} />
+            )}
+
+            {loginWithEmailAndPassword && (
+              <LoginEmailAndPassword
+                setLoginWithEmailAndPassword={setLoginWithEmailAndPassword}
+              />
+            )}
           </Stack>
         </Card>
       </Fade>

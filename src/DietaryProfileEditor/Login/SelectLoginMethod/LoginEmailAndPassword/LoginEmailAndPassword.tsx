@@ -3,7 +3,6 @@ import { useState } from 'react'
 import Button from 'react-bootstrap/Button'
 import React from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
-import Fade from '@mui/material/Fade'
 import Stack from 'react-bootstrap/Stack'
 import './LoginEmailAndPassword.css'
 import CreateEmailAccount from '../CreateEmailAccount/CreateEmailAccount'
@@ -132,10 +131,6 @@ const LoginEmailAndPassword: React.FC<LoginEmailAndPasswordProps> = ({
       })
   }
 
-  if (createNewAccount) {
-    return <CreateEmailAccount setCreateNewAccount={setCreateNewAccount} />
-  }
-
   return (
     <>
       <ErrorModal
@@ -148,11 +143,8 @@ const LoginEmailAndPassword: React.FC<LoginEmailAndPasswordProps> = ({
         bodyMessage={loginErrorMessage}
       />
 
-      <Fade in={true} timeout={500}>
-        <Stack
-          gap={3}
-          className="select-login-method-stack position-absolute top-50 start-50 translate-middle text-center pb-1"
-        >
+      {!createNewAccount && (
+        <>
           <LoginBackButton
             setParentComponentScreenState={setLoginWithEmailAndPassword}
           />
@@ -219,8 +211,12 @@ const LoginEmailAndPassword: React.FC<LoginEmailAndPasswordProps> = ({
               />
             </span>
           </div>
-        </Stack>
-      </Fade>
+        </>
+      )}
+
+      {createNewAccount && (
+        <CreateEmailAccount setCreateNewAccount={setCreateNewAccount} />
+      )}
     </>
   )
 }
