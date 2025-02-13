@@ -170,6 +170,16 @@ const SelectLoginMethod: React.FC = () => {
 
       <Card className="position-absolute top-50 start-50 translate-middle text-center pb-4 pt-3 ps-4 pe-4">
         <Stack gap={3} className="select-login-method-stack">
+          {loginWithSolid && (
+            <LoginSolid setLoginWithSolid={setLoginWithSolid} />
+          )}
+
+          {loginWithEmailAndPassword && (
+            <LoginEmailAndPassword
+              setLoginWithEmailAndPassword={setLoginWithEmailAndPassword}
+            />
+          )}
+
           {!loginWithSolid && !loginWithEmailAndPassword && (
             <>
               <span className="select-login-method-heading">
@@ -296,16 +306,6 @@ const SelectLoginMethod: React.FC = () => {
                 )}
               </Button>
             </>
-          )}
-
-          {loginWithSolid && (
-            <LoginSolid setLoginWithSolid={setLoginWithSolid} />
-          )}
-
-          {loginWithEmailAndPassword && (
-            <LoginEmailAndPassword
-              setLoginWithEmailAndPassword={setLoginWithEmailAndPassword}
-            />
           )}
         </Stack>
       </Card>
