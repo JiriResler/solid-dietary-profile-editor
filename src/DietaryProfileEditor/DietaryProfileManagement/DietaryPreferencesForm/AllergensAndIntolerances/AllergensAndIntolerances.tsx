@@ -1,5 +1,5 @@
 import Form from 'react-bootstrap/Form'
-import { FormattedMessage } from 'react-intl'
+import { FormattedMessage, useIntl } from 'react-intl'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Stack from 'react-bootstrap/Stack'
@@ -17,6 +17,8 @@ const AllergensAndIntolerances: React.FC<Props> = ({
   selectedAllergens,
   setSelectedAllergens,
 }) => {
+  const intl = useIntl()
+
   const allergenList = [
     { label: 'Gluten', iri: 'http://www.wikidata.org/entity/Q188251' },
     { label: 'Crustaceans', iri: 'http://www.wikidata.org/entity/Q25364' },
@@ -36,7 +38,10 @@ const AllergensAndIntolerances: React.FC<Props> = ({
 
   const intoleranceList = [
     {
-      label: 'Lactose',
+      label: intl.formatMessage({
+        id: 'lactoseIntolerance',
+        defaultMessage: 'Lactose intolerance',
+      }),
       value: 'lactose',
     },
     {
@@ -165,7 +170,7 @@ const AllergensAndIntolerances: React.FC<Props> = ({
         </Col>
       </Row>
 
-      <div className="form-group-heading mt-4">
+      <div className="form-group-heading mt-3">
         <FormattedMessage
           id="whatAreYourIntolerances"
           defaultMessage="What are your food intolerances?"

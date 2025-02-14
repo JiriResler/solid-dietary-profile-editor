@@ -122,6 +122,7 @@ type Messages = {
   howSpicyYouLikeYourFood: string
   preferredCookingMethods: string
   finish: string
+  lactoseIntolerance: string
 }
 
 const messagesInSlovak: Messages = {
@@ -260,6 +261,7 @@ const messagesInSlovak: Messages = {
   howSpicyYouLikeYourFood: 'Aké pikantné máte radi jedlo',
   preferredCookingMethods: 'Uprednostňované spôsoby prípravy jedla',
   finish: 'Uložiť',
+  lactoseIntolerance: 'Laktózová intolerancia',
 }
 
 // const cs_messages: Messages = {
