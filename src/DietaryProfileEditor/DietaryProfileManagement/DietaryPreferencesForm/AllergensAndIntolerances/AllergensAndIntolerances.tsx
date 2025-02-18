@@ -80,17 +80,14 @@ const AllergensAndIntolerances: React.FC<Props> = ({
     },
   ]
 
-  const SelectComponents = {
-    DropdownIndicator: () => null,
-    IndicatorSeparator: () => null,
-    // Menu: CustomSelectMenu,
-  }
-
   type AllergenCheckboxProps = {
     allergenName: string
     allergenIri: string
   }
 
+  /**
+   * Renders a checkbox labeled with the allergen name and handles user interactions.
+   */
   const AllergenCheckbox: React.FC<AllergenCheckboxProps> = ({
     allergenName,
     allergenIri,
@@ -182,10 +179,9 @@ const AllergensAndIntolerances: React.FC<Props> = ({
       <Select
         className="dietary-preferences-form-select ms-2 mt-1"
         isMulti
-        components={SelectComponents}
         options={intoleranceList}
-        // value={}
-        // onChange={}
+        value={selectedIntolerances}
+        onChange={setSelectedIntolerances}
         aria-label="select-intolerances"
         placeholder={'Search for intolerances'}
         menuPlacement="top"
