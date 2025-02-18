@@ -4,10 +4,15 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Stack from 'react-bootstrap/Stack'
 import Select from 'react-select'
+import reactSelectOption from '../reactSelectOption'
 
 type Props = {
   selectedAllergens: string[]
   setSelectedAllergens: React.Dispatch<React.SetStateAction<string[]>>
+  selectedIntolerances: ReadonlyArray<reactSelectOption>
+  setSelectedIntolerances: React.Dispatch<
+    React.SetStateAction<ReadonlyArray<reactSelectOption>>
+  >
 }
 
 /**
@@ -16,6 +21,8 @@ type Props = {
 const AllergensAndIntolerances: React.FC<Props> = ({
   selectedAllergens,
   setSelectedAllergens,
+  selectedIntolerances,
+  setSelectedIntolerances,
 }) => {
   const allergenList = [
     { label: 'Gluten', iri: 'http://www.wikidata.org/entity/Q188251' },
