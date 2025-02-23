@@ -47,9 +47,18 @@ const AllergensAndIntolerances: React.FC<Props> = ({
   const { isPending, error, data } = useQuery({
     queryKey: ['repoData'],
     queryFn: () =>
-      fetch('https://api.github.com/repos/TanStack/query').then((res) =>
-        res.json(),
-      ),
+      fetch('https://api.github.com/repos/TanStack/query').then((res) => {
+        return res
+          .json()
+          .then((obj) => {
+            console.log(obj)
+            return 5
+          })
+          .catch((error) => {
+            console.warn(error)
+            return 8
+          })
+      }),
   })
 
   const intoleranceList = [
@@ -147,14 +156,15 @@ const AllergensAndIntolerances: React.FC<Props> = ({
 
   return (
     <>
-      <div>
+      {/* <div>
         <h1>{data.name}</h1>
         <p>{data.description}</p>
         <strong>👀 {data.subscribers_count}</strong>{' '}
         <strong>✨ {data.stargazers_count}</strong>{' '}
         <strong>🍴 {data.forks_count}</strong>
-      </div>
+      </div> */}
 
+      <div>{data}</div>
 
       <div className="form-group-heading">
         <FormattedMessage
