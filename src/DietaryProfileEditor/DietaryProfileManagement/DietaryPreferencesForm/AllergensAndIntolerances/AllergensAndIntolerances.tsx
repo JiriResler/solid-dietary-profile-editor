@@ -5,6 +5,7 @@ import Col from 'react-bootstrap/Col'
 import Stack from 'react-bootstrap/Stack'
 import Select from 'react-select'
 import reactSelectOption from '../reactSelectOption'
+import { useQuery } from '@tanstack/react-query'
 
 type Props = {
   selectedAllergens: string[]
@@ -42,6 +43,14 @@ const AllergensAndIntolerances: React.FC<Props> = ({
     { label: 'Lupin', iri: 'http://www.wikidata.org/entity/Q13582643' },
     { label: 'Molluscs', iri: 'http://www.wikidata.org/entity/Q6501235' },
   ]
+
+  const { isPending, error, data } = useQuery({
+    queryKey: ['repoData'],
+    queryFn: () =>
+      fetch('https://api.github.com/repos/TanStack/query').then((res) =>
+        res.json(),
+      ),
+  })
 
   const intoleranceList = [
     {
@@ -132,8 +141,21 @@ const AllergensAndIntolerances: React.FC<Props> = ({
     )
   }
 
+  if (isPending) return 'Loading...'
+
+  if (error) return 'An error has occurred: ' + error.message
+
   return (
     <>
+      <div>
+        <h1>{data.name}</h1>
+        <p>{data.description}</p>
+        <strong>👀 {data.subscribers_count}</strong>{' '}
+        <strong>✨ {data.stargazers_count}</strong>{' '}
+        <strong>🍴 {data.forks_count}</strong>
+      </div>
+
+
       <div className="form-group-heading">
         <FormattedMessage
           id="whatAreYouAllergicTo"

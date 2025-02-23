@@ -17,6 +17,7 @@
     "@inrupt/solid-ui-react": "^2.9.0",
     "@inrupt/vocab-common-rdf": "^1.0.5",
     "@mui/material": "^5.15.15",
+    "@tanstack/react-query": "^5.66.9",
     "firebase": "^10.5.0",
     "jsdom": "^22.1.0",
     "n3": "^1.17.3",
@@ -32,6 +33,7 @@
     "vitest": "^0.34.6"
   },
   "devDependencies": {
+    "@tanstack/eslint-plugin-query": "^5.66.1",
     "@testing-library/jest-dom": "^6.1.6",
     "@testing-library/react": "^14.0.0",
     "@types/n3": "^1.16.4",
