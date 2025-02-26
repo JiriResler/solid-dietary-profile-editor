@@ -6,6 +6,7 @@ import Stack from 'react-bootstrap/Stack'
 import Select from 'react-select'
 import reactSelectOption from '../reactSelectOption'
 import { useQuery } from '@tanstack/react-query'
+import axios from 'axios'
 
 type Props = {
   selectedAllergens: string[]
@@ -46,19 +47,17 @@ const AllergensAndIntolerances: React.FC<Props> = ({
 
   const { isPending, error, data } = useQuery({
     queryKey: ['repoData'],
-    queryFn: () =>
-      fetch('https://api.github.com/repos/TanStack/query').then((res) => {
-        return res
-          .json()
-          .then((obj) => {
-            console.log(obj)
-            return 5
-          })
-          .catch((error) => {
-            console.warn(error)
-            return 8
-          })
-      }),
+    queryFn: () => {
+      return axios
+        .get('https://api.github.com/repos/TanStack/query')
+        .then((response) => {
+          return response.data
+        })
+        .catch((error) => {
+          console.error(error)
+          throw error
+        })
+    },
   })
 
   const intoleranceList = [
@@ -156,15 +155,13 @@ const AllergensAndIntolerances: React.FC<Props> = ({
 
   return (
     <>
-      {/* <div>
+      <div>
         <h1>{data.name}</h1>
         <p>{data.description}</p>
         <strong>👀 {data.subscribers_count}</strong>{' '}
         <strong>✨ {data.stargazers_count}</strong>{' '}
         <strong>🍴 {data.forks_count}</strong>
-      </div> */}
-
-      <div>{data}</div>
+      </div>
 
       <div className="form-group-heading">
         <FormattedMessage
