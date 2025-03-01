@@ -45,23 +45,34 @@ const AllergensAndIntolerances: React.FC<Props> = ({
     { label: 'Molluscs', iri: 'http://www.wikidata.org/entity/Q6501235' },
   ]
 
+  /**
+   * Sends an HTTP request to get list of intolerances.
+   * @returns A string with intolerance data in RDF format.
+   */
+  function fetchIntolerances() {
+    const intoleranceListUrl =
+      'https://raw.githubusercontent.com/JiriResler/personalized-restaurant-menu-viewer-application-ontology/main/resource/List_of_intolerances.ttl'
+
+    return axios
+      .get<string>(intoleranceListUrl)
+      .then((response) => {
+        return response.data
+      })
+      .catch((error) => {
+        console.error('Error in fetching intolerance data.')
+        throw error
+      })
+  }
+
+  function parseIntoleranceList(list: string) {
+    console.log('Hello World')
+    return 'Hello world'
+  }
+
   const { isPending, error, data } = useQuery({
     queryKey: ['getIntolerances'],
-    queryFn: () => {
-      const intolerancesUrl =
-        'https://raw.githubusercontent.com/JiriResler/personalized-restaurant-menu-viewer-application-ontology/main/resource/List_of_intolerances.ttl'
-
-      return axios
-        .get<string>(intolerancesUrl)
-        .then((response) => {
-          console.log(response.data)
-          return response.data
-        })
-        .catch((error) => {
-          console.error('Error in fetching intolerance data.')
-          throw error
-        })
-    },
+    queryFn: fetchIntolerances,
+    select: parseIntoleranceList,
   })
 
   const intoleranceList = [
