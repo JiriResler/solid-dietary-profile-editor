@@ -7,6 +7,8 @@ import Select from 'react-select'
 import reactSelectOption from '../reactSelectOption'
 import { useQuery } from '@tanstack/react-query'
 import axios from 'axios'
+import N3 from 'n3'
+import { fromRdfJsDataset, getThing } from '@inrupt/solid-client'
 
 type Props = {
   selectedAllergens: string[]
@@ -64,9 +66,28 @@ const AllergensAndIntolerances: React.FC<Props> = ({
       })
   }
 
-  function parseIntoleranceList(list: string) {
-    console.log('Hello World')
-    return 'Hello world'
+  function parseIntoleranceList(rdfFile: string) {
+    const rdfParser = new N3.Parser()
+
+    try {
+      const rdfStore = new N3.Store(rdfParser.parse(rdfFile))
+
+      const intoleranceListDataset = fromRdfJsDataset(rdfStore)
+
+      const intoleranceListUrl =
+        'https://raw.githubusercontent.com/JiriResler/personalized-restaurant-menu-viewer-application-ontology/main/resource/List_of_intolerances'
+
+      const intoleranceListThing = getThing(
+        intoleranceListDataset,
+        intoleranceListUrl,
+      )
+
+      console.log(intoleranceListThing)
+    } catch (error) {
+      console.error(error)
+
+      throw new Error('Parsing of intolerance list failed.')
+    }
   }
 
   const { isPending, error, data } = useQuery({
