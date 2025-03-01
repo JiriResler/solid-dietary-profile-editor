@@ -46,15 +46,19 @@ const AllergensAndIntolerances: React.FC<Props> = ({
   ]
 
   const { isPending, error, data } = useQuery({
-    queryKey: ['repoData'],
+    queryKey: ['getIntolerances'],
     queryFn: () => {
+      const intolerancesUrl =
+        'https://raw.githubusercontent.com/JiriResler/personalized-restaurant-menu-viewer-application-ontology/main/resource/List_of_intolerances.ttl'
+
       return axios
-        .get('https://api.github.com/repos/TanStack/query')
+        .get<string>(intolerancesUrl)
         .then((response) => {
+          console.log(response.data)
           return response.data
         })
         .catch((error) => {
-          console.error(error)
+          console.error('Error in fetching intolerance data.')
           throw error
         })
     },
@@ -149,20 +153,8 @@ const AllergensAndIntolerances: React.FC<Props> = ({
     )
   }
 
-  if (isPending) return 'Loading...'
-
-  if (error) return 'An error has occurred: ' + error.message
-
   return (
     <>
-      <div>
-        <h1>{data.name}</h1>
-        <p>{data.description}</p>
-        <strong>👀 {data.subscribers_count}</strong>{' '}
-        <strong>✨ {data.stargazers_count}</strong>{' '}
-        <strong>🍴 {data.forks_count}</strong>
-      </div>
-
       <div className="form-group-heading">
         <FormattedMessage
           id="whatAreYouAllergicTo"
