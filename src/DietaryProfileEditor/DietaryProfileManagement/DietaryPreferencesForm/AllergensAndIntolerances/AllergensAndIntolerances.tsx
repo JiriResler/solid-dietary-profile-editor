@@ -8,7 +8,7 @@ import reactSelectOption from '../reactSelectOption'
 import { useQuery } from '@tanstack/react-query'
 import axios from 'axios'
 import N3 from 'n3'
-import { fromRdfJsDataset, getThing } from '@inrupt/solid-client'
+import { fromRdfJsDataset, getThing, getUrlAll } from '@inrupt/solid-client'
 
 type Props = {
   selectedAllergens: string[]
@@ -82,11 +82,20 @@ const AllergensAndIntolerances: React.FC<Props> = ({
         intoleranceListUrl,
       )
 
-      console.log(intoleranceListThing)
-    } catch (error) {
-      console.error(error)
+      if (intoleranceListThing === null) {
+        throw new Error('Intolerance list Thing cannot be null.')
+      }
 
-      throw new Error('Parsing of intolerance list failed.')
+      const intoleranceUrls = getUrlAll(
+        intoleranceListThing,
+        'http://www.w3.org/2000/01/rdf-schema#member',
+      )
+
+      console.log(intoleranceUrls)
+    } catch (error) {
+      console.error('Parsing of intolerance list failed.')
+
+      throw error
     }
   }
 
