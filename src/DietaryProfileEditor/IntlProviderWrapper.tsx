@@ -123,6 +123,7 @@ type Messages = {
   preferredCookingMethods: string
   finish: string
   searchForIntolerances: string
+  searchForIntolerancesError: string
 }
 
 const messagesInSlovak: Messages = {
@@ -262,6 +263,7 @@ const messagesInSlovak: Messages = {
   preferredCookingMethods: 'Uprednostňované spôsoby prípravy jedla',
   finish: 'Uložiť',
   searchForIntolerances: 'Vyhľadajte intoleranciu',
+  searchForIntolerancesError: 'Nepodarilo sa načítať intolerancie',
 }
 
 // const cs_messages: Messages = {

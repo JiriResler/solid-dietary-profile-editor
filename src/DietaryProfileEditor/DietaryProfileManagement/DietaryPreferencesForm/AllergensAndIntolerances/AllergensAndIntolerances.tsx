@@ -61,7 +61,7 @@ const AllergensAndIntolerances: React.FC<Props> = ({
         return response.data
       })
       .catch((error) => {
-        console.error('Error in fetching intolerance data.')
+        console.error('Error in fetching intolerance data.', error)
         throw error
       })
   }
@@ -75,7 +75,7 @@ const AllergensAndIntolerances: React.FC<Props> = ({
       const intoleranceListDataset = fromRdfJsDataset(rdfStore)
 
       const intoleranceListUrl =
-        'https://raw.githubusercontent.com/JiriResler/personalized-restaurant-menu-viewer-application-ontology/main/resource/List_of_intolerances'
+        'https://raw.githubusercontent.com/JiriResler/personalized-restaurant-menu-viewer-applances'
 
       const intoleranceListThing = getThing(
         intoleranceListDataset,
@@ -83,7 +83,7 @@ const AllergensAndIntolerances: React.FC<Props> = ({
       )
 
       if (intoleranceListThing === null) {
-        throw new Error('Intolerance list Thing cannot be null.')
+        throw new Error('Intolerance list Thing not found.')
       }
 
       const intoleranceUrls = getUrlAll(
@@ -93,8 +93,7 @@ const AllergensAndIntolerances: React.FC<Props> = ({
 
       console.log(intoleranceUrls)
     } catch (error) {
-      console.error('Parsing of intolerance list failed.')
-
+      console.error('Parsing of intolerance list failed.', error)
       throw error
     }
   }
@@ -104,6 +103,23 @@ const AllergensAndIntolerances: React.FC<Props> = ({
     queryFn: fetchIntolerances,
     select: parseIntoleranceList,
   })
+
+  /**
+   * Returns an error placeholder if an error occurs; otherwise, returns a search placeholder.
+   */
+  function intoleranceSelectPlaceholder() {
+    if (error) {
+      return intl.formatMessage({
+        id: 'searchForIntolerancesError',
+        defaultMessage: 'Could not load intolerances',
+      })
+    } else {
+      return intl.formatMessage({
+        id: 'searchForIntolerances',
+        defaultMessage: 'Search for intolerances',
+      })
+    }
+  }
 
   const intoleranceList = [
     {
@@ -242,22 +258,20 @@ const AllergensAndIntolerances: React.FC<Props> = ({
 
       <Select
         className="dietary-preferences-form-select ms-2 mt-1"
-        isMulti
-        options={intoleranceList}
-        value={selectedIntolerances}
-        onChange={setSelectedIntolerances}
-        aria-label="select-intolerances"
-        placeholder={intl.formatMessage({
-          id: 'searchForIntolerances',
-          defaultMessage: 'Search for intolerances',
-        })}
-        menuPlacement="top"
         styles={{
           control: (baseStyles) => ({
             ...baseStyles,
             minHeight: '50px',
           }),
         }}
+        isMulti
+        options={intoleranceList}
+        value={selectedIntolerances}
+        onChange={setSelectedIntolerances}
+        placeholder={intoleranceSelectPlaceholder()}
+        isLoading={isPending}
+        aria-label="select-intolerances"
+        menuPlacement="top"
       />
     </>
   )
