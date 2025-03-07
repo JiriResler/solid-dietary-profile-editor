@@ -75,7 +75,7 @@ const AllergensAndIntolerances: React.FC<Props> = ({
       const intoleranceListDataset = fromRdfJsDataset(rdfStore)
 
       const intoleranceListUrl =
-        'https://raw.githubusercontent.com/JiriResler/personalized-restaurant-menu-viewer-applances'
+        'https://raw.githubusercontent.com/JiriResler/personalized-restaurant-menu-viewer-application-ontology/main/resource/List_of_intolerances'
 
       const intoleranceListThing = getThing(
         intoleranceListDataset,
@@ -91,7 +91,11 @@ const AllergensAndIntolerances: React.FC<Props> = ({
         'http://www.w3.org/2000/01/rdf-schema#member',
       )
 
-      console.log(intoleranceUrls)
+      const intoleranceRequests = intoleranceUrls.map((url) => axios.get(url))
+
+      Promise.allSettled(intoleranceRequests).then((results) =>
+        results.forEach((result) => console.log(result.status)),
+      )
     } catch (error) {
       console.error('Parsing of intolerance list failed.', error)
       throw error
