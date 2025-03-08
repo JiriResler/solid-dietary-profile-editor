@@ -85,6 +85,8 @@ const DietPreferences: React.FC = () => {
             minHeight: '50px',
           }),
         }}
+        menuPlacement="top"
+        maxMenuHeight={210}
       />
 
       <div className="form-group-heading mt-4">

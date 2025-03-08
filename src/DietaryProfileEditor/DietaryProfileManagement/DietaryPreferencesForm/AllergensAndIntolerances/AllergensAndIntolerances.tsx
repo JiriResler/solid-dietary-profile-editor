@@ -261,7 +261,7 @@ const AllergensAndIntolerances: React.FC<Props> = ({
       </div>
 
       <Select
-        className="dietary-preferences-form-select ms-2 mt-1"
+        className="dietary-preferences-form-select ms-2 mt-1 pb-2"
         styles={{
           control: (baseStyles) => ({
             ...baseStyles,
@@ -276,6 +276,7 @@ const AllergensAndIntolerances: React.FC<Props> = ({
         isLoading={isPending}
         aria-label="select-intolerances"
         menuPlacement="top"
+        maxMenuHeight={210}
       />
     </>
   )

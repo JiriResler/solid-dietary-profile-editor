@@ -166,6 +166,8 @@ const TastesAndFoodPreparation: React.FC = () => {
             minHeight: '50px',
           }),
         }}
+        menuPlacement="top"
+        maxMenuHeight={210}
       />
 
       <div className="form-group-heading mt-4">
@@ -207,6 +209,8 @@ const TastesAndFoodPreparation: React.FC = () => {
                 minHeight: '50px',
               }),
             }}
+            menuPlacement="top"
+            maxMenuHeight={210}
           />
         </Col>
 
@@ -241,6 +245,8 @@ const TastesAndFoodPreparation: React.FC = () => {
                 minHeight: '50px',
               }),
             }}
+            menuPlacement="top"
+            maxMenuHeight={210}
           />
         </Col>
       </Row>
@@ -323,7 +329,7 @@ const TastesAndFoodPreparation: React.FC = () => {
       </Row>
 
       <Select
-        className="dietary-preferences-form-select ms-2 mt-4"
+        className="dietary-preferences-form-select ms-2 mt-4 pb-2"
         isMulti
         options={otherCookingMethods}
         // value={}
@@ -336,6 +342,8 @@ const TastesAndFoodPreparation: React.FC = () => {
             minHeight: '50px',
           }),
         }}
+        menuPlacement="top"
+        maxMenuHeight={210}
       />
     </>
   )
