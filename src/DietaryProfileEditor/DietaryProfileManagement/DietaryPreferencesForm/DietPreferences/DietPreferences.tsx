@@ -97,7 +97,7 @@ const DietPreferences: React.FC = () => {
       </div>
 
       <Form.Group controlId="calorie-intake-input">
-        <Stack direction="horizontal" gap={3} className="ms-2 mt-2">
+        <Stack direction="horizontal" gap={3} className="ms-2 mt-2 pb-2">
           <Form.Control className="app-form-control calorieInput" />
           <Form.Label>kCal</Form.Label>
         </Stack>
