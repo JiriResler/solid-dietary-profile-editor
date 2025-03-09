@@ -7,8 +7,6 @@ import Select from 'react-select'
 import reactSelectOption from '../reactSelectOption'
 import { useQuery } from '@tanstack/react-query'
 import axios from 'axios'
-import N3 from 'n3'
-import { fromRdfJsDataset, getThing, getUrlAll } from '@inrupt/solid-client'
 
 type Props = {
   selectedAllergens: string[]
@@ -47,65 +45,10 @@ const AllergensAndIntolerances: React.FC<Props> = ({
     { label: 'Molluscs', iri: 'http://www.wikidata.org/entity/Q6501235' },
   ]
 
-  /**
-   * Sends an HTTP request to get list of intolerances.
-   * @returns A string with intolerance data in RDF format.
-   */
-  function fetchIntolerances() {
-    const intoleranceListUrl =
-      'https://raw.githubusercontent.com/JiriResler/personalized-restaurant-menu-viewer-application-ontology/main/resource/List_of_intolerances.ttl'
-
-    return axios
-      .get<string>(intoleranceListUrl)
-      .then((response) => {
-        return response.data
-      })
-      .catch((error) => {
-        console.error('Error in fetching intolerance data.', error)
-        throw error
-      })
-  }
-
-  function parseIntoleranceList(rdfFile: string) {
-    const rdfParser = new N3.Parser()
-
-    try {
-      const rdfStore = new N3.Store(rdfParser.parse(rdfFile))
-
-      const intoleranceListDataset = fromRdfJsDataset(rdfStore)
-
-      const intoleranceListUrl =
-        'https://raw.githubusercontent.com/JiriResler/personalized-restaurant-menu-viewer-application-ontology/main/resource/List_of_intolerances'
-
-      const intoleranceListThing = getThing(
-        intoleranceListDataset,
-        intoleranceListUrl,
-      )
-
-      if (intoleranceListThing === null) {
-        throw new Error('Intolerance list Thing not found.')
-      }
-
-      const intoleranceUrls = getUrlAll(
-        intoleranceListThing,
-        'http://www.w3.org/2000/01/rdf-schema#member',
-      )
-
-      const intoleranceRequests = intoleranceUrls.map((url) => axios.get(url))
-
-      Promise.allSettled(intoleranceRequests).then((results) =>
-        results.forEach((result) => console.log(result.status)),
-      )
-    } catch (error) {
-      console.error('Parsing of intolerance list failed.', error)
-      throw error
-    }
-  }
-
   const { isPending, error, data } = useQuery({
     queryKey: ['getIntolerances'],
-    queryFn: fetchIntolerances,
-    select: parseIntoleranceList,
+    queryFn: ,
+    select: ,
   })
 
   /**
