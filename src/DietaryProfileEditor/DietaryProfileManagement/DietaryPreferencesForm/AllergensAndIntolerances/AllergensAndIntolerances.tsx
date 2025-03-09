@@ -7,6 +7,8 @@ import Select from 'react-select'
 import reactSelectOption from '../reactSelectOption'
 import { useQuery } from '@tanstack/react-query'
 import axios from 'axios'
+import { useContext } from 'react'
+import LanguageContext from '../../../LanguageContext'
 
 type Props = {
   selectedAllergens: string[]
@@ -28,6 +30,8 @@ const AllergensAndIntolerances: React.FC<Props> = ({
 }) => {
   const intl = useIntl()
 
+  const { selectedLanguage } = useContext(LanguageContext)
+
   const allergenList = [
     { label: 'Gluten', iri: 'http://www.wikidata.org/entity/Q188251' },
     { label: 'Crustaceans', iri: 'http://www.wikidata.org/entity/Q25364' },
@@ -47,9 +51,29 @@ const AllergensAndIntolerances: React.FC<Props> = ({
 
   const { isPending, error, data } = useQuery({
     queryKey: ['getIntolerances'],
-    queryFn: ,
-    select: ,
+    queryFn: fetchIntolerances,
+    // select: ,
   })
+
+  /**
+   * Retrieves intolerance data from Wikidata.
+   */
+  function fetchIntolerances() {
+    const sparqlQuery = `
+      SELECT ?intolerance ?intoleranceLabel WHERE {
+        ?intolerance wdt:P31 | wdt:P279 wd:Q1727229.
+        SERVICE wikibase:label { 
+          bd:serviceParam wikibase:language "${selectedLanguage}". 
+        }
+      }
+    `
+
+    const endpointUrl = 'https://query.wikidata.org/sparql'
+
+    const requestUrl = endpointUrl + '?query=' + encodeURI(sparqlQuery)
+
+    console.log(requestUrl)
+  }
 
   /**
    * Returns an error placeholder if an error occurs; otherwise, returns a search placeholder.
