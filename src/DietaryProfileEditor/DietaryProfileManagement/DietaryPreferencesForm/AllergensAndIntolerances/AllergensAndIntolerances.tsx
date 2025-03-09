@@ -55,6 +55,26 @@ const AllergensAndIntolerances: React.FC<Props> = ({
     // select: ,
   })
 
+  type IntoleranceBinding = {
+    intolerance: {
+      type: string
+      value: string
+    }
+    intoleranceLabel: {
+      type: string
+      value: string
+    }
+  }
+
+  type IntolerancesResponse = {
+    head: {
+      vars: string[]
+    }
+    results: {
+      bindings: IntoleranceBinding[]
+    }
+  }
+
   /**
    * Retrieves intolerance data from Wikidata.
    */
@@ -72,7 +92,22 @@ const AllergensAndIntolerances: React.FC<Props> = ({
 
     const requestUrl = endpointUrl + '?query=' + encodeURI(sparqlQuery)
 
-    console.log(requestUrl)
+    const requestHeaders = {
+      Accept: 'application/sparql-results+json',
+      'User-Agent':
+        'DietaryProfileEditor/https://github.com/JiriResler/solid-dietary-profile-editor',
+    }
+
+    return axios
+      .get<IntolerancesResponse>(requestUrl, { headers: requestHeaders })
+      .then((response) => {
+        console.log(response.data)
+        return response.data
+      })
+      .catch((error) => {
+        console.error('Error while fetching intolerance data.', error)
+        throw error
+      })
   }
 
   /**
