@@ -52,7 +52,7 @@ const AllergensAndIntolerances: React.FC<Props> = ({
   const { isPending, error, data } = useQuery({
     queryKey: ['getIntolerances'],
     queryFn: fetchIntolerances,
-    // select: ,
+    select: formatIntolerances,
   })
 
   type IntoleranceBinding = {
@@ -66,7 +66,7 @@ const AllergensAndIntolerances: React.FC<Props> = ({
     }
   }
 
-  type IntolerancesResponse = {
+  type IntoleranceResponse = {
     head: {
       vars: string[]
     }
@@ -99,15 +99,28 @@ const AllergensAndIntolerances: React.FC<Props> = ({
     }
 
     return axios
-      .get<IntolerancesResponse>(requestUrl, { headers: requestHeaders })
+      .get<IntoleranceResponse>(requestUrl, { headers: requestHeaders })
       .then((response) => {
-        console.log(response.data)
         return response.data
       })
       .catch((error) => {
         console.error('Error while fetching intolerance data.', error)
         throw error
       })
+  }
+
+  /**
+   * Transforms intolerance response into an array of values and labels for the intolerance select.
+   */
+  function formatIntolerances(
+    response: IntoleranceResponse,
+  ): reactSelectOption[] {
+    return response.results.bindings
+      .map(({ intolerance, intoleranceLabel }) => ({
+        value: intolerance.value,
+        label: capitalizeFirstLetter(intoleranceLabel.value),
+      }))
+      .sort((a, b) => a.label.localeCompare(b.label))
   }
 
   /**
@@ -127,44 +140,16 @@ const AllergensAndIntolerances: React.FC<Props> = ({
     }
   }
 
-  const intoleranceList = [
-    {
-      label: 'Lactose intolerance',
-      value: 'lactose',
-    },
-    {
-      label: 'Caffeine sensitivity',
-      value: 'caffeine',
-    },
-    {
-      label: 'Salicylates',
-      value: 'salicylates',
-    },
-    {
-      label: 'Amines',
-      value: 'amines',
-    },
-    {
-      label: 'High-FODMAP',
-      value: 'high-FODMAP',
-    },
-    {
-      label: 'Aspartame',
-      value: 'aspartame',
-    },
-    {
-      label: 'Yeast',
-      value: 'yeast',
-    },
-    {
-      label: 'Corn',
-      value: 'corn',
-    },
-    {
-      label: 'Sugar alcohols',
-      value: 'sugar-alcohols',
-    },
-  ]
+  /**
+   * Capitalizes the first letter of a given string.
+   */
+  function capitalizeFirstLetter(string: string) {
+    if (string === '') {
+      return ''
+    }
+
+    return string.charAt(0).toUpperCase() + string.slice(1)
+  }
 
   type AllergenCheckboxProps = {
     allergenName: string
@@ -271,7 +256,7 @@ const AllergensAndIntolerances: React.FC<Props> = ({
           }),
         }}
         isMulti
-        options={intoleranceList}
+        options={data}
         value={selectedIntolerances}
         onChange={setSelectedIntolerances}
         placeholder={intoleranceSelectPlaceholder()}
