@@ -1,10 +1,11 @@
-.back-button-arrow {
-  width: 30px;
-}
-
-.back-button-span {
-  cursor: pointer;
+.login-back-button {
   width: fit-content;
   font-size: smaller;
   font-weight: 500;
+  background: none;
+	border: none;
+}
+
+.back-button-arrow {
+  width: 30px;
 }

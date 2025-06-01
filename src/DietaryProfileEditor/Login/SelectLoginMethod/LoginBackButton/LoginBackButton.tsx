@@ -20,8 +20,9 @@ const LoginBackButton: React.FC<LoginBackButtonProps> = ({
   }
 
   return (
-    <span
-      className="text-start back-button-span"
+    <button
+      aria-label="back-button"
+      className="login-back-button"
       onClick={() => setParentComponentGoBack()}
     >
       <img
@@ -31,7 +32,7 @@ const LoginBackButton: React.FC<LoginBackButtonProps> = ({
       />
 
       <FormattedMessage id="goBack" defaultMessage="Back" />
-    </span>
+    </button>
   )
 }
 
