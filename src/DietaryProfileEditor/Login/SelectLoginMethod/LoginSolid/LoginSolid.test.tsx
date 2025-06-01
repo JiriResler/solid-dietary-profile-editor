@@ -43,7 +43,7 @@ describe('LoginSolid', () => {
 
     fireEvent.change(providerUrlTextField, { target: { value: '' } })
 
-    const redirectButton = screen.getAllByRole('button')[0]
+    const redirectButton = screen.getAllByRole('button')[1]
 
     expect(redirectButton).toBeDisabled()
   })
