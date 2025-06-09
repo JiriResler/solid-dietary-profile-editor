@@ -3,10 +3,16 @@ import './ProfileOverview.css'
 import { FormattedMessage } from 'react-intl'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-import Dropdown from 'react-bootstrap/Dropdown'
 import Card from 'react-bootstrap/Card'
 import Stack from 'react-bootstrap/Stack'
 import Button from 'react-bootstrap/Button'
+import Box from '@mui/material/Box'
+import Drawer from '@mui/material/Drawer'
+import List from '@mui/material/List'
+import Divider from '@mui/material/Divider'
+import ListItem from '@mui/material/ListItem'
+import ListItemButton from '@mui/material/ListItemButton'
+import ListItemText from '@mui/material/ListItemText'
 
 type ProfileOverviewProps = {
   setEditProfile: React.Dispatch<React.SetStateAction<boolean>>
@@ -15,37 +21,48 @@ type ProfileOverviewProps = {
 const ProfileOverview: React.FC<ProfileOverviewProps> = ({
   setEditProfile,
 }) => {
-  type CustomToggleProps = {
-    children?: React.ReactNode
-    onClick?: (
-      event: React.MouseEvent<HTMLDivElement, MouseEvent>,
-    ) => NonNullable<unknown>
+  const [open, setOpen] = React.useState(false)
+
+  const toggleDrawer = (newOpen: boolean) => () => {
+    setOpen(newOpen)
   }
 
-  const CustomToggle = React.forwardRef(
-    (props: CustomToggleProps, ref: React.Ref<HTMLDivElement>) => (
-      <div
-        ref={ref}
-        onClick={(e) => {
-          e.preventDefault()
-          if (props.onClick) props.onClick(e)
-        }}
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="28"
-          height="28"
-          fill="white"
-          viewBox="0 0 16 16"
-        >
-          <path d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0m0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0" />
-        </svg>
-      </div>
-    ),
+  const DrawerList = (
+    <Box sx={{ width: 250 }} role="presentation" onClick={toggleDrawer(false)}>
+      <List>
+        {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text) => (
+          <ListItem key={text} disablePadding>
+            <ListItemButton>
+              {/* <ListItemIcon>
+                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+              </ListItemIcon> */}
+              <ListItemText primary={text} />
+            </ListItemButton>
+          </ListItem>
+        ))}
+      </List>
+      <Divider />
+      <List>
+        {['All mail', 'Trash', 'Spam'].map((text) => (
+          <ListItem key={text} disablePadding>
+            <ListItemButton>
+              {/* <ListItemIcon>
+                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+              </ListItemIcon> */}
+              <ListItemText primary={text} />
+            </ListItemButton>
+          </ListItem>
+        ))}
+      </List>
+    </Box>
   )
 
   return (
     <div className="position-relative">
+      <Drawer open={open} onClose={toggleDrawer(false)}>
+        {DrawerList}
+      </Drawer>
+
       <Row className="sticky-top profile-overview-head-section align-items-center">
         <Col className="ms-2">
           <FormattedMessage
@@ -54,10 +71,8 @@ const ProfileOverview: React.FC<ProfileOverviewProps> = ({
           />
         </Col>
 
-        <Col className="position-relative h-100">
-          <Dropdown className="position-absolute top-50 end-0 translate-middle-y me-4">
-            <Dropdown.Toggle as={CustomToggle} />
-          </Dropdown>
+        <Col>
+          <Button onClick={toggleDrawer(true)}>Open drawer</Button>
         </Col>
       </Row>
 
