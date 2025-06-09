@@ -64,14 +64,14 @@ const ProfileOverview: React.FC<ProfileOverviewProps> = ({
       </Drawer>
 
       <Row className="sticky-top profile-overview-head-section align-items-center">
-        <Col className="ms-2">
+        <Col className="ms-2" xs={8}>
           <FormattedMessage
             id="profileOverviewHeading"
             defaultMessage="Dietary profile"
           />
         </Col>
 
-        <Col>
+        <Col className="text-end">
           <button
             onClick={toggleDrawer(true)}
             className="sidebar-drawer-button"
