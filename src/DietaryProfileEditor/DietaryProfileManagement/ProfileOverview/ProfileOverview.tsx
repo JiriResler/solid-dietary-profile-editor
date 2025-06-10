@@ -27,7 +27,7 @@ const ProfileOverview: React.FC<ProfileOverviewProps> = ({
     setOpen(newOpen)
   }
 
-  const DrawerList = (
+  const SidebarDrawerItemList = (
     <Box sx={{ width: 250 }} role="presentation" onClick={toggleDrawer(false)}>
       <List>
         {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text) => (
@@ -60,7 +60,7 @@ const ProfileOverview: React.FC<ProfileOverviewProps> = ({
   return (
     <div className="position-relative">
       <Drawer anchor="right" open={open} onClose={toggleDrawer(false)}>
-        {DrawerList}
+        {SidebarDrawerItemList}
       </Drawer>
 
       <Row className="sticky-top profile-overview-head-section align-items-center">
