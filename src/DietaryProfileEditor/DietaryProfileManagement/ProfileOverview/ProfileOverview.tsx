@@ -18,6 +18,10 @@ type ProfileOverviewProps = {
   setEditProfile: React.Dispatch<React.SetStateAction<boolean>>
 }
 
+/**
+ * Displays the logged in user's dietary profile.
+ * @param setEditProfile Changes a state variable to indicate whether the user wants to edit their dietary profile.
+ */
 const ProfileOverview: React.FC<ProfileOverviewProps> = ({
   setEditProfile,
 }) => {
@@ -27,6 +31,9 @@ const ProfileOverview: React.FC<ProfileOverviewProps> = ({
     setOpen(newOpen)
   }
 
+  /**
+   * Renders a list of items to appear in the sidebar Drawer menu.
+   */
   const SidebarDrawerItemList: React.FC = () => {
     return (
       <Box
