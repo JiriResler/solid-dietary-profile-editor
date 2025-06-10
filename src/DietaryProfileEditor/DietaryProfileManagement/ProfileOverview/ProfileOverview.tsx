@@ -74,7 +74,7 @@ const ProfileOverview: React.FC<ProfileOverviewProps> = ({
         <Col className="text-end">
           <button
             onClick={toggleDrawer(true)}
-            className="sidebar-drawer-button"
+            className="sidebar-drawer-menu-button"
           >
             <img
               src="images/icons/list.svg"
