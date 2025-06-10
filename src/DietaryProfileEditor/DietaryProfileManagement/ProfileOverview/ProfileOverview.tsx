@@ -27,40 +27,46 @@ const ProfileOverview: React.FC<ProfileOverviewProps> = ({
     setOpen(newOpen)
   }
 
-  const SidebarDrawerItemList = (
-    <Box sx={{ width: 250 }} role="presentation" onClick={toggleDrawer(false)}>
-      <List>
-        {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              {/* <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon> */}
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
-      <Divider />
-      <List>
-        {['All mail', 'Trash', 'Spam'].map((text) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              {/* <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon> */}
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
-    </Box>
-  )
+  const SidebarDrawerItemList: React.FC = () => {
+    return (
+      <Box
+        sx={{ width: 250 }}
+        role="presentation"
+        onClick={toggleDrawer(false)}
+      >
+        <List>
+          {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text) => (
+            <ListItem key={text} disablePadding>
+              <ListItemButton>
+                {/* <ListItemIcon>
+                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                </ListItemIcon> */}
+                <ListItemText primary={text} />
+              </ListItemButton>
+            </ListItem>
+          ))}
+        </List>
+        <Divider />
+        <List>
+          {['All mail', 'Trash', 'Spam'].map((text) => (
+            <ListItem key={text} disablePadding>
+              <ListItemButton>
+                {/* <ListItemIcon>
+                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                </ListItemIcon> */}
+                <ListItemText primary={text} />
+              </ListItemButton>
+            </ListItem>
+          ))}
+        </List>
+      </Box>
+    )
+  }
 
   return (
     <div className="position-relative">
       <Drawer anchor="right" open={open} onClose={toggleDrawer(false)}>
-        {SidebarDrawerItemList}
+        <SidebarDrawerItemList />
       </Drawer>
 
       <Row className="sticky-top profile-overview-head-section align-items-center">
