@@ -1,4 +1,5 @@
 import React from 'react'
+import { useState } from 'react'
 import './ProfileOverview.css'
 import { FormattedMessage } from 'react-intl'
 import Row from 'react-bootstrap/Row'
@@ -6,13 +7,7 @@ import Col from 'react-bootstrap/Col'
 import Card from 'react-bootstrap/Card'
 import Stack from 'react-bootstrap/Stack'
 import Button from 'react-bootstrap/Button'
-import Box from '@mui/material/Box'
-import Drawer from '@mui/material/Drawer'
-import List from '@mui/material/List'
-import Divider from '@mui/material/Divider'
-import ListItem from '@mui/material/ListItem'
-import ListItemButton from '@mui/material/ListItemButton'
-import ListItemText from '@mui/material/ListItemText'
+import Offcanvas from 'react-bootstrap/Offcanvas'
 
 type ProfileOverviewProps = {
   setEditProfile: React.Dispatch<React.SetStateAction<boolean>>
@@ -25,56 +20,22 @@ type ProfileOverviewProps = {
 const ProfileOverview: React.FC<ProfileOverviewProps> = ({
   setEditProfile,
 }) => {
-  const [open, setOpen] = React.useState(false)
+  const [show, setShow] = useState(false)
 
-  const toggleDrawer = (newOpen: boolean) => () => {
-    setOpen(newOpen)
-  }
-
-  /**
-   * Renders a list of items to appear in the sidebar Drawer menu.
-   */
-  const SidebarDrawerItemList: React.FC = () => {
-    return (
-      <Box
-        sx={{ width: 250 }}
-        role="presentation"
-        onClick={toggleDrawer(false)}
-      >
-        <List>
-          {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text) => (
-            <ListItem key={text} disablePadding>
-              <ListItemButton>
-                {/* <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon> */}
-                <ListItemText primary={text} />
-              </ListItemButton>
-            </ListItem>
-          ))}
-        </List>
-        <Divider />
-        <List>
-          {['All mail', 'Trash', 'Spam'].map((text) => (
-            <ListItem key={text} disablePadding>
-              <ListItemButton>
-                {/* <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon> */}
-                <ListItemText primary={text} />
-              </ListItemButton>
-            </ListItem>
-          ))}
-        </List>
-      </Box>
-    )
-  }
+  const handleClose = () => setShow(false)
+  const handleShow = () => setShow(true)
 
   return (
     <div className="position-relative">
-      <Drawer anchor="right" open={open} onClose={toggleDrawer(false)}>
-        <SidebarDrawerItemList />
-      </Drawer>
+      <Offcanvas show={show} onHide={handleClose} placement="end">
+        <Offcanvas.Header closeButton>
+          <Offcanvas.Title>Offcanvas</Offcanvas.Title>
+        </Offcanvas.Header>
+        <Offcanvas.Body>
+          Some text as placeholder. In real life you can have the elements you
+          have chosen. Like, text, images, lists, etc.
+        </Offcanvas.Body>
+      </Offcanvas>
 
       <Row className="sticky-top profile-overview-head-section align-items-center">
         <Col className="ms-2" xs={8}>
@@ -85,10 +46,7 @@ const ProfileOverview: React.FC<ProfileOverviewProps> = ({
         </Col>
 
         <Col className="text-end">
-          <button
-            onClick={toggleDrawer(true)}
-            className="sidebar-drawer-menu-button"
-          >
+          <button onClick={handleShow} className="sidebar-drawer-menu-button">
             <img
               src="images/icons/list.svg"
               alt="Sidebar menu icon"
