@@ -6,13 +6,17 @@
   font-weight: 500;
 }
 
-.sidebar-drawer-menu-button {
+.offcanvas-menu-button {
   background: none;
 	border: none;
 }
 
-.sidebar-menu-icon {
+.offcanvas-menu-icon {
   width: 40px;
+}
+
+.profile-overview-offcanvas {
+  max-width: 200px;
 }
 
 .edit-profile-button {

@@ -27,10 +27,16 @@ const ProfileOverview: React.FC<ProfileOverviewProps> = ({
 
   return (
     <div className="position-relative">
-      <Offcanvas show={show} onHide={handleClose} placement="end">
+      <Offcanvas
+        show={show}
+        onHide={handleClose}
+        placement="end"
+        className="profile-overview-offcanvas"
+      >
         <Offcanvas.Header closeButton>
           <Offcanvas.Title>Offcanvas</Offcanvas.Title>
         </Offcanvas.Header>
+
         <Offcanvas.Body>
           Some text as placeholder. In real life you can have the elements you
           have chosen. Like, text, images, lists, etc.
@@ -46,11 +52,11 @@ const ProfileOverview: React.FC<ProfileOverviewProps> = ({
         </Col>
 
         <Col className="text-end">
-          <button onClick={handleShow} className="sidebar-drawer-menu-button">
+          <button onClick={handleShow} className="offcanvas-menu-button">
             <img
               src="images/icons/list.svg"
               alt="Sidebar menu icon"
-              className="sidebar-menu-icon"
+              className="offcanvas-menu-icon"
             />
           </button>
         </Col>
