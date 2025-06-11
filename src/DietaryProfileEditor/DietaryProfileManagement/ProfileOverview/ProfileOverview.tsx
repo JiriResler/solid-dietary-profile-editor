@@ -33,11 +33,11 @@ const ProfileOverview: React.FC<ProfileOverviewProps> = ({
         placement="end"
         className="profile-overview-offcanvas"
       >
-        <Offcanvas.Header closeButton>
+        <Offcanvas.Header className="bg-success offcanvas-header position-relative">
           <img
             src="images/person-circle.svg"
             alt="Offcanvas user picture"
-            className="offcanvas-profile-picture border"
+            className="offcanvas-profile-picture border position-absolute top-0 start-50 translate-middle-x"
           />
         </Offcanvas.Header>
 

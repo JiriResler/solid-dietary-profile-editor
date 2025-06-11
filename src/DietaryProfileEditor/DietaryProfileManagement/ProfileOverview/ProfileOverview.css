@@ -19,8 +19,13 @@
   max-width: 200px;
 }
 
+.offcanvas-header {
+  height: 150px;
+}
+
 .offcanvas-profile-picture {
   width: 50px;
+  margin-top: 20pt;
 }
 
 .edit-profile-button {
