@@ -34,7 +34,11 @@ const ProfileOverview: React.FC<ProfileOverviewProps> = ({
         className="profile-overview-offcanvas"
       >
         <Offcanvas.Header closeButton>
-          <Offcanvas.Title>Offcanvas</Offcanvas.Title>
+          <img
+            src="images/person-circle.svg"
+            alt="Offcanvas user picture"
+            className="offcanvas-profile-picture border"
+          />
         </Offcanvas.Header>
 
         <Offcanvas.Body>
@@ -54,7 +58,7 @@ const ProfileOverview: React.FC<ProfileOverviewProps> = ({
         <Col className="text-end">
           <button onClick={handleShow} className="offcanvas-menu-button">
             <img
-              src="images/icons/list.svg"
+              src="images/list.svg"
               alt="Sidebar menu icon"
               className="offcanvas-menu-icon"
             />

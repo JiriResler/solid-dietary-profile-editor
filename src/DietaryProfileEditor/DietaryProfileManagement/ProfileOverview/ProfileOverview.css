@@ -19,6 +19,10 @@
   max-width: 200px;
 }
 
+.offcanvas-profile-picture {
+  width: 50px;
+}
+
 .edit-profile-button {
   width: 72px;
   height: 72px;
