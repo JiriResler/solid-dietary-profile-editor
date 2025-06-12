@@ -6,16 +6,20 @@
   font-weight: 500;
 }
 
-.offcanvas-menu-icon {
-  width: 40px;
-}
-
 .profile-overview-offcanvas {
   max-width: 200px;
 }
 
+.offcanvas-menu-icon {
+  width: 40px;
+}
+
 .offcanvas-header {
   height: 150px;
+}
+
+.offcanvas-close-icon {
+  width: 40px;
 }
 
 .offcanvas-profile-picture {

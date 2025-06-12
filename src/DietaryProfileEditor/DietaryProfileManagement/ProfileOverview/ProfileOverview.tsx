@@ -33,12 +33,24 @@ const ProfileOverview: React.FC<ProfileOverviewProps> = ({
         placement="end"
         className="profile-overview-offcanvas"
       >
-        <Offcanvas.Header className="bg-success offcanvas-header position-relative">
+        <Offcanvas.Header className="offcanvas-header position-relative">
           <img
             src="images/person-circle.svg"
             alt="Offcanvas user picture"
             className="offcanvas-profile-picture border position-absolute top-0 start-50 translate-middle-x"
           />
+
+          <button
+            className="invisible-button position-absolute top-0 end-0"
+            aria-label="Close offcanvas"
+            onClick={handleClose}
+          >
+            <img
+              src="images/close-x.svg"
+              alt="Close offcanvas icon"
+              className="offcanvas-close-icon"
+            />
+          </button>
         </Offcanvas.Header>
 
         <Offcanvas.Body>
@@ -56,10 +68,14 @@ const ProfileOverview: React.FC<ProfileOverviewProps> = ({
         </Col>
 
         <Col className="text-end">
-          <button onClick={handleShow} className="invisible-button">
+          <button
+            onClick={handleShow}
+            className="invisible-button"
+            aria-label="Open offcanvas"
+          >
             <img
               src="images/list.svg"
-              alt="Sidebar menu icon"
+              alt="Hamburger icon"
               className="offcanvas-menu-icon"
             />
           </button>
