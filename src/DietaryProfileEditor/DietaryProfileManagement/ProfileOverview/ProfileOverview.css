@@ -14,10 +14,6 @@
   width: 40px;
 }
 
-.offcanvas-header {
-  height: 150px;
-}
-
 .offcanvas-close-icon {
   width: 50px;
 }
@@ -25,6 +21,10 @@
 .offcanvas-profile-picture {
   width: 50px;
   margin-top: 20pt;
+}
+
+.user-information {
+  margin-top: 65pt;
 }
 
 .edit-profile-button {

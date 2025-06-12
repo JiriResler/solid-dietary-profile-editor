@@ -33,7 +33,7 @@ const ProfileOverview: React.FC<ProfileOverviewProps> = ({
         placement="end"
         className="profile-overview-offcanvas"
       >
-        <Offcanvas.Header className="offcanvas-header position-relative">
+        <div className="position-relative">
           <img
             src="images/person-circle.svg"
             alt="Offcanvas user picture"
@@ -51,12 +51,16 @@ const ProfileOverview: React.FC<ProfileOverviewProps> = ({
               className="offcanvas-close-icon"
             />
           </button>
-        </Offcanvas.Header>
 
-        <Offcanvas.Body>
-          Some text as placeholder. In real life you can have the elements you
-          have chosen. Like, text, images, lists, etc.
-        </Offcanvas.Body>
+          <div className="user-information text-center">
+            <div>John Doe</div>
+            <div>john.doe@example.com</div>
+          </div>
+        </div>
+
+        <hr />
+
+        <Button>Option</Button>
       </Offcanvas>
 
       <Row className="sticky-top profile-overview-head-section align-items-center">
