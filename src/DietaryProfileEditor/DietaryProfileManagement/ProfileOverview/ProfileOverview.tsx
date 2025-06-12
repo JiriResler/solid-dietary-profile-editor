@@ -56,7 +56,7 @@ const ProfileOverview: React.FC<ProfileOverviewProps> = ({
         </Col>
 
         <Col className="text-end">
-          <button onClick={handleShow} className="offcanvas-menu-button">
+          <button onClick={handleShow} className="invisible-button">
             <img
               src="images/list.svg"
               alt="Sidebar menu icon"

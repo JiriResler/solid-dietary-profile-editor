@@ -47,3 +47,8 @@
   width: 22pt;
   height: 22pt;
 }
+
+.invisible-button {
+  background: none;
+	border: none;
+}

@@ -22,7 +22,7 @@ const LoginBackButton: React.FC<LoginBackButtonProps> = ({
   return (
     <button
       aria-label="back-button"
-      className="login-back-button"
+      className="invisible-button login-back-button"
       onClick={() => setParentComponentGoBack()}
     >
       <img
