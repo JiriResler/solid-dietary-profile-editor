@@ -139,7 +139,7 @@ const messagesInSlovak: Messages = {
   aboutTheApplication: 'O aplikácii',
   sourceCode: 'Zdrojový kód',
   createdBy: 'Vytvoril',
-  editProfile: 'Editovať profil',
+  editProfile: 'Upraviť profil',
   importProfile: 'Importovať profil',
   downloadProfile: 'Stiahnuť profil',
   userManual: 'Používateľská príručka',

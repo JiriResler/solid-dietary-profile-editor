@@ -37,7 +37,7 @@ const ProfileOverview: React.FC<ProfileOverviewProps> = ({
           <img
             src="images/person-circle.svg"
             alt="Offcanvas user picture"
-            className="offcanvas-profile-picture border position-absolute top-0 start-50 translate-middle-x"
+            className="offcanvas-profile-picture position-absolute top-0 start-50 translate-middle-x"
           />
 
           <button
@@ -60,7 +60,21 @@ const ProfileOverview: React.FC<ProfileOverviewProps> = ({
 
         <hr />
 
-        <Button>Option</Button>
+        <button
+          className="invisible-button text-start"
+          onClick={() => setEditProfile(true)}
+        >
+          <img
+            src="images/pencil-square-black.svg"
+            alt="Edit profile icon"
+            className="offcanvas-item-button-icon ms-3 me-3"
+          />
+          <FormattedMessage id="editProfile" defaultMessage="Edit profile" />
+        </button>
+
+        <hr />
+
+        <button>Sign out</button>
       </Offcanvas>
 
       <Row className="sticky-top profile-overview-head-section align-items-center">
@@ -250,13 +264,13 @@ const ProfileOverview: React.FC<ProfileOverviewProps> = ({
       </Stack>
 
       <Button
-        className="position-absolute position-fixed bottom-0 end-0 mb-4 me-4 edit-profile-button app-secondary-color-button"
+        className="position-absolute position-fixed bottom-0 end-0 mb-4 me-4 edit-profile-round-button app-secondary-color-button"
         onClick={() => setEditProfile(true)}
       >
         <img
           src="images/pencil-square.svg"
           alt="Edit profile icon"
-          className="edit-profile-icon"
+          className="edit-profile-round-icon"
         />
       </Button>
     </div>
