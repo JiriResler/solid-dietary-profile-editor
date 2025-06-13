@@ -54,7 +54,7 @@ const ProfileOverview: React.FC<ProfileOverviewProps> = ({
 
           <div className="user-information text-center">
             <div>John Doe</div>
-            <div>john.doe@example.com</div>
+            <div className="user-identifier">john.doe@example.com</div>
           </div>
         </div>
 
