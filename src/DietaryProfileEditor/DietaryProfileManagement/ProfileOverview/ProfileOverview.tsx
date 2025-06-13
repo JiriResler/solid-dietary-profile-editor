@@ -74,7 +74,14 @@ const ProfileOverview: React.FC<ProfileOverviewProps> = ({
 
         <hr />
 
-        <button>Sign out</button>
+        <button className="invisible-button text-start">
+          <img
+            src="images/box-arrow-right.svg"
+            alt="Sign out icon"
+            className="offcanvas-signout-icon ms-3"
+          />
+          <FormattedMessage id="signOut" defaultMessage="Sign out" />
+        </button>
       </Offcanvas>
 
       <Row className="sticky-top profile-overview-head-section align-items-center">
