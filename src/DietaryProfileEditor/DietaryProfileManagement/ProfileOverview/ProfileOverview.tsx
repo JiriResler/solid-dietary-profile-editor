@@ -61,26 +61,32 @@ const ProfileOverview: React.FC<ProfileOverviewProps> = ({
         <hr />
 
         <button
-          className="invisible-button text-start"
+          className="invisible-button text-start position-relative bg-success"
           onClick={() => setEditProfile(true)}
         >
           <img
             src="images/pencil-square-black.svg"
             alt="Edit profile icon"
-            className="offcanvas-item-button-icon ms-3 me-3"
+            className="offcanvas-item-button-icon position-absolute ms-2"
           />
-          <FormattedMessage id="editProfile" defaultMessage="Edit profile" />
+
+          <span className="ms-5">
+            <FormattedMessage id="editProfile" defaultMessage="Edit profile" />
+          </span>
         </button>
 
         <hr />
 
-        <button className="invisible-button text-start">
+        <button className="invisible-button text-start position-relative">
           <img
             src="images/box-arrow-right.svg"
             alt="Sign out icon"
-            className="offcanvas-signout-icon ms-3"
+            className="offcanvas-signout-icon position-absolute ms-2"
           />
-          <FormattedMessage id="signOut" defaultMessage="Sign out" />
+
+          <span className="ms-5">
+            <FormattedMessage id="signOut" defaultMessage="Sign out" />
+          </span>
         </button>
       </Offcanvas>
 
