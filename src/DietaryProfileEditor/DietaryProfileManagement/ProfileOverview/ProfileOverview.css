@@ -31,6 +31,10 @@
   font-size: small;
 }
 
+.offcanvas-item-button {
+  height: 50px;
+}
+
 .offcanvas-item-button-icon {
   width:24px;
 }

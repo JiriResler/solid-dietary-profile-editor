@@ -58,10 +58,10 @@ const ProfileOverview: React.FC<ProfileOverviewProps> = ({
           </div>
         </div>
 
-        <hr />
+        <hr className="mb-2" />
 
         <button
-          className="invisible-button text-start position-relative bg-success"
+          className="invisible-button offcanvas-item-button text-start position-relative"
           onClick={() => setEditProfile(true)}
         >
           <img
@@ -75,9 +75,22 @@ const ProfileOverview: React.FC<ProfileOverviewProps> = ({
           </span>
         </button>
 
-        <hr />
+        <button
+          className="invisible-button offcanvas-item-button text-start position-relative"
+          onClick={() => setEditProfile(true)}
+        >
+          <img
+            src="images/pencil-square-black.svg"
+            alt="Edit profile icon"
+            className="offcanvas-item-button-icon position-absolute ms-2"
+          />
 
-        <button className="invisible-button text-start position-relative">
+          <span className="ms-5">
+            <FormattedMessage id="editProfile" defaultMessage="Edit profile" />
+          </span>
+        </button>
+
+        <button className="invisible-button offcanvas-item-button text-start position-relative">
           <img
             src="images/box-arrow-right.svg"
             alt="Sign out icon"
