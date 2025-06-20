@@ -20,16 +20,13 @@ type ProfileOverviewProps = {
 const ProfileOverview: React.FC<ProfileOverviewProps> = ({
   setEditProfile,
 }) => {
-  const [show, setShow] = useState(false)
-
-  const handleClose = () => setShow(false)
-  const handleShow = () => setShow(true)
+  const [showOffcanvas, setShowOffCanvas] = useState(false)
 
   return (
     <div className="position-relative">
       <Offcanvas
-        show={show}
-        onHide={handleClose}
+        show={showOffcanvas}
+        onHide={() => setShowOffCanvas(false)}
         placement="end"
         className="profile-overview-offcanvas"
       >
@@ -43,7 +40,7 @@ const ProfileOverview: React.FC<ProfileOverviewProps> = ({
           <button
             className="invisible-button position-absolute top-0 end-0"
             aria-label="Close offcanvas"
-            onClick={handleClose}
+            onClick={() => setShowOffCanvas(false)}
           >
             <img
               src="images/close-x.svg"
@@ -113,7 +110,7 @@ const ProfileOverview: React.FC<ProfileOverviewProps> = ({
 
         <Col className="text-end">
           <button
-            onClick={handleShow}
+            onClick={() => setShowOffCanvas(true)}
             className="invisible-button"
             aria-label="Open offcanvas"
           >
