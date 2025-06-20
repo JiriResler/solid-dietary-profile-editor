@@ -1,5 +1,8 @@
-import React from 'react'
-import { useState } from 'react'
+import React, { useState } from 'react'
+import { useSession } from '@inrupt/solid-ui-react'
+import { auth } from '../../../firebase'
+import { signOut } from 'firebase/auth'
+import { useNavigate } from 'react-router-dom'
 import './ProfileOverview.css'
 import { FormattedMessage } from 'react-intl'
 import Row from 'react-bootstrap/Row'
@@ -20,7 +23,28 @@ type ProfileOverviewProps = {
 const ProfileOverview: React.FC<ProfileOverviewProps> = ({
   setEditProfile,
 }) => {
+  const { session: solidSession } = useSession()
+
+  const routerNavigate = useNavigate()
+
   const [showOffcanvas, setShowOffCanvas] = useState(false)
+
+  /**
+   * Signs the user out of the application.
+   */
+  function applicationSignOut() {
+    // Sign out from Firebase
+    signOut(auth).catch((error: Error) => {
+      console.log(error.message)
+    })
+
+    // Sign out from Solid
+    solidSession.logout({ logoutType: 'app' }).catch((error: Error) => {
+      console.log(error.message)
+    })
+
+    routerNavigate('/login')
+  }
 
   return (
     <div className="position-relative">
@@ -87,7 +111,10 @@ const ProfileOverview: React.FC<ProfileOverviewProps> = ({
           </span>
         </button>
 
-        <button className="invisible-button offcanvas-item-button text-start position-relative">
+        <button
+          onClick={applicationSignOut}
+          className="invisible-button offcanvas-item-button text-start position-relative"
+        >
           <img
             src="images/box-arrow-right.svg"
             alt="Sign out icon"
