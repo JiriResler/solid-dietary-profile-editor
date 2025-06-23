@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { useSession } from '@inrupt/solid-ui-react'
+import { useAuthState } from 'react-firebase-hooks/auth'
 import { auth } from '../../../firebase'
 import { signOut } from 'firebase/auth'
 import { useNavigate } from 'react-router-dom'
@@ -25,6 +26,12 @@ const ProfileOverview: React.FC<ProfileOverviewProps> = ({
 }) => {
   const { session: solidSession } = useSession()
 
+  const [firebaseUser] = useAuthState(auth)
+
+  const signedInWithSolid = solidSession.info.isLoggedIn
+
+  const signedInWithFirebase = firebaseUser != null
+
   const routerNavigate = useNavigate()
 
   const [showOffcanvas, setShowOffCanvas] = useState(false)
@@ -32,16 +39,18 @@ const ProfileOverview: React.FC<ProfileOverviewProps> = ({
   /**
    * Signs the user out of the application.
    */
-  function applicationSignOut() {
-    // Sign out from Firebase
-    signOut(auth).catch((error: Error) => {
-      console.log(error.message)
-    })
+  async function applicationSignOut() {
+    if (signedInWithSolid) {
+      await solidSession.logout({ logoutType: 'app' }).catch((error: Error) => {
+        console.log(error.message)
+      })
+    }
 
-    // Sign out from Solid
-    solidSession.logout({ logoutType: 'app' }).catch((error: Error) => {
-      console.log(error.message)
-    })
+    if (signedInWithFirebase) {
+      await signOut(auth).catch((error: Error) => {
+        console.log(error.message)
+      })
+    }
 
     routerNavigate('/login')
   }
@@ -112,7 +121,9 @@ const ProfileOverview: React.FC<ProfileOverviewProps> = ({
         </button>
 
         <button
-          onClick={applicationSignOut}
+          onClick={() => {
+            void applicationSignOut()
+          }}
           className="invisible-button offcanvas-item-button text-start position-relative"
         >
           <img
