@@ -14,6 +14,7 @@ import Button from 'react-bootstrap/Button'
 import Offcanvas from 'react-bootstrap/Offcanvas'
 
 type ProfileOverviewProps = {
+  userId: string
   setEditProfile: React.Dispatch<React.SetStateAction<boolean>>
 }
 
@@ -22,6 +23,7 @@ type ProfileOverviewProps = {
  * @param setEditProfile Changes a state variable to indicate whether the user wants to edit their dietary profile.
  */
 const ProfileOverview: React.FC<ProfileOverviewProps> = ({
+  userId,
   setEditProfile,
 }) => {
   const { session: solidSession } = useSession()
@@ -30,7 +32,7 @@ const ProfileOverview: React.FC<ProfileOverviewProps> = ({
 
   const signedInWithSolid = solidSession.info.isLoggedIn
 
-  const signedInWithFirebase = firebaseUser != null
+  const signedInWithFirebase = firebaseUser !== null
 
   const routerNavigate = useNavigate()
 
@@ -84,7 +86,7 @@ const ProfileOverview: React.FC<ProfileOverviewProps> = ({
 
           <div className="user-information text-center">
             <div>John Doe</div>
-            <div className="user-identifier">john.doe@example.com</div>
+            <div className="user-identifier">{userId}</div>
           </div>
         </div>
 
