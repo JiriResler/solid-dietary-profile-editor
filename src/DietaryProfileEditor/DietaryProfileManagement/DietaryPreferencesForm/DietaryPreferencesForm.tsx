@@ -4,12 +4,11 @@ import Form from 'react-bootstrap/Form'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import FormHeader from './FormHeader/FormHeader'
-import AllergensAndIntolerances from './AllergensAndIntolerances/AllergensAndIntolerances'
+import SelectAllergens from './SelectAllergens/SelectAllergens'
 import FormFooter from './FormFooter/FormFooter'
 import DietPreferences from './DietPreferences/DietPreferences'
 import TastesAndFoodPreparation from './TastesAndFoodPreparation/TastesAndFoodPreparation'
 import React, { useState } from 'react'
-import reactSelectOption from './reactSelectOption'
 
 /**
  * Renders the actual dietary preferences form, while the DietaryPreferencesForm component manages screen size adaptations for large or small displays.
@@ -20,10 +19,6 @@ const ActualDietaryPreferencesForm: React.FC = () => {
   const totalNumberOfSteps = 3
 
   const [selectedAllergens, setSelectedAllergens] = useState<string[]>([])
-
-  const [selectedIntolerances, setSelectedIntolerances] = useState<
-    ReadonlyArray<reactSelectOption>
-  >([])
 
   return (
     <div className="d-flex flex-column h-100">
@@ -38,11 +33,9 @@ const ActualDietaryPreferencesForm: React.FC = () => {
         <div className="overflow-content h-100" tabIndex={-1}>
           <Form>
             {formStep === 0 && (
-              <AllergensAndIntolerances
+              <SelectAllergens
                 selectedAllergens={selectedAllergens}
                 setSelectedAllergens={setSelectedAllergens}
-                selectedIntolerances={selectedIntolerances}
-                setSelectedIntolerances={setSelectedIntolerances}
               />
             )}
             {formStep === 1 && <DietPreferences />}

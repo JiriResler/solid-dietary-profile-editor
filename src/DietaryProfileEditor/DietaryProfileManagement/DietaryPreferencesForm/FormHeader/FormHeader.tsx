@@ -23,22 +23,22 @@ const FormHeader: React.FC<FormHeaderProps> = ({
         <div className="current-step-heading">
           {formStep === 0 && (
             <FormattedMessage
-              id="allergiesAndFoodIntolerances"
-              defaultMessage="Allergies and Food Intolerances"
+              id="allergenPreferencesHeading"
+              defaultMessage="Allergens"
             />
           )}
 
           {formStep === 1 && (
             <FormattedMessage
-              id="dietPreferences"
-              defaultMessage="Dieting Preferences"
+              id="dietPreferencesHeading"
+              defaultMessage="Diet Preferences"
             />
           )}
 
           {formStep === 2 && (
             <FormattedMessage
-              id="tastesAndFoodPreparation"
-              defaultMessage="Tastes and Food Preparation"
+              id="tastePreferencesHeading"
+              defaultMessage="Taste Preferences"
             />
           )}
         </div>
@@ -47,14 +47,14 @@ const FormHeader: React.FC<FormHeaderProps> = ({
           <FormattedMessage id="nextStep" defaultMessage="Next" />:{' '}
           {formStep === 0 && (
             <FormattedMessage
-              id="dietPreferences"
-              defaultMessage="Dieting Preferences"
+              id="dietPreferencesHeading"
+              defaultMessage="Diet Preferences"
             />
           )}
           {formStep === 1 && (
             <FormattedMessage
-              id="tastesAndFoodPreparation"
-              defaultMessage="Tastes and Food Preparation"
+              id="tastePreferencesHeading"
+              defaultMessage="Taste Preferences"
             />
           )}
         </div>

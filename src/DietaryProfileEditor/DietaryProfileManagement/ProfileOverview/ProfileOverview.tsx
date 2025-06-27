@@ -168,8 +168,8 @@ const ProfileOverview: React.FC<ProfileOverviewProps> = ({
           <Card.Body>
             <Card.Title>
               <FormattedMessage
-                id="allergiesAndFoodIntolerances"
-                defaultMessage="Allergies and intolerances"
+                id="allergenPreferencesHeading"
+                defaultMessage="Allergens"
               />
             </Card.Title>
 
@@ -201,20 +201,6 @@ const ProfileOverview: React.FC<ProfileOverviewProps> = ({
                 </div>
               </Stack>
             </Card.Text>
-
-            <Card.Subtitle className="mb-2 text-muted">
-              <FormattedMessage
-                id="yourIntolerances"
-                defaultMessage="Your have intolerance to"
-              />
-            </Card.Subtitle>
-
-            <Card.Text>
-              <ul className="no-bottom-margin">
-                <li>Amines</li>
-                <li>Corn</li>
-              </ul>
-            </Card.Text>
           </Card.Body>
         </Card>
 
@@ -222,8 +208,8 @@ const ProfileOverview: React.FC<ProfileOverviewProps> = ({
           <Card.Body>
             <Card.Title>
               <FormattedMessage
-                id="dietPreferences"
-                defaultMessage="Diet preferences"
+                id="dietPreferencesHeading"
+                defaultMessage="Diet Preferences"
               />
             </Card.Title>
 
@@ -253,8 +239,8 @@ const ProfileOverview: React.FC<ProfileOverviewProps> = ({
           <Card.Body>
             <Card.Title>
               <FormattedMessage
-                id="tastesAndFoodPreparation"
-                defaultMessage="Tastes and food preparation"
+                id="tastePreferencesHeading"
+                defaultMessage="Taste Preferences"
               />
             </Card.Title>
 

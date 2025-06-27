@@ -24,7 +24,7 @@ type Messages = {
   allergicTo: string
   diets: string
   onDiets: string
-  tastePreferences: string
+  tastePreferencesHeading: string
   worldCuisines: string
   tasteOfDesserts: string
   tasteSpiciness: string
@@ -86,7 +86,6 @@ type Messages = {
   loginCredentialsNotValid: string
   emailLoginErrorMessage: string
   profileOverviewHeading: string
-  allergiesAndFoodIntolerances: string
   gluten: string
   crustaceans: string
   eggs: string
@@ -101,8 +100,7 @@ type Messages = {
   sulphites: string
   lupin: string
   molluscs: string
-  whatAreYourIntolerances: string
-  dietPreferences: string
+  dietPreferencesHeading: string
   whichDietsDoYouFollow: string
   calorieTrackingGoal: string
   tastesAndFoodPreparation: string
@@ -114,7 +112,6 @@ type Messages = {
   yesIDo: string
   howSpicyShouldFoodBe: string
   whichCookingMethodsDoYouPrefer: string
-  yourIntolerances: string
   dailyCalorieIntakeGoal: string
   yourFavoriteCuisines: string
   likedIngredients: string
@@ -122,8 +119,7 @@ type Messages = {
   howSpicyYouLikeYourFood: string
   preferredCookingMethods: string
   finish: string
-  searchForIntolerances: string
-  searchForIntolerancesError: string
+  allergenPreferencesHeading: string
 }
 
 const messagesInSlovak: Messages = {
@@ -147,7 +143,7 @@ const messagesInSlovak: Messages = {
   allergicTo: 'Ste alergickí na',
   diets: 'Diéty',
   onDiets: 'Vaše diéty sú',
-  tastePreferences: 'Chuťové preferencie',
+  tastePreferencesHeading: 'Preferencie chutí',
   worldCuisines: 'Obľúbené svetové kuchyne',
   tasteOfDesserts: 'Preferovaná chuť zákuskov',
   tasteSpiciness: 'Úroveň štipľavosti',
@@ -223,7 +219,6 @@ const messagesInSlovak: Messages = {
   emailLoginErrorMessage:
     'Prihlásenie bolo neúspešné kvôli nesprávnym prihlasovacím údajom.',
   profileOverviewHeading: 'Vaše jedálne preferencie',
-  allergiesAndFoodIntolerances: 'Alergie a intolerancie',
   gluten: 'Lepok',
   crustaceans: 'Kôrovce',
   eggs: 'Vajcia',
@@ -238,8 +233,7 @@ const messagesInSlovak: Messages = {
   sulphites: 'Siričitany',
   lupin: 'Vlčí bôb',
   molluscs: 'Mäkkýše',
-  whatAreYourIntolerances: 'Aké sú vaše potravinové intolerancie?',
-  dietPreferences: 'Diéty',
+  dietPreferencesHeading: 'Diéty',
   whichDietsDoYouFollow: 'Ktoré diéty dodržiavate?',
   calorieTrackingGoal:
     'V prípade že si počítate kalórie, aký je váš denný príjem?',
@@ -254,7 +248,6 @@ const messagesInSlovak: Messages = {
   howSpicyShouldFoodBe: 'Zvoľte úroveň ostrosti',
   whichCookingMethodsDoYouPrefer:
     'Ktoré spôsoby prípravy jedla uprednostňujete?',
-  yourIntolerances: 'Máte intoleranciu na',
   dailyCalorieIntakeGoal: 'Váš denný príjem kalórií je',
   yourFavoriteCuisines: 'Vaše obľúbené svetové kuchyne sú',
   likedIngredients: 'Obľúbené ingrediencie',
@@ -262,8 +255,7 @@ const messagesInSlovak: Messages = {
   howSpicyYouLikeYourFood: 'Aké pikantné máte radi jedlo',
   preferredCookingMethods: 'Uprednostňované spôsoby prípravy jedla',
   finish: 'Uložiť',
-  searchForIntolerances: 'Vyhľadajte intoleranciu',
-  searchForIntolerancesError: 'Nepodarilo sa načítať intolerancie',
+  allergenPreferencesHeading: 'Alergény',
 }
 
 // const cs_messages: Messages = {
