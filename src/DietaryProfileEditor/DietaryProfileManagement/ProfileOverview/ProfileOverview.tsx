@@ -128,7 +128,7 @@ const ProfileOverview: React.FC<ProfileOverviewProps> = ({
             className="offcanvas-signout-icon position-absolute ms-2"
           />
 
-          <span className="ms-5">
+          <span className="ms-5 text-danger">
             <FormattedMessage id="signOut" defaultMessage="Sign out" />
           </span>
         </button>
