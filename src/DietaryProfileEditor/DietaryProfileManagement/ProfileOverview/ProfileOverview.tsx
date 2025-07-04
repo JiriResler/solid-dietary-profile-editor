@@ -66,12 +66,6 @@ const ProfileOverview: React.FC<ProfileOverviewProps> = ({
         className="profile-overview-offcanvas"
       >
         <div className="position-relative">
-          <img
-            src="images/person-circle.svg"
-            alt="Offcanvas user picture"
-            className="offcanvas-profile-picture position-absolute top-0 start-50 translate-middle-x"
-          />
-
           <button
             className="invisible-button position-absolute top-0 end-0"
             aria-label="Close offcanvas"
@@ -84,8 +78,8 @@ const ProfileOverview: React.FC<ProfileOverviewProps> = ({
             />
           </button>
 
-          <div className="user-information text-center">
-            <div>John Doe</div>
+          <div className="user-information">
+            <div className="user-name">John Doe</div>
             <div className="user-identifier">{userId}</div>
           </div>
         </div>
