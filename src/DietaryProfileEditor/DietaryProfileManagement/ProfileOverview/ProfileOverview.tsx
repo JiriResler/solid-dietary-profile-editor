@@ -93,7 +93,7 @@ const ProfileOverview: React.FC<ProfileOverviewProps> = ({
           <img
             src="images/pencil-square-black.svg"
             alt="Edit profile icon"
-            className="offcanvas-item-button-icon position-absolute ms-2"
+            className="offcanvas-item-button-icon position-absolute"
           />
 
           <span className="ms-5">
@@ -108,7 +108,7 @@ const ProfileOverview: React.FC<ProfileOverviewProps> = ({
           <img
             src="images/pencil-square-black.svg"
             alt="Edit profile icon"
-            className="offcanvas-item-button-icon position-absolute ms-2"
+            className="offcanvas-item-button-icon position-absolute"
           />
 
           <span className="ms-5">
@@ -125,7 +125,7 @@ const ProfileOverview: React.FC<ProfileOverviewProps> = ({
           <img
             src="images/box-arrow-right.svg"
             alt="Sign out icon"
-            className="offcanvas-signout-icon position-absolute ms-2"
+            className="offcanvas-signout-icon position-absolute"
           />
 
           <span className="ms-5 text-danger">

@@ -48,10 +48,12 @@
 
 .offcanvas-item-button-icon {
   width:24px;
+  margin-left: 8pt;
 }
 
 .offcanvas-signout-icon {
   width:28px;
+  margin-left: 9pt;
 }
 
 .edit-profile-round-button {
