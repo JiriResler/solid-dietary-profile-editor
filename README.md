@@ -1,4 +1,4 @@
 # solid-dietary-profile-editor
-This application allows its users to create a dietary profile. The users can choose how they data is stored, either by using Solid or a traditional approach when they log in using their application-specific credentials.
+This application allows its users to create and store their dietary profile, specifying what they are allergic to, dietary goals, and which taste preferences they have. The users can choose how their data is stored, either by using Solid or a traditional approach using Google Firestore.
 
-> This is a work in progress
+The application is live at: https://jiriresler.github.io/solid-dietary-profile-editor
