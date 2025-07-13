@@ -10,6 +10,11 @@ import SelectDietPreferences from './SelectDietPreferences/SelectDietPreferences
 import SelectTastePreferences from './SelectTastePreferences/SelectTastePreferences'
 import React, { useState } from 'react'
 
+export const SelectComponents = {
+  DropdownIndicator: () => null,
+  IndicatorSeparator: () => null,
+}
+
 /**
  * Renders controls of the dietary preferences form.
  */

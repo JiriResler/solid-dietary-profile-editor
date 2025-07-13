@@ -6,6 +6,7 @@ import Col from 'react-bootstrap/Col'
 import Stack from 'react-bootstrap/Stack'
 import Select from 'react-select'
 import FormCheckbox from '../FormCheckbox/FormCheckbox'
+import { SelectComponents } from '../DietaryPreferencesForm'
 
 /**
  * Displays options and collects input from the user about their diet preferencesa and colorie intake goals.
@@ -23,12 +24,6 @@ const SelectDietPreferences: React.FC = () => {
     'Atkins',
     'Paleo',
   ]
-
-  const SelectComponents = {
-    DropdownIndicator: () => null,
-    IndicatorSeparator: () => null,
-    // Menu: CustomSelectMenu,
-  }
 
   return (
     <>

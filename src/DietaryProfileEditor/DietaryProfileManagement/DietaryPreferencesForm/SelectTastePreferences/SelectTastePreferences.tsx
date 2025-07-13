@@ -6,6 +6,7 @@ import FormCheckbox from '../FormCheckbox/FormCheckbox'
 import Select from 'react-select'
 import Form from 'react-bootstrap/Form'
 import Slider from '@mui/material/Slider'
+import { SelectComponents } from '../DietaryPreferencesForm'
 
 /**
  * Displays taste preference options and collects selected user data.
@@ -48,13 +49,6 @@ const SelectTastePreferences: React.FC = () => {
     { label: 'Pickling/Fermenting', value: 'pickling-fermenting' },
     { label: 'Raw/No-cook', value: 'raw-no-cook' },
   ]
-
-  const IngredientSelectComponents = {
-    DropdownIndicator: () => null,
-    IndicatorSeparator: () => null,
-    // Menu: CustomSelectMenu,
-  }
-
   type RadioButtonProps = {
     label: string
   }
@@ -117,7 +111,7 @@ const SelectTastePreferences: React.FC = () => {
       <div className="form-group-heading">
         <FormattedMessage
           id="favoriteWorldCuisines"
-          defaultMessage="What are your favorite world cuisines?"
+          defaultMessage="Which are your favorite world cuisines?"
         />
       </div>
 
@@ -142,6 +136,7 @@ const SelectTastePreferences: React.FC = () => {
       <Select
         className="dietary-preferences-form-select ms-2 mt-4"
         isMulti
+        components={SelectComponents}
         options={[
           {
             label: 'Cuisine 1',
@@ -184,7 +179,7 @@ const SelectTastePreferences: React.FC = () => {
           <Select
             className="dietary-preferences-form-select mt-3"
             isMulti
-            components={IngredientSelectComponents}
+            components={SelectComponents}
             options={[
               {
                 label: 'Ingredient 1',
@@ -220,7 +215,7 @@ const SelectTastePreferences: React.FC = () => {
           <Select
             className="dietary-preferences-form-select mt-3"
             isMulti
-            components={IngredientSelectComponents}
+            components={SelectComponents}
             options={[
               {
                 label: 'Ingredient 1',
@@ -331,6 +326,7 @@ const SelectTastePreferences: React.FC = () => {
       <Select
         className="dietary-preferences-form-select ms-2 mt-4 pb-2"
         isMulti
+        components={SelectComponents}
         options={otherCookingMethods}
         // value={}
         // onChange={}
