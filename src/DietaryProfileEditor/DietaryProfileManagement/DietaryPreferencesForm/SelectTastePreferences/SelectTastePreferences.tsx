@@ -8,9 +8,9 @@ import Form from 'react-bootstrap/Form'
 import Slider from '@mui/material/Slider'
 
 /**
- * Collects user data on their taste preferences.
+ * Displays taste preference options and collects selected user data.
  */
-const TastesAndFoodPreparation: React.FC = () => {
+const SelectTastePreferences: React.FC = () => {
   const intl = useIntl()
 
   const popularCuisines = [
@@ -349,4 +349,4 @@ const TastesAndFoodPreparation: React.FC = () => {
   )
 }
 
-export default TastesAndFoodPreparation
+export default SelectTastePreferences

@@ -7,7 +7,7 @@ import FormHeader from './FormHeader/FormHeader'
 import SelectAllergens from './SelectAllergens/SelectAllergens'
 import FormFooter from './FormFooter/FormFooter'
 import SelectDietPreferences from './SelectDietPreferences/SelectDietPreferences'
-import TastesAndFoodPreparation from './TastesAndFoodPreparation/TastesAndFoodPreparation'
+import SelectTastePreferences from './SelectTastePreferences/SelectTastePreferences'
 import React, { useState } from 'react'
 
 /**
@@ -39,7 +39,7 @@ const ActualDietaryPreferencesForm: React.FC = () => {
               />
             )}
             {formStep === 1 && <SelectDietPreferences />}
-            {formStep === 2 && <TastesAndFoodPreparation />}
+            {formStep === 2 && <SelectTastePreferences />}
           </Form>
         </div>
       </div>
