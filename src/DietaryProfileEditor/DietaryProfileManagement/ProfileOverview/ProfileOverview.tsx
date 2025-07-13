@@ -230,107 +230,65 @@ const ProfileOverview: React.FC<ProfileOverviewProps> = ({
         <Card>
           <Card.Body>
             <Card.Title>
-              <FormattedMessage
-                id="dietPreferencesHeading"
-                defaultMessage="Diet Preferences"
+              <img
+                src="images/fork-knife.svg"
+                alt="fork-knife-icon"
+                className="me-2 mb-1 preference-card-icon"
               />
-            </Card.Title>
 
-            <Card.Subtitle className="mt-2 mb-2 text-muted">
-              <FormattedMessage id="onDiets" defaultMessage="Your diets are" />
-            </Card.Subtitle>
-
-            <Card.Text>
-              <ul>
-                <li>Vegetarian</li>
-                <li>Low-carb</li>
-              </ul>
-            </Card.Text>
-
-            <Card.Subtitle className="mb-2 text-muted">
-              <FormattedMessage
-                id="dailyCalorieIntakeGoal"
-                defaultMessage="Your daily calorie intake goal is"
-              />
-            </Card.Subtitle>
-
-            <Card.Text className="ms-2">2000 kCal</Card.Text>
-          </Card.Body>
-        </Card>
-
-        <Card>
-          <Card.Body>
-            <Card.Title>
               <FormattedMessage
                 id="tastePreferencesHeading"
                 defaultMessage="Taste Preferences"
               />
             </Card.Title>
 
-            <Card.Subtitle className="mt-2 mb-2 text-muted">
-              <FormattedMessage
-                id="yourFavoriteCuisines"
-                defaultMessage="Your favorite cuisines are"
-              />
+            <Card.Subtitle className="mt-2 mb-2">
+              <Stack gap={2}>
+                <div>
+                  <span className="text-muted">
+                    <FormattedMessage
+                      id="yourFavoriteCuisines"
+                      defaultMessage="Favorite cuisines: "
+                    />
+                  </span>
+
+                  <span>Italian, Japanese</span>
+                </div>
+
+                <div>
+                  <span className="text-muted">
+                    <FormattedMessage
+                      id="howSpicyYouLikeYourFood"
+                      defaultMessage="Preferred level of spiciness: "
+                    />
+                  </span>
+
+                  <span>Mild</span>
+                </div>
+
+                <div>
+                  <span className="text-muted">
+                    <FormattedMessage
+                      id="likedIngredients"
+                      defaultMessage="Liked ingredients: "
+                    />
+                  </span>
+
+                  <span>Avocado, Seaweed</span>
+                </div>
+
+                <div>
+                  <span className="text-muted">
+                    <FormattedMessage
+                      id="dislikedIngredients"
+                      defaultMessage="Disliked ingredients: "
+                    />
+                  </span>
+
+                  <span>Mushrooms, Tofu</span>
+                </div>
+              </Stack>
             </Card.Subtitle>
-
-            <Card.Text>
-              <ul>
-                <li>Chinese</li>
-                <li>Thai</li>
-              </ul>
-            </Card.Text>
-
-            <Card.Subtitle className="mb-2 text-muted">
-              <FormattedMessage
-                id="likedIngredients"
-                defaultMessage="You like ingredients"
-              />
-            </Card.Subtitle>
-
-            <Card.Text>
-              <ul>
-                <li>Chicken breast</li>
-                <li>Potato</li>
-              </ul>
-            </Card.Text>
-
-            <Card.Subtitle className="mb-2 text-muted">
-              <FormattedMessage
-                id="dislikedIngredients"
-                defaultMessage="You don't like ingredients"
-              />
-            </Card.Subtitle>
-
-            <Card.Text>
-              <ul>
-                <li>Tomato</li>
-                <li>Pork</li>
-              </ul>
-            </Card.Text>
-
-            <Card.Subtitle className="mb-2 text-muted">
-              <FormattedMessage
-                id="howSpicyYouLikeYourFood"
-                defaultMessage="How spicy you like your food"
-              />
-            </Card.Subtitle>
-
-            <Card.Text className="ms-2">Not at all</Card.Text>
-
-            <Card.Subtitle className="mb-2 text-muted">
-              <FormattedMessage
-                id="preferredCookingMethods"
-                defaultMessage="Preferred cooking methods"
-              />
-            </Card.Subtitle>
-
-            <Card.Text>
-              <ul className="no-bottom-margin">
-                <li>Steaming</li>
-                <li>Pan frying</li>
-              </ul>
-            </Card.Text>
           </Card.Body>
         </Card>
       </Stack>
