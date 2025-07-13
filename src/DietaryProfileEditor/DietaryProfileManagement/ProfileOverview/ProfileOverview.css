@@ -7,7 +7,7 @@
 }
 
 .profile-overview-offcanvas {
-  max-width: 230px;
+  max-width: 200px;
 }
 
 .offcanvas-menu-icon {
@@ -19,17 +19,13 @@
 }
 
 .user-information {
-  margin-top: 30pt;
+  margin-top: 20pt;
   margin-left: 12pt;
 }
 
 .user-name {
   font-size: large;
   font-weight: 500;
-}
-
-.user-identifier {
-  font-size: small;
 }
 
 .offcanvas-item-button {

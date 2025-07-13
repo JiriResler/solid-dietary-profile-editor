@@ -14,7 +14,6 @@ import Button from 'react-bootstrap/Button'
 import Offcanvas from 'react-bootstrap/Offcanvas'
 
 type ProfileOverviewProps = {
-  userId: string
   setEditProfile: React.Dispatch<React.SetStateAction<boolean>>
 }
 
@@ -23,7 +22,6 @@ type ProfileOverviewProps = {
  * @param setEditProfile Changes a state variable to indicate whether the user wants to edit their dietary profile.
  */
 const ProfileOverview: React.FC<ProfileOverviewProps> = ({
-  userId,
   setEditProfile,
 }) => {
   const { session: solidSession } = useSession()
@@ -65,23 +63,20 @@ const ProfileOverview: React.FC<ProfileOverviewProps> = ({
         placement="end"
         className="profile-overview-offcanvas"
       >
-        <div className="position-relative">
-          <button
-            className="invisible-button position-absolute top-0 end-0"
-            aria-label="Close offcanvas"
-            onClick={() => setShowOffCanvas(false)}
-          >
-            <img
-              src="images/close-x.svg"
-              alt="Close offcanvas icon"
-              className="offcanvas-close-icon"
-            />
-          </button>
+        <button
+          className="invisible-button position-absolute top-0 end-0"
+          aria-label="Close offcanvas"
+          onClick={() => setShowOffCanvas(false)}
+        >
+          <img
+            src="images/close-x.svg"
+            alt="Close offcanvas icon"
+            className="offcanvas-close-icon"
+          />
+        </button>
 
-          <div className="user-information">
-            <div className="user-name">John Doe</div>
-            <div className="user-identifier">{userId}</div>
-          </div>
+        <div className="user-information">
+          <div className="user-name mb-2">John Doe</div>
         </div>
 
         <hr className="mb-2" />
