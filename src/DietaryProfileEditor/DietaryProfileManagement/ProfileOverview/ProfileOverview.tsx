@@ -305,7 +305,7 @@ const ProfileOverview: React.FC<ProfileOverviewProps> = ({
       </Stack>
 
       <Button
-        className="position-absolute position-fixed bottom-0 end-0 mb-4 me-4 edit-profile-round-button"
+        className="position-absolute position-fixed bottom-0 end-0 mb-4 me-4 edit-profile-round-button shadow"
         // onClick={() => setEditProfile(true)}
       >
         <img
