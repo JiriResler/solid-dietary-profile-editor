@@ -9,6 +9,7 @@ import FormFooter from './FormFooter/FormFooter'
 import SelectDietPreferences from './SelectDietPreferences/SelectDietPreferences'
 import SelectTastePreferences from './SelectTastePreferences/SelectTastePreferences'
 import React, { useState } from 'react'
+import reactSelectOption from './reactSelectOption'
 
 export const SelectComponents = {
   DropdownIndicator: () => null,
@@ -26,6 +27,9 @@ const ActualDietaryPreferencesForm: React.FC = () => {
   const [selectedAllergens, setSelectedAllergens] = useState<string[]>([])
 
   const [selectedDiets, setSelectedDiets] = useState<string[]>([])
+  const [selectedDietsSearch, setSelectedDietsSearch] = useState<
+    ReadonlyArray<reactSelectOption>
+  >([])
 
   return (
     <div className="d-flex flex-column h-100">
@@ -49,6 +53,8 @@ const ActualDietaryPreferencesForm: React.FC = () => {
               <SelectDietPreferences
                 selectedDiets={selectedDiets}
                 setSelectedDiets={setSelectedDiets}
+                selectedDietsSearch={selectedDietsSearch}
+                setSelectedDietsSearch={setSelectedDietsSearch}
               />
             )}
             {formStep === 2 && <SelectTastePreferences />}

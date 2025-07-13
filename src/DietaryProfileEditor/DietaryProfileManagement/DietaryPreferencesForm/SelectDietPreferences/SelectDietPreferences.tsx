@@ -6,10 +6,15 @@ import Col from 'react-bootstrap/Col'
 import Stack from 'react-bootstrap/Stack'
 import Select from 'react-select'
 import { SelectComponents } from '../DietaryPreferencesForm'
+import reactSelectOption from '../reactSelectOption'
 
 type SelectDietPreferencesProps = {
   selectedDiets: string[]
   setSelectedDiets: React.Dispatch<React.SetStateAction<string[]>>
+  selectedDietsSearch: ReadonlyArray<reactSelectOption>
+  setSelectedDietsSearch: React.Dispatch<
+    React.SetStateAction<ReadonlyArray<reactSelectOption>>
+  >
 }
 
 /**
@@ -18,6 +23,8 @@ type SelectDietPreferencesProps = {
 const SelectDietPreferences: React.FC<SelectDietPreferencesProps> = ({
   selectedDiets,
   setSelectedDiets,
+  selectedDietsSearch,
+  setSelectedDietsSearch,
 }) => {
   const intl = useIntl()
 
@@ -187,23 +194,10 @@ const SelectDietPreferences: React.FC<SelectDietPreferencesProps> = ({
         className="dietary-preferences-form-select ms-2 mt-4"
         isMulti
         components={SelectComponents}
-        options={[
-          {
-            label: 'Diet 1',
-            value: 'diet1',
-          },
-          {
-            label: 'Diet 2',
-            value: 'diet2',
-          },
-          {
-            label: 'Diet 3',
-            value: 'diet3',
-          },
-        ]}
-        // value={}
-        // onChange={}
-        aria-label="select-more-diets"
+        options={data}
+        value={selectedDietsSearch}
+        onChange={setSelectedDietsSearch}
+        aria-label="select-diets"
         placeholder={intl.formatMessage({
           id: 'searchMoreDiets',
           defaultMessage: 'Search for more diets',
