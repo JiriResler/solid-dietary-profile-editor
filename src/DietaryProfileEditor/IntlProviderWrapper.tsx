@@ -121,6 +121,7 @@ type Messages = {
   finish: string
   allergenPreferencesHeading: string
   deleteProfile: string
+  searchMoreDiets: string
 }
 
 const messagesInSlovak: Messages = {
@@ -258,6 +259,7 @@ const messagesInSlovak: Messages = {
   finish: 'Uložiť',
   allergenPreferencesHeading: 'Alergény',
   deleteProfile: 'Zmazať profil',
+  searchMoreDiets: 'Vyhľadajte ďalšie diéty',
 }
 
 const IntlProviderWrapper: React.FC<PropsWithChildren> = (props) => {

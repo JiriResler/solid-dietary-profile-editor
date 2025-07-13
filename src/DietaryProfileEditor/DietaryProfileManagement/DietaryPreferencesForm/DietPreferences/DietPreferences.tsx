@@ -1,6 +1,6 @@
 import './DietPreferences.css'
 import Form from 'react-bootstrap/Form'
-import { FormattedMessage } from 'react-intl'
+import { FormattedMessage, useIntl } from 'react-intl'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Stack from 'react-bootstrap/Stack'
@@ -8,20 +8,20 @@ import Select from 'react-select'
 import FormCheckbox from '../FormCheckbox/FormCheckbox'
 
 /**
- * Displays options and collects input from the user about their diet preferences.
+ * Displays options and collects input from the user about their diet preferencesa and colorie intake goals.
  */
 const DietPreferences: React.FC = () => {
+  const intl = useIntl()
+
   const popularDietList = [
-    'The Keto Diet',
-    'The Mediterranean Diet',
-    'The Vegan Diet',
-    'Paleo Diet',
-    'Intermittent Fasting',
-    'Low-Carb Diet',
-    'DASH Diet',
-    'Atkins Diet',
-    'Vegetarian Diet',
-    'The Zone Diet',
+    'Vegetarian',
+    'Mediterranean',
+    'DASH',
+    'Low-Carb',
+    'Vegan',
+    'Keto',
+    'Atkins',
+    'Paleo',
   ]
 
   const SelectComponents = {
@@ -42,7 +42,7 @@ const DietPreferences: React.FC = () => {
       <Row className="ms-auto">
         <Col xs={6} lg={4}>
           <Stack gap={2}>
-            {popularDietList.slice(0, 5).map((diet) => {
+            {popularDietList.slice(0, 4).map((diet) => {
               return <FormCheckbox label={diet} key={diet} />
             })}
           </Stack>
@@ -50,7 +50,7 @@ const DietPreferences: React.FC = () => {
 
         <Col xs={6} lg={4}>
           <Stack gap={2}>
-            {popularDietList.slice(5, 10).map((diet) => {
+            {popularDietList.slice(4, 8).map((diet) => {
               return <FormCheckbox label={diet} key={diet} />
             })}
           </Stack>
@@ -78,7 +78,10 @@ const DietPreferences: React.FC = () => {
         // value={}
         // onChange={}
         aria-label="select-more-diets"
-        placeholder={'Search for more diets'}
+        placeholder={intl.formatMessage({
+          id: 'searchMoreDiets',
+          defaultMessage: 'Search for more diets',
+        })}
         styles={{
           control: (baseStyles) => ({
             ...baseStyles,
