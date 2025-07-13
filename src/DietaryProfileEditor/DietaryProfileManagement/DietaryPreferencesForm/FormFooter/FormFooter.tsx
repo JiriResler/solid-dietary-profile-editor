@@ -64,7 +64,7 @@ const FormFooter: React.FC<FormFooterProps> = ({
             className="navigation-button app-primary-color-button"
             onClick={() => handleStepChange(StepDirection.Up)}
           >
-            <FormattedMessage id="nextStep" defaultMessage="Next" />
+            <FormattedMessage id="next" defaultMessage="Next" />
           </Button>
         )}
 

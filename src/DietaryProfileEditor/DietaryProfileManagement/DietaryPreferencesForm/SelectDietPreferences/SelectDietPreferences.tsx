@@ -5,25 +5,36 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Stack from 'react-bootstrap/Stack'
 import Select from 'react-select'
-import FormCheckbox from '../FormCheckbox/FormCheckbox'
 import { SelectComponents } from '../DietaryPreferencesForm'
+
+type SelectDietPreferencesProps = {
+  selectedDiets: string[]
+  setSelectedDiets: React.Dispatch<React.SetStateAction<string[]>>
+}
 
 /**
  * Displays options and collects input from the user about their diet preferencesa and colorie intake goals.
  */
-const SelectDietPreferences: React.FC = () => {
+const SelectDietPreferences: React.FC<SelectDietPreferencesProps> = ({
+  selectedDiets,
+  setSelectedDiets,
+}) => {
   const intl = useIntl()
 
-  const popularDietList = [
-    'Vegetarian',
-    'Mediterranean',
-    'DASH',
-    'Low-Carb',
-    'Vegan',
-    'Keto',
-    'Atkins',
-    'Paleo',
-  ]
+  const dietIriList = {
+    vegetarian: 'http://www.wikidata.org/entity/Q83364',
+  }
+
+  /**
+   * Creates a new array based on whether it already contained the diet IRI or not and sets it to the selected diets state variable.
+   */
+  function handleDietCheckboxOnChange(dietIri: string) {
+    if (selectedDiets.includes(dietIri)) {
+      setSelectedDiets(selectedDiets.filter((iri) => iri != dietIri))
+    } else {
+      setSelectedDiets([...selectedDiets, dietIri])
+    }
+  }
 
   return (
     <>
@@ -34,21 +45,32 @@ const SelectDietPreferences: React.FC = () => {
         />
       </div>
 
+      <span>Selected diets: {selectedDiets}</span>
+
       <Row className="ms-auto">
         <Col xs={6} lg={4}>
           <Stack gap={2}>
-            {popularDietList.slice(0, 4).map((diet) => {
-              return <FormCheckbox label={diet} key={diet} />
-            })}
+            <Form.Check id={'vegetarian-diet-checkbox'}>
+              <Form.Check.Input
+                className="app-form-control app-form-checkbox"
+                checked={selectedDiets.includes(dietIriList['vegetarian'])}
+                onChange={() =>
+                  handleDietCheckboxOnChange(dietIriList['vegetarian'])
+                }
+              />
+
+              <Form.Check.Label className="ms-2">
+                <FormattedMessage
+                  id={'vegetarianDiet'}
+                  defaultMessage={'Vegetarian'}
+                />
+              </Form.Check.Label>
+            </Form.Check>
           </Stack>
         </Col>
 
         <Col xs={6} lg={4}>
-          <Stack gap={2}>
-            {popularDietList.slice(4, 8).map((diet) => {
-              return <FormCheckbox label={diet} key={diet} />
-            })}
-          </Stack>
+          <Stack gap={2}></Stack>
         </Col>
       </Row>
 

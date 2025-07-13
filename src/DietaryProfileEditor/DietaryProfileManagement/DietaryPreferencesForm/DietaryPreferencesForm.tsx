@@ -25,6 +25,8 @@ const ActualDietaryPreferencesForm: React.FC = () => {
 
   const [selectedAllergens, setSelectedAllergens] = useState<string[]>([])
 
+  const [selectedDiets, setSelectedDiets] = useState<string[]>([])
+
   return (
     <div className="d-flex flex-column h-100">
       <div>
@@ -43,7 +45,12 @@ const ActualDietaryPreferencesForm: React.FC = () => {
                 setSelectedAllergens={setSelectedAllergens}
               />
             )}
-            {formStep === 1 && <SelectDietPreferences />}
+            {formStep === 1 && (
+              <SelectDietPreferences
+                selectedDiets={selectedDiets}
+                setSelectedDiets={setSelectedDiets}
+              />
+            )}
             {formStep === 2 && <SelectTastePreferences />}
           </Form>
         </div>

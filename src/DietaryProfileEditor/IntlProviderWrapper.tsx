@@ -122,6 +122,14 @@ type Messages = {
   allergenPreferencesHeading: string
   deleteProfile: string
   searchMoreDiets: string
+  next: string
+  vegetarianDiet: string
+  mediterraneanDiet: string
+  lowCarbDiet: string
+  veganDiet: string
+  ketoDiet: string
+  atkinsDiet: string
+  paleoDiet: string
 }
 
 const messagesInSlovak: Messages = {
@@ -260,6 +268,14 @@ const messagesInSlovak: Messages = {
   allergenPreferencesHeading: 'Alergény',
   deleteProfile: 'Zmazať profil',
   searchMoreDiets: 'Vyhľadajte ďalšie diéty',
+  next: 'Ďalej',
+  vegetarianDiet: 'Vegetariánstvo',
+  mediterraneanDiet: 'Stredomorská strava',
+  lowCarbDiet: 'Nízkosacharidová diéta',
+  veganDiet: 'Veganstvo',
+  ketoDiet: 'Ketogénna diéta',
+  atkinsDiet: 'Atkinsonova diéta',
+  paleoDiet: 'Paleo diéta',
 }
 
 const IntlProviderWrapper: React.FC<PropsWithChildren> = (props) => {

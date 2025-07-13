@@ -4,7 +4,7 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Stack from 'react-bootstrap/Stack'
 
-type Props = {
+type SelectAllergensProps = {
   selectedAllergens: string[]
   setSelectedAllergens: React.Dispatch<React.SetStateAction<string[]>>
 }
@@ -12,7 +12,7 @@ type Props = {
 /**
  * Renders controls for selecting allergens while managing state updates.
  */
-const SelectAllergens: React.FC<Props> = ({
+const SelectAllergens: React.FC<SelectAllergensProps> = ({
   selectedAllergens,
   setSelectedAllergens,
 }) => {
