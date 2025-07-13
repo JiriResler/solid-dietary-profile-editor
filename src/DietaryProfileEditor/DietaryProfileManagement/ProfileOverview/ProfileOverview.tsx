@@ -187,6 +187,49 @@ const ProfileOverview: React.FC<ProfileOverviewProps> = ({
         <Card>
           <Card.Body>
             <Card.Title>
+              <img
+                src="images/leaf.svg"
+                alt="diet-leaf-icon"
+                className="me-2 mb-1 preference-card-icon"
+              />
+
+              <FormattedMessage
+                id="dietPreferencesHeading"
+                defaultMessage="Diets"
+              />
+            </Card.Title>
+
+            <Card.Subtitle className="mt-2 mb-2">
+              <Stack gap={2}>
+                <div>
+                  <span className="text-muted">
+                    <FormattedMessage
+                      id="onDiets"
+                      defaultMessage="Your are on diets: "
+                    />
+                  </span>
+
+                  <span>Vegetarian, Raw</span>
+                </div>
+
+                <div>
+                  <span className="text-muted">
+                    <FormattedMessage
+                      id="dailyCalorieIntakeGoal"
+                      defaultMessage="Daily calorie intake: "
+                    />
+                  </span>
+
+                  <span>2000 kcal</span>
+                </div>
+              </Stack>
+            </Card.Subtitle>
+          </Card.Body>
+        </Card>
+
+        <Card>
+          <Card.Body>
+            <Card.Title>
               <FormattedMessage
                 id="dietPreferencesHeading"
                 defaultMessage="Diet Preferences"
