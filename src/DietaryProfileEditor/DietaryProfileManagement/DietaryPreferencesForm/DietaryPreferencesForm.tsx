@@ -11,7 +11,7 @@ import TastesAndFoodPreparation from './TastesAndFoodPreparation/TastesAndFoodPr
 import React, { useState } from 'react'
 
 /**
- * Renders the actual dietary preferences form, while the DietaryPreferencesForm component manages screen size adaptations for large or small displays.
+ * Renders controls of the dietary preferences form.
  */
 const ActualDietaryPreferencesForm: React.FC = () => {
   const [formStep, setFormStep] = useState(0)
@@ -56,7 +56,7 @@ const ActualDietaryPreferencesForm: React.FC = () => {
 }
 
 /**
- * Displays a form that allows the user to input or update their dietary preferences.
+ * Displays a form that allows the user to input or update their dietary preferences and manages screen size adaptations for large or small displays.
  */
 const DietaryPreferencesForm: React.FC = () => {
   return (

@@ -31,7 +31,7 @@ const FormHeader: React.FC<FormHeaderProps> = ({
           {formStep === 1 && (
             <FormattedMessage
               id="dietPreferencesHeading"
-              defaultMessage="Diet Preferences"
+              defaultMessage="Diets"
             />
           )}
 
@@ -44,11 +44,11 @@ const FormHeader: React.FC<FormHeaderProps> = ({
         </div>
 
         <div className="d-none d-md-flex next-step-heading text-secondary">
-          <FormattedMessage id="nextStep" defaultMessage="Next" />:{' '}
+          <FormattedMessage id="nextStep" defaultMessage="Next: " />
           {formStep === 0 && (
             <FormattedMessage
               id="dietPreferencesHeading"
-              defaultMessage="Diet Preferences"
+              defaultMessage="Diets"
             />
           )}
           {formStep === 1 && (

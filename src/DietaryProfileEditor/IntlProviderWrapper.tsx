@@ -149,7 +149,7 @@ const messagesInSlovak: Messages = {
   tasteOfDesserts: 'Preferovaná chuť zákuskov',
   tasteSpiciness: 'Úroveň štipľavosti',
   whatAreYouAllergicTo: 'Na čo máte alergiu?',
-  nextStep: 'Ďalej',
+  nextStep: 'Ďalší krok: ',
   saveProfile: 'Uložiť profil',
   whichDietsAreYouOn: 'Ktoré diéty dodržiavate?',
   showLessDietOptions: 'Zobraziť menej možností',
