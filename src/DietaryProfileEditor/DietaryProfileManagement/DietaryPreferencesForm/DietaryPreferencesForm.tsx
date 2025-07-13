@@ -6,7 +6,7 @@ import Col from 'react-bootstrap/Col'
 import FormHeader from './FormHeader/FormHeader'
 import SelectAllergens from './SelectAllergens/SelectAllergens'
 import FormFooter from './FormFooter/FormFooter'
-import DietPreferences from './DietPreferences/DietPreferences'
+import SelectDietPreferences from './SelectDietPreferences/SelectDietPreferences'
 import TastesAndFoodPreparation from './TastesAndFoodPreparation/TastesAndFoodPreparation'
 import React, { useState } from 'react'
 
@@ -38,7 +38,7 @@ const ActualDietaryPreferencesForm: React.FC = () => {
                 setSelectedAllergens={setSelectedAllergens}
               />
             )}
-            {formStep === 1 && <DietPreferences />}
+            {formStep === 1 && <SelectDietPreferences />}
             {formStep === 2 && <TastesAndFoodPreparation />}
           </Form>
         </div>

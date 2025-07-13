@@ -1,4 +1,4 @@
-import './DietPreferences.css'
+import './SelectDietPreferences.css'
 import Form from 'react-bootstrap/Form'
 import { FormattedMessage, useIntl } from 'react-intl'
 import Row from 'react-bootstrap/Row'
@@ -10,7 +10,7 @@ import FormCheckbox from '../FormCheckbox/FormCheckbox'
 /**
  * Displays options and collects input from the user about their diet preferencesa and colorie intake goals.
  */
-const DietPreferences: React.FC = () => {
+const SelectDietPreferences: React.FC = () => {
   const intl = useIntl()
 
   const popularDietList = [
@@ -102,11 +102,11 @@ const DietPreferences: React.FC = () => {
       <Form.Group controlId="calorie-intake-input">
         <Stack direction="horizontal" gap={3} className="ms-2 mt-2 pb-2">
           <Form.Control className="app-form-control calorieInput" />
-          <Form.Label>kCal</Form.Label>
+          <Form.Label>kcal</Form.Label>
         </Stack>
       </Form.Group>
     </>
   )
 }
 
-export default DietPreferences
+export default SelectDietPreferences
