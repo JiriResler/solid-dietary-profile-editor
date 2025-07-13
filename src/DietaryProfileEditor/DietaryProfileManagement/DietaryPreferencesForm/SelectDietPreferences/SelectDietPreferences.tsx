@@ -13,6 +13,7 @@ import { useContext } from 'react'
 import LanguageContext from '../../../LanguageContext'
 import ErrorModal from '../../../ErrorModal/ErrorModal'
 import React, { useState } from 'react'
+import isInt from 'validator/lib/isInt'
 
 const dietIriList = {
   vegetarianDiet: 'http://www.wikidata.org/entity/Q83364',
@@ -32,6 +33,8 @@ type SelectDietPreferencesProps = {
   setSelectedDietsSearch: React.Dispatch<
     React.SetStateAction<ReadonlyArray<reactSelectOption>>
   >
+  calorieIntakeGoal: number
+  setCalorieIntakeGoal: React.Dispatch<React.SetStateAction<number>>
 }
 
 /**
@@ -42,18 +45,20 @@ const SelectDietPreferences: React.FC<SelectDietPreferencesProps> = ({
   setSelectedDiets,
   selectedDietsSearch,
   setSelectedDietsSearch,
+  calorieIntakeGoal,
+  setCalorieIntakeGoal,
 }) => {
   const intl = useIntl()
 
   const { selectedLanguage } = useContext(LanguageContext)
+
+  const [dataFetchCausedError, setDataFetchCausedError] = useState(false)
 
   const { isPending, data } = useQuery({
     queryKey: ['getDietsFromWikidata'],
     queryFn: fetchDiets,
     select: formatDietResponse,
   })
-
-  const [dataFetchCausedError, setDataFetchCausedError] = useState(false)
 
   type DietBinding = {
     diet: {
@@ -143,6 +148,19 @@ const SelectDietPreferences: React.FC<SelectDietPreferencesProps> = ({
     }
   }
 
+  /**
+   * Checks whether user input is a number.
+   */
+  function validateAndSetCalorieInput(input: string) {
+    if (input === '') {
+      setCalorieIntakeGoal(0)
+    }
+
+    if (isInt(input)) {
+      setCalorieIntakeGoal(parseInt(input))
+    }
+  }
+
   return (
     <>
       <ErrorModal
@@ -216,7 +234,7 @@ const SelectDietPreferences: React.FC<SelectDietPreferencesProps> = ({
               <Form.Check.Label className="ms-2">
                 <FormattedMessage
                   id={'lowCarbDiet'}
-                  defaultMessage={'Low-carbohydrate'}
+                  defaultMessage={'Low-carb'}
                 />
               </Form.Check.Label>
             </Form.Check>
@@ -328,7 +346,11 @@ const SelectDietPreferences: React.FC<SelectDietPreferencesProps> = ({
 
       <Form.Group controlId="calorie-intake-input">
         <Stack direction="horizontal" gap={3} className="ms-2 mt-2 pb-2">
-          <Form.Control className="app-form-control calorieInput" />
+          <Form.Control
+            className="app-form-control calorieInput"
+            value={calorieIntakeGoal}
+            onChange={(e) => validateAndSetCalorieInput(e.target.value)}
+          />
           <Form.Label>kcal</Form.Label>
         </Stack>
       </Form.Group>

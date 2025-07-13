@@ -31,6 +31,8 @@ const ActualDietaryPreferencesForm: React.FC = () => {
     ReadonlyArray<reactSelectOption>
   >([])
 
+  const [calorieIntakeGoal, setCalorieIntakeGoal] = useState(0)
+
   return (
     <div className="d-flex flex-column h-100">
       <div>
@@ -55,6 +57,8 @@ const ActualDietaryPreferencesForm: React.FC = () => {
                 setSelectedDiets={setSelectedDiets}
                 selectedDietsSearch={selectedDietsSearch}
                 setSelectedDietsSearch={setSelectedDietsSearch}
+                calorieIntakeGoal={calorieIntakeGoal}
+                setCalorieIntakeGoal={setCalorieIntakeGoal}
               />
             )}
             {formStep === 2 && <SelectTastePreferences />}
