@@ -130,6 +130,8 @@ type Messages = {
   ketoDiet: string
   atkinsDiet: string
   paleoDiet: string
+  error: string
+  fetchingDietsFailed: string
 }
 
 const messagesInSlovak: Messages = {
@@ -276,6 +278,8 @@ const messagesInSlovak: Messages = {
   ketoDiet: 'Ketogénna diéta',
   atkinsDiet: 'Atkinsonova diéta',
   paleoDiet: 'Paleo diéta',
+  error: 'Chyba',
+  fetchingDietsFailed: 'Načítanie diét bolo neúspešné',
 }
 
 const IntlProviderWrapper: React.FC<PropsWithChildren> = (props) => {
