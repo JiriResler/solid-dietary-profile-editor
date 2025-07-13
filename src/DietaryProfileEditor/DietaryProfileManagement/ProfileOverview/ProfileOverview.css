@@ -53,9 +53,21 @@
 }
 
 .edit-profile-round-button {
+  background-color: white;
+  border-color: #E0E0E0;
   width: 72px;
   height: 72px;
   border-radius: 50%;
+}
+
+.edit-profile-round-button:hover {
+  background-color: #f3f2f2;
+  border-color: #f3f2f2;
+}
+
+.edit-profile-round-button:active {
+  background-color: #d8d8d8 !important;
+  border-color: #d8d8d8 !important;
 }
 
 .edit-profile-round-icon {

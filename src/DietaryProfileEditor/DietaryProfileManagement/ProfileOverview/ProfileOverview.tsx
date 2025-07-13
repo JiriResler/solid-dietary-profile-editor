@@ -305,11 +305,11 @@ const ProfileOverview: React.FC<ProfileOverviewProps> = ({
       </Stack>
 
       <Button
-        className="position-absolute position-fixed bottom-0 end-0 mb-4 me-4 edit-profile-round-button app-secondary-color-button"
-        onClick={() => setEditProfile(true)}
+        className="position-absolute position-fixed bottom-0 end-0 mb-4 me-4 edit-profile-round-button"
+        // onClick={() => setEditProfile(true)}
       >
         <img
-          src="images/pencil-square.svg"
+          src="images/pencil-square-blue.svg"
           alt="Edit profile icon"
           className="edit-profile-round-icon"
         />
