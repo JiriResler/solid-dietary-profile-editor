@@ -81,3 +81,7 @@
 .no-bottom-margin {
   margin-bottom: 0pt;
 }
+
+.preference-card-icon {
+  width: 18px;
+}

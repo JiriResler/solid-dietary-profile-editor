@@ -159,6 +159,12 @@ const ProfileOverview: React.FC<ProfileOverviewProps> = ({
         <Card>
           <Card.Body>
             <Card.Title>
+              <img
+                src="images/exclamation-triangle.svg"
+                alt="allergen-warning-icon"
+                className="me-2 mb-1 preference-card-icon"
+              />
+
               <FormattedMessage
                 id="allergenPreferencesHeading"
                 defaultMessage="Allergens"
@@ -171,28 +177,6 @@ const ProfileOverview: React.FC<ProfileOverviewProps> = ({
                 defaultMessage="You are allergic to"
               />
             </Card.Subtitle>
-
-            <Card.Text>
-              <Stack gap={1} className="ms-1">
-                <div>
-                  <img
-                    src="images/allergens/Crustaceans.svg"
-                    alt="allergen icon"
-                    className="allergen-icon"
-                  />
-                  <span className="ms-2">Crustaceans</span>
-                </div>
-
-                <div>
-                  <img
-                    src="images/allergens/Soya.svg"
-                    alt="allergen icon"
-                    className="allergen-icon"
-                  />
-                  <span className="ms-2">Soya</span>
-                </div>
-              </Stack>
-            </Card.Text>
           </Card.Body>
         </Card>
 
@@ -306,7 +290,7 @@ const ProfileOverview: React.FC<ProfileOverviewProps> = ({
 
       <Button
         className="position-absolute position-fixed bottom-0 end-0 mb-4 me-4 edit-profile-round-button shadow"
-        // onClick={() => setEditProfile(true)}
+        onClick={() => setEditProfile(true)}
       >
         <img
           src="images/pencil-square-blue.svg"
