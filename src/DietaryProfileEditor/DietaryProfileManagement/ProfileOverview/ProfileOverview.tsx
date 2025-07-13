@@ -171,11 +171,15 @@ const ProfileOverview: React.FC<ProfileOverviewProps> = ({
               />
             </Card.Title>
 
-            <Card.Subtitle className="mt-2 mb-2 text-muted">
-              <FormattedMessage
-                id="allergicTo"
-                defaultMessage="You are allergic to"
-              />
+            <Card.Subtitle className="mt-2 mb-2">
+              <span className="text-muted">
+                <FormattedMessage
+                  id="allergicTo"
+                  defaultMessage="You are allergic to: "
+                />
+              </span>
+
+              <span>Celery, Gluten</span>
             </Card.Subtitle>
           </Card.Body>
         </Card>

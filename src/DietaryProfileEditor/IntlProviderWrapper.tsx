@@ -141,7 +141,7 @@ const messagesInSlovak: Messages = {
   downloadProfile: 'Stiahnuť profil',
   userManual: 'Používateľská príručka',
   signOut: 'Odhlásiť sa',
-  allergicTo: 'Ste alergickí na',
+  allergicTo: 'Ste alergickí na:',
   diets: 'Diéty',
   onDiets: 'Vaše diéty sú',
   tastePreferencesHeading: 'Preferencie chutí',
