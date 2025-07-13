@@ -120,6 +120,7 @@ type Messages = {
   preferredCookingMethods: string
   finish: string
   allergenPreferencesHeading: string
+  deleteProfile: string
 }
 
 const messagesInSlovak: Messages = {
@@ -256,11 +257,8 @@ const messagesInSlovak: Messages = {
   preferredCookingMethods: 'Uprednostňované spôsoby prípravy jedla',
   finish: 'Uložiť',
   allergenPreferencesHeading: 'Alergény',
+  deleteProfile: 'Zmazať profil',
 }
-
-// const cs_messages: Messages = {
-
-// }
 
 const IntlProviderWrapper: React.FC<PropsWithChildren> = (props) => {
   const [selectedLanguageLocale, setSelectedLanguageLocale] = useState('en')
@@ -274,11 +272,6 @@ const IntlProviderWrapper: React.FC<PropsWithChildren> = (props) => {
     if (locale === 'sk') {
       return messagesInSlovak
     }
-
-    // if (locale === 'cs') {
-    //   return cs_messages
-    // }
-
     return {}
   }
 

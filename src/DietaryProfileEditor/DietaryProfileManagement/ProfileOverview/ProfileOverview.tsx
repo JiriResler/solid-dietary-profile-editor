@@ -98,16 +98,19 @@ const ProfileOverview: React.FC<ProfileOverviewProps> = ({
 
         <button
           className="invisible-button offcanvas-item-button text-start position-relative"
-          onClick={() => setEditProfile(true)}
+          onClick={() => alert('Delete pressed')}
         >
           <img
-            src="images/pencil-square-black.svg"
-            alt="Edit profile icon"
+            src="images/trash.svg"
+            alt="Delete profile icon"
             className="offcanvas-item-button-icon position-absolute"
           />
 
           <span className="ms-5">
-            <FormattedMessage id="editProfile" defaultMessage="Edit profile" />
+            <FormattedMessage
+              id="deleteProfile"
+              defaultMessage="Delete profile"
+            />
           </span>
         </button>
 
