@@ -8,10 +8,11 @@ import Form from 'react-bootstrap/Form'
 import Slider from '@mui/material/Slider'
 import { SelectComponents } from '../DietaryPreferencesForm'
 import reactSelectOption from '../reactSelectOption'
-import { useContext } from 'react'
 import LanguageContext from '../../../LanguageContext'
 import { useQuery } from '@tanstack/react-query'
 import axios from 'axios'
+import { useState, useContext } from 'react'
+import ErrorModal from '../../../ErrorModal/ErrorModal'
 
 const cuisineIriList = {
   italianCuisine: 'http://www.wikidata.org/entity/Q192786',
@@ -45,6 +46,8 @@ const SelectTastePreferences: React.FC<SelectTastePreferencesProps> = ({
   const intl = useIntl()
 
   const { selectedLanguage } = useContext(LanguageContext)
+
+  const [cuisineFetchCausedError, setCuisineFetchCausedError] = useState(false)
 
   const cuisineQuery = useQuery({
     queryKey: ['getCuisinesFromWikidata'],
@@ -99,6 +102,7 @@ const SelectTastePreferences: React.FC<SelectTastePreferencesProps> = ({
         return response.data
       })
       .catch((error) => {
+        setCuisineFetchCausedError(true)
         console.error('Error while fetching diet option data.', error)
         throw error
       })
@@ -223,6 +227,19 @@ const SelectTastePreferences: React.FC<SelectTastePreferencesProps> = ({
 
   return (
     <>
+      <ErrorModal
+        show={cuisineFetchCausedError}
+        setShow={setCuisineFetchCausedError}
+        titleMessage={intl.formatMessage({
+          id: 'error',
+          defaultMessage: 'Error',
+        })}
+        bodyMessage={intl.formatMessage({
+          id: 'fetchingCuisinesFailed',
+          defaultMessage: 'Retrieving of cuisine data failed.',
+        })}
+      />
+
       <div className="form-group-heading">
         <FormattedMessage
           id="favoriteWorldCuisines"
@@ -417,7 +434,7 @@ const SelectTastePreferences: React.FC<SelectTastePreferencesProps> = ({
           defaultMessage: 'Search for more cuisines',
         })}
         menuPlacement="top"
-        maxMenuHeight={210}
+        maxMenuHeight={170}
         isLoading={cuisineQuery.isPending}
         styles={{
           control: (baseStyles) => ({

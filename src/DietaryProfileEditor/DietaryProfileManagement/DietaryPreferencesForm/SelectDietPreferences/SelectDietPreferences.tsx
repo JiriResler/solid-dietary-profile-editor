@@ -9,10 +9,9 @@ import { SelectComponents } from '../DietaryPreferencesForm'
 import reactSelectOption from '../reactSelectOption'
 import { useQuery } from '@tanstack/react-query'
 import axios from 'axios'
-import { useContext } from 'react'
+import { useState, useContext } from 'react'
 import LanguageContext from '../../../LanguageContext'
 import ErrorModal from '../../../ErrorModal/ErrorModal'
-import React, { useState } from 'react'
 import isInt from 'validator/lib/isInt'
 
 const dietIriList = {
@@ -108,7 +107,6 @@ const SelectDietPreferences: React.FC<SelectDietPreferencesProps> = ({
       })
       .catch((error) => {
         setDataFetchCausedError(true)
-
         console.error('Error while fetching diet option data.', error)
         throw error
       })
@@ -327,7 +325,7 @@ const SelectDietPreferences: React.FC<SelectDietPreferencesProps> = ({
           defaultMessage: 'Search for more diets',
         })}
         menuPlacement="top"
-        maxMenuHeight={150}
+        maxMenuHeight={170}
         isLoading={isPending}
         styles={{
           control: (baseStyles) => ({

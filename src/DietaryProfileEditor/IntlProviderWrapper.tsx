@@ -141,6 +141,7 @@ type Messages = {
   japaneseCuisine: string
   frenchCuisine: string
   searchMoreCuisines: string
+  fetchingCuisinesFailed: string
 }
 
 const messagesInSlovak: Messages = {
@@ -298,6 +299,7 @@ const messagesInSlovak: Messages = {
   japaneseCuisine: 'Japonská',
   frenchCuisine: 'Francúzska',
   searchMoreCuisines: 'Vyhľadajte ďalšie svetové kuchyne',
+  fetchingCuisinesFailed: 'Načítanie svetových kuchýň bolo neúspešné',
 }
 
 const IntlProviderWrapper: React.FC<PropsWithChildren> = (props) => {
