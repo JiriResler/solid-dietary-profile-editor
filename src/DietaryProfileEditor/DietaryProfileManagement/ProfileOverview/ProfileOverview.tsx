@@ -12,6 +12,19 @@ import Card from 'react-bootstrap/Card'
 import Stack from 'react-bootstrap/Stack'
 import Button from 'react-bootstrap/Button'
 import Offcanvas from 'react-bootstrap/Offcanvas'
+import { useQuery } from '@tanstack/react-query'
+import {
+  createSolidDataset,
+  getInteger,
+  getPodUrlAll,
+  getSolidDataset,
+  getStringEnglish,
+  getStringNoLocale,
+  getThing,
+  getUrlAll,
+  SolidDataset,
+} from '@inrupt/solid-client'
+import { FOAF } from '@inrupt/vocab-common-rdf'
 
 type ProfileOverviewProps = {
   setEditProfile: React.Dispatch<React.SetStateAction<boolean>>
@@ -35,6 +48,182 @@ const ProfileOverview: React.FC<ProfileOverviewProps> = ({
   const routerNavigate = useNavigate()
 
   const [showOffcanvas, setShowOffCanvas] = useState(false)
+
+  const { data, isPending, error } = useQuery({
+    queryKey: ['getUserDietaryProfile'],
+    queryFn: fetchDietaryProfile,
+    // select: formatDietaryProfileResponse,
+  })
+
+  interface SolidPodResponseError extends Error {
+    statusCode?: number
+  }
+
+  type DietaryProfileObject = {
+    userFullName: string
+    allergens: string[]
+    diets: string[]
+    calories: number
+    cuisines: string[]
+    likedIngredients: string[]
+    dislikedIngredients: string[]
+    spicinessLevel: string
+    cookingMethods: string[]
+  }
+
+  /**
+   * Retrieves dietary profile of the signed-in user.
+   */
+  function fetchDietaryProfile() {
+    if (signedInWithSolid) {
+      return fetchDietaryProfileSolidPod()
+    }
+
+    // if (signedInWithFirebase) {
+    //   return firebaseUser?.email
+    // }
+  }
+
+  /**
+   * Retrieves dietary profile of the signed-in user from their Solid Pod.
+   */
+  async function fetchDietaryProfileSolidPod() {
+    const userWebId = solidSession.info.webId
+
+    if (userWebId === undefined) {
+      return null
+    }
+
+    const podUrls = await getPodUrlAll(userWebId, {
+      fetch: solidSession.fetch as undefined,
+    })
+
+    const podUrl = podUrls[0]
+
+    const dietaryProfileLocation =
+      'dietary-profile-editor-application/dietary-profile'
+
+    const profileUrl = podUrl + dietaryProfileLocation
+
+    let dietaryProfileDataset: SolidDataset
+
+    try {
+      // Attempt to retrieve the profile
+      dietaryProfileDataset = await getSolidDataset(profileUrl, {
+        fetch: solidSession.fetch as undefined,
+      })
+    } catch (error) {
+      if (
+        typeof (error as SolidPodResponseError).statusCode === 'number' &&
+        (error as SolidPodResponseError).statusCode === 404
+      ) {
+        // If not found, return null
+        return null
+      } else {
+        console.error((error as Error).message)
+        alert(
+          'There was an error while retrieving the profile with the code ' +
+            (error as SolidPodResponseError).statusCode,
+        )
+        throw error
+      }
+    }
+
+    const dietaryProfileWithIris: DietaryProfileObject = {
+      userFullName: '',
+      allergens: [],
+      diets: [],
+      calories: 0,
+      cuisines: [],
+      likedIngredients: [],
+      dislikedIngredients: [],
+      spicinessLevel: '',
+      cookingMethods: [],
+    }
+
+    // Read user name from profile card
+    await getSolidDataset(userWebId, {
+      fetch: solidSession.fetch as undefined,
+    })
+      .then((profileDataset) => {
+        const userThing = getThing(profileDataset, userWebId)
+
+        if (userThing === null) {
+          return
+        }
+
+        const userName = getStringNoLocale(userThing, FOAF.name)
+
+        if (userName === null) {
+          return
+        }
+
+        dietaryProfileWithIris.userFullName = userName
+      })
+      .catch((error) => {
+        console.error('Fetching user name failed', error)
+        return ''
+      })
+
+    const dietaryProfileThing = getThing(dietaryProfileDataset, profileUrl)
+
+    if (dietaryProfileThing === null) {
+      return null
+    }
+
+    const ontologyIri =
+      'https://jiriresler.solidcommunity.net/public/dietary-profile-and-customized-menus-ontology#'
+
+    dietaryProfileWithIris.allergens = getUrlAll(
+      dietaryProfileThing,
+      ontologyIri + 'allergicTo',
+    )
+
+    dietaryProfileWithIris.diets = getUrlAll(
+      dietaryProfileThing,
+      ontologyIri + 'onDiet',
+    )
+
+    const calories = getInteger(
+      dietaryProfileThing,
+      ontologyIri + 'dailyCalorieIntakeGoal',
+    )
+
+    if (calories !== null) {
+      dietaryProfileWithIris.calories = calories
+    }
+
+    dietaryProfileWithIris.cuisines = getUrlAll(
+      dietaryProfileThing,
+      ontologyIri + 'favoriteCuisine',
+    )
+
+    dietaryProfileWithIris.likedIngredients = getUrlAll(
+      dietaryProfileThing,
+      ontologyIri + 'likedIngredient',
+    )
+
+    dietaryProfileWithIris.dislikedIngredients = getUrlAll(
+      dietaryProfileThing,
+      ontologyIri + 'dislikedIngredient',
+    )
+
+    const spicinessLevel = getStringEnglish(
+      dietaryProfileThing,
+      ontologyIri + 'foodSpicinessPreference',
+    )
+
+    if (spicinessLevel !== null) {
+      dietaryProfileWithIris.spicinessLevel = spicinessLevel
+    }
+
+    dietaryProfileWithIris.cookingMethods = getUrlAll(
+      dietaryProfileThing,
+      ontologyIri + 'preferredCookingMethod',
+    )
+
+    return dietaryProfileWithIris
+  }
 
   /**
    * Signs the user out of the application.
@@ -76,7 +265,7 @@ const ProfileOverview: React.FC<ProfileOverviewProps> = ({
         </button>
 
         <div className="user-information">
-          <div className="user-name mb-2">John Doe</div>
+          <div className="user-name mb-2">{data?.userFullName}</div>
         </div>
 
         <hr className="mb-2" />
