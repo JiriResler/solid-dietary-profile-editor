@@ -8,6 +8,7 @@ type FormFooterProps = {
   formStep: number
   setFormStep: React.Dispatch<React.SetStateAction<number>>
   totalNumberOfSteps: number
+  handleFormSubmit: () => void
 }
 
 /**
@@ -17,6 +18,7 @@ const FormFooter: React.FC<FormFooterProps> = ({
   formStep,
   setFormStep,
   totalNumberOfSteps,
+  handleFormSubmit,
 }) => {
   enum StepDirection {
     Up = 'up',
@@ -69,7 +71,11 @@ const FormFooter: React.FC<FormFooterProps> = ({
         )}
 
         {formStep === totalNumberOfSteps - 1 && (
-          <Button className="navigation-button" variant="success">
+          <Button
+            className="navigation-button"
+            variant="success"
+            onClick={() => handleFormSubmit()}
+          >
             <FormattedMessage id="finish" defaultMessage="Finish" />
           </Button>
         )}

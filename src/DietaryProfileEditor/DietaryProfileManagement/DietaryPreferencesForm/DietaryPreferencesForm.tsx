@@ -10,6 +10,22 @@ import SelectDietPreferences from './SelectDietPreferences/SelectDietPreferences
 import SelectTastePreferences from './SelectTastePreferences/SelectTastePreferences'
 import React, { useState } from 'react'
 import reactSelectOption from './reactSelectOption'
+import { useSession } from '@inrupt/solid-ui-react'
+import { useAuthState } from 'react-firebase-hooks/auth'
+import { auth } from '../../../firebase'
+import { fetch } from '@inrupt/solid-client-authn-browser'
+import {
+  addUrl,
+  createSolidDataset,
+  createThing,
+  getPodUrlAll,
+  getSolidDataset,
+  getThingAll,
+  removeThing,
+  saveSolidDatasetAt,
+  setThing,
+  SolidDataset,
+} from '@inrupt/solid-client'
 
 export const SelectComponents = {
   DropdownIndicator: () => null,
@@ -20,6 +36,14 @@ export const SelectComponents = {
  * Renders controls of the dietary preferences form.
  */
 const ActualDietaryPreferencesForm: React.FC = () => {
+  const { session: solidSession } = useSession()
+
+  const [firebaseUser] = useAuthState(auth)
+
+  const signedInWithSolid = solidSession.info.isLoggedIn
+
+  const signedInWithFirebase = firebaseUser !== null
+
   const [formStep, setFormStep] = useState(0)
 
   const totalNumberOfSteps = 3
@@ -55,6 +79,97 @@ const ActualDietaryPreferencesForm: React.FC = () => {
   >([])
   const [selectedCookingMethodsSearch, setSelectedCookingMethodsSearch] =
     useState<ReadonlyArray<reactSelectOption>>([])
+
+  interface SolidPodResponseError extends Error {
+    statusCode?: number
+  }
+
+  /**
+   * Saves user profile when submit form button is pressed.
+   */
+  function handleDietaryPreferencesFormOnSubmit() {
+    if (signedInWithSolid) {
+      void saveDietaryProfileSolid()
+    }
+
+    if (signedInWithFirebase) {
+      saveDietaryProfileFirebase()
+    }
+  }
+
+  /**
+   * Saves user profile to a Solid Pod.
+   */
+  async function saveDietaryProfileSolid() {
+    const userWebId = solidSession.info.webId
+
+    if (userWebId === undefined) {
+      return
+    }
+
+    const podUrls = await getPodUrlAll(userWebId, {
+      fetch: fetch,
+    })
+
+    const podUrl = podUrls[0]
+
+    const dietaryProfileLocation =
+      'dietary-profile-editor-application/dietary-profile'
+
+    const profileUrl = podUrl + dietaryProfileLocation
+
+    let dietaryProfile: SolidDataset
+
+    try {
+      // Attempt to retrieve the profile in case it already exists.
+      dietaryProfile = await getSolidDataset(profileUrl, {
+        fetch: fetch,
+      })
+
+      // Clear the profile
+      const items = getThingAll(dietaryProfile)
+      items.forEach((item) => {
+        dietaryProfile = removeThing(dietaryProfile, item)
+      })
+    } catch (error) {
+      if (
+        typeof (error as SolidPodResponseError).statusCode === 'number' &&
+        (error as SolidPodResponseError).statusCode === 404
+      ) {
+        // if not found, create a new SolidDataset
+        dietaryProfile = createSolidDataset()
+      } else {
+        console.error((error as Error).message)
+        alert(
+          'There was an error while saving the profile with the code ' +
+            (error as SolidPodResponseError).statusCode,
+        )
+
+        return
+      }
+    }
+
+    let user = createThing({ name: 'me' })
+
+    user = addUrl(
+      user,
+      'https://github.com/JiriResler/solid-choose-well-ontology/blob/main/choosewell#allergicTo',
+      'testAllergenName',
+    )
+
+    dietaryProfile = setThing(dietaryProfile, user)
+
+    await saveSolidDatasetAt(profileUrl, dietaryProfile, {
+      fetch: fetch,
+    })
+
+    alert('Profile saved')
+  }
+
+  /**
+   * Saves user profile to Google Firestore.
+   */
+  function saveDietaryProfileFirebase() {}
 
   return (
     <div className="d-flex flex-column h-100">
@@ -115,6 +230,7 @@ const ActualDietaryPreferencesForm: React.FC = () => {
           formStep={formStep}
           setFormStep={setFormStep}
           totalNumberOfSteps={totalNumberOfSteps}
+          handleFormSubmit={handleDietaryPreferencesFormOnSubmit}
         />
       </div>
     </div>
