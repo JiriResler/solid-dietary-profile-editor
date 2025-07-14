@@ -38,6 +38,13 @@ const ActualDietaryPreferencesForm: React.FC = () => {
     ReadonlyArray<reactSelectOption>
   >([])
 
+  const [selectedLikedIngredients, setSelectedLikedIngredients] = useState<
+    ReadonlyArray<reactSelectOption>
+  >([])
+
+  const [selectedDislikedIngredients, setSelectedDislikedIngredients] =
+    useState<ReadonlyArray<reactSelectOption>>([])
+
   return (
     <div className="d-flex flex-column h-100">
       <div>
@@ -72,6 +79,10 @@ const ActualDietaryPreferencesForm: React.FC = () => {
                 setSelectedCuisines={setSelectedCuisines}
                 selectedCuisinesSearch={selectedCuisinesSearch}
                 setSelectedCuisinesSearch={setSelectedCuisinesSearch}
+                selectedLikedIngredients={selectedLikedIngredients}
+                setSelectedLikedIngredients={setSelectedLikedIngredients}
+                selectedDislikedIngredients={selectedDislikedIngredients}
+                setSelectedDislikedIngredients={setSelectedDislikedIngredients}
               />
             )}
           </Form>

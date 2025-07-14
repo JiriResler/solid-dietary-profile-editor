@@ -32,6 +32,14 @@ type SelectTastePreferencesProps = {
   setSelectedCuisinesSearch: React.Dispatch<
     React.SetStateAction<ReadonlyArray<reactSelectOption>>
   >
+  selectedLikedIngredients: ReadonlyArray<reactSelectOption>
+  setSelectedLikedIngredients: React.Dispatch<
+    React.SetStateAction<ReadonlyArray<reactSelectOption>>
+  >
+  selectedDislikedIngredients: ReadonlyArray<reactSelectOption>
+  setSelectedDislikedIngredients: React.Dispatch<
+    React.SetStateAction<ReadonlyArray<reactSelectOption>>
+  >
 }
 
 /**
@@ -42,6 +50,10 @@ const SelectTastePreferences: React.FC<SelectTastePreferencesProps> = ({
   setSelectedCuisines,
   selectedCuisinesSearch,
   setSelectedCuisinesSearch,
+  selectedLikedIngredients,
+  setSelectedLikedIngredients,
+  selectedDislikedIngredients,
+  setSelectedDislikedIngredients,
 }) => {
   const intl = useIntl()
 
@@ -49,10 +61,19 @@ const SelectTastePreferences: React.FC<SelectTastePreferencesProps> = ({
 
   const [cuisineFetchCausedError, setCuisineFetchCausedError] = useState(false)
 
+  const [ingredientFetchCausedError, setIngredientFetchCausedError] =
+    useState(false)
+
   const cuisineQuery = useQuery({
     queryKey: ['getCuisinesFromWikidata'],
     queryFn: fetchCuisines,
     select: formatCuisineResponse,
+  })
+
+  const ingredientQuery = useQuery({
+    queryKey: ['getIngredientsFromWikidata'],
+    queryFn: fetchIngredients,
+    select: formatIngredientResponse,
   })
 
   type CuisineBinding = {
@@ -72,6 +93,26 @@ const SelectTastePreferences: React.FC<SelectTastePreferencesProps> = ({
     }
     results: {
       bindings: CuisineBinding[]
+    }
+  }
+
+  type IngredientBinding = {
+    ingredient: {
+      type: string
+      value: string
+    }
+    ingredientLabel: {
+      type: string
+      value: string
+    }
+  }
+
+  type IngredientResponse = {
+    head: {
+      vars: string[]
+    }
+    results: {
+      bindings: IngredientBinding[]
     }
   }
 
@@ -118,6 +159,52 @@ const SelectTastePreferences: React.FC<SelectTastePreferencesProps> = ({
       .map(({ cuisine, cuisineLabel }) => ({
         value: cuisine.value,
         label: capitalizeFirstLetter(cuisineLabel.value),
+      }))
+      .sort((a, b) => a.label.localeCompare(b.label))
+  }
+
+  /**
+   * Retrieves a list of ingredients from Wikidata.
+   */
+  function fetchIngredients() {
+    // SPARQL query retrieving ingredient results from Wikidata.
+    const sparqlQuery = `
+      SELECT DISTINCT ?ingredient ?ingredientLabel WHERE {
+        ?ingredient (wdt:P31|wdt:P279) wd:Q25403900.
+        SERVICE wikibase:label { bd:serviceParam wikibase:language "${selectedLanguage},en,mul". }
+      }
+      `
+
+    const endpointUrl = 'https://query.wikidata.org/sparql'
+
+    const requestUrl = endpointUrl + '?query=' + encodeURI(sparqlQuery)
+
+    const requestHeaders = {
+      Accept: 'application/sparql-results+json',
+    }
+
+    return axios
+      .get<IngredientResponse>(requestUrl, { headers: requestHeaders })
+      .then((response) => {
+        return response.data
+      })
+      .catch((error) => {
+        setIngredientFetchCausedError(true)
+        console.error('Error while fetching ingredient option data.', error)
+        throw error
+      })
+  }
+
+  /**
+   * Transforms ingredient Wikidata response into an array of values and labels for the Select component. Response data is sorted by resource label.
+   */
+  function formatIngredientResponse(
+    response: IngredientResponse,
+  ): reactSelectOption[] {
+    return response.results.bindings
+      .map(({ ingredient, ingredientLabel }) => ({
+        value: ingredient.value,
+        label: capitalizeFirstLetter(ingredientLabel.value),
       }))
       .sort((a, b) => a.label.localeCompare(b.label))
   }
@@ -237,6 +324,19 @@ const SelectTastePreferences: React.FC<SelectTastePreferencesProps> = ({
         bodyMessage={intl.formatMessage({
           id: 'fetchingCuisinesFailed',
           defaultMessage: 'Retrieving of cuisine data failed.',
+        })}
+      />
+
+      <ErrorModal
+        show={ingredientFetchCausedError}
+        setShow={setIngredientFetchCausedError}
+        titleMessage={intl.formatMessage({
+          id: 'error',
+          defaultMessage: 'Error',
+        })}
+        bodyMessage={intl.formatMessage({
+          id: 'fetchingIngredientsFailed',
+          defaultMessage: 'Retrieving of ingredient data failed.',
         })}
       />
 
@@ -453,74 +553,63 @@ const SelectTastePreferences: React.FC<SelectTastePreferencesProps> = ({
 
       <Row className="ms-auto">
         <Col className="pb-4">
-          <div>What I like</div>
+          <div>
+            <FormattedMessage id="whatILike" defaultMessage="What I like" />
+          </div>
 
           <Select
             className="dietary-preferences-form-select mt-3"
             isMulti
             components={SelectComponents}
-            options={[
-              {
-                label: 'Ingredient 1',
-                value: 'ingredient1',
-              },
-              {
-                label: 'Ingredient 2',
-                value: 'ingredient2',
-              },
-              {
-                label: 'Ingredient 3',
-                value: 'ingredient3',
-              },
-            ]}
-            // value={}
-            // onChange={}
+            options={ingredientQuery.data}
+            value={selectedLikedIngredients}
+            onChange={setSelectedLikedIngredients}
+            isLoading={ingredientQuery.isPending}
             aria-label="preferred-ingrediences-select"
-            placeholder={'Search for an ingredient'}
+            placeholder={intl.formatMessage({
+              id: 'searchIngredients',
+              defaultMessage: 'Search for ingredients',
+            })}
+            menuPlacement="top"
+            maxMenuHeight={170}
             styles={{
               control: (baseStyles) => ({
                 ...baseStyles,
                 minHeight: '50px',
               }),
             }}
-            menuPlacement="top"
-            maxMenuHeight={210}
           />
         </Col>
 
         <Col className="pb-4">
-          <div>What I don't like</div>
+          <div>
+            <FormattedMessage
+              id="whatIDontLike"
+              defaultMessage="What I don't like"
+            />
+          </div>
 
           <Select
             className="dietary-preferences-form-select mt-3"
             isMulti
             components={SelectComponents}
-            options={[
-              {
-                label: 'Ingredient 1',
-                value: 'ingredient1',
-              },
-              {
-                label: 'Ingredient 2',
-                value: 'ingredient2',
-              },
-              {
-                label: 'Ingredient 3',
-                value: 'ingredient3',
-              },
-            ]}
-            // value={}
-            // onChange={}
-            aria-label="disliked-ingrediences-select"
-            placeholder={'Search for an ingredient'}
+            options={ingredientQuery.data}
+            value={selectedDislikedIngredients}
+            onChange={setSelectedDislikedIngredients}
+            isLoading={ingredientQuery.isPending}
+            aria-label="preferred-ingrediences-select"
+            placeholder={intl.formatMessage({
+              id: 'searchIngredients',
+              defaultMessage: 'Search for ingredients',
+            })}
+            menuPlacement="top"
+            maxMenuHeight={170}
             styles={{
               control: (baseStyles) => ({
                 ...baseStyles,
                 minHeight: '50px',
               }),
             }}
-            menuPlacement="top"
-            maxMenuHeight={210}
           />
         </Col>
       </Row>

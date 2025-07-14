@@ -142,6 +142,10 @@ type Messages = {
   frenchCuisine: string
   searchMoreCuisines: string
   fetchingCuisinesFailed: string
+  fetchingIngredientsFailed: string
+  whatILike: string
+  searchIngredients: string
+  whatIDontLike: string
 }
 
 const messagesInSlovak: Messages = {
@@ -300,6 +304,10 @@ const messagesInSlovak: Messages = {
   frenchCuisine: 'Francúzska',
   searchMoreCuisines: 'Vyhľadajte ďalšie svetové kuchyne',
   fetchingCuisinesFailed: 'Načítanie svetových kuchýň bolo neúspešné',
+  fetchingIngredientsFailed: 'Načítanie ingrediencií bolo neúspešné',
+  whatILike: 'Mám rád',
+  searchIngredients: 'Vyhľadajte ingrediencie',
+  whatIDontLike: 'Nemám rád',
 }
 
 const IntlProviderWrapper: React.FC<PropsWithChildren> = (props) => {
