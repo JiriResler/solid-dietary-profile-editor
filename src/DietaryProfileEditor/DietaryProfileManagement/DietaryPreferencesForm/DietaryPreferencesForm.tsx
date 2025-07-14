@@ -34,10 +34,16 @@ export const SelectComponents = {
   IndicatorSeparator: () => null,
 }
 
+type ActualDietaryPreferencesFormProps = {
+  setEditProfile: React.Dispatch<React.SetStateAction<boolean>>
+}
+
 /**
  * Renders controls of the dietary preferences form.
  */
-const ActualDietaryPreferencesForm: React.FC = () => {
+const ActualDietaryPreferencesForm: React.FC<
+  ActualDietaryPreferencesFormProps
+> = ({ setEditProfile }) => {
   const { session: solidSession } = useSession()
 
   const [firebaseUser] = useAuthState(auth)
@@ -298,6 +304,8 @@ const ActualDietaryPreferencesForm: React.FC = () => {
     })
 
     alert('Profile saved')
+
+    setEditProfile(false)
   }
 
   /**
@@ -371,14 +379,20 @@ const ActualDietaryPreferencesForm: React.FC = () => {
   )
 }
 
+type DietaryPreferencesFormProps = {
+  setEditProfile: React.Dispatch<React.SetStateAction<boolean>>
+}
+
 /**
  * Displays a form that allows the user to input or update their dietary preferences and manages screen size adaptations for large or small displays.
  */
-const DietaryPreferencesForm: React.FC = () => {
+const DietaryPreferencesForm: React.FC<DietaryPreferencesFormProps> = ({
+  setEditProfile,
+}) => {
   return (
     <div className="dietary-preferences-form-screen">
       <div className="d-lg-none h-100 form-small-screen-container">
-        <ActualDietaryPreferencesForm />
+        <ActualDietaryPreferencesForm setEditProfile={setEditProfile} />
       </div>
 
       <div className="d-none d-lg-block h-100">
@@ -386,7 +400,7 @@ const DietaryPreferencesForm: React.FC = () => {
           <Col>
             <Card className="dietary-preferences-form-card position-absolute top-50 start-50 translate-middle">
               <Card.Body className="h-100">
-                <ActualDietaryPreferencesForm />
+                <ActualDietaryPreferencesForm setEditProfile={setEditProfile} />
               </Card.Body>
             </Card>
           </Col>

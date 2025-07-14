@@ -47,7 +47,7 @@ const DietaryProfileManagement: React.FC = () => {
   }
 
   if (editProfile) {
-    return <DietaryPreferencesForm />
+    return <DietaryPreferencesForm setEditProfile={setEditProfile} />
   } else {
     return <ProfileOverview setEditProfile={setEditProfile} />
   }
