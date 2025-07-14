@@ -64,6 +64,9 @@ const SelectTastePreferences: React.FC<SelectTastePreferencesProps> = ({
   const [ingredientFetchCausedError, setIngredientFetchCausedError] =
     useState(false)
 
+  const [spicinessRadioSelected, setSpicinessRadioSelected] =
+    useState('unspecified')
+
   const cuisineQuery = useQuery({
     queryKey: ['getCuisinesFromWikidata'],
     queryFn: fetchCuisines,
@@ -255,27 +258,6 @@ const SelectTastePreferences: React.FC<SelectTastePreferencesProps> = ({
     { label: 'Pickling/Fermenting', value: 'pickling-fermenting' },
     { label: 'Raw/No-cook', value: 'raw-no-cook' },
   ]
-  type RadioButtonProps = {
-    label: string
-  }
-
-  /**
-   * Renders a radio button for selecting the user's food spiciness preference.
-   */
-  const RadioButton: React.FC<RadioButtonProps> = ({ label }) => {
-    const inputId =
-      label.replace(/,/g, '').replace(/\s/g, '-').toLowerCase() + '-radio'
-
-    return (
-      <Form.Check id={inputId}>
-        <Form.Check.Input
-          type="radio"
-          className="app-form-control app-form-checkbox"
-        />
-        <Form.Check.Label className="checkbox-label">{label}</Form.Check.Label>
-      </Form.Check>
-    )
-  }
 
   const spicinessSliderMarks = [
     {
@@ -622,29 +604,53 @@ const SelectTastePreferences: React.FC<SelectTastePreferencesProps> = ({
       </div>
 
       <Stack gap={2} className="ms-3">
-        <RadioButton
-          label={intl.formatMessage({
-            id: 'notSpecified',
-            defaultMessage: 'Not specified',
-          })}
-          key="spiciness-radio-button-1"
-        />
+        <Form.Check
+          id={'spiciness-radio-unspecified'}
+          key="spiciness-radio-option-1"
+        >
+          <Form.Check.Input
+            type="radio"
+            className="app-form-control app-form-checkbox"
+            checked={spicinessRadioSelected === 'unspecified'}
+            onChange={() => setSpicinessRadioSelected('unspecified')}
+          />
+          <Form.Check.Label className="checkbox-label">
+            <FormattedMessage
+              id="notSpecified"
+              defaultMessage="Not specified"
+            />
+          </Form.Check.Label>
+        </Form.Check>
 
-        <RadioButton
-          label={intl.formatMessage({
-            id: 'notAtAll',
-            defaultMessage: 'Not at all',
-          })}
-          key="spiciness-radio-button-2"
-        />
+        <Form.Check
+          id={'spiciness-radio-negative'}
+          key="spiciness-radio-option-2"
+        >
+          <Form.Check.Input
+            type="radio"
+            className="app-form-control app-form-checkbox"
+            checked={spicinessRadioSelected === 'negative'}
+            onChange={() => setSpicinessRadioSelected('negative')}
+          />
+          <Form.Check.Label className="checkbox-label">
+            <FormattedMessage id="notAtAll" defaultMessage="Not at all" />
+          </Form.Check.Label>
+        </Form.Check>
 
-        <RadioButton
-          label={intl.formatMessage({
-            id: 'yesIDo',
-            defaultMessage: 'Yes, I do',
-          })}
-          key="spiciness-radio-button-3"
-        />
+        <Form.Check
+          id={'spiciness-radio-positive'}
+          key="spiciness-radio-option-3"
+        >
+          <Form.Check.Input
+            type="radio"
+            className="app-form-control app-form-checkbox"
+            checked={spicinessRadioSelected === 'positive'}
+            onChange={() => setSpicinessRadioSelected('positive')}
+          />
+          <Form.Check.Label className="checkbox-label">
+            <FormattedMessage id="yesIDo" defaultMessage="Yes, I do" />
+          </Form.Check.Label>
+        </Form.Check>
 
         <Row>
           <Col xs={12} lg={4}>
