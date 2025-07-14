@@ -13,9 +13,8 @@ import reactSelectOption from './reactSelectOption'
 import { useSession } from '@inrupt/solid-ui-react'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { auth } from '../../../firebase'
-import { fetch } from '@inrupt/solid-client-authn-browser'
 import {
-  addUrl,
+  addStringEnglish,
   createSolidDataset,
   createThing,
   getPodUrlAll,
@@ -87,7 +86,7 @@ const ActualDietaryPreferencesForm: React.FC = () => {
   /**
    * Saves user profile when submit form button is pressed.
    */
-  function handleDietaryPreferencesFormOnSubmit() {
+  function handleFormSubmit() {
     if (signedInWithSolid) {
       void saveDietaryProfileSolid()
     }
@@ -108,7 +107,7 @@ const ActualDietaryPreferencesForm: React.FC = () => {
     }
 
     const podUrls = await getPodUrlAll(userWebId, {
-      fetch: fetch,
+      fetch: solidSession.fetch as undefined,
     })
 
     const podUrl = podUrls[0]
@@ -123,7 +122,7 @@ const ActualDietaryPreferencesForm: React.FC = () => {
     try {
       // Attempt to retrieve the profile in case it already exists.
       dietaryProfile = await getSolidDataset(profileUrl, {
-        fetch: fetch,
+        fetch: solidSession.fetch as undefined,
       })
 
       // Clear the profile
@@ -136,7 +135,7 @@ const ActualDietaryPreferencesForm: React.FC = () => {
         typeof (error as SolidPodResponseError).statusCode === 'number' &&
         (error as SolidPodResponseError).statusCode === 404
       ) {
-        // if not found, create a new SolidDataset
+        // If not found, create a new SolidDataset
         dietaryProfile = createSolidDataset()
       } else {
         console.error((error as Error).message)
@@ -144,14 +143,13 @@ const ActualDietaryPreferencesForm: React.FC = () => {
           'There was an error while saving the profile with the code ' +
             (error as SolidPodResponseError).statusCode,
         )
-
         return
       }
     }
 
     let user = createThing({ name: 'me' })
 
-    user = addUrl(
+    user = addStringEnglish(
       user,
       'https://github.com/JiriResler/solid-choose-well-ontology/blob/main/choosewell#allergicTo',
       'testAllergenName',
@@ -160,7 +158,7 @@ const ActualDietaryPreferencesForm: React.FC = () => {
     dietaryProfile = setThing(dietaryProfile, user)
 
     await saveSolidDatasetAt(profileUrl, dietaryProfile, {
-      fetch: fetch,
+      fetch: solidSession.fetch as undefined,
     })
 
     alert('Profile saved')
@@ -230,7 +228,7 @@ const ActualDietaryPreferencesForm: React.FC = () => {
           formStep={formStep}
           setFormStep={setFormStep}
           totalNumberOfSteps={totalNumberOfSteps}
-          handleFormSubmit={handleDietaryPreferencesFormOnSubmit}
+          handleFormSubmit={handleFormSubmit}
         />
       </div>
     </div>
