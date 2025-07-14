@@ -147,6 +147,14 @@ type Messages = {
   whatILike: string
   searchIngredients: string
   whatIDontLike: string
+  bakingMethod: string
+  grillingMethod: string
+  boilingMethod: string
+  deepFryingMethod: string
+  steamingMethod: string
+  sauteingMethod: string
+  fetchingCookingMethodsFailed: string
+  searchMoreCookingMethods: string
 }
 
 const messagesInSlovak: Messages = {
@@ -310,6 +318,15 @@ const messagesInSlovak: Messages = {
   searchIngredients: 'Vyhľadajte ingrediencie',
   whatIDontLike: 'Nemám rád',
   extraHot: 'Extra',
+  bakingMethod: 'Pečenie',
+  grillingMethod: 'Grilovanie',
+  boilingMethod: 'Varenie',
+  deepFryingMethod: 'Vyprážanie',
+  steamingMethod: 'Naparovanie',
+  sauteingMethod: 'Restovanie',
+  fetchingCookingMethodsFailed:
+    'Načítanie spôsobov prípravy jedla bolo neúspešné',
+  searchMoreCookingMethods: 'Vyhľadajte ingrediencie spôsoby prípravy',
 }
 
 const IntlProviderWrapper: React.FC<PropsWithChildren> = (props) => {

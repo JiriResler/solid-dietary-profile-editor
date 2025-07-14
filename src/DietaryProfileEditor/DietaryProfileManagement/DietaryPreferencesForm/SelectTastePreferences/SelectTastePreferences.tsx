@@ -2,7 +2,6 @@ import { FormattedMessage, useIntl } from 'react-intl'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Stack from 'react-bootstrap/Stack'
-import FormCheckbox from '../FormCheckbox/FormCheckbox'
 import Select from 'react-select'
 import Form from 'react-bootstrap/Form'
 import Slider from '@mui/material/Slider'
@@ -25,6 +24,15 @@ const cuisineIriList = {
   frenchCuisine: 'http://www.wikidata.org/entity/Q6661',
 }
 
+const cookingMethodIriList = {
+  bakingMethod: 'http://www.wikidata.org/entity/Q720398',
+  grillingMethod: 'http://www.wikidata.org/entity/Q264619',
+  boilingMethod: 'http://www.wikidata.org/entity/Q20074315',
+  deepFryingMethod: 'http://www.wikidata.org/entity/Q854618',
+  steamingMethod: 'http://www.wikidata.org/entity/Q1415859',
+  sauteingMethod: 'http://www.wikidata.org/entity/Q1521462',
+}
+
 type SelectTastePreferencesProps = {
   selectedCuisines: string[]
   setSelectedCuisines: React.Dispatch<React.SetStateAction<string[]>>
@@ -44,6 +52,12 @@ type SelectTastePreferencesProps = {
   setSpicinessRadioSelected: React.Dispatch<React.SetStateAction<string>>
   spicinessLevelSliderValue: number
   setSpicinessLevelSliderValue: React.Dispatch<React.SetStateAction<number>>
+  selectedCookingMethods: string[]
+  setSelectedCookingMethods: React.Dispatch<React.SetStateAction<string[]>>
+  selectedCookingMethodsSearch: ReadonlyArray<reactSelectOption>
+  setSelectedCookingMethodsSearch: React.Dispatch<
+    React.SetStateAction<ReadonlyArray<reactSelectOption>>
+  >
 }
 
 /**
@@ -62,6 +76,10 @@ const SelectTastePreferences: React.FC<SelectTastePreferencesProps> = ({
   setSpicinessRadioSelected,
   spicinessLevelSliderValue,
   setSpicinessLevelSliderValue,
+  selectedCookingMethods,
+  setSelectedCookingMethods,
+  selectedCookingMethodsSearch,
+  setSelectedCookingMethodsSearch,
 }) => {
   const intl = useIntl()
 
@@ -70,6 +88,9 @@ const SelectTastePreferences: React.FC<SelectTastePreferencesProps> = ({
   const [cuisineFetchCausedError, setCuisineFetchCausedError] = useState(false)
 
   const [ingredientFetchCausedError, setIngredientFetchCausedError] =
+    useState(false)
+
+  const [cookingMethodFetchCausedError, setCookingMethodFetchCausedError] =
     useState(false)
 
   const cuisineQuery = useQuery({
@@ -82,6 +103,12 @@ const SelectTastePreferences: React.FC<SelectTastePreferencesProps> = ({
     queryKey: ['getIngredientsFromWikidata'],
     queryFn: fetchIngredients,
     select: formatIngredientResponse,
+  })
+
+  const cookingMethodQuery = useQuery({
+    queryKey: ['getCookingMethodsFromWikidata'],
+    queryFn: fetchCookingMethods,
+    select: formatCookingMethodResponse,
   })
 
   type CuisineBinding = {
@@ -121,6 +148,26 @@ const SelectTastePreferences: React.FC<SelectTastePreferencesProps> = ({
     }
     results: {
       bindings: IngredientBinding[]
+    }
+  }
+
+  type CookingMethodBinding = {
+    cookingMethod: {
+      type: string
+      value: string
+    }
+    cookingMethodLabel: {
+      type: string
+      value: string
+    }
+  }
+
+  type CookingMethodResponse = {
+    head: {
+      vars: string[]
+    }
+    results: {
+      bindings: CookingMethodBinding[]
     }
   }
 
@@ -218,6 +265,53 @@ const SelectTastePreferences: React.FC<SelectTastePreferencesProps> = ({
   }
 
   /**
+   * Retrieves a list of cooking methods from Wikidata.
+   */
+  function fetchCookingMethods() {
+    // SPARQL query retrieving cokking method results from Wikidata, ignoring those already specified via checkboxes.
+    const sparqlQuery = `
+      SELECT DISTINCT ?cookingMethod ?cookingMethodLabel WHERE {
+        ?cookingMethod (wdt:P31|wdt:P279) wd:Q1039303.
+        FILTER(?cookingMethod NOT IN(wd:Q720398, wd:Q264619, wd:Q20074315, wd:Q854618, wd:Q1415859, wd:Q1521462))
+        SERVICE wikibase:label { bd:serviceParam wikibase:language "${selectedLanguage},en,mul". }
+      }
+    `
+
+    const endpointUrl = 'https://query.wikidata.org/sparql'
+
+    const requestUrl = endpointUrl + '?query=' + encodeURI(sparqlQuery)
+
+    const requestHeaders = {
+      Accept: 'application/sparql-results+json',
+    }
+
+    return axios
+      .get<CookingMethodResponse>(requestUrl, { headers: requestHeaders })
+      .then((response) => {
+        return response.data
+      })
+      .catch((error) => {
+        setCookingMethodFetchCausedError(true)
+        console.error('Error while fetching cooking method option data.', error)
+        throw error
+      })
+  }
+
+  /**
+   * Transforms cooking method Wikidata response into an array of values and labels for the Select component. Response data is sorted by resource label.
+   */
+  function formatCookingMethodResponse(
+    response: CookingMethodResponse,
+  ): reactSelectOption[] {
+    return response.results.bindings
+      .map(({ cookingMethod, cookingMethodLabel }) => ({
+        value: cookingMethod.value,
+        label: capitalizeFirstLetter(cookingMethodLabel.value),
+      }))
+      .sort((a, b) => a.label.localeCompare(b.label))
+  }
+
+  /**
    * Creates a new selectedCuisines array based on whether it previously contained the cuisine IRI or not and sets it to the selected cuisines state variable.
    */
   function handleCuisineCheckboxOnChange(cuisineIri: string) {
@@ -225,6 +319,19 @@ const SelectTastePreferences: React.FC<SelectTastePreferencesProps> = ({
       setSelectedCuisines(selectedCuisines.filter((iri) => iri != cuisineIri))
     } else {
       setSelectedCuisines([...selectedCuisines, cuisineIri])
+    }
+  }
+
+  /**
+   * Creates a new selectedCookingMethods array based on whether it previously contained the cooking method IRI or not and sets it to the selected cooking methods state variable.
+   */
+  function handleCookingMethodCheckboxOnChange(cookingMethodIri: string) {
+    if (selectedCookingMethods.includes(cookingMethodIri)) {
+      setSelectedCookingMethods(
+        selectedCookingMethods.filter((iri) => iri != cookingMethodIri),
+      )
+    } else {
+      setSelectedCookingMethods([...selectedCookingMethods, cookingMethodIri])
     }
   }
 
@@ -238,31 +345,6 @@ const SelectTastePreferences: React.FC<SelectTastePreferencesProps> = ({
 
     return string.charAt(0).toUpperCase() + string.slice(1)
   }
-
-  const commonCookingMethods = [
-    'Baking',
-    'Grilling',
-    'Boiling',
-    'Roasting',
-    'Stir-frying',
-    'Sauteing',
-    'Steaming',
-    'Deep-frying',
-  ]
-
-  const otherCookingMethods = [
-    { label: 'Broiling', value: 'broiling' },
-    { label: 'Slow cooking', value: 'slow-cooking' },
-    { label: 'Poaching', value: 'poaching' },
-    { label: 'Sous Vide', value: 'sous-vide' },
-    { label: 'Searing', value: 'searing' },
-    { label: 'Smoking', value: 'smoking' },
-    { label: 'Pressure cooking', value: 'pressure-cooking' },
-    { label: 'Blanching', value: 'blanching' },
-    { label: 'Microwaving', value: 'microwaving' },
-    { label: 'Pickling/Fermenting', value: 'pickling-fermenting' },
-    { label: 'Raw/No-cook', value: 'raw-no-cook' },
-  ]
 
   const spicinessSliderMarks = [
     {
@@ -345,6 +427,19 @@ const SelectTastePreferences: React.FC<SelectTastePreferencesProps> = ({
         bodyMessage={intl.formatMessage({
           id: 'fetchingIngredientsFailed',
           defaultMessage: 'Retrieving of ingredient data failed.',
+        })}
+      />
+
+      <ErrorModal
+        show={cookingMethodFetchCausedError}
+        setShow={setCookingMethodFetchCausedError}
+        titleMessage={intl.formatMessage({
+          id: 'error',
+          defaultMessage: 'Error',
+        })}
+        bodyMessage={intl.formatMessage({
+          id: 'fetchingCookingMethodsFailed',
+          defaultMessage: 'Retrieving of cooking method data failed.',
         })}
       />
 
@@ -715,19 +810,137 @@ const SelectTastePreferences: React.FC<SelectTastePreferencesProps> = ({
       </div>
 
       <Row className="ms-auto">
-        <Col xs={6} lg={3}>
+        <Col xs={6} lg={4}>
           <Stack gap={2}>
-            {commonCookingMethods.slice(0, 4).map((method) => {
-              return <FormCheckbox label={method} key={method} />
-            })}
+            <Form.Check id={'baking-cooking-method-checkbox'}>
+              <Form.Check.Input
+                className="app-form-control app-form-checkbox"
+                checked={selectedCookingMethods.includes(
+                  cookingMethodIriList['bakingMethod'],
+                )}
+                onChange={() =>
+                  handleCookingMethodCheckboxOnChange(
+                    cookingMethodIriList['bakingMethod'],
+                  )
+                }
+              />
+
+              <Form.Check.Label className="ms-2">
+                <FormattedMessage
+                  id={'bakingMethod'}
+                  defaultMessage={'Baking'}
+                />
+              </Form.Check.Label>
+            </Form.Check>
+
+            <Form.Check id={'grilling-cooking-method-checkbox'}>
+              <Form.Check.Input
+                className="app-form-control app-form-checkbox"
+                checked={selectedCookingMethods.includes(
+                  cookingMethodIriList['grillingMethod'],
+                )}
+                onChange={() =>
+                  handleCookingMethodCheckboxOnChange(
+                    cookingMethodIriList['grillingMethod'],
+                  )
+                }
+              />
+
+              <Form.Check.Label className="ms-2">
+                <FormattedMessage
+                  id={'grillingMethod'}
+                  defaultMessage={'Grilling'}
+                />
+              </Form.Check.Label>
+            </Form.Check>
+
+            <Form.Check id={'boiling-cooking-method-checkbox'}>
+              <Form.Check.Input
+                className="app-form-control app-form-checkbox"
+                checked={selectedCookingMethods.includes(
+                  cookingMethodIriList['boilingMethod'],
+                )}
+                onChange={() =>
+                  handleCookingMethodCheckboxOnChange(
+                    cookingMethodIriList['boilingMethod'],
+                  )
+                }
+              />
+
+              <Form.Check.Label className="ms-2">
+                <FormattedMessage
+                  id={'boilingMethod'}
+                  defaultMessage={'Boiling'}
+                />
+              </Form.Check.Label>
+            </Form.Check>
           </Stack>
         </Col>
 
-        <Col xs={6} lg={3}>
+        <Col xs={6} lg={4}>
           <Stack gap={2}>
-            {commonCookingMethods.slice(4, 8).map((method) => {
-              return <FormCheckbox label={method} key={method} />
-            })}
+            <Form.Check id={'deep-frying-cooking-method-checkbox'}>
+              <Form.Check.Input
+                className="app-form-control app-form-checkbox"
+                checked={selectedCookingMethods.includes(
+                  cookingMethodIriList['deepFryingMethod'],
+                )}
+                onChange={() =>
+                  handleCookingMethodCheckboxOnChange(
+                    cookingMethodIriList['deepFryingMethod'],
+                  )
+                }
+              />
+
+              <Form.Check.Label className="ms-2">
+                <FormattedMessage
+                  id={'deepFryingMethod'}
+                  defaultMessage={'Deep-frying'}
+                />
+              </Form.Check.Label>
+            </Form.Check>
+
+            <Form.Check id={'steaming-cooking-method-checkbox'}>
+              <Form.Check.Input
+                className="app-form-control app-form-checkbox"
+                checked={selectedCookingMethods.includes(
+                  cookingMethodIriList['steamingMethod'],
+                )}
+                onChange={() =>
+                  handleCookingMethodCheckboxOnChange(
+                    cookingMethodIriList['steamingMethod'],
+                  )
+                }
+              />
+
+              <Form.Check.Label className="ms-2">
+                <FormattedMessage
+                  id={'steamingMethod'}
+                  defaultMessage={'Steaming'}
+                />
+              </Form.Check.Label>
+            </Form.Check>
+
+            <Form.Check id={'sauteing-cooking-method-checkbox'}>
+              <Form.Check.Input
+                className="app-form-control app-form-checkbox"
+                checked={selectedCookingMethods.includes(
+                  cookingMethodIriList['sauteingMethod'],
+                )}
+                onChange={() =>
+                  handleCookingMethodCheckboxOnChange(
+                    cookingMethodIriList['sauteingMethod'],
+                  )
+                }
+              />
+
+              <Form.Check.Label className="ms-2">
+                <FormattedMessage
+                  id={'sauteingMethod'}
+                  defaultMessage={'Sauteing'}
+                />
+              </Form.Check.Label>
+            </Form.Check>
           </Stack>
         </Col>
       </Row>
@@ -736,19 +949,23 @@ const SelectTastePreferences: React.FC<SelectTastePreferencesProps> = ({
         className="dietary-preferences-form-select ms-2 mt-4 pb-2"
         isMulti
         components={SelectComponents}
-        options={otherCookingMethods}
-        // value={}
-        // onChange={}
+        options={cookingMethodQuery.data}
+        value={selectedCookingMethodsSearch}
+        onChange={setSelectedCookingMethodsSearch}
         aria-label="more-cooking-methods-select"
-        placeholder={'Select more methods'}
+        placeholder={intl.formatMessage({
+          id: 'searchMoreCookingMethods',
+          defaultMessage: 'Search for more cooking methods',
+        })}
+        isLoading={cookingMethodQuery.isPending}
+        menuPlacement="top"
+        maxMenuHeight={170}
         styles={{
           control: (baseStyles) => ({
             ...baseStyles,
             minHeight: '50px',
           }),
         }}
-        menuPlacement="top"
-        maxMenuHeight={210}
       />
     </>
   )
