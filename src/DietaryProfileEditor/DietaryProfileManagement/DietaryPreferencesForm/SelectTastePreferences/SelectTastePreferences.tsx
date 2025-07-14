@@ -40,6 +40,10 @@ type SelectTastePreferencesProps = {
   setSelectedDislikedIngredients: React.Dispatch<
     React.SetStateAction<ReadonlyArray<reactSelectOption>>
   >
+  spicinessRadioSelected: string
+  setSpicinessRadioSelected: React.Dispatch<React.SetStateAction<string>>
+  spicinessLevelSliderValue: number
+  setSpicinessLevelSliderValue: React.Dispatch<React.SetStateAction<number>>
 }
 
 /**
@@ -54,6 +58,10 @@ const SelectTastePreferences: React.FC<SelectTastePreferencesProps> = ({
   setSelectedLikedIngredients,
   selectedDislikedIngredients,
   setSelectedDislikedIngredients,
+  spicinessRadioSelected,
+  setSpicinessRadioSelected,
+  spicinessLevelSliderValue,
+  setSpicinessLevelSliderValue,
 }) => {
   const intl = useIntl()
 
@@ -63,9 +71,6 @@ const SelectTastePreferences: React.FC<SelectTastePreferencesProps> = ({
 
   const [ingredientFetchCausedError, setIngredientFetchCausedError] =
     useState(false)
-
-  const [spicinessRadioSelected, setSpicinessRadioSelected] =
-    useState('unspecified')
 
   const cuisineQuery = useQuery({
     queryKey: ['getCuisinesFromWikidata'],
@@ -262,19 +267,31 @@ const SelectTastePreferences: React.FC<SelectTastePreferencesProps> = ({
   const spicinessSliderMarks = [
     {
       value: 0,
-      label: 'Mild',
+      label: intl.formatMessage({
+        id: 'mild',
+        defaultMessage: 'Mild',
+      }),
     },
     {
       value: 33,
-      label: 'Medium',
+      label: intl.formatMessage({
+        id: 'medium',
+        defaultMessage: 'Medium',
+      }),
     },
     {
       value: 66,
-      label: 'Hot',
+      label: intl.formatMessage({
+        id: 'hot',
+        defaultMessage: 'Hot',
+      }),
     },
     {
       value: 100,
-      label: 'Extra hot',
+      label: intl.formatMessage({
+        id: 'extraHot',
+        defaultMessage: 'Extra hot',
+      }),
     },
   ]
 
@@ -292,6 +309,15 @@ const SelectTastePreferences: React.FC<SelectTastePreferencesProps> = ({
       return 'Extra hot'
     }
     return ''
+  }
+
+  /**
+   * Sets the new value for slected spiciness level.
+   */
+  function handleSpicinessSliderOnChange(_: Event, value: number | number[]) {
+    if (!Array.isArray(value)) {
+      setSpicinessLevelSliderValue(value)
+    }
   }
 
   return (
@@ -654,19 +680,28 @@ const SelectTastePreferences: React.FC<SelectTastePreferencesProps> = ({
 
         <Row>
           <Col xs={12} lg={4}>
-            <FormattedMessage
-              id="howSpicyShouldFoodBe"
-              defaultMessage="How spicy should it be?"
-            />
+            <div
+              className={
+                spicinessRadioSelected !== 'positive' ? 'text-muted' : ''
+              }
+            >
+              <FormattedMessage
+                id="howSpicyShouldFoodBe"
+                defaultMessage="How spicy should it be?"
+              />
+            </div>
           </Col>
 
           <Col xs={9} lg={4}>
             <Slider
+              disabled={spicinessRadioSelected !== 'positive'}
               aria-label="spiciness-slider"
               getAriaValueText={valueLabelFormat}
               step={100 / 3}
               marks={spicinessSliderMarks}
               sx={{ marginLeft: '8pt', marginTop: '-3pt', color: '#2541b2' }}
+              value={spicinessLevelSliderValue}
+              onChange={handleSpicinessSliderOnChange}
             />
           </Col>
         </Row>

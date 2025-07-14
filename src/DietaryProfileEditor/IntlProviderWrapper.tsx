@@ -50,6 +50,7 @@ type Messages = {
   mild: string
   medium: string
   hot: string
+  extraHot: string
   selectASolidProvider: string
   typeInProviderUrlHeading: string
   providerUrlPlaceholder: string
@@ -308,6 +309,7 @@ const messagesInSlovak: Messages = {
   whatILike: 'Mám rád',
   searchIngredients: 'Vyhľadajte ingrediencie',
   whatIDontLike: 'Nemám rád',
+  extraHot: 'Extra',
 }
 
 const IntlProviderWrapper: React.FC<PropsWithChildren> = (props) => {

@@ -45,6 +45,11 @@ const ActualDietaryPreferencesForm: React.FC = () => {
   const [selectedDislikedIngredients, setSelectedDislikedIngredients] =
     useState<ReadonlyArray<reactSelectOption>>([])
 
+  const [spicinessRadioSelected, setSpicinessRadioSelected] =
+    useState('unspecified')
+
+  const [spicinessLevelSliderValue, setSpicinessLevelSliderValue] = useState(0)
+
   return (
     <div className="d-flex flex-column h-100">
       <div>
@@ -83,6 +88,10 @@ const ActualDietaryPreferencesForm: React.FC = () => {
                 setSelectedLikedIngredients={setSelectedLikedIngredients}
                 selectedDislikedIngredients={selectedDislikedIngredients}
                 setSelectedDislikedIngredients={setSelectedDislikedIngredients}
+                spicinessRadioSelected={spicinessRadioSelected}
+                setSpicinessRadioSelected={setSpicinessRadioSelected}
+                spicinessLevelSliderValue={spicinessLevelSliderValue}
+                setSpicinessLevelSliderValue={setSpicinessLevelSliderValue}
               />
             )}
           </Form>
