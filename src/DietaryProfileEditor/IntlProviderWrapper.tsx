@@ -132,6 +132,15 @@ type Messages = {
   paleoDiet: string
   error: string
   fetchingDietsFailed: string
+  italianCuisine: string
+  greekCuisine: string
+  mexicanCuisine: string
+  chineseCuisine: string
+  turkishCuisine: string
+  spanishCuisine: string
+  japaneseCuisine: string
+  frenchCuisine: string
+  searchMoreCuisines: string
 }
 
 const messagesInSlovak: Messages = {
@@ -280,6 +289,15 @@ const messagesInSlovak: Messages = {
   paleoDiet: 'Paleo diéta',
   error: 'Chyba',
   fetchingDietsFailed: 'Načítanie diét bolo neúspešné',
+  italianCuisine: 'Talianska',
+  greekCuisine: 'Grécka',
+  mexicanCuisine: 'Mexická',
+  chineseCuisine: 'Čínska',
+  turkishCuisine: 'Turecká',
+  spanishCuisine: 'Španielska',
+  japaneseCuisine: 'Japonská',
+  frenchCuisine: 'Francúzska',
+  searchMoreCuisines: 'Vyhľadajte ďalšie svetové kuchyne',
 }
 
 const IntlProviderWrapper: React.FC<PropsWithChildren> = (props) => {
