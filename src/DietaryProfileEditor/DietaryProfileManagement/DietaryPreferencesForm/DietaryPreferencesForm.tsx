@@ -13,8 +13,11 @@ import reactSelectOption from './reactSelectOption'
 import { useSession } from '@inrupt/solid-ui-react'
 import { useAuthState } from 'react-firebase-hooks/auth'
 import { auth } from '../../../firebase'
+import { FOAF, RDF } from '@inrupt/vocab-common-rdf'
 import {
+  addInteger,
   addStringEnglish,
+  addUrl,
   createSolidDataset,
   createThing,
   getPodUrlAll,
@@ -117,18 +120,18 @@ const ActualDietaryPreferencesForm: React.FC = () => {
 
     const profileUrl = podUrl + dietaryProfileLocation
 
-    let dietaryProfile: SolidDataset
+    let dietaryProfileDataset: SolidDataset
 
     try {
       // Attempt to retrieve the profile in case it already exists.
-      dietaryProfile = await getSolidDataset(profileUrl, {
+      dietaryProfileDataset = await getSolidDataset(profileUrl, {
         fetch: solidSession.fetch as undefined,
       })
 
       // Clear the profile
-      const items = getThingAll(dietaryProfile)
+      const items = getThingAll(dietaryProfileDataset)
       items.forEach((item) => {
-        dietaryProfile = removeThing(dietaryProfile, item)
+        dietaryProfileDataset = removeThing(dietaryProfileDataset, item)
       })
     } catch (error) {
       if (
@@ -136,7 +139,7 @@ const ActualDietaryPreferencesForm: React.FC = () => {
         (error as SolidPodResponseError).statusCode === 404
       ) {
         // If not found, create a new SolidDataset
-        dietaryProfile = createSolidDataset()
+        dietaryProfileDataset = createSolidDataset()
       } else {
         console.error((error as Error).message)
         alert(
@@ -147,17 +150,150 @@ const ActualDietaryPreferencesForm: React.FC = () => {
       }
     }
 
-    let user = createThing({ name: 'me' })
+    // Create a Thing with the same IRI as the profile file on Pod
+    let dietaryProfileThing = createThing({ name: '' })
 
-    user = addStringEnglish(
-      user,
-      'https://github.com/JiriResler/solid-choose-well-ontology/blob/main/choosewell#allergicTo',
-      'testAllergenName',
+    const ontologyIri =
+      'https://jiriresler.solidcommunity.net/public/dietary-profile-and-customized-menus-ontology#'
+
+    dietaryProfileThing = addUrl(
+      dietaryProfileThing,
+      RDF.type,
+      ontologyIri + 'DietaryProfile',
     )
 
-    dietaryProfile = setThing(dietaryProfile, user)
+    dietaryProfileThing = addUrl(dietaryProfileThing, FOAF.maker, userWebId)
 
-    await saveSolidDatasetAt(profileUrl, dietaryProfile, {
+    for (const allergenIri of selectedAllergens) {
+      dietaryProfileThing = addUrl(
+        dietaryProfileThing,
+        ontologyIri + 'allergicTo',
+        allergenIri,
+      )
+    }
+
+    for (const dietIri of selectedDiets) {
+      dietaryProfileThing = addUrl(
+        dietaryProfileThing,
+        ontologyIri + 'onDiet',
+        dietIri,
+      )
+    }
+
+    for (const dietOption of selectedDietsSearch) {
+      dietaryProfileThing = addUrl(
+        dietaryProfileThing,
+        ontologyIri + 'onDiet',
+        dietOption.value,
+      )
+    }
+
+    if (calorieIntakeGoal > 0) {
+      dietaryProfileThing = addInteger(
+        dietaryProfileThing,
+        ontologyIri + 'dailyCalorieIntakeGoal',
+        calorieIntakeGoal,
+      )
+    }
+
+    for (const cuisineIri of selectedCuisines) {
+      dietaryProfileThing = addUrl(
+        dietaryProfileThing,
+        ontologyIri + 'favoriteCuisine',
+        cuisineIri,
+      )
+    }
+
+    for (const cuisineOption of selectedCuisinesSearch) {
+      dietaryProfileThing = addUrl(
+        dietaryProfileThing,
+        ontologyIri + 'favoriteCuisine',
+        cuisineOption.value,
+      )
+    }
+
+    for (const ingredientOption of selectedLikedIngredients) {
+      dietaryProfileThing = addUrl(
+        dietaryProfileThing,
+        ontologyIri + 'likedIngredient',
+        ingredientOption.value,
+      )
+    }
+
+    for (const ingredientOption of selectedDislikedIngredients) {
+      dietaryProfileThing = addUrl(
+        dietaryProfileThing,
+        ontologyIri + 'dislikedIngredient',
+        ingredientOption.value,
+      )
+    }
+
+    if (spicinessRadioSelected !== 'unspecified') {
+      if (spicinessRadioSelected === 'negative') {
+        dietaryProfileThing = addStringEnglish(
+          dietaryProfileThing,
+          ontologyIri + 'foodSpicinessPreference',
+          'not-spicy',
+        )
+      }
+
+      if (spicinessRadioSelected === 'positive') {
+        if (spicinessLevelSliderValue === 0) {
+          dietaryProfileThing = addStringEnglish(
+            dietaryProfileThing,
+            ontologyIri + 'foodSpicinessPreference',
+            'mild',
+          )
+        }
+
+        if (spicinessLevelSliderValue >= 33 && spicinessLevelSliderValue < 66) {
+          dietaryProfileThing = addStringEnglish(
+            dietaryProfileThing,
+            ontologyIri + 'foodSpicinessPreference',
+            'medium',
+          )
+        }
+
+        if (
+          spicinessLevelSliderValue >= 66 &&
+          spicinessLevelSliderValue < 100
+        ) {
+          dietaryProfileThing = addStringEnglish(
+            dietaryProfileThing,
+            ontologyIri + 'foodSpicinessPreference',
+            'hot',
+          )
+        }
+
+        if (spicinessLevelSliderValue === 100) {
+          dietaryProfileThing = addStringEnglish(
+            dietaryProfileThing,
+            ontologyIri + 'foodSpicinessPreference',
+            'extra-hot',
+          )
+        }
+      }
+    }
+
+    for (const cookingMethodIri of selectedCookingMethods) {
+      dietaryProfileThing = addUrl(
+        dietaryProfileThing,
+        ontologyIri + 'preferredCookingMethod',
+        cookingMethodIri,
+      )
+    }
+
+    for (const cookingMethodOption of selectedCookingMethodsSearch) {
+      dietaryProfileThing = addUrl(
+        dietaryProfileThing,
+        ontologyIri + 'preferredCookingMethod',
+        cookingMethodOption.value,
+      )
+    }
+
+    dietaryProfileDataset = setThing(dietaryProfileDataset, dietaryProfileThing)
+
+    await saveSolidDatasetAt(profileUrl, dietaryProfileDataset, {
       fetch: solidSession.fetch as undefined,
     })
 
