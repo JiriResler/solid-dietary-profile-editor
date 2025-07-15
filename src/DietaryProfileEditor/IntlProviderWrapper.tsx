@@ -157,7 +157,6 @@ type Messages = {
   searchMoreCookingMethods: string
   emptyProfileText: string
   preferredCookingMethodsOverview: string
-  saveProfileSuccessfulTitle: string
   profileSavedSuccessfully: string
   profileDeletion: string
   profileDeletionConfirm: string
@@ -165,6 +164,8 @@ type Messages = {
   profileDeletionSuccessMessage: string
   profileDeletionNotFoundMessage: string
   profileDeletionErrorMessage: string
+  saveProfileModalTitle: string
+  profileSaveError: string
 }
 
 const messagesInSlovak: Messages = {
@@ -339,14 +340,15 @@ const messagesInSlovak: Messages = {
   searchMoreCookingMethods: 'Vyhľadajte spôsoby prípravy',
   emptyProfileText: 'Profil je prázdny, kliknite na tlačidlo editácie profilu.',
   preferredCookingMethodsOverview: 'Preferované spôsoby prípravy jedla: ',
-  saveProfileSuccessfulTitle: 'Operácia úspešná',
   profileSavedSuccessfully: 'Profil bol úspešne uložený',
   profileDeletion: 'Zmazanie profilu',
   profileDeletionConfirm: 'Naozaj chcete zmazať váš diétny profil?',
   delete: 'Zmazať',
-  profileDeletionSuccessMessage: 'Profil bol úspešne zmazaný.',
-  profileDeletionNotFoundMessage: 'Profil nebol nájdený.',
+  profileDeletionSuccessMessage: 'Profil bol úspešne zmazaný',
+  profileDeletionNotFoundMessage: 'Profil nebol nájdený',
   profileDeletionErrorMessage: 'Profil sa nepodarilo zmazať',
+  saveProfileModalTitle: 'Uloženie profilu',
+  profileSaveError: 'Profil sa nepodarilo uložiť',
 }
 
 const IntlProviderWrapper: React.FC<PropsWithChildren> = (props) => {

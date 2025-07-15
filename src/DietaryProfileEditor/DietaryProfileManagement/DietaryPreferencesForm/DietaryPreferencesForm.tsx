@@ -30,8 +30,8 @@ import {
 } from '@inrupt/solid-client'
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
-import { FormattedMessage } from 'react-intl'
-import { collection, addDoc } from 'firebase/firestore'
+import { FormattedMessage, useIntl } from 'react-intl'
+import { doc, setDoc } from 'firebase/firestore'
 
 export const SelectComponents = {
   DropdownIndicator: () => null,
@@ -56,14 +56,17 @@ const ActualDietaryPreferencesForm: React.FC<
 
   const signedInWithFirebase = firebaseUser !== null
 
+  const intl = useIntl()
+
   const [formStep, setFormStep] = useState(0)
 
   const totalNumberOfSteps = 3
 
   const [profileSavingInProgress, setProfileSavingInProgress] = useState(false)
 
-  const [showSaveProfileSuccessModal, setShowSaveProfileSuccessModal] =
-    useState(false)
+  const [showSaveProfileModal, setShowSaveProfileModal] = useState(false)
+
+  const [saveProfileModalMessage, setSaveProfileModalMessage] = useState('')
 
   const [selectedAllergens, setSelectedAllergens] = useState<string[]>([])
 
@@ -159,10 +162,16 @@ const ActualDietaryPreferencesForm: React.FC<
         dietaryProfileDataset = createSolidDataset()
       } else {
         console.error((error as Error).message)
-        alert(
-          'There was an error while saving the profile with the code ' +
-            (error as SolidPodResponseError).statusCode,
+
+        setSaveProfileModalMessage(
+          intl.formatMessage({
+            id: 'profileSaveError',
+            defaultMessage: 'Profile could not be saved',
+          }),
         )
+
+        setShowSaveProfileModal(true)
+
         setProfileSavingInProgress(false)
         return
       }
@@ -313,9 +322,30 @@ const ActualDietaryPreferencesForm: React.FC<
 
     await saveSolidDatasetAt(profileUrl, dietaryProfileDataset, {
       fetch: solidSession.fetch as undefined,
+    }).catch((error) => {
+      setSaveProfileModalMessage(
+        intl.formatMessage({
+          id: 'profileSaveError',
+          defaultMessage: 'Profile could not be saved',
+        }),
+      )
+
+      setShowSaveProfileModal(true)
+
+      setProfileSavingInProgress(false)
+
+      console.log((error as Error).message)
+      return
     })
 
-    setShowSaveProfileSuccessModal(true)
+    setSaveProfileModalMessage(
+      intl.formatMessage({
+        id: 'profileSavedSuccessfully',
+        defaultMessage: 'Profile was saved successfully',
+      }),
+    )
+
+    setShowSaveProfileModal(true)
   }
 
   /**
@@ -324,16 +354,37 @@ const ActualDietaryPreferencesForm: React.FC<
   function saveDietaryProfileFirebase() {
     setProfileSavingInProgress(true)
 
-    addDoc(collection(db, 'users'), {
+    if (firebaseUser === null || firebaseUser === undefined) {
+      setProfileSavingInProgress(false)
+      return
+    }
+
+    setDoc(doc(db, 'users', firebaseUser.uid), {
       first: 'Ada',
       last: 'Lovelace',
       born: 1815,
     })
       .then(() => {
-        setShowSaveProfileSuccessModal(true)
+        setSaveProfileModalMessage(
+          intl.formatMessage({
+            id: 'profileSavedSuccessfully',
+            defaultMessage: 'Profile was saved successfully',
+          }),
+        )
+
+        setShowSaveProfileModal(true)
       })
       .catch((error) => {
         console.error(error)
+
+        setSaveProfileModalMessage(
+          intl.formatMessage({
+            id: 'profileSaveError',
+            defaultMessage: 'Profile could not be saved',
+          }),
+        )
+
+        setShowSaveProfileModal(true)
       })
       .finally(() => {
         setProfileSavingInProgress(false)
@@ -343,29 +394,24 @@ const ActualDietaryPreferencesForm: React.FC<
   return (
     <div className="d-flex flex-column h-100">
       <Modal
-        show={showSaveProfileSuccessModal}
+        show={showSaveProfileModal}
         onHide={() => {
           setProfileSavingInProgress(false)
           setEditProfile(false)
-          setShowSaveProfileSuccessModal(false)
+          setShowSaveProfileModal(false)
         }}
         centered
       >
         <Modal.Header closeButton>
           <Modal.Title>
             <FormattedMessage
-              id="saveProfileSuccessfulTitle"
-              defaultMessage="Operation successful"
+              id="saveProfileModalTitle"
+              defaultMessage="Save profile"
             />
           </Modal.Title>
         </Modal.Header>
 
-        <Modal.Body>
-          <FormattedMessage
-            id="profileSavedSuccessfully"
-            defaultMessage={'Profile saved successfully'}
-          />
-        </Modal.Body>
+        <Modal.Body>{saveProfileModalMessage}</Modal.Body>
 
         <Modal.Footer>
           <Button
@@ -373,7 +419,7 @@ const ActualDietaryPreferencesForm: React.FC<
             onClick={() => {
               setProfileSavingInProgress(false)
               setEditProfile(false)
-              setShowSaveProfileSuccessModal(false)
+              setShowSaveProfileModal(false)
             }}
           >
             <FormattedMessage id="closeModal" defaultMessage="Close" />
