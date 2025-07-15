@@ -29,7 +29,7 @@ import {
 import { FOAF } from '@inrupt/vocab-common-rdf'
 import Spinner from 'react-bootstrap/Spinner'
 import axios from 'axios'
-import { doc, getDoc } from 'firebase/firestore'
+import { doc, getDoc, deleteDoc } from 'firebase/firestore'
 
 const allergenIntlMessageList = [
   {
@@ -994,9 +994,36 @@ const ProfileOverview: React.FC<ProfileOverviewProps> = ({
         })
     }
 
-    // if (signedInWithFirebase) {
+    if (signedInWithFirebase) {
+      setProfileDeleteInProgress(true)
 
-    // }
+      if (firebaseUser === null || firebaseUser === undefined) {
+        return
+      }
+
+      deleteDoc(doc(db, 'users', firebaseUser.uid))
+        .then(() => {
+          setProfileDeleteModalMessage(
+            intl.formatMessage({
+              id: 'profileDeletionSuccessMessage',
+              defaultMessage: 'Profile was deleted successfully.',
+            }),
+          )
+          setProfileWasDeleted(true)
+        })
+        .catch((error) => {
+          setProfileDeleteModalMessage(
+            intl.formatMessage({
+              id: 'profileDeletionErrorMessage',
+              defaultMessage: 'Profile could not be deleted.',
+            }),
+          )
+          console.error(error)
+        })
+        .finally(() => {
+          setProfileDeleteInProgress(false)
+        })
+    }
   }
 
   /**
