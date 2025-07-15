@@ -1,3 +1,11 @@
+.profile-overview-screen {
+  height: 100dvh;
+}
+
+.empty-profile-text {
+  font-weight: 500;
+}
+
 .profile-overview-head-section {
   background-color: #2541b2;
   height: 86px;
@@ -83,5 +91,5 @@
 }
 
 .preference-card-icon {
-  width: 18px;
+  width: 20px;
 }

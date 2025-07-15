@@ -5,7 +5,7 @@ import { auth } from '../../../firebase'
 import { signOut } from 'firebase/auth'
 import { useNavigate } from 'react-router-dom'
 import './ProfileOverview.css'
-import { FormattedMessage } from 'react-intl'
+import { FormattedMessage, useIntl } from 'react-intl'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Card from 'react-bootstrap/Card'
@@ -24,6 +24,7 @@ import {
   SolidDataset,
 } from '@inrupt/solid-client'
 import { FOAF } from '@inrupt/vocab-common-rdf'
+import Spinner from 'react-bootstrap/Spinner'
 
 type ProfileOverviewProps = {
   setEditProfile: React.Dispatch<React.SetStateAction<boolean>>
@@ -46,12 +47,14 @@ const ProfileOverview: React.FC<ProfileOverviewProps> = ({
 
   const routerNavigate = useNavigate()
 
+  const intl = useIntl()
+
   const [showOffcanvas, setShowOffCanvas] = useState(false)
 
   const dietaryProfileQuery = useQuery({
     queryKey: ['getUserDietaryProfile'],
     queryFn: fetchDietaryProfile,
-    // select: formatDietaryProfileResponse,
+    select: formatDietaryProfileResponse,
   })
 
   const userNameQuery = useQuery({
@@ -77,14 +80,16 @@ const ProfileOverview: React.FC<ProfileOverviewProps> = ({
   /**
    * Retrieves dietary profile of the signed-in user.
    */
-  function fetchDietaryProfile() {
+  async function fetchDietaryProfile() {
     if (signedInWithSolid) {
-      return fetchDietaryProfileSolidPod()
+      return await fetchDietaryProfileSolidPod()
     }
 
     // if (signedInWithFirebase) {
-    //   return firebaseUser?.email
+
     // }
+
+    return null
   }
 
   /**
@@ -243,7 +248,20 @@ const ProfileOverview: React.FC<ProfileOverviewProps> = ({
     )
 
     if (spicinessLevel !== null) {
-      dietaryProfileWithIris.spicinessLevel = spicinessLevel
+      if (spicinessLevel === 'extra-hot') {
+        dietaryProfileWithIris.spicinessLevel = intl.formatMessage({
+          id: 'extraHot',
+          defaultMessage: 'Extra-hot',
+        })
+      } else {
+        const capitalizedSpicinessLevel =
+          spicinessLevel.charAt(0).toUpperCase() + spicinessLevel.slice(1)
+
+        dietaryProfileWithIris.spicinessLevel = intl.formatMessage({
+          id: spicinessLevel,
+          defaultMessage: capitalizedSpicinessLevel,
+        })
+      }
     }
 
     dietaryProfileWithIris.cookingMethods = getUrlAll(
@@ -252,6 +270,30 @@ const ProfileOverview: React.FC<ProfileOverviewProps> = ({
     )
 
     return dietaryProfileWithIris
+  }
+
+  /**
+   * Creates an object with resource labels instead of IRIs.
+   */
+  function formatDietaryProfileResponse(
+    dietaryProfileIris: DietaryProfileObject | null,
+  ): DietaryProfileObject | null {
+    // Non-existing profile
+    if (dietaryProfileIris === null) {
+      return null
+    }
+    console.log(dietaryProfileIris)
+
+    return {
+      allergens: ['Gluten', 'Lupin'],
+      diets: ['Vegetarian', 'Keto'],
+      calories: 2222,
+      cuisines: ['Chinese', 'Italian'],
+      likedIngredients: ['Tomato', 'Pork'],
+      dislikedIngredients: ['Chicken', 'Carrot'],
+      spicinessLevel: 'Medium',
+      cookingMethods: ['Boiling', 'Frying'],
+    }
   }
 
   /**
@@ -274,7 +316,7 @@ const ProfileOverview: React.FC<ProfileOverviewProps> = ({
   }
 
   return (
-    <div className="position-relative">
+    <div className="position-relative profile-overview-screen">
       <Offcanvas
         show={showOffcanvas}
         onHide={() => setShowOffCanvas(false)}
@@ -373,143 +415,192 @@ const ProfileOverview: React.FC<ProfileOverviewProps> = ({
         </Col>
       </Row>
 
-      <Stack gap={3} className="preferences-card-stack mt-3 mb-3">
-        <Card>
-          <Card.Body>
-            <Card.Title>
-              <img
-                src="images/exclamation-triangle.svg"
-                alt="allergen-warning-icon"
-                className="me-2 mb-1 preference-card-icon"
-              />
+      {dietaryProfileQuery.isPending && (
+        <Spinner
+          animation="border"
+          role="status"
+          variant="primary"
+          className="position-absolute top-50 start-50"
+        >
+          <span className="visually-hidden">Loading...</span>
+        </Spinner>
+      )}
 
-              <FormattedMessage
-                id="allergenPreferencesHeading"
-                defaultMessage="Allergens"
-              />
-            </Card.Title>
+      {dietaryProfileQuery.data === null && !dietaryProfileQuery.isPending && (
+        <div className="position-absolute top-50 start-50 translate-middle empty-profile-text">
+          <FormattedMessage
+            id="emptyProfileText"
+            defaultMessage="Profile is empty, click the Edit Profile button to start."
+          />
+        </div>
+      )}
 
-            <Card.Subtitle className="mt-2 mb-2">
-              <span className="text-muted">
-                <FormattedMessage
-                  id="allergicTo"
-                  defaultMessage="You are allergic to: "
-                />
-              </span>
+      {dietaryProfileQuery.data !== null &&
+        dietaryProfileQuery.data !== undefined &&
+        !dietaryProfileQuery.isPending && (
+          <Stack gap={3} className="preferences-card-stack mt-3 mb-3">
+            <Card>
+              <Card.Body>
+                <Card.Title>
+                  <img
+                    src="images/exclamation-triangle.svg"
+                    alt="allergen-warning-icon"
+                    className="me-2 mb-1 preference-card-icon"
+                  />
 
-              <span>Celery, Gluten</span>
-            </Card.Subtitle>
-          </Card.Body>
-        </Card>
+                  <FormattedMessage
+                    id="allergenPreferencesHeading"
+                    defaultMessage="Allergens"
+                  />
+                </Card.Title>
 
-        <Card>
-          <Card.Body>
-            <Card.Title>
-              <img
-                src="images/leaf.svg"
-                alt="diet-leaf-icon"
-                className="me-2 mb-1 preference-card-icon"
-              />
-
-              <FormattedMessage
-                id="dietPreferencesHeading"
-                defaultMessage="Diets"
-              />
-            </Card.Title>
-
-            <Card.Subtitle className="mt-2 mb-2">
-              <Stack gap={2}>
-                <div>
+                <Card.Subtitle className="mt-2 mb-2">
                   <span className="text-muted">
                     <FormattedMessage
-                      id="onDiets"
-                      defaultMessage="Your are on diets: "
+                      id="allergicTo"
+                      defaultMessage="You are allergic to: "
                     />
                   </span>
 
-                  <span>Vegetarian, Raw</span>
-                </div>
+                  <span>{dietaryProfileQuery.data.allergens.join(', ')}</span>
+                </Card.Subtitle>
+              </Card.Body>
+            </Card>
 
-                <div>
-                  <span className="text-muted">
-                    <FormattedMessage
-                      id="dailyCalorieIntakeGoal"
-                      defaultMessage="Daily calorie intake: "
-                    />
-                  </span>
+            <Card>
+              <Card.Body>
+                <Card.Title>
+                  <img
+                    src="images/leaf.svg"
+                    alt="diet-leaf-icon"
+                    className="me-2 mb-1 preference-card-icon"
+                  />
 
-                  <span>2000 kcal</span>
-                </div>
-              </Stack>
-            </Card.Subtitle>
-          </Card.Body>
-        </Card>
+                  <FormattedMessage
+                    id="dietPreferencesHeading"
+                    defaultMessage="Diets"
+                  />
+                </Card.Title>
 
-        <Card>
-          <Card.Body>
-            <Card.Title>
-              <img
-                src="images/fork-knife.svg"
-                alt="fork-knife-icon"
-                className="me-2 mb-1 preference-card-icon"
-              />
+                <Card.Subtitle className="mt-2 mb-2">
+                  <Stack gap={2}>
+                    <div>
+                      <span className="text-muted">
+                        <FormattedMessage
+                          id="onDiets"
+                          defaultMessage="Your are on diets: "
+                        />
+                      </span>
 
-              <FormattedMessage
-                id="tastePreferencesHeading"
-                defaultMessage="Taste Preferences"
-              />
-            </Card.Title>
+                      <span>{dietaryProfileQuery.data.diets.join(', ')}</span>
+                    </div>
 
-            <Card.Subtitle className="mt-2 mb-2">
-              <Stack gap={2}>
-                <div>
-                  <span className="text-muted">
-                    <FormattedMessage
-                      id="yourFavoriteCuisines"
-                      defaultMessage="Favorite cuisines: "
-                    />
-                  </span>
+                    <div>
+                      <span className="text-muted">
+                        <FormattedMessage
+                          id="dailyCalorieIntakeGoal"
+                          defaultMessage="Daily calorie intake: "
+                        />
+                      </span>
 
-                  <span>Italian, Japanese</span>
-                </div>
+                      <span>
+                        {dietaryProfileQuery.data.calories > 0
+                          ? dietaryProfileQuery.data.calories + ' kcal'
+                          : ''}
+                      </span>
+                    </div>
+                  </Stack>
+                </Card.Subtitle>
+              </Card.Body>
+            </Card>
 
-                <div>
-                  <span className="text-muted">
-                    <FormattedMessage
-                      id="howSpicyYouLikeYourFood"
-                      defaultMessage="Preferred level of spiciness: "
-                    />
-                  </span>
+            <Card>
+              <Card.Body>
+                <Card.Title>
+                  <img
+                    src="images/fork-knife.svg"
+                    alt="fork-knife-icon"
+                    className="me-2 mb-1 preference-card-icon"
+                  />
 
-                  <span>Mild</span>
-                </div>
+                  <FormattedMessage
+                    id="tastePreferencesHeading"
+                    defaultMessage="Taste Preferences"
+                  />
+                </Card.Title>
 
-                <div>
-                  <span className="text-muted">
-                    <FormattedMessage
-                      id="likedIngredients"
-                      defaultMessage="Liked ingredients: "
-                    />
-                  </span>
+                <Card.Subtitle className="mt-2 mb-2">
+                  <Stack gap={2}>
+                    <div>
+                      <span className="text-muted">
+                        <FormattedMessage
+                          id="yourFavoriteCuisines"
+                          defaultMessage="Favorite cuisines: "
+                        />
+                      </span>
 
-                  <span>Avocado, Seaweed</span>
-                </div>
+                      <span>
+                        {dietaryProfileQuery.data.cuisines.join(', ')}
+                      </span>
+                    </div>
 
-                <div>
-                  <span className="text-muted">
-                    <FormattedMessage
-                      id="dislikedIngredients"
-                      defaultMessage="Disliked ingredients: "
-                    />
-                  </span>
+                    <div>
+                      <span className="text-muted">
+                        <FormattedMessage
+                          id="howSpicyYouLikeYourFood"
+                          defaultMessage="Preferred level of spiciness: "
+                        />
+                      </span>
 
-                  <span>Mushrooms, Tofu</span>
-                </div>
-              </Stack>
-            </Card.Subtitle>
-          </Card.Body>
-        </Card>
-      </Stack>
+                      <span>{dietaryProfileQuery.data.spicinessLevel}</span>
+                    </div>
+
+                    <div>
+                      <span className="text-muted">
+                        <FormattedMessage
+                          id="likedIngredients"
+                          defaultMessage="Liked ingredients: "
+                        />
+                      </span>
+
+                      <span>
+                        {dietaryProfileQuery.data.likedIngredients.join(', ')}
+                      </span>
+                    </div>
+
+                    <div>
+                      <span className="text-muted">
+                        <FormattedMessage
+                          id="dislikedIngredients"
+                          defaultMessage="Disliked ingredients: "
+                        />
+                      </span>
+
+                      <span>
+                        {dietaryProfileQuery.data.dislikedIngredients.join(
+                          ', ',
+                        )}
+                      </span>
+                    </div>
+
+                    <div>
+                      <span className="text-muted">
+                        <FormattedMessage
+                          id="preferredCookingMethodsOverview"
+                          defaultMessage="Preferred cooking methods: "
+                        />
+                      </span>
+
+                      <span>
+                        {dietaryProfileQuery.data.cookingMethods.join(', ')}
+                      </span>
+                    </div>
+                  </Stack>
+                </Card.Subtitle>
+              </Card.Body>
+            </Card>
+          </Stack>
+        )}
 
       <Button
         className="position-absolute position-fixed bottom-0 end-0 mb-4 me-4 edit-profile-round-button shadow"

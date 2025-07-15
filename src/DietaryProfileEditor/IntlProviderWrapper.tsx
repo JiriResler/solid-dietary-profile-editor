@@ -155,6 +155,8 @@ type Messages = {
   sauteingMethod: string
   fetchingCookingMethodsFailed: string
   searchMoreCookingMethods: string
+  emptyProfileText: string
+  preferredCookingMethodsOverview: string
 }
 
 const messagesInSlovak: Messages = {
@@ -326,7 +328,9 @@ const messagesInSlovak: Messages = {
   sauteingMethod: 'Restovanie',
   fetchingCookingMethodsFailed:
     'Načítanie spôsobov prípravy jedla bolo neúspešné',
-  searchMoreCookingMethods: 'Vyhľadajte ingrediencie spôsoby prípravy',
+  searchMoreCookingMethods: 'Vyhľadajte spôsoby prípravy',
+  emptyProfileText: 'Profil je prázdny, kliknite na tlačidlo editácie profilu.',
+  preferredCookingMethodsOverview: 'Preferované spôsoby prípravy jedla: ',
 }
 
 const IntlProviderWrapper: React.FC<PropsWithChildren> = (props) => {
