@@ -130,6 +130,49 @@ const dietIntlMessageList = [
   },
 ]
 
+const cuisineIntlMessageList = [
+  {
+    cuisineIntlMessageId: 'italianCuisine',
+    cuisineIri: 'http://www.wikidata.org/entity/Q192786',
+    label: 'Italian',
+  },
+  {
+    cuisineIntlMessageId: 'greekCuisine',
+    cuisineIri: 'http://www.wikidata.org/entity/Q744027',
+    label: 'Greek',
+  },
+  {
+    cuisineIntlMessageId: 'mexicanCuisine',
+    cuisineIri: 'http://www.wikidata.org/entity/Q207965',
+    label: 'Mexican',
+  },
+  {
+    cuisineIntlMessageId: 'chineseCuisine',
+    cuisineIri: 'http://www.wikidata.org/entity/Q10876842',
+    label: 'Chinese',
+  },
+  {
+    cuisineIntlMessageId: 'turkishCuisine',
+    cuisineIri: 'http://www.wikidata.org/entity/Q654493',
+    label: 'Turkish',
+  },
+  {
+    cuisineIntlMessageId: 'spanishCuisine',
+    cuisineIri: 'http://www.wikidata.org/entity/Q622512',
+    label: 'Spanish',
+  },
+  {
+    cuisineIntlMessageId: 'japaneseCuisine',
+    cuisineIri: 'http://www.wikidata.org/entity/Q234138',
+    label: 'Japanese',
+  },
+  {
+    cuisineIntlMessageId: 'frenchCuisine',
+    cuisineIri: 'http://www.wikidata.org/entity/Q6661',
+    label: 'French',
+  },
+]
+
 type ProfileOverviewProps = {
   setEditProfile: React.Dispatch<React.SetStateAction<boolean>>
 }
@@ -188,6 +231,26 @@ const ProfileOverview: React.FC<ProfileOverviewProps> = ({
     }
     results: {
       bindings: DietBinding[]
+    }
+  }
+
+  type CuisineBinding = {
+    cuisine: {
+      type: string
+      value: string
+    }
+    cuisineLabel: {
+      type: string
+      value: string
+    }
+  }
+
+  type CuisineResponse = {
+    head: {
+      vars: string[]
+    }
+    results: {
+      bindings: CuisineBinding[]
     }
   }
 
@@ -475,7 +538,7 @@ const ProfileOverview: React.FC<ProfileOverviewProps> = ({
     })
 
     // SPARQL query to retrieve diet labels from Wikidata
-    const sparqlQuery = `
+    const sparqlQueryDiets = `
       SELECT DISTINCT ?diet ?dietLabel WHERE {
         ?diet (wdt:P31|wdt:P279) wd:Q474191.
         FILTER(?diet IN(${dietIrisInBrackets.join(', ')}))
@@ -485,7 +548,7 @@ const ProfileOverview: React.FC<ProfileOverviewProps> = ({
 
     const endpointUrl = 'https://query.wikidata.org/sparql'
 
-    const requestUrl = endpointUrl + '?query=' + encodeURI(sparqlQuery)
+    const requestUrl = endpointUrl + '?query=' + encodeURI(sparqlQueryDiets)
 
     const requestHeaders = {
       Accept: 'application/sparql-results+json',
@@ -507,7 +570,73 @@ const ProfileOverview: React.FC<ProfileOverviewProps> = ({
         console.error('Error while fetching diet labels.', error)
         throw error
       })
-    console.log(dietaryProfileLabels)
+
+    // Find cuisine labels based on their IRIs
+    const cuisineLabelsToFetch = []
+
+    for (const cuisineIri of dietaryProfileIris.cuisines) {
+      let cuisineIntlMessageId = ''
+
+      for (const cuisine of cuisineIntlMessageList) {
+        if (cuisine.cuisineIri === cuisineIri) {
+          cuisineIntlMessageId = cuisine.cuisineIntlMessageId
+
+          dietaryProfileLabels.cuisines.push(
+            intl.formatMessage({
+              id: cuisineIntlMessageId,
+              defaultMessage: cuisine.label,
+            }),
+          )
+        }
+      }
+
+      if (cuisineIntlMessageId === '') {
+        cuisineLabelsToFetch.push(cuisineIri)
+      }
+    }
+
+    const cuisineIrisInBrackets = cuisineLabelsToFetch.map((cuisineIri) => {
+      return '<' + cuisineIri + '>'
+    })
+
+    // SPARQL query to retrieve cuisine labels from Wikidata
+    const sparqlQueryCuisines = `
+      SELECT DISTINCT ?cuisine ?cuisineLabel WHERE {
+        ?cuisine (wdt:P31|wdt:P279) wd:Q1968435.
+        FILTER(?cuisine IN(${cuisineIrisInBrackets.join(', ')}))
+        SERVICE wikibase:label { bd:serviceParam wikibase:language "${selectedLanguage},en,mul". }
+      }
+    `
+
+    const endpointUrlCuisines = 'https://query.wikidata.org/sparql'
+
+    const requestUrlCuisines =
+      endpointUrlCuisines + '?query=' + encodeURI(sparqlQueryCuisines)
+
+    const requestHeadersCuisines = {
+      Accept: 'application/sparql-results+json',
+    }
+
+    await axios
+      .get<CuisineResponse>(requestUrlCuisines, {
+        headers: requestHeadersCuisines,
+      })
+      .then((response) => {
+        for (const cuisineBinding of response.data.results.bindings) {
+          const cuisineLabelValue = cuisineBinding.cuisineLabel.value
+
+          const capitalizedCuisineLabel =
+            cuisineLabelValue.charAt(0).toUpperCase() +
+            cuisineLabelValue.slice(1)
+
+          dietaryProfileLabels.cuisines.push(capitalizedCuisineLabel)
+        }
+      })
+      .catch((error) => {
+        console.error('Error while fetching cuisine labels.', error)
+        throw error
+      })
+
     return dietaryProfileLabels
   }
 
