@@ -254,6 +254,26 @@ const ProfileOverview: React.FC<ProfileOverviewProps> = ({
     }
   }
 
+  type IngredientBinding = {
+    ingredient: {
+      type: string
+      value: string
+    }
+    ingredientLabel: {
+      type: string
+      value: string
+    }
+  }
+
+  type IngredientResponse = {
+    head: {
+      vars: string[]
+    }
+    results: {
+      bindings: IngredientBinding[]
+    }
+  }
+
   type DietaryProfileObject = {
     allergens: string[]
     diets: string[]
@@ -546,16 +566,17 @@ const ProfileOverview: React.FC<ProfileOverviewProps> = ({
       }
     `
 
-    const endpointUrl = 'https://query.wikidata.org/sparql'
+    const endpointUrlDiets = 'https://query.wikidata.org/sparql'
 
-    const requestUrl = endpointUrl + '?query=' + encodeURI(sparqlQueryDiets)
+    const requestUrlDiets =
+      endpointUrlDiets + '?query=' + encodeURI(sparqlQueryDiets)
 
-    const requestHeaders = {
+    const requestHeadersDiets = {
       Accept: 'application/sparql-results+json',
     }
 
     await axios
-      .get<DietResponse>(requestUrl, { headers: requestHeaders })
+      .get<DietResponse>(requestUrlDiets, { headers: requestHeadersDiets })
       .then((response) => {
         for (const dietBinding of response.data.results.bindings) {
           const dietLabelValue = dietBinding.dietLabel.value
@@ -634,6 +655,100 @@ const ProfileOverview: React.FC<ProfileOverviewProps> = ({
       })
       .catch((error) => {
         console.error('Error while fetching cuisine labels.', error)
+        throw error
+      })
+
+    // Find liked ingredient labels based on their IRIs
+    const likedIngredientIrisInBrackets =
+      dietaryProfileIris.likedIngredients.map((ingredientIri) => {
+        return '<' + ingredientIri + '>'
+      })
+
+    // SPARQL query to retrieve liked ingredient labels from Wikidata
+    const sparqlQueryLikedIngredients = `
+      SELECT DISTINCT ?ingredient ?ingredientLabel WHERE {
+        ?ingredient (wdt:P31|wdt:P279) wd:Q25403900.
+        FILTER(?ingredient IN(${likedIngredientIrisInBrackets.join(', ')}))
+        SERVICE wikibase:label { bd:serviceParam wikibase:language "${selectedLanguage},en,mul". }
+      }
+    `
+
+    const endpointUrlLikedIngredients = 'https://query.wikidata.org/sparql'
+
+    const requestUrlLikedIngredients =
+      endpointUrlLikedIngredients +
+      '?query=' +
+      encodeURI(sparqlQueryLikedIngredients)
+
+    const requestHeadersLikedIngredients = {
+      Accept: 'application/sparql-results+json',
+    }
+
+    await axios
+      .get<IngredientResponse>(requestUrlLikedIngredients, {
+        headers: requestHeadersLikedIngredients,
+      })
+      .then((response) => {
+        for (const ingredientBinding of response.data.results.bindings) {
+          const ingredientLabelValue = ingredientBinding.ingredientLabel.value
+
+          const capitalizedIngredientLabel =
+            ingredientLabelValue.charAt(0).toUpperCase() +
+            ingredientLabelValue.slice(1)
+
+          dietaryProfileLabels.likedIngredients.push(capitalizedIngredientLabel)
+        }
+      })
+      .catch((error) => {
+        console.error('Error while fetching ingredient labels.', error)
+        throw error
+      })
+
+    // Find disliked ingredient labels based on their IRIs
+    const dislikedIngredientIrisInBrackets =
+      dietaryProfileIris.dislikedIngredients.map((ingredientIri) => {
+        return '<' + ingredientIri + '>'
+      })
+
+    // SPARQL query to retrieve disliked ingredient labels from Wikidata
+    const sparqlQueryDislikedIngredients = `
+      SELECT DISTINCT ?ingredient ?ingredientLabel WHERE {
+        ?ingredient (wdt:P31|wdt:P279) wd:Q25403900.
+        FILTER(?ingredient IN(${dislikedIngredientIrisInBrackets.join(', ')}))
+        SERVICE wikibase:label { bd:serviceParam wikibase:language "${selectedLanguage},en,mul". }
+      }
+    `
+
+    const endpointUrlDislikedIngredients = 'https://query.wikidata.org/sparql'
+
+    const requestUrlDislikedIngredients =
+      endpointUrlDislikedIngredients +
+      '?query=' +
+      encodeURI(sparqlQueryDislikedIngredients)
+
+    const requestHeadersDislikedIngredients = {
+      Accept: 'application/sparql-results+json',
+    }
+
+    await axios
+      .get<IngredientResponse>(requestUrlDislikedIngredients, {
+        headers: requestHeadersDislikedIngredients,
+      })
+      .then((response) => {
+        for (const ingredientBinding of response.data.results.bindings) {
+          const ingredientLabelValue = ingredientBinding.ingredientLabel.value
+
+          const capitalizedIngredientLabel =
+            ingredientLabelValue.charAt(0).toUpperCase() +
+            ingredientLabelValue.slice(1)
+
+          dietaryProfileLabels.dislikedIngredients.push(
+            capitalizedIngredientLabel,
+          )
+        }
+      })
+      .catch((error) => {
+        console.error('Error while fetching ingredient labels.', error)
         throw error
       })
 
