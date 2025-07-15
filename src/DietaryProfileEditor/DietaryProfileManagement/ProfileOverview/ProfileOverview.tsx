@@ -26,6 +26,65 @@ import {
 import { FOAF } from '@inrupt/vocab-common-rdf'
 import Spinner from 'react-bootstrap/Spinner'
 
+const allergenList = [
+  {
+    allergenIntlMessageId: 'gluten',
+    allergenIri: 'http://www.wikidata.org/entity/Q188251',
+  },
+  {
+    allergenIntlMessageId: 'crustaceans',
+    allergenIri: 'http://www.wikidata.org/entity/Q25364',
+  },
+  {
+    allergenIntlMessageId: 'eggs',
+    allergenIri: 'http://www.wikidata.org/entity/Q93189',
+  },
+  {
+    allergenIntlMessageId: 'fish',
+    allergenIri: 'http://www.wikidata.org/entity/Q152',
+  },
+  {
+    allergenIntlMessageId: 'peanuts',
+    allergenIri: 'http://www.wikidata.org/entity/Q37383',
+  },
+  {
+    allergenIntlMessageId: 'soya',
+    allergenIri: 'http://www.wikidata.org/entity/Q11006',
+  },
+  {
+    allergenIntlMessageId: 'milk',
+    allergenIri: 'http://www.wikidata.org/entity/Q8495',
+  },
+  {
+    allergenIntlMessageId: 'nuts',
+    allergenIri: 'http://www.wikidata.org/entity/Q11009',
+  },
+  {
+    allergenIntlMessageId: 'celery',
+    allergenIri: 'http://www.wikidata.org/entity/Q28298',
+  },
+  {
+    allergenIntlMessageId: 'mustard',
+    allergenIri: 'http://www.wikidata.org/entity/Q1937700',
+  },
+  {
+    allergenIntlMessageId: 'sesame',
+    allergenIri: 'http://www.wikidata.org/entity/Q2763698',
+  },
+  {
+    allergenIntlMessageId: 'sulphites',
+    allergenIri: 'http://www.wikidata.org/entity/Q413363',
+  },
+  {
+    allergenIntlMessageId: 'lupin',
+    allergenIri: 'http://www.wikidata.org/entity/Q13582643',
+  },
+  {
+    allergenIntlMessageId: 'molluscs',
+    allergenIri: 'http://www.wikidata.org/entity/Q6501235',
+  },
+]
+
 type ProfileOverviewProps = {
   setEditProfile: React.Dispatch<React.SetStateAction<boolean>>
 }
@@ -199,7 +258,11 @@ const ProfileOverview: React.FC<ProfileOverviewProps> = ({
       cookingMethods: [],
     }
 
-    const dietaryProfileThing = getThing(dietaryProfileDataset, profileUrl)
+    let dietaryProfileThing = getThing(dietaryProfileDataset, profileUrl)
+
+    if (dietaryProfileThing === null) {
+      dietaryProfileThing = getThing(dietaryProfileDataset, profileUrl + '#')
+    }
 
     if (dietaryProfileThing === null) {
       return null
@@ -282,18 +345,41 @@ const ProfileOverview: React.FC<ProfileOverviewProps> = ({
     if (dietaryProfileIris === null) {
       return null
     }
-    console.log(dietaryProfileIris)
 
-    return {
-      allergens: ['Gluten', 'Lupin'],
-      diets: ['Vegetarian', 'Keto'],
-      calories: 2222,
-      cuisines: ['Chinese', 'Italian'],
-      likedIngredients: ['Tomato', 'Pork'],
-      dislikedIngredients: ['Chicken', 'Carrot'],
-      spicinessLevel: 'Medium',
-      cookingMethods: ['Boiling', 'Frying'],
+    const dietaryProfileLabels: DietaryProfileObject = {
+      allergens: [],
+      diets: [],
+      calories: dietaryProfileIris.calories,
+      cuisines: [],
+      likedIngredients: [],
+      dislikedIngredients: [],
+      spicinessLevel: dietaryProfileIris.spicinessLevel,
+      cookingMethods: [],
     }
+
+    for (const allergenIri of dietaryProfileIris.allergens) {
+      let allergenIntlMessageid = ''
+
+      for (const allergen of allergenList) {
+        if (allergen.allergenIri === allergenIri) {
+          allergenIntlMessageid = allergen.allergenIntlMessageId
+        }
+      }
+
+      // Capitalized intl message id
+      const allergenEnglishlabel =
+        allergenIntlMessageid.charAt(0).toUpperCase() +
+        allergenIntlMessageid.slice(1)
+
+      dietaryProfileLabels.allergens.push(
+        intl.formatMessage({
+          id: allergenIntlMessageid,
+          defaultMessage: allergenEnglishlabel,
+        }),
+      )
+    }
+
+    return dietaryProfileLabels
   }
 
   /**
