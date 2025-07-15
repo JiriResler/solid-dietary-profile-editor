@@ -14,6 +14,7 @@ import { useAuthState } from 'react-firebase-hooks/auth'
 import { Navigate } from 'react-router-dom'
 import { auth } from '../../firebase'
 import Stack from 'react-bootstrap/Stack'
+import { languageFullName } from './loginHelpers'
 
 /**
  * Displays the login screen and allows the user to switch application language.
@@ -47,25 +48,6 @@ const Login: React.FC = () => {
 
     // if (language === 'Česky') {
     //   setSelectedLanguage('cs')
-    // }
-
-    return
-  }
-
-  /**
-   * Returns full language name based on the provided locale.
-   */
-  function languageFullName(locale: string) {
-    if (locale === 'en') {
-      return 'English'
-    }
-
-    if (locale === 'sk') {
-      return 'Slovensky'
-    }
-
-    // if (locale === 'cs') {
-    //   return 'Česky'
     // }
 
     return
@@ -196,7 +178,6 @@ const Login: React.FC = () => {
         >
           <option key="en">English</option>
           <option key="sk">Slovensky</option>
-          {/* <option key="cs">Česky</option> */}
         </Form.Select>
       </div>
     </>
