@@ -28,6 +28,9 @@ import {
   setThing,
   SolidDataset,
 } from '@inrupt/solid-client'
+import Modal from 'react-bootstrap/Modal'
+import Button from 'react-bootstrap/Button'
+import { FormattedMessage } from 'react-intl'
 
 export const SelectComponents = {
   DropdownIndicator: () => null,
@@ -55,6 +58,11 @@ const ActualDietaryPreferencesForm: React.FC<
   const [formStep, setFormStep] = useState(0)
 
   const totalNumberOfSteps = 3
+
+  const [profileSavingInProgress, setProfileSavingInProgress] = useState(false)
+
+  const [showSaveProfileSuccessModal, setShowSaveProfileSuccessModal] =
+    useState(true)
 
   const [selectedAllergens, setSelectedAllergens] = useState<string[]>([])
 
@@ -109,6 +117,8 @@ const ActualDietaryPreferencesForm: React.FC<
    * Saves user profile to a Solid Pod.
    */
   async function saveDietaryProfileSolid() {
+    setProfileSavingInProgress(true)
+
     const userWebId = solidSession.info.webId
 
     if (userWebId === undefined) {
@@ -152,6 +162,7 @@ const ActualDietaryPreferencesForm: React.FC<
           'There was an error while saving the profile with the code ' +
             (error as SolidPodResponseError).statusCode,
         )
+        setProfileSavingInProgress(false)
         return
       }
     }
@@ -303,18 +314,57 @@ const ActualDietaryPreferencesForm: React.FC<
       fetch: solidSession.fetch as undefined,
     })
 
-    alert('Profile saved')
-
-    setEditProfile(false)
+    setShowSaveProfileSuccessModal(true)
   }
 
   /**
    * Saves user profile to Google Firestore.
    */
-  function saveDietaryProfileFirebase() {}
+  function saveDietaryProfileFirebase() {
+    setProfileSavingInProgress(true)
+
+    setProfileSavingInProgress(false)
+
+    setShowSaveProfileSuccessModal(true)
+  }
 
   return (
     <div className="d-flex flex-column h-100">
+      <Modal
+        show={showSaveProfileSuccessModal}
+        onHide={() => {
+          setProfileSavingInProgress(false)
+          setEditProfile(false)
+          setShowSaveProfileSuccessModal(false)
+        }}
+        centered
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>
+            <FormattedMessage
+              id="saveProfileSuccessfulTitle"
+              defaultMessage="Operation successful"
+            />
+          </Modal.Title>
+        </Modal.Header>
+
+        <Modal.Body>
+          <FormattedMessage
+            id="profileSavedSuccessfully"
+            defaultMessage={'Profile saved successfully'}
+          />
+        </Modal.Body>
+
+        <Modal.Footer>
+          <Button
+            variant="secondary"
+            onClick={() => setShowSaveProfileSuccessModal(false)}
+          >
+            <FormattedMessage id="closeModal" defaultMessage="Close" />
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
       <div>
         <FormHeader
           formStep={formStep}
@@ -373,6 +423,7 @@ const ActualDietaryPreferencesForm: React.FC<
           setFormStep={setFormStep}
           totalNumberOfSteps={totalNumberOfSteps}
           handleFormSubmit={handleFormSubmit}
+          profileSavingInProgress={profileSavingInProgress}
         />
       </div>
     </div>

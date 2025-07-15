@@ -3,12 +3,14 @@ import { FormattedMessage } from 'react-intl'
 import './FormFooter.css'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
+import Spinner from 'react-bootstrap/esm/Spinner'
 
 type FormFooterProps = {
   formStep: number
   setFormStep: React.Dispatch<React.SetStateAction<number>>
   totalNumberOfSteps: number
   handleFormSubmit: () => void
+  profileSavingInProgress: boolean
 }
 
 /**
@@ -19,6 +21,7 @@ const FormFooter: React.FC<FormFooterProps> = ({
   setFormStep,
   totalNumberOfSteps,
   handleFormSubmit,
+  profileSavingInProgress,
 }) => {
   enum StepDirection {
     Up = 'up',
@@ -75,8 +78,17 @@ const FormFooter: React.FC<FormFooterProps> = ({
             className="navigation-button"
             variant="success"
             onClick={() => handleFormSubmit()}
+            disabled={profileSavingInProgress}
           >
-            <FormattedMessage id="finish" defaultMessage="Finish" />
+            {!profileSavingInProgress && (
+              <FormattedMessage id="finish" defaultMessage="Finish" />
+            )}
+
+            {profileSavingInProgress && (
+              <Spinner animation="border" role="status" size="sm">
+                <span className="visually-hidden">Loading...</span>
+              </Spinner>
+            )}
           </Button>
         )}
       </Col>

@@ -157,6 +157,8 @@ type Messages = {
   searchMoreCookingMethods: string
   emptyProfileText: string
   preferredCookingMethodsOverview: string
+  saveProfileSuccessfulTitle: string
+  profileSavedSuccessfully: string
 }
 
 const messagesInSlovak: Messages = {
@@ -331,6 +333,8 @@ const messagesInSlovak: Messages = {
   searchMoreCookingMethods: 'Vyhľadajte spôsoby prípravy',
   emptyProfileText: 'Profil je prázdny, kliknite na tlačidlo editácie profilu.',
   preferredCookingMethodsOverview: 'Preferované spôsoby prípravy jedla: ',
+  saveProfileSuccessfulTitle: 'Operácia úspešná',
+  profileSavedSuccessfully: 'Profil bol úspešne uložený',
 }
 
 const IntlProviderWrapper: React.FC<PropsWithChildren> = (props) => {
