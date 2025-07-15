@@ -62,7 +62,7 @@ const ActualDietaryPreferencesForm: React.FC<
   const [profileSavingInProgress, setProfileSavingInProgress] = useState(false)
 
   const [showSaveProfileSuccessModal, setShowSaveProfileSuccessModal] =
-    useState(true)
+    useState(false)
 
   const [selectedAllergens, setSelectedAllergens] = useState<string[]>([])
 
