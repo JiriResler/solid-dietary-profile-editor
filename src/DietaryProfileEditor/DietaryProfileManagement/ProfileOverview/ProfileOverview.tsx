@@ -12,6 +12,7 @@ import Col from 'react-bootstrap/Col'
 import Card from 'react-bootstrap/Card'
 import Stack from 'react-bootstrap/Stack'
 import Button from 'react-bootstrap/Button'
+import Modal from 'react-bootstrap/Modal'
 import Offcanvas from 'react-bootstrap/Offcanvas'
 import { useQuery } from '@tanstack/react-query'
 import {
@@ -23,6 +24,7 @@ import {
   getThing,
   getUrlAll,
   SolidDataset,
+  deleteSolidDataset,
 } from '@inrupt/solid-client'
 import { FOAF } from '@inrupt/vocab-common-rdf'
 import Spinner from 'react-bootstrap/Spinner'
@@ -210,6 +212,10 @@ type ProfileOverviewProps = {
   setEditProfile: React.Dispatch<React.SetStateAction<boolean>>
 }
 
+interface SolidPodResponseError extends Error {
+  statusCode?: number
+}
+
 /**
  * Displays the logged in user's dietary profile.
  * @param setEditProfile Changes a state variable to indicate whether the user wants to edit their dietary profile.
@@ -233,6 +239,19 @@ const ProfileOverview: React.FC<ProfileOverviewProps> = ({
 
   const [showOffcanvas, setShowOffCanvas] = useState(false)
 
+  const [showDeleteProfileModal, setShowDeleteProfileModal] = useState(false)
+
+  const [profileWasDeleted, setProfileWasDeleted] = useState(false)
+
+  const [profileDeleteInProgress, setProfileDeleteInProgress] = useState(false)
+
+  const [profileDeleteModalMessage, setProfileDeleteModalMessage] = useState(
+    intl.formatMessage({
+      id: 'profileDeletionConfirm',
+      defaultMessage: 'Are you sure you want to delete your dietary profile?',
+    }),
+  )
+
   const dietaryProfileQuery = useQuery({
     queryKey: ['getUserDietaryProfile'],
     queryFn: fetchDietaryProfile,
@@ -242,10 +261,6 @@ const ProfileOverview: React.FC<ProfileOverviewProps> = ({
     queryKey: ['getUserName'],
     queryFn: fetchUserName,
   })
-
-  interface SolidPodResponseError extends Error {
-    statusCode?: number
-  }
 
   type DietBinding = {
     diet: {
@@ -882,6 +897,72 @@ const ProfileOverview: React.FC<ProfileOverviewProps> = ({
   }
 
   /**
+   * Deletes the signed in user's dietary profile
+   */
+  async function deleteProfile() {
+    if (signedInWithSolid) {
+      setProfileDeleteInProgress(true)
+
+      const userWebId = solidSession.info.webId
+
+      if (userWebId === undefined) {
+        return
+      }
+
+      const podUrls = await getPodUrlAll(userWebId, {
+        fetch: solidSession.fetch as undefined,
+      })
+
+      const podUrl = podUrls[0]
+
+      const profileUrl =
+        podUrl + 'dietary-profile-editor-application/dietary-profile'
+
+      deleteSolidDataset(profileUrl, {
+        fetch: solidSession.fetch as undefined,
+      })
+        .then(() => {
+          setProfileDeleteModalMessage(
+            intl.formatMessage({
+              id: 'profileDeletionSuccessMessage',
+              defaultMessage: 'Profile was deleted successfully.',
+            }),
+          )
+          setProfileWasDeleted(true)
+        })
+        .catch((error) => {
+          if (
+            typeof (error as SolidPodResponseError).statusCode === 'number' &&
+            (error as SolidPodResponseError).statusCode === 404
+          ) {
+            setProfileDeleteModalMessage(
+              intl.formatMessage({
+                id: 'profileDeletionNotFoundMessage',
+                defaultMessage: 'No profile was found.',
+              }),
+            )
+            console.error(error)
+          } else {
+            setProfileDeleteModalMessage(
+              intl.formatMessage({
+                id: 'profileDeletionErrorMessage',
+                defaultMessage: 'Profile could not be deleted.',
+              }),
+            )
+            console.error(error)
+          }
+        })
+        .finally(() => {
+          setProfileDeleteInProgress(false)
+        })
+    }
+
+    // if (signedInWithFirebase) {
+
+    // }
+  }
+
+  /**
    * Signs the user out of the application.
    */
   async function applicationSignOut() {
@@ -943,7 +1024,10 @@ const ProfileOverview: React.FC<ProfileOverviewProps> = ({
 
         <button
           className="invisible-button offcanvas-item-button text-start position-relative"
-          onClick={() => alert('Delete pressed')}
+          onClick={() => {
+            setShowOffCanvas(false)
+            setShowDeleteProfileModal(true)
+          }}
         >
           <img
             src="images/trash.svg"
@@ -976,6 +1060,67 @@ const ProfileOverview: React.FC<ProfileOverviewProps> = ({
           </span>
         </button>
       </Offcanvas>
+
+      <Modal
+        show={showDeleteProfileModal}
+        centered
+        onHide={() => {
+          setProfileDeleteModalMessage(
+            intl.formatMessage({
+              id: 'profileDeletionConfirm',
+              defaultMessage:
+                'Are you sure you want to delete your dietary profile?',
+            }),
+          )
+          setShowDeleteProfileModal(false)
+        }}
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>
+            <FormattedMessage
+              id="profileDeletion"
+              defaultMessage="Profile deletion"
+            />
+          </Modal.Title>
+        </Modal.Header>
+
+        <Modal.Body>{profileDeleteModalMessage}</Modal.Body>
+
+        <Modal.Footer>
+          <Button
+            variant="danger"
+            disabled={profileDeleteInProgress}
+            className="delete-profile-button"
+            onClick={() => void deleteProfile()}
+          >
+            {!profileDeleteInProgress && (
+              <FormattedMessage id="delete" defaultMessage="Delete" />
+            )}
+
+            {profileDeleteInProgress && (
+              <Spinner animation="border" role="status" size="sm">
+                <span className="visually-hidden">Loading...</span>
+              </Spinner>
+            )}
+          </Button>
+
+          <Button
+            variant="secondary"
+            onClick={() => {
+              setProfileDeleteModalMessage(
+                intl.formatMessage({
+                  id: 'profileDeletionConfirm',
+                  defaultMessage:
+                    'Are you sure you want to delete your dietary profile?',
+                }),
+              )
+              setShowDeleteProfileModal(false)
+            }}
+          >
+            <FormattedMessage id="closeModal" defaultMessage="Close" />
+          </Button>
+        </Modal.Footer>
+      </Modal>
 
       <Row className="sticky-top profile-overview-head-section align-items-center">
         <Col className="ms-2" xs={8}>
@@ -1020,170 +1165,185 @@ const ProfileOverview: React.FC<ProfileOverviewProps> = ({
         </div>
       )}
 
-      {dietaryProfileQuery.data !== null && !dietaryProfileQuery.isPending && (
-        <Stack gap={3} className="preferences-card-stack mt-3 mb-3">
-          <Card>
-            <Card.Body>
-              <Card.Title>
-                <img
-                  src="images/exclamation-triangle.svg"
-                  alt="allergen-warning-icon"
-                  className="me-2 mb-1 preference-card-icon"
-                />
-
-                <FormattedMessage
-                  id="allergenPreferencesHeading"
-                  defaultMessage="Allergens"
-                />
-              </Card.Title>
-
-              <Card.Subtitle className="mt-2 mb-2">
-                <span className="text-muted">
-                  <FormattedMessage
-                    id="allergicTo"
-                    defaultMessage="You are allergic to: "
-                  />
-                </span>
-
-                {dietaryProfileQuery.data !== undefined && (
-                  <span>{dietaryProfileQuery.data.allergens.join(', ')}</span>
-                )}
-              </Card.Subtitle>
-            </Card.Body>
-          </Card>
-
-          <Card>
-            <Card.Body>
-              <Card.Title>
-                <img
-                  src="images/leaf.svg"
-                  alt="diet-leaf-icon"
-                  className="me-2 mb-1 preference-card-icon"
-                />
-
-                <FormattedMessage
-                  id="dietPreferencesHeading"
-                  defaultMessage="Diets"
-                />
-              </Card.Title>
-
-              <Card.Subtitle className="mt-2 mb-2">
-                <Stack gap={2}>
-                  <div>
-                    <span className="text-muted">
-                      <FormattedMessage
-                        id="onDiets"
-                        defaultMessage="Your are on diets: "
-                      />
-                    </span>
-
-                    <span>{dietaryProfileQuery.data?.diets.join(', ')}</span>
-                  </div>
-
-                  <div>
-                    <span className="text-muted">
-                      <FormattedMessage
-                        id="dailyCalorieIntakeGoal"
-                        defaultMessage="Daily calorie intake: "
-                      />
-                    </span>
-
-                    {dietaryProfileQuery.data?.calories !== undefined && (
-                      <span>
-                        {dietaryProfileQuery.data?.calories > 0
-                          ? dietaryProfileQuery.data?.calories + ' kcal'
-                          : ''}
-                      </span>
-                    )}
-                  </div>
-                </Stack>
-              </Card.Subtitle>
-            </Card.Body>
-          </Card>
-
-          <Card>
-            <Card.Body>
-              <Card.Title>
-                <img
-                  src="images/fork-knife.svg"
-                  alt="fork-knife-icon"
-                  className="me-2 mb-1 preference-card-icon"
-                />
-
-                <FormattedMessage
-                  id="tastePreferencesHeading"
-                  defaultMessage="Taste Preferences"
-                />
-              </Card.Title>
-
-              <Card.Subtitle className="mt-2 mb-2">
-                <Stack gap={2}>
-                  <div>
-                    <span className="text-muted">
-                      <FormattedMessage
-                        id="yourFavoriteCuisines"
-                        defaultMessage="Favorite cuisines: "
-                      />
-                    </span>
-
-                    <span>{dietaryProfileQuery.data?.cuisines.join(', ')}</span>
-                  </div>
-
-                  <div>
-                    <span className="text-muted">
-                      <FormattedMessage
-                        id="howSpicyYouLikeYourFood"
-                        defaultMessage="Preferred level of spiciness: "
-                      />
-                    </span>
-
-                    <span>{dietaryProfileQuery.data?.spicinessLevel}</span>
-                  </div>
-
-                  <div>
-                    <span className="text-muted">
-                      <FormattedMessage
-                        id="likedIngredients"
-                        defaultMessage="Liked ingredients: "
-                      />
-                    </span>
-
-                    <span>
-                      {dietaryProfileQuery.data?.likedIngredients.join(', ')}
-                    </span>
-                  </div>
-
-                  <div>
-                    <span className="text-muted">
-                      <FormattedMessage
-                        id="dislikedIngredients"
-                        defaultMessage="Disliked ingredients: "
-                      />
-                    </span>
-
-                    <span>
-                      {dietaryProfileQuery.data?.dislikedIngredients.join(', ')}
-                    </span>
-                  </div>
-
-                  <div>
-                    <span className="text-muted">
-                      <FormattedMessage
-                        id="preferredCookingMethodsOverview"
-                        defaultMessage="Preferred cooking methods: "
-                      />
-                    </span>
-
-                    <span>
-                      {dietaryProfileQuery.data?.cookingMethods.join(', ')}
-                    </span>
-                  </div>
-                </Stack>
-              </Card.Subtitle>
-            </Card.Body>
-          </Card>
-        </Stack>
+      {profileWasDeleted && (
+        <div className="position-absolute top-50 start-50 translate-middle empty-profile-text">
+          <FormattedMessage
+            id="emptyProfileText"
+            defaultMessage="Profile is empty, click the Edit Profile button to start."
+          />
+        </div>
       )}
+
+      {dietaryProfileQuery.data !== null &&
+        !dietaryProfileQuery.isPending &&
+        !profileWasDeleted && (
+          <Stack gap={3} className="preferences-card-stack mt-3 mb-3">
+            <Card>
+              <Card.Body>
+                <Card.Title>
+                  <img
+                    src="images/exclamation-triangle.svg"
+                    alt="allergen-warning-icon"
+                    className="me-2 mb-1 preference-card-icon"
+                  />
+
+                  <FormattedMessage
+                    id="allergenPreferencesHeading"
+                    defaultMessage="Allergens"
+                  />
+                </Card.Title>
+
+                <Card.Subtitle className="mt-2 mb-2">
+                  <span className="text-muted">
+                    <FormattedMessage
+                      id="allergicTo"
+                      defaultMessage="You are allergic to: "
+                    />
+                  </span>
+
+                  {dietaryProfileQuery.data !== undefined && (
+                    <span>{dietaryProfileQuery.data.allergens.join(', ')}</span>
+                  )}
+                </Card.Subtitle>
+              </Card.Body>
+            </Card>
+
+            <Card>
+              <Card.Body>
+                <Card.Title>
+                  <img
+                    src="images/leaf.svg"
+                    alt="diet-leaf-icon"
+                    className="me-2 mb-1 preference-card-icon"
+                  />
+
+                  <FormattedMessage
+                    id="dietPreferencesHeading"
+                    defaultMessage="Diets"
+                  />
+                </Card.Title>
+
+                <Card.Subtitle className="mt-2 mb-2">
+                  <Stack gap={2}>
+                    <div>
+                      <span className="text-muted">
+                        <FormattedMessage
+                          id="onDiets"
+                          defaultMessage="Your are on diets: "
+                        />
+                      </span>
+
+                      <span>{dietaryProfileQuery.data?.diets.join(', ')}</span>
+                    </div>
+
+                    <div>
+                      <span className="text-muted">
+                        <FormattedMessage
+                          id="dailyCalorieIntakeGoal"
+                          defaultMessage="Daily calorie intake: "
+                        />
+                      </span>
+
+                      {dietaryProfileQuery.data?.calories !== undefined && (
+                        <span>
+                          {dietaryProfileQuery.data?.calories > 0
+                            ? dietaryProfileQuery.data?.calories + ' kcal'
+                            : ''}
+                        </span>
+                      )}
+                    </div>
+                  </Stack>
+                </Card.Subtitle>
+              </Card.Body>
+            </Card>
+
+            <Card>
+              <Card.Body>
+                <Card.Title>
+                  <img
+                    src="images/fork-knife.svg"
+                    alt="fork-knife-icon"
+                    className="me-2 mb-1 preference-card-icon"
+                  />
+
+                  <FormattedMessage
+                    id="tastePreferencesHeading"
+                    defaultMessage="Taste Preferences"
+                  />
+                </Card.Title>
+
+                <Card.Subtitle className="mt-2 mb-2">
+                  <Stack gap={2}>
+                    <div>
+                      <span className="text-muted">
+                        <FormattedMessage
+                          id="yourFavoriteCuisines"
+                          defaultMessage="Favorite cuisines: "
+                        />
+                      </span>
+
+                      <span>
+                        {dietaryProfileQuery.data?.cuisines.join(', ')}
+                      </span>
+                    </div>
+
+                    <div>
+                      <span className="text-muted">
+                        <FormattedMessage
+                          id="howSpicyYouLikeYourFood"
+                          defaultMessage="Preferred level of spiciness: "
+                        />
+                      </span>
+
+                      <span>{dietaryProfileQuery.data?.spicinessLevel}</span>
+                    </div>
+
+                    <div>
+                      <span className="text-muted">
+                        <FormattedMessage
+                          id="likedIngredients"
+                          defaultMessage="Liked ingredients: "
+                        />
+                      </span>
+
+                      <span>
+                        {dietaryProfileQuery.data?.likedIngredients.join(', ')}
+                      </span>
+                    </div>
+
+                    <div>
+                      <span className="text-muted">
+                        <FormattedMessage
+                          id="dislikedIngredients"
+                          defaultMessage="Disliked ingredients: "
+                        />
+                      </span>
+
+                      <span>
+                        {dietaryProfileQuery.data?.dislikedIngredients.join(
+                          ', ',
+                        )}
+                      </span>
+                    </div>
+
+                    <div>
+                      <span className="text-muted">
+                        <FormattedMessage
+                          id="preferredCookingMethodsOverview"
+                          defaultMessage="Preferred cooking methods: "
+                        />
+                      </span>
+
+                      <span>
+                        {dietaryProfileQuery.data?.cookingMethods.join(', ')}
+                      </span>
+                    </div>
+                  </Stack>
+                </Card.Subtitle>
+              </Card.Body>
+            </Card>
+          </Stack>
+        )}
 
       <Button
         className="position-absolute position-fixed bottom-0 end-0 mb-4 me-4 edit-profile-round-button shadow"
