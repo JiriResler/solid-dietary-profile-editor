@@ -12,7 +12,7 @@ import React, { useState } from 'react'
 import reactSelectOption from './reactSelectOption'
 import { useSession } from '@inrupt/solid-ui-react'
 import { useAuthState } from 'react-firebase-hooks/auth'
-import { auth } from '../../../firebase'
+import { auth, db } from '../../../firebase'
 import { FOAF, RDF } from '@inrupt/vocab-common-rdf'
 import {
   addInteger,
@@ -31,6 +31,7 @@ import {
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
 import { FormattedMessage } from 'react-intl'
+import { collection, addDoc } from 'firebase/firestore'
 
 export const SelectComponents = {
   DropdownIndicator: () => null,
@@ -323,9 +324,20 @@ const ActualDietaryPreferencesForm: React.FC<
   function saveDietaryProfileFirebase() {
     setProfileSavingInProgress(true)
 
-    setProfileSavingInProgress(false)
-
-    setShowSaveProfileSuccessModal(true)
+    addDoc(collection(db, 'users'), {
+      first: 'Ada',
+      last: 'Lovelace',
+      born: 1815,
+    })
+      .then(() => {
+        setShowSaveProfileSuccessModal(true)
+      })
+      .catch((error) => {
+        console.error(error)
+      })
+      .finally(() => {
+        setProfileSavingInProgress(false)
+      })
   }
 
   return (
