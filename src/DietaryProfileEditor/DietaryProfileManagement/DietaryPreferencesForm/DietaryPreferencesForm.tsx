@@ -104,6 +104,17 @@ const ActualDietaryPreferencesForm: React.FC<
     statusCode?: number
   }
 
+  type DietaryProfileObject = {
+    allergens: string[]
+    diets: string[]
+    calories: number
+    cuisines: string[]
+    likedIngredients: string[]
+    dislikedIngredients: string[]
+    spicinessLevel: string
+    cookingMethods: string[]
+  }
+
   /**
    * Saves user profile when submit form button is pressed.
    */
@@ -359,11 +370,81 @@ const ActualDietaryPreferencesForm: React.FC<
       return
     }
 
-    setDoc(doc(db, 'users', firebaseUser.uid), {
-      first: 'Ada',
-      last: 'Lovelace',
-      born: 1815,
-    })
+    const dietaryProfileData: DietaryProfileObject = {
+      allergens: selectedAllergens,
+      diets: [],
+      calories: 0,
+      cuisines: [],
+      likedIngredients: [],
+      dislikedIngredients: [],
+      spicinessLevel: '',
+      cookingMethods: [],
+    }
+
+    for (const dietIri of selectedDiets) {
+      dietaryProfileData.diets.push(dietIri)
+    }
+
+    for (const dietOption of selectedDietsSearch) {
+      dietaryProfileData.diets.push(dietOption.value)
+    }
+
+    if (calorieIntakeGoal > 0) {
+      dietaryProfileData.calories = calorieIntakeGoal
+    }
+
+    for (const cuisineIri of selectedCuisines) {
+      dietaryProfileData.cuisines.push(cuisineIri)
+    }
+
+    for (const cuisineOption of selectedCuisinesSearch) {
+      dietaryProfileData.cuisines.push(cuisineOption.value)
+    }
+
+    for (const ingredientOption of selectedLikedIngredients) {
+      dietaryProfileData.likedIngredients.push(ingredientOption.value)
+    }
+
+    for (const ingredientOption of selectedDislikedIngredients) {
+      dietaryProfileData.dislikedIngredients.push(ingredientOption.value)
+    }
+
+    if (spicinessRadioSelected !== 'unspecified') {
+      if (spicinessRadioSelected === 'negative') {
+        dietaryProfileData.spicinessLevel = 'not-spicy'
+      }
+
+      if (spicinessRadioSelected === 'positive') {
+        if (spicinessLevelSliderValue === 0) {
+          dietaryProfileData.spicinessLevel = 'mild'
+        }
+
+        if (spicinessLevelSliderValue >= 33 && spicinessLevelSliderValue < 66) {
+          dietaryProfileData.spicinessLevel = 'medium'
+        }
+
+        if (
+          spicinessLevelSliderValue >= 66 &&
+          spicinessLevelSliderValue < 100
+        ) {
+          dietaryProfileData.spicinessLevel = 'hot'
+        }
+
+        if (spicinessLevelSliderValue === 100) {
+          dietaryProfileData.spicinessLevel = 'extra-hot'
+        }
+      }
+    }
+
+    for (const cookingMethodIri of selectedCookingMethods) {
+      dietaryProfileData.cookingMethods.push(cookingMethodIri)
+    }
+
+    for (const cookingMethodOption of selectedCookingMethodsSearch) {
+      dietaryProfileData.cookingMethods.push(cookingMethodOption.value)
+    }
+
+    setDoc(doc(db, 'users', firebaseUser.uid), dietaryProfileData)
       .then(() => {
         setSaveProfileModalMessage(
           intl.formatMessage({
