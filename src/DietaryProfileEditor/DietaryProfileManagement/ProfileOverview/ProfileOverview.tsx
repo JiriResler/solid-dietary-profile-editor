@@ -14,7 +14,6 @@ import Button from 'react-bootstrap/Button'
 import Offcanvas from 'react-bootstrap/Offcanvas'
 import { useQuery } from '@tanstack/react-query'
 import {
-  createSolidDataset,
   getInteger,
   getPodUrlAll,
   getSolidDataset,
@@ -49,10 +48,15 @@ const ProfileOverview: React.FC<ProfileOverviewProps> = ({
 
   const [showOffcanvas, setShowOffCanvas] = useState(false)
 
-  const { data, isPending, error } = useQuery({
+  const dietaryProfileQuery = useQuery({
     queryKey: ['getUserDietaryProfile'],
     queryFn: fetchDietaryProfile,
     // select: formatDietaryProfileResponse,
+  })
+
+  const userNameQuery = useQuery({
+    queryKey: ['getUserName'],
+    queryFn: fetchUserName,
   })
 
   interface SolidPodResponseError extends Error {
@@ -60,7 +64,6 @@ const ProfileOverview: React.FC<ProfileOverviewProps> = ({
   }
 
   type DietaryProfileObject = {
-    userFullName: string
     allergens: string[]
     diets: string[]
     calories: number
@@ -82,6 +85,57 @@ const ProfileOverview: React.FC<ProfileOverviewProps> = ({
     // if (signedInWithFirebase) {
     //   return firebaseUser?.email
     // }
+  }
+
+  /**
+   * Retrieves full name of the signed-in user.
+   */
+  async function fetchUserName() {
+    if (signedInWithSolid) {
+      const userWebId = solidSession.info.webId
+
+      if (userWebId === undefined) {
+        return ''
+      }
+
+      let userName = ''
+
+      // Read user name from profile card
+      await getSolidDataset(userWebId, {
+        fetch: solidSession.fetch as undefined,
+      })
+        .then((profileDataset) => {
+          const userThing = getThing(profileDataset, userWebId)
+
+          if (userThing === null) {
+            return
+          }
+
+          const foafName = getStringNoLocale(userThing, FOAF.name)
+
+          if (foafName === null) {
+            return
+          }
+
+          userName = foafName
+        })
+        .catch((error) => {
+          console.error('Fetching user name failed', error)
+          throw error
+        })
+
+      return userName
+    }
+
+    if (signedInWithFirebase) {
+      if (firebaseUser === undefined) {
+        return ''
+      }
+
+      return firebaseUser.displayName
+    }
+
+    return ''
   }
 
   /**
@@ -130,7 +184,6 @@ const ProfileOverview: React.FC<ProfileOverviewProps> = ({
     }
 
     const dietaryProfileWithIris: DietaryProfileObject = {
-      userFullName: '',
       allergens: [],
       diets: [],
       calories: 0,
@@ -140,30 +193,6 @@ const ProfileOverview: React.FC<ProfileOverviewProps> = ({
       spicinessLevel: '',
       cookingMethods: [],
     }
-
-    // Read user name from profile card
-    await getSolidDataset(userWebId, {
-      fetch: solidSession.fetch as undefined,
-    })
-      .then((profileDataset) => {
-        const userThing = getThing(profileDataset, userWebId)
-
-        if (userThing === null) {
-          return
-        }
-
-        const userName = getStringNoLocale(userThing, FOAF.name)
-
-        if (userName === null) {
-          return
-        }
-
-        dietaryProfileWithIris.userFullName = userName
-      })
-      .catch((error) => {
-        console.error('Fetching user name failed', error)
-        return ''
-      })
 
     const dietaryProfileThing = getThing(dietaryProfileDataset, profileUrl)
 
@@ -265,7 +294,7 @@ const ProfileOverview: React.FC<ProfileOverviewProps> = ({
         </button>
 
         <div className="user-information">
-          <div className="user-name mb-2">{data?.userFullName}</div>
+          <div className="user-name mb-2">{userNameQuery.data}</div>
         </div>
 
         <hr className="mb-2" />
