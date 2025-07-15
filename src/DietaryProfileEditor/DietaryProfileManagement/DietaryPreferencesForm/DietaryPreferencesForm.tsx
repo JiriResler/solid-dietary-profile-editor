@@ -358,7 +358,11 @@ const ActualDietaryPreferencesForm: React.FC<
         <Modal.Footer>
           <Button
             variant="secondary"
-            onClick={() => setShowSaveProfileSuccessModal(false)}
+            onClick={() => {
+              setProfileSavingInProgress(false)
+              setEditProfile(false)
+              setShowSaveProfileSuccessModal(false)
+            }}
           >
             <FormattedMessage id="closeModal" defaultMessage="Close" />
           </Button>
