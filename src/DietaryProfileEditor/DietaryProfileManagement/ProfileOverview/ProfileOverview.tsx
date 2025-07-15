@@ -2,7 +2,7 @@ import { useState, useContext } from 'react'
 import LanguageContext from '../../LanguageContext'
 import { useSession } from '@inrupt/solid-ui-react'
 import { useAuthState } from 'react-firebase-hooks/auth'
-import { auth } from '../../../firebase'
+import { auth, db } from '../../../firebase'
 import { signOut } from 'firebase/auth'
 import { useNavigate } from 'react-router-dom'
 import './ProfileOverview.css'
@@ -29,6 +29,7 @@ import {
 import { FOAF } from '@inrupt/vocab-common-rdf'
 import Spinner from 'react-bootstrap/Spinner'
 import axios from 'axios'
+import { doc, getDoc } from 'firebase/firestore'
 
 const allergenIntlMessageList = [
   {
@@ -241,6 +242,9 @@ const ProfileOverview: React.FC<ProfileOverviewProps> = ({
 
   const [showDeleteProfileModal, setShowDeleteProfileModal] = useState(false)
 
+  const [showProfileLoadErrorModal, setShowProfileLoadErrorModal] =
+    useState(false)
+
   const [profileWasDeleted, setProfileWasDeleted] = useState(false)
 
   const [profileDeleteInProgress, setProfileDeleteInProgress] = useState(false)
@@ -361,9 +365,9 @@ const ProfileOverview: React.FC<ProfileOverviewProps> = ({
       return await fetchDietaryProfileSolidPod()
     }
 
-    // if (signedInWithFirebase) {
-
-    // }
+    if (signedInWithFirebase) {
+      return await fetchDietaryProfileFirebase()
+    }
 
     return null
   }
@@ -456,10 +460,8 @@ const ProfileOverview: React.FC<ProfileOverviewProps> = ({
         return null
       } else {
         console.error((error as Error).message)
-        alert(
-          'There was an error while retrieving the profile with the code ' +
-            (error as SolidPodResponseError).statusCode,
-        )
+
+        setShowProfileLoadErrorModal(true)
         throw error
       }
     }
@@ -548,6 +550,36 @@ const ProfileOverview: React.FC<ProfileOverviewProps> = ({
       dietaryProfileThing,
       ontologyIri + 'preferredCookingMethod',
     )
+
+    return await formatDietaryProfileResponse(dietaryProfileWithIris)
+  }
+
+  /**
+   * Retrieves dietary profile of the signed-in user from Firestore.
+   */
+  async function fetchDietaryProfileFirebase() {
+    let dietaryProfileWithIris: DietaryProfileObject = {
+      allergens: [],
+      diets: [],
+      calories: 0,
+      cuisines: [],
+      likedIngredients: [],
+      dislikedIngredients: [],
+      spicinessLevel: '',
+      cookingMethods: [],
+    }
+
+    if (firebaseUser === null || firebaseUser === undefined) {
+      return null
+    }
+
+    const dietaryProfileDoc = await getDoc(doc(db, 'users', firebaseUser.uid))
+
+    if (dietaryProfileDoc.exists()) {
+      dietaryProfileWithIris = dietaryProfileDoc.data() as DietaryProfileObject
+    } else {
+      setShowProfileLoadErrorModal(true)
+    }
 
     return await formatDietaryProfileResponse(dietaryProfileWithIris)
   }
@@ -657,6 +689,7 @@ const ProfileOverview: React.FC<ProfileOverviewProps> = ({
       })
       .catch((error) => {
         console.error('Error while fetching diet labels.', error)
+        setShowProfileLoadErrorModal(true)
         throw error
       })
 
@@ -723,6 +756,7 @@ const ProfileOverview: React.FC<ProfileOverviewProps> = ({
       })
       .catch((error) => {
         console.error('Error while fetching cuisine labels.', error)
+        setShowProfileLoadErrorModal(true)
         throw error
       })
 
@@ -769,6 +803,7 @@ const ProfileOverview: React.FC<ProfileOverviewProps> = ({
       })
       .catch((error) => {
         console.error('Error while fetching ingredient labels.', error)
+        setShowProfileLoadErrorModal(true)
         throw error
       })
 
@@ -817,6 +852,7 @@ const ProfileOverview: React.FC<ProfileOverviewProps> = ({
       })
       .catch((error) => {
         console.error('Error while fetching ingredient labels.', error)
+        setShowProfileLoadErrorModal(true)
         throw error
       })
 
@@ -890,6 +926,7 @@ const ProfileOverview: React.FC<ProfileOverviewProps> = ({
       })
       .catch((error) => {
         console.error('Error while fetching cooking method labels.', error)
+        setShowProfileLoadErrorModal(true)
         throw error
       })
 
@@ -1122,6 +1159,41 @@ const ProfileOverview: React.FC<ProfileOverviewProps> = ({
         </Modal.Footer>
       </Modal>
 
+      <Modal
+        show={showProfileLoadErrorModal}
+        centered
+        onHide={() => {
+          setShowProfileLoadErrorModal(false)
+        }}
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>
+            <FormattedMessage
+              id="profileLoading"
+              defaultMessage="Loading profile"
+            />
+          </Modal.Title>
+        </Modal.Header>
+
+        <Modal.Body>
+          {intl.formatMessage({
+            id: 'loadingProfileError',
+            defaultMessage: 'Loading dietary profile failed',
+          })}
+        </Modal.Body>
+
+        <Modal.Footer>
+          <Button
+            variant="secondary"
+            onClick={() => {
+              setShowProfileLoadErrorModal(false)
+            }}
+          >
+            <FormattedMessage id="closeModal" defaultMessage="Close" />
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
       <Row className="sticky-top profile-overview-head-section align-items-center">
         <Col className="ms-2" xs={8}>
           <FormattedMessage
@@ -1157,7 +1229,7 @@ const ProfileOverview: React.FC<ProfileOverviewProps> = ({
       )}
 
       {!dietaryProfileQuery.isPending && dietaryProfileQuery.data === null && (
-        <div className="position-absolute top-50 start-50 translate-middle empty-profile-text">
+        <div className="position-absolute top-50 start-50 translate-middle empty-profile-text w-75 text-center">
           <FormattedMessage
             id="emptyProfileText"
             defaultMessage="Profile is empty, click the Edit Profile button to start."
@@ -1166,7 +1238,7 @@ const ProfileOverview: React.FC<ProfileOverviewProps> = ({
       )}
 
       {profileWasDeleted && (
-        <div className="position-absolute top-50 start-50 translate-middle empty-profile-text">
+        <div className="position-absolute top-50 start-50 translate-middle empty-profile-text w-75 text-center">
           <FormattedMessage
             id="emptyProfileText"
             defaultMessage="Profile is empty, click the Edit Profile button to start."

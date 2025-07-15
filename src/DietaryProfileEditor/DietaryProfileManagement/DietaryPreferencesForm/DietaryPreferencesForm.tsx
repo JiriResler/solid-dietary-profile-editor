@@ -411,27 +411,27 @@ const ActualDietaryPreferencesForm: React.FC<
 
     if (spicinessRadioSelected !== 'unspecified') {
       if (spicinessRadioSelected === 'negative') {
-        dietaryProfileData.spicinessLevel = 'not-spicy'
+        dietaryProfileData.spicinessLevel = 'Not-spicy'
       }
 
       if (spicinessRadioSelected === 'positive') {
         if (spicinessLevelSliderValue === 0) {
-          dietaryProfileData.spicinessLevel = 'mild'
+          dietaryProfileData.spicinessLevel = 'Mild'
         }
 
         if (spicinessLevelSliderValue >= 33 && spicinessLevelSliderValue < 66) {
-          dietaryProfileData.spicinessLevel = 'medium'
+          dietaryProfileData.spicinessLevel = 'Medium'
         }
 
         if (
           spicinessLevelSliderValue >= 66 &&
           spicinessLevelSliderValue < 100
         ) {
-          dietaryProfileData.spicinessLevel = 'hot'
+          dietaryProfileData.spicinessLevel = 'Hot'
         }
 
         if (spicinessLevelSliderValue === 100) {
-          dietaryProfileData.spicinessLevel = 'extra-hot'
+          dietaryProfileData.spicinessLevel = 'Extra-hot'
         }
       }
     }

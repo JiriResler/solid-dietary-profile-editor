@@ -166,6 +166,8 @@ type Messages = {
   profileDeletionErrorMessage: string
   saveProfileModalTitle: string
   profileSaveError: string
+  profileLoading: string
+  loadingProfileError: string
 }
 
 const messagesInSlovak: Messages = {
@@ -349,6 +351,8 @@ const messagesInSlovak: Messages = {
   profileDeletionErrorMessage: 'Profil sa nepodarilo zmazať',
   saveProfileModalTitle: 'Uloženie profilu',
   profileSaveError: 'Profil sa nepodarilo uložiť',
+  profileLoading: 'Načítanie profilu',
+  loadingProfileError: 'Načítanie profilu sa skončilo chybou',
 }
 
 const IntlProviderWrapper: React.FC<PropsWithChildren> = (props) => {
