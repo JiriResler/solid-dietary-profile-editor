@@ -173,6 +173,39 @@ const cuisineIntlMessageList = [
   },
 ]
 
+const cookingMethodIntlMessageList = [
+  {
+    cookingMethodIntlMessageId: 'bakingMethod',
+    cookingMethodIri: 'http://www.wikidata.org/entity/Q720398',
+    label: 'Baking',
+  },
+  {
+    cookingMethodIntlMessageId: 'grillingMethod',
+    cookingMethodIri: 'http://www.wikidata.org/entity/Q264619',
+    label: 'Grilling',
+  },
+  {
+    cookingMethodIntlMessageId: 'boilingMethod',
+    cookingMethodIri: 'http://www.wikidata.org/entity/Q20074315',
+    label: 'Boiling',
+  },
+  {
+    cookingMethodIntlMessageId: 'deepFryingMethod',
+    cookingMethodIri: 'http://www.wikidata.org/entity/Q854618',
+    label: 'Deep-frying',
+  },
+  {
+    cookingMethodIntlMessageId: 'steamingMethod',
+    cookingMethodIri: 'http://www.wikidata.org/entity/Q1415859',
+    label: 'Steaming',
+  },
+  {
+    cookingMethodIntlMessageId: 'sauteingMethod',
+    cookingMethodIri: 'http://www.wikidata.org/entity/Q1521462',
+    label: 'Sauteing',
+  },
+]
+
 type ProfileOverviewProps = {
   setEditProfile: React.Dispatch<React.SetStateAction<boolean>>
 }
@@ -271,6 +304,26 @@ const ProfileOverview: React.FC<ProfileOverviewProps> = ({
     }
     results: {
       bindings: IngredientBinding[]
+    }
+  }
+
+  type CookingMethodBinding = {
+    cookingMethod: {
+      type: string
+      value: string
+    }
+    cookingMethodLabel: {
+      type: string
+      value: string
+    }
+  }
+
+  type CookingMethodResponse = {
+    head: {
+      vars: string[]
+    }
+    results: {
+      bindings: CookingMethodBinding[]
     }
   }
 
@@ -749,6 +802,79 @@ const ProfileOverview: React.FC<ProfileOverviewProps> = ({
       })
       .catch((error) => {
         console.error('Error while fetching ingredient labels.', error)
+        throw error
+      })
+
+    // Find cooking method labels based on their IRIs
+    const cookingMethodLabelsToFetch = []
+
+    for (const cookingMethodIri of dietaryProfileIris.cookingMethods) {
+      let cookingMethodIntlMessageId = ''
+
+      for (const cookingMethod of cookingMethodIntlMessageList) {
+        if (cookingMethod.cookingMethodIri === cookingMethodIri) {
+          cookingMethodIntlMessageId = cookingMethod.cookingMethodIntlMessageId
+
+          dietaryProfileLabels.cookingMethods.push(
+            intl.formatMessage({
+              id: cookingMethodIntlMessageId,
+              defaultMessage: cookingMethod.label,
+            }),
+          )
+        }
+      }
+
+      if (cookingMethodIntlMessageId === '') {
+        cookingMethodLabelsToFetch.push(cookingMethodIri)
+      }
+    }
+
+    const cookingMethodIrisInBrackets = cookingMethodLabelsToFetch.map(
+      (cookingMethodIri) => {
+        return '<' + cookingMethodIri + '>'
+      },
+    )
+
+    // SPARQL query to retrieve cooking method labels from Wikidata
+    const sparqlQueryCookingMethods = `
+      SELECT DISTINCT ?cookingMethod ?cookingMethodLabel WHERE {
+        ?cookingMethod (wdt:P31|wdt:P279) wd:Q1039303.
+        FILTER(?cookingMethod IN(${cookingMethodIrisInBrackets.join(', ')}))
+        SERVICE wikibase:label { bd:serviceParam wikibase:language "${selectedLanguage},en,mul". }
+      }
+    `
+
+    const endpointUrlCookingMethods = 'https://query.wikidata.org/sparql'
+
+    const requestUrlCookingMethods =
+      endpointUrlCookingMethods +
+      '?query=' +
+      encodeURI(sparqlQueryCookingMethods)
+
+    const requestHeadersCookingMethods = {
+      Accept: 'application/sparql-results+json',
+    }
+
+    await axios
+      .get<CookingMethodResponse>(requestUrlCookingMethods, {
+        headers: requestHeadersCookingMethods,
+      })
+      .then((response) => {
+        for (const cookingMethodBinding of response.data.results.bindings) {
+          const cookingMethodLabelValue =
+            cookingMethodBinding.cookingMethodLabel.value
+
+          const capitalizedCookingMethodLabel =
+            cookingMethodLabelValue.charAt(0).toUpperCase() +
+            cookingMethodLabelValue.slice(1)
+
+          dietaryProfileLabels.cookingMethods.push(
+            capitalizedCookingMethodLabel,
+          )
+        }
+      })
+      .catch((error) => {
+        console.error('Error while fetching cooking method labels.', error)
         throw error
       })
 
