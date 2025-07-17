@@ -65,7 +65,11 @@ const Login: React.FC = () => {
   }
 
   if (authed) {
-    return <Navigate to={'/?locale=' + locale} replace />
+    if (locale !== null) {
+      return <Navigate to={'/?locale=' + locale} replace />
+    } else {
+      return <Navigate to={'/'} replace />
+    }
   }
 
   return (
