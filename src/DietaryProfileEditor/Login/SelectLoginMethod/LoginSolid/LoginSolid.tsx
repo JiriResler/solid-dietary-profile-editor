@@ -1,12 +1,13 @@
 import Button from 'react-bootstrap/Button'
 import Form from 'react-bootstrap/Form'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 import { getKeyByValue } from './LoginSolidHelpers'
 import Spinner from 'react-bootstrap/Spinner'
 import ErrorModal from '../../../ErrorModal/ErrorModal'
 import { login } from '@inrupt/solid-client-authn-browser'
 import LoginBackButton from '../LoginBackButton/LoginBackButton'
+import LanguageContext from '../../../LanguageContext'
 
 type LoginSolidProps = {
   setLoginWithSolid: React.Dispatch<React.SetStateAction<boolean>>
@@ -28,6 +29,8 @@ const LoginSolid: React.FC<LoginSolidProps> = ({ setLoginWithSolid }) => {
   const [loginInProgress, setLoginInProgress] = useState(false)
 
   const intl = useIntl()
+
+  const { selectedLanguage } = useContext(LanguageContext)
 
   const providerNameAndUrls = {
     'Inrupt Pod Spaces': 'https://login.inrupt.com/',
@@ -125,8 +128,12 @@ const LoginSolid: React.FC<LoginSolidProps> = ({ setLoginWithSolid }) => {
   function getRedirectUrl() {
     const productionMode = import.meta.env.PROD
 
+    const urlState = '?locale=' + selectedLanguage
+
     return new URL(
-      productionMode ? '/solid-dietary-profile-editor/login' : '/login',
+      productionMode
+        ? '/solid-dietary-profile-editor/login' + urlState
+        : '/login' + urlState,
       window.location.origin,
     ).toString()
   }

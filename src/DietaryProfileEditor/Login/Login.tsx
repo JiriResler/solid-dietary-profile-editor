@@ -15,6 +15,7 @@ import { Navigate } from 'react-router-dom'
 import { auth } from '../../firebase'
 import Stack from 'react-bootstrap/Stack'
 import { languageFullName } from './loginHelpers'
+import { useSearchParams } from 'react-router-dom'
 
 /**
  * Displays the login screen and allows the user to switch application language.
@@ -31,6 +32,9 @@ const Login: React.FC = () => {
   const [showAboutApplicationModal, setShowAboutApplicationModal] =
     useState(false)
 
+  const [searchParams] = useSearchParams()
+  const locale = searchParams.get('locale')
+
   const aboutApplicationText =
     '<b>Dietary Profile Editor</b> is designed for people who enjoy dining out but have specific dietary needs, such as food allergies. It allows you to save and manage your dietary preferences. What sets it apart is the option to use <b>Solid</b>, a technology that stores your data in a decentralized way, giving you full control over who can access it, ensuring a higher level of privacy.'
 
@@ -45,10 +49,6 @@ const Login: React.FC = () => {
     if (language === 'Slovensky') {
       setSelectedLanguage('sk')
     }
-
-    // if (language === 'Česky') {
-    //   setSelectedLanguage('cs')
-    // }
 
     return
   }
@@ -65,7 +65,7 @@ const Login: React.FC = () => {
   }
 
   if (authed) {
-    return <Navigate to="/" replace />
+    return <Navigate to={'/?locale=' + locale} replace />
   }
 
   return (
